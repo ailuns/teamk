@@ -1,0 +1,285 @@
+@CHARSET "UTF-8";
+/* Left Menu */
+div#left_menu {
+	width : 0px;
+	height : 100%;
+	transition: 0.5s;
+	background-color: #06c;
+	position: fixed;
+	top : 220px;
+	padding: 10px 0 0 0;
+	float: left;
+}
+div#left_menu ul#menu_list {
+	display: none;
+	list-style: none;
+	margin-left: -40px;
+}
+div#left_menu ul#menu_list li {
+	padding: 5px 0 5px 40px;
+}
+div#left_menu ul#menu_list a {
+	color: #fff;
+	font-weight: bold;
+	text-decoration: none;
+	font-size: 20px;
+}
+div#logo_menu {
+	width : 200px;
+	height : 100%;
+	transition: 0.5s;
+	background: linear-gradient(to top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.1));
+	position: fixed;
+	margin-left : 0px;
+	top : 0px;
+	padding-top: 10px;
+}
+div#logo_menu h3 {
+	color: #fff;
+	margin-left: 10px;
+}
+div#logo_menu p {
+	text-align: justify;
+	width: 100%;
+	padding: 0 10px;
+}
+div#logo_menu p:hover {background-color: #111;}
+div#logo_menu p a {
+	text-decoration: none;
+	color: #fff;
+}
+div#logo_menu p a span {font-size: 12px; color: #ccc}
+div#left_click {
+	width : 30px;
+	height : 100%;
+	transition: 0.5s;
+	background: linear-gradient(to top, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.2));
+	position: fixed;
+	margin-left : 200px;
+	top : 0px;
+	text-align: center;
+	font-weight: bold;
+	padding-top: 230px;
+	color: #fff;
+	border-right: 1px dotted #fff;
+}
+div#left_click:HOVER {
+	background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2));
+	cursor: pointer;
+}
+/* Right Menu */
+div#submenu {
+	width : 150px;
+	height : 100%;
+	background: linear-gradient(to top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.1));
+	position: fixed;
+	right : 0px;
+	top : 0px;
+	border-left: 1px dotted #fff;
+}
+div#submenu ul {
+	list-style: none;
+	margin-left: -40px;
+	margin-top: 100%;
+}
+div#submenu ul li {padding: 5px 0 0 30px;}
+div#submenu ul a {
+	text-decoration: none;
+	font-size: 15px;
+	color: #fff;
+}
+div#submenu embed {
+	position: fixed;
+	right: 0;
+	bottom: 20%;
+}
+
+
+/* South Korea Map Start */
+div#map object {
+	height: 600px;
+}
+polyline#pl_HD1_1_, polyline#pl_HD2_1_, 
+polyline#pl_HD3_1_, polyline#pl_HD4_1_, 
+polyline#pl_HD5_1_, polyline#pl_HD6_1_, 
+polyline#pl_HD7_1_, polyline#pl_HD8_1_, 
+polyline#pl_HD9_1_, polyline#pl_HI1_1_, 
+polyline#pl_HI2_1_, polyline#pl_HI3_1_, 
+polyline#pl_HI4_1_, polyline#pl_HI5_1_, 
+polyline#pl_HI6_1_, polyline#pl_HI7_1_, 
+path#sejong {
+	fill: #2459da;
+	fill-opacity: 1;
+	stroke: #fff;
+	stroke-miterlimit: 1;
+}
+polyline#pl_HD1_1_ {}/*충청남도*/
+polyline#pl_HD2_1_ {}/*제주도*/
+polyline#pl_HD3_1_ {}/*경상남도*/
+polyline#pl_HD4_1_ {}/*경상북도*/
+polyline#pl_HD5_1_ {}/*전라북도*/
+polyline#pl_HD6_1_ {}/*충청북도*/
+polyline#pl_HD7_1_ {}/*강원도*/
+polyline#pl_HD8_1_ {}/*경기도*/
+polyline#pl_HD9_1_ {}/*전라남도*/
+polyline#pl_HI1_1_ {}/*울산광역시*/
+polyline#pl_HI2_1_ {}/*부산광역시*/
+polyline#pl_HI3_1_ {}/*대구광역시*/
+polyline#pl_HI4_1_ {}/*대전광역시*/
+polyline#pl_HI5_1_ {}/*인천관역시*/
+polyline#pl_HI6_1_ {}/*서울특별시*/
+polyline#pl_HI7_1_ {}/*광주광역시*/
+path#sejong {}/*세종특별자치시*/
+polyline#pl_HD1_1_:hover, polyline#pl_HD2_1_:hover, 
+polyline#pl_HD3_1_:hover, polyline#pl_HD4_1_:hover, 
+polyline#pl_HD5_1_:hover, polyline#pl_HD6_1_:hover, 
+polyline#pl_HD7_1_:hover, polyline#pl_HD8_1_:hover, 
+polyline#pl_HD9_1_:hover, polyline#pl_HI1_1_:hover, 
+polyline#pl_HI2_1_:hover, polyline#pl_HI3_1_:hover, 
+polyline#pl_HI4_1_:hover, polyline#pl_HI5_1_:hover, 
+polyline#pl_HI6_1_:hover, polyline#pl_HI7_1_:hover, 
+path#sejong:hover {
+	fill: #fff;
+	fill-opacity: 1;
+}
+/* South Korea Map End */
+
+
+/*Main Page*/
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #2459da;
+	background-image: url("../img/Jeju-bg.jpg");
+	background-repeat : no-repeat;
+	background-size: cover;
+	background-position: bottom center;
+}
+div#wrap {
+	margin-top: 100px;
+	width: 100%;
+	height: 100%;
+	padding-top: 50px;
+	margin: 0 auto;
+	text-align: center;
+}
+div#map {
+	width: 100%;
+	height: 700px;
+	margin: 0 auto;
+	border-top: 1px dotted #fff;
+	border-bottom: 3px double #fff;
+	padding-top: 20px;
+}
+center {
+	margin-top: 30px;
+	font-weight: bold;
+	color: #fff;
+	font-size: 20px;
+}
+div#search {
+	width: 600px;
+	height: 58px;
+	margin: 0 auto;
+	margin-top: 50px;
+	background-color: #39f;
+	border-radius: 30px;
+	text-align: center;
+	padding: 3px 0 0 0;
+}
+div#search input[type=submit]:hover {
+	text-shadow: 1px 1px 3px #0080ff;
+}
+div#search input[type=text] {
+	width: 400px;
+	border: 3px solid #39f;
+	border-radius: 15px;
+	font-size: 20px;
+	padding: 10px;
+}
+div#search input[type=submit] {
+	width: 80px;
+	height: 49px;
+	border: 3px solid #39f;
+	background-color: #39f;
+	color: #fff;
+	font-weight: bold;
+	font-size: 20px;
+}
+div#main_go {
+	width: 85px; 
+	height : 50px;
+	font-size: 2em;
+	margin: 0 auto;
+	margin-top: 50px;
+}
+div#login_join {
+	width: 125px;
+	height: 20px;
+	font-size: 0.9em;
+	color: gray;
+	margin: 0 auto;
+	margin-top: 50px;
+}
+div#footer {
+	width: 100%;
+	height: 200px;
+}
+input.login, input.enter, input.join {
+	border: none;
+	background-color: #39f;
+	height: 60px;
+	margin: 50px 0 0 0;
+	font-weight: bold;
+	font-size: 25px;
+	color: #fff;
+}
+input.login:hover, input.enter:hover, input.join:hover {
+	background-color: #afdcf0;
+}
+input.enter {
+	width: 300px;
+}
+input.login {
+	width: 200px;
+	border-radius: 50px 0 0 50px;
+	padding-left: 30px;
+}
+input.join {
+	width: 200px;
+	border-radius: 0 50px 50px 0;
+	padding-right: 30px;
+}
+
+/* Footer.jsp */
+div#footer {
+	width: 100%;
+	background-color: #eee;
+	height: 100px;
+	margin-top: 200px;
+	font-size: 12px;
+	color: #333;
+}
+div#footer a {
+	text-decoration: none;
+	color: #333;
+	margin: 0 10px;
+}
+div#footer div#footer_bar {
+	width: 100%;
+	background-color: #ccc;
+	height: 25px;
+	padding-top: 7px;
+}
+div#footer div#footer_bar div {
+	width: 60%;
+	min-width: 850px;
+	margin: 0 auto;
+}
+div#footer div#footer_misc {
+	width: 60%;
+	min-width: 850px;
+	margin: 0 auto;
+	padding-top: 10px;
+	line-height: 1.5em;
+}

@@ -1,0 +1,108 @@
+package net.ins.db;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
+public class interestDAO {
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	String sql="";
+	ResultSet rs = null;
+	private Connection getconn() throws Exception{
+		Connection conn = null;
+		Context init = new InitialContext();
+		DataSource ds = (DataSource)init.lookup("java:comp/env/jdbc/mysqldb");
+		conn = ds.getConnection();
+		return conn;
+	}
+	public List<interestBEAN> MyInterest(String id,String type,int start, int end){
+		List<interestBEAN> MyInterest = new ArrayList<interestBEAN>();
+		if(type.equals("P"))sql = "select B.inter_num, A.file1, A.subject, A.intro, A.cost, B.ori_num, B.date from pack A right outer join interest B on A.num = B.ori_num where B.id = ? and B.type =? order by B.inter_num desc limit ?,?";
+		else if(type.equals("T"))sql = "select B.inter_num, A.img, A.subject, A.intro, A.cost, B.ori_num, B.date from thing A right outer join interest B on A.num = B.ori_num where B.id = ? and B.type =? order by B.inter_num desc limit ?,?";
+		
+		try{
+			conn = getconn();
+			pstmt= conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, type);
+			pstmt.setInt(3, start-1);
+			pstmt.setInt(4, end);
+			rs=pstmt.executeQuery();
+			while(rs.next()){
+				interestBEAN inb = new interestBEAN();
+				if(type.equals("P"))inb.setImg(rs.getString("file1"));
+				if(type.equals("T"))inb.setImg(rs.getString("img"));
+				inb.setInter_num(rs.getInt("inter_num"));
+				inb.setDate(rs.getTimestamp("date"));
+				inb.setOri_num(rs.getInt("ori_num"));
+				inb.setSubject(rs.getString("subject"));
+				inb.setCost(rs.getInt("cost"));
+				inb.setIntro(rs.getString("intro"));
+				MyInterest.add(inb);
+				
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return MyInterest;
+	}
+	public int InterestCount(String id,String type){
+		int count = 0;
+		try{
+			conn = getconn();
+			sql = "select count(inter_num) from interest where id =? and type = ? order by inter_num desc";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, type);
+			rs = pstmt.executeQuery();
+			if(rs.next())count = rs.getInt(1);			
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return count;
+	}
+	public void InterestDel(int num){
+		try{
+			conn = getconn();
+			sql = "delete from interest where inter_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+}
+ 

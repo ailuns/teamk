@@ -1,0 +1,730 @@
+@CHARSET "UTF-8";
+div#clear {clear: both;}
+* {
+	box-sizing: border-box;
+	font-family: "나눔 고딕", "Noto Sans", sans-serif;
+}
+
+/* Main.jsp */
+div#datepicker {
+	height: 300px;
+	width: 60%;
+	min-width: 850px;
+	margin: 0 auto;
+}
+div#calendar, div#scheduler {float: left;}
+
+/* Calendar Start */
+div#calendar {
+	height: 300px;
+	width: 40%;
+	box-sizing: border-box;
+}
+div#calendar .ui-datepicker,
+div#calendar .ui-datepicker table,
+div#calendar .ui-datepicker tr,
+div#calendar .ui-datepicker td,
+div#calendar .ui-datepicker th {
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-spacing: 0;
+}
+div#calendar .ui-datepicker {
+    display: none;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    cursor: default;
+    text-transform: uppercase;
+    font-family: Tahoma;
+    font-size: 15px;
+    background: #fff;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 10px 0 0 10px;
+}
+div#calendar .ui-datepicker-header {
+    position: relative;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #d6d6d6;
+}
+div#calendar .ui-datepicker-title { text-align: center; }
+div#calendar .ui-datepicker-month {
+    position: relative;
+    padding-right: 15px;
+    color: #565656;
+}
+div#calendar .ui-datepicker-year {
+    padding-left: 8px;
+    color: #004080;
+}
+div#calendar .ui-datepicker-month:before {
+    display: block;
+    position: absolute;
+    top: 5px;
+    right: 0;
+    width: 5px;
+    height: 5px;
+    content: '';
+    background: #0080ff;
+    background: -moz-linear-gradient(top, #0080ff 0%, #004080 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#0080ff), color-stop(100%,#004080));
+    background: -webkit-linear-gradient(top, #0080ff 0%,#004080 100%);
+    background: -o-linear-gradient(top, #0080ff 0%,#004080 100%);
+    background: -ms-linear-gradient(top, #0080ff 0%,#004080 100%);
+    background: linear-gradient(top, #0080ff 0%,#004080 100%);
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+div#calendar .ui-datepicker-calendar th {
+    padding-top: 15px;
+    padding-bottom: 10px;
+    text-align: center;
+    font-weight: normal;
+    color: #0080ff;
+}
+div#calendar .ui-datepicker-calendar td {
+    padding: 0 7px;
+ 	font-weight: bold;
+    text-align: center;
+    line-height: 26px;
+}
+div#calendar .ui-datepicker-calendar .ui-state-default {
+    display: block;
+    width: 26px;
+    outline: none;
+    text-decoration: none;
+    color: #808080;
+    border: 1px solid transparent;
+}
+div#calendar .ui-datepicker-calendar .ui-state-active {
+    color: #000;
+    border: 1px solid #0080ff;
+}
+div#calendar .ui-datepicker-other-month .ui-state-default { color: #565656; }
+/* Calendar End */
+
+
+div#scheduler {
+	background-color: #06c;
+	height: 300px;
+	width: 60%;
+	border-radius: 0 10px 10px 0;
+	color: #fff;
+	font-weight: bold;
+	font-size: 30px;
+}
+div#scheduler form {
+	text-align: left;
+	margin-left: 30px;
+	line-height: 1.75em;
+}
+div#scheduler form label {margin: 0 20px 10px 0;}
+div#scheduler form input[type=text] {
+	font-size: 23px;
+	width: 70%;
+}
+div#scheduler form select {
+	font-size: 23px;
+	width: 50%;
+}
+div#scheduler form input[type=submit] {
+	font-size: 20px;
+	width: 18%;
+	border: 1px solid #fff;
+	background-color: #06c;
+	color: #fff;
+	font-weight: bold;
+}
+div#scheduler form input[type=submit]:hover {background-color: #09f;}
+div#package_show {
+	height: 200px;
+	width: 60%;
+	min-width: 850px;
+	margin: 0 auto;
+	margin-top: 15px;
+}
+div#package_show a {
+	height: 200px;
+	width: 33.3%;
+	display: block;
+	float: left;
+	text-align: left;
+	text-decoration: none;
+	color: #fff;
+	text-shadow: 1px 1px 1px #000;
+}
+div#package_show a#pack1 {
+	background-image: url("../img/i.jpg");
+	background-repeat : no-repeat;
+	background-size: cover;
+	background-position: center center;
+	border-radius: 10px 0 0 10px;
+	transition: 0.5s;
+}
+div#package_show a#pack2 {
+	background-image: url("../img/491021_374477_1553.jpg");
+	background-repeat : no-repeat;
+	background-size: cover;
+	background-position: center center;
+	transition: 0.5s;
+}
+div#package_show a#pack3 {
+	background-image: url("../img/군항제3.jpg");
+	background-repeat : no-repeat;
+	background-size: cover;
+	background-position: center center;
+	border-radius: 0 10px 10px 0;
+	transition: 0.5s;
+}
+a#pack1 span, a#pack2 span, a#pack3 span {
+	margin-left: 10px;
+	display: block;
+}
+a#pack1 #pktt, a#pack2 #pktt, a#pack3 #pktt {
+	font-size: 30px;
+	font-weight: bold;
+	margin-top: 20px;
+}
+a#pack1 #pksc, a#pack2 #pksc, a#pack3 #pksc {height: 50px;}
+a#pack1 #pkpr, a#pack2 #pkpr, a#pack3 #pkpr {
+	font-size: 30px;
+	font-weight: bold;
+}
+div#goods_show {
+	height: 200px;
+	width: 60%;
+	min-width: 850px;
+	margin: 0 auto;
+	margin-top: 15px;
+	background-color: #fff;
+}
+div#review_show {
+	height: 200px;
+	width: 60%;
+	min-width: 850px;
+	margin: 0 auto;
+	margin-top: 15px;
+	background-color: #fff;
+	border-radius: 10px;
+	padding: 10px;
+}
+div#review_show div {
+	height: 200px;
+	width: 50%;
+	float: left;
+	padding-left: 10px;
+}
+div#review_show div h1 {
+	text-align: left;
+	font-size: 25px;
+	height: 30px;
+	margin: 0 0 10px 0;
+}
+div#review_show div table {
+	width: 95%;
+	font-size: 12px;
+	border-collapse: collapse;
+}
+div#review_show div table tr {
+	color: #565656;
+	text-align: left;
+	border-bottom: 1px dotted #999;
+	height: 25px;
+}
+div#review_show div table tr:hover {background-color: #cef;}
+div#review_show div table a {
+	text-decoration: none;
+	color: #565656;
+	padding-left: 10px;
+}
+div#review_show div table td#num {width: 20px;}
+div#review_show div table td#date {width: 70px;}
+
+/* Package.jsp */
+div#package_head {
+	height: 150px;
+	width: 60%;
+	min-width: 850px;
+	margin: 0 auto;
+}
+div#package_title, div#package_search {float: left;}
+div#package_title {
+	background-color: #0c9;
+	width: 30%;
+	height: 150px;
+	color: #fff;
+	font-size: 50px;
+	padding-top: 50px;
+	font-weight: lighter;
+}
+div#package_search {
+	background-color: #06c;
+	width: 70%;
+	height: 150px;
+	color: #fff;
+	text-align: left;
+	font-weight: bold;
+}
+div#package_search p {
+	text-align: center;
+	font-size: 20px;
+}
+div#package_search form label {
+	margin: 0 10px 0 20px;
+}
+div#package_search form input[type=text] {
+	font-size: 15px;
+	width: 36%;
+}
+div#package_search form select {
+	font-size: 15px;
+	width: 65%;
+}
+div#package_search form input[type=submit] {
+	font-size: 15px;
+	width: 18%;
+	border: 1px solid #fff;
+	background-color: #06c;
+	color: #fff;
+	font-weight: bold;
+}
+div#package_search form input[type=submit]:hover {
+	background-color: #09f;
+}
+div#package_feat {
+	width: 60%;
+	min-width: 850px;
+	height: 300px;
+	background-color: #222;
+	margin: 0 auto;
+}
+div#package_feat div {float: right;}
+div#feat_ttl1, div#feat_ttl2, div#feat_ttl3, div#feat_ttl4, div#feat_ttl5 {
+	width: 5%;
+	height: 300px;
+	background-color: red;
+	transition: 0.5s;
+	padding-top: 10px;
+	color: #fff;
+}
+div#feat_con0 {
+	width: 75%;
+	height: 300px;
+	background-color: #222;
+	color: #fff;
+	font-weight: bold;
+	transition: 0.5s;
+}
+div#feat_con1, div#feat_con2, div#feat_con3, div#feat_con4, div#feat_con5 {
+	width: 0%;
+	height: 300px;
+	transition: 0.5s;
+}
+div#feat_con1 {
+	background-image: url("../img/20101021182610.jpg");
+	background-repeat : no-repeat;
+	background-size: cover;
+	background-position: center center;
+}
+div#feat_con2 {
+	background-image: url("../img/491021_374477_1553.jpg");
+	background-repeat : no-repeat;
+	background-size: cover;
+	background-position: center center;
+}
+div#feat_con3 {
+	background-image: url("../img/군항제3.jpg");
+	background-repeat : no-repeat;
+	background-size: cover;
+	background-position: center center;
+}
+div#feat_con4 {
+	background-image: url("../img/i.jpg");
+	background-repeat : no-repeat;
+	background-size: cover;
+	background-position: center center;
+}
+div#feat_con5 {
+	background-image: url("../img/Jeju-bg.jpg");
+	background-repeat : no-repeat;
+	background-size: cover;
+	background-position: center center;
+}
+div#feat_con1 span, div#feat_con2 span, div#feat_con3 span, div#feat_con4 span, div#feat_con5 span {
+	display: none;
+}
+div#package_feat a {
+	
+}
+div#package_list {
+	width: 60%;
+	min-width: 850px;
+	height: 100%;
+	background-color: #fff;
+	margin: 0 auto;
+}
+div#package_list table {
+	border-collapse: collapse;
+}
+div#package_list table tr {
+	padding-right: 10px;
+	text-align: left;
+}
+div#package_list table img {
+	width: 250px;
+	height: 150px;
+}
+div#package_list table #subject {
+	font-size: 20px;
+	font-weight: bold;
+	border-top: 1px solid #ccc;
+}
+div#package_list table #price {
+	font-size: 20px;
+	font-weight: bold;
+	border-left: 1px dotted #ddd;
+	border-top: 1px solid #ccc;
+	
+}
+div#package_list table #context {
+	text-align: justify;
+}
+div#pages {
+	width: 60%;
+	height: 40px;
+	margin: 0 auto;
+	background-color: #fff;
+	padding-top: 10px;
+}
+div#pages a {
+	text-decoration: none;
+	color: #333;
+	margin: 0 10px;
+}
+
+
+/* LoginForm.jsp */
+div#member_head {
+	height: 150px;
+	width: 60%;
+	min-width: 850px;
+	margin: 0 auto;
+	margin-top: 100px;
+}
+div#member_title, div#member_script {
+	height: 150px;
+	float: left;
+	color: #fff;
+}
+div#member_title {
+	background-color: #0c9;
+	width: 30%;
+	font-size: 50px;
+	padding-top: 50px;
+	font-weight: lighter;
+}
+div#member_script {
+	background-color: #06c;
+	width: 70%;
+	text-align: left;
+	font-weight: bold;
+}
+div#member {
+	width: 60%;
+	min-width: 850px;
+	margin: 0 auto;
+	background-color: #fff;
+	padding: 100px 0;
+	text-align: center;
+}
+div#login_form {
+	margin: 0 auto;
+	padding: 5px 20px;
+	width: 500px;
+}
+div#login_form form {
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 10px;
+}
+div#login_form form label {
+	width: 100px;
+	float: left;
+	margin: 5px 0;
+	text-align: right;
+}
+div#login_form form input {
+	margin: 5px 0;
+	border: 1px solid #999;
+}
+div#login_form form input[type="text"], div#login_form form input[type="password"] {width: 200px;}
+div#login_form form input[type="button"] {}
+div#login_form table {
+	width: 80%;
+	border-collapse: collapse;
+	margin: 10px auto;
+	text-align: left;
+}
+div#login_form table tr#hr {border-bottom: 1px solid #ccc;}
+div#login_form table input[type="button"] {
+	width: 130px;
+}
+
+/*Insert Form.jsp*/
+div#insert_form {
+	margin: 30px auto;
+	padding: 10px 0;
+	width: 600px;
+	text-align: left;
+}
+div#insert_form form label {
+	width: 120px;
+	float: left;
+	margin: 5px 30px 5px 0;
+	text-align: right;
+}
+div#insert_form form input {
+	margin: 5px 0;
+	border: 1px solid #ccc;
+}
+div#insert_form form input[type="text"], div#insert_form form input[type="password"] {
+	width: 300px;
+	padding: 5px;
+}
+div#insert_form form input#sample6_address, div#insert_form form input#sample6_address2 {margin-left: 150px;}
+div#insert_form form input[type="submit"], div#insert_form form input[type="button"] {
+	height: 30px;
+	width: 100px;
+}
+div#insert_form form input[type="submit"] {
+	margin: 20px 0 0 200px;
+	width: 200px;
+}
+
+/*Find ID.jsp*/
+div#findid_form {
+	margin: 0 auto;
+	padding: 5px 20px;
+	width: 500px;
+
+}
+div#findid_form form {
+	padding-bottom: 10px;
+}
+div#findid_form form label {
+	width: 100px;
+	float: left;
+	margin: 5px 0;
+	text-align: right;
+}
+div#findid_form form input {
+	margin: 5px 0;
+	border: 1px solid #999;
+}
+div#findid_form form input[type="text"] {width: 200px;}
+div#findid_form form input[type="button"] {}
+
+/*Find Pass.jsp*/
+div#findpass_form {
+	margin: 0 auto;
+	padding: 5px 20px;
+	width: 500px;
+	text-align: left;
+}
+div#findpass_form form {
+	padding-bottom: 10px;
+}
+div#findpass_form form label {
+	width: 100px;
+	float: left;
+	margin: 5px 30px 0 0;
+	text-align: right;
+}
+div#findpass_form form input {
+	margin: 5px 0;
+	border: 1px solid #999;
+}
+div#findpass_form form input[type="text"] {width: 200px;}
+div#findpass_form form input[type="button"] {}
+
+/*Member Info.jsp*/
+div#info_form {
+	margin: 0 auto;
+	padding: 5px 20px;
+	width: 600px;
+}
+div#info_form table {
+	border-collapse: collapse;
+	margin-bottom: 30px;
+	text-align: left;
+	width: 100%;
+}
+div#info_form table tr {
+	height: 40px;
+	border-bottom: 1px solid #ddd;
+}
+div#info_form table th {
+	text-align: left;
+	width: 120px;
+}
+
+/*Member Update Form.jsp*/
+div#m_update_form {
+	margin: 30px auto;
+	padding: 10px 0;
+	width: 600px;
+	text-align: left;
+}
+div#m_update_form form label {
+	width: 120px;
+	float: left;
+	margin: 5px 30px 5px 0;
+	text-align: right;
+}
+div#m_update_form form input {
+	margin: 5px 0;
+	border: 1px solid #ccc;
+}
+div#m_update_form form input[type="text"], div#m_update_form form input[type="password"] {
+	width: 300px;
+	padding: 5px;
+}
+div#m_update_form form input#sample6_address, div#m_update_form form input#sample6_address2 {margin-left: 150px;}
+div#m_update_form form input[type="submit"], div#m_update_form form input[type="button"] {
+	height: 30px;
+	width: 100px;
+}
+div#m_update_form form input[type="submit"] {
+	margin: 20px 0 0 200px;
+}
+
+/*Member Delete Form.jsp*/
+div#m_delete_form {
+	margin: 0 auto;
+	padding: 5px 20px;
+	width: 500px;
+}
+div#m_delete_form form {
+	padding-bottom: 10px;
+}
+div#m_delete_form form label {
+	width: 100px;
+	float: left;
+	margin: 5px 0;
+	text-align: right;
+}
+div#m_delete_form form input {
+	margin: 5px 0;
+	border: 1px solid #999;
+}
+div#m_delete_form form input[type="text"], div#m_delete_form form input[type="password"] {width: 200px;}
+div#m_delete_form form input[type="button"] {}
+
+/* Board List.jsp */
+div#board_head {
+	height: 150px;
+	width: 60%;
+	min-width: 850px;
+	margin: 0 auto;
+	margin-top: 100px;
+}
+div#rvw_title, div#rvw_script {
+	height: 150px;
+	float: left;
+	color: #fff;
+}
+div#rvw_title {
+	background-color: #0c9;
+	width: 30%;
+	font-size: 50px;
+	padding-top: 50px;
+	font-weight: lighter;
+}
+div#rvw_script {
+	background-color: #06c;
+	width: 70%;
+	text-align: left;
+	font-weight: bold;
+}
+div#board {
+	width: 60%;
+	min-width: 850px;
+	margin: 0 auto;
+	background-color: #fff;
+	padding: 20px;
+}
+div#board div#board_list {
+	width: 90%;
+	margin: 20px auto;
+}
+div#board div#board_list table {
+	border-collapse: collapse;
+	margin-bottom: 20px;
+	font-size: 15px;
+	width: 100%;
+}
+div#board div#board_list table tr {
+	line-height: 1.75em;
+	border-bottom: 1px solid #ddd;
+}
+div#board div#board_list table tr:HOVER {background-color: #eee;}
+div#board div#board_list table th#num {
+	width: 50px;
+}
+div#board div#board_list table th#date {
+	width: 100px;
+}
+div#board div#board_list table th#readcount {
+	width: 50px;
+}
+div#board div#board_list table th#name {
+	width: 100px;
+}
+div#board div#board_list table th {
+	
+}
+div#board div#board_list table td#title {
+	text-align: left;
+	max-width: 200px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+div#board div#board_list table a {
+	text-decoration: none;
+	color: #000;
+}
+
+/*Board Content.jsp*/
+div#board div#board_content {
+	width: 90%;
+	margin: 20px auto;
+}
+div#board div#board_content table {
+	border-collapse: collapse;
+	width: 100%;
+}
+div#board div#board_content table tr {
+	border-bottom: 1px solid #ccc;
+}
+div#board div#board_content table td#num {
+	width: 90px;
+	text-align: left;
+}
+div#board div#board_content table td#readcount {
+	width: 100px;
+	text-align: right;
+}
+div#board div#board_content table td#subject {
+	text-align: left;
+	font-size: 20px;
+	font-weight: bold;
+	padding: 10px 0;
+}
+
+
+
+
+
