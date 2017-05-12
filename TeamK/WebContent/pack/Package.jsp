@@ -205,7 +205,7 @@ ul.tabs li {
 <jsp:include page="../inc/leftMenu.jsp"></jsp:include>
 <!-- 왼쪽 메뉴 -->
 <%
-
+	//
 	// 세션으로 로그인한 아이디 값 받아오기
 	String user_id = (String) session.getAttribute("id");
 	
