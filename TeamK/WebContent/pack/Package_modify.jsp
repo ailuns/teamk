@@ -9,13 +9,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="./js/HuskyEZCreator.js" charset="utf-8"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="./js/jquery-3.2.0.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script>
 	jQuery(document).ready(function($){
 		$("#date_from").datepicker({
 			dateFormat: 'yy-mm-dd',    // 날짜 포맷 형식
 			minDate : 0,			   // 최소 날짜 설정      0이면 오늘부터 선택 가능
-			numberOfMonths: 2,		   // 보여줄 달의 갯수
+			numberOfMonths: 1,		   // 보여줄 달의 갯수
 	        dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],  // 일(Day) 표기 형식
 	        monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],   // 월(Month) 표기 형식
 	        showOn: "both",		// 버튼을 표시      both : input과 buttom 둘다 클릭 시 달력 표시           bottom  :  buttom 클릭 했을 때만 달력 표시
@@ -34,6 +36,11 @@
 
 <style type="text/css">
 
+img.ui-datepicker-trigger
+{
+	cursor : pointer;
+	margin-left : 5px;
+}
 
 #wrap
 {
@@ -97,11 +104,16 @@
 				<tr>
 					<td>출발일자</td>
 					<td><input type="text" id="date_from" name="sdate" value="<%=date %>" class="input_style" name="startDate" required="yes"></td>
-					
 				</tr>
 				<tr>
 					<td>지역</td>
-					<td><input type="text" name="area" required="yes" value="<%=pb.getArea() %>"></td>
+					<td>
+						<select id="area" name="area">
+							<option value="서울" <%="서울".equals(pb.getArea()) ? "selected" : ""%>>서울</option>
+							<option value="부산" <%="부산".equals(pb.getArea()) ? "selected" : ""%>>부산</option>
+							<option value="경기도" <%="경기도".equals(pb.getArea()) ? "selected" : ""%>>경기도</option>
+						</select>
+					</td>
 				</tr>
 				<tr>
 					<td>도시</td>
@@ -110,6 +122,16 @@
 				<tr>
 					<td>소분류</td>
 					<td><input type="text" name="sarea" required="yes" value="<%=pb.getSarea() %>" placeholder="ex) 강남, 명동"></td>
+				</tr>
+				<tr>
+					<td>타입</td>
+					<td>
+						<select id="type" name="type">
+							<option value="city" <%="city".equals(pb.getType()) ? "selected" : ""%>>도시</option>
+							<option value="mount" <%="mount".equals(pb.getType()) ? "selected" : ""%>>산</option>
+							<option value="sea" <%="sea".equals(pb.getType()) ? "selected" : ""%>>바다</option>
+						</select>
+					</td>
 				</tr>
 				<tr>
 					<td>가격</td>

@@ -17,7 +17,7 @@
 		$("#date_from").datepicker({
 			dateFormat: 'yy-mm-dd',    // 날짜 포맷 형식
 			minDate : 0,			   // 최소 날짜 설정      0이면 오늘부터 선택 가능
-			numberOfMonths: 2,		   // 보여줄 달의 갯수
+			numberOfMonths: 1,		   // 보여줄 달의 갯수
 	        dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],  // 일(Day) 표기 형식
 	        monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],   // 월(Month) 표기 형식
 	        showOn: "both",		// 버튼을 표시      both : input과 buttom 둘다 클릭 시 달력 표시           bottom  :  buttom 클릭 했을 때만 달력 표시
@@ -31,14 +31,33 @@
 		$("#txt_prodStart").datepicker();
 	    $('img.ui-datepicker-trigger').attr('align', 'absmiddle');
 	    
-	    
+	    // 이미지 첨부 나머지 4부분은 숨겨둔다
 	    $('#aa').hide();
 		$('#aa2').hide();
 		$('#aa3').hide();
 		$('#aa4').hide();
-	    
+		
+		
+		// 파일 크기 제한 5MB
+		var maxSize = 5*1024*1024;
+		var fileID = ["#file1", "#file2", "#file3", "#file4", "#file5"];
+		
+		for (var i = 0; i < fileID.length; i++)
+		{
+			$(fileID[i]).bind('change', function() {   // 파일 첨부 할 때 함수 호출
+				var filesize_temp = (this.files[0].size)/1048576;
+				var filesize = filesize_temp.toString().substring(0, 4);
+				
+				if (this.files[0].size > maxSize)
+				{
+					alert("5MB 이하의 이미지를 선택해주세요  (" + filesize + "MB)");
+					$(this).val("");
+				}
+			});
+		}
 	});
 	
+	// 이미지추가 버튼 (+) 클릭 시 보여준다
 	function winopen(num){
 		switch(num)
 		{
@@ -56,23 +75,7 @@
 				break;
 		}
 	}
-	
- 	function filechk(form)
- 	{
- 		var filename = form.file.value;
- 		var file = filename.substring(filename.lastIndexOf(".") + 1)
- 		
- 		if (file == "jpg" || file == "png" || file == "gif" || file == "")
- 		{
- 			return true;
- 		}
- 		else
- 		{
- 			alert("jpg, png, gif 파일만 업로드 가능합니다");	
- 			return false;
- 		}
- 	}
-	
+
 	
 </script>
 
