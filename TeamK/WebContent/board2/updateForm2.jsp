@@ -9,6 +9,30 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+function check() {
+	if(document.fr.subject.value==""){
+		alert("제목을 입력해주세요");
+		document.fr.subject.focus();
+		return false;
+	}
+	if(document.fr.subject.value.length>20){
+		alert("제목은 20자 이내로 입력해주세요");
+		document.fr.subject.focus();
+		return false;
+	}
+	if(document.fr.content.value==""){
+		alert("내용을 입력해주세요");
+		document.fr.content.focus();
+		return false;
+	}
+	if(document.fr.email.value==""){
+		alert("이메일을 입력해주세요");
+		document.fr.email.focus();
+		return false;
+	}
+}
+</script>
 <link href="./css/inc.css" rel="stylesheet" type="text/css">
 <link href="./css/subpage.css" rel="stylesheet" type="text/css">
 </head>
