@@ -1,6 +1,6 @@
 <Context>
 	<Resource 
-	name="jdbc/mysqlDB"
+	name="jdbc/mysqldb"
 	auth="Container"
 	type="javax.sql.DataSource"
 	driverClassName="com.mysql.jdbc.Driver"

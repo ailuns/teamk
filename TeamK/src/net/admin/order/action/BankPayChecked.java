@@ -12,10 +12,11 @@ public class BankPayChecked implements Action{
 		request.setCharacterEncoding("utf-8");
 		String [] tich = request.getParameterValues("tich[]");
 		AdminDAO adao = new AdminDAO();
-		for(int i =0; i< tich.length; i++){
-			adao.BankPayChecked(2,Integer.parseInt(tich[i]));
+		if(tich!=null){
+			for(int i =0; i< tich.length; i++){
+				adao.BankPayChecked(2,Integer.parseInt(tich[i]));
+			}
 		}
-		
 		return null;
 	}
 	
