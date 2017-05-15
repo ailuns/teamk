@@ -18,7 +18,7 @@ public class bnsDAO {
 	private Connection getconn() throws Exception{
 		Connection conn = null;
 		Context init = new InitialContext();
-		DataSource ds = (DataSource)init.lookup("java:comp/env/jdbc/mysqldb");
+		DataSource ds = (DataSource)init.lookup("java:comp/env/jdbc/mysqlDB");
 		conn = ds.getConnection();
 		return conn;
 	}
