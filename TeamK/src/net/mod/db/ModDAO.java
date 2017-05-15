@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -27,6 +28,28 @@ public class ModDAO {
 		DataSource ds = (DataSource)init.lookup("java:comp/env/jdbc/mysqldb");
 		conn = ds.getConnection();
 		return conn;
+	}
+	public int TI_Count(String id){
+		int count=0;
+		try{
+			conn = getconn();
+			sql = "select count(ti_num) from trade_info where id=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next())count = rs.getInt(1);
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return count;
 	}
 	public ModTradeInfoBEAN TBasketInfoToMTIB(int tch_num,ModTradeInfoBEAN mtib){
 		try{
@@ -122,6 +145,7 @@ public class ModDAO {
 			}
 		}
 	}
+	
 	public void InsertPackOrder(ModTradeInfoBEAN mtib){
 		try{
 			conn=getconn();
@@ -196,13 +220,16 @@ public class ModDAO {
 		return mtib;
 	}
 	
-	public List<ModTradeInfoBEAN> ReadModTI(String id){
+	public List<ModTradeInfoBEAN> ReadModTI(String id,int start, int end){
 		List<ModTradeInfoBEAN> ModList = new ArrayList<ModTradeInfoBEAN>();
 		try{
 			conn=getconn();
-			sql = "select * from trade_info where id = ?";
+			sql = "select * from trade_info where id = ? "+
+					"order by ti_status, ti_num desc limit ?,?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
+			pstmt.setInt(2, start-1);
+			pstmt.setInt(3, end);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				ModTradeInfoBEAN mtib = new ModTradeInfoBEAN();
@@ -218,6 +245,15 @@ public class ModDAO {
 				mtib.setTrade_date(rs.getTimestamp("ti_trade_date"));
 				mtib.setTotal_cost(rs.getInt("ti_total_cost"));
 				mtib.setStatus(rs.getInt("ti_status"));
+				String status_text = "";
+				switch(rs.getInt("ti_status")){
+					case 1: status_text="입금 확인 중"; break;
+					case 2: status_text="결제 완료";break;
+					case 3: status_text="환불 완료";break;
+					case 9: status_text="대기중"; break;
+					case 10:status_text="완료";break;
+				}
+				mtib.setStatus_text(status_text);
 				ModList.add(mtib);
 			}
 		}catch (Exception e) {
@@ -234,21 +270,21 @@ public class ModDAO {
 		
 		return ModList;
 	}
-	public List<ModTradeInfoBEAN> MyPackOrder(String id, int ti_num){
+	public List<ModTradeInfoBEAN> MyPackOrder(int ti_num){
 		List<ModTradeInfoBEAN> ModPackList = new ArrayList<ModTradeInfoBEAN>();
 		try{
 			conn =getconn();
 			sql = "select A.*, B.subject, B.intro, B.file1 "
 					+"from pack_order A left outer join pack B "
-					+"on A.ori_num = B.num where A.po_id=? and A.po_ti_num=?";
+					+"on A.ori_num = B.num where A.po_ti_num=?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
-			pstmt.setInt(2, ti_num);
+			pstmt.setInt(1, ti_num);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				ModTradeInfoBEAN mtib = new ModTradeInfoBEAN();
-				mtib.setIntro(rs.getString("intro"));
+				mtib.setNum(rs.getInt("po_num"));
 				mtib.setOri_num(rs.getInt("ori_num"));
+				mtib.setIntro(rs.getString("intro"));
 				mtib.setSubject(rs.getString("subject"));
 				mtib.setImg(rs.getString("file1"));
 				mtib.setTrade_num(rs.getString("po_trade_num"));
@@ -257,10 +293,10 @@ public class ModDAO {
 				mtib.setTrade_date(rs.getTimestamp("po_res_date"));
 				String statustext = "";
 				switch(rs.getInt("po_res_status")){
-					case 0: statustext = "환불 완료";break;
 					case 1: statustext = "입금 확인중"; break;
-					case 2: statustext = "결제 완료"; break;
+					case 2: statustext = "예약 완료"; break;
 					case 3: statustext = "결제 취소 확인중";break;
+					case 4: statustext = "환불 완료";break;
 					case 10:statustext = "완료";break;
 				}
 				mtib.setStatus_text(statustext);
@@ -281,26 +317,28 @@ public class ModDAO {
 		
 		return ModPackList;
 	}
-	public List<ModTradeInfoBEAN> MyThingOrder(String id, int ti_num){
+	public List<ModTradeInfoBEAN> MyThingOrder(int ti_num){
 		List<ModTradeInfoBEAN> ModThingList = new ArrayList<ModTradeInfoBEAN>();
 		try{
 			conn =getconn();
 			sql = "select A.*, B.subject, B.intro, B.img "
 					+"from thing_order A left outer join thing B "
-					+"on A.ori_num = B.num where A.o_id=? and A.o_ti_num=?";
+					+"on A.ori_num = B.num where A.o_ti_num=?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
-			pstmt.setInt(2, ti_num);
+			pstmt.setInt(1, ti_num);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				ModTradeInfoBEAN mtib = new ModTradeInfoBEAN();
+				mtib.setNum(rs.getInt("o_num"));
+				mtib.setOri_num(rs.getInt("ori_num"));
 				mtib.setIntro(rs.getString("intro"));
 				mtib.setSubject(rs.getString("subject"));
 				mtib.setImg(rs.getString("img"));
-				mtib.setOri_num(rs.getInt("ori_num"));
 				mtib.setTrade_num(rs.getString("o_trade_num"));
 				mtib.setThing_count(rs.getInt("o_count"));
 				mtib.setCost(rs.getInt("o_cost"));
+				mtib.setColor(rs.getString("o_color"));
+				mtib.setSize(rs.getString("o_size"));
 				mtib.setTrade_date(rs.getTimestamp("o_date"));
 				String statustext = "";
 				switch(rs.getInt("o_status")){
@@ -329,5 +367,29 @@ public class ModDAO {
 			}
 		}
 		return ModThingList;
+	}
+	public void receive_change(ReceiveInfoBEAN rib){
+		try{
+			conn = getconn();
+			sql = "update trade_info set ti_receive_name=?, ti_receive_mobile=?, "+
+					"ti_receive_postcode=?, ti_receive_address1=?, ti_receive_address2=? where ti_num =?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, rib.getName());
+			pstmt.setString(2, rib.getMobile());
+			pstmt.setString(3, rib.getPostcode());
+			pstmt.setString(4, rib.getAddress1());
+			pstmt.setString(5, rib.getAddress2());
+			pstmt.setInt(6, rib.getRa_num());
+			pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }

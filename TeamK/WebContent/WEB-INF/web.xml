@@ -70,6 +70,15 @@
 		<servlet-name>ReplyFrontController</servlet-name>
 		<url-pattern>*.ro</url-pattern>
 	</servlet-mapping>
+	<servlet>
+    <servlet-name>AdminFrontController</servlet-name>
+    <servlet-class>net.admin.order.action.AdminFrontController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminFrontController</servlet-name>
+    <url-pattern>
+  	*.ao</url-pattern>
+  </servlet-mapping>
 	<resource-ref>
 		<description>dkdkd</description>
 		<res-ref-name>jdbc/mysqlDB</res-ref-name>

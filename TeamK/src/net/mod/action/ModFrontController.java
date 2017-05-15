@@ -45,6 +45,13 @@ public class ModFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else if(command.equals("/Receive_Change.mo")){
+			action = new Receive_Change();
+			try {
+				afo = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}else if(command.equals("/Add_Address.mo")){
 			afo = new ActionForward();
 			afo.setPath("./MyOrder/ReceiveAdd.jsp");
@@ -63,13 +70,13 @@ public class ModFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}	
-		}else if(command.equals("/test.mo")){
-			action = new test();
+		}else if(command.equals("/receive_changeAction.mo")){
+			action = new receive_chageAction();
 			try {
 				afo = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
-			}
+			}	
 		}
 		if (afo != null) {
 			if (afo.isRedirect()) {

@@ -56,7 +56,7 @@ public class MyOrderAddAction implements Action{
 				break;
 			case "무통장 입금":
 				trade_type+=", "+request.getParameter("select_bank");
-				if(request.getParameter("cash_receipt_check").equals("1")){
+				if(request.getParameter("cash_receipt_check")!=null){
 					trade_type+=", "+request.getParameter("cash_receipt_type_select")+
 							", "+request.getParameter("cash_receipt_number");
 				}

@@ -148,4 +148,7 @@ public class RIDAO {
 			}
 		}
 	}
+	public void receive_change(ReceiveInfoBEAN rib){
+		
+	}
 }
