@@ -46,7 +46,7 @@
 	<div id="left_menu">
 		<ul id="menu_list">
 			<li><a href="./main.bo">메인</a></li>
-			<li><a href="../package/package.jsp">패키지</a></li>
+			<li><a href="./PackList.po">패키지</a></li>
 			<li><a href="#">상품</a></li>
 			<li><a href="./BoardList.bo">리뷰게시판</a></li>
 			<li><a href="./BoardList2.bo">Q&amp;A</a></li>
