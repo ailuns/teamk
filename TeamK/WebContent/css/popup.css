@@ -1,0 +1,57 @@
+@CHARSET "UTF-8";
+* {
+	box-sizing: border-box;
+	font-family: "나눔 고딕", "Noto Sans", sans-serif;
+	text-align: center;
+}
+
+/*Join Id Check.jsp*/
+div#idcheck {
+	width: 300px;
+	height: 150px;
+	margin: 25px auto;
+}
+div#idcheck form input[type="text"] {width: 200px;}
+div#idcheck form input[type="submit"] {
+	border: 1px solid #000;
+	width: 90px;
+	height: 24px;
+}
+div#idcheck form p {
+	height: 60px;
+	padding: 5px 10px;
+	background-color: #eee;
+}
+div#idcheck form input[type="button"] {
+	width: 150px;
+	height: 30px;
+	border: 1px solid #000;
+}
+
+/*Email Check.jsp*/
+div#emailchk {
+	width: 300px;
+	height: 25px;
+	margin: 88px auto;
+}
+div#emailchk form input[type="text"] {width: 200px;}
+div#emailchk form input[type="submit"] {
+	border: 1px solid #000;
+	width: 90px;
+	height: 24px;
+}
+
+/*Email Check Update.jsp*/
+div#emailchkup {
+	width: 300px;
+	margin: 65px auto;
+}
+div#emailchkup form label {margin-right: 10px;}
+div#emailchkup form input[type="text"] {width: 240px;}
+div#emailchkup form input[type="submit"] {
+	border: 1px solid #000;
+	width: 100px;
+	height: 25px;
+	margin-top: 10px;
+}
+
