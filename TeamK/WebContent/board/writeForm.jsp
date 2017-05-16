@@ -33,13 +33,13 @@
 <input type="hidden" value="1" name="type">
 <input type="hidden" name="id" value="<%=id%>">
 <label for="subject">제목</label><input type="text" name="subject" id="subject" maxlength="20"><br><br>
+<textarea id="ir1" rows="30" cols="80" name="content" id="content"></textarea><br><br>
 <label for="file1">첨부파일1</label><input type="file" name="file1" id="file1"><br>
 <label for="file2">첨부파일2</label><input type="file" name="file2" id="file2"><br>
 <label for="file3">첨부파일3</label><input type="file" name="file3" id="file3"><br>
 <label for="file4">첨부파일4</label><input type="file" name="file4" id="file4"><br>
 <label for="file5">첨부파일5</label><input type="file" name="file5" id="file5"><br>
 <div class="clear"></div><br>
-<textarea id="ir1" rows="30" cols="80" name="content" id="content"></textarea><br><br>
 <input type="submit" id="save" value="글쓰기">
 <input type="button" value="글목록" onclick="location.href='./BoardList.bo?pageNum=1'">
 </form>
