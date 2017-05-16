@@ -755,6 +755,26 @@ div#board div#board_content form#reply input[type="submit"], div#board div#board
 }
 
 /*Board Write.jsp*/
+div#board div#board_write {
+	width: 800px;
+	margin: 20px auto;
+}
+div#board div#board_write form {width: 100%;}
+div#board div#board_write form label {
+	width: 100px;
+	float: left;
+	margin: 2px 20px 2px 0;
+	text-align: left;
+}
+div#board div#board_write form input {
+	margin: 2px 0;
+	width: 679px;
+}
+div#board div#board_write form textarea {width: 797px;}
+div#board div#board_write form input[type="submit"], div#board div#board_write form input[type="button"] {
+	width: 150px;
+}
+
 
 
 
