@@ -56,6 +56,21 @@ public class BoardFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else if(command.equals("/BoardWrite3.bo")){
+			//	./board/writeForm.jsp
+			// 이동정보 저장 net.board.action.ActionForward
+			forward=new ActionForward();
+	   		forward.setPath("./board3/writeForm3.jsp");
+	   		forward.setRedirect(false);			
+		}else if(command.equals("/BoardWriteAction3.bo")){
+			// 처리할파일 틀 제시 net.board.action.Action
+			// 파일 BoardWriteAction execute()
+			action = new BoardWriteAction3();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}else if(command.equals("/BoardList.bo")){
 			// 	 BoardListAction		execute()
 			action = new BoardListAction();
@@ -72,6 +87,14 @@ public class BoardFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else if(command.equals("/BoardList3.bo")){
+			// 	 BoardListAction		execute()
+			action = new BoardListAction3();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}else if(command.equals("/BoardContent.bo")){
 			action = new BoardContentAction();
 			try {
@@ -81,6 +104,13 @@ public class BoardFrontController extends HttpServlet {
 			}
 		}else if(command.equals("/BoardContent2.bo")){
 			action = new BoardContentAction2();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/BoardContent3.bo")){
+			action = new BoardContentAction3();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
@@ -146,6 +176,22 @@ public class BoardFrontController extends HttpServlet {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+		 }else if(command.equals("/BoardDelete3.bo")){
+	   		 forward=new ActionForward();
+	   		 forward.setPath("./board3/deleteForm3.jsp");
+	   		 forward.setRedirect(false);
+	   		try {
+	   			forward=action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	   	 }else if(command.equals("/BoardDeleteAction3.bo")){
+			   	action = new BoardDeleteAction3();
+			   	try {
+			   		forward=action.execute(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 		 }else if(command.equals("/BoardReplyAction.bo")){
 				action = new BoardReplyAction();
 				try {
@@ -201,6 +247,13 @@ public class BoardFrontController extends HttpServlet {
 			}
 		}else if(command.equals("/listSearch2.bo")){
 			action = new BoardlistSearchAction2();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/listSearch3.bo")){
+			action = new BoardlistSearchAction3();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
