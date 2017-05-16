@@ -16,7 +16,7 @@ String email = request.getParameter("email");
 		<form action="./MemberEmailchangeAction.me" method="post">
 			<input type="hidden" name="checknum" value="<%=checknum%>"> 
 			<input type="hidden" name="email" value="<%=email%>"> 
-			<input type="text" name="number" id="number" placeholder="인증번호를 입력해주세요">
+			<input type="text" name="number" id="number" placeholder="인증번호를 입력해주세요" maxlength="6">
 			<input type="submit" value="확인">
 		</form>
 	</div>
