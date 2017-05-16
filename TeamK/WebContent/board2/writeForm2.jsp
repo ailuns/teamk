@@ -14,11 +14,6 @@ function check() {
 		document.fr.subject.focus();
 		return false;
 	}
-	if(document.fr.subject.value.length>20){
-		alert("제목은 20자 이내로 입력해주세요");
-		document.fr.subject.focus();
-		return false;
-	}
 	if(document.fr.content.value==""){
 		alert("내용을 입력해주세요");
 		document.fr.content.focus();
@@ -62,7 +57,7 @@ ID:<input type="text" name="id" value="<%=id%>" readonly><br>
 첨부파일4:<input type="file" name="file4"><br>
 첨부파일5:<input type="file" name="file5"><br>
 답변받을이메일주소:<input type="text" name="email" value="<%=mb.getEmail()%>"><br>
-제목:<input type="text" name="subject"><br>
+제목:<input type="text" name="subject" maxlength="20"><br>
 내용:<textarea rows="10" cols="20" name="content"></textarea><br>
 <input type="submit" value="글쓰기">
 </form>

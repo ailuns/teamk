@@ -36,7 +36,7 @@ ID:<input type="text" name="id" value="<%=id%>" readonly><br>
 첨부파일3:<input type="file" name="file3"><br>
 첨부파일4:<input type="file" name="file4"><br>
 첨부파일5:<input type="file" name="file5"><br>
-제목:<input type="text" name="subject"><br>
+제목:<input type="text" name="subject" maxlength="20"><br>
 내용:<textarea id="ir1" rows="30" cols="90" name="content"></textarea><br>
 <input type="submit" id="save" value="글쓰기">
 <input type="button" value="글목록" 
@@ -84,11 +84,7 @@ $("#save").click(function(){
 		return false;
 	}
     
-    if (document.fr.subject.value.length > 20) {
-		alert("제목은 20자 이하로 작성해주세요");
-		document.fr.subject.focus();
-		return false;
-	}
+
 
     if (content == "<br>")  // 빈공간 값 <br>
     {
