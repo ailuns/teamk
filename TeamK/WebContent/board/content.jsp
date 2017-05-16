@@ -27,8 +27,8 @@ int num = Integer.parseInt(request.getParameter("num"));
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
 		<div id="board_head">
-			<div id="rvw_title">로그인</div>
-			<div id="rvw_script">로그인이 필요합니다.</div>
+			<div id="rvw_title">리뷰</div>
+			<div id="rvw_script">물건이나 여행 후기를 쓰는 곳 입니다.</div>
 		</div>
 		<div id="clear"></div>
 		<div id="board">

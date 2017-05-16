@@ -47,8 +47,7 @@ MemberBean mb = mdao.getMember(id);
 		</div>
 		<div id="clear"></div>
 		<div id="login_form">
-<form action="./BoardWriteAction2.bo" method="post" name="fr" enctype="multipart/form-data"
-onsubmit="return check()">
+<form action="./BoardWriteAction2.bo" method="post" name="fr" enctype="multipart/form-data" onsubmit="return check()">
 <input type="hidden" value="2" name="type">
 ID:<input type="text" name="id" value="<%=id%>" readonly><br>
 첨부파일1:<input type="file" name="file1"><br>
