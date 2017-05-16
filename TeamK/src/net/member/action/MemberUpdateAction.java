@@ -75,6 +75,7 @@ public class MemberUpdateAction implements Action {
 			} else {
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();
+				session.setAttribute("id", id);
 				out.println("<script>");
 				out.println("alert('수정완료');");
 				out.println("location.href='./main.bo'");

@@ -101,11 +101,13 @@ if(id!=null){
     }}
     %>
 </table>
-<form action="./BoardReplyAction.bo?pageNum=<%=pageNum%>" method="post" name="fr1">
+<form action="./BoardReplyAction.bo?pageNum=<%=pageNum%>" method="post" name="fr1" id="reply">
 <span><%=id %></span>
 <input type="hidden" name="group_del" value="<%=bb.getNum()%>">
-<input type="hidden" name="id" value="<%=id%>" readonly><br>
-<textarea rows="3" cols="50" name="content" placeholder="타인을 향한 지나친 비방, 욕설은 자제해주세요."></textarea><br>
+<input type="hidden" name="id" value="<%=id%>" readonly>
+<div id="textarea">
+<textarea rows="3" cols="59" name="content" placeholder="타인을 향한 지나친 비방, 욕설은 자제해주세요."></textarea>
+</div>
 <%if(id!=null){%>
 <input type="submit" value="댓글달기">
     		<%}else{%>

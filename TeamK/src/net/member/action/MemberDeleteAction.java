@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
+import com.tq.util.BCrypt;
 
 import net.member.db.MemberBean;
 import net.member.db.MemberDAO;
@@ -26,15 +27,14 @@ public class MemberDeleteAction implements Action {
 			forward.setRedirect(true);
 			return forward;
 		}
+		
 		MemberDAO mdao = new MemberDAO();
-
 		MemberBean mb = new MemberBean();
 
 		mb = mdao.getMember(id);
-		String str = mb.getPass();
-		String pass2 = new String(Base64.decode(str));
+		String hashPass = mb.getPass();
 
-		if (pass.equals(pass2)) {
+		if (BCrypt.checkpw(pass, hashPass)) {
 
 			int check = mdao.deleteMember(mb);
 
@@ -59,12 +59,12 @@ public class MemberDeleteAction implements Action {
 				return null;
 
 			} else {
-				session.setAttribute("id", id);
+				session.removeAttribute("id");
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();
 				out.println("<script>");
 				out.println("alert('삭제완료');");
-				out.println("location.href='MemberLogin.me';");
+				out.println("location.href='main.bo';");
 				out.println("</script>");
 				out.close();
 				return null;
