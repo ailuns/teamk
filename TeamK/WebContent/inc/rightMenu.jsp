@@ -6,11 +6,12 @@
 	<ul>
 		<%
 		String id = (String)session.getAttribute("id");
-		if(id==null){
+		System.out.print(id);
+		if(id==null || id==""){
 		%>
 		<li><a href="./MemberLogin.me">로그인</a></li>
 		<li><a href="./MemberJoin.me">회원가입</a></li>
-		<%}else{%>
+		<%}else if(id!=null || id!=""){%>
 		<li><a href="./MemberLogout.me">로그아웃</a></li>
 		<li><a href="./MemberInfo.me">회원정보</a></li>
 		<%} %>
