@@ -97,7 +97,7 @@ if(rcount!=0){lrb=(List)request.getAttribute("lrb");}//
 <td><%=rb.getDate()%></td>
 <td><%
 if(id!=null){
-if(id.equals(rb.getId())||id.equals("admin")){ 
+if(id.equals(rb.getId())||id.equals("admin")){
 %>
 <form action="./BoardReplyDel2.bo?pageNum=<%=pageNum%>" method="post" name="replydel">
 <input type="hidden" name="group_del" value="<%=bb.getNum()%>">
@@ -111,20 +111,18 @@ if(id.equals(rb.getId())||id.equals("admin")){
     %>
 </table>
 
+<%
+if(id!=null){
+if(id.equals("admin")){%>
 <%request.setAttribute("email", bb.getEmail());%> 
-
 <form action="./BoardReplyAction2.bo?pageNum=<%=pageNum%>" method="post" name="fr1">
 <input type="hidden" name="group_del" value="<%=bb.getNum()%>">
 <input type="hidden" name="wEmail" value="<%=bb.getEmail()%>">
 <input type="hidden" name="wContent" value="<%=bb.getContent()%>">
 ID:<input type="text" name="id" value="<%=id%>" readonly><br>
 내용:<textarea rows="2" cols="20" name="content"></textarea><br>
-<%if(id!=null){%>
-<input type="submit" value="댓글달기">
-    		<%}else{%>
-    			<input type="button" value="댓글달기" 
-    				   onclick="alert('로그인 해주세요')">
-    		<%} %>
+<input type="submit" value="댓글달기">		
+<%}}%>
 </form>
 <!-- ///////////////////댓글///////////////// -->
 		</div>
