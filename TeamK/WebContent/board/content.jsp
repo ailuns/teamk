@@ -75,22 +75,17 @@ List lrb = null;
 int rcount = (int)request.getAttribute("rcount");
 if(rcount!=0){lrb=(List)request.getAttribute("lrb");}//
 %>
-<table border="1">
-<h3>댓글(<%=rcount%>개)</h3>
-  
-    <%   
-    if(rcount!=0){%>
-    	<tr><td>번호</td><td>ID</td><td>내용</td><td>날짜</td><td></td></tr> <%
+<p>댓글(<%=rcount%>개)</p>
+<table id="reply">
+    <%if(rcount!=0){
     for(int i=0; i<lrb.size(); i++){
     	//자바빈(BoardBean) 변수 =배열한칸 접근  배열변수.get()
-    	BoardReplyBean rb = (BoardReplyBean)lrb.get(i);
-    			%>
+    	BoardReplyBean rb = (BoardReplyBean)lrb.get(i);%>
 <tr>
-<td><%=i+1%></td>
-<td><%=rb.getId()%></td>
-<td><%=rb.getContent()%></td>
-<td><%=rb.getDate()%></td>
-<td><%
+<%-- <td><%=i+1%></td> --%>
+<td id="name"><%=rb.getId()%></td>
+<td id="content"><%=rb.getContent()%></td>
+<td id="delete"><%
 if(id!=null){
 	if(id.equals(rb.getId())||id.equals("admin")){ 
 %>
@@ -100,19 +95,21 @@ if(id!=null){
 <input type="submit" value="리플삭제">
 </form>
 <%}}%></td>
+<td id="date"><%=rb.getDate()%></td>
 </tr>
     <%
     }}
     %>
 </table>
 <form action="./BoardReplyAction.bo?pageNum=<%=pageNum%>" method="post" name="fr1">
+<span><%=id %></span>
 <input type="hidden" name="group_del" value="<%=bb.getNum()%>">
-ID:<input type="text" name="id" value="<%=id%>" readonly><br>
-내용:<textarea rows="2" cols="20" name="content"></textarea><br>
+<input type="hidden" name="id" value="<%=id%>" readonly><br>
+<textarea rows="3" cols="50" name="content" placeholder="타인을 향한 지나친 비방, 욕설은 자제해주세요."></textarea><br>
 <%if(id!=null){%>
 <input type="submit" value="댓글달기">
     		<%}else{%>
-    			<input type="button" value="로그인 해주세요 " 
+    			<input type="button" value="로그인 해주세요" 
     				   onclick="location.href='./MemberLogin.me'">
     		<%} %>
 </form>
