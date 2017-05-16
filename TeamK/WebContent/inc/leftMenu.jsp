@@ -52,9 +52,6 @@ if(count!=0){
 	}
 }
 %>
-	
-		
-		
 	</div>
 	<div id="left_menu">
 		<ul id="menu_list">

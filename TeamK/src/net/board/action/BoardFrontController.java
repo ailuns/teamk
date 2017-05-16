@@ -130,6 +130,13 @@ public class BoardFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else if(command.equals("/BoardUpdate3.bo")){
+			action = new BoardUpdate3();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}else if(command.equals("/BoardUpdateAction.bo")){
 			action = new BoardUpdateAction();
 			try {
@@ -139,6 +146,13 @@ public class BoardFrontController extends HttpServlet {
 			}
 		}else if(command.equals("/BoardUpdateAction2.bo")){
 			action = new BoardUpdateAction2();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/BoardUpdateAction3.bo")){
+			action = new BoardUpdateAction3();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
