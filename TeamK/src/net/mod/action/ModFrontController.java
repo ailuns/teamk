@@ -32,7 +32,7 @@ public class ModFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 		}else if(command.equals("/MyOrderList.mo")){
-			action = new MyOrderList();
+			action = new MyPackOrderList();
 			try {
 				afo = action.execute(request, response);
 			} catch (Exception e) {

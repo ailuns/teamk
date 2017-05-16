@@ -29,6 +29,28 @@ public class ModDAO {
 		conn = ds.getConnection();
 		return conn;
 	}
+	public int PO_Count(String id){
+		int count = 0;
+		try{
+			conn = getconn();
+			sql = "select count(po_num) from pack_order where po_id=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next())count = rs.getInt(1);
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return count;
+	}
 	public int TI_Count(String id){
 		int count=0;
 		try{
@@ -270,15 +292,15 @@ public class ModDAO {
 		
 		return ModList;
 	}
-	public List<ModTradeInfoBEAN> MyPackOrder(int ti_num){
+	public List<ModTradeInfoBEAN> MyPackOrder(String id, int start, int end){
 		List<ModTradeInfoBEAN> ModPackList = new ArrayList<ModTradeInfoBEAN>();
 		try{
 			conn =getconn();
 			sql = "select A.*, B.subject, B.intro, B.file1 "
 					+"from pack_order A left outer join pack B "
-					+"on A.ori_num = B.num where A.po_ti_num=?";
+					+"on A.ori_num = B.num order by A.po_status, B.date where A.po_id=? limit ?,?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, ti_num);
+			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				ModTradeInfoBEAN mtib = new ModTradeInfoBEAN();
@@ -293,10 +315,11 @@ public class ModDAO {
 				mtib.setTrade_date(rs.getTimestamp("po_res_date"));
 				String statustext = "";
 				switch(rs.getInt("po_res_status")){
-					case 1: statustext = "입금 확인중"; break;
-					case 2: statustext = "예약 완료"; break;
-					case 3: statustext = "결제 취소 확인중";break;
-					case 4: statustext = "환불 완료";break;
+					case 1: statustext = "입금 확인 중"; break;
+					case 2: statustext = "예약 대기 중"; break;
+					case 3: statustext = "예약 완료"; break;
+					case 4: statustext = "결제 취소 확인 중";break;
+					case 5: statustext = "환불 완료";break;
 					case 10:statustext = "완료";break;
 				}
 				mtib.setStatus_text(statustext);
