@@ -62,6 +62,7 @@ if(id.equals(bb.getId())){ %>
 <input type="button" value="글삭제" 
        onclick="location.href= './BoardDelete3.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'">
 <%}}%>
+
 <input type="button" value="글목록" 
        onclick="location.href='./BoardList3.bo?pageNum=<%=pageNum%>'">
 
