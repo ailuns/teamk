@@ -741,11 +741,10 @@ div#board div#board_content form#reply span {
 	padding-top: 20px;
 	text-align: left;
 }
-div#board div#board_content form#reply textarea {
+div#board div#board_content form#reply div#textarea {
+	background-color: pink;
 	position: absolute;
-	width: 70%;
 	left: 160px;
-	right: 80px;
 }
 div#board div#board_content form#reply input[type="submit"], div#board div#board_content form#reply input[type="button"] {
 	height: 60px;
@@ -755,7 +754,7 @@ div#board div#board_content form#reply input[type="submit"], div#board div#board
 	top: 0;
 }
 
-
+/*Board Write.jsp*/
 
 
 

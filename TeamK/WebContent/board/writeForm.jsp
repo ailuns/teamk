@@ -22,12 +22,13 @@
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
-		<div id="login_head">
-		<div id="login_title">리뷰 게시판</div>
-			<div id="login_script">물건이나 여행 후기를 쓰는 곳 입니다.</div>
+		<div id="board_head">
+			<div id="rvw_title">로그인</div>
+			<div id="rvw_script">로그인이 필요합니다.</div>
 		</div>
 		<div id="clear"></div>
-		<div id="review_list">
+		<div id="board">
+		<div id="board_write">
 <form action="./BoardWriteAction.bo" method="post" name="fr" enctype="multipart/form-data">
 <input type="hidden" value="1" name="type">
 ID:<input type="text" name="id" value="<%=id%>" readonly><br>
@@ -42,6 +43,7 @@ ID:<input type="text" name="id" value="<%=id%>" readonly><br>
 <input type="button" value="글목록" 
        onclick="location.href='./BoardList.bo?pageNum=1'">
 </form>
+</div>
 </div>
 	</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
