@@ -38,6 +38,7 @@ int num = Integer.parseInt(request.getParameter("num"));
 <tr><td>글쓴이</td><td><%=bb.getId()%></td><td>작성일</td><td><%=bb.getDate()%></td></tr>
 <tr><td>답변받을 메일주소</td><td colspan="3"><%=bb.getEmail()%></td></tr>
 <tr><td>글제목</td><td colspan="3"><%=bb.getSubject()%></td></tr>
+<tr><td>글내용</td><td colspan="3"><%=bb.getContent()%></td></tr>
 <%if(bb.getFile1()!=null){%>
 <tr><td>첨부파일1</td><td colspan="3"><%if(bb.getFile1()!=null){%><img src="./upload/<%=bb.getFile1()%>" height="60"><a href="./upload/<%=bb.getFile1()%>"><%=bb.getFile1()%></a><%}%></td></tr>
 <%}%>
@@ -53,8 +54,6 @@ int num = Integer.parseInt(request.getParameter("num"));
 <%if(bb.getFile5()!=null){%>
 <tr><td>첨부파일5</td><td colspan="3"><%if(bb.getFile5()!=null){%><img src="./upload/<%=bb.getFile5()%>" height="60"><a href="./upload/<%=bb.getFile5()%>"><%=bb.getFile5()%></a><%}%></td></tr>
 <%}%>
-<tr><td>글내용</td><td colspan="3">
-<%=bb.getContent()%></td></tr>
 <%String sub = bb.getSubject();%>
 <tr><td colspan="3">
 <%if(id!=null){
