@@ -15,9 +15,7 @@ div#left_menu ul#menu_list {
 	list-style: none;
 	margin-left: -40px;
 }
-div#left_menu ul#menu_list li {
-	padding: 5px 0 5px 40px;
-}
+div#left_menu ul#menu_list li {padding: 5px 0 5px 40px;}
 div#left_menu ul#menu_list a {
 	color: #fff;
 	font-weight: bold;
@@ -96,9 +94,7 @@ div#submenu embed {
 
 
 /* South Korea Map Start */
-div#map object {
-	height: 600px;
-}
+div#map object {height: 600px;}
 polyline#pl_HD1_1_, polyline#pl_HD2_1_, 
 polyline#pl_HD3_1_, polyline#pl_HD4_1_, 
 polyline#pl_HD5_1_, polyline#pl_HD6_1_, 
@@ -152,7 +148,7 @@ body {
 	background-color: #2459da;
 	background-image: url("../img/Jeju-bg.jpg");
 	background-repeat : no-repeat;
-	background-size: cover;
+	background-size: contain;
 	background-position: bottom center;
 }
 div#wrap {
@@ -187,9 +183,7 @@ div#search {
 	text-align: center;
 	padding: 3px 0 0 0;
 }
-div#search input[type=submit]:hover {
-	text-shadow: 1px 1px 3px #0080ff;
-}
+div#search input[type=submit]:hover {text-shadow: 1px 1px 3px #0080ff;}
 div#search input[type=text] {
 	width: 400px;
 	border: 3px solid #39f;
@@ -234,12 +228,8 @@ input.login, input.enter, input.join {
 	font-size: 25px;
 	color: #fff;
 }
-input.login:hover, input.enter:hover, input.join:hover {
-	background-color: #afdcf0;
-}
-input.enter {
-	width: 300px;
-}
+input.login:hover, input.enter:hover, input.join:hover {background-color: #afdcf0;}
+input.enter {width: 300px;}
 input.login {
 	width: 200px;
 	border-radius: 50px 0 0 50px;
