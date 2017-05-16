@@ -8,9 +8,15 @@
 <link href="../css/popup.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
 	function result() {
-		opener.document.fr.id.value = document.wfr.userid.value;
-		opener.document.fr.idchecknum.value = document.wfr.idchecknum.value;
-		window.close(); 
+		if(document.wfr.userid.value<4){
+			alert("아이디는 4~10글자로 정해주세요");
+			document.wfr.userid.focus();
+			return false;
+		}else{
+			opener.document.fr.id.value = document.wfr.userid.value;
+			opener.document.fr.idchecknum.value = document.wfr.idchecknum.value;
+			window.close(); 
+		}
 	}
 	function check_key() {
 		var char_ASCII = event.keyCode;
@@ -57,7 +63,7 @@
 	%>
 	<div id="idcheck">
 	<form action="joinIdCheck.jsp" method="post" name="wfr">
-		<input type="text" name="userid" value="<%=id%>" onkeypress="nonHangulSpecialKey()">
+		<input type="text" name="userid" value="<%=id%>" onkeypress="nonHangulSpecialKey()" maxlength="10">
 		<input type="submit" value="중복확인">
 		<p>
 		<%if(id.length()>=4 && id.length()<=10){
@@ -78,7 +84,7 @@
 				<%
 				out.println(id + "는 사용 가능한<br>아이디 입니다.");
 		%></p>
-		<input type="button" name="select" value="아이디 선택" onclick="result()">
+		<input type="button" name="select" value="아이디 선택" onclick="return result()">
 		<input type="hidden" name="idchecknum" value="1">
 		<%
 			}

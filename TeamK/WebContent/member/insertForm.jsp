@@ -114,7 +114,8 @@ function sample6_execDaumPostcode() {
 			document.fr.id.focus();
 			return false;
 		}
-		if(document.fr.idchecknum.value == ""){
+		
+		if(document.fr.idchecknum.value != 1){
 			alert("ID중복확인을 해주세요.");
 			document.fr.id.focus();
 			return false;
@@ -173,8 +174,6 @@ function sample6_execDaumPostcode() {
 			document.fr.email.focus();
 			return false;
 		}
-		alert("회원가입완료!! 로그인페이지로 이동합니다.");
-
 	}
 	document.fr.submit();
 </script>
@@ -197,7 +196,7 @@ MemberBean mb= new MemberBean();
 		<div id="member">
 			<div id="insert_form">
 			<form action="./MemberJoinAction.me" method="post" name="fr" onsubmit="return winopen()">
-				<label for="id">아이디</label><input type="text" name="id" id="id" onkeypress="nonHangulSpecialKey()"placeholder="ID는 영문, 숫자만 가능">
+				<label for="id">아이디</label><input type="text" name="id" id="id" onkeypress="nonHangulSpecialKey()"placeholder="ID는 영문, 숫자만 가능"  maxlength="10">
 				<input type="hidden" name="idchecknum"> 
 				<input type="hidden" name="name2" value="0"> 
 				<input type="button"value="중복확인" onclick="idCheck()"><br>
