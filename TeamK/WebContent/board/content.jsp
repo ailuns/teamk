@@ -112,8 +112,8 @@ ID:<input type="text" name="id" value="<%=id%>" readonly><br>
 <%if(id!=null){%>
 <input type="submit" value="댓글달기">
     		<%}else{%>
-    			<input type="button" value="댓글달기" 
-    				   onclick="alert('로그인 해주세요')">
+    			<input type="button" value="로그인 해주세요" 
+    				   onclick="location.href='./MemberLogin.me'">
     		<%} %>
 </form>
 <!-- ///////////////////댓글///////////////// -->
