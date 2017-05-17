@@ -101,8 +101,7 @@ public class MyOrderAddAction implements Action{
 			moddao.InsertPackOrder(mtib);
 			check = 1;
 		}
-		request.setAttribute("check", check);
-		afo.setPath("./MyOrderPayed.mo");
+		afo.setPath("./MyOrderPayed.mo?check="+check);
 		afo.setRedirect(true);
 		return afo;
 	}

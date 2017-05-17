@@ -8,7 +8,7 @@
 </head>
 <%
 request.setCharacterEncoding("utf-8");
-int check = ((Integer)request.getAttribute("check")).intValue();
+int check = Integer.parseInt(request.getParameter("check"));
 if(check ==1){
 %>
 	<script type="text/javascript">
