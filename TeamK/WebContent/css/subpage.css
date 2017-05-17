@@ -277,7 +277,7 @@ div#package_search form input[type=text] {
 	font-size: 15px;
 	width: 36%;
 }
-div#package_search form select {
+div#package_search form input#city_search {
 	font-size: 15px;
 	width: 65%;
 }

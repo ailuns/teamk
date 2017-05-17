@@ -9,8 +9,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link href="../css/inc.css" rel="stylesheet" type="text/css">
+<link href="../css/subpage.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="./js/jquery-3.2.0.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script>
@@ -23,9 +24,9 @@
 			numberOfMonths: 2,		   // 보여줄 달의 갯수
 	        dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],  // 일(Day) 표기 형식
 	        monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],   // 월(Month) 표기 형식
-	        showOn: "both",		// 버튼을 표시      both : input과 buttom 둘다 클릭 시 달력 표시           bottom  :  buttom 클릭 했을 때만 달력 표시
-	        buttonImage: "./img/calendar.png",   // 버튼에 사용될 이미지
-	        buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
+	        //showOn: "both",		// 버튼을 표시      both : input과 buttom 둘다 클릭 시 달력 표시           bottom  :  buttom 클릭 했을 때만 달력 표시
+	        //buttonImage: "./img/calendar.png",   // 버튼에 사용될 이미지
+	        //buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
 	        onClose: function(selectedDate){		// 닫힐 때 함수 호출
 	        	$("#date_to").datepicker("option", "minDate", selectedDate);    // #date_to의 최소 날짜를 #date_from에서 선택된 날짜로 설정
 	    		$('img.ui-datepicker-trigger').attr('align', 'absmiddle');
@@ -38,9 +39,9 @@
 			numberOfMonths: 2,		   // 보여줄 달의 갯수
 	        dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],  // 일(Day) 표기 형식
 	        monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],   // 월(Month) 표기 형식
-	        showOn: "both",			// 버튼을 표시      both : input과 buttom 둘다 클릭 시 달력 표시           bottom  :  buttom 클릭 했을 때만 달력 표시
-	        buttonImage: "./img/calendar.png",   // 버튼에 사용될 이미지
-	        buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
+	        //showOn: "both",			// 버튼을 표시      both : input과 buttom 둘다 클릭 시 달력 표시           bottom  :  buttom 클릭 했을 때만 달력 표시
+	        //buttonImage: "./img/calendar.png",   // 버튼에 사용될 이미지
+	        //buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
 	        onClose: function(selectedDate){		// 닫힐 때 함수 호출
 	        	$("#date_from").datepicker("option", "maxDate", selectedDate);   // #date_from의 최대 날짜를 #date_to에서 선택된 날짜로 설정
 	    		$('img.ui-datepicker-trigger').attr('align', 'absmiddle');
@@ -64,7 +65,82 @@
 			var activeTab = $(this).attr("name");		// 클릭된 탭부분 name 속성값 가져와서 저장
 			$("#" + activeTab).fadeIn();		// 해당 탭내용 부분을 보여준다  흐릿 -> 또렷하게 애니메이션 효과			
 		});
-
+		//Featured Packages List
+	    $("#feat_ttl1")
+	    .mouseenter(function() {
+	      $("#feat_con0").css('width', '0');
+	      $("#feat_con0 span").css('display', 'none');
+	      $("#feat_con1").css('width', '75%');
+	      $("#feat_con1 span").css('display', 'block');
+	      $("#feat_con2").css('width', '0');
+	      $("#feat_con2 span").css('display', 'none');
+	      $("#feat_con3").css('width', '0');
+	      $("#feat_con3 span").css('display', 'none');
+	      $("#feat_con4").css('width', '0');
+	      $("#feat_con4 span").css('display', 'none');
+	      $("#feat_con5").css('width', '0');
+	      $("#feat_con5 span").css('display', 'none');
+	    });
+	    $("#feat_ttl2")
+	    .mouseenter(function() {
+	      $("#feat_con0").css('width', '0');
+	      $("#feat_con0 span").css('display', 'none');
+	      $("#feat_con1").css('width', '0');
+	      $("#feat_con1 span").css('display', 'none');
+	      $("#feat_con2").css('width', '75%');
+	      $("#feat_con2 span").css('display', 'block');
+	      $("#feat_con3").css('width', '0');
+	      $("#feat_con3 span").css('display', 'none');
+	      $("#feat_con4").css('width', '0');
+	      $("#feat_con4 span").css('display', 'none');
+	      $("#feat_con5").css('width', '0');
+	      $("#feat_con5 span").css('display', 'none');
+	    });
+	    $("#feat_ttl3")
+	    .mouseenter(function() {
+	      $("#feat_con0").css('width', '0');
+	      $("#feat_con0 span").css('display', 'none');
+	      $("#feat_con1").css('width', '0');
+	      $("#feat_con1 span").css('display', 'none');
+	      $("#feat_con2").css('width', '0');
+	      $("#feat_con2 span").css('display', 'none');
+	      $("#feat_con3").css('width', '75%');
+	      $("#feat_con3 span").css('display', 'block');
+	      $("#feat_con4").css('width', '0');
+	      $("#feat_con4 span").css('display', 'none');
+	      $("#feat_con5").css('width', '0');
+	      $("#feat_con5 span").css('display', 'none');
+	    });
+	    $("#feat_ttl4")
+	    .mouseenter(function() {
+	      $("#feat_con0").css('width', '0');
+	      $("#feat_con0 span").css('display', 'none');
+	      $("#feat_con1").css('width', '0');
+	      $("#feat_con1 span").css('display', 'none');
+	      $("#feat_con2").css('width', '0');
+	      $("#feat_con2 span").css('display', 'none');
+	      $("#feat_con3").css('width', '0');
+	      $("#feat_con3 span").css('display', 'none');
+	      $("#feat_con4").css('width', '75%');
+	      $("#feat_con4 span").css('display', 'block');
+	      $("#feat_con5").css('width', '0');
+	      $("#feat_con5 span").css('display', 'none');
+	    });
+	    $("#feat_ttl5")
+	    .mouseenter(function() {
+	      $("#feat_con0").css('width', '0');
+	      $("#feat_con0 span").css('display', 'none');
+	      $("#feat_con1").css('width', '0');
+	      $("#feat_con1 span").css('display', 'none');
+	      $("#feat_con2").css('width', '0');
+	      $("#feat_con2 span").css('display', 'none');
+	      $("#feat_con3").css('width', '0');
+	      $("#feat_con3 span").css('display', 'none');
+	      $("#feat_con4").css('width', '0');
+	      $("#feat_con4 span").css('display', 'none');
+	      $("#feat_con5").css('width', '75%');
+	      $("#feat_con5 span").css('display', 'block');
+	    });
 
 	});
 	
@@ -72,77 +148,49 @@
 </script>
 
 <style type="text/css">
-
-img.ui-datepicker-trigger
-{
+img.ui-datepicker-trigger {
 	cursor : pointer;
 	margin-left : 5px;
 }
-
-
-
-#wrap
-{
-	width : 1000px;
-	min-height : 1000px;
-	border : 1px solid black;
-	margin : 0 auto;
-	padding-top : 50px;
-}
-
+/* #wrap{ */
+/* 	width : 1000px; */
+/* 	min-height : 1000px; */
+/* 	border : 1px solid black; */
+/* 	margin : 0 auto; */
+/* 	padding-top : 50px; */
+/* } */
 
 /* 검색  */
-
-#search_div
-{
-	width : 450px;
-	height : 200px;
-	padding : 10px;
-	background-color: #D6F0FF;
-	margin : 0 auto;
-}
-
-#city_search
-{
-	width : 430px;
-}
-
-
-.input_style
-{
-	height : 25px;
-	margin-bottom : 10px;
-	padding-left : 10px;
-	border-radius : 1px;
-}
-
-#search_btn
-{
-	cursor : pointer;
-	width : 200px;
-	height : 35px;
-	margin-left : 100px;
-	background-color: #B2CCFF;
-}
-/* 검색  */
-
-
-
-
+/* #search_div { */
+/* 	width : 450px; */
+/* 	height : 200px; */
+/* 	padding : 10px; */
+/* 	background-color: #D6F0FF; */
+/* 	margin : 0 auto; */
+/* } */
+/* #city_search {width : 430px;} */
+/* .input_style { */
+/* 	height : 25px; */
+/* 	margin-bottom : 10px; */
+/* 	padding-left : 10px; */
+/* 	border-radius : 1px; */
+/* } */
+/* #search_btn { */
+/* 	cursor : pointer; */
+/* 	width : 200px; */
+/* 	height : 35px; */
+/* 	margin-left : 100px; */
+/* 	background-color: #B2CCFF; */
+/* } */
 
 /* 탭 패키지  */
-
-#package_tab
-{
+#package_tab {
 	margin : 0 auto;
 	margin-top : 50px;
 	width : 785px;
 	height : 630px;
 	border : 1px solid blue;
 }
-
-
-
 ul.tabs {
 	margin: 0;
 	padding: 0;
@@ -154,7 +202,6 @@ ul.tabs {
 	border-bottom: none;
 	border-right: none;
 }
-
 ul.tabs li {
 	width: 73px;
  	height: 32px;
@@ -165,7 +212,6 @@ ul.tabs li {
 	font-weight: bold;
 	line-height: 31px;
 }
-
 .tab_container {
 	border: 1px solid black;
 	float: left;
@@ -174,29 +220,18 @@ ul.tabs li {
 	padding : 10px;
 	margin : 0 auto;
 }
-
-.img_size
-{
+.img_size {
 	width : 250px;
 	height : 150px;
 	border: 1px solid pink;
 }
-
-
-#img_content
-{
+#img_content {
 	padding-top : 10px;
 	padding-left: 10px;
 }
 
 /* 탭 패키지  */
-
-
-.clear {
-	clear: both;
-}
-
-
+/* .clear {clear: both;} */
 </style>
 
 </head>
@@ -231,31 +266,34 @@ ul.tabs li {
 
 <div id="wrap">
 	<!--여행지 검색창 -->
-	<div id = "search_div">
-		<form action="./PackSearchAction.po" name="fr" method="get" onsubmit="return input_chk()">
-			<table>
-				<tr>
-					<td>여행지</td>
-				</tr>
-				<tr>
-					<td colspan="2"><input type="text" id="city_search" name="city" class="input_style" required="yes" placeholder="도시를 입력해주세요"></td>
-				</tr>
-				<tr>
-					<td>시작날</td>
-					<td>끝나는날</td>
-				</tr>
-				<tr>
-					<td><input type="text" id="date_from" class="input_style" name="startDate" required="yes"></td>
-					<td><input type="text" id="date_to" class="input_style" name="endDate" required="yes"></td>
-				</tr>
-				<tr>
-					<td colspan="2"><input type="submit" value="검색" id="search_btn" class="input_style"></td>
-				</tr>
-			</table>
+	<div id="package_head">
+			<div id="package_title">패키지</div>
+			<div id="package_search">
+				<p>내게 맞는 패키지 검색하기</p>
+		<form action="./PackSearchAction.po" name="fr" method="get" id="scheduler" onsubmit="return input_chk()">
+			<label for="date_from">출발</label><input type="text" id="date_from" class="input_style" name="startDate" required="yes">
+			<label for="date_to">도착</label><input type="text" id="date_to" class="input_style" name="endDate" required="yes"><br><br>
+			<label for="city_search">지역</label><input type="text" id="city_search" name="city" class="input_style" required="yes" placeholder="도시를 입력해주세요">
+			<input type="submit" value="검색" id="search_btn" class="input_style">
 		</form>
 	</div>
+	</div>
+	<div id="clear"></div>
 	<!--여행지 검색창 -->
-	
+	<div id="package_feat">
+			<div id="feat_con5"><a href="#"><span id="pktt">Lorem ipsum</span><br><span id="pksc">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span><br><span id="pkpr">￦123,456~</span></a></div>
+			<div id="feat_ttl5">타<br>이<br>틀<br>5</div>
+			<div id="feat_con4"><a href="#"><span id="pktt">Lorem ipsum</span><br><span id="pksc">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span><br><span id="pkpr">￦123,456~</span></a></div>
+			<div id="feat_ttl4">타<br>이<br>틀<br>4</div>
+			<div id="feat_con3"><a href="#"><span id="pktt">Lorem ipsum</span><br><span id="pksc">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span><br><span id="pkpr">￦123,456~</span></a></div>
+			<div id="feat_ttl3">타<br>이<br>틀<br>3</div>
+			<div id="feat_con2"><a href="#"><span id="pktt">Lorem ipsum</span><br><span id="pksc">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span><br><span id="pkpr">￦123,456~</span></a></div>
+			<div id="feat_ttl2">타<br>이<br>틀<br>2</div>
+			<div id="feat_con1"><a href="#"><span id="pktt">Lorem ipsum</span><br><span id="pksc">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span><br><span id="pkpr">￦123,456~</span></a></div>
+			<div id="feat_ttl1">타<br>이<br>틀<br>1</div>
+			<div id="feat_con0"><span>추천 상품<br>소개</span></div>
+		</div>
+		<div id="clear"></div>
 	<div id="package_tab">
 		<form action="./Package.po" method="get" id="pf">
 		<!-- 탭 부분 -->
@@ -536,8 +574,11 @@ ul.tabs li {
 		}
 	%>
 </div>
-<!-- 오른쪽 메뉴 -->
-<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
-<!-- 오른쪽 메뉴 -->
+<jsp:include page="../inc/footer.jsp"></jsp:include>
+	<!--오른쪽 메뉴 -->
+	<div>
+		<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
+	</div>
+	<!--오른쪽 메뉴 -->
 </body>
 </html>
