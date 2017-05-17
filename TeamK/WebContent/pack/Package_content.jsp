@@ -180,33 +180,6 @@
 		});
 	}
 
-
-
-	function ReplyPage(repageNum, num)
-	{
-		$.ajax({
-			type:"post",
-			url:"./ReplyList.ro",
-			data:{
-				repageNum:repageNum,
-				num:num
-			},
-			success:function(){
-//	 		$("#QnA").load("./PackQnA.jsp");
-//	 			$("#QnA").load(window.location.href+" #QnA");
-				window.location.reload(true);;
-			}
-		});
-	}
-	
-// 	function Move(num, repagenum)
-// 	{	
-// 		location.href="./PackContent.po?num=" + num + "&repageNum=" + repagenum + "#QnA";
-// 	}
-	
-	
-	
-	
 	//구글맵 v3
 	function initAutocomplete() {
 
