@@ -884,7 +884,7 @@
 						<form action="./ReplyWrite.ro" method="post">
 							
 							<%
-								if (user_id == null)
+								if (user_id.equals(""))
 								{
 							%>
 							<td>
