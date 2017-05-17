@@ -118,6 +118,56 @@ public class BoardDAO {
 		}			
 	}//insertBoard2(bb)
 	
+	public void insertBoard3(BoardBean bb){
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		String sql="";
+		ResultSet rs=null;
+		int num=0;
+		int re_ref=0;
+		try {
+			//1,2 디비연결
+			con = com.connect();
+			
+			// num 게시판 글 번호 구하기
+			sql="select max(num) from board";
+			pstmt = con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()){
+				num=rs.getInt(1)+1;
+			}
+			sql="select max(re_ref) from board where type=3";
+			pstmt = con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()){
+				re_ref=rs.getInt(1)+1;
+			}
+			
+			//3 sql insert now()
+			sql="insert into board(num,id,subject,content,readcount,date,file1,file2,file3,file4,file5,type,re_ref,email) values(?,?,?,?,?,now(),?,?,?,?,?,?,?,?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1,num);
+			pstmt.setString(2,bb.getId());
+			pstmt.setString(3,bb.getSubject());
+			pstmt.setString(4,bb.getContent());
+			pstmt.setInt(5,0);//readcount 조회수 0
+			pstmt.setString(6,bb.getFile1()); //re_ref 답변글 그룹==일반글의 글번호 동일
+			pstmt.setString(7,bb.getFile2());
+			pstmt.setString(8,bb.getFile3());
+			pstmt.setString(9,bb.getFile4());
+			pstmt.setString(10,bb.getFile5());
+			pstmt.setInt(11,bb.getType());
+			pstmt.setInt(12,re_ref); //re_ref 답변글 들여쓰기 일반글 들여쓰기 없음
+			pstmt.setString(13,bb.getEmail());
+			//4  실행
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			com.close(con, pstmt, rs);
+		}			
+	}//insertBoard3(bb)
+	
 	public int getBoardCount(){
 		Connection con=null;
 		PreparedStatement pstmt=null;
@@ -219,6 +269,57 @@ public class BoardDAO {
 		}
 		return count;
 	}//getBoardCount2	
+	
+	public int getBoardCount3(){
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		String sql="";
+		ResultSet rs=null;
+		int count=0;
+		try {
+			//1,2 디비연결 메서드 호출
+			con = com.connect();
+			//3 sql  함수 count(*) 이용
+			sql="select count(*) from board where type=3";
+			//4 rs 실행 저장
+			pstmt = con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			//5 rs 데이터 있으면  count 저장
+			if(rs.next()){
+				count=rs.getInt(1);
+			}
+		} catch (Exception e) {			
+		}finally {
+			com.close(con, pstmt, rs);		
+		}
+		return count;
+	}//getBoardCount3	
+	
+	public int getBoardCount3(String search){
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		String sql="";
+		ResultSet rs=null;
+		int count=0;
+		try {
+			//1,2 디비연결 메서드 호출
+			con = com.connect();
+			//3 sql  함수 count(*) 이용
+			sql="select count(*) from board where type=3 and subject like ?";
+			//4 rs 실행 저장
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%"+search+"%");
+			rs=pstmt.executeQuery();
+			//5 rs 데이터 있으면  count 저장
+			if(rs.next()){
+				count=rs.getInt(1);
+			}
+		} catch (Exception e) {			
+		}finally {
+			com.close(con, pstmt, rs);		
+		}
+		return count;
+	}//getBoardCount3	
 	
 	public List getBoardList(int startRow,int pageSize){
 		
@@ -430,6 +531,112 @@ public List getBoardList2(int startRow,int pageSize,String search){
 		
 	}return boardList;
 }//getBoardList2 search
+
+public List getBoardList3(int startRow,int pageSize){
+	
+	Connection con=null;
+	PreparedStatement pstmt=null;
+	String sql="";
+	ResultSet rs=null;
+	List boardList3 = new ArrayList();
+	try {
+		//1,2 디비연결 메서드호출
+		con = com.connect();
+		//3 sql 객체 생성
+		  // sql select * from board
+		  // 최근글위로 re_ref 그룹별내림차순 정렬 re_seq오름차순   
+		  //     re_ref desc,re_seq asc
+	      // 글잘라오기   limit 시작행-1,개수
+		sql="select * from board where type=3 order by re_ref desc limit ?,?";
+		pstmt=con.prepareStatement(sql);
+		pstmt.setInt(1, startRow-1);//시작행-1
+		pstmt.setInt(2, pageSize);//몇개글
+		//4 rs 실행 저장
+		rs=pstmt.executeQuery();
+		//5 rs while 데이터 있으면
+		// 자바빈 객체 생성 BoardBean bb
+		// bb 멤버변수 <= rs열데이터 가져와서 저장
+		// bb게시판 글 하나 => boardList저장
+	    while(rs.next()){
+	    	BoardBean bb = new BoardBean();
+	    	bb.setNum(rs.getInt("num"));
+	    	bb.setId(rs.getString("id"));
+	    	bb.setSubject(rs.getString("subject"));
+	    	bb.setContent(rs.getString("content"));
+	    	bb.setReadcount(rs.getInt("readcount"));
+	    	bb.setDate(rs.getDate("date"));
+	    	bb.setFile1(rs.getString("file1"));
+	    	bb.setFile2(rs.getString("file2"));	
+	    	bb.setFile3(rs.getString("file3"));	
+	    	bb.setFile4(rs.getString("file4"));	
+	    	bb.setFile5(rs.getString("file5"));
+	    	bb.setType(rs.getInt("type"));
+	    	bb.setRe_ref(rs.getInt("re_ref"));
+	    		
+	    	//boardList한칸저장
+	    	boardList3.add(bb);
+	    }
+	} catch (Exception e) {
+		e.printStackTrace();
+	}finally {
+		com.close(con, pstmt, rs);
+		
+	}return boardList3;
+}//getBoardList2
+
+//(search)
+public List getBoardList3(int startRow,int pageSize,String search){
+
+Connection con=null;
+PreparedStatement pstmt=null;
+String sql="";
+ResultSet rs=null;
+List boardList = new ArrayList();
+try {
+	//1,2 디비연결 메서드호출
+	con = com.connect();
+	//3 sql 객체 생성
+	  // sql select * from board
+	  // 최근글위로 re_ref 그룹별내림차순 정렬 re_seq오름차순   
+	  //     re_ref desc,re_seq asc
+      // 글잘라오기   limit 시작행-1,개수
+	sql="select * from board where subject like ? and type=3 order by re_ref desc limit ?,?";
+	pstmt=con.prepareStatement(sql);
+	pstmt.setString(1, "%"+search+"%");
+	pstmt.setInt(2, startRow-1);//시작행-1
+	pstmt.setInt(3, pageSize);//몇개글
+	//4 rs 실행 저장
+	rs=pstmt.executeQuery();
+	//5 rs while 데이터 있으면
+	// 자바빈 객체 생성 BoardBean bb
+	// bb 멤버변수 <= rs열데이터 가져와서 저장
+	// bb게시판 글 하나 => boardList저장
+    while(rs.next()){
+    	BoardBean bb = new BoardBean();
+    	bb.setNum(rs.getInt("num"));
+    	bb.setId(rs.getString("id"));
+    	bb.setSubject(rs.getString("subject"));
+    	bb.setContent(rs.getString("content"));
+    	bb.setReadcount(rs.getInt("readcount"));
+    	bb.setDate(rs.getDate("date"));
+    	bb.setFile1(rs.getString("file1"));
+    	bb.setFile2(rs.getString("file2"));	
+    	bb.setFile3(rs.getString("file3"));	
+    	bb.setFile4(rs.getString("file4"));	
+    	bb.setFile5(rs.getString("file5"));
+    	bb.setType(rs.getInt("type"));
+    	bb.setRe_ref(rs.getInt("re_ref"));
+    		
+    	//boardList한칸저장
+    	boardList.add(bb);
+    }
+} catch (Exception e) {
+	e.printStackTrace();
+}finally {
+	com.close(con, pstmt, rs);
+	
+}return boardList;
+}//getBoardList3 search
 
 	public BoardBean getBoard(int num){
 		BoardBean bb = null;

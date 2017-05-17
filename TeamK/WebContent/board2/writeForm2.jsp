@@ -41,29 +41,31 @@ MemberBean mb = mdao.getMember(id);
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
-		<div id="login_head">
-			<div id="login_title">Q&A 게시판</div>
-			<div id="login_script">궁금한것은 질문해주세요.</div>
+		<div id="board_head">
+			<div id="qna_title">Q&A 게시판</div>
+			<div id="qna_script">궁금한것은 질문해주세요.</div>
 		</div>
-		<div id="clear"></div>
-		<div id="login_form">
+<div id="clear"></div>
+<div id="board">
+<div id="board_write">
 <form action="./BoardWriteAction2.bo" method="post" name="fr" enctype="multipart/form-data" onsubmit="return check()">
 <input type="hidden" value="2" name="type">
-ID:<input type="text" name="id" value="<%=id%>" readonly><br>
-첨부파일1:<input type="file" name="file1"><br>
-첨부파일2:<input type="file" name="file2"><br>
-첨부파일3:<input type="file" name="file3"><br>
-첨부파일4:<input type="file" name="file4"><br>
-첨부파일5:<input type="file" name="file5"><br>
-답변받을이메일주소:<input type="text" name="email" value="<%=mb.getEmail()%>"><br>
-제목:<input type="text" name="subject" maxlength="20"><br>
-내용:<textarea rows="10" cols="20" name="content"></textarea><br>
-<input type="submit" value="글쓰기">
+<input type="hidden" name="id" value="<%=id%>">
+<label for="email">답변 받으실<br>이메일 주소</label><input type="text" name="email" id="email" value="<%=mb.getEmail()%>"><br><br>
+<label for="subject">제목</label><input type="text" name="subject" id="subject" maxlength="20"><br><br>
+<textarea id="ir1" rows="30" cols="80" name="content" id="content"></textarea><br><br>
+<label for="file1">첨부파일1</label><input type="file" name="file1" id="file1"><br>
+<label for="file2">첨부파일2</label><input type="file" name="file2" id="file2"><br>
+<label for="file3">첨부파일3</label><input type="file" name="file3" id="file3"><br>
+<label for="file4">첨부파일4</label><input type="file" name="file4" id="file4"><br>
+<label for="file5">첨부파일5</label><input type="file" name="file5" id="file5"><br>
+<div class="clear"></div><br>
+<input type="submit" id="save" value="글쓰기">
+<input type="button" value="글목록" onclick="location.href='./BoardList2.bo?pageNum=1'">
 </form>
-<input type="button" value="글목록" 
-       onclick="location.href='./BoardList2.bo?pageNum=1'">
+</div>
+</div>
        </div>
-	</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->
 	<div>

@@ -17,6 +17,10 @@ public class BankPayCheck implements Action{
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		String pageNum = request.getParameter("pageNum");
+		String stat = request.getParameter("status");
+		if(stat==null)stat ="1";
+		System.out.println(stat);
+		int status = Integer.parseInt(stat);
 		AdminDAO adao = new AdminDAO();
 		ModDAO moddao = new ModDAO();
 		int count = adao.BankPayCount();
@@ -34,7 +38,7 @@ public class BankPayCheck implements Action{
 		ModTradeInfoBEAN mtib;
 		Vector v;
 		if (count != 0) {
-			List<ModTradeInfoBEAN> TradeInfoList = adao.BankPayList(start, pagesize);
+			List<ModTradeInfoBEAN> TradeInfoList = adao.StatusPayList(status,start, pagesize);
 			for (int i = 0; i < TradeInfoList.size(); i++) {
 				v = new Vector();
 				mtib = TradeInfoList.get(i);

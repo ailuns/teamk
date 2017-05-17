@@ -1,3 +1,7 @@
+<%@page import="net.board.db.BoardBean"%>
+<%@page import="java.util.List"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="net.board.db.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <script src="./js/jquery-3.2.0.js"></script>
@@ -31,23 +35,29 @@
 	</div>
 	<div id="logo_menu">	
 		<img alt="로고" src="./img/log3.png" width="200px" height="200px" onclick="location.href='./index.bo'"><br><br>
-		<h3>공지사항</h3>
-		<p><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-		Nunc sit amet ante purus. <span>/ 04-25-17</span></a></p>
-		<p><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-		Nunc sit amet ante purus. <span>/ 04-25-17</span></a></p>
-		<p><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-		Nunc sit amet ante purus. <span>/ 04-25-17</span></a></p>
-		<p><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-		Nunc sit amet ante purus. <span>/ 04-25-17</span></a></p>
-		<p><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-		Nunc sit amet ante purus. <span>/ 04-25-17</span></a></p>
+		<h3><a href="./BoardList3.bo">공지사항</a></h3>
+	
+				<%
+BoardDAO bdao=new BoardDAO();
+
+int count=bdao.getBoardCount();
+SimpleDateFormat sdf=new SimpleDateFormat("yyyy.MM.dd");
+if(count!=0){
+	List<BoardBean> boardList=bdao.getBoardList3(1, 10);
+	for(int i=0;i<boardList.size();i++){
+		BoardBean bb=boardList.get(i);
+		%>
+<p><a href="./BoardContent3.bo?num=<%=bb.getNum()%>&pageNum=1"><%=bb.getSubject()%><span><%=sdf.format(bb.getDate())%></span></a></p>	
+		<%
+	}
+}
+%>
 	</div>
 	<div id="left_menu">
 		<ul id="menu_list">
 			<li><a href="./main.bo">메인</a></li>
 			<li><a href="./PackList.po">패키지</a></li>
-			<li><a href="#">상품</a></li>
+			<li><a href="./Productlist.bo">상품</a></li>
 			<li><a href="./BoardList.bo">리뷰게시판</a></li>
 			<li><a href="./BoardList2.bo">Q&amp;A</a></li>
 		</ul>

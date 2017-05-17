@@ -8,18 +8,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link href="./css/inc.css" rel="stylesheet" type="text/css">
-<link href="./css/subpage.css" rel="stylesheet" type="text/css">
+<link href="../css/inc.css" rel="stylesheet" type="text/css">
+<link href="../css/subpage.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <%
-List boardList2=(List)request.getAttribute("boardList2");
+System.out.println("Listsearch3 execute()");
+List boardList3=(List)request.getAttribute("boardList3");
 String pageNum=(String)request.getAttribute("pageNum");
 int count=((Integer)request.getAttribute("count")).intValue();
 int pageCount=((Integer)request.getAttribute("pageCount")).intValue();
 int pageBlock=((Integer)request.getAttribute("pageBlock")).intValue();
 int startPage=((Integer)request.getAttribute("startPage")).intValue();
 int endPage=((Integer)request.getAttribute("endPage")).intValue();
+
+String search=request.getParameter("search");
 
 BoardDAO bdao = new BoardDAO();
 %>
@@ -30,23 +33,23 @@ BoardDAO bdao = new BoardDAO();
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
 		<div id="board_head">
-			<div id="qna_title">Q&A 게시판</div>
-			<div id="qna_script">궁금한것은 질문해주세요.<br>[전체글 개수 :<%=count%>]</div>
+			<div id="qna_title">공지사항</div>
+			<div id="qna_script">공지사항 게시판 입니다.<br>[검색된 글의 개수 :<%=count%>]</div>
 		</div>
 		<div id="clear"></div>
 		<div id="board">
 		<div id="board_list">
 <table>
-<tr><th id="num">번호</th><th id="title">제목</th><th id="name">작성자</th><th id="date">날짜</th><th id="readcount">조회수</th></tr>
+<tr><td>번호</td><td>제목</td><td>ID</td><td>날짜</td><td>조회수</td></tr>
     <%
-    for(int i=0; i<boardList2.size(); i++){
+    for(int i=0; i<boardList3.size(); i++){
     	//자바빈(BoardBean) 변수 =배열한칸 접근  배열변수.get()
-    	BoardBean bb = (BoardBean)boardList2.get(i);
+    	BoardBean bb = (BoardBean)boardList3.get(i);
     			%>
 <tr><td><%=bb.getRe_ref()%></td>
-<td id="title">
-<a href="./BoardContent2.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>">
-<%if(bdao.getBoardReplyCount(bb.getNum())>=1){%>[답변완료]<%}%><%=bb.getSubject()%>[<%=bdao.getBoardReplyCount(bb.getNum())%>]</a><%if(bdao.getFile(bb.getNum())!=null){%><img src="./img/File_icon.gif" width="15" height="15>"><%}%></td>
+<td>
+<a href="./BoardContent3.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>">
+<%=bb.getSubject()%>[<%=bdao.getBoardReplyCount(bb.getNum())%>]</a></td>
 <td><%=bb.getId()%></td><td><%=bb.getDate() %></td>
     <td><%=bb.getReadcount() %></td></tr>
     			<%
@@ -63,20 +66,20 @@ if(count!=0){
 	// 끝페이지 번호 구하기  
 	//이전
 	if(startPage>pageBlock){
-		%><a href="./BoardList2.bo?pageNum=<%=startPage-pageBlock%>">[이전]</a><%
+		%><a href="./listSearch3.bo?pageNum=<%=startPage-pageBlock%>&search=<%=search%>">[이전]</a><%
 	}
 	// 1..10 11..20 21..30
 	for(int i=startPage; i<=endPage; i++){
-		%><a href="./BoardList2.bo?pageNum=<%=i%>">[<%=i%>]</a><%
+		%><a href="./listSearch3.bo?pageNum=<%=i%>&search=<%=search%>">[<%=i%>]</a><%
 	}
 	// 다음
 	if(endPage < pageCount){
-		%><a href="./BoardList2.bo?pageNum=<%=startPage+pageBlock%>">[다음]</a>
+		%><a href="./listSearch3.bo?pageNum=<%=startPage+pageBlock%>&search=<%=search%>">[다음]</a>
 		<%
 		}
 }
 %><br>
-<form action="listSearch2.bo" method="get">
+<form action="listSearch3.bo" method="get">
 <input type="text" name="search" class="input_box">
 <input type="submit" value="검색" class="btn">
 </form>
@@ -84,7 +87,7 @@ if(count!=0){
 String id = (String)session.getAttribute("id");
 if(id!=null){%>
 <input type="button" value="글쓰기" 
-       onclick="location.href='./BoardWrite2.bo'">
+       onclick="location.href='./BoardWrite3.bo'">
     		<%}else{%>
     			<input type="button" value="글쓰기" 
     				   onclick="alert('로그인 해주세요')">

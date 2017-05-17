@@ -37,16 +37,16 @@ div#logo_menu h3 {
 	margin-left: 10px;
 }
 div#logo_menu p {
-	text-align: justify;
+	text-align: left;
 	width: 100%;
 	padding: 0 10px;
 }
-div#logo_menu p:hover {background-color: #111;}
+div#logo_menu p:hover {background-color: rgba(255, 255, 255, 0.75);}
 div#logo_menu p a {
 	text-decoration: none;
-	color: #fff;
+	color: #000;
 }
-div#logo_menu p a span {font-size: 12px; color: #ccc}
+div#logo_menu p a span {font-size: 12px; color: #333}
 div#left_click {
 	width : 30px;
 	height : 100%;

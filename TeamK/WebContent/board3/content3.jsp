@@ -1,4 +1,3 @@
-<%@page import="net.member.db.MemberBean"%>
 <%@page import="net.board.db.BoardDAO"%>
 <%@page import="net.board.db.BoardReplyBean"%>
 <%@page import="java.util.List"%>
@@ -6,7 +5,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
@@ -28,8 +27,8 @@ int num = Integer.parseInt(request.getParameter("num"));
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
 		<div id="board_head">
-			<div id="qna_title">Q&A 게시판</div>
-			<div id="qna_script">궁금한것은 질문해주세요.</div>
+			<div id="rvw_title">공지사항</div>
+			<div id="rvw_script">공지사항 게시판 입니다.</div>
 		</div>
 		<div id="clear"></div>
 		<div id="board">
@@ -58,71 +57,18 @@ int num = Integer.parseInt(request.getParameter("num"));
 if(id!=null){
 if(id.equals(bb.getId())){ %>
 <input type="button" value="글수정" 
-       onclick="location.href= './BoardUpdate2.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'">     
+       onclick="location.href= './BoardUpdate3.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'">     
 <%}if(id.equals(bb.getId())||id.equals("admin")){ %>
 <input type="button" value="글삭제" 
-       onclick="location.href= './BoardDelete2.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'">
+       onclick="location.href= './BoardDelete3.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'">
 <%}}%>
+
 <input type="button" value="글목록" 
-       onclick="location.href='./BoardList2.bo?pageNum=<%=pageNum%>'">
+       onclick="location.href='./BoardList3.bo?pageNum=<%=pageNum%>'">
 
 
-
-<!-- ///////////////////댓글///////////////// -->
-<%
-//List boardReplyList=(List)request.getAttribute("boardReplyList");
-List lrb = null;
-
-//List<BoardReplyBean> lrb = (List)request.getAttribute("lrb");
-int rcount = (int)request.getAttribute("rcount");
-if(rcount!=0){lrb=(List)request.getAttribute("lrb");}//
-%>
-<p>댓글(<%=rcount%>개)</p>
-<table id="reply">
-    <%if(rcount!=0){
-    for(int i=0; i<lrb.size(); i++){
-    	//자바빈(BoardBean) 변수 =배열한칸 접근  배열변수.get()
-    	BoardReplyBean rb = (BoardReplyBean)lrb.get(i);%>
-<tr>
-<%-- <td><%=i+1%></td> --%>
-<td id="name"><%=rb.getId()%></td>
-<td id="content"><%=rb.getContent()%></td>
-<td id="delete"><%
-if(id!=null){
-	if(id.equals(rb.getId())||id.equals("admin")){ 
-%>
-<form action="./BoardReplyDel.bo?pageNum=<%=pageNum%>" method="post" name="replydel">
-<input type="hidden" name="group_del" value="<%=bb.getNum()%>">
-<input type="hidden" name="num" value="<%=rb.getNum()%>">
-<input type="submit" value="리플삭제">
-</form>
-<%}}%></td>
-<td id="date"><%=rb.getDate()%></td>
-</tr>
-    <%
-    }}
-    %>
-</table>
-
-<%
-if(id!=null){
-if(id.equals("admin")){%>
-<%request.setAttribute("email", bb.getEmail());%> 
-<form action="./BoardReplyAction2.bo?pageNum=<%=pageNum%>" method="post" name="fr1" id="reply">
-<input type="hidden" name="wEmail" value="<%=bb.getEmail()%>">
-<input type="hidden" name="wContent" value="<%=bb.getContent()%>">
-<span><%=id %></span>
-<input type="hidden" name="group_del" value="<%=bb.getNum()%>">
-<input type="hidden" name="id" value="<%=id%>" readonly>
-<div id="textarea">
-<textarea rows="3" cols="59" name="content"></textarea>
 </div>
-<input type="submit" value="댓글달기">		
-<%}}%>
-</form>
-<!-- ///////////////////댓글///////////////// -->
-		</div>
-		</div>
+</div>
 	</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->

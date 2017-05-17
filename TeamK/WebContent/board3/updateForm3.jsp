@@ -21,35 +21,32 @@ String pageNum = (String)request.getAttribute("pageNum");
 String id = (String)session.getAttribute("id");
 %>
 	<!--왼쪽 메뉴 -->
-	<div>
-		<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
-	</div>
+<!-- 	<div> -->
+<%-- 		<jsp:include page="../inc/leftMenu.jsp"></jsp:include> --%>
+<!-- 	</div> -->
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
-		<div id="board_head">
-			<div id="rvw_title">리뷰 작성</div>
-			<div id="rvw_script">리뷰를 작성합니다.</div>
+		<div id="rvw_head">
+			<div id="rvw_title">공지사항</div>
+			<div id="rvw_script">공지사항 게시판 입니다.</div>
 		</div>
 		<div id="clear"></div>
-		<div id="board">
-		<div id="board_write">
-<form action="./BoardUpdateAction.bo?pageNum=<%=pageNum%>" method="post" name="fr" enctype="multipart/form-data">
-<input type="hidden" value="1" name="type">
+		<div id="login_form">
+<form action="./BoardUpdateAction3.bo?pageNum=<%=pageNum%>" method="post" name="fr" enctype="multipart/form-data">
+<input type="hidden" value="3" name="type">
 <input type="hidden" name="num" value="<%=bb.getNum()%>">
-<input type="hidden" name="id" value="<%=id%>" readonly><br>
-<label for="subject">제목</label><input type="text" name="subject" id="subject" value="<%=bb.getSubject()%>"><br><br>
-<textarea id="ir1" rows="30" cols="80" name="content"><%=bb.getContent() %></textarea><br><br>
-<label for="file1">첨부파일1</label><input type="file" name="file1" id="file1"><%if(bb.getFile1()!=null){%><br><label for="file11">기존파일1</label><input type="hidden" name="file11" id="file11" value="<%=bb.getFile1()%>"><img src="./upload/<%=bb.getFile1()%>" width="50" ><%=bb.getFile1()%><%}%><br>
-<label for="file2">첨부파일2</label><input type="file" name="file2" id="file2"><%if(bb.getFile2()!=null){%><br><label for="file12">기존파일2</label><input type="hidden" name="file12" id="file12" value="<%=bb.getFile2()%>"><img src="./upload/<%=bb.getFile2()%>" width="50" ><%=bb.getFile2()%><%}%><br>
-<label for="file3">첨부파일3</label><input type="file" name="file3" id="file3"><%if(bb.getFile3()!=null){%><br><label for="file13">기존파일3</label><input type="hidden" name="file13" id="file13" value="<%=bb.getFile3()%>"><img src="./upload/<%=bb.getFile3()%>" width="50" ><%=bb.getFile3()%><%}%><br>
-<label for="file4">첨부파일4</label><input type="file" name="file4" id="file4"><%if(bb.getFile4()!=null){%><br><label for="file14">기존파일4</label><input type="hidden" name="file14" id="file14" value="<%=bb.getFile4()%>"><img src="./upload/<%=bb.getFile4()%>" width="50" ><%=bb.getFile4()%><%}%><br>
-<label for="file5">첨부파일5</label><input type="file" name="file5" id="file5"><%if(bb.getFile5()!=null){%><br><label for="file15">기존파일5</label><input type="hidden" name="file15" id="file15" value="<%=bb.getFile5()%>"><img src="./upload/<%=bb.getFile5()%>" width="50" ><%=bb.getFile5()%><%}%><br>
-<div class="clear"></div><br>
+ID:<input type="text" name="id" value="<%=id%>" readonly><br>
+첨부파일1:<input type="file" name="file1"><%if(bb.getFile1()!=null){%>기존파일1:<input type="hidden" name="file11" value="<%=bb.getFile1()%>"><img src="./upload/<%=bb.getFile1()%>" width="50" ><%=bb.getFile1()%><%}%><br>
+첨부파일2:<input type="file" name="file2"><%if(bb.getFile2()!=null){%>기존파일2:<input type="hidden" name="file12" value="<%=bb.getFile2()%>"><img src="./upload/<%=bb.getFile2()%>" width="50" ><%=bb.getFile2()%><%}%><br>
+첨부파일3:<input type="file" name="file3"><%if(bb.getFile3()!=null){%>기존파일3:<input type="hidden" name="file13" value="<%=bb.getFile3()%>"><img src="./upload/<%=bb.getFile3()%>" width="50" ><%=bb.getFile3()%><%}%><br>
+첨부파일4:<input type="file" name="file4"><%if(bb.getFile4()!=null){%>기존파일4:<input type="hidden" name="file14" value="<%=bb.getFile4()%>"><img src="./upload/<%=bb.getFile4()%>" width="50" ><%=bb.getFile4()%><%}%><br>
+첨부파일5:<input type="file" name="file5"><%if(bb.getFile5()!=null){%>기존파일5:<input type="hidden" name="file15" value="<%=bb.getFile5()%>"><img src="./upload/<%=bb.getFile5()%>" width="50" ><%=bb.getFile5()%><%}%><br>
+제목:<input type="text" name="subject" value="<%=bb.getSubject()%>"><br>
+내용:<textarea id="ir1" rows="30" cols="90" name="content"><%=bb.getContent() %></textarea><br>
 <input type="submit" value="글수정" onclick="submitContents(this);">
 <input type="button" value="취소" OnClick="javascript:history.back(-1)">
 </form>
-</div>
-</div>
+		</div>
 	</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->

@@ -13,20 +13,21 @@ import net.board.db.BoardBean;
 import net.board.db.BoardDAO;
 
 
-public class BoardListAction implements Action {
+public class BoardlistSearchAction3 implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("BoardListAction execute()");
 		request.setCharacterEncoding("utf-8");
 		BoardBean bb = new BoardBean();
 		BoardDAO bdao = new BoardDAO();
 		
+		String search=request.getParameter("search");
+		
 		//게시판 전체 글 개수
 		// int count=  getBoardCount() 메서드 호출
-		int count = bdao.getBoardCount();
+		int count = bdao.getBoardCount3(search);
 		//한페이지에 보여줄 글의 개수 설정
-		int pageSize=15;
+		int pageSize=10;
 		//한페이지가 몇페이지인지 가져오기 없으면 1페이지 설정
 		String pageNum=request.getParameter("pageNum");
 		if(pageNum==null){
@@ -39,7 +40,7 @@ public class BoardListAction implements Action {
 		int endRow=currentPage*pageSize;
 		
 		//List boardList =   메서드호출 getBoardList(시작행, 몇개)
-		List boardList=bdao.getBoardList(startRow, pageSize);
+		List boardList=bdao.getBoardList3(startRow, pageSize, search);
 		//전체 페이지 수 구하기 게시판 글 50개 한화면에 보여줄 글 개수 10 => 5전체페이지
 		//    게시판 글 56개 한화면에 보여줄 글개수 10 =>  5전체페이지 +1 (나머지)=>6
 		int pageCount=count/pageSize+(count%pageSize==0?0:1);
@@ -55,7 +56,7 @@ public class BoardListAction implements Action {
 		//데이터 저장  count boardList pageCount pageNum
 		//       pageBlock StartPage endPage
 		request.setAttribute("count", count);
-		request.setAttribute("boardList", boardList);
+		request.setAttribute("boardList3", boardList);
 		request.setAttribute("pageCount", pageCount);
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("pageBlock", pageBlock);
@@ -65,7 +66,7 @@ public class BoardListAction implements Action {
 		
 		// 이동 ./board/list.jsp
 		ActionForward forward = new ActionForward();
-   		forward.setPath("./board/list.jsp");
+   		forward.setPath("./board3/listSearch3.jsp");
    		forward.setRedirect(false);	
 		
 		return forward;

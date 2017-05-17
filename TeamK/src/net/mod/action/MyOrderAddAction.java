@@ -46,9 +46,9 @@ public class MyOrderAddAction implements Action{
 			}
 			mtib.setPo_receive_check(Integer.parseInt(receive_check));
 		}
-		mtib.setStatus(2);
+		int status = 2;
 		String trade_type = request.getParameter("t_type");
-		
+		if(!(trade_type.equals("무통장 입금"))&&tch==null)status=9;
 		switch(trade_type){
 			case "카드 결제":
 				trade_type+=", "+request.getParameter("select_card")+
@@ -60,13 +60,13 @@ public class MyOrderAddAction implements Action{
 					trade_type+=", "+request.getParameter("cash_receipt_type_select")+
 							", "+request.getParameter("cash_receipt_number");
 				}
-				mtib.setStatus(1);
+				status = 1;
 					break;
 		}
-		
-		System.out.println(trade_type);
+		mtib.setStatus(status);
 		mtib.setTrade_type(trade_type);
 		mtib=moddao.CreateTradeInfo(mtib);
+		if(status==9)mtib.setStatus(2);
 		if(tch!=null){
 			for(int i = 0; i<tch.length;i++){
 				mtib=moddao.TBasketInfoToMTIB(Integer.parseInt(tch[i]),mtib);
