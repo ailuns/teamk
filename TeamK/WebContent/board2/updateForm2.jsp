@@ -73,6 +73,7 @@ MemberBean mb = mdao.getMember(id);
 <label for="file5">첨부파일5</label><input type="file" name="file5" id="file5"><%if(bb.getFile5()!=null){%><br><label for="file15">기존파일5</label><input type="hidden" name="file15" id="file15" value="<%=bb.getFile5()%>"><img src="./upload/<%=bb.getFile5()%>" width="50" ><%=bb.getFile5()%><%}%><br>
 <div class="clear"></div><br>
 <input type="submit" value="글수정">
+<input type="button" value="취소" OnClick="javascript:history.back(-1)">
 </form>
 </div>
 	</div>
