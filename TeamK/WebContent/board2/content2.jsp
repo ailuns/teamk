@@ -27,47 +27,45 @@ int num = Integer.parseInt(request.getParameter("num"));
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
-		<div id="login_head">
-			<div id="login_title">Q&A 게시판</div>
-			<div id="login_script">궁금한것은 질문해주세요.</div>
+		<div id="board_head">
+			<div id="qna_title">Q&A 게시판</div>
+			<div id="qna_script">궁금한것은 질문해주세요.</div>
 		</div>
 		<div id="clear"></div>
-		<div id="login_form">
-<table border="1">
-<tr><td>글번호</td><td><%=bb.getRe_ref()%></td><td>조회수</td><td><%=bb.getReadcount()%></td></tr>
-<tr><td>글쓴이</td><td><%=bb.getId()%></td><td>작성일</td><td><%=bb.getDate()%></td></tr>
-<tr><td>답변받을 메일주소</td><td colspan="3"><%=bb.getEmail()%></td></tr>
-<tr><td>글제목</td><td colspan="3"><%=bb.getSubject()%></td></tr>
-<tr><td>글내용</td><td colspan="3"><%=bb.getContent()%></td></tr>
+		<div id="board">
+		<div id="board_content">
+<table>
+<tr><td id="num"><%=bb.getRe_ref()%></td><td id="date"><%=bb.getDate()%></td><td id="readcount">조회수: <%=bb.getReadcount()%></td></tr>
+<tr><td colspan="2" id="subject"><%=bb.getSubject()%></td><td id="id"><%=bb.getId()%></td></tr>
+<tr><td colspan="3" id="content"><br><br><%=bb.getContent()%><br><br></td></tr>
 <%if(bb.getFile1()!=null){%>
-<tr><td>첨부파일1</td><td colspan="3"><%if(bb.getFile1()!=null){%><img src="./upload/<%=bb.getFile1()%>" height="60"><a href="./upload/<%=bb.getFile1()%>"><%=bb.getFile1()%></a><%}%></td></tr>
+<tr><td>첨부파일1</td><td colspan="3"><%if(bb.getFile1()!=null){%><a href="./upload/<%=bb.getFile1()%>"><%=bb.getFile1()%></a><%}%></td></tr>
 <%}%>
 <%if(bb.getFile2()!=null){%>
-<tr><td>첨부파일2</td><td colspan="3"><%if(bb.getFile2()!=null){%><img src="./upload/<%=bb.getFile2()%>" height="60"><a href="./upload/<%=bb.getFile2()%>"><%=bb.getFile2()%></a><%}%></td></tr>
+<tr><td>첨부파일2</td><td colspan="3"><%if(bb.getFile2()!=null){%><a href="./upload/<%=bb.getFile2()%>"><%=bb.getFile2()%></a><%}%></td></tr>
 <%}%>
 <%if(bb.getFile3()!=null){%>
-<tr><td>첨부파일3</td><td colspan="3"><%if(bb.getFile3()!=null){%><img src="./upload/<%=bb.getFile3()%>" height="60"><a href="./upload/<%=bb.getFile3()%>"><%=bb.getFile3()%></a><%}%></td></tr>
+<tr><td>첨부파일3</td><td colspan="3"><%if(bb.getFile3()!=null){%><a href="./upload/<%=bb.getFile3()%>"><%=bb.getFile3()%></a><%}%></td></tr>
 <%}%>
 <%if(bb.getFile4()!=null){%>
-<tr><td>첨부파일4</td><td colspan="3"><%if(bb.getFile4()!=null){%><img src="./upload/<%=bb.getFile4()%>" height="60"><a href="./upload/<%=bb.getFile4()%>"><%=bb.getFile4()%></a><%}%></td></tr>
+<tr><td>첨부파일4</td><td colspan="3"><%if(bb.getFile4()!=null){%><a href="./upload/<%=bb.getFile4()%>"><%=bb.getFile4()%></a><%}%></td></tr>
 <%}%>
 <%if(bb.getFile5()!=null){%>
-<tr><td>첨부파일5</td><td colspan="3"><%if(bb.getFile5()!=null){%><img src="./upload/<%=bb.getFile5()%>" height="60"><a href="./upload/<%=bb.getFile5()%>"><%=bb.getFile5()%></a><%}%></td></tr>
+<tr><td>첨부파일5</td><td colspan="3"><%if(bb.getFile5()!=null){%><a href="./upload/<%=bb.getFile5()%>"><%=bb.getFile5()%></a><%}%></td></tr>
 <%}%>
-<%String sub = bb.getSubject();%>
-<tr><td colspan="3">
-<%if(id!=null){
-	if(id.equals(bb.getId())){ %>
+</table>
+<%
+if(id!=null){
+if(id.equals(bb.getId())){ %>
 <input type="button" value="글수정" 
-       onclick="location.href= './BoardUpdate2.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'">
+       onclick="location.href= './BoardUpdate.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'">     
 <%}if(id.equals(bb.getId())||id.equals("admin")){ %>
 <input type="button" value="글삭제" 
-       onclick="location.href= './BoardDelete2.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'">
+       onclick="location.href= './BoardDelete.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'">
 <%}}%>
 <input type="button" value="글목록" 
-       onclick="location.href='./BoardList2.bo?pageNum=<%=pageNum%>'">
-</td></tr>
-</table>
+       onclick="location.href='./BoardList.bo?pageNum=<%=pageNum%>'">
+
 
 
 <!-- ///////////////////댓글///////////////// -->
@@ -124,6 +122,7 @@ ID:<input type="text" name="id" value="<%=id%>" readonly><br>
 <%}}%>
 </form>
 <!-- ///////////////////댓글///////////////// -->
+		</div>
 		</div>
 	</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>

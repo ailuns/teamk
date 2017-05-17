@@ -300,7 +300,9 @@ div#package_feat {
 	margin: 0 auto;
 }
 div#package_feat div {float: right;}
-div#feat_ttl1, div#feat_ttl2, div#feat_ttl3, div#feat_ttl4, div#feat_ttl5 {
+div#feat_ttl1, div#feat_ttl2,
+div#feat_ttl3, div#feat_ttl4,
+div#feat_ttl5 {
 	width: 5%;
 	height: 300px;
 	background-color: red;
@@ -316,7 +318,9 @@ div#feat_con0 {
 	font-weight: bold;
 	transition: 0.5s;
 }
-div#feat_con1, div#feat_con2, div#feat_con3, div#feat_con4, div#feat_con5 {
+div#feat_con1, div#feat_con2,
+div#feat_con3, div#feat_con4,
+div#feat_con5 {
 	width: 0%;
 	height: 300px;
 	transition: 0.5s;
@@ -351,7 +355,9 @@ div#feat_con5 {
 	background-size: cover;
 	background-position: center center;
 }
-div#feat_con1 span, div#feat_con2 span, div#feat_con3 span, div#feat_con4 span, div#feat_con5 span {display: none;}
+div#feat_con1 span, div#feat_con2 span,
+div#feat_con3 span, div#feat_con4 span,
+div#feat_con5 span {display: none;}
 div#package_feat a {}
 div#package_list {
 	width: 60%;
@@ -449,7 +455,8 @@ div#login_form form input {
 	margin: 5px 0;
 	border: 1px solid #999;
 }
-div#login_form form input[type="text"], div#login_form form input[type="password"] {width: 200px;}
+div#login_form form input[type="text"],
+div#login_form form input[type="password"] {width: 200px;}
 div#login_form form input[type="button"] {}
 div#login_form table {
 	width: 80%;
@@ -477,12 +484,15 @@ div#insert_form form input {
 	margin: 5px 0;
 	border: 1px solid #ccc;
 }
-div#insert_form form input[type="text"], div#insert_form form input[type="password"] {
+div#insert_form form input[type="text"],
+div#insert_form form input[type="password"] {
 	width: 300px;
 	padding: 5px;
 }
-div#insert_form form input#sample6_address, div#insert_form form input#sample6_address2 {margin-left: 150px;}
-div#insert_form form input[type="submit"], div#insert_form form input[type="button"] {
+div#insert_form form input#sample6_address,
+div#insert_form form input#sample6_address2 {margin-left: 150px;}
+div#insert_form form input[type="submit"],
+div#insert_form form input[type="button"] {
 	height: 30px;
 	width: 100px;
 }
@@ -571,12 +581,15 @@ div#m_update_form form input {
 	margin: 5px 0;
 	border: 1px solid #ccc;
 }
-div#m_update_form form input[type="text"], div#m_update_form form input[type="password"] {
+div#m_update_form form input[type="text"],
+div#m_update_form form input[type="password"] {
 	width: 300px;
 	padding: 5px;
 }
-div#m_update_form form input#sample6_address, div#m_update_form form input#sample6_address2 {margin-left: 150px;}
-div#m_update_form form input[type="submit"], div#m_update_form form input[type="button"] {
+div#m_update_form form input#sample6_address,
+div#m_update_form form input#sample6_address2 {margin-left: 150px;}
+div#m_update_form form input[type="submit"],
+div#m_update_form form input[type="button"] {
 	height: 30px;
 	width: 100px;
 }
@@ -599,7 +612,8 @@ div#m_delete_form form input {
 	margin: 5px 0;
 	border: 1px solid #999;
 }
-div#m_delete_form form input[type="text"], div#m_delete_form form input[type="password"] {width: 200px;}
+div#m_delete_form form input[type="text"],
+div#m_delete_form form input[type="password"] {width: 200px;}
 div#m_delete_form form input[type="button"] {}
 
 /* Board List.jsp */
@@ -746,7 +760,8 @@ div#board div#board_content form#reply div#textarea {
 	position: absolute;
 	left: 160px;
 }
-div#board div#board_content form#reply input[type="submit"], div#board div#board_content form#reply input[type="button"] {
+div#board div#board_content form#reply input[type="submit"],
+div#board div#board_content form#reply input[type="button"] {
 	height: 60px;
 	width: 80px;
 	position: absolute;
@@ -771,10 +786,40 @@ div#board div#board_write form input {
 	width: 679px;
 }
 div#board div#board_write form textarea {width: 797px;}
-div#board div#board_write form input[type="submit"], div#board div#board_write form input[type="button"] {
-	width: 150px;
+div#board div#board_write form input[type="submit"],
+div#board div#board_write form input[type="button"] {width: 150px;}
+
+/*Board Delete.jsp*/
+div#board div#board_delete {
+	margin: 100px auto;
+	font-weight: bold;
 }
+div#board div#board_delete form input[type="submit"] {
+	width: 150px;
+	font-size: 15px;
+	font-weight: bold;
+	background-color: #000;
+	color: #fff;
+	border: 1px solid #000;
+}
+div#board div#board_delete form input[type="submit"]:HOVER {cursor: pointer;}
 
-
-
-
+/*QnA Board List.jsp*/
+div#qna_title, div#qna_script {
+	height: 150px;
+	float: left;
+	color: #fff;
+}
+div#qna_title {
+	background-color: #0c9;
+	width: 30%;
+	font-size: 50px;
+	padding-top: 50px;
+	font-weight: lighter;
+}
+div#qna_script {
+	background-color: #06c;
+	width: 70%;
+	text-align: left;
+	font-weight: bold;
+}

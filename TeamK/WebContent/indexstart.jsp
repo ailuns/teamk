@@ -8,6 +8,5 @@
 </head>
 <body>
 <%response.sendRedirect("./index.bo");%>
-<%-- <%response.sendRedirect("./Productlist.bo");%> --%>
 </body>
 </html>
