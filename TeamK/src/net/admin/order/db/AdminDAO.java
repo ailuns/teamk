@@ -53,14 +53,15 @@ public class AdminDAO {
 		}
 		return count;
 	}
-	public List<ModTradeInfoBEAN> BankPayList(int start, int end){
+	public List<ModTradeInfoBEAN> StatusPayList(int ti_status, int start, int end){
 		List<ModTradeInfoBEAN> BankPayList = new ArrayList<ModTradeInfoBEAN>();
 		try{
 			conn=getconn();
-			sql = "select * from trade_info where ti_status = 1 limit ?,?";
+			sql = "select * from trade_info where ti_status = ? limit ?,?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, start-1);
-			pstmt.setInt(2, end);
+			pstmt.setInt(1, ti_status);
+			pstmt.setInt(2, start-1);
+			pstmt.setInt(3, end);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				ModTradeInfoBEAN mtib = new ModTradeInfoBEAN();

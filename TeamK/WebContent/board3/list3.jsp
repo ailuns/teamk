@@ -82,13 +82,12 @@ if(count!=0){
 </form>
 <%
 String id = (String)session.getAttribute("id");
-if(id!=null){%>
+if(id!=null){
+if(id.equals("admin")){
+%>
 <input type="button" value="글쓰기" 
-       onclick="location.href='./BoardWrite3.bo'">
-    		<%}else{%>
-    			<input type="button" value="글쓰기" 
-    				   onclick="alert('로그인 해주세요')">
-    		<%} %>
+       onclick="location.href='./BoardWrite3.bo'">	
+    		<%}}%>
 <input type="button" value="메인으로" 
        onclick="location.href='./main.bo'">
        </div>

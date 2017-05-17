@@ -45,8 +45,9 @@ MemberBean mb = mdao.getMember(id);
 			<div id="login_title">Q&A 게시판</div>
 			<div id="login_script">궁금한것은 질문해주세요.</div>
 		</div>
-		<div id="clear"></div>
-		<div id="login_form">
+<div id="clear"></div>
+<div id="board">
+<div id="board_write">
 <form action="./BoardWriteAction2.bo" method="post" name="fr" enctype="multipart/form-data" onsubmit="return check()">
 <input type="hidden" value="2" name="type">
 ID:<input type="text" name="id" value="<%=id%>" readonly><br>
@@ -60,6 +61,8 @@ ID:<input type="text" name="id" value="<%=id%>" readonly><br>
 내용:<textarea rows="10" cols="20" name="content"></textarea><br>
 <input type="submit" value="글쓰기">
 </form>
+</div>
+</div>
 <input type="button" value="글목록" 
        onclick="location.href='./BoardList2.bo?pageNum=1'">
        </div>

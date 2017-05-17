@@ -27,12 +27,12 @@ String id = (String)session.getAttribute("id");
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
 		<div id="rvw_head">
-			<div id="rvw_title">리뷰</div>
-			<div id="rvw_script">물건이나 여행 후기를 쓰는 곳 입니다.</div>
+			<div id="rvw_title">공지사항</div>
+			<div id="rvw_script">공지사항 게시판 입니다.</div>
 		</div>
 		<div id="clear"></div>
 		<div id="login_form">
-<form action="./BoardUpdateAction.bo?pageNum=<%=pageNum%>" method="post" name="fr" enctype="multipart/form-data">
+<form action="./BoardUpdateAction3.bo?pageNum=<%=pageNum%>" method="post" name="fr" enctype="multipart/form-data">
 <input type="hidden" value="1" name="type">
 <input type="hidden" name="num" value="<%=bb.getNum()%>">
 ID:<input type="text" name="id" value="<%=id%>" readonly><br>

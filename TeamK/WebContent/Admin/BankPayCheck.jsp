@@ -75,7 +75,7 @@ function Trade_Info_Delete(){
 		%>
 		<form action="./BankPayChecked.ao" method="post" name="fr">
 		<%
-		if (ModList != null) {
+		if (ModList.size() != 0) {
 			for(int i = 0; i < ModList.size(); i++){
 				Vector v = ModList.get(i);		
 				ModTradeInfoBEAN mtib = (ModTradeInfoBEAN)v.get(0);
@@ -142,15 +142,21 @@ function Trade_Info_Delete(){
 		<br>
 	<%	
 			}
-		}
-		%>
+			%>
 		<input type="button" value="입금 확인  완료" onclick="BankPayCheck()">
 		<input type="button" value="주문 삭제" onclick="Trade_Info_Delete()"> 
+	<%
+	}else{
+		 %>
+		 <div>무통장 입금 내역이 없습니다!</div>
+		 <%
+	}
+		%>
 		</form>
 		<%
 		if (pageNum != 1) {
 	%>
-	<a href="./MyOrderList.mo?pageNum=<%=pageNum - 1%>">[이전 페이지]</a>
+	<a href="./BankPayCheck.ao?pageNum=<%=pageNum - 1%>">[이전 페이지]</a>
 	<%
 		;
 		}
@@ -159,22 +165,22 @@ function Trade_Info_Delete(){
 			if (endpage > pcount)
 				endpage = pcount;
 			if (startp > pblock) {
-	%><a href="./MyOrderList.mo?pageNum=<%=startp - 1%>">[이전]</a>
+	%><a href="./BankPayCheck.ao?pageNum=<%=startp - 1%>">[이전]</a>
 	<%
 		}
 			for (int i = startp; i <= endpage; i++) {
-	%><a href="./MyOrderList.mo?pageNum=<%=i%>">[<%=i%>]
+	%><a href="./BankPayCheck.ao?pageNum=<%=i%>">[<%=i%>]
 	</a>
 	<%
 		}
 			if (endpage < pcount) {
-	%><a href="./MyOrderList.mo?pageNum=<%=endpage + 1%>">[다음]</a>
+	%><a href="./BankPayCheck.ao?pageNum=<%=endpage + 1%>">[다음]</a>
 	<%
 		}
 		}
 		if (pcount != pageNum) {
 	%>
-	<a href="./MyOrderList.mo?pageNum=<%=pageNum + 1%>">[다음 페이지]</a>
+	<a href="./BankPayCheck.ao?pageNum=<%=pageNum + 1%>">[다음 페이지]</a>
 	<br>
 	<%
 		;

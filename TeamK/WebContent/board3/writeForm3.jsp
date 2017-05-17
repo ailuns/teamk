@@ -27,7 +27,8 @@
 			<div id="login_script">공지사항 게시판 입니다.</div>
 		</div>
 		<div id="clear"></div>
-		<div id="review_list">
+<div id="board">
+<div id="board_write">
 <form action="./BoardWriteAction3.bo" method="post" name="fr" enctype="multipart/form-data">
 <input type="hidden" value="3" name="type">
 ID:<input type="text" name="id" value="<%=id%>" readonly><br>
@@ -43,6 +44,7 @@ ID:<input type="text" name="id" value="<%=id%>" readonly><br>
        onclick="location.href='./BoardList3.bo?pageNum=1'">
 </form>
 </div>
+	</div>
 	</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->
