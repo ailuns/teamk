@@ -10,6 +10,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<!-- <link href="../css/inc.css" rel="stylesheet" type="text/css"> -->
+<!-- <link href="../css/subpage.css" rel="stylesheet" type="text/css"> -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="./js/jquery-3.2.0.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -352,14 +354,14 @@
 	clear: both;
 }
 
-#wrap {
-	width: 500px;
-	min-height: 1000px;
-	border: 5px solid red;
-/* 	margin: 0 auto; */
-	margin-left : 200px;
+#wrap_pack { 
+	width: 980px; 
+	min-height: 1000px; 
+	border: 5px solid red; 
+ 	margin: 0 auto; 
+	 
 	padding-top: 50px;
-}
+} 
 
 
 /* 이미지, 가격, 인원수 정보 부분 */
@@ -558,9 +560,9 @@
 	</div>
 
 	<!-- 왼쪽 메뉴 -->
-<%-- 	<jsp:include page="../inc/leftMenu.jsp"></jsp:include> --%>
+	<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
 	<!-- 왼쪽 메뉴 -->
-	<div id="wrap">
+	<div id="wrap_pack">
 		<!--글제목 -->
 		<h3><%=PB.getSubject()%></h3>
 		<!--글제목 -->

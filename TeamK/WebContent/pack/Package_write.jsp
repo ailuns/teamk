@@ -88,11 +88,11 @@ img.ui-datepicker-trigger
 }
 
 
-div #wrap
+#wrap_pack
 {
-	width : 500px;
+	width : 1000px;
 	min-height : 1000px;
-	border : 1px solid red;
+	border : 1px solid black;
 	margin : 0 auto;
 	padding-top : 50px;
 }
@@ -102,10 +102,10 @@ div #wrap
 </head>
 <body>
 <!-- 왼쪽 메뉴 -->
-<%-- <jsp:include page="../inc/leftMenu.jsp"></jsp:include> --%>
+<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
 <!-- 왼쪽 메뉴 -->
 
-<div id="wrap">
+<div id="wrap_pack">
 	<div>
 		<form action="./PackWriteAction.po" id="fr" method="post" enctype="multipart/form-data">
 			<table border="1">
