@@ -44,6 +44,7 @@ ID:<input type="text" name="id" value="<%=id%>" readonly><br>
 제목:<input type="text" name="subject" value="<%=bb.getSubject()%>"><br>
 내용:<textarea id="ir1" rows="30" cols="90" name="content"><%=bb.getContent() %></textarea><br>
 <input type="submit" value="글수정" onclick="submitContents(this);">
+<input type="button" value="취소" OnClick="javascript:history.back(-1)">
 </form>
 		</div>
 	</div>

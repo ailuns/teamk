@@ -71,6 +71,7 @@ ID:<input type="text" name="id" value="<%=id%>" readonly><br>
 제목:<input type="text" name="subject" value="<%=bb.getSubject()%>"><br>
 내용:<textarea rows="10" cols="20" name="content"><%=bb.getContent() %></textarea><br>
 <input type="submit" value="글수정">
+<input type="button" value="취소" OnClick="javascript:history.back(-1)">
 </form>
 </div>
 	</div>
