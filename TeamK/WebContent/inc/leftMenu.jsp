@@ -43,7 +43,7 @@ BoardDAO bdao=new BoardDAO();
 int count=bdao.getBoardCount();
 SimpleDateFormat sdf=new SimpleDateFormat("yyyy.MM.dd");
 if(count!=0){
-	List<BoardBean> boardList=bdao.getBoardList3(1, 10);
+	List<BoardBean> boardList= bdao.getBoardList3(1, 10);
 	for(int i=0;i<boardList.size();i++){
 		BoardBean bb=boardList.get(i);
 		%>

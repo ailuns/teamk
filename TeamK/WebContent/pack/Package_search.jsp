@@ -89,12 +89,8 @@
 			}
 			return false;
 		}
-		
-		
 	});
-	
-	
-	
+
 </script>
 
 <style type="text/css">
@@ -207,6 +203,12 @@ img.ui-datepicker-trigger
 
 %>
 
+<!--왼쪽 메뉴 -->
+<div>
+	<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
+</div>
+<!--왼쪽 메뉴 -->
+
 <div id="wrap">
 	<div id = "search_div">
 		<form action="./PackSearchAction.po" name="fr" method="get" onsubmit="return input_chk()">
@@ -232,37 +234,57 @@ img.ui-datepicker-trigger
 		</form>
 	</div>
 	
-	<div id="package_result">
+
 	
-		<p>검색조건에 해당하는 상품이 총 <%=count %>개 있습니다</p>
-		<hr>		
+	<p>검색조건에 해당하는 상품이 총 <%=count %>개 있습니다</p>
+	<hr>	
+	
+	
+	
+	
+	<div id="package_list">
 		<table>
 		<%
-		
-		PackBean pb;
-		if (count!=0)
-		{
-			for (int i = 0; i <list.size(); i++)
+	
+			PackBean pb;
+			if (count!=0)
 			{
-				pb =(PackBean)list.get(i);
-		%>		<tr>
-					<td>
-						<div>
-							<a href="./PackContent.po?num=<%=pb.getNum() %>">
-							<img class="img_size" alt="" src="./images/<%=pb.getFile1() %>">
-								<b><%=pb.getSubject() %></b>
-								<span><%=pb.getIntro() %></span>
-								<b><%=pb.getCost() %></b>
-							</a>
-						</div>
-					</td>
-				</tr>
+				for (int i = 0; i <list.size(); i++)
+				{
+					pb =(PackBean)list.get(i);
+		%>
+			<tr>
+				<td rowspan="2" id="thumb">
+					<a href="./PackContent.po?num=<%=pb.getNum() %>">
+					<img class="img_size" alt="" src="./upload/<%=pb.getFile1() %>">
+					</a>
+				</td>
+				<td id="subject">
+					<%=pb.getSubject() %>
+				</td>
+				<td rowspan="2"  id="price">
+					<span><%=pb.getCost() %></span>
+				</td>
+			</tr>
+			<tr>
+				<td id="context">
+					<span><%=pb.getIntro() %></span>
+				</td>
+			</tr>
 		<%
+				}
 			}
-		}
 		%>
 		</table>
 	</div>
 </div>
+<!--오른쪽 메뉴 -->
+<div>
+	<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
+</div>
+<!--오른쪽 메뉴 -->
+<!--아래 메뉴-->
+<jsp:include page="../inc/footer.jsp"></jsp:include>
+<!--아래 메뉴-->
 </body>
 </html>

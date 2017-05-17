@@ -1,11 +1,10 @@
-<%@page import="net.reply.db.ReplyBean"%>
-<%@page import="net.reply.db.ReplyDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="net.pack.db.PackDAO"%>
 <%@ page import="net.pack.db.PackBean"%>
 <%@ page import="java.util.List"%>
-
+<%@ page import="net.reply.db.ReplyDAO"%>
+<%@ page import="net.reply.db.ReplyBean"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,8 +16,22 @@
 </head>
 <%
 	PackBean PB = (PackBean) session.getAttribute("PackBean");
+	ReplyBean RB = (ReplyBean) session.getAttribute("rb");
 	//세션으로 로그인한 아이디 값 받아오기
 	String user_id = (String) session.getAttribute("id");
+	
+	if (user_id == null)
+		user_id = "";
+	
+	List List = (List)request.getAttribute("replylist");
+	int count = ((Integer)request.getAttribute("count")).intValue();
+	String repageNum = (String)request.getAttribute("repageNum");
+	int pageCount = ((Integer)request.getAttribute("pageCount")).intValue();
+	int pageBlock = ((Integer)request.getAttribute("pageBlock")).intValue();
+	int startPage = ((Integer)request.getAttribute("startPage")).intValue();
+	int endPage = ((Integer)request.getAttribute("endPage")).intValue();
+	int currentPage = ((Integer)request.getAttribute("currentPage")).intValue();
+	int pagesize = ((Integer)request.getAttribute("pagesize")).intValue();
 %>
 <body>
 	<h3>My Google Maps Demo</h3>
@@ -92,9 +105,108 @@
 			$('#banner').hide();
 			$('#banner_sub').hide();
 		});
-		
 	});
 
+
+	function ReplyWrite(num)
+	{
+		$.ajax({
+			type:"post",
+			url:"./ReplyWrite.ro",
+			data:{
+				id:$("#id").val(),
+				content:$("#content").val(),
+				num:$("#num").val(),
+				success:function(){
+					window.location.reload(true);
+				}
+			}
+		});
+	}
+
+	function Re_Reply_Write(num)
+	{
+		$.ajax({
+			type:"post",
+			url:"./Re_ReplyWriteAction.ro",
+			data:{
+				id:$("#reid").val(),
+				content:$("#recontent").val(),
+				num:$("#num").val(),
+				repageNum:$("#repageNum").val(),
+				replynum:$("#replynum").val(),
+				re_ref:$("#re_ref").val(),
+				re_lev:$("#re_lev").val(),
+				re_seq:$("#re_seq").val(),
+				success:function(){
+					window.location.reload(true);
+				}
+			}
+		});
+	}
+
+
+	function ReplyDel(renum, id)
+	{
+//			alert(renum);
+//			alert(id);
+		$.ajax({
+			type:"post",
+			url:"./ReplyDelAction.ro",
+			data:{
+				renum:renum,
+				id:id,
+				success:function(){
+					window.location.reload(true);
+				}
+			}
+		});
+	}
+
+	function reUpdateAction(num)
+	{
+//			var a = $("#contentup").val()
+//			alert(a);
+		$.ajax({
+			type:"post",
+			url:"./ReplyUpdateActoin.ro",
+			data:{
+				content:$("#contentup").val(),
+				num:num
+			},
+			success:function(){
+			window.location.reload(true);
+		}
+		});
+	}
+
+
+
+	function ReplyPage(repageNum, num)
+	{
+		$.ajax({
+			type:"post",
+			url:"./ReplyList.ro",
+			data:{
+				repageNum:repageNum,
+				num:num
+			},
+			success:function(){
+//	 		$("#QnA").load("./PackQnA.jsp");
+//	 			$("#QnA").load(window.location.href+" #QnA");
+				window.location.reload(true);;
+			}
+		});
+	}
+	
+// 	function Move(num, repagenum)
+// 	{	
+// 		location.href="./PackContent.po?num=" + num + "&repageNum=" + repagenum + "#QnA";
+// 	}
+	
+	
+	
+	
 	//구글맵 v3
 	function initAutocomplete() {
 
@@ -233,6 +345,12 @@
 	// 대댓글 작성 시 해당 댓글 밑에 입력창 보여주기/숨기기
 	function rewrite(renum){
 		$('#con' + renum).toggle();
+	}
+	
+	// 대댓글 작성 시 해당 댓글 밑에 입력창 보여주기/숨기기
+	function reupdate(renum){
+		$('#conup' + renum).toggle();
+		$("#relist" + renum).toggle();
 	}
 
 	// 비로그인 때 상품문의글 쓰려고 하면 실행
@@ -616,178 +734,190 @@
 
 		<!--상품 문의 -->
 		<div id="middle3">
-			<div id="QnA">
-				<h3>상품 문의</h3>
-				<hr>
+		<div id="QnA">
+			<h3>상품 문의</h3>
+			<hr>
+			<%
+				
+				// 메서드 호출 getBoardList(시작행, 몇개)
+				
+			%>
+
+			<table border="1">
+				<tr>
+					<td>번호</td>
+					<td>작성자</td>
+					<td>내용</td>
+				</tr>
 				<%
-					// 디비 객체 생성 BoardDAO
-					ReplyDAO cdao = new ReplyDAO();
-					//전체글 횟수 구하기 int count = getBoardCount()
-					int count = cdao.getCommentCount(PB.getNum());
-
-					//한페이지에 보여줄 글의 갯수
-					int pagesize = 10;
-
-					//현재페이지가 몇페이지인지 가져오기
-					String pageNum = request.getParameter("pageNum");
-
-					if (pageNum == null)
-						pageNum = "1";
-					//시작행 구하기   1,  11,  21,  31,  41  ...... 
-
-					int currentPage = Integer.parseInt(pageNum);
-					int startRow = (currentPage - 1) * pagesize + 1;
-
-					//끝행 구하기
-					int endRow = currentPage * pagesize;
-
-					// 메서드 호출 getBoardList(시작행, 몇개)
-					List replyList;
 					ReplyBean rb;
+					if (count != 0) {
+						for (int i = 0; i < List.size(); i++) 
+						{
+							rb = (ReplyBean)List.get(i);
 				%>
-				게시판 전체글 갯수[<%=count%>]
 
-				<table border="1">
-					<tr>
-						<td>번호</td>
-						<td>작성자</td>
-						<td>내용</td>
-					</tr>
+				<tr id="relist<%=rb.getNum()%>">
+					<td><%=rb.getNum()%></td>
+					<td><%=rb.getId()%></td>
+					<td>
+						<%
+							// 답글 들여쓰기 모양
+							int wid = 0;
+							if (rb.getRe_lev() > 0) {
+								wid = 10 * rb.getRe_lev();
+						%> <img src="level.gif" width=<%=wid%>> <img src="re.gif">
+						<%
+							}
+						%> <a href="#?num=<%=rb.getNum()%>&pageNum=<%=repageNum%>"><%=rb.getContent()%></a>
+					</td>
 					<%
-						if (count != 0) {
-							replyList = cdao.getCommentList(startRow, pagesize, PB.getNum());
-							for (int i = 0; i < replyList.size(); i++) {
-								rb = (ReplyBean) replyList.get(i);
+					if(!user_id.equals(""))
+					{
 					%>
+					<td><input type="button" value="답글" id="rereply" onclick="rewrite(<%=rb.getNum()%>)"></td>
+					<%
+					}
+					if(rb.getId().equals(user_id))
+					{
+					%>
+					<td><input type="button" value="수정" id="re_update" onclick="reupdate(<%=rb.getNum() %>)"></td>
+					<%
+					}
+					if(rb.getId().equals(user_id) || user_id.equals("admin"))
+					{
+					%>
+					<td><input type="button" value="삭제" id="re_delete" onclick="ReplyDel(<%=rb.getNum() %>, '<%=user_id%>');"></td>
+					<%
+					}
+					%>
+				</tr>
 
+				<tr id="conup<%=rb.getNum()%>" style="display: none;">
+					<td>
+						<input type="hidden" name="num" value="<%=PB.getNum()%>">
+						<input type="hidden" name="pageNum" value="<%=repageNum%>">
+						<input type="hidden" name="replynum" value="<%=rb.getNum()%>">
+					</td>
+					<td><%=user_id %></td>
+					<td><textarea cols="60" rows="2" id="contentup" name="contentup"><%=rb.getContent() %></textarea></td>
+					<td><input type="button" id="re_reply_content" value="수정" onclick="reUpdateAction(<%=rb.getNum() %>)"></td>
+					<td><input type="button" id="re_reply_content" value="취소" onclick="reupdate(<%=rb.getNum() %>)"></td>
+				<tr>
+				
+				
+				
+				<tr id="con<%=rb.getNum()%>" style="display: none;">
+					<td>
+						<form action="./Re_ReplyWriteAction.ro" method="post">
+							<input type="hidden" id="num" name="num" value="<%=PB.getNum()%>">
+							<input type="hidden" id="repageNum" name="repageNum" value="<%=repageNum%>">
+							<input type="hidden" id="replynum" name="replynum" value="<%=rb.getNum()%>">
+							<input type="hidden" id="re_ref" name="re_ref" value="<%=rb.getRe_ref()%>">
+							<input type="hidden" id="re_lev" name="re_lev" value="<%=rb.getRe_lev()%>">
+							<input type="hidden" id="re_seq" name="re_seq" value="<%=rb.getRe_seq()%>">
+					</td>
+					<td>
+						<p><%=user_id %></p>
+						<input type="hidden" id="reid" name="id" class="box" value="<%=user_id %>">
+					</td>
+					<td><textarea cols="60" rows="2" id="recontent" name="content"></textarea></td>
+					<td><input type="button" id="re_reply_content" value="답글등록" onclick="Re_Reply_Write()"></td>
+					</form>
+				<tr>
+				
+				<%
+					}
+						// 최근글위로 re_ref 그룹별 내림차순 re_se q 오름차순
+						// 			re_ref desc   re_seq asc
+						// 글잘라오기 limit 시작행-1, 개수
+					}
+				%>
+			</table>
+
+			<center>
+				<%
+					if (count != 0) {
+						// 페이지 갯수 구하기
+						pageCount = count / pagesize + (count % pagesize == 0 ? 0 : 1);
+						pageBlock = 10;
+						// 시작 페이지 구하기
+						startPage = ((currentPage - 1) / pageBlock) * pageBlock + 1;
+						// 끝페이지 구하기
+						endPage = startPage + pageBlock - 1;
+						if (endPage > pageCount) {
+							endPage = pageCount;
+						}
+
+						//이전
+						if (startPage > pageBlock) {
+				%>
+				<a href="./PackContent.po?num=<%=PB.getNum() %>&pageNum=<%=startPage - pageBlock%>#QnA">[이전]</a>
+				<%
+					}
+
+						//페이지
+						for (int i = startPage; i <= endPage; i++) {
+				%>
+<%-- 				<a href="javascript:void(0);" onclick="Move(<%=PB.getNum() %>, <%=i%>);">[<%=i%>]</a> --%>
+<%-- 				<a href="javascript:void(0);" onclick="ReplyPage(<%=i%>, <%=PB.getNum() %>)">[<%=i%>]</a> --%>
+				<a href="./PackContent.po?num=<%=PB.getNum() %>&repageNum=<%=i %>#QnA">[<%=i%>]</a>
+				<%
+					}
+
+						//다음
+						if (endPage < pageCount) {
+				%>
+				<a href="./PackContent.po?num=<%=PB.getNum() %>&pageNum=<%=startPage + pageBlock%>#QnA">[다음]</a>
+				<%
+					}
+				}
+				%>
+			</center>
+
+			<br>
+			
+			<fieldset>
+				<legend></legend>
+				<table>
 					<tr>
-						<td><%=rb.getNum()%></td>
-						<td><%=rb.getId()%></td>
-						<td>
+						<form action="./ReplyWrite.ro" method="post">
+							
 							<%
-								// 답글 들여쓰기 모양
-										int wid = 0;
-										if (rb.getRe_lev() > 0) {
-											wid = 10 * rb.getRe_lev();
-							%> <img src="level.gif" width=<%=wid%>> <img src="re.gif">
+								if (user_id == null)
+								{
+							%>
+							<td>
+								<p>아이디</p>
+							</td>
+							<td>
+								<input type="text" name="content" class="box" style="width: 500px;" placeholder="로그인이 필요한 서비스입니다" readonly onclick="loginChk()"></td>
+							<td>
 							<%
 								}
-							%> <a href="#?num=<%=rb.getNum()%>&pageNum=<%=pageNum%>"><%=rb.getContent()%></a>
-						</td>
-						<td><input type="button" value="답글" id="rereply" onclick="rewrite(<%=rb.getNum()%>)"></td>
-						<td><input type="button" value="삭제" id="re_delete" onclick="location.href='ReplyDelAction.ro?renum=<%=rb.getNum() %>&id=<%=rb.getId() %>'"></td>
-					</tr>
-
-					<tr>
-					<tr id="con<%=rb.getNum()%>" style="display: none;">
-						<td>
-							<form action="./Re_ReplyWriteAction.ro" method="post">
-								<input type="hidden" name="num" value="<%=PB.getNum()%>">
-								<input type="hidden" name="pageNum" value="<%=pageNum%>">
-								<input type="hidden" name="replynum" value="<%=rb.getNum()%>">
-								<input type="hidden" name="re_ref" value="<%=rb.getRe_ref()%>">
-								<input type="hidden" name="re_lev" value="<%=rb.getRe_lev()%>">
-								<input type="hidden" name="re_seq" value="<%=rb.getRe_seq()%>">
-						</td>
-						<td>ID</td>
-						<td><input type="text" name="id"></td>
-						<td><textarea cols="60" rows="2" name="content"></textarea> <input
-							type="submit" id="re_reply_content" value="답글등록"></td>
+								else
+								{
+							%>
+							<td>
+								<p><%=user_id %></p>
+								<input type="hidden" id="id" name="id" class="box" value="<%=user_id %>">
+							</td>
+							<td>
+								<input type="text" id="content" name="content" class="box" style="width: 500px;"></td>
+							<td>
+							<%
+								}
+							%>
+								<input type="hidden" name="pageNum" value="<%=repageNum%>">
+								<input type="hidden" id="num" name="num" value="<%=PB.getNum() %>">
+							<input type="button" value="문의글쓰기" onclick="ReplyWrite(<%=PB.getNum() %>)"></td>
 						</form>
-					<tr>
 					</tr>
-					<%
-						}
-							// 최근글위로 re_ref 그룹별 내림차순 re_se q 오름차순
-							// 			re_ref desc   re_seq asc
-							// 글잘라오기 limit 시작행-1, 개수
-						}
-					%>
 				</table>
-
-				
-
-				<center>
-					<%
-						if (count != 0) {
-							// 페이지 갯수 구하기
-							int pageCount = count / pagesize + (count % pagesize == 0 ? 0 : 1);
-							int pageBlock = 10;
-							// 시작 페이지 구하기
-							int startPage = ((currentPage - 1) / pageBlock) * pageBlock + 1;
-							// 끝페이지 구하기
-							int endPage = startPage + pageBlock - 1;
-							if (endPage > pageCount) {
-								endPage = pageCount;
-							}
-
-							//이전
-							if (startPage > pageBlock) {
-					%>
-					<a href="./ReplyList.ro?pageNum=<%=startPage - pageBlock%>">[이전]</a>
-					<%
-						}
-
-							//페이지
-							for (int i = startPage; i <= endPage; i++) {
-					%>
-					<a href="./ReplyList.ro?pageNum=<%=i%>">[<%=i%>]
-					</a>
-					<%
-						}
-
-							//다음
-							if (endPage < pageCount) {
-					%>
-					<a href="./ReplyList.ro?pageNum=<%=startPage + pageBlock%>">[다음]</a>
-					<%
-						}
-						}
-					%>
-				</center>
-
-				<br>
-				
-				<fieldset>
-					<legend></legend>
-					<table>
-						<tr>
-							<form action="./ReplyWrite.ro" method="post">
-								
-								<%
-									if (user_id == null)
-									{
-								%>
-								<td>
-									<p>아이디</p>
-								</td>
-								<td>
-									<input type="text" name="content" class="box" style="width: 500px;" placeholder="로그인이 필요한 서비스입니다" readonly onclick="loginChk()"></td>
-								<td>
-								<%
-									}
-									else
-									{
-								%>
-								<td>
-									<p><%=user_id %></p>
-								</td>
-								<td>
-									<input type="text" name="content" class="box" style="width: 500px;"></td>
-								<td>
-								<%
-									}
-								%>
-									<input type="hidden" name="pageNum" value="<%=pageNum%>">
-									<input type="hidden" name="num" value="<%=PB.getNum() %>">
-								<input type="submit" value="문의글쓰기"></td>
-							</form>
-						</tr>
-					</table>
-					<legend></legend>
-				</fieldset>
-			</div>
+				<legend></legend>
+			</fieldset>
 		</div>
+	</div>
 		<!--상품 문의 -->
 	</div>
 	<!-- 오른쪽 메뉴 -->
