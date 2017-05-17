@@ -32,14 +32,14 @@ BoardDAO bdao = new BoardDAO();
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
-		<div id="login_head">
-			<div id="login_title">Q&A 게시판</div>
-			<div id="login_script">궁금한것은 질문해주세요.</div>
+		<div id="board_head">
+			<div id="qna_title">공지사항</div>
+			<div id="qna_script">공지사항 게시판 입니다.<br>[검색된 글의 개수 :<%=count%>]</div>
 		</div>
 		<div id="clear"></div>
-		<div id="login_form">
-<h1>Q&A 게시판 [검색된 글의 개수 :<%=count%>]</h1>
-<table border="1">
+		<div id="board">
+		<div id="board_list">
+<table>
 <tr><td>번호</td><td>제목</td><td>ID</td><td>날짜</td><td>조회수</td></tr>
     <%
     for(int i=0; i<boardList3.size(); i++){
@@ -94,6 +94,7 @@ if(id!=null){%>
     		<%} %>
 <input type="button" value="메인으로" 
        onclick="location.href='./main.bo'">
+</div>
 </div>
 	</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
