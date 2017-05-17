@@ -25,7 +25,7 @@ public class MyPackOrderList implements Action {
 		if (pageNum == null)
 			pageNum = "1";
 		int curpage = Integer.parseInt(pageNum);
-		int pagesize = 3;
+		int pagesize = 10;
 		int start = (curpage - 1) * pagesize + 1;
 		int pcount = count / pagesize + (count % pagesize == 0 ? 0 : 1);
 		int pblock = 10;

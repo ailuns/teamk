@@ -63,6 +63,7 @@ public class MyOrderAddAction implements Action{
 				status = 1;
 					break;
 		}
+		int check = 0;
 		mtib.setStatus(status);
 		mtib.setTrade_type(trade_type);
 		mtib=moddao.CreateTradeInfo(mtib);
@@ -80,7 +81,7 @@ public class MyOrderAddAction implements Action{
 			for(int i = 0; i<pch.length;i++){
 				mtib=moddao.PBasketInfoToMTIB(Integer.parseInt(pch[i]),mtib);
 				moddao.InsertPackOrder(mtib);
-			
+				check = 1;
 				//bnsdao.PackBasketDelete(Integer.parseInt(pch[i]));
 			}
 		}
@@ -98,8 +99,10 @@ public class MyOrderAddAction implements Action{
 			mtib.setOri_num(Integer.parseInt(pnum));
 			mtib.setPack_count(request.getParameter("adult")+","+request.getParameter("child"));
 			moddao.InsertPackOrder(mtib);
+			check = 1;
 		}
-		afo.setPath("./Main.bns");
+		request.setAttribute("check", check);
+		afo.setPath("./MyOrderPayed.mo");
 		afo.setRedirect(true);
 		return afo;
 	}

@@ -17,21 +17,7 @@
 $(document).ready(function(){
 	receive_info_hide();
 })
-function receive_info_select(i){
-	receive_info_hide();
-	$('#receive_info_select'+i).hide();
-	$('#receive_info_selected'+i).show();
-	$('#receive_info'+i).show();
-}
-function receive_info_hide(){
-	$(".receive_info_selected").hide();
-	$(".receive_info").hide();
-	$(".receive_info_select").show();
-}	
 
-function receive_change(i,ti_num){
-	window.open('./Receive_Change.mo?num='+i+"&ti_num="+ti_num, '배송지 선택', 'left=200, top=100, width=480, height=640');
-}
 </script>
 </head>
 <body>
@@ -45,103 +31,45 @@ function receive_change(i,ti_num){
 		int count = ((Integer) request.getAttribute("count")).intValue();
 		String pagenum = (String) request.getAttribute("pageNum");
 		int pageNum = Integer.parseInt(pagenum);
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		List<Vector> ModList = (List<Vector>) request.getAttribute("ModList");
-		if (ModList != null) {
-			for(int i = 0; i < ModList.size(); i++){
-				Vector v = ModList.get(i);		
-				ModTradeInfoBEAN mtib = (ModTradeInfoBEAN)v.get(0);
-				List<ModTradeInfoBEAN> mpbList = (List<ModTradeInfoBEAN>)v.get(1);
-				List<ModTradeInfoBEAN> mtbList = (List<ModTradeInfoBEAN>)v.get(2);
+		List<ModTradeInfoBEAN> ModPList = (List<ModTradeInfoBEAN>)request.getAttribute("ModPList");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
 				
 	%>
 	<div>
 		<form>
-			<h3>주문 번호 : <%=mtib.getTi_num() %></h3>
-			<h4> 상태 : <%=mtib.getStatus_text() %></h4>
-			<%if(mpbList.size()!=0){ %>
-				<h5>주문한 여행 패키지 목록</h5>
+			<%if(ModPList.size()!=0){
+				for(int i =0; i< ModPList.size();i++){
+					ModTradeInfoBEAN mpb = ModPList.get(i);
+					String []pack_count = mpb.getPack_count().split(",");%>
+				<h5><%=mpb.getSubject() %></h5>
 				<table border = "1">
-					<%for(int j =0; j< mpbList.size();j++){
-						ModTradeInfoBEAN mpb = mpbList.get(j);
-						String []pack_count = mpb.getPack_count().split(",");%>
 					<tr onclick="location.href='#'">
+						<td rowspan = "2"><%=mpb.getImg() %></td>
 						<td><%=mpb.getTrade_num() %></td>
-						<td><%=mpb.getImg() %></td>
-						<td><%=mpb.getSubject() %></td>
+						<td><%=sdf.format(mpb.getDate()) %></td>
 						<td><%=mpb.getIntro() %></td>
 						<td>성인 : <%=pack_count[0] %>, 아동 : <%=pack_count[1] %></td>
 						<td><%=mpb.getCost() %>원</td>
-						<td><%if(mpb.getPo_receive_check()==1){ %>Yes
-						<%}else{%>NO<%} %></td>
+					</tr>
+					<tr>
+						<td><input type = "button" value = "여행자 정보 입력" onclick="insertPM"></td>
+						<td><input type = "button" value = "예약 취소"></td>
 					</tr>						
-					<%} %>
-				</table>				
-			<%} 
-			if(mtbList.size()!=0){%>
-				<h5>주문한 상품 목록</h5>
-				<table border = "1">
-					<%for(int j =0; j< mtbList.size();j++){
-						ModTradeInfoBEAN mtb = mtbList.get(j);%>
-					<tr onclick="location.href='#'">
-						<td><%=mtb.getTrade_num() %></td>
-						<td><%=mtb.getImg() %></td>
-						<td><%=mtb.getSubject() %></td>
-						<td><%=mtb.getIntro() %></td>
-						<td><%=mtb.getColor() %></td>
-						<td><%=mtb.getSize() %></td>
-						<td><%=mtb.getThing_count()%>개</td>
-						<td><%=mtb.getCost() %>원</td>
-					</tr>
-					<%} %>
 				</table>
-				<%} %>
-				<h5>결제 정보</h5>
-				<table border ="1">
-					<tr>
-						<td><%=mtib.getTrade_type() %></td>
-						<td><%=mtib.getPayer() %></td>
-						<td><%=mtib.getStatus_text()%></td>
-						<td><%=sdf.format(mtib.getTrade_date()) %></td>
-						<td><%=mtib.getTotal_cost() %>원</td>
-					</tr>
-				</table>
-				<%if(mtbList.size()!=0||mtib.getPo_receive_check()==1){ %>
-				<h5><span class="receive_info_select" 
-						id="receive_info_select<%=i %>" onclick ="receive_info_select(<%=i%>)">배송지 정보▼</span>
-					<span class="receive_info_selected" 
-						id="receive_info_selected<%=i %>"onclick ="receive_info_hide()" >배송지 정보▲</span></h5>
-				<table class = "receive_info"
-					id = "receive_info<%=i%>" border ="1">
-					<tr>
-						<td id="receive_name<%=i%>"><%=mtib.getName() %></td>
-						<td id="receive_mobile<%=i%>"><%=mtib.getMobile() %></td>
-						<td id="receive_addr<%=i%>">[<%=mtib.getPostcode() %>]
-							<%=mtib.getAddress1() %> <%=mtib.getAddress2() %></td>
-						<td id="receive_status<%=i%>"><%=mtib.getStatus_text()%></td>
-						<%if(mtib.getStatus()<3){ %>
-						<td id="receive_change<%=i %>">
-							<input type= "button" value="배송지 변경" onclick = "receive_change(<%=i%>,<%=mtib.getTi_num()%>)"></td>
-						<%} %>
-						<%if(mtib.getMemo().length()!=0){ %><td id="receive_memo<%=i%>"><%=mtib.getMemo() %></td>
-						<%} %>
-					</tr>
-				</table>
-				<%} %>
-			</form>
-		</div>
+				<%}
+				}else {%>
+					
+		주문 내역 없음
+		<%
+			}
+		%>
+			</form>				
 		
-	<%		}	
-		} else {
-	%>
-	주문 내역 없음
-	<%
-		}
-	%>
+	</div>
 	<%
 		if (pageNum != 1) {
 	%>
-	<a href="./MyOrderList.mo?pageNum=<%=pageNum - 1%>">[이전 페이지]</a>
+	<a href="./MyPackOrderList.mo?pageNum=<%=pageNum - 1%>">[이전 페이지]</a>
 	<%
 		;
 		}
@@ -150,22 +78,22 @@ function receive_change(i,ti_num){
 			if (endpage > pcount)
 				endpage = pcount;
 			if (startp > pblock) {
-	%><a href="./MyOrderList.mo?pageNum=<%=startp - 1%>">[이전]</a>
+	%><a href="./MyPackOrderList.mo?pageNum=<%=startp - 1%>">[이전]</a>
 	<%
 		}
 			for (int i = startp; i <= endpage; i++) {
-	%><a href="./MyOrderList.mo?pageNum=<%=i%>">[<%=i%>]
+	%><a href="./MyPackOrderList.mo?pageNum=<%=i%>">[<%=i%>]
 	</a>
 	<%
 		}
 			if (endpage < pcount) {
-	%><a href="./MyOrderList.mo?pageNum=<%=endpage + 1%>">[다음]</a>
+	%><a href="./MyPackOrderList.mo?pageNum=<%=endpage + 1%>">[다음]</a>
 	<%
 		}
 		}
 		if (pcount != pageNum) {
 	%>
-	<a href="./MyOrderList.mo?pageNum=<%=pageNum + 1%>">[다음 페이지]</a>
+	<a href="./MyPackOrderList.mo?pageNum=<%=pageNum + 1%>">[다음 페이지]</a>
 	<br>
 	<%
 		;

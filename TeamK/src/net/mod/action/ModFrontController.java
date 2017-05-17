@@ -31,8 +31,15 @@ public class ModFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/MyOrderList.mo")){
+		}else if(command.equals("/MyPackOrderList.mo")){
 			action = new MyPackOrderList();
+			try {
+				afo = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/MyThingOrderList.mo")){
+			action = new MyThingOrderList();
 			try {
 				afo = action.execute(request, response);
 			} catch (Exception e) {
@@ -77,6 +84,10 @@ public class ModFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}	
+		}else if(command.equals("/MyOrderPayed.mo")){
+			afo = new ActionForward();
+			afo.setPath("/MyOrder/MyOrderPayed.jsp");
+			afo.setRedirect(false);
 		}
 		if (afo != null) {
 			if (afo.isRedirect()) {

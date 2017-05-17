@@ -44,7 +44,7 @@ public class BankPayCheck implements Action{
 				mtib = TradeInfoList.get(i);
 				String [] t_type = mtib.getTrade_type().split(",");
 				mtib.setTrade_type(t_type[0]);
-				List<ModTradeInfoBEAN> ModPackList = moddao.MyPackOrder(mtib.getTi_num());
+				List<ModTradeInfoBEAN> ModPackList = moddao.PackOrder(mtib.getTi_num());
 				List<ModTradeInfoBEAN> ModThingList = moddao.MyThingOrder(mtib.getTi_num());
 				v.addElement(mtib);
 				v.addElement(ModPackList);

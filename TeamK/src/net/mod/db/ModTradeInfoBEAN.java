@@ -9,7 +9,13 @@ public class ModTradeInfoBEAN {
 	private String trade_type, id, pack_count, memo, color, size,payer ;
 	private String img, subject, intro,trade_num, status_text, trans_num;
 	private int status, thing_count, ori_num,cost, po_receive_check,num, ti_num,total_cost;
-	private Timestamp trade_date;
+	private Timestamp trade_date,date;
+	public Timestamp getDate() {
+		return date;
+	}
+	public void setDate(Timestamp date) {
+		this.date = date;
+	}
 	public String getTrans_num() {
 		return trans_num;
 	}
