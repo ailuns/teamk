@@ -33,7 +33,7 @@ String id = (String)session.getAttribute("id");
 		<div id="clear"></div>
 		<div id="login_form">
 <form action="./BoardUpdateAction3.bo?pageNum=<%=pageNum%>" method="post" name="fr" enctype="multipart/form-data">
-<input type="hidden" value="1" name="type">
+<input type="hidden" value="3" name="type">
 <input type="hidden" name="num" value="<%=bb.getNum()%>">
 ID:<input type="text" name="id" value="<%=id%>" readonly><br>
 첨부파일1:<input type="file" name="file1"><%if(bb.getFile1()!=null){%>기존파일1:<input type="hidden" name="file11" value="<%=bb.getFile1()%>"><img src="./upload/<%=bb.getFile1()%>" width="50" ><%=bb.getFile1()%><%}%><br>
