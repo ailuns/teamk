@@ -146,9 +146,8 @@ public class PackDAO {
 					+ "from(select substring(serial, 1, 8) sdate, "
 					+ "num, serial, subject, intro, content, type, area, city, cost, readcount, stock, date, "
 					+ "file1, file2, file3, file4, file5 from pack ) a "
-					+ "where city like ? and sdate between ? and ? order by num desc";
+					+ "where city like ? and sdate between ? and ? order by num asc";
 	
-			
 			pstm = conn.prepareStatement(sql);
 			pstm.setString(1, "%" +  search + "%");
 			pstm.setInt(2, startDate);
@@ -176,7 +175,6 @@ public class PackDAO {
 				PB.setFile3(rs.getString("file3"));
 				PB.setFile4(rs.getString("file4"));
 				PB.setFile5(rs.getString("file5"));
-
 				list.add(PB);
 			}
 
@@ -357,7 +355,7 @@ public class PackDAO {
 			int serial = Integer.parseInt(String.valueOf(pb.getSerial()) + String.valueOf(num));
 			System.out.println("WriteInsert content >> " + pb.getContent());
 
-			sql = "insert into pack(num, serial, subject, intro, content, area, city, sarea, cost, readcount, stock, date, file1, file2, file3, file4, file5) values(?,?,?,?,?,?,?,?,?,?,?,now(),?,?,?,?,?)";
+			sql = "insert into pack(num, serial, subject, intro, content, area, city, sarea, cost, readcount, stock, date, file1, file2, file3, file4, file5) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			pstm = conn.prepareStatement(sql);
 			pstm.setInt(1, num);
 			pstm.setInt(2, serial);
@@ -370,11 +368,12 @@ public class PackDAO {
 			pstm.setInt(9, pb.getCost());
 			pstm.setInt(10, 0);
 			pstm.setInt(11, pb.getStock());
-			pstm.setString(12, pb.getFile1());
-			pstm.setString(13, pb.getFile2());
-			pstm.setString(14, pb.getFile3());
-			pstm.setString(15, pb.getFile4());
-			pstm.setString(16, pb.getFile5());
+			pstm.setString(12, pb.getDate());
+			pstm.setString(13, pb.getFile1());
+			pstm.setString(14, pb.getFile2());
+			pstm.setString(15, pb.getFile3());
+			pstm.setString(16, pb.getFile4());
+			pstm.setString(17, pb.getFile5());
 
 			pstm.executeUpdate();
 

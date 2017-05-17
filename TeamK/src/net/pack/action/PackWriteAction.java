@@ -25,7 +25,7 @@ public class PackWriteAction implements Action{
 		// MultipartRequest 객체 생성
 		ServletContext context=request.getServletContext();
 		String realPath=context.getRealPath("/upload");
-		int maxSize = 10*1024*1024; // 10MB
+		int maxSize = 10*1024*1024; // 10MB  실제 첨부 제한은 5MB
 		
 		MultipartRequest multi=new MultipartRequest(request, realPath,maxSize,"utf-8",new DefaultFileRenamePolicy());
 
@@ -42,38 +42,6 @@ public class PackWriteAction implements Action{
 		String file3 = multi.getFilesystemName("file3");
 		String file4 = multi.getFilesystemName("file4");
 		String file5 = multi.getFilesystemName("file5");
-		
-		
-		File file1_1 = multi.getFile("file1");
-//		File file2_1 = multi.getFile("file2");
-//		File file3_1 = multi.getFile("file3");
-//		File file4_1 = multi.getFile("file4");
-//		File file5_1 = multi.getFile("file5");
-		
-		int fileSize1 = (int)file1_1.length();
-//		int fileSize2 = (int)file2_1.length();
-//		int fileSize3 = (int)file3_1.length();
-//		int fileSize4 = (int)file4_1.length();
-//		int fileSize5 = (int)file5_1.length();
-		
-		System.out.println("파일크기" + fileSize1);
-		
-		if (fileSize1 > maxSize/2)
-		{
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>");
-			out.println("alert('첨부파일은 5MB 이하로 첨부해주세요');");
-			out.println("history.go(-1);");
-			out.println("</script>");
-			out.close();
-		}
-		
-		
-		
-		
-		
-		
 		String sdate = multi.getParameter("startDate");
 		
 		String aa[] = sdate.split("-");
@@ -93,6 +61,7 @@ public class PackWriteAction implements Action{
 		pb.setCost(cost);
 		pb.setStock(stock);
 		pb.setSerial(Integer.parseInt(serial));
+		pb.setDate(sdate);
 		
 		if (file1 == null)
 			pb.setFile1("");
@@ -119,14 +88,13 @@ public class PackWriteAction implements Action{
 		else
 			pb.setFile5(file5);
 
-//		pdao.insertPack(pb);
-//		
-//		//ActoinForward 이동정보 담아서 로그인 이동
-//		ActionForward forward = new ActionForward();
-//		forward.setPath("PackList.po");
-//		forward.setRedirect(true);
-//		return forward;
-		return null;
+		pdao.insertPack(pb);
+		
+		//ActoinForward 이동정보 담아서 로그인 이동
+		ActionForward forward = new ActionForward();
+		forward.setPath("PackList.po");
+		forward.setRedirect(true);
+		return forward;
 	}
 
 }

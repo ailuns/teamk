@@ -8,11 +8,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="../css/inc.css" rel="stylesheet" type="text/css">
+<link href="../css/subpage.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script src="./js/jquery-3.2.0.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script>
-	$(document).ready(function(){
+	jQuery(document).ready(function($){
 		
 		
 		// 달력 관련 소스
@@ -22,9 +24,9 @@
 			numberOfMonths: 2,		   // 보여줄 달의 갯수
 	        dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],  // 일(Day) 표기 형식
 	        monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],   // 월(Month) 표기 형식
-	        showOn: "both",		// 버튼을 표시      both : input과 buttom 둘다 클릭 시 달력 표시           bottom  :  buttom 클릭 했을 때만 달력 표시
-	        buttonImage: "./images/calendar.png",   // 버튼에 사용될 이미지
-	        buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
+// 	        showOn: "both",		// 버튼을 표시      both : input과 buttom 둘다 클릭 시 달력 표시           bottom  :  buttom 클릭 했을 때만 달력 표시
+// 	        buttonImage: "./img/calendar.png",   // 버튼에 사용될 이미지
+// 	        buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
 	        onClose: function(selectedDate){		// 닫힐 때 함수 호출
 	        	$("#date_to").datepicker("option", "minDate", selectedDate);    // #date_to의 최소 날짜를 #date_from에서 선택된 날짜로 설정
 	    		$('img.ui-datepicker-trigger').attr('align', 'absmiddle');
@@ -37,9 +39,9 @@
 			numberOfMonths: 2,		   // 보여줄 달의 갯수
 	        dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],  // 일(Day) 표기 형식
 	        monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],   // 월(Month) 표기 형식
-	        showOn: "both",			// 버튼을 표시      both : input과 buttom 둘다 클릭 시 달력 표시           bottom  :  buttom 클릭 했을 때만 달력 표시
-	        buttonImage: "./images/calendar.png",   // 버튼에 사용될 이미지
-	        buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
+// 	        showOn: "both",			// 버튼을 표시      both : input과 buttom 둘다 클릭 시 달력 표시           bottom  :  buttom 클릭 했을 때만 달력 표시
+// 	        buttonImage: "./img/calendar.png",   // 버튼에 사용될 이미지
+// 	        buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
 	        onClose: function(selectedDate){		// 닫힐 때 함수 호출
 	        	$("#date_from").datepicker("option", "maxDate", selectedDate);   // #date_from의 최대 날짜를 #date_to에서 선택된 날짜로 설정
 	    		$('img.ui-datepicker-trigger').attr('align', 'absmiddle');
@@ -49,8 +51,7 @@
 	    $("#txt_prodStart").datepicker();
 	    $('img.ui-datepicker-trigger').attr('align', 'absmiddle');
 	    
-	    
-	    
+
 	    
 	    // 탭 관련 소스
 		$(".tab_content").hide();  // 탭 내용 전체 숨김
@@ -89,12 +90,8 @@
 			}
 			return false;
 		}
-		
-		
 	});
-	
-	
-	
+
 </script>
 
 <style type="text/css">
@@ -106,14 +103,14 @@ img.ui-datepicker-trigger
 }
 
 
-#wrap
-{
-	width : 1000px;
-	min-height : 1000px;
-	border : 1px solid black;
-	margin : 0 auto;
-	padding-top : 50px;
-}
+/* #wrap */
+/* { */
+/* 	width : 1000px; */
+/* 	min-height : 1000px; */
+/* 	border : 1px solid black; */
+/* 	margin : 0 auto; */
+/* 	padding-top : 50px; */
+/* } */
 
 
 /* 검색  */
@@ -207,62 +204,73 @@ img.ui-datepicker-trigger
 
 %>
 
+<!--왼쪽 메뉴 -->
+<div>
+	<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
+</div>
+<!--왼쪽 메뉴 -->
+
 <div id="wrap">
-	<div id = "search_div">
-		<form action="./PackSearchAction.po" name="fr" method="get" onsubmit="return input_chk()">
-			<table>
-				<tr>
-					<td>여행지</td>
-				</tr>
-				<tr>
-					<td colspan="2"><input type="text" value="<%=search %>" id="city_search" name="city" class="input_style" required="yes" placeholder="도시를 입력해주세요"></td>
-				</tr>
-				<tr>
-					<td>시작날</td>
-					<td>끝나는날</td>
-				</tr>
-				<tr>
-					<td><input type="text" id="date_from" class="input_style" name="startDate" required="yes" value="<%=startDate%>"></td>
-					<td><input type="text" id="date_to" class="input_style" name="endDate" required="yes" value="<%=endDate%>"></td>
-				</tr>
-				<tr>
-					<td colspan="2"><input type="submit" value="검색" id="search_btn" class="input_style"></td>
-				</tr>
-			</table>
-		</form>
+	<div id="package_head">
+		<div id="package_title">패키지
+		</div>
+		<div id="package_search">
+			<p>내게 맞는 패키지 검색하기</p>
+			<form action="./PackSearchAction.po" name="fr" method="get" id="scheduler" onsubmit="return input_chk()">
+				<label for="date_from">출발</label><input type="text" id="date_from" class="input_style" name="startDate" value="<%=startDate%>" required="yes">
+				<label for="date_to">도착</label><input type="text" id="date_to" class="input_style" name="endDate" value="<%=endDate%>" required="yes"><br><br>
+				<label for="city_search">지역</label><input type="text" id="city_search" name="city" value="<%=search %>" class="input_style" required="yes" placeholder="도시를 입력해주세요">
+				<input type="submit" value="검색" id="search_btn" class="input_style">
+			</form>
+		</div>
 	</div>
-	
-	<div id="package_result">
-	
-		<p>검색조건에 해당하는 상품이 총 <%=count %>개 있습니다</p>
-		<hr>		
+	<div id="clear"></div>
+	<p>검색조건에 해당하는 상품이 총 <%=count %>개 있습니다</p>
+	<hr>	
+
+	<div id="package_list">
 		<table>
 		<%
-		
-		PackBean pb;
-		if (count!=0)
-		{
-			for (int i = 0; i <list.size(); i++)
+	
+			PackBean pb;
+			if (count!=0)
 			{
-				pb =(PackBean)list.get(i);
-		%>		<tr>
-					<td>
-						<div>
-							<a href="./PackContent.po?num=<%=pb.getNum() %>">
-							<img class="img_size" alt="" src="./images/<%=pb.getFile1() %>">
-								<b><%=pb.getSubject() %></b>
-								<span><%=pb.getIntro() %></span>
-								<b><%=pb.getCost() %></b>
-							</a>
-						</div>
-					</td>
-				</tr>
+				for (int i = 0; i <list.size(); i++)
+				{
+					pb =(PackBean)list.get(i);
+		%>
+			<tr>
+				<td rowspan="2" id="thumb">
+					<a href="./PackContent.po?num=<%=pb.getNum() %>">
+					<img class="img_size" alt="" src="./upload/<%=pb.getFile1() %>">
+					</a>
+				</td>
+				<td id="subject">
+					<%=pb.getSubject() %>
+				</td>
+				<td rowspan="2"  id="price">
+					<span><%=pb.getCost() %></span>
+				</td>
+			</tr>
+			<tr>
+				<td id="context">
+					<span><%=pb.getIntro() %></span>
+				</td>
+			</tr>
 		<%
+				}
 			}
-		}
 		%>
 		</table>
 	</div>
 </div>
+<!--오른쪽 메뉴 -->
+<div>
+	<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
+</div>
+<!--오른쪽 메뉴 -->
+<!--아래 메뉴-->
+<jsp:include page="../inc/footer.jsp"></jsp:include>
+<!--아래 메뉴-->
 </body>
 </html>

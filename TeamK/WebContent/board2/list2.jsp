@@ -29,22 +29,22 @@ BoardDAO bdao = new BoardDAO();
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
-		<div id="login_head">
-			<div id="login_title">Q&A 게시판</div>
-			<div id="login_script">궁금한것은 질문해주세요.</div>
+		<div id="board_head">
+			<div id="qna_title">Q&A 게시판</div>
+			<div id="qna_script">궁금한것은 질문해주세요.<br>[전체글 개수 :<%=count%>]</div>
 		</div>
 		<div id="clear"></div>
-		<div id="login_form">
-<h4>[전체글 개수 :<%=count%>]</h4>
-<table border="1">
-<tr><td>번호</td><td>제목</td><td>ID</td><td>날짜</td><td>조회수</td></tr>
+		<div id="board">
+		<div id="board_list">
+<table>
+<tr><th id="num">번호</th><th id="title">제목</th><th id="name">작성자</th><th id="date">날짜</th><th id="readcount">조회수</th></tr>
     <%
     for(int i=0; i<boardList2.size(); i++){
     	//자바빈(BoardBean) 변수 =배열한칸 접근  배열변수.get()
     	BoardBean bb = (BoardBean)boardList2.get(i);
     			%>
 <tr><td><%=bb.getRe_ref()%></td>
-<td>
+<td id="title">
 <a href="./BoardContent2.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>">
 <%if(bdao.getBoardReplyCount(bb.getNum())>=1){%>[답변완료]<%}%><%=bb.getSubject()%>[<%=bdao.getBoardReplyCount(bb.getNum())%>]</a><%if(bdao.getFile(bb.getNum())!=null){%><img src="./img/File_icon.gif" width="15" height="15>"><%}%></td>
 <td><%=bb.getId()%></td><td><%=bb.getDate() %></td>
@@ -92,6 +92,7 @@ if(id!=null){%>
 <input type="button" value="메인으로" 
        onclick="location.href='./main.bo'">
 </div>
+</div>
 	</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->
@@ -100,4 +101,4 @@ if(id!=null){%>
 	</div>
 	<!--오른쪽 메뉴 -->
 </body>
-</html>11111
+</html>

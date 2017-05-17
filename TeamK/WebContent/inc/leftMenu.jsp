@@ -43,7 +43,7 @@ BoardDAO bdao=new BoardDAO();
 int count=bdao.getBoardCount();
 SimpleDateFormat sdf=new SimpleDateFormat("yyyy.MM.dd");
 if(count!=0){
-	List<BoardBean> boardList=bdao.getBoardList3(1, 10);
+	List<BoardBean> boardList= bdao.getBoardList3(1, 10);
 	for(int i=0;i<boardList.size();i++){
 		BoardBean bb=boardList.get(i);
 		%>
@@ -57,7 +57,7 @@ if(count!=0){
 		<ul id="menu_list">
 			<li><a href="./main.bo">메인</a></li>
 			<li><a href="./PackList.po">패키지</a></li>
-			<li><a href="#">상품</a></li>
+			<li><a href="./Productlist.bo">상품</a></li>
 			<li><a href="./BoardList.bo">리뷰게시판</a></li>
 			<li><a href="./BoardList2.bo">Q&amp;A</a></li>
 		</ul>

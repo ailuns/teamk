@@ -42,7 +42,7 @@ img.ui-datepicker-trigger
 	margin-left : 5px;
 }
 
-#wrap
+#wrap_pack
 {
 	width : 1000px;
 	min-height : 1000px;
@@ -93,7 +93,7 @@ img.ui-datepicker-trigger
 <jsp:include page="../inc/leftMenu.jsp"></jsp:include>
 <!-- 왼쪽 메뉴 -->
 
-<div id="wrap">
+<div id="wrap_pack">
 	<div>
 		<form action="./PackModifyAction.po?num=<%=pb.getNum() %>" id="fr" method="post" enctype="multipart/form-data">
 			<table>
