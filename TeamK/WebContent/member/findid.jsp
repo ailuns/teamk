@@ -9,6 +9,12 @@
 <link href="./css/subpage.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<%
+String id = (String) session.getAttribute("id");
+if (id != null) {
+	response.sendRedirect("./main.bo");
+}
+%>
 	<!--왼쪽 메뉴 -->
 	<div>
 		<jsp:include page="../inc/leftMenu.jsp"></jsp:include>

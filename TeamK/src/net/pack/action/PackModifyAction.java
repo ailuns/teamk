@@ -23,46 +23,42 @@ public class PackModifyAction implements Action{
 		// upload 폴더 만들기  5*1024*1024
 		// MultipartRequest 객체 생성
 		ServletContext context=request.getServletContext();
-		String realPath=context.getRealPath("writeAPI/upload");
-		int maxSize=5*1024*1024;
+		String realPath=context.getRealPath("/upload");
+		int maxSize = 10*1024*1024;
 		MultipartRequest multi=new MultipartRequest(request, realPath,maxSize,"utf-8",new DefaultFileRenamePolicy());
 
 		int num = Integer.parseInt(request.getParameter("num"));
 		System.out.println("Modify num >> " + num);
-		
+			
 		String subject = multi.getParameter("subject");
 		String intro = multi.getParameter("intro");
 		String content = multi.getParameter("content");
+		String type = multi.getParameter("type");
 		String area = multi.getParameter("area");
 		String city = multi.getParameter("city");
 		String sarea = multi.getParameter("sarea");
 		int cost = Integer.parseInt(multi.getParameter("cost"));
 		int stock = Integer.parseInt(multi.getParameter("stock"));
+		String sdate = multi.getParameter("startDate");
 		String file1 = multi.getFilesystemName("file1");
 		String file2 = multi.getFilesystemName("file2");
 		String file3 = multi.getFilesystemName("file3");
 		String file4 = multi.getFilesystemName("file4");
 		String file5 = multi.getFilesystemName("file5");
-		
-		String sdate = multi.getParameter("sdate");
-		
-		String aa[] = sdate.split("-");
-		
-		String serial = aa[0] + aa[1] + aa[2];
-		
-		
+	
 		PackBean pb = new  PackBean();
 		PackDAO pdao = new PackDAO();
 		
 		pb.setIntro(intro);
 		pb.setSubject(subject);
 		pb.setContent(content);
+		pb.setType(type);
 		pb.setArea(area);
 		pb.setCity(city);
 		pb.setSarea(sarea);
 		pb.setCost(cost);
 		pb.setStock(stock);
-		pb.setSerial(Integer.parseInt(serial));
+		pb.setDate(sdate);
 		
 		// upload 폴더에 올라가는 파일이름		
 		if(file1 == null){
@@ -74,30 +70,29 @@ public class PackModifyAction implements Action{
 		if(file2 == null){
 			pb.setFile2(multi.getParameter("file2"));
 		}else{
-			pb.setFile2(multi.getFilesystemName("file2"));
+			pb.setFile2(file2);
 		}
 		
 		if(file3 == null){
 			pb.setFile3(multi.getParameter("file3"));
 		}else{
-			pb.setFile3(multi.getFilesystemName("file3"));
+			pb.setFile3(file3);
 		}
 		
 		if(file4 == null){
 			pb.setFile4(multi.getParameter("file4"));
 		}else{
-			pb.setFile4(multi.getFilesystemName("file4"));
+			pb.setFile4(file4);
 		}
 		
 		if(file5 == null){
 			pb.setFile5(multi.getParameter("file5"));
 		}else{
-			pb.setFile5(multi.getFilesystemName("file5"));
+			pb.setFile5(file5);
 		}
 				
 		pdao.updatePackcontent(pb, num);
-		
-		
+			
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
@@ -105,10 +100,6 @@ public class PackModifyAction implements Action{
 		out.println("location.href='./PackList.po';");
 		out.println("</script>");
 		out.close();
-	
-		
-		return null;
-		
+		return null;	
 	}
-
 }

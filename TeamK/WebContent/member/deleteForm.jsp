@@ -32,8 +32,10 @@
 		<div id="member">
 			<div id="m_delete_form">
 			<form action="./MemberDeleteAction.me" method="post" name="fr">
-				<label for="id">아이디</label><input type="text" name="id" id="id" value="<%=id%>"><br>
-				<label for="pass">비밀번호</label><input type="password" name="pass" id="pass"><br> 
+				<label for="id">아이디</label>
+				<input type="text" name="id" id="id" value="<%=id%>"><br>
+				<label for="pass">비밀번호</label>
+				<input type="password" name="pass" id="pass"><br> 
 				<input type="submit" value="회원탈퇴">
 			</form>
 			</div>

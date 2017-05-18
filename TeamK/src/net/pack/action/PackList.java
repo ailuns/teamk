@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.pack.db.CategoryDAO;
+import net.pack.db.CategoryBean;
 import net.pack.db.PackBean;
 import net.pack.db.PackDAO;
 
@@ -14,15 +16,16 @@ public class PackList implements Action{
 	@Override
 	public ActionForward excute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
-System.out.println("PackList excute()");
+		System.out.println("PackList excute()");
 		
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		
 		// 디비 객체 생성 BoardDAO
 		PackDAO pdao = new PackDAO();
+		CategoryDAO cdao = new CategoryDAO();
 		//전체글 횟수 구하기 int count = getBoardCount()
-		int count = 5;//pdao.getBoardCount();
+		int count = 8;
 		
 		
 		//한페이지에 보여줄 글의 갯수
@@ -53,10 +56,16 @@ System.out.println("PackList excute()");
 		// 끝페이지 구하기
 		int endPage = startPage+pageBlock-1;
 		
-		String area[] = {"서울", "경기도","경상도", "전라도", "충청도", "강원도", "제주도"};
+		String area[] = {"서울","부산","경기도","강원도","충청북도","충청남도","전라북도","전라남도","경상북도","경상남도","제주도"};
 		
-		List list[] = null;
+		int areaCount[] = new int[11];
+		//전체글 횟수 구하기 int count = getBoardCount()
 		
+		for (int i = 0; i < area.length; i++)
+		{
+			areaCount[i] = pdao.getPackCount(area[i]);
+		}
+
 //		for(int i = 0; i < area.length; i++)
 //		{
 //			list[i] = pdao.getBoardList(startRow, pagesize, area[i]);
@@ -69,6 +78,13 @@ System.out.println("PackList excute()");
 		List list5 = pdao.getBoardList(startRow, pagesize, area[4]);
 		List list6 = pdao.getBoardList(startRow, pagesize, area[5]);
 		List list7 = pdao.getBoardList(startRow, pagesize, area[6]);
+		List list8 = pdao.getBoardList(startRow, pagesize, area[7]);
+		List list9 = pdao.getBoardList(startRow, pagesize, area[8]);
+		List list10 = pdao.getBoardList(startRow, pagesize, area[9]);
+		List list11 = pdao.getBoardList(startRow, pagesize, area[10]);
+		
+		List CategoryList = cdao.getCategoryList();
+
 		
 		request.setAttribute("list1", list1);
 		request.setAttribute("list2", list2);
@@ -77,7 +93,22 @@ System.out.println("PackList excute()");
 		request.setAttribute("list5", list5);
 		request.setAttribute("list6", list6);
 		request.setAttribute("list7", list7);
-		
+		request.setAttribute("list8", list8);
+		request.setAttribute("list9", list9);
+		request.setAttribute("list10", list10);
+		request.setAttribute("list11", list11);
+		request.setAttribute("CategoryList", CategoryList);
+		request.setAttribute("areaCount1", areaCount[0]);
+		request.setAttribute("areaCount2", areaCount[1]);
+		request.setAttribute("areaCount3", areaCount[2]);
+		request.setAttribute("areaCount4", areaCount[3]);
+		request.setAttribute("areaCount5", areaCount[4]);
+		request.setAttribute("areaCount6", areaCount[5]);
+		request.setAttribute("areaCount7", areaCount[6]);
+		request.setAttribute("areaCount8", areaCount[7]);
+		request.setAttribute("areaCount9", areaCount[8]);
+		request.setAttribute("areaCount10", areaCount[9]);
+		request.setAttribute("areaCount11", areaCount[10]);
 		
 		request.setAttribute("count", count);
 		

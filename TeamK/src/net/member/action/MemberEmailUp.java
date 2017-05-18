@@ -18,7 +18,6 @@ public class MemberEmailUp implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		System.out.println("Teamk MemberEmail execute()");
-
 		String email = request.getParameter("email");
 		String echeck = request.getParameter("echeck");
 
@@ -43,7 +42,7 @@ public class MemberEmailUp implements Action {
 			String receiver = email;
 			String subject = "[Team K 여행사]인증 번호";
 
-			String content = "인증번호 : [" + checknum + "]";
+			String content = "인증번호 : " + checknum ;
 
 			String server = "smtp.naver.com";
 
@@ -74,7 +73,6 @@ public class MemberEmailUp implements Action {
 		}
 
 		request.setAttribute("checknum", checknum);
-		System.out.println(checknum);
 		ActionForward forward = new ActionForward();
 		forward.setPath("./member/emailcheck2.jsp");
 		forward.setRedirect(false);

@@ -10,8 +10,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<!-- <link href="../css/inc.css" rel="stylesheet" type="text/css"> -->
-<!-- <link href="../css/subpage.css" rel="stylesheet" type="text/css"> -->
+<link href="../css/inc.css" rel="stylesheet" type="text/css">
+<link href="../css/subpage.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="./js/jquery-3.2.0.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -36,8 +36,6 @@
 	int pagesize = ((Integer)request.getAttribute("pagesize")).intValue();
 %>
 <body>
-	<h3>My Google Maps Demo</h3>
-
 	<script>
 
 	// 찜하기, 예약하기 버튼 클릭 시 각각 버튼 마다 이동할 페이지
@@ -107,51 +105,110 @@
 			$('#banner').hide();
 			$('#banner_sub').hide();
 		});
+		
+		$('#remote_close').click(function(){
+			$('#remote_control').hide();
+			$('#remote_close').hide();
+		});
+		
+		
+// 		$(".secretChk").click(function(){
+			
+// 			if ($(".secretChk").is(":checked"))
+// 	 		{
+// 				alert("체크 시 관리자와 본인만 읽기 가능합니다");
+// 	 		}
+// 		});	
+			
+	
 	});
 
 
 	function ReplyWrite(num)
 	{
-		$.ajax({
-			type:"post",
-			url:"./ReplyWrite.ro",
-			data:{
-				id:$("#id").val(),
-				content:$("#content").val(),
-				num:$("#num").val(),
-				success:function(){
-					window.location.reload(true);
+		if($(".secretChk").is(":checked"))
+		{
+			$.ajax({
+				type:"post",
+				url:"./ReplyWrite.ro",
+				data:{
+					id:$("#id").val(),
+					content:$("#content").val(),
+					num:$("#num").val(),
+					secretChk:$(".secretChk").val(),
+					success:function(){
+						window.location.reload(true);
+					}
 				}
-			}
-		});
+			});
+		}
+		else
+		{
+			$.ajax({
+				type:"post",
+				url:"./ReplyWrite.ro",
+				data:{
+					id:$("#id").val(),
+					content:$("#content").val(),
+					num:$("#num").val(),
+					secretChk:"0",
+					success:function(){
+						window.location.reload(true);
+					}
+				}
+			});
+		}
 	}
 
 	function Re_Reply_Write(num)
 	{
-		$.ajax({
-			type:"post",
-			url:"./Re_ReplyWriteAction.ro",
-			data:{
-				id:$("#reid").val(),
-				content:$("#recontent").val(),
-				num:$("#num").val(),
-				repageNum:$("#repageNum").val(),
-				replynum:$("#replynum").val(),
-				re_ref:$("#re_ref").val(),
-				re_lev:$("#re_lev").val(),
-				re_seq:$("#re_seq").val(),
-				success:function(){
-					window.location.reload(true);
+		if($(".re_secretChk").is(":checked"))
+		{
+			$.ajax({
+				type:"post",
+				url:"./Re_ReplyWriteAction.ro",
+				data:{
+					id:$("#reid").val(),
+					content:$("#recontent").val(),
+					num:$("#num").val(),
+					repageNum:$("#repageNum").val(),
+					replynum:$("#replynum").val(),
+					re_ref:$("#re_ref").val(),
+					re_lev:$("#re_lev").val(),
+					re_seq:$("#re_seq").val(),
+					secretChk:$(".re_secretChk").val(),
+					success:function(){
+						window.location.reload(true);
+					}
 				}
-			}
-		});
+			});
+		}
+		else
+		{
+			$.ajax({
+				type:"post",
+				url:"./Re_ReplyWriteAction.ro",
+				data:{
+					id:$("#reid").val(),
+					content:$("#recontent").val(),
+					num:$("#num").val(),
+					repageNum:$("#repageNum").val(),
+					replynum:$("#replynum").val(),
+					re_ref:$("#re_ref").val(),
+					re_lev:$("#re_lev").val(),
+					re_seq:$("#re_seq").val(),
+					secretChk:"0",
+					success:function(){
+						window.location.reload(true);
+					}
+				}
+			});
+		}
 	}
 
 
 	function ReplyDel(renum, id)
 	{
-//			alert(renum);
-//			alert(id);
 		$.ajax({
 			type:"post",
 			url:"./ReplyDelAction.ro",
@@ -167,19 +224,37 @@
 
 	function reUpdateAction(num)
 	{
-//			var a = $("#contentup").val()
-//			alert(a);
-		$.ajax({
-			type:"post",
-			url:"./ReplyUpdateActoin.ro",
-			data:{
-				content:$("#contentup").val(),
-				num:num
-			},
-			success:function(){
-			window.location.reload(true);
+		if($(".up_secretChk"+num).is(":checked"))
+		{
+			$.ajax({
+				type:"post",
+				url:"./ReplyUpdateActoin.ro",
+				data:{
+					content:$("#contentup").val(),
+					num:num,
+					secretChk:$(".up_secretChk"+num).val(),
+					success:function(){
+						window.location.reload(true);
+					}
+				}
+			});
 		}
-		});
+		
+		else
+		{
+			$.ajax({
+				type:"post",
+				url:"./ReplyUpdateActoin.ro",
+				data:{
+					content:$("#contentup").val(),
+					num:num,
+					secretChk:"0"
+				},
+				success:function(){
+				window.location.reload(true);
+			}
+			});
+		}
 	}
 
 	//구글맵 v3
@@ -274,8 +349,8 @@
 		            	
 		            	// 말풍선에 넣을 이미지 및 문구 설정
 		            	var imgurl = photos[0].getUrl({'maxWidth': 150, 'maxHeight': 150});
-		            	var contentString = "<table border='1'><tr><td rowspan='2'><img style='width:100px; height:100px' src=" + imgurl + "></td><td><center><p>" + place.name + "</p></center></td></tr>"
-		            	 + "<tr><td><center><p>" + place.formatted_address + "</p></center></td></tr></table>";
+		            	var contentString = "<table border='1'><tr><td rowspan='2'><img style='width:100px; height:100px' src=" + imgurl + "></td><td><p style='text-align: center;'>" + place.name + "</p></td></tr>"
+		            	 + "<tr><td><p style='text-align: center;'>" + place.formatted_address + "</p></td></tr></table>";
 						
 						var infowindow1 = new google.maps.InfoWindow({ content: contentString});
 						 
@@ -337,7 +412,7 @@
 		else //취소
 		    return;
 	}
-	
+
 
 </script>
 
@@ -356,11 +431,12 @@
 
 #wrap_pack { 
 	width: 980px; 
-	min-height: 1000px; 
-	border: 5px solid red; 
- 	margin: 0 auto; 
-	 
+	min-height: 1000px;
+	border: 5px solid red;
+	margin-top : 50px;
+ 	margin: 0 auto;
 	padding-top: 50px;
+	background-color: #eee;
 } 
 
 
@@ -374,7 +450,6 @@
 {
 	list-style: none;
 }
-
 
 #imgdiv{
 	width: 470px;
@@ -401,12 +476,14 @@
 	box-sizing : border-box;
 	border : 5px solid #A6A6A6;
 }
+/* 이미지에 마우스를 올렸을 때 이벤트 */
 
 #contentdiv1 {
 	width: 400px;
 	height: 400px;
 	border: 3px solid blue;
 	float: left;
+	margin-left : 50px;
 }
 
 
@@ -425,9 +502,11 @@
 /* 여행정보 내용 */
 
 /* 구글맵 */
+
+
 #map_canvas {
-	width: 740px;
-	height: 400px;
+	width: 800px;
+	height: 500px;
 }
 
 .controls {
@@ -463,7 +542,7 @@
 /* 상품 문의 */
 #QnA {
 	width: 800px;
-	height: 500px;
+	min-height: 300px;
 	border: 3px solid pink;
 }
 /* 상품 문의 */
@@ -500,7 +579,6 @@
 	right : 150px;
 	bottom : 5px;
 	background-color: white;
-
 }
 
 #banner_content
@@ -538,9 +616,110 @@
 {
 	cursor: pointer;
 }
+
+
+#replyTable
+{
+	background-color: white;
+	
+}
+
+/* tr:nth-child(odd)  */
+/* { */
+/* 	background-color: #BFBFBF; */
+/* } */
+
+#replyContent
+{	
+	width: 700px;
+	height : 50px;
+}
+
+#recontent, #contentup, #content
+{
+	width : 600px;
+	height : 70px;
+}
+
+#replyWrite
+{
+	background-color: white;
+}
+
+
 /* 추천상품 배너 */
 
+#remote_control
+{
+	padding-left : 20px;
+	padding-top : 15px;
+	width : 100px;
+	height : 170px;
+	position : fixed;
+	right : 510px;
+	bottom : 220px;
+	background-color: white;
+	text-align: center;
+	border : 1px solid #BDBDBD;
+}
+
+#remote_control td
+{
+	border-top : 1px solid gray;
+	border-bottom : 1px solid gray;
+	padding-top : 10px;
+	padding-bottom : 5px;
+}
+
+#remote_control td:HOVER, #remote_close
+{
+	cursor: pointer;
+}
+
+#remote_close
+{
+	margin : 0px;
+	padding : 0px;
+	width : 30px;
+	height : 20px;
+	position : fixed;
+	right : 545px;
+	bottom : 390px;
+	background-color: white;
+	text-align: center;
+	font-size: 0.8em;
+	border : 1px solid #BDBDBD;
+	border-bottom: none;
+}
+
+#remote_control a:LINK, #remote_control a:VISITED
+{
+	color : #BBBBBB;
+	text-decoration: none;
+	font-size: 0.8em;	
+}
+
+
 </style>
+
+
+	<div id="remote_control">
+		<div id="remote_close">x</div>
+		<table id="remote_content">
+			<tr>
+				<td><a href="#">Top</a></td>
+			</tr>
+			<tr>
+				<td><a href="./PackContent.po?num=<%=PB.getNum() %>#contentdiv2">여행정보</a></td>
+			</tr>
+			<tr>
+				<td><a href="./PackContent.po?num=<%=PB.getNum() %>#middle2">지도뷰</a></td>
+			</tr>
+			<tr>
+				<td><a href="./PackContent.po?num=<%=PB.getNum() %>#QnA">상품문의</a></td>
+			</tr>
+		</table>
+	</div>
 
 	<div id="banner_sub">추천상품</div>
 	<div id="banner">
@@ -562,6 +741,25 @@
 	<!-- 왼쪽 메뉴 -->
 	<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
 	<!-- 왼쪽 메뉴 -->
+	<!--여행지 검색창 -->
+	<div id="wrap"> 
+		<div id="package_head">
+			<div id="package_title">패키지
+			</div>
+			<div id="package_search">
+				<p>내게 맞는 패키지 검색하기</p>
+				<form action="./PackSearchAction.po" name="fr" method="get" id="scheduler" onsubmit="return input_chk()">
+					<label for="date_from">출발</label><input type="text" id="date_from" class="input_style" name="startDate" required="yes">
+					<label for="date_to">도착</label><input type="text" id="date_to" class="input_style" name="endDate" required="yes"><br><br>
+					<label for="city_search">지역</label><input type="text" id="city_search" name="city" class="input_style" required="yes" placeholder="도시를 입력해주세요">
+					<input type="submit" value="검색" id="search_btn" class="input_style">
+				</form>
+			</div>
+		</div>
+	</div>
+	<div id="clear"></div>
+	<!--여행지 검색창 -->
+	
 	<div id="wrap_pack">
 		<!--글제목 -->
 		<h3><%=PB.getSubject()%></h3>
@@ -688,17 +886,18 @@
 		<!--상품 정보, 내용이 들어가는 영역 -->
 		<div id="middle1">
 			<div id="contentdiv2">
-			
-			<%=PB.getContent() %></div>
+				<%=PB.getContent() %>
+			</div>
 		</div>
 		<!--상품 정보, 내용이 들어가는 영역 -->
 
 		<!--구글맵 제어할 버튼 부분 -->
 		<div id="middle2">
 			<hr>
-			<p id="sub"><%=PB.getCity()%> <%=PB.getSarea()%></p>
-			<input type="button" id="btn1" value="주변 명소"> <input
-				type="button" id="btn2" value="주변 맛집">
+			<h3 id="sub"><%=PB.getCity()%> <%=PB.getSarea()%></h3>
+			<hr>
+			<input type="button" id="btn1" value="주변 명소"> 
+			<input type="button" id="btn2" value="주변 맛집">
 		</div>
 		<!--구글맵 제어할 버튼 부분 -->
 		
@@ -712,19 +911,23 @@
 		<div id="QnA">
 			<h3>상품 문의</h3>
 			<hr>
-			<%
-				
-				// 메서드 호출 getBoardList(시작행, 몇개)
-				
-			%>
-
-			<table border="1">
+			<table border="1" id="replyTable">
 				<tr>
-					<td>번호</td>
-					<td>작성자</td>
-					<td>내용</td>
+<!-- 					<td>번호</td> -->
+<!-- 					<td>작성자</td> -->
+<!-- 					<td>내용</td> -->
 				</tr>
 				<%
+				
+				if(count == 0)
+				{
+				%>
+					<tr>
+						<td style="width:800px; text-align: center; height:50px;">문의 내역이 없습니다</td>
+					</tr>
+				<%
+				}
+				
 					ReplyBean rb;
 					if (count != 0) {
 						for (int i = 0; i < List.size(); i++) 
@@ -733,20 +936,46 @@
 				%>
 
 				<tr id="relist<%=rb.getNum()%>">
-					<td><%=rb.getNum()%></td>
+<%-- 					<td><%=rb.getNum()%></td> --%>
 					<td><%=rb.getId()%></td>
-					<td>
+					<%
+					if ((rb.getId().equals(user_id) && rb.getH_or_s() == 1) || rb.getH_or_s() == 0){
+					%>
+					<td id="replyContent">
 						<%
 							// 답글 들여쓰기 모양
 							int wid = 0;
 							if (rb.getRe_lev() > 0) {
 								wid = 10 * rb.getRe_lev();
-						%> <img src="level.gif" width=<%=wid%>> <img src="re.gif">
+						%> 
+<%-- 						<img src="level.gif" id="reimg" width=<%=wid%>> <img src="re.gif"> --%>
+							<span>[답변]</span>
 						<%
 							}
-						%> <a href="#?num=<%=rb.getNum()%>&pageNum=<%=repageNum%>"><%=rb.getContent()%></a>
+						
+						%> 
+						
+						<%=rb.getContent()%>
+						<%
+						if(rb.getH_or_s() == 1)
+						{
+						%>
+						<img src="./img/lock.png" width="10px" height="10px">
+						<%
+						}
+						%>
 					</td>
 					<%
+					}
+					else if (rb.getH_or_s() == 1 && !rb.getId().equals(user_id)){
+					%>
+					<td style="height:50px;">
+						비밀글입니다<img src="./img/lock.png" width="10px" height="10px">
+					</td>
+					<%
+					}
+					
+					
 					if(!user_id.equals(""))
 					{
 					%>
@@ -767,40 +996,52 @@
 					}
 					%>
 				</tr>
-
+				
 				<tr id="conup<%=rb.getNum()%>" style="display: none;">
 					<td>
 						<input type="hidden" name="num" value="<%=PB.getNum()%>">
 						<input type="hidden" name="pageNum" value="<%=repageNum%>">
 						<input type="hidden" name="replynum" value="<%=rb.getNum()%>">
+						<%=user_id %>
 					</td>
-					<td><%=user_id %></td>
+					
 					<td><textarea cols="60" rows="2" id="contentup" name="contentup"><%=rb.getContent() %></textarea></td>
-					<td><input type="button" id="re_reply_content" value="수정" onclick="reUpdateAction(<%=rb.getNum() %>)"></td>
-					<td><input type="button" id="re_reply_content" value="취소" onclick="reupdate(<%=rb.getNum() %>)"></td>
+					<td>
+						<input type="button" id="re_reply_content" value="수정" onclick="reUpdateAction(<%=rb.getNum() %>)">
+					</td>
+					<td>
+						<input type="button" id="re_reply_content" value="취소" onclick="reupdate(<%=rb.getNum() %>)">
+					</td>
+					<td>
+						<input type="checkbox" class="up_secretChk<%=rb.getNum() %>" name="secretChk" value="1" <%if(rb.getH_or_s() == 1){%>checked<%} %>>비밀글
+					</td>
 				<tr>
 				
 				
 				
 				<tr id="con<%=rb.getNum()%>" style="display: none;">
 					<td>
-						<form action="./Re_ReplyWriteAction.ro" method="post">
-							<input type="hidden" id="num" name="num" value="<%=PB.getNum()%>">
-							<input type="hidden" id="repageNum" name="repageNum" value="<%=repageNum%>">
-							<input type="hidden" id="replynum" name="replynum" value="<%=rb.getNum()%>">
-							<input type="hidden" id="re_ref" name="re_ref" value="<%=rb.getRe_ref()%>">
-							<input type="hidden" id="re_lev" name="re_lev" value="<%=rb.getRe_lev()%>">
-							<input type="hidden" id="re_seq" name="re_seq" value="<%=rb.getRe_seq()%>">
-					</td>
-					<td>
+						<input type="hidden" id="num" name="num" value="<%=PB.getNum()%>">
+						<input type="hidden" id="repageNum" name="repageNum" value="<%=repageNum%>">
+						<input type="hidden" id="replynum" name="replynum" value="<%=rb.getNum()%>">
+						<input type="hidden" id="re_ref" name="re_ref" value="<%=rb.getRe_ref()%>">
+						<input type="hidden" id="re_lev" name="re_lev" value="<%=rb.getRe_lev()%>">
+						<input type="hidden" id="re_seq" name="re_seq" value="<%=rb.getRe_seq()%>">
 						<p><%=user_id %></p>
 						<input type="hidden" id="reid" name="id" class="box" value="<%=user_id %>">
 					</td>
 					<td><textarea cols="60" rows="2" id="recontent" name="content"></textarea></td>
-					<td><input type="button" id="re_reply_content" value="답글등록" onclick="Re_Reply_Write()"></td>
-					</form>
+					<td>
+						<input type="button" id="re_reply_content" value="답글등록" onclick="Re_Reply_Write()">
+					</td>
+					<td>
+						<input type="button" id="re_reply_content" value="취소" onclick="rewrite(<%=rb.getNum() %>)">
+					</td>
+					<td>
+						<input type="checkbox" class="re_secretChk" name="secretChk" value="1">비밀글
+					</td>
 				<tr>
-				
+			
 				<%
 					}
 						// 최근글위로 re_ref 그룹별 내림차순 re_se q 오름차순
@@ -808,6 +1049,7 @@
 						// 글잘라오기 limit 시작행-1, 개수
 					}
 				%>
+				
 			</table>
 
 			<center>
@@ -823,7 +1065,6 @@
 						if (endPage > pageCount) {
 							endPage = pageCount;
 						}
-
 						//이전
 						if (startPage > pageBlock) {
 				%>
@@ -834,8 +1075,6 @@
 						//페이지
 						for (int i = startPage; i <= endPage; i++) {
 				%>
-<%-- 				<a href="javascript:void(0);" onclick="Move(<%=PB.getNum() %>, <%=i%>);">[<%=i%>]</a> --%>
-<%-- 				<a href="javascript:void(0);" onclick="ReplyPage(<%=i%>, <%=PB.getNum() %>)">[<%=i%>]</a> --%>
 				<a href="./PackContent.po?num=<%=PB.getNum() %>&repageNum=<%=i %>#QnA">[<%=i%>]</a>
 				<%
 					}
@@ -852,51 +1091,59 @@
 
 			<br>
 			
-			<fieldset>
-				<legend></legend>
-				<table>
+			<table id="replyWrite">
+				<tr>
+					<%
+						if (user_id.equals(""))
+						{
+					%>
+					<td>
+						<textarea type="text" id="content" name="content" class="box" style="width:800px; height:50px;" placeholder="로그인이 필요한 서비스입니다" readonly onclick="loginChk()"></textarea>
+					</td>
 					<tr>
-						<form action="./ReplyWrite.ro" method="post">
-							
-							<%
-								if (user_id.equals(""))
-								{
-							%>
 							<td>
-								<p>아이디</p>
+								<div style="text-align:right; margin-top:15px; width:800px;">
+									<input type="checkbox" class="secretChk" name="secretChk" value="1" onclick="loginChk()">비밀글
+									<input type="button" value="문의글쓰기" onclick="loginChk()">
+								</div>
 							</td>
+						</tr>
+					<td>
+					<%
+						}
+						else
+						{
+					%>
+						<td>
+							<textarea type="text" id="content" name="content" class="box" style="width:800px; height:50px;"></textarea>
+							<input type="hidden" id="id" name="id" class="box" value="<%=user_id %>">
+							<input type="hidden" name="pageNum" value="<%=repageNum%>">
+							<input type="hidden" id="num" name="num" value="<%=PB.getNum() %>">
+						</td>
+						<tr>
 							<td>
-								<input type="text" name="content" class="box" style="width: 500px;" placeholder="로그인이 필요한 서비스입니다" readonly onclick="loginChk()"></td>
-							<td>
-							<%
-								}
-								else
-								{
-							%>
-							<td>
-								<p><%=user_id %></p>
-								<input type="hidden" id="id" name="id" class="box" value="<%=user_id %>">
+								<div style="text-align:right; margin-top:15px; width:800px;">
+									<input type="checkbox" class="secretChk" name="secretChk" value="1">비밀글
+									<input type="button" value="문의글쓰기" onclick="ReplyWrite(<%=PB.getNum() %>)">
+								</div>
 							</td>
-							<td>
-								<input type="text" id="content" name="content" class="box" style="width: 500px;"></td>
-							<td>
-							<%
-								}
-							%>
-								<input type="hidden" name="pageNum" value="<%=repageNum%>">
-								<input type="hidden" id="num" name="num" value="<%=PB.getNum() %>">
-							<input type="button" value="문의글쓰기" onclick="ReplyWrite(<%=PB.getNum() %>)"></td>
-						</form>
-					</tr>
-				</table>
-				<legend></legend>
-			</fieldset>
+						</tr>
+					<%
+						}
+					%>
+				</tr>
+			</table>
 		</div>
 	</div>
-		<!--상품 문의 -->
+	<!--상품 문의 -->
 	</div>
 	<!-- 오른쪽 메뉴 -->
 	<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
 	<!-- 오른쪽 메뉴 -->
+	<!--푸터 메뉴 -->
+	<div>
+		<jsp:include page="../inc/footer.jsp"></jsp:include>
+	</div>
+	<!--푸터 메뉴 -->
 </body>
 </html>

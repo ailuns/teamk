@@ -7,8 +7,6 @@
 <title>Insert title here</title>
 <link href="./css/inc.css" rel="stylesheet" type="text/css">
 <link href="./css/subpage.css" rel="stylesheet" type="text/css">
-</head>
-<body>
 <script type="text/javascript">
 function winopen(){
 	if (document.fr.name.value == "") {
@@ -41,6 +39,14 @@ function sendmail() {
 	}
 }
 </script>
+</head>
+<body>
+<%
+String id = (String) session.getAttribute("id");
+if (id != null) {
+	response.sendRedirect("./main.bo");
+}
+%>
 	<!--왼쪽 메뉴 -->
 	<div>
 		<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
