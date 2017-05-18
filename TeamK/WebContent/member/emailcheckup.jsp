@@ -9,7 +9,7 @@
 <link href="./css/popup.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<%String checknum = (String) request.getAttribute("checknum");%>
+<%-- 	<%String checknum = (String) request.getAttribute("checknum");%> --%>
 	<div id="emailchkup">
 	<form action="./MemberEmailUp.me" method="post">
 		<label for="email">이메일</label><input type="text" name="email" id="email"> 

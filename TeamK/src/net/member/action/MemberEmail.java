@@ -44,7 +44,7 @@ public class MemberEmail implements Action {
 			String receiver = email;
 			String subject = "[Team K 여행사]인증 번호";
 
-			String content = checknum;
+			String content = "인증번호 : " + checknum ;
 
 			String server = "smtp.naver.com";
 

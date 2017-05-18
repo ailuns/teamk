@@ -22,7 +22,6 @@ public class MemberFindIdAction implements Action {
 		
 		MemberDAO mdao=new MemberDAO();
 		String id = mdao.findid(name, email);
-		System.out.println("아이디는"+id);
 		
 		if(id!=""){
 			PrintWriter out = response.getWriter();
