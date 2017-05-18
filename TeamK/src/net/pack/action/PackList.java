@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.pack.db.CategoryDAO;
+import net.pack.db.CategoryBean;
 import net.pack.db.PackBean;
 import net.pack.db.PackDAO;
 
@@ -14,13 +16,14 @@ public class PackList implements Action{
 	@Override
 	public ActionForward excute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
-System.out.println("PackList excute()");
+		System.out.println("PackList excute()");
 		
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		
 		// 디비 객체 생성 BoardDAO
 		PackDAO pdao = new PackDAO();
+		CategoryDAO cdao = new CategoryDAO();
 		//전체글 횟수 구하기 int count = getBoardCount()
 		int count = 5;//pdao.getBoardCount();
 		
@@ -70,6 +73,8 @@ System.out.println("PackList excute()");
 		List list6 = pdao.getBoardList(startRow, pagesize, area[5]);
 		List list7 = pdao.getBoardList(startRow, pagesize, area[6]);
 		
+		List CategoryList = cdao.getCategoryList();
+		
 		request.setAttribute("list1", list1);
 		request.setAttribute("list2", list2);
 		request.setAttribute("list3", list3);
@@ -77,7 +82,7 @@ System.out.println("PackList excute()");
 		request.setAttribute("list5", list5);
 		request.setAttribute("list6", list6);
 		request.setAttribute("list7", list7);
-		
+		request.setAttribute("CategoryList", CategoryList);
 		
 		request.setAttribute("count", count);
 		
