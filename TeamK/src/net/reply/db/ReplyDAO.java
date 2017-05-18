@@ -20,17 +20,7 @@ public class ReplyDAO {
 	int num = 0;
 
 	private Connection getConnection() throws Exception {
-//		String dbid = "jspid";
-//		String dbpass = "jsppass";
-//		String dburl = "jdbc:mysql://localhost:3306/jspdb2";
-//
-//		Class.forName("com.mysql.jdbc.Driver");
-//		conn = DriverManager.getConnection(dburl, dbid, dbpass);
-//
-//		return conn;
 
-		
-		
 		//커넥션 풀 (Connection Poll)
 		// 데이터베이스와 연결된 Connection 객체를 미리 생성
 		// Pool 속에 저장해 두고 필요할때마다 접근하여 사용
@@ -188,7 +178,7 @@ public class ReplyDAO {
 				num = rs.getInt(1) + 1;
 			}
 
-			sql = "insert into reply(num, id, date, content, re_ref, re_lev, re_seq, group_del, reply_type) values(?,?,now(),?,?,?,?,?,?)";
+			sql = "insert into reply values(?,?,now(),?,?,?,?,?,?,?)";
 			pstm = conn.prepareStatement(sql);
 			pstm.setInt(1, num);
 			pstm.setString(2, rb.getId());
@@ -198,6 +188,7 @@ public class ReplyDAO {
 			pstm.setInt(6, 0); // 답변글 순서 - 일반글 순서 맨위
 			pstm.setInt(7, rb.getGroup_del());
 			pstm.setInt(8, 3);
+			pstm.setInt(9, rb.getH_or_s());
 			
 			pstm.executeUpdate();
 
@@ -256,8 +247,7 @@ public class ReplyDAO {
 			pstm.setInt(2, rb.getRe_seq());
 			pstm.executeUpdate();
 			
-			sql = "insert into reply(num, id, date, content, re_ref, re_lev, re_seq, group_del, reply_type) values(?,?,now(),?,?,?,?,?,?)";
-			
+			sql = "insert into reply values(?,?,now(),?,?,?,?,?,?,?)";			
 			pstm = conn.prepareStatement(sql);
 			pstm.setInt(1, num);
 			pstm.setString(2, rb.getId());
@@ -267,6 +257,7 @@ public class ReplyDAO {
 			pstm.setInt(6, rb.getRe_seq() + 1); // 답변글 순서 - 일반글 순서 맨위
 			pstm.setInt(7, rb.getGroup_del());
 			pstm.setInt(8, 3);
+			pstm.setInt(9, rb.getH_or_s());
 			
 			pstm.executeUpdate();
 
@@ -414,7 +405,46 @@ public class ReplyDAO {
 	}
 	
 	
-	
-	
-	
+	public void updateReply(String content, int num) {
+		try {
+			conn = getConnection();
+			sql = "update reply set content=? where num=?";
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, content);
+			pstm.setInt(2, num);
+			rs = pstm.executeQuery();
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		finally {
+			if (pstm != null) {
+				try {
+					pstm.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}	
 }

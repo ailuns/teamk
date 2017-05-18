@@ -107,51 +107,103 @@
 			$('#banner').hide();
 			$('#banner_sub').hide();
 		});
+		
+		
+		$(".secretChk").click(function(){
+			
+			if ($(".secretChk").is(":checked"))
+	 		{
+				alert("관리자와 본인만 읽기 가능합니다");
+	 		}
+		});	
 	});
 
 
 	function ReplyWrite(num)
 	{
-		$.ajax({
-			type:"post",
-			url:"./ReplyWrite.ro",
-			data:{
-				id:$("#id").val(),
-				content:$("#content").val(),
-				num:$("#num").val(),
-				success:function(){
-					window.location.reload(true);
+		if($(".secretChk").is(":checked"))
+		{
+			$.ajax({
+				type:"post",
+				url:"./ReplyWrite.ro",
+				data:{
+					id:$("#id").val(),
+					content:$("#content").val(),
+					num:$("#num").val(),
+					secretChk:$(".secretChk").val(),
+					success:function(){
+						window.location.reload(true);
+					}
 				}
-			}
-		});
+			});
+		}
+		else
+		{
+			$.ajax({
+				type:"post",
+				url:"./ReplyWrite.ro",
+				data:{
+					id:$("#id").val(),
+					content:$("#content").val(),
+					num:$("#num").val(),
+					secretChk:"0",
+					success:function(){
+						window.location.reload(true);
+					}
+				}
+			});
+		}
 	}
 
 	function Re_Reply_Write(num)
 	{
-		$.ajax({
-			type:"post",
-			url:"./Re_ReplyWriteAction.ro",
-			data:{
-				id:$("#reid").val(),
-				content:$("#recontent").val(),
-				num:$("#num").val(),
-				repageNum:$("#repageNum").val(),
-				replynum:$("#replynum").val(),
-				re_ref:$("#re_ref").val(),
-				re_lev:$("#re_lev").val(),
-				re_seq:$("#re_seq").val(),
-				success:function(){
-					window.location.reload(true);
+		if($(".secretChk").is(":checked"))
+		{
+			$.ajax({
+				type:"post",
+				url:"./Re_ReplyWriteAction.ro",
+				data:{
+					id:$("#reid").val(),
+					content:$("#recontent").val(),
+					num:$("#num").val(),
+					repageNum:$("#repageNum").val(),
+					replynum:$("#replynum").val(),
+					re_ref:$("#re_ref").val(),
+					re_lev:$("#re_lev").val(),
+					re_seq:$("#re_seq").val(),
+					secretChk:$(".secretChk").val(),
+					success:function(){
+						window.location.reload(true);
+					}
 				}
-			}
-		});
+			});
+		}
+		else
+		{
+			$.ajax({
+				type:"post",
+				url:"./Re_ReplyWriteAction.ro",
+				data:{
+					id:$("#reid").val(),
+					content:$("#recontent").val(),
+					num:$("#num").val(),
+					repageNum:$("#repageNum").val(),
+					replynum:$("#replynum").val(),
+					re_ref:$("#re_ref").val(),
+					re_lev:$("#re_lev").val(),
+					re_seq:$("#re_seq").val(),
+					secretChk:"0",
+					success:function(){
+						window.location.reload(true);
+					}
+				}
+			});
+		}
 	}
 
 
 	function ReplyDel(renum, id)
 	{
-//			alert(renum);
-//			alert(id);
 		$.ajax({
 			type:"post",
 			url:"./ReplyDelAction.ro",
@@ -167,8 +219,6 @@
 
 	function reUpdateAction(num)
 	{
-//			var a = $("#contentup").val()
-//			alert(a);
 		$.ajax({
 			type:"post",
 			url:"./ReplyUpdateActoin.ro",
@@ -337,7 +387,7 @@
 		else //취소
 		    return;
 	}
-	
+
 
 </script>
 
@@ -798,6 +848,9 @@
 					</td>
 					<td><textarea cols="60" rows="2" id="recontent" name="content"></textarea></td>
 					<td><input type="button" id="re_reply_content" value="답글등록" onclick="Re_Reply_Write()"></td>
+					<td>
+						<input type="checkbox" class="secretChk" name="secretChk" value="1">비밀글
+					</td>
 					</form>
 				<tr>
 				
@@ -823,7 +876,6 @@
 						if (endPage > pageCount) {
 							endPage = pageCount;
 						}
-
 						//이전
 						if (startPage > pageBlock) {
 				%>
@@ -834,8 +886,6 @@
 						//페이지
 						for (int i = startPage; i <= endPage; i++) {
 				%>
-<%-- 				<a href="javascript:void(0);" onclick="Move(<%=PB.getNum() %>, <%=i%>);">[<%=i%>]</a> --%>
-<%-- 				<a href="javascript:void(0);" onclick="ReplyPage(<%=i%>, <%=PB.getNum() %>)">[<%=i%>]</a> --%>
 				<a href="./PackContent.po?num=<%=PB.getNum() %>&repageNum=<%=i %>#QnA">[<%=i%>]</a>
 				<%
 					}
@@ -886,6 +936,9 @@
 								<input type="hidden" name="pageNum" value="<%=repageNum%>">
 								<input type="hidden" id="num" name="num" value="<%=PB.getNum() %>">
 							<input type="button" value="문의글쓰기" onclick="ReplyWrite(<%=PB.getNum() %>)"></td>
+							<td>
+								<input type="checkbox" class="secretChk" name="secretChk" value="1">비밀글
+							</td>
 						</form>
 					</tr>
 				</table>
