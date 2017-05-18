@@ -25,7 +25,7 @@ public class PackList implements Action{
 		PackDAO pdao = new PackDAO();
 		CategoryDAO cdao = new CategoryDAO();
 		//전체글 횟수 구하기 int count = getBoardCount()
-		int count = 5;//pdao.getBoardCount();
+		int count = 8;
 		
 		
 		//한페이지에 보여줄 글의 갯수
@@ -58,8 +58,14 @@ public class PackList implements Action{
 		
 		String area[] = {"서울","부산","경기도","강원도","충청북도","충청남도","전라북도","전라남도","경상북도","경상남도","제주도"};
 		
-		List list[] = null;
+		int areaCount[] = new int[11];
+		//전체글 횟수 구하기 int count = getBoardCount()
 		
+		for (int i = 0; i < area.length; i++)
+		{
+			areaCount[i] = pdao.getPackCount(area[i]);
+		}
+
 //		for(int i = 0; i < area.length; i++)
 //		{
 //			list[i] = pdao.getBoardList(startRow, pagesize, area[i]);
@@ -78,6 +84,7 @@ public class PackList implements Action{
 		List list11 = pdao.getBoardList(startRow, pagesize, area[10]);
 		
 		List CategoryList = cdao.getCategoryList();
+
 		
 		request.setAttribute("list1", list1);
 		request.setAttribute("list2", list2);
@@ -91,6 +98,17 @@ public class PackList implements Action{
 		request.setAttribute("list10", list10);
 		request.setAttribute("list11", list11);
 		request.setAttribute("CategoryList", CategoryList);
+		request.setAttribute("areaCount1", areaCount[0]);
+		request.setAttribute("areaCount2", areaCount[1]);
+		request.setAttribute("areaCount3", areaCount[2]);
+		request.setAttribute("areaCount4", areaCount[3]);
+		request.setAttribute("areaCount5", areaCount[4]);
+		request.setAttribute("areaCount6", areaCount[5]);
+		request.setAttribute("areaCount7", areaCount[6]);
+		request.setAttribute("areaCount8", areaCount[7]);
+		request.setAttribute("areaCount9", areaCount[8]);
+		request.setAttribute("areaCount10", areaCount[9]);
+		request.setAttribute("areaCount11", areaCount[10]);
 		
 		request.setAttribute("count", count);
 		

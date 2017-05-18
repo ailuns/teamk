@@ -214,6 +214,61 @@ public class PackDAO {
 		return list;
 	}
 	
+	// 해당 지역의 패키지 갯수 카운터
+	public int getPackCount(String area) {
+		int count = 0;
+		try {
+			conn = getConnection();
+//				sql = "select count(*) from pack where city like ?";
+			
+			sql = "select count(*) from pack where area=?";
+
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, area);
+			rs = pstm.executeQuery();
+			if (rs.next()) {
+				count = rs.getInt(1);
+			}
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		finally {
+			if (pstm != null) {
+				try {
+					pstm.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return count;
+	}
+	
+	
+	
+	
 	// 검색어(도시, 날짜) 있는 게시판 갯수 카운터
 	public int getPackCount(String search, int startDate, int endDate) {
 		int count = 0;
