@@ -4,7 +4,7 @@
     <%@ page import="net.pack.db.PackBean" %>
     <%@ page import="java.util.List" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
@@ -31,6 +31,64 @@
 		$("#txt_prodStart").datepicker();
 	    $('img.ui-datepicker-trigger').attr('align', 'absmiddle');
 		
+	    
+	    
+	 	// 파일 크기 제한 5MB
+		var maxSize = 5*1024*1024;
+		$("#file11").bind('change', function() {   // 파일 첨부 할 때 함수 호출
+			var filesize_temp = (this.files[0].size)/1048576;
+			var filesize = filesize_temp.toString().substring(0, 4);
+			
+			if (this.files[0].size > maxSize)
+			{
+				alert("5MB 이하의 이미지를 선택해주세요  (" + filesize + "MB)");
+				$("#file1").val("");
+			}
+		});
+		
+		$("#file22").bind('change', function() {   // 파일 첨부 할 때 함수 호출
+			var filesize_temp = (this.files[0].size)/1048576;
+			var filesize = filesize_temp.toString().substring(0, 4);
+			
+			if (this.files[0].size > maxSize)
+			{
+				alert("5MB 이하의 이미지를 선택해주세요  (" + filesize + "MB)");
+				$("#file2").val("");
+			}
+		});
+		
+		$("#file33").bind('change', function() {   // 파일 첨부 할 때 함수 호출
+			var filesize_temp = (this.files[0].size)/1048576;
+			var filesize = filesize_temp.toString().substring(0, 4);
+			
+			if (this.files[0].size > maxSize)
+			{
+				alert("5MB 이하의 이미지를 선택해주세요  (" + filesize + "MB)");
+				$("#file3").val("");
+			}
+		});
+		
+		$("#file44").bind('change', function() {   // 파일 첨부 할 때 함수 호출
+			var filesize_temp = (this.files[0].size)/1048576;
+			var filesize = filesize_temp.toString().substring(0, 4);
+			
+			if (this.files[0].size > maxSize)
+			{
+				alert("5MB 이하의 이미지를 선택해주세요  (" + filesize + "MB)");
+				$("#file4").val("");
+			}
+		});
+		
+		$("#file55").bind('change', function() {   // 파일 첨부 할 때 함수 호출
+			var filesize_temp = (this.files[0].size)/1048576;
+			var filesize = filesize_temp.toString().substring(0, 4);
+			
+			if (this.files[0].size > maxSize)
+			{
+				alert("5MB 이하의 이미지를 선택해주세요  (" + filesize + "MB)");
+				$("#file5").val("");
+			}
+		});
 	});
 </script>
 
@@ -154,13 +212,12 @@ img.ui-datepicker-trigger
 					<td>이미지첨부</td>
 					<td>
 						<input type="text" name="file1" id="file1" value="<%=pb.getFile1()%>" readonly style="width: 300px;">
-						
-						<input type="button" value="파일수정" class="dup" id="button" onclick="document.getElementById('file11').click();"
-						onchange="document.getElementById('file1').value=this.value;">
+												
+						<input type="button" value="파일수정" class="dup" id="button" onclick="document.getElementById('file11').click();">
 						
 						<input type="button" value="파일삭제" class="dup" id="button" onclick="document.getElementById('file1').value='';">
 						
-						<input type="file" size="30" name="file" id="file11" style="display: none;"
+						<input type="file" size="30" name="file1" id="file11" style="display: none;"
 						onchange="document.getElementById('file1').value=this.value;" />
 					</td>
 				</tr>
@@ -169,12 +226,11 @@ img.ui-datepicker-trigger
 					<td>
 						<input type="text" name="file2" id="file2" value="<%=pb.getFile2()%>" readonly style="width: 300px;">
 						
-						<input type="button" value="파일수정" class="dup" id="button" onclick="document.getElementById('file22').click();"
-						onchange="document.getElementById('file2').value=this.value;">
+						<input type="button" value="파일수정" class="dup" id="button" onclick="document.getElementById('file22').click();">
 						
 						<input type="button" value="파일삭제" class="dup" id="button" onclick="document.getElementById('file2').value='';">
 						
-						<input type="file" size="30" name="file" id="file22" style="display: none;"
+						<input type="file" size="30" name="file2" id="file22" style="display: none;"
 						onchange="document.getElementById('file2').value=this.value;" />
 					</td>
 				</tr>
@@ -188,7 +244,7 @@ img.ui-datepicker-trigger
 						
 						<input type="button" value="파일삭제" class="dup" id="button" onclick="document.getElementById('file3').value='';">
 						
-						<input type="file" size="30" name="file" id="file33" style="display: none;"
+						<input type="file" size="30" name="file3" id="file33" style="display: none;"
 						onchange="document.getElementById('file3').value=this.value;" />
 					</td>
 				</tr>
@@ -202,7 +258,7 @@ img.ui-datepicker-trigger
 						
 						<input type="button" value="파일삭제" class="dup" id="button" onclick="document.getElementById('file4').value='';">
 						
-						<input type="file" size="30" name="file" id="file44" style="display: none;"
+						<input type="file" size="30" name="file4" id="file44" style="display: none;"
 						onchange="document.getElementById('file4').value=this.value;" />
 					</td>
 				</tr>
@@ -216,7 +272,7 @@ img.ui-datepicker-trigger
 						
 						<input type="button" value="파일삭제" class="dup" id="button" onclick="document.getElementById('file5').value='';">
 						
-						<input type="file" size="30" name="file" id="file55" style="display: none;"
+						<input type="file" size="30" name="file5" id="file55" style="display: none;"
 						onchange="document.getElementById('file5').value=this.value;" />
 					</td>
 				</tr>

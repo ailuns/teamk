@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"%>
     <%@ page import="net.pack.db.PackDAO" %>
     <%@ page import="net.pack.db.PackBean" %>
+    <%@ page import="net.pack.db.CategoryBean" %>
     <%@ page import="java.util.List" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -254,6 +255,8 @@ ul.tabs li {
 	List List6 = (List)request.getAttribute("list6");
 	List List7 = (List)request.getAttribute("list7");
 	
+	List CategoryList = (List)request.getAttribute("CategoryList");
+	
 	int count = ((Integer)request.getAttribute("count")).intValue();
 	String pageNum = (String)request.getAttribute("pageNum");
 	int pageCount = ((Integer)request.getAttribute("pageCount")).intValue();
@@ -299,13 +302,25 @@ ul.tabs li {
 		<form action="./Package.po" method="get" id="pf">
 		<!-- 탭 부분 -->
 		<ul class="tabs">
-			<li name="tab1" class="tab_color" style="background-color: #BDBDBD;" value="서울">서울</li>
+		
+		<%
+			CategoryBean cb;
+			for (int i = 0; i < 1; i++)
+			{
+				cb =(CategoryBean)CategoryList.get(i);
+		%>	
+		
+			<li name="tab1" class="tab_color" style="background-color: #BDBDBD;" value="<%=cb.getCar_name() %>"><%=cb.getCar_name() %></li>
 			<li name="tab2" class="tab_color" value="경기도">경기도</li>
 			<li name="tab3" class="tab_color" value="경상도">경상도</li>
 			<li name="tab4" class="tab_color">전라도</li>
 			<li name="tab5" class="tab_color">충청도</li>
 			<li name="tab6" class="tab_color">강원도</li>
 			<li name="tab7" class="tab_color">제주도</li>
+			
+		<%
+			}
+		%>
 		</ul>
 		<!-- 탭 부분 -->
 		</form>

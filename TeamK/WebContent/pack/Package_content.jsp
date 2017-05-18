@@ -109,13 +109,13 @@
 		});
 		
 		
-		$(".secretChk").click(function(){
+// 		$(".secretChk").click(function(){
 			
-			if ($(".secretChk").is(":checked"))
-	 		{
-				alert("관리자와 본인만 읽기 가능합니다");
-	 		}
-		});	
+// 			if ($(".secretChk").is(":checked"))
+// 	 		{
+// 				alert("체크 시 관리자와 본인만 읽기 가능합니다");
+// 	 		}
+// 		});	
 	});
 
 
@@ -157,7 +157,7 @@
 
 	function Re_Reply_Write(num)
 	{
-		if($(".secretChk").is(":checked"))
+		if($(".re_secretChk").is(":checked"))
 		{
 			$.ajax({
 				type:"post",
@@ -171,7 +171,7 @@
 					re_ref:$("#re_ref").val(),
 					re_lev:$("#re_lev").val(),
 					re_seq:$("#re_seq").val(),
-					secretChk:$(".secretChk").val(),
+					secretChk:$(".re_secretChk").val(),
 					success:function(){
 						window.location.reload(true);
 					}
@@ -219,17 +219,37 @@
 
 	function reUpdateAction(num)
 	{
-		$.ajax({
-			type:"post",
-			url:"./ReplyUpdateActoin.ro",
-			data:{
-				content:$("#contentup").val(),
-				num:num
-			},
-			success:function(){
-			window.location.reload(true);
+		if($(".up_secretChk"+num).is(":checked"))
+		{
+			$.ajax({
+				type:"post",
+				url:"./ReplyUpdateActoin.ro",
+				data:{
+					content:$("#contentup").val(),
+					num:num,
+					secretChk:$(".up_secretChk"+num).val(),
+					success:function(){
+						window.location.reload(true);
+					}
+				}
+			});
 		}
-		});
+		
+		else
+		{
+			$.ajax({
+				type:"post",
+				url:"./ReplyUpdateActoin.ro",
+				data:{
+					content:$("#contentup").val(),
+					num:num,
+					secretChk:"0"
+				},
+				success:function(){
+				window.location.reload(true);
+			}
+			});
+		}
 	}
 
 	//구글맵 v3
@@ -785,18 +805,43 @@
 				<tr id="relist<%=rb.getNum()%>">
 					<td><%=rb.getNum()%></td>
 					<td><%=rb.getId()%></td>
+					<%
+					if ((rb.getId().equals(user_id) && rb.getH_or_s() == 1) || rb.getH_or_s() == 0){
+					%>
 					<td>
 						<%
 							// 답글 들여쓰기 모양
 							int wid = 0;
 							if (rb.getRe_lev() > 0) {
 								wid = 10 * rb.getRe_lev();
-						%> <img src="level.gif" width=<%=wid%>> <img src="re.gif">
+						%> 
+						<img src="level.gif" width=<%=wid%>> <img src="re.gif">
 						<%
 							}
-						%> <a href="#?num=<%=rb.getNum()%>&pageNum=<%=repageNum%>"><%=rb.getContent()%></a>
+						
+						%> 
+						
+						<a href="#?num=<%=rb.getNum()%>&pageNum=<%=repageNum%>"><%=rb.getContent()%></a>
+						<%
+						if(rb.getH_or_s() == 1)
+						{
+						%>
+						<img src="./img/lock.png" width="10px" height="10px">
+						<%
+						}
+						%>
 					</td>
 					<%
+					}
+					else if (rb.getH_or_s() == 1 && !rb.getId().equals(user_id)){
+					%>
+					<td>
+						비밀글입니다<img src="./img/lock.png" width="10px" height="10px">
+					</td>
+					<%
+					}
+					
+					
 					if(!user_id.equals(""))
 					{
 					%>
@@ -828,6 +873,7 @@
 					<td><textarea cols="60" rows="2" id="contentup" name="contentup"><%=rb.getContent() %></textarea></td>
 					<td><input type="button" id="re_reply_content" value="수정" onclick="reUpdateAction(<%=rb.getNum() %>)"></td>
 					<td><input type="button" id="re_reply_content" value="취소" onclick="reupdate(<%=rb.getNum() %>)"></td>
+					<td><input type="checkbox" class="up_secretChk<%=rb.getNum() %>" name="secretChk" value="1" <%if(rb.getH_or_s() == 1){%>checked<%} %>>비밀글</td>
 				<tr>
 				
 				
@@ -848,8 +894,9 @@
 					</td>
 					<td><textarea cols="60" rows="2" id="recontent" name="content"></textarea></td>
 					<td><input type="button" id="re_reply_content" value="답글등록" onclick="Re_Reply_Write()"></td>
+					<td><input type="button" id="re_reply_content" value="취소" onclick="rewrite(<%=rb.getNum() %>)"></td>
 					<td>
-						<input type="checkbox" class="secretChk" name="secretChk" value="1">비밀글
+						<input type="checkbox" class="re_secretChk" name="secretChk" value="1">비밀글
 					</td>
 					</form>
 				<tr>
