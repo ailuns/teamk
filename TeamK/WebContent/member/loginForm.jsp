@@ -9,12 +9,12 @@
 <link href="./css/subpage.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<%
-		String id = (String) session.getAttribute("id");
-		if (id != null) {
-			response.sendRedirect("./main.bo");
-		}
-	%>
+<%
+String id = (String) session.getAttribute("id");
+if (id != null) {
+	response.sendRedirect("./main.bo");
+}
+%>
 	<!--왼쪽 메뉴 -->
 	<div>
 		<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
@@ -29,11 +29,10 @@
 		<div id="member">
 			<div id="login_form">
 				<form action="./MemberLoginAction.me" method="post" name="fr">
-					<label for="id">아이디</label><input type="text" name="id" id="id"
-						autofocus><br> <label for="pass">비밀번호</label><input
-						type="password" name="pass" id="pass"><br> <input
-						type="submit" value="로그인"> <input type="hidden"
-						value="<%=request.getHeader("referer")%>" name="exurl">
+					<label for="id">아이디</label><input type="text" name="id" id="id" autofocus><br> 
+					<label for="pass">비밀번호</label><input type="password" name="pass" id="pass"><br> 
+					<input type="submit" value="로그인">
+					<input type="hidden" value="<%=request.getHeader("referer")%>" name="exurl">
 				</form>
 				<table>
 					<tr id="hr">
