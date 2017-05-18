@@ -10,8 +10,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<!-- <link href="../css/inc.css" rel="stylesheet" type="text/css"> -->
-<!-- <link href="../css/subpage.css" rel="stylesheet" type="text/css"> -->
+<link href="../css/inc.css" rel="stylesheet" type="text/css">
+<link href="../css/subpage.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="./js/jquery-3.2.0.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -104,6 +104,11 @@
 		$('#close').click(function(){
 			$('#banner').hide();
 			$('#banner_sub').hide();
+		});
+		
+		$('#remote_close').click(function(){
+			$('#remote_control').hide();
+			$('#remote_close').hide();
 		});
 		
 		
@@ -344,8 +349,8 @@
 		            	
 		            	// 말풍선에 넣을 이미지 및 문구 설정
 		            	var imgurl = photos[0].getUrl({'maxWidth': 150, 'maxHeight': 150});
-		            	var contentString = "<table border='1'><tr><td rowspan='2'><img style='width:100px; height:100px' src=" + imgurl + "></td><td><center><p>" + place.name + "</p></center></td></tr>"
-		            	 + "<tr><td><center><p>" + place.formatted_address + "</p></center></td></tr></table>";
+		            	var contentString = "<table border='1'><tr><td rowspan='2'><img style='width:100px; height:100px' src=" + imgurl + "></td><td><p style='text-align: center;'>" + place.name + "</p></td></tr>"
+		            	 + "<tr><td><p style='text-align: center;'>" + place.formatted_address + "</p></td></tr></table>";
 						
 						var infowindow1 = new google.maps.InfoWindow({ content: contentString});
 						 
@@ -427,9 +432,11 @@
 #wrap_pack { 
 	width: 980px; 
 	min-height: 1000px;
-	border: 5px solid red; 
+	border: 5px solid red;
+	margin-top : 50px;
  	margin: 0 auto;
 	padding-top: 50px;
+	background-color: #eee;
 } 
 
 
@@ -443,7 +450,6 @@
 {
 	list-style: none;
 }
-
 
 #imgdiv{
 	width: 470px;
@@ -470,12 +476,14 @@
 	box-sizing : border-box;
 	border : 5px solid #A6A6A6;
 }
+/* 이미지에 마우스를 올렸을 때 이벤트 */
 
 #contentdiv1 {
 	width: 400px;
 	height: 400px;
 	border: 3px solid blue;
 	float: left;
+	margin-left : 50px;
 }
 
 
@@ -494,9 +502,11 @@
 /* 여행정보 내용 */
 
 /* 구글맵 */
+
+
 #map_canvas {
-	width: 740px;
-	height: 400px;
+	width: 800px;
+	height: 500px;
 }
 
 .controls {
@@ -532,7 +542,7 @@
 /* 상품 문의 */
 #QnA {
 	width: 800px;
-	min-height: 600px;
+	min-height: 300px;
 	border: 3px solid pink;
 }
 /* 상품 문의 */
@@ -569,7 +579,6 @@
 	right : 150px;
 	bottom : 5px;
 	background-color: white;
-
 }
 
 #banner_content
@@ -640,7 +649,77 @@
 
 /* 추천상품 배너 */
 
+#remote_control
+{
+	padding-left : 20px;
+	padding-top : 15px;
+	width : 100px;
+	height : 170px;
+	position : fixed;
+	right : 510px;
+	bottom : 220px;
+	background-color: white;
+	text-align: center;
+	border : 1px solid #BDBDBD;
+}
+
+#remote_control td
+{
+	border-top : 1px solid gray;
+	border-bottom : 1px solid gray;
+	padding-top : 10px;
+	padding-bottom : 5px;
+}
+
+#remote_control td:HOVER, #remote_close
+{
+	cursor: pointer;
+}
+
+#remote_close
+{
+	margin : 0px;
+	padding : 0px;
+	width : 30px;
+	height : 20px;
+	position : fixed;
+	right : 545px;
+	bottom : 390px;
+	background-color: white;
+	text-align: center;
+	font-size: 0.8em;
+	border : 1px solid #BDBDBD;
+	border-bottom: none;
+}
+
+#remote_control a:LINK, #remote_control a:VISITED
+{
+	color : #BBBBBB;
+	text-decoration: none;
+	font-size: 0.8em;	
+}
+
+
 </style>
+
+
+	<div id="remote_control">
+		<div id="remote_close">x</div>
+		<table id="remote_content">
+			<tr>
+				<td><a href="#">Top</a></td>
+			</tr>
+			<tr>
+				<td><a href="./PackContent.po?num=<%=PB.getNum() %>#contentdiv2">여행정보</a></td>
+			</tr>
+			<tr>
+				<td><a href="./PackContent.po?num=<%=PB.getNum() %>#middle2">지도뷰</a></td>
+			</tr>
+			<tr>
+				<td><a href="./PackContent.po?num=<%=PB.getNum() %>#QnA">상품문의</a></td>
+			</tr>
+		</table>
+	</div>
 
 	<div id="banner_sub">추천상품</div>
 	<div id="banner">
@@ -662,6 +741,25 @@
 	<!-- 왼쪽 메뉴 -->
 	<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
 	<!-- 왼쪽 메뉴 -->
+	<!--여행지 검색창 -->
+	<div id="wrap"> 
+		<div id="package_head">
+			<div id="package_title">패키지
+			</div>
+			<div id="package_search">
+				<p>내게 맞는 패키지 검색하기</p>
+				<form action="./PackSearchAction.po" name="fr" method="get" id="scheduler" onsubmit="return input_chk()">
+					<label for="date_from">출발</label><input type="text" id="date_from" class="input_style" name="startDate" required="yes">
+					<label for="date_to">도착</label><input type="text" id="date_to" class="input_style" name="endDate" required="yes"><br><br>
+					<label for="city_search">지역</label><input type="text" id="city_search" name="city" class="input_style" required="yes" placeholder="도시를 입력해주세요">
+					<input type="submit" value="검색" id="search_btn" class="input_style">
+				</form>
+			</div>
+		</div>
+	</div>
+	<div id="clear"></div>
+	<!--여행지 검색창 -->
+	
 	<div id="wrap_pack">
 		<!--글제목 -->
 		<h3><%=PB.getSubject()%></h3>
@@ -788,17 +886,18 @@
 		<!--상품 정보, 내용이 들어가는 영역 -->
 		<div id="middle1">
 			<div id="contentdiv2">
-			
-			<%=PB.getContent() %></div>
+				<%=PB.getContent() %>
+			</div>
 		</div>
 		<!--상품 정보, 내용이 들어가는 영역 -->
 
 		<!--구글맵 제어할 버튼 부분 -->
 		<div id="middle2">
 			<hr>
-			<p id="sub"><%=PB.getCity()%> <%=PB.getSarea()%></p>
-			<input type="button" id="btn1" value="주변 명소"> <input
-				type="button" id="btn2" value="주변 맛집">
+			<h3 id="sub"><%=PB.getCity()%> <%=PB.getSarea()%></h3>
+			<hr>
+			<input type="button" id="btn1" value="주변 명소"> 
+			<input type="button" id="btn2" value="주변 맛집">
 		</div>
 		<!--구글맵 제어할 버튼 부분 -->
 		

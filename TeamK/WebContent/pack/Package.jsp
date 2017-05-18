@@ -196,7 +196,6 @@ ul.tabs {
 /* 	border: 1px solid black; */
  	margin-left : 110px; 
 	margin-bottom : 10px;
-	
 }
 ul.tabs li {
 	width: 80px;
@@ -359,7 +358,7 @@ ul.tabs li {
 <!-- 						<table> -->
 <!-- 							<tr> -->
 <!-- 								<td> -->
-									<img alt="" src="./img/nones.png" style="margin:0 auto;">
+									<img alt="" src="./img/nones.png" style="margin:0 auto; margin-top:220px;">
 <!-- 								</td> -->
 <!-- 							</tr> -->
 <!-- 						</table> -->
