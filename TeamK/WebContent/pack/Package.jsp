@@ -51,10 +51,7 @@
 		
 	    $("#txt_prodStart").datepicker();
 	    $('img.ui-datepicker-trigger').attr('align', 'absmiddle');
-	    
-	    
-	    
-	    
+
 	    // 탭 관련 소스
 		$(".tab_content").hide();  // 탭 내용 전체 숨김
 		$(".tab_content:first").show();  // 탭 첫번째 내용만 보이게
@@ -66,9 +63,9 @@
 			var activeTab = $(this).attr("name");		// 클릭된 탭부분 name 속성값 가져와서 저장
 			$("#" + activeTab).fadeIn();		// 해당 탭내용 부분을 보여준다  흐릿 -> 또렷하게 애니메이션 효과			
 		});
+		
 		//Featured Packages List
-	    $("#feat_ttl1")
-	    .mouseenter(function() {
+	    $("#feat_ttl1").mouseenter(function() {
 	      $("#feat_con0").css('width', '0');
 	      $("#feat_con0 span").css('display', 'none');
 	      $("#feat_con1").css('width', '75%');
@@ -82,8 +79,7 @@
 	      $("#feat_con5").css('width', '0');
 	      $("#feat_con5 span").css('display', 'none');
 	    });
-	    $("#feat_ttl2")
-	    .mouseenter(function() {
+	    $("#feat_ttl2").mouseenter(function() {
 	      $("#feat_con0").css('width', '0');
 	      $("#feat_con0 span").css('display', 'none');
 	      $("#feat_con1").css('width', '0');
@@ -97,8 +93,7 @@
 	      $("#feat_con5").css('width', '0');
 	      $("#feat_con5 span").css('display', 'none');
 	    });
-	    $("#feat_ttl3")
-	    .mouseenter(function() {
+	    $("#feat_ttl3").mouseenter(function() {
 	      $("#feat_con0").css('width', '0');
 	      $("#feat_con0 span").css('display', 'none');
 	      $("#feat_con1").css('width', '0');
@@ -112,8 +107,7 @@
 	      $("#feat_con5").css('width', '0');
 	      $("#feat_con5 span").css('display', 'none');
 	    });
-	    $("#feat_ttl4")
-	    .mouseenter(function() {
+	    $("#feat_ttl4").mouseenter(function() {
 	      $("#feat_con0").css('width', '0');
 	      $("#feat_con0 span").css('display', 'none');
 	      $("#feat_con1").css('width', '0');
@@ -127,8 +121,7 @@
 	      $("#feat_con5").css('width', '0');
 	      $("#feat_con5 span").css('display', 'none');
 	    });
-	    $("#feat_ttl5")
-	    .mouseenter(function() {
+	    $("#feat_ttl5").mouseenter(function() {
 	      $("#feat_con0").css('width', '0');
 	      $("#feat_con0 span").css('display', 'none');
 	      $("#feat_con1").css('width', '0');
@@ -188,24 +181,24 @@ img.ui-datepicker-trigger {
 #package_tab {
 	margin : 0 auto;
 	margin-top : 50px;
-	width : 785px;
+	width : 1000px;
 	height : 630px;
 	border : 1px solid blue;
 }
 ul.tabs {
 	margin: 0;
 	padding: 0;
-	width: 785px;
-	height: 32px;
+	width: 1000px;
 	float: left;
 	list-style: none;
 	border: 1px solid black;
 	border-bottom: none;
 	border-right: none;
+	
 }
 ul.tabs li {
 	width: 73px;
- 	height: 32px;
+ 	height: 50px;
 	float: left;
 	border-right: 1px solid black;
 	text-align: center;
@@ -216,7 +209,7 @@ ul.tabs li {
 .tab_container {
 	border: 1px solid black;
 	float: left;
-	min-width: 730px;
+	min-width: 1000px;
 	min-height: 600px;
 	padding : 10px;
 	margin : 0 auto;
@@ -224,11 +217,19 @@ ul.tabs li {
 .img_size {
 	width : 250px;
 	height : 150px;
-	border: 1px solid pink;
+	
 }
 #img_content {
-	padding-top : 10px;
-	padding-left: 10px;
+	padding : 0px;
+	margin : 20px;
+	border: 1px solid pink;
+	background-color: white;
+}
+
+.tab_content a:LINK, .tab_content a:VISITED
+{
+	color : black;
+	text-decoration: none;
 }
 
 /* 탭 패키지  */
@@ -254,6 +255,12 @@ ul.tabs li {
 	List List5 = (List)request.getAttribute("list5");
 	List List6 = (List)request.getAttribute("list6");
 	List List7 = (List)request.getAttribute("list7");
+	List List8 = (List)request.getAttribute("list8");
+	List List9 = (List)request.getAttribute("list9");
+	List List10 = (List)request.getAttribute("list10");
+	List List11 = (List)request.getAttribute("list11");
+	
+	List ListArr[] = {List1, List2, List3, List4, List5, List6, List7, List8, List9, List10, List11};
 	
 	List CategoryList = (List)request.getAttribute("CategoryList");
 	
@@ -305,19 +312,16 @@ ul.tabs li {
 		
 		<%
 			CategoryBean cb;
-			for (int i = 0; i < 1; i++)
+			cb =(CategoryBean)CategoryList.get(0);
+		%>
+						
+			<li name="tab1" class="tab_color" style="background-color: #BDBDBD;" value="<%=cb.getCar_name() %>"><%=cb.getCar_name() %></li>
+		<%
+			for (int i = 1; i < CategoryList.size(); i++)
 			{
 				cb =(CategoryBean)CategoryList.get(i);
 		%>	
-		
-			<li name="tab1" class="tab_color" style="background-color: #BDBDBD;" value="<%=cb.getCar_name() %>"><%=cb.getCar_name() %></li>
-			<li name="tab2" class="tab_color" value="경기도">경기도</li>
-			<li name="tab3" class="tab_color" value="경상도">경상도</li>
-			<li name="tab4" class="tab_color">전라도</li>
-			<li name="tab5" class="tab_color">충청도</li>
-			<li name="tab6" class="tab_color">강원도</li>
-			<li name="tab7" class="tab_color">제주도</li>
-			
+			<li name="tab<%=i+1 %>" class="tab_color" style="background-color: white;" value="<%=cb.getCar_name() %>"><%=cb.getCar_name() %></li>
 		<%
 			}
 		%>
@@ -327,254 +331,60 @@ ul.tabs li {
 		<div class="clear"></div>
 		
 		<!-- 탭 내용 -->
-		<div class="tab_container">   
-			<div id="tab1" class="tab_content">
-			<table>
-			<%
-			PackBean pb;
-			if (count!=0)
+		<div class="tab_container">  
+		<%
+			for(int i = 0; i < ListArr.length; i++)
 			{
-				for (int i = 0; i <List1.size(); i++)
+		%>
+				<div id="tab<%=i+1 %>" class="tab_content">
+				<table>
+		<%
+				PackBean pb;
+				if (count!=0)
 				{
-					pb =(PackBean)List1.get(i);
-			%>		
-					<td>
-						<div>
-							<a href="./PackContent.po?num=<%=pb.getNum() %>">
-							<img class="img_size" alt="" src="./upload/<%=pb.getFile1() %>">
-							<div id="img_content">
-								<b><%=pb.getSubject() %></b>
-								<p><%=pb.getIntro() %></p>
-								<b><%=pb.getCost() %></b>
-							</div>
-							</a>
-						</div>
-					</td>
-					
-				<%
-					if (i == 2 || i == 5)
+					for (int j = 0; j <ListArr[i].size(); j++)
 					{
-					%>
+						pb =(PackBean)ListArr[i].get(j);
+		%>		
+						<td>
+							<div>
+							<a href="./PackContent.po?num=<%=pb.getNum() %>">
+								<div id="img_content">
+									<table>
+										<tr>
+											<td><img class="img_size" alt="" src="./upload/<%=pb.getFile1() %>"></td>
+										</tr>
+										<tr>
+											<td><b><%=pb.getSubject() %></b></td>
+										</tr>
+										<tr>
+											<td><p><%=pb.getIntro() %></p></td>
+										</tr>
+										<tr>
+											<td><b><%=pb.getCost() %></b></td>
+										</tr>
+									</table>
+								</div>
+								</a>
+							</div>
+						</td>
+						
+					<%
+						if (j == 2 || j == 5)
+						{
+						%>
 							<tr>
 							</tr>
-					<%
+						<%
+						}
 					}
 				}
+					%>
+				</table>
+				</div>
+		<%
 			}
-				%>
-			</table>
-			</div>
-			<div id="tab2" class="tab_content">
-			<table>
-				<%
-				if (count!=0)
-				{
-					for (int i = 0; i <List2.size(); i++)
-					{
-						pb =(PackBean)List2.get(i);
-				%>		
-						<td>
-							<div>
-								<a href="./PackContent.po?num=<%=pb.getNum() %>">
-								<img class="img_size" alt="" src="./upload/<%=pb.getFile1() %>">
-								<div id="img_content">
-									<b><%=pb.getSubject() %></b>
-									<p><%=pb.getIntro() %></p>
-									<b><%=pb.getCost() %></b>
-								</div>
-								</a>
-							</div>
-						</td>
-						
-					<%
-						if (i == 2 || i == 5)
-						{
-						%>
-								<tr>
-								</tr>
-						<%
-						}
-					}
-				}
-				%>
-			</table>
-			</div>
-			<div id="tab3" class="tab_content">
-			<table>
-				<%
-				if (count!=0)
-				{
-					for (int i = 0; i <List3.size(); i++)
-					{
-						pb =(PackBean)List3.get(i);
-				%>		
-						<td>
-							<div>
-								<a href="./PackContent.po?num=<%=pb.getNum() %>">
-								<img class="img_size" alt="" src="./upload/<%=pb.getFile1() %>">
-								<div id="img_content">
-									<b><%=pb.getSubject() %></b>
-									<p><%=pb.getIntro() %></p>
-									<b><%=pb.getCost() %></b>
-								</div>
-								</a>
-							</div>
-						</td>
-						
-					<%
-						if (i == 2 || i == 5)
-						{
-						%>
-								<tr>
-								</tr>
-						<%
-						}
-					}
-				}
-				%>
-			</table>
-			</div>
-			<div id="tab4" class="tab_content">
-			<table>
-				<%
-				if (count!=0)
-				{
-					for (int i = 0; i <List4.size(); i++)
-					{
-						pb =(PackBean)List4.get(i);
-				%>		
-						<td>
-							<div>
-								<a href="./PackContent.po?num=<%=pb.getNum() %>">
-								<img class="img_size" alt="" src="./upload/<%=pb.getFile1() %>">
-								<div id="img_content">
-									<b><%=pb.getSubject() %></b>
-									<p><%=pb.getIntro() %></p>
-									<b><%=pb.getCost() %></b>
-								</div>
-								</a>
-							</div>
-						</td>
-						
-					<%
-						if (i == 2 || i == 5)
-						{
-						%>
-								<tr>
-								</tr>
-						<%
-						}
-					}
-				}
-				%>
-			</table>
-			
-			</div>
-			<div id="tab5" class="tab_content">
-			<table>
-				<%
-				if (count!=0)
-				{
-					for (int i = 0; i <List5.size(); i++)
-					{
-						pb =(PackBean)List5.get(i);
-				%>		
-						<td>
-							<div>
-								<a href="./PackContent.po?num=<%=pb.getNum() %>">
-								<img class="img_size" alt="" src="./upload/<%=pb.getFile1() %>">
-								<div id="img_content">
-									<b><%=pb.getSubject() %></b>
-									<p><%=pb.getIntro() %></p>
-									<b><%=pb.getCost() %></b>
-								</div>
-								</a>
-							</div>
-						</td>
-						
-					<%
-						if (i == 2 || i == 5)
-						{
-						%>
-								<tr>
-								</tr>
-						<%
-						}
-					}
-				}
-				%>
-			</table>
-			</div>
-			<div id="tab6" class="tab_content">
-			<table>
-				<%
-				if (count!=0)
-				{
-					for (int i = 0; i <List6.size(); i++)
-					{
-						pb =(PackBean)List6.get(i);
-				%>		
-						<td>
-							<div>
-								<a href="./PackContent.po?num=<%=pb.getNum() %>">
-								<img class="img_size" alt="" src="./upload/<%=pb.getFile1() %>">
-								<div id="img_content">
-									<b><%=pb.getSubject() %></b>
-									<p><%=pb.getIntro() %></p>
-									<b><%=pb.getCost() %></b>
-								</div>
-								</a>
-							</div>
-						</td>
-						
-					<%
-						if (i == 2 || i == 5)
-						{
-						%>
-								<tr>
-								</tr>
-						<%
-						}
-					}
-				}
-				%>
-			</table>
-			</div>
-			<div id="tab7" class="tab_content">
-			<table>
-				<%
-				if (count!=0)
-				{
-					for (int i = 0; i <List7.size(); i++)
-					{
-						pb =(PackBean)List7.get(i);
-				%>		
-						<td>
-							<div>
-								<a href="./PackContent.po?num=<%=pb.getNum() %>">
-								<img class="img_size" alt="" src="./upload/<%=pb.getFile1() %>">
-								<div id="img_content">
-									<b><%=pb.getSubject() %></b>
-									<p><%=pb.getIntro() %></p>
-									<b><%=pb.getCost() %></b>
-								</div>
-								</a>
-							</div>
-						</td>
-						
-					<%
-						if (i == 2 || i == 5)
-						{
-						%>
-								<tr>
-								</tr>
-						<%
-						}
-					}
-				}
-				%>
-			</table>
-			</div>
+		%>
 		</div>
 		<!-- 탭 내용 -->
 	</div>
@@ -590,11 +400,16 @@ ul.tabs li {
 		}
 	%>
 </div>
-<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->
 	<div>
 		<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
 	</div>
 	<!--오른쪽 메뉴 -->
+	<!--푸터 메뉴 -->
+	<div>
+		<jsp:include page="../inc/footer.jsp"></jsp:include>
+	</div>
+	<!--푸터 메뉴 -->
+	
 </body>
 </html>

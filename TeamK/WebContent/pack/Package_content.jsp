@@ -36,8 +36,6 @@
 	int pagesize = ((Integer)request.getAttribute("pagesize")).intValue();
 %>
 <body>
-	<h3>My Google Maps Demo</h3>
-
 	<script>
 
 	// 찜하기, 예약하기 버튼 클릭 시 각각 버튼 마다 이동할 페이지
@@ -426,10 +424,9 @@
 
 #wrap_pack { 
 	width: 980px; 
-	min-height: 1000px; 
+	min-height: 1000px;
 	border: 5px solid red; 
- 	margin: 0 auto; 
-	 
+ 	margin: 0 auto;
 	padding-top: 50px;
 } 
 
@@ -533,7 +530,7 @@
 /* 상품 문의 */
 #QnA {
 	width: 800px;
-	height: 500px;
+	min-height: 600px;
 	border: 3px solid pink;
 }
 /* 상품 문의 */
@@ -608,6 +605,37 @@
 {
 	cursor: pointer;
 }
+
+
+#replyTable
+{
+	background-color: white;
+	
+}
+
+/* tr:nth-child(odd)  */
+/* { */
+/* 	background-color: #BFBFBF; */
+/* } */
+
+#replyContent
+{	
+	width: 700px;
+	height : 50px;
+}
+
+#recontent, #contentup, #content
+{
+	width : 600px;
+	height : 70px;
+}
+
+#replyWrite
+{
+	background-color: white;
+}
+
+
 /* 추천상품 배너 */
 
 </style>
@@ -782,17 +810,11 @@
 		<div id="QnA">
 			<h3>상품 문의</h3>
 			<hr>
-			<%
-				
-				// 메서드 호출 getBoardList(시작행, 몇개)
-				
-			%>
-
-			<table border="1">
+			<table border="1" id="replyTable">
 				<tr>
-					<td>번호</td>
-					<td>작성자</td>
-					<td>내용</td>
+<!-- 					<td>번호</td> -->
+<!-- 					<td>작성자</td> -->
+<!-- 					<td>내용</td> -->
 				</tr>
 				<%
 					ReplyBean rb;
@@ -803,12 +825,12 @@
 				%>
 
 				<tr id="relist<%=rb.getNum()%>">
-					<td><%=rb.getNum()%></td>
+<%-- 					<td><%=rb.getNum()%></td> --%>
 					<td><%=rb.getId()%></td>
 					<%
 					if ((rb.getId().equals(user_id) && rb.getH_or_s() == 1) || rb.getH_or_s() == 0){
 					%>
-					<td>
+					<td id="replyContent">
 						<%
 							// 답글 들여쓰기 모양
 							int wid = 0;
@@ -862,45 +884,52 @@
 					}
 					%>
 				</tr>
-
+				
 				<tr id="conup<%=rb.getNum()%>" style="display: none;">
 					<td>
 						<input type="hidden" name="num" value="<%=PB.getNum()%>">
 						<input type="hidden" name="pageNum" value="<%=repageNum%>">
 						<input type="hidden" name="replynum" value="<%=rb.getNum()%>">
+						<%=user_id %>
 					</td>
-					<td><%=user_id %></td>
+					
 					<td><textarea cols="60" rows="2" id="contentup" name="contentup"><%=rb.getContent() %></textarea></td>
-					<td><input type="button" id="re_reply_content" value="수정" onclick="reUpdateAction(<%=rb.getNum() %>)"></td>
-					<td><input type="button" id="re_reply_content" value="취소" onclick="reupdate(<%=rb.getNum() %>)"></td>
-					<td><input type="checkbox" class="up_secretChk<%=rb.getNum() %>" name="secretChk" value="1" <%if(rb.getH_or_s() == 1){%>checked<%} %>>비밀글</td>
+					<td>
+						<input type="button" id="re_reply_content" value="수정" onclick="reUpdateAction(<%=rb.getNum() %>)">
+					</td>
+					<td>
+						<input type="button" id="re_reply_content" value="취소" onclick="reupdate(<%=rb.getNum() %>)">
+					</td>
+					<td>
+						<input type="checkbox" class="up_secretChk<%=rb.getNum() %>" name="secretChk" value="1" <%if(rb.getH_or_s() == 1){%>checked<%} %>>비밀글
+					</td>
 				<tr>
 				
 				
 				
 				<tr id="con<%=rb.getNum()%>" style="display: none;">
 					<td>
-						<form action="./Re_ReplyWriteAction.ro" method="post">
-							<input type="hidden" id="num" name="num" value="<%=PB.getNum()%>">
-							<input type="hidden" id="repageNum" name="repageNum" value="<%=repageNum%>">
-							<input type="hidden" id="replynum" name="replynum" value="<%=rb.getNum()%>">
-							<input type="hidden" id="re_ref" name="re_ref" value="<%=rb.getRe_ref()%>">
-							<input type="hidden" id="re_lev" name="re_lev" value="<%=rb.getRe_lev()%>">
-							<input type="hidden" id="re_seq" name="re_seq" value="<%=rb.getRe_seq()%>">
-					</td>
-					<td>
+						<input type="hidden" id="num" name="num" value="<%=PB.getNum()%>">
+						<input type="hidden" id="repageNum" name="repageNum" value="<%=repageNum%>">
+						<input type="hidden" id="replynum" name="replynum" value="<%=rb.getNum()%>">
+						<input type="hidden" id="re_ref" name="re_ref" value="<%=rb.getRe_ref()%>">
+						<input type="hidden" id="re_lev" name="re_lev" value="<%=rb.getRe_lev()%>">
+						<input type="hidden" id="re_seq" name="re_seq" value="<%=rb.getRe_seq()%>">
 						<p><%=user_id %></p>
 						<input type="hidden" id="reid" name="id" class="box" value="<%=user_id %>">
 					</td>
 					<td><textarea cols="60" rows="2" id="recontent" name="content"></textarea></td>
-					<td><input type="button" id="re_reply_content" value="답글등록" onclick="Re_Reply_Write()"></td>
-					<td><input type="button" id="re_reply_content" value="취소" onclick="rewrite(<%=rb.getNum() %>)"></td>
+					<td>
+						<input type="button" id="re_reply_content" value="답글등록" onclick="Re_Reply_Write()">
+					</td>
+					<td>
+						<input type="button" id="re_reply_content" value="취소" onclick="rewrite(<%=rb.getNum() %>)">
+					</td>
 					<td>
 						<input type="checkbox" class="re_secretChk" name="secretChk" value="1">비밀글
 					</td>
-					</form>
 				<tr>
-				
+			
 				<%
 					}
 						// 최근글위로 re_ref 그룹별 내림차순 re_se q 오름차순
@@ -908,6 +937,7 @@
 						// 글잘라오기 limit 시작행-1, 개수
 					}
 				%>
+				
 			</table>
 
 			<center>
@@ -949,54 +979,53 @@
 
 			<br>
 			
-			<fieldset>
-				<legend></legend>
-				<table>
-					<tr>
-						<form action="./ReplyWrite.ro" method="post">
-							
-							<%
-								if (user_id.equals(""))
-								{
-							%>
+			<table id="replyWrite">
+				<tr>
+					<%
+						if (user_id.equals(""))
+						{
+					%>
+					<td>
+						<p>아이디</p>
+					</td>
+					<td>
+						<input type="text" name="content" class="box" style="width: 500px;" placeholder="로그인이 필요한 서비스입니다" readonly onclick="loginChk()"></td>
+					<td>
+					<%
+						}
+						else
+						{
+					%>
+						<td>
+							<textarea type="text" id="content" name="content" class="box" style="width:800px; height:50px;"></textarea>
+							<input type="hidden" id="id" name="id" class="box" value="<%=user_id %>">
+							<input type="hidden" name="pageNum" value="<%=repageNum%>">
+							<input type="hidden" id="num" name="num" value="<%=PB.getNum() %>">
+						</td>
+						<tr>
 							<td>
-								<p>아이디</p>
+								<div style="text-align:right; margin-top:15px; width:800px;">
+									<input type="checkbox" class="secretChk" name="secretChk" value="1">비밀글
+									<input type="button" value="문의글쓰기" onclick="ReplyWrite(<%=PB.getNum() %>)">
+								</div>
 							</td>
-							<td>
-								<input type="text" name="content" class="box" style="width: 500px;" placeholder="로그인이 필요한 서비스입니다" readonly onclick="loginChk()"></td>
-							<td>
-							<%
-								}
-								else
-								{
-							%>
-							<td>
-								<p><%=user_id %></p>
-								<input type="hidden" id="id" name="id" class="box" value="<%=user_id %>">
-							</td>
-							<td>
-								<input type="text" id="content" name="content" class="box" style="width: 500px;"></td>
-							<td>
-							<%
-								}
-							%>
-								<input type="hidden" name="pageNum" value="<%=repageNum%>">
-								<input type="hidden" id="num" name="num" value="<%=PB.getNum() %>">
-							<input type="button" value="문의글쓰기" onclick="ReplyWrite(<%=PB.getNum() %>)"></td>
-							<td>
-								<input type="checkbox" class="secretChk" name="secretChk" value="1">비밀글
-							</td>
-						</form>
-					</tr>
-				</table>
-				<legend></legend>
-			</fieldset>
+						</tr>
+					<%
+						}
+					%>
+				</tr>
+			</table>
 		</div>
 	</div>
-		<!--상품 문의 -->
+	<!--상품 문의 -->
 	</div>
 	<!-- 오른쪽 메뉴 -->
 	<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
 	<!-- 오른쪽 메뉴 -->
+	<!--푸터 메뉴 -->
+	<div>
+		<jsp:include page="../inc/footer.jsp"></jsp:include>
+	</div>
+	<!--푸터 메뉴 -->
 </body>
 </html>
