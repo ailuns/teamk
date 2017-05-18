@@ -23,7 +23,7 @@ public class PackModifyAction implements Action{
 		// upload 폴더 만들기  5*1024*1024
 		// MultipartRequest 객체 생성
 		ServletContext context=request.getServletContext();
-		String realPath=context.getRealPath("writeAPI/upload");
+		String realPath=context.getRealPath("/upload");
 		int maxSize=5*1024*1024;
 		MultipartRequest multi=new MultipartRequest(request, realPath,maxSize,"utf-8",new DefaultFileRenamePolicy());
 
