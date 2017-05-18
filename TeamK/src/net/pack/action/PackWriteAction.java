@@ -32,17 +32,19 @@ public class PackWriteAction implements Action{
 		String subject = multi.getParameter("subject");
 		String intro = multi.getParameter("intro");
 		String content = multi.getParameter("content");
+		String type = multi.getParameter("type");
 		String area = multi.getParameter("area");
 		String city = multi.getParameter("city");
 		String sarea = multi.getParameter("sarea");
 		int cost = Integer.parseInt(multi.getParameter("cost"));
 		int stock = Integer.parseInt(multi.getParameter("stock"));
+		String sdate = multi.getParameter("startDate");
 		String file1 = multi.getFilesystemName("file1");
 		String file2 = multi.getFilesystemName("file2");
 		String file3 = multi.getFilesystemName("file3");
 		String file4 = multi.getFilesystemName("file4");
 		String file5 = multi.getFilesystemName("file5");
-		String sdate = multi.getParameter("startDate");
+		
 		
 		String aa[] = sdate.split("-");
 		
@@ -52,16 +54,19 @@ public class PackWriteAction implements Action{
 		PackBean pb = new  PackBean();
 		PackDAO pdao = new PackDAO();
 		
+		pb.setSerial(Integer.parseInt(serial));
 		pb.setIntro(intro);
 		pb.setSubject(subject);
 		pb.setContent(content);
+		pb.setType(type);
 		pb.setArea(area);
 		pb.setCity(city);
 		pb.setSarea(sarea);
 		pb.setCost(cost);
 		pb.setStock(stock);
-		pb.setSerial(Integer.parseInt(serial));
 		pb.setDate(sdate);
+		
+		
 		
 		if (file1 == null)
 			pb.setFile1("");
@@ -96,4 +101,5 @@ public class PackWriteAction implements Action{
 		forward.setRedirect(true);
 		return forward;
 	}
+
 }
