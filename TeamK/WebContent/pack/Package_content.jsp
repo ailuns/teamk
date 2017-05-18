@@ -114,6 +114,8 @@
 // 				alert("체크 시 관리자와 본인만 읽기 가능합니다");
 // 	 		}
 // 		});	
+			
+	
 	});
 
 
@@ -817,6 +819,16 @@
 <!-- 					<td>내용</td> -->
 				</tr>
 				<%
+				
+				if(count == 0)
+				{
+				%>
+					<tr>
+						<td style="width:800px; text-align: center; height:50px;">문의 내역이 없습니다</td>
+					</tr>
+				<%
+				}
+				
 					ReplyBean rb;
 					if (count != 0) {
 						for (int i = 0; i < List.size(); i++) 
@@ -837,13 +849,14 @@
 							if (rb.getRe_lev() > 0) {
 								wid = 10 * rb.getRe_lev();
 						%> 
-						<img src="level.gif" width=<%=wid%>> <img src="re.gif">
+<%-- 						<img src="level.gif" id="reimg" width=<%=wid%>> <img src="re.gif"> --%>
+							<span>[답변]</span>
 						<%
 							}
 						
 						%> 
 						
-						<a href="#?num=<%=rb.getNum()%>&pageNum=<%=repageNum%>"><%=rb.getContent()%></a>
+						<%=rb.getContent()%>
 						<%
 						if(rb.getH_or_s() == 1)
 						{
@@ -857,7 +870,7 @@
 					}
 					else if (rb.getH_or_s() == 1 && !rb.getId().equals(user_id)){
 					%>
-					<td>
+					<td style="height:50px;">
 						비밀글입니다<img src="./img/lock.png" width="10px" height="10px">
 					</td>
 					<%
@@ -986,10 +999,16 @@
 						{
 					%>
 					<td>
-						<p>아이디</p>
+						<textarea type="text" id="content" name="content" class="box" style="width:800px; height:50px;" placeholder="로그인이 필요한 서비스입니다" readonly onclick="loginChk()"></textarea>
 					</td>
-					<td>
-						<input type="text" name="content" class="box" style="width: 500px;" placeholder="로그인이 필요한 서비스입니다" readonly onclick="loginChk()"></td>
+					<tr>
+							<td>
+								<div style="text-align:right; margin-top:15px; width:800px;">
+									<input type="checkbox" class="secretChk" name="secretChk" value="1" onclick="loginChk()">비밀글
+									<input type="button" value="문의글쓰기" onclick="loginChk()">
+								</div>
+							</td>
+						</tr>
 					<td>
 					<%
 						}
