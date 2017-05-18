@@ -9,20 +9,22 @@
 <%
 request.setCharacterEncoding("utf-8");
 int check = Integer.parseInt(request.getParameter("check"));
-if(check ==1){
 %>
+	<script src = "./js/jquery-3.2.0.js"></script>
 	<script type="text/javascript">
-		if(confirm("여행상품은 대표자 연락처를 반드시 입력해야합니다! 지금 바로 입력페이지로 이동하시겠습니까?")){
-			location.href="./MyPackOrderList.mo";
+	$(window).ready(function(){
+		if(<%=check%> ==1)
+			if(confirm("여행상품은 대표자 연락처를 반드시 입력해야합니다!\n지금 바로 입력페이지로 이동하시겠습니까?")){
+				location.href="./MyPackOrderList.mo";
 		}
+	})
+		
+	
 	</script>
-<%
-}
-%>
 <body>
-이용해주셔서 감사합니다
 결제가 정상적으로 완료 되었습니다.<br>
-<input type = "button" value = "main" onclick="location.href='./Main.Bns'">
+이용해주셔서 감사합니다<br>
+<input type = "button" value = "main" onclick="location.href='./Main.bns'">
 <input type="button" value="Pack Order List" onclick="location.href='./MyPackOrderList.mo'">
 <input type="button" value="Thing Order List" onclick="location.href='./MyThingOrderList.mo'">
 </body>

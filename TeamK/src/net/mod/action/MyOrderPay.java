@@ -50,6 +50,7 @@ public class MyOrderPay implements Action{
 		if(tnum!=null){
 			tbb = new TBasketBEAN();
 			tbb.setOri_num(Integer.parseInt(tnum));
+			tbb.setNum(0);
 			tbb.setCount(Integer.parseInt(request.getParameter("count")));
 			tbb.setCost(Integer.parseInt(request.getParameter("cost")));;
 			tbb=bndao.ThingBasketToPay(tbb);
@@ -57,6 +58,7 @@ public class MyOrderPay implements Action{
 		}
 		if(pnum!=null){
 			pbb =new PBasketBEAN();
+			pbb.setPb_num(0);
 			pbb.setOri_num(Integer.parseInt(pnum));
 			String [] countp={request.getParameter("adult"),request.getParameter("child")};
 			pbb.setCountp(countp);

@@ -13,9 +13,21 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-	order_hide();
-});
+	TransNum_Insert_Reset();
 
+
+});
+function TransNum_Insert_Reset(){
+	$('.Trans_Num_Fix').hide();
+	$('.Trans_Num_View').show();
+}
+function Trans_Num_Fix(num){
+	TransNum_Insert_Reset();
+	
+	$('#Trans_Num_View'+num).hide();
+	$('#Trans_Num_Fix'+num).show();
+	$('#Trans_Num'+num).select();
+}
 </script>
 </head>
 <body>
@@ -37,47 +49,22 @@ $(document).ready(function(){
 			for(int i = 0; i < ModList.size(); i++){
 				Vector v = ModList.get(i);		
 				ModTradeInfoBEAN mtib = (ModTradeInfoBEAN)v.get(0);
-				List<ModTradeInfoBEAN> mpbList = (List<ModTradeInfoBEAN>)v.get(1);
-				List<ModTradeInfoBEAN> mtbList = (List<ModTradeInfoBEAN>)v.get(2);
+				List<ModTradeInfoBEAN> mtbList = (List<ModTradeInfoBEAN>)v.get(1);
 				
 	%>
 	
-		<h3>주문 번호 : <%=mtib.getTi_num() %></h3>
-		<h4>결제일 : <%=sdf.format(mtib.getTrade_date())%></h4>
+		<h3>배송지 정보</h3>
 		<table border="1">
 			<tr>
-				<td><input type = "checkbox" name ="tich" 
-							value = "<%=mtib.getTi_num() %>"></td>
-				<td><%=mtib.getPayer() %></td>
-				<td><%=mtib.getTrade_type() %></td>
-				<td><%=mtib.getTotal_cost() %>원</td>
-				<td><%=sdf.format(mtib.getTrade_date()) %></td>
+				<td><%=mtib.getName() %></td>
+				<td><%=mtib.getMobile() %></td>
+				<td><%="["+mtib.getPostcode()+"] "+mtib.getAddress1()+" "+mtib.getAddress2() %></td>
+				<%if(mtib.getMemo().length()!=0){ %>
+				<td><%=mtib.getMemo() %></td>
+				<%} %>
 			</tr>
 		</table>
-		<span id="order_select<%=i%>" class="order_select"
-			onclick = "order_view(<%=i%>)">주문 품목▼</span>
-		<span id="order_selected<%=i%>" class="order_selected" onclick="order_hide()">주문 품목▲</span>
-		<div id="order_view<%=i%>" class="order_view">
-		<%if(mpbList.size()!=0){ %>
-				<h5>주문한 여행 패키지 목록</h5>
-				<table border = "1">
-					<%for(int j =0; j< mpbList.size();j++){
-						ModTradeInfoBEAN mpb = mpbList.get(j);
-						String []pack_count = mpb.getPack_count().split(",");%>
-					<tr onclick="location.href='#'">
-						<td><%=mpb.getTrade_num() %></td>
-						<td><%=mpb.getImg() %></td>
-						<td><%=mpb.getSubject() %></td>
-						<td><%=mpb.getIntro() %></td>
-						<td>성인 : <%=pack_count[0] %>, 아동 : <%=pack_count[1] %></td>
-						<td><%=mpb.getCost() %>원</td>
-						<td><%if(mpb.getPo_receive_check()==1){ %>Yes
-						<%}else{%>NO<%} %></td>
-					</tr>						
-					<%} %>
-				</table>				
-			<%} 
-			if(mtbList.size()!=0){%>
+		<%if(mtbList.size()!=0){%>
 				<h5>주문한 상품 목록</h5>
 				<table border = "1">
 					<%for(int j =0; j< mtbList.size();j++){
@@ -91,18 +78,33 @@ $(document).ready(function(){
 						<td><%=mtb.getSize() %></td>
 						<td><%=mtb.getThing_count()%>개</td>
 						<td><%=mtb.getCost() %>원</td>
+						<%if(mtb.getTrans_num().length()!=0){ %>
+							<td id="Trans_Num_View<%=mtb.getNum()%>" class= "Trans_Num_View">
+								<%=mtb.getTrans_num() %>
+								<input type="button" value="수정" onclick="Trans_Num_Fix(<%=mtb.getNum()%>)"></td>
+							<td id="Trans_Num_Fix<%=mtb.getNum()%>" class= "Trans_Num_Fix">
+								<input type = "text" value="<%=mtb.getTrans_num() %>"
+									id="Trans_Num<%=mtb.getNum()%>">
+								<input type = "Button" value="변경" 
+									onclick="Trans_Num_Insert(<%=mtb.getNum()%>)">
+								<input type ="Button" value="취소"
+									onclick="Cancel()">
+							</td>
+						<%}else{%>
+							<td><input type = "text" placeholder="송장번호를 입력해 주세요" 
+								id="trans_num<%=mtb.getNum()%>">
+							<input type="button" value="입력" onclick = "Trans_Num_Insert(<%=mtb.getNum()%>)"></td>
+						<%} %>
 					</tr>
 					<%} %>
 				</table>
 				<%} %>
-		</div>
 		
 		<br>
 	<%	
 			}
 			%>
-		<input type="button" value="입금 확인  완료" onclick="BankPayCheck()">
-		<input type="button" value="주문 삭제" onclick="Trade_Info_Delete()"> 
+		<input type="button" value="배송중" onclick="BankPayCheck()"> 
 	<%
 	}else{
 		 %>
@@ -136,7 +138,7 @@ $(document).ready(function(){
 	<%
 		}
 		}
-		if (pcount != pageNum) {
+		if (pcount != pageNum&&count!=0) {
 	%>
 	<a href="./BankPayCheck.ao?pageNum=<%=pageNum + 1%>">[다음 페이지]</a>
 	<br>

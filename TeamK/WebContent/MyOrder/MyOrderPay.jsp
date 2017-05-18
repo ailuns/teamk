@@ -209,10 +209,11 @@ $(document).ready(function() {
 		$('.'+trade_id).show();
 	});
 	$('#monthly_pay_disable').hide();
-	if(<%=thing_cost_sum%><50000){
-		$('#monthly_pay').attr('disabled','disabled');
-		$('#monthly_pay_disable').show();
-		
+	if(<%=ModPackList.size()%>==0){
+		if(<%=thing_cost_sum%><50000){
+			$('#monthly_pay').hide();
+			$('#monthly_pay_disable').show();
+		}
 	}
 	
 	$('#select_card').change(function(){
@@ -223,7 +224,7 @@ $(document).ready(function() {
 			$('#select_card_check').hide();
 		}
 	});
-	$('#select_card_check').hide();
+
 	$('#cash_receipt_check').attr('disabled','disabled');
 	$('#select_bank').change(function(){
 		select_val = $(this).val();
@@ -320,6 +321,7 @@ function mobile_agree_selected(i){
 	$('#mobile_agree_li_view'+i).hide();
 }
 function selectreset(){
+	$('#select_card_check').show();
 	$('.agree_li_view').hide();
 	$('#card_agree_ul').hide();
 	$('#mobile_agree_ul').hide();
@@ -383,17 +385,17 @@ function selectreset(){
 								</select>
 								</label>
 								<p id="select_card_check" style="color: red">! 카드사를 선택해 주세요</p>
+								<p id = "monthly_pay_disable">할부는 결제 금액이 5만원 이상인 경우에 가능합니다 </p>
 							</li>
-							<li>
+							<li  id="monthly_pay">
 							<label>할부 기간
-								<select name="monthly_pay" id="monthly_pay">
+								<select name="monthly_pay">
 									<option value ="1">일시불</option>
 									<%for(int i = 2; i<13;i++){ %>
 									<option value="<%=i %>"><%=i %>개월</option>
 									<%} %>
 								</select>
 							</label>
-							<p id = "monthly_pay_disable">할부는 5만원 이상인 경우에 가능합니다 </p>
 							</li>
 							
 						</ul>	

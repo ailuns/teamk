@@ -47,7 +47,7 @@ function receive_change(i,ti_num){
 		int pageNum = Integer.parseInt(pagenum);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		List<Vector> ModList = (List<Vector>) request.getAttribute("ModList");
-		if (ModList != null) {
+		if (ModList.size() !=0) {
 			for(int i = 0; i < ModList.size(); i++){
 				Vector v = ModList.get(i);		
 				ModTradeInfoBEAN mtib = (ModTradeInfoBEAN)v.get(0);

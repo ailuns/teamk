@@ -31,11 +31,11 @@ public class MyThingOrderList implements Action{
 		int startp=((curpage-1)/pblock)*pblock+1;
 		int endpage=startp+pblock-1;
 		if(endpage > pcount)endpage = pcount;
-		List<Vector> ModList = new ArrayList<Vector>();
+		List<Vector> ModList = new ArrayList<Vector>(  );
 		ModTradeInfoBEAN mtib;
 		Vector v;
 		if (count != 0) {
-			List<ModTradeInfoBEAN> TradeInfoList = moddao.ReadModTI(id, start, pagesize);
+			List<ModTradeInfoBEAN> TradeInfoList = moddao.TO_ReadModTI(id, start, pagesize);
 			for (int i = 0; i < TradeInfoList.size(); i++) {
 				v = new Vector();
 				mtib = TradeInfoList.get(i);

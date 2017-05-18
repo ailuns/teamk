@@ -32,11 +32,34 @@ public class AdminDAO {
 		conn = ds.getConnection();
 		return conn;
 	}
-	public int BankPayCount(){
+	public int Ti_Count(int status){
 		int count = 0;
 		try{
 			conn = getconn();
-			sql = "select count(ti_num) from trade_info where ti_status = 1";
+			sql = "select count(ti_num) from trade_info where ti_status = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, status);
+			rs = pstmt.executeQuery();
+			if(rs.next())count = rs.getInt(1);
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return count;
+	}
+	public int TransNumInsert_Count(){
+		int count=0;
+		try{
+			conn = getconn();
+			sql = "select count(ti_num) from trade_info where to_null_check = 0"+
+					" and ti_status = 2";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			if(rs.next())count = rs.getInt(1);
@@ -62,6 +85,47 @@ public class AdminDAO {
 			pstmt.setInt(1, ti_status);
 			pstmt.setInt(2, start-1);
 			pstmt.setInt(3, end);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				ModTradeInfoBEAN mtib = new ModTradeInfoBEAN();
+				mtib.setTi_num(rs.getInt("ti_num"));
+				mtib.setName(rs.getString("ti_receive_name"));
+				mtib.setMobile(rs.getString("ti_receive_mobile"));
+				mtib.setPostcode(rs.getString("ti_receive_postcode"));
+				mtib.setAddress1(rs.getString("ti_receive_address1"));
+				mtib.setAddress2(rs.getString("ti_receive_address2"));
+				mtib.setMemo(rs.getString("ti_receive_memo"));
+				mtib.setTrade_type(rs.getString("ti_trade_type"));
+				mtib.setPayer(rs.getString("ti_trade_payer"));
+				mtib.setTrade_date(rs.getTimestamp("ti_trade_date"));
+				mtib.setTotal_cost(rs.getInt("ti_total_cost"));
+				mtib.setStatus(rs.getInt("ti_status"));
+				BankPayList.add(mtib);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return BankPayList;
+	}
+	public List<ModTradeInfoBEAN> StatusPayList(int TO_Null_Check, int ti_status, int start, int end){
+		List<ModTradeInfoBEAN> BankPayList = new ArrayList<ModTradeInfoBEAN>();
+		try{
+			conn=getconn();
+			sql = "select * from trade_info where to_null_check = ? and ti_status = ? limit ?,?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, TO_Null_Check);
+			pstmt.setInt(2, ti_status);
+			pstmt.setInt(3, start-1);
+			pstmt.setInt(4, end);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				ModTradeInfoBEAN mtib = new ModTradeInfoBEAN();

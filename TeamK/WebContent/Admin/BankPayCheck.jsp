@@ -26,21 +26,11 @@ function order_hide(){
 	$('.order_view').hide();
 	$('.order_select').show();
 }
-function BankPayCheck(){
-	var tich = [];
-	$("input[name='tich']:checked").each(function(i){
-		tich.push($(this).val());
-	})
-	$.ajax({
-		url:'./BankPayChecked.ao',
-		type:'post',
-		data:{
-			tich:tich,
-		},success:function(){
-			alert("입금 확인 완료");
-			window.location.reload(true);
-        }
-	});
+function select_check(){
+	if($("input[name='tich']:checked").length==0){
+		alert("선택 된 주문이 없습니다!");
+		return false;	
+	}
 }
 function Trade_Info_Delete(){
 	var tich = [];
@@ -73,8 +63,9 @@ function Trade_Info_Delete(){
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		List<Vector> ModList = (List<Vector>) request.getAttribute("ModList");
 		%>
-		<form action="./BankPayChecked.ao" method="post" name="fr">
+		<form action="./BankPayChecked.ao" method="post" name="fr" onsubmit="return select_check()">
 		<%
+		if(ModList.size()==0&&count!=0)response.sendRedirect("./BankPayCheck.ao");
 		if (ModList.size() != 0) {
 			for(int i = 0; i < ModList.size(); i++){
 				Vector v = ModList.get(i);		
@@ -143,12 +134,12 @@ function Trade_Info_Delete(){
 	<%	
 			}
 			%>
-		<input type="button" value="입금 확인  완료" onclick="BankPayCheck()">
+		<input type="submit" value="입금 확인  완료">
 		<input type="button" value="주문 삭제" onclick="Trade_Info_Delete()"> 
 	<%
 	}else{
 		 %>
-		 <div>무통장 입금 내역이 없습니다!</div>
+		 <div>새로운 무통장 입금 내역이 없습니다!</div>
 		 <%
 	}
 		%>
@@ -178,7 +169,7 @@ function Trade_Info_Delete(){
 	<%
 		}
 		}
-		if (pcount != pageNum) {
+		if (pcount != pageNum&&count!=0) {
 	%>
 	<a href="./BankPayCheck.ao?pageNum=<%=pageNum + 1%>">[다음 페이지]</a>
 	<br>

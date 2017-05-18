@@ -21,6 +21,8 @@ public class MyOrderAddAction implements Action{
 		String []pch=request.getParameterValues("pch");
 		String pnum = request.getParameter("pnum");
 		String tnum = request.getParameter("tnum");
+		int to_null_check = 0;
+		if(tch==null&&tnum==null)to_null_check=1;
 		ModTradeInfoBEAN mtib = new ModTradeInfoBEAN();
 		ModDAO moddao = new ModDAO();
 		bnsDAO bnsdao = new bnsDAO();
@@ -36,8 +38,8 @@ public class MyOrderAddAction implements Action{
 		mtib.setPayer(request.getParameter("o_receive_name"));
 		mtib.setMobile(request.getParameter("o_receive_mobile"));
 		mtib.setMemo(request.getParameter("o_memo"));
+		mtib.setTo_null_check(to_null_check);
 		String receive_check = request.getParameter("po_receive_check");
-		System.out.println( request.getParameter("po_receive_check"));
 		if(receive_check!=null){
 			if(receive_check.equals("0")&&tnum==null&&tch==null){
 				mtib.setPostcode(null);

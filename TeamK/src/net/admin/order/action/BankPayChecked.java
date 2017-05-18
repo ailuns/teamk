@@ -10,14 +10,17 @@ public class BankPayChecked implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		String [] tich = request.getParameterValues("tich[]");
+		String [] tich = request.getParameterValues("tich");
 		AdminDAO adao = new AdminDAO();
 		if(tich!=null){
 			for(int i =0; i< tich.length; i++){
 				adao.BankPayChecked(2,Integer.parseInt(tich[i]));
 			}
 		}
-		return null;
+		ActionForward afo = new ActionForward();
+		afo.setPath(request.getHeader("referer"));
+		afo.setRedirect(true);
+		return afo;
 	}
 	
 }
