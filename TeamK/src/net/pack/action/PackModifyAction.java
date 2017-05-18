@@ -65,34 +65,34 @@ public class PackModifyAction implements Action{
 		pb.setSerial(Integer.parseInt(serial));
 		
 		// upload 폴더에 올라가는 파일이름		
-		if(file1 == null){
+		if(file1 == ""){
 			pb.setFile1(multi.getParameter("file1"));
 		}else{
 			pb.setFile1(file1);
 		}
 		
-		if(file2 == null){
+		if(file2 == ""){
 			pb.setFile2(multi.getParameter("file2"));
 		}else{
-			pb.setFile2(multi.getFilesystemName("file2"));
+			pb.setFile2(file2);
 		}
 		
-		if(file3 == null){
+		if(file3 == ""){
 			pb.setFile3(multi.getParameter("file3"));
 		}else{
-			pb.setFile3(multi.getFilesystemName("file3"));
+			pb.setFile3(file3);
 		}
 		
-		if(file4 == null){
+		if(file4 == ""){
 			pb.setFile4(multi.getParameter("file4"));
 		}else{
-			pb.setFile4(multi.getFilesystemName("file4"));
+			pb.setFile4(file4);
 		}
 		
-		if(file5 == null){
+		if(file5 == ""){
 			pb.setFile5(multi.getParameter("file5"));
 		}else{
-			pb.setFile5(multi.getFilesystemName("file5"));
+			pb.setFile5(file5);
 		}
 				
 		pdao.updatePackcontent(pb, num);
