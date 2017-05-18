@@ -96,5 +96,4 @@ public class PackWriteAction implements Action{
 		forward.setRedirect(true);
 		return forward;
 	}
-
 }
