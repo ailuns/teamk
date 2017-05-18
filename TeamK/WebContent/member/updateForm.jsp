@@ -99,20 +99,33 @@ function submit() {
 		<div id="member">
 			<div id="m_update_form">
 				<form action="./MemberUpdateAction.me" method="post" name="fr" onsubmit="return submit()">
-					<label for="id">아이디</label><input type="text" name="id" id="id" value="<%=mb.getId()%>" readonly><br> 
-					<label for="pass">비밀번호</label><input type="password" name="pass" id="pass">
+					
+					<label for="id">아이디</label>
+					<input type="text" name="id" id="id" value="<%=mb.getId()%>" readonly><br> 
+					
+					<label for="pass">비밀번호</label>
+					<input type="password" name="pass" id="pass">
 					<input type="button" value="비밀번호변경"  onclick="passchange()"><br>
-					<label for="name">이름</label><input type="text" name="name" id="name" value="<%=mb.getName()%>"><br> 
-					<label for="address">주소</label><input type="text" id="sample6_postcode" placeholder="우편번호" name="postcode" value="<%=mb.getPostcode()%>">
+					
+					<label for="name">이름</label>
+					<input type="text" name="name" id="name" value="<%=mb.getName()%>"><br> 
+					
+					<label for="address">주소</label>
+					<input type="text" id="sample6_postcode" placeholder="우편번호" name="postcode" value="<%=mb.getPostcode()%>">
 					<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" name="btnPostcode"><br>
 					<input type="text" id="sample6_address" placeholder="주소" name="address1" value="<%=mb.getAddress1()%>"><br>
 					<input type="text" id="sample6_address2" placeholder="상세주소" name="address2" value="<%=mb.getAddress2()%>"><br>
-					<label for="mobile">전화번호</label><input type="text" name="mobile" id="mobile" value="<%=mb.getMobile()%>"><br> 
-					<label for="email">이메일</label><input type="text" name="email" id="email" value="<%=mb.getEmail()%>"  readonly>
+					
+					<label for="mobile">전화번호</label>
+					<input type="text" name="mobile" id="mobile" value="<%=mb.getMobile()%>"><br> 
+					
+					<label for="email">이메일</label>
+					<input type="text" name="email" id="email" value="<%=mb.getEmail()%>"  readonly>
 					<input type="button" value="변경하기" onclick="sendmailup()">
 					<input type="hidden" name="eckecknum" value="1"><br> 
 					<input type="submit" value="수정완료">
 					<input type="button" value="돌아가기" onclick="history.back()">
+					
 				</form>
 			</div>
 		</div>

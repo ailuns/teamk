@@ -180,7 +180,10 @@ function sample6_execDaumPostcode() {
 </head>
 <body>
 <%
-MemberBean mb= new MemberBean();
+String id = (String) session.getAttribute("id");
+if (id != null) {
+	response.sendRedirect("./main.bo");
+}
 %>
 	<!--왼쪽 메뉴 -->
 	<div>
@@ -196,19 +199,27 @@ MemberBean mb= new MemberBean();
 		<div id="member">
 			<div id="insert_form">
 			<form action="./MemberJoinAction.me" method="post" name="fr" onsubmit="return winopen()">
-				<label for="id">아이디</label><input type="text" name="id" id="id" onkeypress="nonHangulSpecialKey()"placeholder="ID는 영문, 숫자만 가능"  maxlength="10">
+				<label for="id">아이디</label><input type="text" name="id" id="id" 
+				onkeypress="nonHangulSpecialKey()"placeholder="ID는 영문, 숫자만 가능"  maxlength="10">
 				<input type="hidden" name="idchecknum"> 
 				<input type="hidden" name="name2" value="0"> 
 				<input type="button"value="중복확인" onclick="idCheck()"><br>
+				
 				<label for="pass">비밀번호</label><input type="password" name="pass" id="pass"><br> 
 				<label for="pass2">비밀번호 확인</label><input type="password" name="pass2" id="pass2"><br> 
+				
 				<label for="name">이름</label><input type="text" name="name" id="name"><br> 
+				
 				<label for="mobile">전화번호</label><input type="text"name="mobile" id="mobile"><br>
-				<label for="address">주소</label><input type="text" id="sample6_postcode" placeholder="우편번호" name="postcode">
+				
+				<label for="address">주소</label>
+				<input type="text" id="sample6_postcode" placeholder="우편번호" name="postcode">
 				<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" name="btnPostcode"><br>
 				<input type="text" id="sample6_address" placeholder="주소" name="address1"><br>
 				<input type="text" id="sample6_address2" placeholder="상세주소" name="address2"><br>
-				<label for="email">이메일</label><input type="text" name="email" id="email" placeholder="반드시 이메일 인증을 해주세요.">
+				
+				<label for="email">이메일</label>
+				<input type="text" name="email" id="email" placeholder="반드시 이메일 인증을 해주세요.">
 				<input type="button" value="이메일 인증" onclick="sendmail()">
 				<input type="hidden" name="eckecknum"> <br>
 				<input type="submit" value="가입">

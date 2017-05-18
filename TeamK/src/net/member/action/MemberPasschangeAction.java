@@ -19,31 +19,21 @@ public class MemberPasschangeAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		System.out.println("Teamk MemberPasschangeAction execute()");
+		
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
 		String pass = request.getParameter("pass");// 기존패스워드
-		System.out.println(pass);
 		String pass2 = request.getParameter("pass2");// 기존 패스워드와 비교할 확인용 패스워드
-		System.out.println(pass2);
 		String changepass = request.getParameter("changepass");// 앞에서받은 변경할 비밀번호
-		System.out.println(changepass);
-		String changepass2 = request.getParameter("changepass2");// 앞에서 받은 변경할
-																	// 비밀번호 재입력
-		System.out.println(changepass2);
+		String changepass2 = request.getParameter("changepass2");// 비밀번호 확인
+		
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
-		// String txtCipher = "";
-		// txtCipher = Base64.encode(txtPlain.getBytes());
-		//
 		MemberDAO mdao = new MemberDAO();
-		//
+	
 		MemberBean mb = mdao.getMember(id);
-		// String str = mb.getPass();
-		// String pass2 = new String(Base64.decode(str));
-
-		// BCrypt.checkpw(mb.getPass(), hashPass);
 
 		if (BCrypt.checkpw(pass2, pass) == false) {
 			out.println("<script>");

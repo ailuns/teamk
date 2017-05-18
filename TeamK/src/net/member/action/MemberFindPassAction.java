@@ -52,7 +52,7 @@ public class MemberFindPassAction implements Action {
 			String receiver = email;
 			String subject = "[Team K 여행사]비밀번호 조회";
 
-			String content = name+"고객님의  임시 비밀번호는  "+ checknum + " 입니다.";
+			String content = name+"고객님의  임시 비밀번호는 :  "+ checknum + " 입니다.";
 
 			String server = "smtp.naver.com";
 
