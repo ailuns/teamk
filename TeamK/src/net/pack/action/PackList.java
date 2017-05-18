@@ -56,7 +56,7 @@ public class PackList implements Action{
 		// 끝페이지 구하기
 		int endPage = startPage+pageBlock-1;
 		
-		String area[] = {"서울", "경기도","경상도", "전라도", "충청도", "강원도", "제주도"};
+		String area[] = {"서울","부산","경기도","강원도","충청북도","충청남도","전라북도","전라남도","경상북도","경상남도","제주도"};
 		
 		List list[] = null;
 		
@@ -72,6 +72,10 @@ public class PackList implements Action{
 		List list5 = pdao.getBoardList(startRow, pagesize, area[4]);
 		List list6 = pdao.getBoardList(startRow, pagesize, area[5]);
 		List list7 = pdao.getBoardList(startRow, pagesize, area[6]);
+		List list8 = pdao.getBoardList(startRow, pagesize, area[7]);
+		List list9 = pdao.getBoardList(startRow, pagesize, area[8]);
+		List list10 = pdao.getBoardList(startRow, pagesize, area[9]);
+		List list11 = pdao.getBoardList(startRow, pagesize, area[10]);
 		
 		List CategoryList = cdao.getCategoryList();
 		
@@ -82,6 +86,10 @@ public class PackList implements Action{
 		request.setAttribute("list5", list5);
 		request.setAttribute("list6", list6);
 		request.setAttribute("list7", list7);
+		request.setAttribute("list8", list8);
+		request.setAttribute("list9", list9);
+		request.setAttribute("list10", list10);
+		request.setAttribute("list11", list11);
 		request.setAttribute("CategoryList", CategoryList);
 		
 		request.setAttribute("count", count);
