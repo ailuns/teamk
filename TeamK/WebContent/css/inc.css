@@ -32,6 +32,10 @@ div#logo_menu {
 	top : 0px;
 	padding-top: 10px;
 }
+div#logo_menu img:HOVER
+{
+	cursor: pointer;
+}
 div#logo_menu h3 {
 	color: #fff;
 	margin-left: 10px;
