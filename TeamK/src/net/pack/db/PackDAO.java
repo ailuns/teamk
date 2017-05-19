@@ -19,17 +19,7 @@ public class PackDAO {
 	int num = 0;
 
 	private Connection getConnection() throws Exception {
-//		String dbid = "jspid";
-//		String dbpass = "jsppass";
-//		String dburl = "jdbc:mysql://localhost:3306/jspdb2";
-//
-//		Class.forName("com.mysql.jdbc.Driver");
-//		conn = DriverManager.getConnection(dburl, dbid, dbpass);
-//
-//		return conn;
-
-		
-		
+	
 		//커넥션 풀 (Connection Poll)
 		// 데이터베이스와 연결된 Connection 객체를 미리 생성
 		// Pool 속에 저장해 두고 필요할때마다 접근하여 사용
@@ -135,25 +125,18 @@ public class PackDAO {
 	
 	
 	// 검색어(도시, 날짜) 있는 게시판 글 가져오기
-	public List getBoardList_search(int start, int count, String search, int startDate, int endDate) {
+	public List getPackList_search(int start, int count, String search, String startDate, String endDate) {
 		List list = new ArrayList();
 
 		try {
 			conn = getConnection();
-//			sql = "select * from pack where city like ? order by num desc limit ?, ?";
-			
-			sql = "select * "
-					+ "from(select substring(serial, 1, 8) sdate, "
-					+ "num, serial, subject, intro, content, type, area, city, cost, readcount, stock, date, "
-					+ "file1, file2, file3, file4, file5 from pack ) a "
-					+ "where city like ? and sdate between ? and ? order by num asc";
+
+			sql = "select * from pack where city like ? and date >= ? and date <= ? order by num asc";
 	
 			pstm = conn.prepareStatement(sql);
 			pstm.setString(1, "%" +  search + "%");
-			pstm.setInt(2, startDate);
-			pstm.setInt(3, endDate);
-//			pstm.setInt(4, start - 1);
-//			pstm.setInt(5, count);
+			pstm.setString(2, startDate);
+			pstm.setString(3, endDate);
 
 			rs = pstm.executeQuery();
 			while (rs.next()) {
@@ -270,21 +253,17 @@ public class PackDAO {
 	
 	
 	// 검색어(도시, 날짜) 있는 게시판 갯수 카운터
-	public int getPackCount(String search, int startDate, int endDate) {
+	public int getPackCount(String search, String startDate, String endDate) {
 		int count = 0;
 		try {
 			conn = getConnection();
-//			sql = "select count(*) from pack where city like ?";
-			
-			sql = "select count(*) "
-					+ "from (select substring(serial, 1, 8) sdate, city from pack) a "
-					+ "where city like ? and sdate between ? and ?";
-			
+
+			sql = "select count(*) from pack where city like ? and date >= ? and date <= ?";
 			
 			pstm = conn.prepareStatement(sql);
 			pstm.setString(1, "%" + search + "%");
-			pstm.setInt(2, startDate);
-			pstm.setInt(3, endDate);
+			pstm.setString(2, startDate);
+			pstm.setString(3, endDate);
 			rs = pstm.executeQuery();
 			if (rs.next()) {
 				count = rs.getInt(1);
