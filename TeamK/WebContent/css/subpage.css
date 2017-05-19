@@ -359,17 +359,6 @@ div#feat_con1 span, div#feat_con2 span,
 div#feat_con3 span, div#feat_con4 span,
 div#feat_con5 span {display: none;}
 div#package_feat a {}
-/* img.ui-datepicker-trigger { */
-/* 	cursor : pointer; */
-/* 	margin-left : 5px; */
-/* } */
-/* #package_wrap{  */
-/* 	width : 1000px;  */
-/* 	min-height : 1000px;  */
-/* 	border : 1px solid black;  */
-/* 	margin : 0 auto;  */
-/* 	padding-top : 50px;  */
-/* } */
 div#package_tab {
 	width: 60%;
 	min-width: 850px;
