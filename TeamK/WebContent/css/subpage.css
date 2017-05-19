@@ -126,7 +126,7 @@ div#scheduler form input[type=text] {
 	font-size: 23px;
 	width: 70%;
 }
-div#scheduler form select {
+div#scheduler form input#city_search {
 	font-size: 23px;
 	width: 50%;
 }

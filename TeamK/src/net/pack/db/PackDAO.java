@@ -125,13 +125,22 @@ public class PackDAO {
 	
 	
 	// 검색어(도시, 날짜) 있는 게시판 글 가져오기
-	public List getPackList_search(int start, int count, String search, String startDate, String endDate) {
+	public List getPackList_search(String search, String startDate, String endDate, int chk) {
 		List list = new ArrayList();
 
 		try {
 			conn = getConnection();
 
-			sql = "select * from pack where city like ? and date >= ? and date <= ? order by date asc";
+			if (chk == 1)
+			{
+				sql = "select * from pack where area like ? and date >= ? and date <= ? order by date asc";
+			}
+			else if (chk == 2)
+			{
+				sql = "";
+			}
+				
+			
 	
 			pstm = conn.prepareStatement(sql);
 			pstm.setString(1, "%" +  search + "%");

@@ -131,26 +131,13 @@
 			<div id="calendar"></div>
 			<div id="scheduler">
 				<p>내게 맞는 패키지 검색하기</p>
-				<form action="#" method="post" name="fr" id="scheduler">
+				<form action="./PackSearchAction.po" method="post" name="fr" id="scheduler">
 					<label for="from">출발</label>
-					<input type="text" id="from" name="from"><br>
+					<input type="text" id="from" name="startDate"><br>
 					<label for="to">도착</label>
-					<input type="text" id="to" name="to"><br>
+					<input type="text" id="to" name="endDate"><br>
 					<label for="area">지역</label>
-					<select id="area" name="area">
-						<option value="null">선택하세요</option>
-						<option value="null">서울특별시</option>
-						<option value="null">부산광역시</option>
-						<option value="null">경기도</option>
-						<option value="null">강원도</option>
-						<option value="null">충청북도</option>
-						<option value="null">충청남도</option>
-						<option value="null">전라북도</option>
-						<option value="null">전라남도</option>
-						<option value="null">경상북도</option>
-						<option value="null">경상남도</option>
-						<option value="null">제주도</option>
-					</select>
+					<input type="text" id="city_search" name="city" class="input_style" required="yes" placeholder="도시를 입력해주세요">
 					<input type="submit" value="검색">
 				</form>
 			</div>

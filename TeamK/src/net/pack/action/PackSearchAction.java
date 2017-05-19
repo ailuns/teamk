@@ -17,16 +17,10 @@ public class PackSearchAction implements Action{
 		HttpSession session = request.getSession();
 		
 		String search = request.getParameter("city");
-//		String basicSD = request.getParameter("startDate");
-//		String basicED = request.getParameter("endDate");
-//		String sD[] = basicSD.split("-");
-//		String eD[] = basicED.split("-");
-//		
-//		int startDate = Integer.parseInt(sD[0] + sD[1] + sD[2]);
-//		int endDate = Integer.parseInt(eD[0] + eD[1] + eD[2]);
-		
 		String startDate = request.getParameter("startDate");
 		String endDate = request.getParameter("endDate");
+		
+//		String area = request.getParameter("area");
 		
 		System.out.println("start >> " + startDate);
 		System.out.println("end >> " + endDate);
@@ -35,7 +29,7 @@ public class PackSearchAction implements Action{
 		// 디비 객체 생성 BoardDAO
 		PackDAO pdao = new PackDAO();
 		//전체글 횟수 구하기 int count = getBoardCount()
-		int count = pdao.getPackCount(search, startDate, endDate);//pdao.getBoardCount();
+		int count = pdao.getPackCount(search, startDate, endDate);
 		
 		System.out.println("count >> " + count);
 		//한페이지에 보여줄 글의 갯수
@@ -66,14 +60,12 @@ public class PackSearchAction implements Action{
 		int startPage = ((currentPage-1)/pageBlock)*pageBlock+1;
 		// 끝페이지 구하기
 		int endPage = startPage+pageBlock-1;
-
-//		for(int i = 0; i < area.length; i++)
-//		{
-//			list[i] = pdao.getBoardList(startRow, pagesize, area[i]);
-//		}
 		
-		List list = pdao.getPackList_search(startRow, pagesize, search, startDate, endDate);
+		// city로 검색할때
+		List list = pdao.getPackList_search(search, startDate, endDate, 1);
 		
+		// area로 검색할때
+//		List mainSearch = pdao.getPackList_search(area, startDate, endDate, 2);
 		
 		request.setAttribute("list", list);
 		request.setAttribute("count", count);
