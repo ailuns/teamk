@@ -142,7 +142,7 @@ if(id!=null){
 <%if(id!=null){%>
 <input type="button" value="댓글달기" onclick="replyupdate()">
     		<%}else{%>
-    			<input type="button" value="로그인 해주세요" 
+    			<input type="button" value="로그인필요" 
     				   onclick="location.href='./MemberLogin.me'">
     		<%} %>
 </form>
