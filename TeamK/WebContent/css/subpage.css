@@ -359,12 +359,12 @@ div#feat_con1 span, div#feat_con2 span,
 div#feat_con3 span, div#feat_con4 span,
 div#feat_con5 span {display: none;}
 div#package_feat a {}
+
 div#package_tab {
 	width: 60%;
 	min-width: 850px;
-	background-color: #fff;
-	margin: 0 auto;
-	margin-bottom: 50px;
+/* 	background-color: #fff; */
+	margin : 20px auto;
 	height: 1000px;
 }
 div#package_tab ul.tabs {
@@ -390,12 +390,13 @@ div#package_tab .tab_container {
 	width: 100%;
 	min-width: 850px;
 	min-height: 600px;
+	margin-top : 20px;
 	text-align: center;
 }
 div#package_tab div.tab_content table {margin: 0 auto;}
 div#package_tab .img_size {
-	width : 250px;
-	height : 150px;
+	width : 300px;
+	height : 200px;
 }
 div#package_tab #img_content {
 	padding : 0px;
