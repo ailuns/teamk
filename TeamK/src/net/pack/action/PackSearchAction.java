@@ -17,13 +17,16 @@ public class PackSearchAction implements Action{
 		HttpSession session = request.getSession();
 		
 		String search = request.getParameter("city");
-		String basicSD = request.getParameter("startDate");
-		String basicED = request.getParameter("endDate");
-		String sD[] = basicSD.split("-");
-		String eD[] = basicED.split("-");
+//		String basicSD = request.getParameter("startDate");
+//		String basicED = request.getParameter("endDate");
+//		String sD[] = basicSD.split("-");
+//		String eD[] = basicED.split("-");
+//		
+//		int startDate = Integer.parseInt(sD[0] + sD[1] + sD[2]);
+//		int endDate = Integer.parseInt(eD[0] + eD[1] + eD[2]);
 		
-		int startDate = Integer.parseInt(sD[0] + sD[1] + sD[2]);
-		int endDate = Integer.parseInt(eD[0] + eD[1] + eD[2]);
+		String startDate = request.getParameter("startDate");
+		String endDate = request.getParameter("endDate");
 		
 		System.out.println("start >> " + startDate);
 		System.out.println("end >> " + endDate);
@@ -69,7 +72,7 @@ public class PackSearchAction implements Action{
 //			list[i] = pdao.getBoardList(startRow, pagesize, area[i]);
 //		}
 		
-		List list = pdao.getBoardList_search(startRow, pagesize, search, startDate, endDate);
+		List list = pdao.getPackList_search(startRow, pagesize, search, startDate, endDate);
 		
 		
 		request.setAttribute("list", list);
@@ -80,8 +83,8 @@ public class PackSearchAction implements Action{
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("search", search);
-		request.setAttribute("startDate", basicSD);
-		request.setAttribute("endDate", basicED);
+		request.setAttribute("startDate", startDate);
+		request.setAttribute("endDate", endDate);
 		
 		
 		//ActoinForward 이동정보 담아서 로그인 이동

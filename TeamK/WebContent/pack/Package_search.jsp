@@ -16,7 +16,6 @@
 <script>
 	jQuery(document).ready(function($){
 		
-		
 		// 달력 관련 소스
 		$("#date_from").datepicker({
 			dateFormat: 'yy-mm-dd',    // 날짜 포맷 형식
@@ -29,7 +28,6 @@
 // 	        buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
 	        onClose: function(selectedDate){		// 닫힐 때 함수 호출
 	        	$("#date_to").datepicker("option", "minDate", selectedDate);    // #date_to의 최소 날짜를 #date_from에서 선택된 날짜로 설정
-	    		$('img.ui-datepicker-trigger').attr('align', 'absmiddle');
 	        	}
 		});
 		
@@ -44,14 +42,8 @@
 // 	        buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
 	        onClose: function(selectedDate){		// 닫힐 때 함수 호출
 	        	$("#date_from").datepicker("option", "maxDate", selectedDate);   // #date_from의 최대 날짜를 #date_to에서 선택된 날짜로 설정
-	    		$('img.ui-datepicker-trigger').attr('align', 'absmiddle');
 	        	}
 		});
-		
-	    $("#txt_prodStart").datepicker();
-	    $('img.ui-datepicker-trigger').attr('align', 'absmiddle');
-	    
-
 	    
 	    // 탭 관련 소스
 		$(".tab_content").hide();  // 탭 내용 전체 숨김
@@ -250,6 +242,9 @@ img.ui-datepicker-trigger
 				</td>
 				<td rowspan="2"  id="price">
 					<span><%=pb.getCost() %></span>
+				</td>
+				<td rowspan="2"  id="price">
+					<span><%=pb.getDate() %></span>
 				</td>
 			</tr>
 			<tr>

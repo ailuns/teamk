@@ -1,6 +1,7 @@
 package net.board.action;
 
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,18 +18,22 @@ public class BoardReplyDel2 implements Action {
 		
 		System.out.println("BoardReplyDel2");
 		int num = Integer.parseInt(request.getParameter("num"));
-		System.out.println(num);
+		int rNum = Integer.parseInt(request.getParameter("rNum"));
 		
 		BoardDAO bdao = new BoardDAO();
 		bdao.deleteReply(num);
 		
+		List<BoardReplyBean> lrb = bdao.getBoardReplyList(rNum);
+		
 		BoardReplyBean rb = new BoardReplyBean();
 		
-		rb.setGroup_del(Integer.parseInt(request.getParameter("group_del")));
-		
+		request.setAttribute("lrb", lrb);
+		int rcount = bdao.getBoardReplyCount(rNum);
+		request.setAttribute("rcount", rcount);
+		request.setAttribute("rNum", String.valueOf(rNum));
 		ActionForward forward = new ActionForward();
-   		forward.setPath("./BoardContent2.bo?num="+rb.getGroup_del()+"&pageNum="+request.getParameter("pageNum"));
-   		forward.setRedirect(true);	
+   		forward.setPath("./board/reply.jsp");
+   		forward.setRedirect(false);	
 		
 		return forward;
 		

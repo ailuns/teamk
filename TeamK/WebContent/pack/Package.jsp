@@ -28,9 +28,9 @@
 	        //showOn: "both",		// 버튼을 표시      both : input과 buttom 둘다 클릭 시 달력 표시           bottom  :  buttom 클릭 했을 때만 달력 표시
 	        //buttonImage: "./img/calendar.png",   // 버튼에 사용될 이미지
 	        //buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
-	        onClose: function(selectedDate){		// 닫힐 때 함수 호출
+	        onClose: function(selectedDate)    // 닫힐 때 함수 호출
+	        {		
 	        	$("#date_to").datepicker("option", "minDate", selectedDate);    // #date_to의 최소 날짜를 #date_from에서 선택된 날짜로 설정
-	    		$('img.ui-datepicker-trigger').attr('align', 'absmiddle');
 	        }
 		});
 		
@@ -43,14 +43,11 @@
 	        //showOn: "both",			// 버튼을 표시      both : input과 buttom 둘다 클릭 시 달력 표시           bottom  :  buttom 클릭 했을 때만 달력 표시
 	        //buttonImage: "./img/calendar.png",   // 버튼에 사용될 이미지
 	        //buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
-	        onClose: function(selectedDate){		// 닫힐 때 함수 호출
+	        onClose: function(selectedDate)// 닫힐 때 함수 호출
+	        {		
 	        	$("#date_from").datepicker("option", "maxDate", selectedDate);   // #date_from의 최대 날짜를 #date_to에서 선택된 날짜로 설정
-	    		$('img.ui-datepicker-trigger').attr('align', 'absmiddle');
-	        	}
+        	}
 		});
-		
-	    $("#txt_prodStart").datepicker();
-	    $('img.ui-datepicker-trigger').attr('align', 'absmiddle');
 
 	    // 탭 관련 소스
 		$(".tab_content").hide();  // 탭 내용 전체 숨김
@@ -148,94 +145,7 @@ img.ui-datepicker-trigger {
 	cursor : pointer;
 	margin-left : 5px;
 }
-#package_wrap{ 
-	width : 1000px; 
-	min-height : 1000px; 
-	border : 1px solid black; 
-	margin : 0 auto; 
-	padding-top : 50px; 
-} 
 
-/* 검색  */
-/* #search_div { */
-/* 	width : 450px; */
-/* 	height : 200px; */
-/* 	padding : 10px; */
-/* 	background-color: #D6F0FF; */
-/* 	margin : 0 auto; */
-/* } */
-/* #city_search {width : 430px;} */
-/* .input_style { */
-/* 	height : 25px; */
-/* 	margin-bottom : 10px; */
-/* 	padding-left : 10px; */
-/* 	border-radius : 1px; */
-/* } */
-/* #search_btn { */
-/* 	cursor : pointer; */
-/* 	width : 200px; */
-/* 	height : 35px; */
-/* 	margin-left : 100px; */
-/* 	background-color: #B2CCFF; */
-/* } */
-
-/* 탭 패키지  */
-#package_tab {
-	margin : 0 auto;
-	margin-top : 50px;
-	width : 1150px;
-	min-height : 630px;
-/* 	border : 1px solid blue; */
-}
-ul.tabs {
-	margin: 0;
-	padding: 0;
-	width: 1200px;
-	float: left;
-	list-style: none;
-/* 	border: 1px solid black; */
- 	margin-left : 110px; 
-	margin-bottom : 10px;
-}
-ul.tabs li {
-	width: 80px;
- 	height: 80px;
-	float: left;
-	padding-top : 20px;
-/* 	border-right: 1px solid black; */
-	text-align: center;
-	cursor: pointer;
-	font-weight: bold;
-	line-height: 31px;
-}
-.tab_container {
-	background-color : #F6F6F6;
-	float: left;
-	min-width: 1000px;
-	min-height: 600px;
-	padding : 10px;
-	margin-left : 50px;
-}
-.img_size {
-	width : 250px;
-	height : 150px;
-}
-#img_content {
-	padding : 0px;
-	margin : 20px;
-	margin-left : 35px;
-	border: 1px solid pink;
-	background-color: white;
-}
-
-.tab_content a:LINK, .tab_content a:VISITED
-{
-	color : black;
-	text-decoration: none;
-}
-
-/* 탭 패키지  */
-/* .clear {clear: both;} */
 </style>
 
 </head>
@@ -247,36 +157,21 @@ ul.tabs li {
 	//
 	// 세션으로 로그인한 아이디 값 받아오기
 	String user_id = (String) session.getAttribute("id");
+	List ListArr[] = new List[11];
+	int areaCount[] = new int[11];
 	
+	// 각 탭에 들어갈 패키지 리스트 받아오기
+	for (int i = 0; i < ListArr.length; i++)
+	{
+		ListArr[i] = (List)request.getAttribute("list"+i);
+	}
+	
+	// 지역별 패키지 갯수 받아오기
+	for (int i = 0; i < ListArr.length; i++)
+	{
+		areaCount[i] = ((Integer)request.getAttribute("areaCount"+i)).intValue();
+	}
 
-	// 각 탭에 들어갈 내용 받아옴
-	List List1 = (List)request.getAttribute("list1");
-	List List2 = (List)request.getAttribute("list2");
-	List List3 = (List)request.getAttribute("list3");
-	List List4 = (List)request.getAttribute("list4");
-	List List5 = (List)request.getAttribute("list5");
-	List List6 = (List)request.getAttribute("list6");
-	List List7 = (List)request.getAttribute("list7");
-	List List8 = (List)request.getAttribute("list8");
-	List List9 = (List)request.getAttribute("list9");
-	List List10 = (List)request.getAttribute("list10");
-	List List11 = (List)request.getAttribute("list11");
-	int areaCount1 = ((Integer)request.getAttribute("areaCount1")).intValue();
-	int areaCount2 = ((Integer)request.getAttribute("areaCount2")).intValue();
-	int areaCount3 = ((Integer)request.getAttribute("areaCount3")).intValue();
-	int areaCount4 = ((Integer)request.getAttribute("areaCount4")).intValue();
-	int areaCount5 = ((Integer)request.getAttribute("areaCount5")).intValue();
-	int areaCount6 = ((Integer)request.getAttribute("areaCount6")).intValue();
-	int areaCount7 = ((Integer)request.getAttribute("areaCount7")).intValue();
-	int areaCount8 = ((Integer)request.getAttribute("areaCount8")).intValue();
-	int areaCount9 = ((Integer)request.getAttribute("areaCount9")).intValue();
-	int areaCount10 = ((Integer)request.getAttribute("areaCount10")).intValue();
-	int areaCount11 = ((Integer)request.getAttribute("areaCount11")).intValue();
-	
-	List ListArr[] = {List1, List2, List3, List4, List5, List6, List7, List8, List9, List10, List11};
-	int areaCount[] = {areaCount1, areaCount2,areaCount3,areaCount4,areaCount5,areaCount6,areaCount7,areaCount8,areaCount9,areaCount10,areaCount11};
-	
-	
 	List CategoryList = (List)request.getAttribute("CategoryList");
 	
 	int count = ((Integer)request.getAttribute("count")).intValue();
@@ -286,7 +181,6 @@ ul.tabs li {
 	int startPage = ((Integer)request.getAttribute("startPage")).intValue();
 	int endPage = ((Integer)request.getAttribute("endPage")).intValue();
 
-	
 %>
 
 <div id="wrap">
@@ -353,31 +247,24 @@ ul.tabs li {
 				if(areaCount[i] == 0)
 				{
 				%>
-				
 					<div id="tab<%=i+1 %>" class="tab_content">
-<!-- 						<table> -->
-<!-- 							<tr> -->
-<!-- 								<td> -->
-									<img alt="" src="./img/nones.png" style="margin:0 auto; margin-top:220px;">
-<!-- 								</td> -->
-<!-- 							</tr> -->
-<!-- 						</table> -->
+						<img alt="" src="./img/nones.png" style="margin:0 auto; margin-top:220px;">
 					</div>
 				<%
 				}
 				
 				else if(areaCount[i] != 0)
 				{
-		%>
+				%>
 					<div id="tab<%=i+1 %>" class="tab_content">
 					<table>
-		<%
+				<%
 					PackBean pb;
 					for (int j = 0; j < ListArr[i].size(); j++)
 					{
 						pb =(PackBean)ListArr[i].get(j);
 						System.out.println(pb.getSubject());
-		%>				
+				%>				
 						<td>
 							<div>
 							<a href="./PackContent.po?num=<%=pb.getNum() %>">

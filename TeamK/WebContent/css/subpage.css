@@ -359,48 +359,56 @@ div#feat_con1 span, div#feat_con2 span,
 div#feat_con3 span, div#feat_con4 span,
 div#feat_con5 span {display: none;}
 div#package_feat a {}
-div#package_list {
+
+div#package_tab {
 	width: 60%;
 	min-width: 850px;
-	height: 100%;
-	background-color: #fff;
-	margin: 0 auto;
+/* 	background-color: #fff; */
+	margin : 20px auto;
+	height: 1000px;
 }
-div#package_list table {border-collapse: collapse;}
-div#package_list table tr {
-	padding-right: 10px;
-	text-align: left;
+div#package_tab ul.tabs {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	float: left;
+	list-style: none;
 }
-div#package_list table img {
-	width: 250px;
-	height: 150px;
-}
-div#package_list table #subject {
-	font-size: 20px;
+div#package_tab ul.tabs li {
+	width: 9.09%;
+ 	height: 80px;
+	float: left;
+	padding-top : 20px;
+	text-align: center;
+	cursor: pointer;
 	font-weight: bold;
-	border-top: 1px solid #ccc;
+	line-height: 31px;
 }
-div#package_list table #price {
-	font-size: 20px;
-	font-weight: bold;
-	border-left: 1px dotted #ddd;
-	border-top: 1px solid #ccc;
-	
+div#package_tab .tab_container {
+	background-color : #F6F6F6;
+	float: left;
+	width: 100%;
+	min-width: 850px;
+	min-height: 600px;
+	margin-top : 20px;
+	text-align: center;
 }
-div#package_list table #context {text-align: justify;}
-div#pages {
-	width: 60%;
-	height: 40px;
-	margin: 0 auto;
-	background-color: #fff;
-	padding-top: 10px;
+div#package_tab div.tab_content table {margin: 0 auto;}
+div#package_tab .img_size {
+	width : 300px;
+	height : 200px;
 }
-div#pages a {
+div#package_tab #img_content {
+	padding : 0px;
+	margin : 15px;
+	border: 1px solid pink;
+	background-color: white;
+}
+div#package_tab .tab_content a:LINK,
+div#package_tab .tab_content a:VISITED {
+	color : black;
 	text-decoration: none;
-	color: #333;
-	margin: 0 10px;
 }
-
 
 /* LoginForm.jsp */
 div#member_head {

@@ -19,16 +19,27 @@ public class BoardReplyAction implements Action {
 		BoardReplyBean rb = new BoardReplyBean();
 		BoardDAO bdao = new BoardDAO();
 		
+		String rid = request.getParameter("rId");
+		String rcontent = request.getParameter("rContent");
+		int rNum = Integer.parseInt(request.getParameter("rNum"));
+		String pageNum = request.getParameter("pageNum");
 		
-		rb.setId(request.getParameter("id"));
-		rb.setContent(request.getParameter("content"));
-		rb.setGroup_del(Integer.parseInt(request.getParameter("group_del")));
+		
+		rb.setId(rid);
+		rb.setContent(rcontent);
+		rb.setGroup_del(rNum);
 		
 		bdao.insertReplyBoard(rb);
+		int rcount = bdao.getBoardReplyCount(rNum);
+		List<BoardReplyBean> lrb = bdao.getBoardReplyList(rNum);
+		request.setAttribute("lrb", lrb);
+		request.setAttribute("rcount", rcount);
+		request.setAttribute("rNum", String.valueOf(rNum));
+	
 		
 		ActionForward forward = new ActionForward();
-   		forward.setPath("./BoardContent.bo?num="+rb.getGroup_del()+"&pageNum="+request.getParameter("pageNum"));
-   		forward.setRedirect(true);	
+   		forward.setPath("./board/reply.jsp");
+   		forward.setRedirect(false);	
 		
 		return forward;
 	}

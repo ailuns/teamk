@@ -27,19 +27,33 @@ public class BoardReplyAction2 implements Action {
 		
 		BoardReplyBean rb = new BoardReplyBean();
 		BoardDAO bdao = new BoardDAO();
-		BoardBean bb = new BoardBean();
 		
-		rb.setId(request.getParameter("id"));
-		rb.setContent(request.getParameter("content"));
-		rb.setGroup_del(Integer.parseInt(request.getParameter("group_del")));
+		String rid = request.getParameter("rId");
+		String rcontent = request.getParameter("rContent");
+		int rNum = Integer.parseInt(request.getParameter("rNum"));
+		String pageNum = request.getParameter("pageNum");
 		String wEmail = request.getParameter("wEmail");
 		String wContent = request.getParameter("wContent");
-		String content = request.getParameter("content");
-		
 	
+		
+		
+		rb.setId(rid);
+		rb.setGroup_del(rNum);
+		rb.setContent(rcontent);
+		
 		bdao.insertReplyBoard(rb);
+		int rcount = bdao.getBoardReplyCount(rNum);
+		List<BoardReplyBean> lrb = bdao.getBoardReplyList(rNum);
+		request.setAttribute("lrb", lrb);
+		request.setAttribute("rcount", rcount);
+		request.setAttribute("rNum", String.valueOf(rNum));
+		request.setAttribute("wEmail", wEmail);
+		request.setAttribute("wContent", wContent);
 		
-		
+		System.out.println("rid : "+rid);
+		System.out.println("wEmail : "+wEmail);
+		System.out.println("wContent : "+wContent);
+		System.out.println("rcontent : "+rcontent);
 		
 String email = wEmail;//받는사람의 이메일 주소
 		
@@ -48,7 +62,7 @@ String email = wEmail;//받는사람의 이메일 주소
 		String receiver= email;
 		String subject = "답변이 왔습니다.";
 		
-		String content1=  "문의내용 : ["+wContent+"] <br> 답변내용 : ["+content+"]";
+		String content1=  "문의내용 : ["+wContent+"] <br> 답변내용 : ["+rcontent+"]";
 		
 		String server = "smtp.naver.com";
 		
@@ -80,8 +94,8 @@ String email = wEmail;//받는사람의 이메일 주소
 		
 		
 		ActionForward forward = new ActionForward();
-   		forward.setPath("./BoardContent2.bo?num="+rb.getGroup_del()+"&pageNum="+request.getParameter("pageNum"));
-   		forward.setRedirect(true);	
+   		forward.setPath("./board2/reply2.jsp");
+   		forward.setRedirect(false);	
 		
 		return forward;
 		

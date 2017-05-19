@@ -11,6 +11,37 @@
 <title>Insert title here</title>
 <link href="./css/inc.css" rel="stylesheet" type="text/css">
 <link href="./css/subpage.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./js/jquery-3.2.0.js"></script>
+<script type="text/javascript">
+	function replyupdate(){
+		 $.ajax({
+	         url:'./BoardReplyAction.bo',
+	         type:'post',
+	         data:{
+	            rContent:$('#rContent').val(),
+	            rNum:$('#rNum').val(),
+		        rId:$('#rId').val(),
+		        pageNum:$('#pageNum').val()
+	         },success:function(data){
+	        	 $('#replyUpdate').html(data);
+	         }
+	      });
+	}
+	function replydelete(rbNum) {
+		
+		$.ajax({
+			url:'./BoardReplyDel.bo',
+	        type:'post',
+	        data:{
+	        	num:rbNum,
+	        	rNum:$('#rNum').val(),
+	        },success:function(data){
+	        	 $('#replyUpdate').html(data);
+	         }
+		});
+	}
+	
+</script>
 </head>
 <body>
 <%
@@ -75,6 +106,7 @@ List lrb = null;
 int rcount = (int)request.getAttribute("rcount");
 if(rcount!=0){lrb=(List)request.getAttribute("lrb");}//
 %>
+<div id="replyUpdate">
 <p>댓글(<%=rcount%>개)</p>
 <table id="reply">
     <%if(rcount!=0){
@@ -82,17 +114,15 @@ if(rcount!=0){lrb=(List)request.getAttribute("lrb");}//
     	//자바빈(BoardBean) 변수 =배열한칸 접근  배열변수.get()
     	BoardReplyBean rb = (BoardReplyBean)lrb.get(i);%>
 <tr>
-<%-- <td><%=i+1%></td> --%>
+<td><%=i+1%></td>
 <td id="name"><%=rb.getId()%></td>
 <td id="content"><%=rb.getContent()%></td>
 <td id="delete"><%
 if(id!=null){
 	if(id.equals(rb.getId())||id.equals("admin")){ 
 %>
-<form action="./BoardReplyDel.bo?pageNum=<%=pageNum%>" method="post" name="replydel">
-<input type="hidden" name="group_del" value="<%=bb.getNum()%>">
-<input type="hidden" name="num" value="<%=rb.getNum()%>">
-<input type="submit" value="리플삭제">
+<form method="post" name="replydel">
+<input type="button" value="리플삭제" onclick="replydelete(<%=rb.getNum()%>)">
 </form>
 <%}}%></td>
 <td id="date"><%=rb.getDate()%></td>
@@ -101,21 +131,23 @@ if(id!=null){
     }}
     %>
 </table>
-<form action="./BoardReplyAction.bo?pageNum=<%=pageNum%>" method="post" name="fr1" id="reply">
+<form method="post" name="fr1" id="reply">
 <span><%=id %></span>
-<input type="hidden" name="group_del" value="<%=bb.getNum()%>">
-<input type="hidden" name="id" value="<%=id%>" readonly>
+<input type="hidden" id="rNum" name="group_del" value="<%=bb.getNum()%>">
+<input type="hidden" id="pageNum" value="<%=pageNum%>">
+<input type="hidden" id="rId" name="id" value="<%=id%>" readonly>
 <div id="textarea">
-<textarea rows="3" cols="59" name="content" placeholder="타인을 향한 지나친 비방, 욕설은 자제해주세요."></textarea>
+<textarea rows="3" cols="59" id="rContent" name="content" placeholder="타인을 향한 지나친 비방, 욕설은 자제해주세요."></textarea>
 </div>
 <%if(id!=null){%>
-<input type="submit" value="댓글달기">
+<input type="button" value="댓글달기" onclick="replyupdate()">
     		<%}else{%>
-    			<input type="button" value="로그인 해주세요" 
+    			<input type="button" value="로그인필요" 
     				   onclick="location.href='./MemberLogin.me'">
     		<%} %>
 </form>
 <!-- ///////////////////댓글///////////////// -->
+</div>
 </div>
 </div>
 	</div>
