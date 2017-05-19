@@ -247,36 +247,21 @@ ul.tabs li {
 	//
 	// 세션으로 로그인한 아이디 값 받아오기
 	String user_id = (String) session.getAttribute("id");
+	List ListArr[] = new List[11];
+	int areaCount[] = new int[11];
 	
+	// 각 탭에 들어갈 패키지 리스트 받아오기
+	for (int i = 0; i < ListArr.length; i++)
+	{
+		ListArr[i] = (List)request.getAttribute("list"+i);
+	}
+	
+	// 지역별 패키지 갯수 받아오기
+	for (int i = 0; i < ListArr.length; i++)
+	{
+		areaCount[i] = ((Integer)request.getAttribute("areaCount"+i)).intValue();
+	}
 
-	// 각 탭에 들어갈 내용 받아옴
-	List List1 = (List)request.getAttribute("list1");
-	List List2 = (List)request.getAttribute("list2");
-	List List3 = (List)request.getAttribute("list3");
-	List List4 = (List)request.getAttribute("list4");
-	List List5 = (List)request.getAttribute("list5");
-	List List6 = (List)request.getAttribute("list6");
-	List List7 = (List)request.getAttribute("list7");
-	List List8 = (List)request.getAttribute("list8");
-	List List9 = (List)request.getAttribute("list9");
-	List List10 = (List)request.getAttribute("list10");
-	List List11 = (List)request.getAttribute("list11");
-	int areaCount1 = ((Integer)request.getAttribute("areaCount1")).intValue();
-	int areaCount2 = ((Integer)request.getAttribute("areaCount2")).intValue();
-	int areaCount3 = ((Integer)request.getAttribute("areaCount3")).intValue();
-	int areaCount4 = ((Integer)request.getAttribute("areaCount4")).intValue();
-	int areaCount5 = ((Integer)request.getAttribute("areaCount5")).intValue();
-	int areaCount6 = ((Integer)request.getAttribute("areaCount6")).intValue();
-	int areaCount7 = ((Integer)request.getAttribute("areaCount7")).intValue();
-	int areaCount8 = ((Integer)request.getAttribute("areaCount8")).intValue();
-	int areaCount9 = ((Integer)request.getAttribute("areaCount9")).intValue();
-	int areaCount10 = ((Integer)request.getAttribute("areaCount10")).intValue();
-	int areaCount11 = ((Integer)request.getAttribute("areaCount11")).intValue();
-	
-	List ListArr[] = {List1, List2, List3, List4, List5, List6, List7, List8, List9, List10, List11};
-	int areaCount[] = {areaCount1, areaCount2,areaCount3,areaCount4,areaCount5,areaCount6,areaCount7,areaCount8,areaCount9,areaCount10,areaCount11};
-	
-	
 	List CategoryList = (List)request.getAttribute("CategoryList");
 	
 	int count = ((Integer)request.getAttribute("count")).intValue();
@@ -286,7 +271,6 @@ ul.tabs li {
 	int startPage = ((Integer)request.getAttribute("startPage")).intValue();
 	int endPage = ((Integer)request.getAttribute("endPage")).intValue();
 
-	
 %>
 
 <div id="wrap">
@@ -353,31 +337,24 @@ ul.tabs li {
 				if(areaCount[i] == 0)
 				{
 				%>
-				
 					<div id="tab<%=i+1 %>" class="tab_content">
-<!-- 						<table> -->
-<!-- 							<tr> -->
-<!-- 								<td> -->
-									<img alt="" src="./img/nones.png" style="margin:0 auto; margin-top:220px;">
-<!-- 								</td> -->
-<!-- 							</tr> -->
-<!-- 						</table> -->
+						<img alt="" src="./img/nones.png" style="margin:0 auto; margin-top:220px;">
 					</div>
 				<%
 				}
 				
 				else if(areaCount[i] != 0)
 				{
-		%>
+				%>
 					<div id="tab<%=i+1 %>" class="tab_content">
 					<table>
-		<%
+				<%
 					PackBean pb;
 					for (int j = 0; j < ListArr[i].size(); j++)
 					{
 						pb =(PackBean)ListArr[i].get(j);
 						System.out.println(pb.getSubject());
-		%>				
+				%>				
 						<td>
 							<div>
 							<a href="./PackContent.po?num=<%=pb.getNum() %>">

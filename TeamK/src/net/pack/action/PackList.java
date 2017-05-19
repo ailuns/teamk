@@ -53,48 +53,40 @@ public class PackList implements Action{
 		
 		String area[] = {"서울","부산","경기도","강원도","충청북도","충청남도","전라북도","전라남도","경상북도","경상남도","제주도"};
 		
+		// 지역별 패키지 갯수 받을 저장 장소
 		int areaCount[] = new int[11];
 		
+		// 지역별 패키지 갯수 구하기
 		for (int i = 0; i < area.length; i++)
 		{
 			areaCount[i] = pdao.getPackCount(area[i]);
 		}
 		
+		// 지역별 패키지 갯수 넘기기
+		for(int i = 0; i < areaCount.length; i++)
+		{
+			request.setAttribute("areaCount"+i, areaCount[i]);
+		}
+		
+		// 지역별 패키지 리스트 받을 저장 장소
 		List list[] = new List[11];
 		
+		// 지역별 패키지 리스트 구하기
 		for(int i = 0; i < area.length; i++)
 		{
 			list[i] = pdao.getBoardList(startRow, pagesize, area[i]);
 		}
 
+		// 지역별 패키지 리스트 보내기
+		for(int i = 0; i < list.length; i++)
+		{
+			request.setAttribute("list"+i, list[i]);
+		}
+		
+		// 지역 분류명 리스트 구하기&보내기
 		List CategoryList = cdao.getCategoryList();
-
-		request.setAttribute("list1", list[0]);
-		request.setAttribute("list2", list[1]);
-		request.setAttribute("list3", list[2]);
-		request.setAttribute("list4", list[3]);
-		request.setAttribute("list5", list[4]);
-		request.setAttribute("list6", list[5]);
-		request.setAttribute("list7", list[6]);
-		request.setAttribute("list8", list[7]);
-		request.setAttribute("list9", list[8]);
-		request.setAttribute("list10", list[9]);
-		request.setAttribute("list11", list[10]);	
-		
 		request.setAttribute("CategoryList", CategoryList);
-		
-		request.setAttribute("areaCount1", areaCount[0]);
-		request.setAttribute("areaCount2", areaCount[1]);
-		request.setAttribute("areaCount3", areaCount[2]);
-		request.setAttribute("areaCount4", areaCount[3]);
-		request.setAttribute("areaCount5", areaCount[4]);
-		request.setAttribute("areaCount6", areaCount[5]);
-		request.setAttribute("areaCount7", areaCount[6]);
-		request.setAttribute("areaCount8", areaCount[7]);
-		request.setAttribute("areaCount9", areaCount[8]);
-		request.setAttribute("areaCount10", areaCount[9]);
-		request.setAttribute("areaCount11", areaCount[10]);
-		
+
 		request.setAttribute("count", count);
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("pageCount", pageCount);
