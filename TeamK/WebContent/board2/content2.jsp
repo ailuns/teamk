@@ -12,6 +12,39 @@
 <title>Insert title here</title>
 <link href="./css/inc.css" rel="stylesheet" type="text/css">
 <link href="./css/subpage.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./js/jquery-3.2.0.js"></script>
+<script type="text/javascript">
+	function replyupdate(){
+		 $.ajax({
+	         url:'./BoardReplyAction2.bo',
+	         type:'post',
+	         data:{
+	            rContent:$('#rContent').val(),
+	            rNum:$('#rNum').val(),
+		        rId:$('#rId').val(),
+		        pageNum:$('#pageNum').val(),
+		        wEmail:$('#wEmail').val(),
+		        wContent:$('#wContent').val()
+	         },success:function(data){
+	        	 $('#replyUpdate').html(data);
+	         }
+	      });
+	}
+	function replydelete(rbNum) {
+		
+		$.ajax({
+			url:'./BoardReplyDel.bo',
+	        type:'post',
+	        data:{
+	        	num:rbNum,
+	        	rNum:$('#rNum').val(),
+	        },success:function(data){
+	        	 $('#replyUpdate').html(data);
+	         }
+		});
+	}
+	
+</script>
 </head>
 <body>
 <%
@@ -37,6 +70,7 @@ int num = Integer.parseInt(request.getParameter("num"));
 <table>
 <tr><td id="num"><%=bb.getRe_ref()%></td><td id="date"><%=bb.getDate()%></td><td id="readcount">조회수: <%=bb.getReadcount()%></td></tr>
 <tr><td colspan="2" id="subject"><%=bb.getSubject()%></td><td id="id"><%=bb.getId()%></td></tr>
+<tr><td id="num">메일주소 : <%=bb.getEmail()%></td></tr>
 <tr><td colspan="3" id="content"><br><br><%=bb.getContent()%><br><br></td></tr>
 <%if(bb.getFile1()!=null){%>
 <tr><td>첨부파일1</td><td colspan="3"><%if(bb.getFile1()!=null){%><a href="./upload/<%=bb.getFile1()%>"><%=bb.getFile1()%></a><%}%></td></tr>
@@ -77,6 +111,7 @@ List lrb = null;
 int rcount = (int)request.getAttribute("rcount");
 if(rcount!=0){lrb=(List)request.getAttribute("lrb");}//
 %>
+<div id="replyUpdate">
 <p>댓글(<%=rcount%>개)</p>
 <table id="reply">
     <%if(rcount!=0){
@@ -84,17 +119,15 @@ if(rcount!=0){lrb=(List)request.getAttribute("lrb");}//
     	//자바빈(BoardBean) 변수 =배열한칸 접근  배열변수.get()
     	BoardReplyBean rb = (BoardReplyBean)lrb.get(i);%>
 <tr>
-<%-- <td><%=i+1%></td> --%>
+<td><%=i+1%></td>
 <td id="name"><%=rb.getId()%></td>
 <td id="content"><%=rb.getContent()%></td>
 <td id="delete"><%
 if(id!=null){
 	if(id.equals(rb.getId())||id.equals("admin")){ 
 %>
-<form action="./BoardReplyDel.bo?pageNum=<%=pageNum%>" method="post" name="replydel">
-<input type="hidden" name="group_del" value="<%=bb.getNum()%>">
-<input type="hidden" name="num" value="<%=rb.getNum()%>">
-<input type="submit" value="리플삭제">
+<form method="post" name="replydel">
+<input type="button" value="리플삭제" onclick="replydelete(<%=rb.getNum()%>)">
 </form>
 <%}}%></td>
 <td id="date"><%=rb.getDate()%></td>
@@ -103,26 +136,26 @@ if(id!=null){
     }}
     %>
 </table>
-
 <%
 if(id!=null){
 if(id.equals("admin")){%>
-<%request.setAttribute("email", bb.getEmail());%> 
-<form action="./BoardReplyAction2.bo?pageNum=<%=pageNum%>" method="post" name="fr1" id="reply">
-<input type="hidden" name="wEmail" value="<%=bb.getEmail()%>">
-<input type="hidden" name="wContent" value="<%=bb.getContent()%>">
-<span><%=id %></span>
-<input type="hidden" name="group_del" value="<%=bb.getNum()%>">
-<input type="hidden" name="id" value="<%=id%>" readonly>
-<div id="textarea">
-<textarea rows="3" cols="59" name="content"></textarea>
+<form method="post" name="fr1" id="reply">
+<span><%=id%></span>
+	<input type="hidden" id="wEmail" value="<%=bb.getEmail()%>">
+	<input type="hidden" id="rNum" name="group_del" value="<%=bb.getNum()%>">
+	<input type="hidden" id="pageNum" value="<%=pageNum%>">
+	<input type="hidden" id="rId" name="id" value="<%=id%>" readonly>
+	<div id="textarea">
+		<textarea rows="3" cols="59" id="rContent" name="content"></textarea>
+		<input type="hidden" id="wContent" value="<%=bb.getContent()%>">
 </div>
-<input type="submit" value="댓글달기">		
+<input type="button" value="댓글달기" onclick="replyupdate()">		
 <%}}%>
 </form>
 <!-- ///////////////////댓글///////////////// -->
 		</div>
 		</div>
+	</div>
 	</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->
