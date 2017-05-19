@@ -17,12 +17,13 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
   jQuery(document).ready(function($){
-    //Calendar
+	//Calendar
 	$('#calendar').datepicker({
       inline: true,
       firstDay: 0,
       showOtherMonths: true,
-      dayNamesMin: ['일', '월', '화', '수', '목', '금', '토']
+      dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+      monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
     });
     //Scheduler
 //     var dateFormat = "mm/dd/yy",
