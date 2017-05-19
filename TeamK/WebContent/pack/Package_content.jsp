@@ -545,6 +545,35 @@
 	min-height: 300px;
 	border: 3px solid pink;
 }
+
+#replyTable
+{
+	background-color: white;
+	
+}
+
+/* tr:nth-child(odd)  */
+/* { */
+/* 	background-color: #BFBFBF; */
+/* } */
+
+#replyContent
+{	
+	width: 700px;
+	height : 50px;
+}
+
+#recontent, #contentup, #content
+{
+	width : 600px;
+	height : 70px;
+}
+
+#replyWrite
+{
+	background-color: white;
+}
+
 /* 상품 문의 */
 
 
@@ -566,7 +595,6 @@
 	text-align: center;
 	font-size: 0.8em;
 }
-
 
 #banner
 {
@@ -616,39 +644,10 @@
 {
 	cursor: pointer;
 }
-
-
-#replyTable
-{
-	background-color: white;
-	
-}
-
-/* tr:nth-child(odd)  */
-/* { */
-/* 	background-color: #BFBFBF; */
-/* } */
-
-#replyContent
-{	
-	width: 700px;
-	height : 50px;
-}
-
-#recontent, #contentup, #content
-{
-	width : 600px;
-	height : 70px;
-}
-
-#replyWrite
-{
-	background-color: white;
-}
-
-
 /* 추천상품 배너 */
 
+
+/* 화면이동 리모컨 */
 #remote_control
 {
 	padding-left : 20px;
@@ -698,10 +697,9 @@
 	text-decoration: none;
 	font-size: 0.8em;	
 }
-
+/* 화면이동 리모컨 */
 
 </style>
-
 
 	<div id="remote_control">
 		<div id="remote_close">x</div>
@@ -720,7 +718,7 @@
 			</tr>
 		</table>
 	</div>
-
+	
 	<div id="banner_sub">추천상품</div>
 	<div id="banner">
 		<div id="close">close</div>

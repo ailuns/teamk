@@ -131,7 +131,7 @@ public class PackDAO {
 		try {
 			conn = getConnection();
 
-			sql = "select * from pack where city like ? and date >= ? and date <= ? order by num asc";
+			sql = "select * from pack where city like ? and date >= ? and date <= ? order by date asc";
 	
 			pstm = conn.prepareStatement(sql);
 			pstm.setString(1, "%" +  search + "%");
@@ -584,7 +584,4 @@ public class PackDAO {
 		}
 		return -1;
 	}
-	
-	
-
 }

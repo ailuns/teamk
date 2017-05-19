@@ -243,6 +243,9 @@ img.ui-datepicker-trigger
 				<td rowspan="2"  id="price">
 					<span><%=pb.getCost() %></span>
 				</td>
+				<td rowspan="2"  id="price">
+					<span><%=pb.getDate() %></span>
+				</td>
 			</tr>
 			<tr>
 				<td id="context">
