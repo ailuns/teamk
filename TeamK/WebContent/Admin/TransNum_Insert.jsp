@@ -51,20 +51,8 @@ function Trans_Num_Fix(num){
 				ModTradeInfoBEAN mtib = (ModTradeInfoBEAN)v.get(0);
 				List<ModTradeInfoBEAN> mtbList = (List<ModTradeInfoBEAN>)v.get(1);
 				
-	%>
-	
-		<h3>배송지 정보</h3>
-		<table border="1">
-			<tr>
-				<td><%=mtib.getName() %></td>
-				<td><%=mtib.getMobile() %></td>
-				<td><%="["+mtib.getPostcode()+"] "+mtib.getAddress1()+" "+mtib.getAddress2() %></td>
-				<%if(mtib.getMemo().length()!=0){ %>
-				<td><%=mtib.getMemo() %></td>
-				<%} %>
-			</tr>
-		</table>
-		<%if(mtbList.size()!=0){%>
+			if(mtbList.size()!=0){%>
+			<h3>주문 번호 : <%=mtib.getTi_num() %></h3>
 				<h5>주문한 상품 목록</h5>
 				<table border = "1">
 					<%for(int j =0; j< mtbList.size();j++){
@@ -88,7 +76,7 @@ function Trans_Num_Fix(num){
 								<input type = "Button" value="변경" 
 									onclick="Trans_Num_Insert(<%=mtb.getNum()%>)">
 								<input type ="Button" value="취소"
-									onclick="Cancel()">
+									onclick="TransNum_Insert_Reset()">
 							</td>
 						<%}else{%>
 							<td><input type = "text" placeholder="송장번호를 입력해 주세요" 
@@ -99,12 +87,23 @@ function Trans_Num_Fix(num){
 					<%} %>
 				</table>
 				<%} %>
-		
+		<h5>배송지 정보</h5>
+		<table border="1">
+			<tr>
+				<td><%=mtib.getName() %></td>
+				<td><%=mtib.getMobile() %></td>
+				<td><%="["+mtib.getPostcode()+"] "+mtib.getAddress1()+" "+mtib.getAddress2() %></td>
+			</tr>
+				<%if(mtib.getMemo().length()!=0){ %>
+				<tr><td colspan="3"><%=mtib.getMemo() %></td></tr>
+				<%} %>
+			
+		</table>
 		<br>
 	<%	
 			}
 			%>
-		<input type="button" value="배송중" onclick="BankPayCheck()"> 
+		<input type="button" value="발송" onclick="BankPayCheck()"> 
 	<%
 	}else{
 		 %>
