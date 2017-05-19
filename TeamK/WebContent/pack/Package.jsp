@@ -28,9 +28,9 @@
 	        //showOn: "both",		// 버튼을 표시      both : input과 buttom 둘다 클릭 시 달력 표시           bottom  :  buttom 클릭 했을 때만 달력 표시
 	        //buttonImage: "./img/calendar.png",   // 버튼에 사용될 이미지
 	        //buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
-	        onClose: function(selectedDate){		// 닫힐 때 함수 호출
+	        onClose: function(selectedDate)    // 닫힐 때 함수 호출
+	        {		
 	        	$("#date_to").datepicker("option", "minDate", selectedDate);    // #date_to의 최소 날짜를 #date_from에서 선택된 날짜로 설정
-	    		$('img.ui-datepicker-trigger').attr('align', 'absmiddle');
 	        }
 		});
 		
@@ -43,14 +43,11 @@
 	        //showOn: "both",			// 버튼을 표시      both : input과 buttom 둘다 클릭 시 달력 표시           bottom  :  buttom 클릭 했을 때만 달력 표시
 	        //buttonImage: "./img/calendar.png",   // 버튼에 사용될 이미지
 	        //buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
-	        onClose: function(selectedDate){		// 닫힐 때 함수 호출
+	        onClose: function(selectedDate)// 닫힐 때 함수 호출
+	        {		
 	        	$("#date_from").datepicker("option", "maxDate", selectedDate);   // #date_from의 최대 날짜를 #date_to에서 선택된 날짜로 설정
-	    		$('img.ui-datepicker-trigger').attr('align', 'absmiddle');
-	        	}
+        	}
 		});
-		
-	    $("#txt_prodStart").datepicker();
-	    $('img.ui-datepicker-trigger').attr('align', 'absmiddle');
 
 	    // 탭 관련 소스
 		$(".tab_content").hide();  // 탭 내용 전체 숨김
@@ -142,6 +139,102 @@
 	
 
 </script>
+
+<style type="text/css">
+img.ui-datepicker-trigger {
+	cursor : pointer;
+	margin-left : 5px;
+}
+#package_wrap{ 
+	width : 1000px; 
+	min-height : 1000px; 
+	border : 1px solid black; 
+	margin : 0 auto; 
+	padding-top : 50px; 
+} 
+
+/* 검색  */
+/* #search_div { */
+/* 	width : 450px; */
+/* 	height : 200px; */
+/* 	padding : 10px; */
+/* 	background-color: #D6F0FF; */
+/* 	margin : 0 auto; */
+/* } */
+/* #city_search {width : 430px;} */
+/* .input_style { */
+/* 	height : 25px; */
+/* 	margin-bottom : 10px; */
+/* 	padding-left : 10px; */
+/* 	border-radius : 1px; */
+/* } */
+/* #search_btn { */
+/* 	cursor : pointer; */
+/* 	width : 200px; */
+/* 	height : 35px; */
+/* 	margin-left : 100px; */
+/* 	background-color: #B2CCFF; */
+/* } */
+
+/* 탭 패키지  */
+#package_tab {
+	margin : 0 auto;
+	margin-top : 50px;
+	width : 1150px;
+	min-height : 630px;
+/* 	border : 1px solid blue; */
+}
+ul.tabs {
+	margin: 0;
+	padding: 0;
+	width: 1200px;
+	float: left;
+	list-style: none;
+/* 	border: 1px solid black; */
+ 	margin-left : 110px; 
+	margin-bottom : 10px;
+}
+ul.tabs li {
+	width: 80px;
+ 	height: 80px;
+	float: left;
+	padding-top : 20px;
+/* 	border-right: 1px solid black; */
+	text-align: center;
+	cursor: pointer;
+	font-weight: bold;
+	line-height: 31px;
+}
+.tab_container {
+	background-color : #F6F6F6;
+	float: left;
+	min-width: 1000px;
+	min-height: 600px;
+	padding : 10px;
+	margin-left : 50px;
+}
+.img_size {
+	width : 250px;
+	height : 150px;
+}
+#img_content {
+	padding : 0px;
+	margin : 20px;
+	margin-left : 35px;
+	border: 1px solid pink;
+	background-color: white;
+}
+
+.tab_content a:LINK, .tab_content a:VISITED
+{
+	color : black;
+	text-decoration: none;
+}
+
+/* 탭 패키지  */
+/* .clear {clear: both;} */
+</style>
+
 </head>
 <body>
 <!-- 왼쪽 메뉴 -->
@@ -298,7 +391,6 @@
 			}
 		%>
 		</div>
-		<div class="clear"></div>
 		<!-- 탭 내용 -->
 	</div>
 	<%
@@ -319,7 +411,9 @@
 	</div>
 	<!--오른쪽 메뉴 -->
 	<!--푸터 메뉴 -->
+	<div>
 		<jsp:include page="../inc/footer.jsp"></jsp:include>
+	</div>
 	<!--푸터 메뉴 -->
 	
 </body>
