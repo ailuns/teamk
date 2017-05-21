@@ -533,6 +533,45 @@ public class ModDAO {
 		}
 		return ModThingList;
 	}
+	public void Po_Status_Update(int status, int po_num){
+		try{
+			conn =getconn();
+			sql = "update pack_order set o_res_status = ? where po_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, status);
+			pstmt.setInt(2, po_num);
+			pstmt.executeQuery();
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	public void To_Status_Update(int status, int o_num){
+		try{
+			conn = getconn();
+			sql = "update thing_order set o_status = ? where o_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, status);
+			pstmt.setInt(2, o_num);
+			pstmt.executeQuery();
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	public void receive_change(ReceiveInfoBEAN rib){
 		try{
 			conn = getconn();

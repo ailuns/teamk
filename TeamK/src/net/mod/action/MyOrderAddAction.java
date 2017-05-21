@@ -48,13 +48,15 @@ public class MyOrderAddAction implements Action{
 			}
 			mtib.setPo_receive_check(Integer.parseInt(receive_check));
 		}
+		String Monthly_pay = request.getParameter("monthly_pay");
+		if(Monthly_pay==null)Monthly_pay="1";
 		int status = 2;
 		String trade_type = request.getParameter("t_type");
 		if(!(trade_type.equals("무통장 입금"))&&tch==null)status=9;
 		switch(trade_type){
 			case "카드 결제":
 				trade_type+=", "+request.getParameter("select_card")+
-					", 할부 : "+request.getParameter("monthly_pay")+"개월";
+					", 할부 : "+Integer.parseInt(Monthly_pay)+"개월";
 				break;
 			case "무통장 입금":
 				trade_type+=", "+request.getParameter("select_bank");

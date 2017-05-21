@@ -38,7 +38,7 @@ public class AdminFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/TransNum_Insert_Action.ao")){
+		}else if(command.equals("/Trans_Num_Insert_Action.ao")){
 			action = new TransNum_Insert_Action();
 			try {
 				afo = action.execute(request, response);
@@ -47,6 +47,20 @@ public class AdminFrontController extends HttpServlet{
 			}
 		}else if(command.equals("/TransNum_Insert.ao")){
 			action = new TransNum_Insert();
+			try {
+				afo = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/Pack_res.ao")){
+			action = new Pack_Res();
+			try {
+				afo = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/Pack_Res_Action.ao")){
+			action = new Pack_Res_Action();
 			try {
 				afo = action.execute(request, response);
 			} catch (Exception e) {
