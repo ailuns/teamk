@@ -157,7 +157,7 @@ body {
 }
 div#wrap {
 	margin-top: 100px;
-	width: 100%;
+	width: 1000px;
 	height: 100%;
 	padding-top: 50px;
 	margin: 0 auto;
@@ -267,12 +267,12 @@ footer div#footer_bar {
 }
 footer div#footer_bar div {
 	width: 60%;
-	min-width: 850px;
+	min-width: 1000px;
 	margin: 0 auto;
 }
 footer div#footer_misc {
 	width: 60%;
-	min-width: 850px;
+	min-width: 1000px;
 	margin: 0 auto;
 	padding-top: 10px;
 	line-height: 1.5em;

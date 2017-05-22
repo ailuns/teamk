@@ -31,7 +31,6 @@ String wContent = (String)request.getAttribute("wContent");
     	//자바빈(BoardBean) 변수 =배열한칸 접근  배열변수.get()
     	BoardReplyBean rb = (BoardReplyBean)lrb.get(i);%>
 <tr>
-<td><%=i+1%></td>
 <td id="name"><%=rb.getId()%></td>
 <td id="content"><%=rb.getContent()%></td>
 <td id="delete"><%
@@ -40,7 +39,7 @@ if(id!=null){
 %>
 <form method="post" name="replydel" >
 <input type="hidden" name="num" value="<%=rb.getNum()%>">
-<input type="button" value="리플삭제" onclick="replydelete(<%=rb.getNum()%>)">
+<input type="button" value="×" onclick="replydelete(<%=rb.getNum()%>)">
 </form>
 <%}}%></td>
 <td id="date"><%=rb.getDate()%></td>
