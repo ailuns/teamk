@@ -55,10 +55,11 @@ if(count!=0){
 	</div>
 	<div id="left_menu">
 		<ul id="menu_list">
-			<li><a href="./main.bo">메인</a></li>
-			<li><a href="./PackList.po">패키지</a></li>
-			<li><a href="./Productlist.bo">상품</a></li>
-			<li><a href="./BoardList.bo">리뷰게시판</a></li>
-			<li><a href="./BoardList2.bo">Q&amp;A</a></li>
+			<li id="home"><a href="./main.bo">메인</a></li>
+			<li id="pack"><a href="./PackList.po">패키지</a></li>
+			<li id="shop"><a href="./Productlist.bo">상품</a></li>
+			<li id="rvw"><a href="./BoardList.bo">리뷰게시판</a></li>
+			<li id="qna"><a href="./BoardList2.bo">Q&amp;A</a></li>
 		</ul>
+		<!-- All icons by Adrien Coquet from the Noun Project -->
 	</div>
