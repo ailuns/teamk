@@ -3,13 +3,13 @@
     <%@ page import="net.pack.db.PackDAO" %>
     <%@ page import="net.pack.db.PackBean" %>
     <%@ page import="java.util.List" %>
+    <%@ page import="java.text.DecimalFormat" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link href="../css/inc.css" rel="stylesheet" type="text/css">
-<link href="../css/subpage.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="./js/jquery-3.2.0.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -68,40 +68,57 @@ img.ui-datepicker-trigger
 } 
 
 
-/* 탭 패키지  */
+/* 패키지 리스트  */
 
-#package_result
-{
-	margin : 0 auto;
-	margin-top : 50px;
-	width : 785px;
-	height : 630px;
-	border : 1px solid blue;
-}
 
-.img_size
-{
-	width : 200px;
-	height: 150px;
-}
-
-#package_list
-{
-	width : 500px;
-}
-
-#search_result #img_content
-{
-	float: left;
-}
-/* 탭 패키지  */
+/* 패키지 리스트  */
 
 .clear {
 	clear: both;
 }
 
-
-
+div#package_list {
+	width: 60%;
+	min-width: 850px;
+	height: 100%;
+	background-color: #fff;
+	margin: 0 auto;
+}
+div#package_list table {border-collapse: collapse;}
+div#package_list table tr {
+	padding-right: 10px;
+	text-align: left;
+}
+div#package_list table img {
+	width: 250px;
+	height: 150px;
+}
+div#package_list table #subject {
+	font-size: 20px;
+	font-weight: bold;
+	border-top: 1px solid #ccc;
+	width : 500px;
+	padding-left : 10px;
+}
+div#package_list table #context {
+	padding-left : 10px;
+}
+div#package_list table #price, #date {
+	font-size: 20px;
+	font-weight: bold;
+	border-left: 1px dotted #ddd;
+	border-top: 1px solid #ccc;
+	width : 200px;
+	text-align: center;
+}
+div#package_list table #context {text-align: justify;}
+div#pages {
+	width: 60%;
+	height: 40px;
+	margin: 0 auto;
+	background-color: #fff;
+	padding-top: 10px;
+}
 
 </style>
 </head>
@@ -116,6 +133,8 @@ img.ui-datepicker-trigger
 	int pageBlock = ((Integer)request.getAttribute("pageBlock")).intValue();
 	int startPage = ((Integer)request.getAttribute("startPage")).intValue();
 	int endPage = ((Integer)request.getAttribute("endPage")).intValue();
+	int currentPage = ((Integer)request.getAttribute("currentPage")).intValue();
+	int pagesize = ((Integer)request.getAttribute("pagesize")).intValue();
 	
 	String search = (String)request.getAttribute("search");
 	String startDate = (String)request.getAttribute("startDate");
@@ -129,66 +148,106 @@ img.ui-datepicker-trigger
 </div>
 <!--왼쪽 메뉴 -->
 
-<div id="wrap_packlist">
+<!-- <div id="wrap_packlist"> -->
 	<div id="wrap">
-	<div id="package_head">
-		<div id="package_title">패키지
+		<div id="package_head">
+			<div id="package_title">패키지
+			</div>
+			<div id="package_search">
+				<p>내게 맞는 패키지 검색하기</p>
+				<form action="./PackSearchAction.po" name="fr" method="get" id="scheduler" onsubmit="return input_chk()">
+					<label for="date_from">출발</label><input type="text" id="date_from" class="input_style" name="startDate" value="<%=startDate%>" required="yes">
+					<label for="date_to">도착</label><input type="text" id="date_to" class="input_style" name="endDate" value="<%=endDate%>" required="yes"><br><br>
+					<label for="city_search">지역</label><input type="text" id="city_search" name="city" value="<%=search %>" class="input_style" required="yes" placeholder="도시를 입력해주세요">
+					<input type="submit" value="검색" id="search_btn" class="input_style">
+				</form>
+			</div>
 		</div>
-		<div id="package_search">
-			<p>내게 맞는 패키지 검색하기</p>
-			<form action="./PackSearchAction.po" name="fr" method="get" id="scheduler" onsubmit="return input_chk()">
-				<label for="date_from">출발</label><input type="text" id="date_from" class="input_style" name="startDate" value="<%=startDate%>" required="yes">
-				<label for="date_to">도착</label><input type="text" id="date_to" class="input_style" name="endDate" value="<%=endDate%>" required="yes"><br><br>
-				<label for="city_search">지역</label><input type="text" id="city_search" name="city" value="<%=search %>" class="input_style" required="yes" placeholder="도시를 입력해주세요">
-				<input type="submit" value="검색" id="search_btn" class="input_style">
-			</form>
-		</div>
-	</div>
-	
-	<div id="clear"></div>
-	<p>검색조건에 해당하는 상품이 총 <%=count %>개 있습니다</p>
-	<hr>	
+		
+		<div id="clear"></div>
+		<p>검색조건에 해당하는 상품이 총 <%=count %>개 있습니다</p>
+		<hr>	
 
-	<div id="package_list">
-		<table>
-		<%
-	
-			PackBean pb;
-			if (count!=0)
-			{
-				for (int i = 0; i <list.size(); i++)
+		<div id="package_list">
+			<table>
+			<%
+				PackBean pb;
+				if (count!=0)
 				{
-					pb =(PackBean)list.get(i);
-		%>
-			<tr>
-				<td rowspan="2" id="thumb">
-					<a href="./PackContent.po?num=<%=pb.getNum() %>">
-					<img class="img_size" alt="" src="./upload/<%=pb.getFile1() %>">
-					</a>
-				</td>
-				<td id="subject">
-					<%=pb.getSubject() %>
-				</td>
-				<td rowspan="2"  id="price">
-					<span><%=pb.getCost() %></span>
-				</td>
-				<td rowspan="2"  id="price">
-					<span><%=pb.getDate() %></span>
-				</td>
-			</tr>
-			<tr>
-				<td id="context">
-					<span><%=pb.getIntro() %></span>
-				</td>
-			</tr>
-		<%
+					for (int i = 0; i <list.size(); i++)
+					{
+						pb =(PackBean)list.get(i);
+// 						int inValues = Integer.parseInt(junsu);
+						DecimalFormat Commas = new DecimalFormat("#,###");
+						String cost = (String)Commas.format(pb.getCost());
+			%>
+				<tr>
+					<td rowspan="2" id="thumb">
+						<a href="./PackContent.po?num=<%=pb.getNum() %>">
+						<img class="img_size" alt="" src="./upload/<%=pb.getFile1() %>">
+						</a>
+					</td>
+					<td id="subject">
+						<%=pb.getSubject() %>
+					</td>
+					<td rowspan="2"  id="price">
+						<span><%=cost %>원</span>
+					</td>
+					<td rowspan="2"  id="date">
+						<span><%=pb.getDate() %></span>
+					</td>
+				</tr>
+				<tr>
+					<td id="context">
+						<span><%=pb.getIntro() %></span>
+					</td>
+				</tr>
+			<%
+					}
 				}
-			}
-		%>
-		</table>
+			%>
+			</table>
+		</div>
+		<div id="pages">
+			<center>
+				<%
+					if (count != 0) {
+						// 페이지 갯수 구하기
+						pageCount = count / pagesize + (count % pagesize == 0 ? 0 : 1);
+						pageBlock = 10;
+						// 시작 페이지 구하기
+						startPage = ((currentPage - 1) / pageBlock) * pageBlock + 1;
+						// 끝페이지 구하기
+						endPage = startPage + pageBlock - 1;
+						if (endPage > pageCount) {
+							endPage = pageCount;
+						}
+						//이전
+						if (startPage > pageBlock) {
+				%>
+				<a href="./PackContent.po?pageNum=<%=startPage - pageBlock%>#QnA">[이전]</a>
+				<%
+					}
+
+						//페이지
+						for (int i = startPage; i <= endPage; i++) {
+				%>
+				<a href="./PackContent.po?repageNum=<%=i %>#QnA">[<%=i%>]</a>
+				<%
+					}
+
+						//다음
+						if (endPage < pageCount) {
+				%>
+				<a href="./PackContent.po?pageNum=<%=startPage + pageBlock%>#QnA">[다음]</a>
+				<%
+					}
+				}
+				%>
+			</center>
+		</div>
 	</div>
-	</div>
-</div>
+<!-- </div> -->
 <!--오른쪽 메뉴 -->
 <div>
 	<jsp:include page="../inc/rightMenu.jsp"></jsp:include>

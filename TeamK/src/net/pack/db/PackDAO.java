@@ -54,7 +54,7 @@ public class PackDAO {
 
 		try {
 			conn = getConnection();
-			sql = "select * from pack where area=? order by num desc limit ?, ?";
+			sql = "select * from pack where area=? and date > now() order by num desc limit ?, ?";
 			pstm = conn.prepareStatement(sql);
 			pstm.setString(1, area);
 			pstm.setInt(2, start - 1);
