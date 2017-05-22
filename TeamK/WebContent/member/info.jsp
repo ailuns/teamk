@@ -23,7 +23,7 @@
 	<div id="wrap">
 		<div id="member_head">
 			<div id="member_title">회원정보</div>
-			<div id="member_script">회원님이 입력하신 정보를 확인하고, 수정 및 삭제합니다.</div>
+			<div id="member_script"></div>
 		</div>
 		<div id="clear"></div>
 		<div id="member">

@@ -193,7 +193,7 @@ if (id != null) {
 	<div id="wrap">
 		<div id="member_head">
 			<div id="member_title">회원가입</div>
-			<div id="member_script">회원가입을 하시면 저희 사이트의 더 많은 기능을 이용하실 수 있습니다.</div>
+			<div id="member_script"></div>
 		</div>
 		<div id="clear"></div>
 		<div id="member">
