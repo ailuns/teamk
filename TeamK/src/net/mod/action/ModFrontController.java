@@ -88,6 +88,13 @@ public class ModFrontController extends HttpServlet{
 			afo = new ActionForward();
 			afo.setPath("/MyOrder/MyOrderPayed.jsp");
 			afo.setRedirect(false);
+		}else if(command.equals("/PM_Insert.mo")){
+			action = new PM_Insert();
+			try {
+				afo = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
 		}
 		if (afo != null) {
 			if (afo.isRedirect()) {

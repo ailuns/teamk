@@ -139,7 +139,7 @@ public class ModDAO {
 			rs = pstmt.executeQuery();
 			if(rs.next())i=rs.getInt(1)+1;
 			sql = "insert into thing_order "+
-				"values(?,?,?,?,?,?,?,?,?,?,?,?)";
+				"values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			pstmt=conn.prepareStatement(sql);
 			strtoday = sdf.format(c1);
 			pstmt.setInt(1, i);
@@ -154,6 +154,7 @@ public class ModDAO {
 			pstmt.setString(10, "");
 			pstmt.setTimestamp(11, c1);
 			pstmt.setInt(12, mtib.getStatus());
+			pstmt.setString(13, "");
 			pstmt.executeUpdate();
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -168,17 +169,17 @@ public class ModDAO {
 		}
 	}
 	
-	public void InsertPackOrder(ModTradeInfoBEAN mtib){
+	public int InsertPackOrder(ModTradeInfoBEAN mtib){
+		int i = 1;
 		try{
 			conn=getconn();
-			int i = 1;
 			sql ="select max(po_num) from pack_order";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			if(rs.next())i = rs.getInt(1)+1;
 			strtoday = sdf.format(c1);
 			sql = "insert into pack_order "+
-				"values(?,?,?,?,?,?,?,?,?,?)";
+				"values(?,?,?,?,?,?,?,?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, i);
 			pstmt.setString(2, mtib.getId());
@@ -190,7 +191,8 @@ public class ModDAO {
 			pstmt.setInt(8,mtib.getTi_num());
 			pstmt.setTimestamp(9, c1);
 			pstmt.setInt(10, mtib.getStatus());
-			pstmt.executeUpdate();				
+			pstmt.setString(11, "");
+			pstmt.executeUpdate();
 		}catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -201,7 +203,7 @@ public class ModDAO {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
+		}return i;
 	}
 	public ModTradeInfoBEAN CreateTradeInfo(ModTradeInfoBEAN mtib){
 		try{

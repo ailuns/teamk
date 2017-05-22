@@ -15,9 +15,13 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-	receive_info_hide();
-})
 
+})
+function insertPM(num){
+	window.open('./PM_Insert.mo?num='+num, '여행자 정보 입력', 
+			'left=200, top=100, width=600, height=640, scrollbars=yes, status=no,'+
+			'resizable=no, fullscreen=no, channelmode=no,location=no');
+}
 </script>
 </head>
 <body>
@@ -52,7 +56,7 @@ $(document).ready(function(){
 						<td><%=mpb.getCost() %>원</td>
 					</tr>
 					<tr>
-						<td><input type = "button" value = "여행자 정보 입력" onclick="insertPM"></td>
+						<td><input type = "button" value = "여행자 정보 입력" onclick="insertPM(<%=mpb.getNum()%>)"></td>
 						<td><input type = "button" value = "예약 취소"></td>
 					</tr>						
 				</table>
@@ -67,7 +71,7 @@ $(document).ready(function(){
 		
 	</div>
 	<%
-		if (pageNum != 1) {
+		if (pageNum > 1) {
 	%>
 	<a href="./MyPackOrderList.mo?pageNum=<%=pageNum - 1%>">[이전 페이지]</a>
 	<%
@@ -94,12 +98,12 @@ $(document).ready(function(){
 		if (pcount != pageNum) {
 	%>
 	<a href="./MyPackOrderList.mo?pageNum=<%=pageNum + 1%>">[다음 페이지]</a>
-	<br>
+	
 	<%
 		;
 		}
 	%>
-	<input type="button" value="Main"
+	<br><input type="button" value="Main"
 		onclick="location.href = './Main.bns'">
 </body>
 </html>

@@ -90,7 +90,7 @@ function Trans_Num_Fix(num){
 					<%} %>
 				</table>
 				<%} %>
-		<h5>배송지 정보</h5>
+		<h5>배송지 정보<%=mtib.getTi_num() %></h5>
 		<table border="1">
 			<tr>
 				<td><%=mtib.getName() %></td>

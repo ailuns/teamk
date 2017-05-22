@@ -480,6 +480,10 @@ public class AdminDAO {
 				mtib.setAddress1(rs2.getString("ti_receive_address1"));
 				mtib.setAddress2(rs2.getString("ti_receive_address2"));
 				mtib.setMobile(rs2.getString("ti_receive_mobile"));
+				mtib.setPayer(rs2.getString("ti_trade_payer"));
+				String []t_type=rs2.getString("ti_trade_type").split(",");
+				mtib.setTrade_type(t_type[0]);
+				mtib.setTrade_date(rs2.getTimestamp("ti_trade_date"));
 				rs2.close();
 				pstmt2.close();
 				conn2.close();

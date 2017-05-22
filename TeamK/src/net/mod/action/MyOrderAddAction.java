@@ -9,6 +9,8 @@ import javax.servlet.http.HttpSession;
 import net.bns.db.bnsDAO;
 import net.mod.db.ModDAO;
 import net.mod.db.ModTradeInfoBEAN;
+import net.mod.db.PMDAO;
+import net.mod.db.PackMemberBEAN;
 
 
 public class MyOrderAddAction implements Action{
@@ -26,6 +28,8 @@ public class MyOrderAddAction implements Action{
 		ModTradeInfoBEAN mtib = new ModTradeInfoBEAN();
 		ModDAO moddao = new ModDAO();
 		bnsDAO bnsdao = new bnsDAO();
+		PackMemberBEAN pm;
+		PMDAO pmdao = new PMDAO();
 		ActionForward afo = new ActionForward();
 		HttpSession session = request.getSession();
 		String id = (String)session.getAttribute("id");
@@ -84,7 +88,23 @@ public class MyOrderAddAction implements Action{
 		if(pch!=null){
 			for(int i = 0; i<pch.length;i++){
 				mtib=moddao.PBasketInfoToMTIB(Integer.parseInt(pch[i]),mtib);
-				moddao.InsertPackOrder(mtib);
+				int po_num = moddao.InsertPackOrder(mtib);
+				String [] a_or_c = mtib.getPack_count().split(",");
+				pm = new PackMemberBEAN();
+				pm.setPo_num(po_num);
+				pm.setPm_id(id);
+				pm.setLeader_check(1);
+				pm.setAdult_or_child(1);
+				pmdao.PM_Create(pm);
+				pm.setLeader_check(0);
+				for(int j = 0; j < Integer.parseInt(a_or_c[0])-1; j++){
+					pmdao.PM_Create(pm);
+				}
+				pm.setAdult_or_child(2);
+				for(int j = 0; j<Integer.parseInt(a_or_c[1]);j++){
+					pmdao.PM_Create(pm);
+				}
+				
 				check = 1;
 				//bnsdao.PackBasketDelete(Integer.parseInt(pch[i]));
 			}
@@ -100,9 +120,28 @@ public class MyOrderAddAction implements Action{
 		
 		if(pnum!=null){
 			mtib=moddao.CreateTradeInfo(mtib);
-			mtib.setOri_num(Integer.parseInt(pnum));
-			mtib.setPack_count(request.getParameter("adult")+","+request.getParameter("child"));
-			moddao.InsertPackOrder(mtib);
+			int num = Integer.parseInt(pnum);
+			mtib.setOri_num(num);
+			String adult = request.getParameter("adult");
+			String child= request.getParameter("child");
+			
+			mtib.setPack_count(adult+","+child);
+			int po_num = moddao.InsertPackOrder(mtib);
+			pm = new PackMemberBEAN();
+			pm.setPo_num(po_num);
+			pm.setPm_id(id);
+			pm.setLeader_check(1);
+			pm.setAdult_or_child(1);
+			pmdao.PM_Create(pm);
+			pm.setLeader_check(0);
+			for(int i = 0; i < Integer.parseInt(adult)-1; i++){
+				pmdao.PM_Create(pm);
+			}
+			pm.setAdult_or_child(2);
+			for(int i = 0; i<Integer.parseInt(child);i++){
+				pmdao.PM_Create(pm);
+			}
+			
 			check = 1;
 		}
 		afo.setPath("./MyOrderPayed.mo?check="+check);
