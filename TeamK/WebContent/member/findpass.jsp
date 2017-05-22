@@ -55,7 +55,7 @@ if (id != null) {
 	<div id="wrap">
 		<div id="member_head">
 			<div id="member_title">비밀번호 찾기</div>
-			<div id="member_script">입력하신 정보로 회원님의 비밀번호를 찾습니다.</div>
+			<div id="member_script"></div>
 		</div>
 		<div id="clear"></div>
 		<div id="member">

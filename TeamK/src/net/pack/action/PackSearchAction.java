@@ -33,7 +33,7 @@ public class PackSearchAction implements Action{
 		
 		System.out.println("count >> " + count);
 		//한페이지에 보여줄 글의 갯수
-		int pagesize = 6;
+		int pagesize = 10;
 		//시작행 구하기   1,  11,  21,  31,  41  ...... 
 		
 		//현재페이지가 몇페이지인지 가져오기
@@ -77,7 +77,8 @@ public class PackSearchAction implements Action{
 		request.setAttribute("search", search);
 		request.setAttribute("startDate", startDate);
 		request.setAttribute("endDate", endDate);
-		
+		request.setAttribute("currentPage", currentPage);
+		request.setAttribute("pagesize", pagesize);
 		
 		//ActoinForward 이동정보 담아서 로그인 이동
 		ActionForward forward = new ActionForward();

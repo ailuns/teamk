@@ -26,7 +26,7 @@
 	<div id="wrap">
 		<div id="member_head">
 			<div id="member_title">로그인</div>
-			<div id="member_script">로그인이 필요합니다.</div>
+			<div id="member_script"></div>
 		</div>
 		<div id="clear"></div>
 		<div id="member">

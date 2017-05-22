@@ -114,7 +114,6 @@ if(rcount!=0){lrb=(List)request.getAttribute("lrb");}//
     	//자바빈(BoardBean) 변수 =배열한칸 접근  배열변수.get()
     	BoardReplyBean rb = (BoardReplyBean)lrb.get(i);%>
 <tr>
-<td><%=i+1%></td>
 <td id="name"><%=rb.getId()%></td>
 <td id="content"><%=rb.getContent()%></td>
 <td id="delete"><%
@@ -122,7 +121,7 @@ if(id!=null){
 	if(id.equals(rb.getId())||id.equals("admin")){ 
 %>
 <form method="post" name="replydel">
-<input type="button" value="리플삭제" onclick="replydelete(<%=rb.getNum()%>)">
+<input type="button" value="×" onclick="replydelete(<%=rb.getNum()%>)">
 </form>
 <%}}%></td>
 <td id="date"><%=rb.getDate()%></td>

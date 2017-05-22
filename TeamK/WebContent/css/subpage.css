@@ -9,7 +9,7 @@ div#clear {clear: both;}
 div#datepicker {
 	height: 300px;
 	width: 60%;
-	min-width: 850px;
+	min-width: 1000px;
 	margin: 0 auto;
 }
 div#calendar, div#scheduler {float: left;}
@@ -142,7 +142,7 @@ div#scheduler form input[type=submit]:hover {background-color: #09f;}
 div#package_show {
 	height: 200px;
 	width: 60%;
-	min-width: 850px;
+	min-width: 1000px;
 	margin: 0 auto;
 	margin-top: 15px;
 }
@@ -196,7 +196,7 @@ a#pack1 #pkpr, a#pack2 #pkpr, a#pack3 #pkpr {
 div#goods_show {
 	height: 200px;
 	width: 60%;
-	min-width: 850px;
+	min-width: 1000px;
 	margin: 0 auto;
 	margin-top: 15px;
 	background-color: #fff;
@@ -204,7 +204,7 @@ div#goods_show {
 div#review_show {
 	height: 200px;
 	width: 60%;
-	min-width: 850px;
+	min-width: 1000px;
 	margin: 0 auto;
 	margin-top: 15px;
 	background-color: #fff;
@@ -247,7 +247,7 @@ div#review_show div table td#date {width: 70px;}
 div#package_head {
 	height: 150px;
 	width: 60%;
-	min-width: 850px;
+	min-width: 1000px;
 	margin: 0 auto;
 }
 div#package_title, div#package_search {float: left;}
@@ -294,7 +294,7 @@ div#package_search form input[type=submit]:hover {
 }
 div#package_feat {
 	width: 60%;
-	min-width: 850px;
+	min-width: 1000px;
 	height: 300px;
 	background-color: #222;
 	margin: 0 auto;
@@ -362,7 +362,7 @@ div#package_feat a {}
 
 div#package_tab {
 	width: 60%;
-	min-width: 850px;
+	min-width: 1000px;
 /* 	background-color: #fff; */
 	margin : 20px auto;
 	height: 1000px;
@@ -388,7 +388,7 @@ div#package_tab .tab_container {
 	background-color : #F6F6F6;
 	float: left;
 	width: 100%;
-	min-width: 850px;
+	min-width: 1000px;
 	min-height: 600px;
 	margin-top : 20px;
 	text-align: center;
@@ -414,7 +414,7 @@ div#package_tab .tab_content a:VISITED {
 div#member_head {
 	height: 150px;
 	width: 60%;
-	min-width: 850px;
+	min-width: 1000px;
 	margin: 0 auto;
 	margin-top: 100px;
 }
@@ -438,7 +438,7 @@ div#member_script {
 }
 div#member {
 	width: 60%;
-	min-width: 850px;
+	min-width: 1000px;
 	margin: 0 auto;
 	background-color: #fff;
 	padding: 100px 0;
@@ -628,7 +628,7 @@ div#m_delete_form form input[type="button"] {}
 div#board_head {
 	height: 150px;
 	width: 60%;
-	min-width: 850px;
+	min-width: 1000px;
 	margin: 0 auto;
 	margin-top: 100px;
 }
@@ -652,7 +652,7 @@ div#rvw_script {
 }
 div#board {
 	width: 60%;
-	min-width: 850px;
+	min-width: 1000px;
 	margin: 0 auto;
 	background-color: #fff;
 	padding: 20px;
@@ -721,10 +721,6 @@ div#board div#board_content table td#content {
 }
 div#board div#board_content table td#content img {max-width: 100%;}
 div#board div#board_content table#reply {text-align: justify;}
-div#board div#board_content table#reply td#num {
-	width: 50px;
-	font-size: 12px;
-}
 div#board div#board_content table#reply td#name {
 	width: 160px;
 	font-weight: bold;
@@ -738,11 +734,11 @@ div#board div#board_content table#reply td#content {padding-left: 10px;}
 div#board div#board_content table#reply td#delete {
 	width: 30px;
 }
-div#board div#board_content table#reply td#delete form input[type="submit"] {
+div#board div#board_content table#reply td#delete form input[type="button"] {
 	border: 1px solid #fff;
 	background-color: #fff;
 }
-div#board div#board_content table#reply td#delete form input[type="submit"]:HOVER {
+div#board div#board_content table#reply td#delete form input[type="button"]:HOVER {
 	color: #f00;
 	cursor: pointer;
 }
@@ -763,10 +759,10 @@ div#board div#board_content form#reply span {
 	padding-top: 20px;
 	text-align: left;
 }
-div#board div#board_content form#reply div#textarea {
-	background-color: pink;
+div#board div#board_content form#reply textarea {
 	position: absolute;
 	left: 160px;
+	width: 625px;
 }
 div#board div#board_content form#reply input[type="submit"],
 div#board div#board_content form#reply input[type="button"] {
