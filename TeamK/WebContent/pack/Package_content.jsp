@@ -433,14 +433,13 @@
 	width: 980px; 
 	min-height: 1000px;
 	border: 5px solid red;
-	margin-top : 50px;
- 	margin: 0 auto;
+ 	margin: 50px auto;
 	padding-top: 50px;
 	background-color: #eee;
 } 
 
 
-/* 이미지, 가격, 인원수 정보 부분 */
+/* 이미지 정보 부분 */
 #top {
 	width: 960px;
 }
@@ -478,6 +477,10 @@
 }
 /* 이미지에 마우스를 올렸을 때 이벤트 */
 
+/* 이미지 정보 부분 */
+
+
+/* 인원, 가격 정보 부분 */
 #contentdiv1 {
 	width: 400px;
 	height: 400px;
@@ -486,8 +489,8 @@
 	margin-left : 50px;
 }
 
+/* 인원, 가격 정보 부분 */
 
-/* 이미지, 가격, 인원수 정보 부분 */
 	
 	
 
@@ -545,6 +548,35 @@
 	min-height: 300px;
 	border: 3px solid pink;
 }
+
+#replyTable
+{
+	background-color: white;
+	
+}
+
+/* tr:nth-child(odd)  */
+/* { */
+/* 	background-color: #BFBFBF; */
+/* } */
+
+#replyContent
+{	
+	width: 700px;
+	height : 50px;
+}
+
+#recontent, #contentup, #content
+{
+	width : 600px;
+	height : 70px;
+}
+
+#replyWrite
+{
+	background-color: white;
+}
+
 /* 상품 문의 */
 
 
@@ -566,7 +598,6 @@
 	text-align: center;
 	font-size: 0.8em;
 }
-
 
 #banner
 {
@@ -616,39 +647,10 @@
 {
 	cursor: pointer;
 }
-
-
-#replyTable
-{
-	background-color: white;
-	
-}
-
-/* tr:nth-child(odd)  */
-/* { */
-/* 	background-color: #BFBFBF; */
-/* } */
-
-#replyContent
-{	
-	width: 700px;
-	height : 50px;
-}
-
-#recontent, #contentup, #content
-{
-	width : 600px;
-	height : 70px;
-}
-
-#replyWrite
-{
-	background-color: white;
-}
-
-
 /* 추천상품 배너 */
 
+
+/* 화면이동 리모컨 */
 #remote_control
 {
 	padding-left : 20px;
@@ -698,10 +700,9 @@
 	text-decoration: none;
 	font-size: 0.8em;	
 }
-
+/* 화면이동 리모컨 */
 
 </style>
-
 
 	<div id="remote_control">
 		<div id="remote_close">x</div>
@@ -720,7 +721,7 @@
 			</tr>
 		</table>
 	</div>
-
+	
 	<div id="banner_sub">추천상품</div>
 	<div id="banner">
 		<div id="close">close</div>
@@ -749,9 +750,13 @@
 			<div id="package_search">
 				<p>내게 맞는 패키지 검색하기</p>
 				<form action="./PackSearchAction.po" name="fr" method="get" id="scheduler" onsubmit="return input_chk()">
-					<label for="date_from">출발</label><input type="text" id="date_from" class="input_style" name="startDate" required="yes">
-					<label for="date_to">도착</label><input type="text" id="date_to" class="input_style" name="endDate" required="yes"><br><br>
-					<label for="city_search">지역</label><input type="text" id="city_search" name="city" class="input_style" required="yes" placeholder="도시를 입력해주세요">
+					<label for="date_from">출발</label>
+					<input type="text" id="date_from" class="input_style" name="startDate" required="yes">
+					<label for="date_to">도착</label>
+					<input type="text" id="date_to" class="input_style" name="endDate" required="yes">
+					<br><br>
+					<label for="city_search">지역</label>
+					<input type="text" id="city_search" name="city" class="input_style" required="yes" placeholder="도시를 입력해주세요">
 					<input type="submit" value="검색" id="search_btn" class="input_style">
 				</form>
 			</div>
@@ -784,8 +789,8 @@
 			<div id="imgdiv">
 				<!--첫번째 이미지는 무조건 첨부하게 제어 -->
 				<img src="./upload/<%=PB.getFile1() %>" id="main">
+				<!--첫번째 이미지는 무조건 첨부하게 제어 -->
 				<ul class="bxslider">
-					<!--첫번째 이미지는 무조건 첨부하게 제어 -->
 					<li><img src="./upload/<%=PB.getFile1() %>" style="box-sizing : border-box; border : 5px solid #A6A6A6;"></li>
 					<%
 					// 2~5번째 이미지는 null이 아닐 경우 출력 o   null 경우 출력 x
@@ -810,20 +815,8 @@
 				<form name="fr" method="post">
 					<table border="1">
 						<tr>
-							<td width="50px">성인</td>
-							<td width="100px">200,000</td>
-						</tr>
-						<tr>
-							<td>아동</td>
-							<td>100,000</td>
-						</tr>
-					</table>
-					<table border="1">
-						<tr>
-							<td width="75px">성인</td>
-							<td width="75px">아동</td>
-						</tr>
-						<tr>
+							<td style="width:100px; text-align: center;">성인</td>
+							<td style="width:150px; text-align: center;">200,000</td>
 							<td>
 								<!--최대 10명까지 선택가능하게 생성 -->
 								<select id="adult" name="adult" onchange="people_Calc(1)">
@@ -837,6 +830,10 @@
 								</select>
 								<!--최대 10명까지 선택가능하게 생성 -->
 							</td>
+						</tr>
+						<tr>
+							<td>아동</td>
+							<td>100,000</td>
 							<td>
 							<!--초기값은 1명까지 선택되게 생성 -->
 							<select id="child" name="child" onchange="people_Calc()">
@@ -848,9 +845,16 @@
 						</tr>
 						<tr>
 							<td>합계</td>
-							<td colspan="2"><p id="p">200000</p> 
-							
-							<script type="text/javascript">
+							<td colspan="2"><p id="p">200000</p></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><input type="submit" value="찜하기" onclick="submit_fun(1)"></td>
+							<td><input type="submit" value="예약하기" onclick="submit_fun(2)"></td>
+						</tr>
+					</table>
+					
+					<script type="text/javascript">
 							// 선택된 인원 수에 따라 가격 변경, 어른 인원에 따라 아이인원제한
 							function people_Calc(num){			
 								$(document).ready(function(){
@@ -870,13 +874,7 @@
 									$('#p').html(val1 * 200000 + val2 * 100000);
 								});
 							}
-						</script></td>
-						</tr>
-						<tr>
-							<td><input type="submit" value="찜하기" onclick="submit_fun(1)"></td>
-							<td><input type="submit" value="예약하기" onclick="submit_fun(2)"></td>
-						</tr>
-					</table>
+					</script>
 				</form>
 			</div>
 			<!--인원수, 가격 -->
@@ -1098,11 +1096,11 @@
 						{
 					%>
 					<td>
-						<textarea type="text" id="content" name="content" class="box" style="width:800px; height:50px;" placeholder="로그인이 필요한 서비스입니다" readonly onclick="loginChk()"></textarea>
+						<textarea type="text" id="content" name="content" class="box" style="width:790px; height:50px;" placeholder="로그인이 필요한 서비스입니다" readonly onclick="loginChk()"></textarea>
 					</td>
 					<tr>
 							<td>
-								<div style="text-align:right; margin-top:15px; width:800px;">
+								<div style="text-align:right; margin-top:15px; width:790px;">
 									<input type="checkbox" class="secretChk" name="secretChk" value="1" onclick="loginChk()">비밀글
 									<input type="button" value="문의글쓰기" onclick="loginChk()">
 								</div>
@@ -1115,14 +1113,14 @@
 						{
 					%>
 						<td>
-							<textarea type="text" id="content" name="content" class="box" style="width:800px; height:50px;"></textarea>
+							<textarea type="text" id="content" name="content" class="box" style="width:790px; height:50px;"></textarea>
 							<input type="hidden" id="id" name="id" class="box" value="<%=user_id %>">
 							<input type="hidden" name="pageNum" value="<%=repageNum%>">
 							<input type="hidden" id="num" name="num" value="<%=PB.getNum() %>">
 						</td>
 						<tr>
 							<td>
-								<div style="text-align:right; margin-top:15px; width:800px;">
+								<div style="text-align:right; margin-top:15px; width:790px;">
 									<input type="checkbox" class="secretChk" name="secretChk" value="1">비밀글
 									<input type="button" value="문의글쓰기" onclick="ReplyWrite(<%=PB.getNum() %>)">
 								</div>

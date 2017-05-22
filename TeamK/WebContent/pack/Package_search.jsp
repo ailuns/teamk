@@ -16,7 +16,6 @@
 <script>
 	jQuery(document).ready(function($){
 		
-		
 		// 달력 관련 소스
 		$("#date_from").datepicker({
 			dateFormat: 'yy-mm-dd',    // 날짜 포맷 형식
@@ -29,7 +28,6 @@
 // 	        buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
 	        onClose: function(selectedDate){		// 닫힐 때 함수 호출
 	        	$("#date_to").datepicker("option", "minDate", selectedDate);    // #date_to의 최소 날짜를 #date_from에서 선택된 날짜로 설정
-	    		$('img.ui-datepicker-trigger').attr('align', 'absmiddle');
 	        	}
 		});
 		
@@ -44,52 +42,9 @@
 // 	        buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
 	        onClose: function(selectedDate){		// 닫힐 때 함수 호출
 	        	$("#date_from").datepicker("option", "maxDate", selectedDate);   // #date_from의 최대 날짜를 #date_to에서 선택된 날짜로 설정
-	    		$('img.ui-datepicker-trigger').attr('align', 'absmiddle');
 	        	}
 		});
-		
-	    $("#txt_prodStart").datepicker();
-	    $('img.ui-datepicker-trigger').attr('align', 'absmiddle');
-	    
 
-	    
-	    // 탭 관련 소스
-		$(".tab_content").hide();  // 탭 내용 전체 숨김
-		$(".tab_content:first").show();  // 탭 첫번째 내용만 보이게
-		
-		$('ul li').click(function() {
-			$('.tab_color').css("background", "white");  //탭부분 배경색 하얀색으로
-			$(".tab_content").hide();					// 탭 내용 전체 숨김
-			$(this).css("background", "#BDBDBD");		// 클릭된 탭부분 배경색 #BDBDBD으로
-			var activeTab = $(this).attr("name");		// 클릭된 탭부분 name 속성값 가져와서 저장
-			$("#" + activeTab).show();					// 해당 탭내용 부분을 보여준다
-		});
-		
-		
-		
-		function input_chk()
-		{
-			var city = $("#city_search").val();
-			var date_f = $("#date_from").val();
-			var date_t = $("#date_to").val();
-			
-			if(city == "")
-			{
-				alert("도시명을 입력해주세요");
-				return false;
-			}
-			else if(date_f == "")
-			{
-				alert("날짜를 입력해주세요");
-				return false;
-			}
-			else if(date_t == "")
-			{
-				alert("날짜를 입력해주세요");
-				return false;
-			}
-			return false;
-		}
 	});
 
 </script>
@@ -103,53 +58,14 @@ img.ui-datepicker-trigger
 }
 
 
-/* #wrap */
-/* { */
-/* 	width : 1000px; */
-/* 	min-height : 1000px; */
-/* 	border : 1px solid black; */
-/* 	margin : 0 auto; */
-/* 	padding-top : 50px; */
-/* } */
-
-
-/* 검색  */
-
-#search_div
-{
-	width : 450px;
-	height : 200px;
-	padding : 10px;
-	background-color: #D6F0FF;
-	margin : 0 auto;
-}
-
-#city_search
-{
-	width : 430px;
-}
-
-
-.input_style
-{
-	height : 25px;
-	margin-bottom : 10px;
-	padding-left : 10px;
-	border-radius : 1px;
-}
-
-#search_btn
-{
-	cursor : pointer;
-	width : 200px;
-	height : 35px;
-	margin-left : 100px;
-	background-color: #B2CCFF;
-}
-/* 검색  */
-
-
-
+#wrap_packlist 
+{ 
+	width : 1300px; 
+	min-height : 1000px; 
+	border : 1px solid black; 
+	margin : 0 auto; 
+	padding-top : 50px; 
+} 
 
 
 /* 탭 패키지  */
@@ -169,7 +85,10 @@ img.ui-datepicker-trigger
 	height: 150px;
 }
 
-
+#package_list
+{
+	width : 500px;
+}
 
 #search_result #img_content
 {
@@ -210,7 +129,8 @@ img.ui-datepicker-trigger
 </div>
 <!--왼쪽 메뉴 -->
 
-<div id="wrap">
+<div id="wrap_packlist">
+	<div id="wrap">
 	<div id="package_head">
 		<div id="package_title">패키지
 		</div>
@@ -224,6 +144,7 @@ img.ui-datepicker-trigger
 			</form>
 		</div>
 	</div>
+	
 	<div id="clear"></div>
 	<p>검색조건에 해당하는 상품이 총 <%=count %>개 있습니다</p>
 	<hr>	
@@ -251,6 +172,9 @@ img.ui-datepicker-trigger
 				<td rowspan="2"  id="price">
 					<span><%=pb.getCost() %></span>
 				</td>
+				<td rowspan="2"  id="price">
+					<span><%=pb.getDate() %></span>
+				</td>
 			</tr>
 			<tr>
 				<td id="context">
@@ -262,6 +186,7 @@ img.ui-datepicker-trigger
 			}
 		%>
 		</table>
+	</div>
 	</div>
 </div>
 <!--오른쪽 메뉴 -->

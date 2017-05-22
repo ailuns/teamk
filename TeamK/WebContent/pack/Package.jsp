@@ -28,9 +28,9 @@
 	        //showOn: "both",		// 버튼을 표시      both : input과 buttom 둘다 클릭 시 달력 표시           bottom  :  buttom 클릭 했을 때만 달력 표시
 	        //buttonImage: "./img/calendar.png",   // 버튼에 사용될 이미지
 	        //buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
-	        onClose: function(selectedDate){		// 닫힐 때 함수 호출
+	        onClose: function(selectedDate)    // 닫힐 때 함수 호출
+	        {		
 	        	$("#date_to").datepicker("option", "minDate", selectedDate);    // #date_to의 최소 날짜를 #date_from에서 선택된 날짜로 설정
-	    		$('img.ui-datepicker-trigger').attr('align', 'absmiddle');
 	        }
 		});
 		
@@ -43,14 +43,11 @@
 	        //showOn: "both",			// 버튼을 표시      both : input과 buttom 둘다 클릭 시 달력 표시           bottom  :  buttom 클릭 했을 때만 달력 표시
 	        //buttonImage: "./img/calendar.png",   // 버튼에 사용될 이미지
 	        //buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
-	        onClose: function(selectedDate){		// 닫힐 때 함수 호출
+	        onClose: function(selectedDate)// 닫힐 때 함수 호출
+	        {		
 	        	$("#date_from").datepicker("option", "maxDate", selectedDate);   // #date_from의 최대 날짜를 #date_to에서 선택된 날짜로 설정
-	    		$('img.ui-datepicker-trigger').attr('align', 'absmiddle');
-	        	}
+        	}
 		});
-		
-	    $("#txt_prodStart").datepicker();
-	    $('img.ui-datepicker-trigger').attr('align', 'absmiddle');
 
 	    // 탭 관련 소스
 		$(".tab_content").hide();  // 탭 내용 전체 숨김
@@ -142,6 +139,15 @@
 	
 
 </script>
+
+<style type="text/css">
+img.ui-datepicker-trigger {
+	cursor : pointer;
+	margin-left : 5px;
+}
+
+</style>
+
 </head>
 <body>
 <!-- 왼쪽 메뉴 -->
@@ -298,7 +304,6 @@
 			}
 		%>
 		</div>
-		<div class="clear"></div>
 		<!-- 탭 내용 -->
 	</div>
 	<%
@@ -319,7 +324,9 @@
 	</div>
 	<!--오른쪽 메뉴 -->
 	<!--푸터 메뉴 -->
+	<div>
 		<jsp:include page="../inc/footer.jsp"></jsp:include>
+	</div>
 	<!--푸터 메뉴 -->
 	
 </body>
