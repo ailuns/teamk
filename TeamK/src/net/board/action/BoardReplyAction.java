@@ -24,7 +24,6 @@ public class BoardReplyAction implements Action {
 		int rNum = Integer.parseInt(request.getParameter("rNum"));
 		String pageNum = request.getParameter("pageNum");
 		
-		
 		rb.setId(rid);
 		rb.setContent(rcontent);
 		rb.setGroup_del(rNum);

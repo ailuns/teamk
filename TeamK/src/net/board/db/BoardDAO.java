@@ -296,7 +296,7 @@ public class BoardDAO {
 		return count;
 	}//getBoardCount3	
 	
-	public int getBoardCount3(String search){
+	public int getBoardCount3(String search, String ss){
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		String sql="";
@@ -306,7 +306,7 @@ public class BoardDAO {
 			//1,2 디비연결 메서드 호출
 			con = com.connect();
 			//3 sql  함수 count(*) 이용
-			sql="select count(*) from board where type=3 and subject like ?";
+			sql="select count(*) from board where type=3 and " +ss+ " like ?";
 			//4 rs 실행 저장
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "%"+search+"%");
@@ -590,7 +590,7 @@ public List getBoardList3(int startRow,int pageSize){
 }//getBoardList2
 
 //(search)
-public List getBoardList3(int startRow,int pageSize,String search){
+public List getBoardList3(int startRow,int pageSize,String search, String ss){
 
 Connection con=null;
 PreparedStatement pstmt=null;
@@ -605,7 +605,7 @@ try {
 	  // 최근글위로 re_ref 그룹별내림차순 정렬 re_seq오름차순   
 	  //     re_ref desc,re_seq asc
       // 글잘라오기   limit 시작행-1,개수
-	sql="select * from board where subject like ? and type=3 order by re_ref desc limit ?,?";
+	sql="select * from board where " +ss+ " like ? and type=3 order by re_ref desc limit ?,?";
 	pstmt=con.prepareStatement(sql);
 	pstmt.setString(1, "%"+search+"%");
 	pstmt.setInt(2, startRow-1);//시작행-1

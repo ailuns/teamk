@@ -78,6 +78,7 @@ if(count!=0){
     <option value="content">내용</option>
     <option value="type_select">분류</option>
 </select>
+
 <input type="text" name="search" class="input_box">
 <input type="submit" value="검색" class="btn">
 </form>
