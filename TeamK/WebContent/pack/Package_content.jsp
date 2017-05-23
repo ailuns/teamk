@@ -5,6 +5,7 @@
 <%@ page import="java.util.List"%>
 <%@ page import="net.reply.db.ReplyDAO"%>
 <%@ page import="net.reply.db.ReplyBean"%>
+<%@ page import="net.pack.db.CategoryBean" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -26,6 +27,8 @@
 		user_id = "";
 	
 	List List = (List)request.getAttribute("replylist");
+	List CategoryList = (List)request.getAttribute("CategoryList");
+	
 	int count = ((Integer)request.getAttribute("count")).intValue();
 	String repageNum = (String)request.getAttribute("repageNum");
 	int pageCount = ((Integer)request.getAttribute("pageCount")).intValue();
@@ -37,7 +40,46 @@
 %>
 <body>
 	<script>
-
+	jQuery(document).ready(function($){
+	
+		// 달력 관련 소스
+		$("#date_from").datepicker({
+			dateFormat: 'yy-mm-dd',    // 날짜 포맷 형식
+			minDate : 0,			   // 최소 날짜 설정      0이면 오늘부터 선택 가능
+			numberOfMonths: 2,		   // 보여줄 달의 갯수
+			dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],  // 일(Day) 표기 형식
+			monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],   // 월(Month) 표기 형식
+			//showOn: "both",		// 버튼을 표시      both : input과 buttom 둘다 클릭 시 달력 표시           bottom  :  buttom 클릭 했을 때만 달력 표시
+			//buttonImage: "./img/calendar.png",   // 버튼에 사용될 이미지
+			//buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
+			onClose: function(selectedDate){		// 닫힐 때 함수 호출
+				if (selectedDate == "")  // 시작날 선택 안했을때
+				{
+					$("#to").datepicker("option", "minDate", 0);   		// #date_to의 최소 날짜를 오늘 날짜로 설정
+				}
+				else					// 시작날 선택 했을때
+				{
+					$("#to").datepicker("option", "minDate", selectedDate);    // #date_to의 최소 날짜를 #date_from에서 선택된 날짜로 설정
+				}
+			}
+		});
+		
+		
+		$("#date_to").datepicker({
+			dateFormat: 'yy-mm-dd',    // 날짜 포맷 형식
+			numberOfMonths: 2,		   // 보여줄 달의 갯수
+	        dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],  // 일(Day) 표기 형식
+	        monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],   // 월(Month) 표기 형식
+	        //showOn: "both",			// 버튼을 표시      both : input과 buttom 둘다 클릭 시 달력 표시           bottom  :  buttom 클릭 했을 때만 달력 표시
+	        //buttonImage: "./img/calendar.png",   // 버튼에 사용될 이미지
+	        //buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
+	        onClose: function(selectedDate)// 닫힐 때 함수 호출
+	        {		
+	       		$("#date_from").datepicker("option", "maxDate", selectedDate);   // #date_from의 최대 날짜를 #date_to에서 선택된 날짜로 설정
+		   	}
+		});
+	});
+	
 	// 찜하기, 예약하기 버튼 클릭 시 각각 버튼 마다 이동할 페이지
 	function submit_fun(i)
 	{
@@ -413,6 +455,17 @@
 		    return;
 	}
 
+	// 패키지 검색 시 지역 선택
+	function input_chk()
+    {
+    	var val = $("#area option:selected").val(); 
+    	if (val == "")
+		{
+    		alert("지역을 선택해주세요");
+	    		return false;
+		}
+		return true;
+    }
 
 </script>
 
@@ -424,6 +477,12 @@
 <!-- 구글맵에 필요한 스크립트 -->
 
 <style type="text/css">
+
+img.ui-datepicker-trigger {
+	cursor : pointer;
+	margin-left : 5px;
+}
+
 
 .clear {
 	clear: both;
@@ -753,10 +812,22 @@
 					<label for="date_from">출발</label>
 					<input type="text" id="date_from" class="input_style" name="startDate" required="yes">
 					<label for="date_to">도착</label>
-					<input type="text" id="date_to" class="input_style" name="endDate" required="yes">
+					<input type="text" id="date_to" class="input_style" name="endDate">
 					<br><br>
 					<label for="city_search">지역</label>
-					<input type="text" id="city_search" name="city" class="input_style" required="yes" placeholder="도시를 입력해주세요">
+					<select id="area" name="area">
+						<option value="">선택하세요</option>
+						<%
+							CategoryBean cb;
+							for (int i = 0; i < CategoryList.size(); i++)
+							{
+								cb =(CategoryBean)CategoryList.get(i);
+						%>	
+							<option value="<%=cb.getCar_name() %>"><%=cb.getCar_name() %></option>
+						<%
+							}
+						%>
+					</select>
 					<input type="submit" value="검색" id="search_btn" class="input_style">
 				</form>
 			</div>

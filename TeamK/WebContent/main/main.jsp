@@ -25,34 +25,6 @@
       dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
       monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
     });
-    //Scheduler
-//     var dateFormat = "mm/dd/yy",
-//     from = $( "#from" ).datepicker({
-//       defaultDate: "+1w",
-//       changeMonth: true,
-//       numberOfMonths: 2
-//     })
-//       .on( "change", function() {
-//         to.datepicker( "option", "minDate", getDate( this ) );
-//       }),
-//     to = $( "#to" ).datepicker({
-//       defaultDate: "+1w",
-//       changeMonth: true,
-//       numberOfMonths: 2
-//     })
-//     .on( "change", function() {
-//       from.datepicker( "option", "maxDate", getDate( this ) );
-//     });
-
-//     function getDate( element ) {
-//       var date;
-//       try {
-//         date = $.datepicker.parseDate( dateFormat, element.value );
-//       } catch( error ) {
-//         date = null;
-//       }
-//     return date;
-//     }
 
 	//Scheduler
 	$("#from").datepicker({
@@ -65,13 +37,19 @@
         //buttonImage: "./img/calendar.png",   // 버튼에 사용될 이미지
         //buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
         onClose: function(selectedDate){		// 닫힐 때 함수 호출
-        	$("#to").datepicker("option", "minDate", selectedDate);    // #date_to의 최소 날짜를 #date_from에서 선택된 날짜로 설정
+        	if (selectedDate == "")  // 시작날 선택 안했을때
+       		{
+        		$("#to").datepicker("option", "minDate", "0");   		// #date_to의 최소 날짜를 오늘 날짜로 설정
+       		}
+        	else					// 시작날 선택 했을때
+        	{
+        		$("#to").datepicker("option", "minDate", selectedDate);    // #date_to의 최소 날짜를 #date_from에서 선택된 날짜로 설정
+        	}
         }
 	});
 	
 	$("#to").datepicker({
 		dateFormat: 'yy-mm-dd',    // 날짜 포맷 형식
-		minDate : 0,			   // 최소 날짜 설정      0이면 오늘부터 선택 가능
 		numberOfMonths: 2,		   // 보여줄 달의 갯수
         dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],  // 일(Day) 표기 형식
         monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],   // 월(Month) 표기 형식

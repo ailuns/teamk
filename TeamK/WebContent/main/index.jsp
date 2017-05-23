@@ -40,7 +40,7 @@
 <!-- 			<a href="#" id="login">　로그인</a><a href="#" id="join">회원가입</a> -->
 <!-- 		</div> -->
 		<!--로그인 & 회원가입-->
-		<div id="wrap">
+	<div id="index_wrap">
 		<div id="main_menu_box">
 		<%
 		String id = (String) session.getAttribute("id");
