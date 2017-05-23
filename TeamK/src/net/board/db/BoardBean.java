@@ -17,7 +17,16 @@ public class BoardBean {
 	  private int type; //type 1일때는 리뷰게시판, 2일때는 Q&A 게시판 
 	  private int re_ref; //게시판에 표시되는 글번호(글쓸때마다 type에 따라서 각각 1씩 증가)
 	  private String email; // Q&A게시판에 글남길때 답변받을 메일주소
+	  private String type_select;
 	  
+	  
+	
+	public String getType_select() {
+		return type_select;
+	}
+	public void setType_select(String type_select) {
+		this.type_select = type_select;
+	}
 	public int getNum() {
 		return num;
 	}

@@ -45,7 +45,7 @@ public class BoardDAO {
 				re_ref=rs.getInt(1)+1;
 			}
 			//3 sql insert now()
-			sql="insert into board(num,id,subject,content,readcount,date,file1,file2,file3,file4,file5,type,re_ref) values(?,?,?,?,?,now(),?,?,?,?,?,?,?)";
+			sql="insert into board(num,id,subject,content,readcount,date,file1,file2,file3,file4,file5,type,re_ref,type_select) values(?,?,?,?,?,now(),?,?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1,num);
 			pstmt.setString(2,bb.getId());
@@ -59,6 +59,7 @@ public class BoardDAO {
 			pstmt.setString(10,bb.getFile5());
 			pstmt.setInt(11,bb.getType());
 			pstmt.setInt(12,re_ref); //re_ref 답변글 들여쓰기 일반글 들여쓰기 없음
+			pstmt.setString(13, bb.getType_select());
 			//4  실행
 			pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -193,7 +194,7 @@ public class BoardDAO {
 		return count;
 	}//getBoardCount	
 	
-	public int getBoardCount(String search){
+	public int getBoardCount(String search, String ss){
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		String sql="";
@@ -203,7 +204,7 @@ public class BoardDAO {
 			//1,2 디비연결 메서드 호출
 			con = com.connect();
 			//3 sql  함수 count(*) 이용
-			sql="select count(*) from board where type=1 and subject like ?";
+			sql="select count(*) from board where type=1 and " +ss+ " like ?";
 			//4 rs 실행 저장
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "%"+search+"%");
@@ -244,7 +245,7 @@ public class BoardDAO {
 		return count;
 	}//getBoardCount2	
 	
-	public int getBoardCount2(String search){
+	public int getBoardCount2(String search, String ss){
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		String sql="";
@@ -254,7 +255,7 @@ public class BoardDAO {
 			//1,2 디비연결 메서드 호출
 			con = com.connect();
 			//3 sql  함수 count(*) 이용
-			sql="select count(*) from board where type=2 and subject like ?";
+			sql="select count(*) from board where type=2 and " + ss + " like ?";
 			//4 rs 실행 저장
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "%"+search+"%");
@@ -361,6 +362,7 @@ public class BoardDAO {
 		    	bb.setFile5(rs.getString("file5"));
 		    	bb.setType(rs.getInt("type"));
 		    	bb.setRe_ref(rs.getInt("re_ref"));
+		    	bb.setType_select(rs.getString("type_select"));
 		    	
 		    		
 		    	//boardList한칸저장
@@ -374,7 +376,7 @@ public class BoardDAO {
 	}//getBoardList
 	
 	//(search)
-public List getBoardList(int startRow,int pageSize,String search){
+public List getBoardList(int startRow,int pageSize,String search,String ss){
 		
 		Connection con=null;
 		PreparedStatement pstmt=null;
@@ -389,11 +391,13 @@ public List getBoardList(int startRow,int pageSize,String search){
 			  // 최근글위로 re_ref 그룹별내림차순 정렬 re_seq오름차순   
 			  //     re_ref desc,re_seq asc
 		      // 글잘라오기   limit 시작행-1,개수
-			sql="select * from board where subject like ? and type=1 order by re_ref desc limit ?,?";
+			sql="select * from board where " +ss+ " like ? and type=1 order by re_ref desc limit ?,?";
+			
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, "%"+search+"%");
 			pstmt.setInt(2, startRow-1);//시작행-1
 			pstmt.setInt(3, pageSize);//몇개글
+			
 			//4 rs 실행 저장
 			rs=pstmt.executeQuery();
 			//5 rs while 데이터 있으면
@@ -415,6 +419,7 @@ public List getBoardList(int startRow,int pageSize,String search){
 		    	bb.setFile5(rs.getString("file5"));
 		    	bb.setType(rs.getInt("type"));
 		    	bb.setRe_ref(rs.getInt("re_ref"));
+		    	bb.setType_select(rs.getString("type_select"));
 		    		
 		    	//boardList한칸저장
 		    	boardList.add(bb);
@@ -479,7 +484,7 @@ public List getBoardList2(int startRow,int pageSize){
 	}//getBoardList2
 
 //(search)
-public List getBoardList2(int startRow,int pageSize,String search){
+public List getBoardList2(int startRow,int pageSize,String search,String ss){
 	
 	Connection con=null;
 	PreparedStatement pstmt=null;
@@ -494,7 +499,7 @@ public List getBoardList2(int startRow,int pageSize,String search){
 		  // 최근글위로 re_ref 그룹별내림차순 정렬 re_seq오름차순   
 		  //     re_ref desc,re_seq asc
 	      // 글잘라오기   limit 시작행-1,개수
-		sql="select * from board where subject like ? and type=2 order by re_ref desc limit ?,?";
+		sql="select * from board where " + ss + " like ? and type=2 order by re_ref desc limit ?,?";
 		pstmt=con.prepareStatement(sql);
 		pstmt.setString(1, "%"+search+"%");
 		pstmt.setInt(2, startRow-1);//시작행-1

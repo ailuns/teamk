@@ -23,10 +23,10 @@ public class BoardlistSearchAction implements Action {
 		BoardDAO bdao = new BoardDAO();
 		
 		String search=request.getParameter("search");
-		
+		String ss = request.getParameter("selectSearch");
 		//게시판 전체 글 개수
 		// int count=  getBoardCount() 메서드 호출
-		int count = bdao.getBoardCount(search);
+		int count = bdao.getBoardCount(search, ss);
 		//한페이지에 보여줄 글의 개수 설정
 		int pageSize=15;
 		//한페이지가 몇페이지인지 가져오기 없으면 1페이지 설정
@@ -41,7 +41,7 @@ public class BoardlistSearchAction implements Action {
 		int endRow=currentPage*pageSize;
 		
 		//List boardList =   메서드호출 getBoardList(시작행, 몇개)
-		List boardList=bdao.getBoardList(startRow, pageSize, search);
+		List boardList=bdao.getBoardList(startRow, pageSize, search, ss);
 		//전체 페이지 수 구하기 게시판 글 50개 한화면에 보여줄 글 개수 10 => 5전체페이지
 		//    게시판 글 56개 한화면에 보여줄 글개수 10 =>  5전체페이지 +1 (나머지)=>6
 		int pageCount=count/pageSize+(count%pageSize==0?0:1);
@@ -63,6 +63,7 @@ public class BoardlistSearchAction implements Action {
 		request.setAttribute("pageBlock", pageBlock);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
+		request.setAttribute("ss", ss);
 		
 		
 		// 이동 ./board/list.jsp

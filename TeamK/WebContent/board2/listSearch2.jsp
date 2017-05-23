@@ -21,6 +21,7 @@ int pageCount=((Integer)request.getAttribute("pageCount")).intValue();
 int pageBlock=((Integer)request.getAttribute("pageBlock")).intValue();
 int startPage=((Integer)request.getAttribute("startPage")).intValue();
 int endPage=((Integer)request.getAttribute("endPage")).intValue();
+String ss = (String)request.getAttribute("ss");
 
 String search=request.getParameter("search");
 
@@ -70,7 +71,7 @@ if(count!=0){
 	}
 	// 1..10 11..20 21..30
 	for(int i=startPage; i<=endPage; i++){
-		%><a href="./listSearch2.bo?pageNum=<%=i%>&search=<%=search%>">[<%=i%>]</a><%
+		%><a href="./listSearch2.bo?pageNum=<%=i%>&selectSearch=<%=ss%>&search=<%=search%>">[<%=i%>]</a><%
 	}
 	// 다음
 	if(endPage < pageCount){
@@ -80,6 +81,11 @@ if(count!=0){
 }
 %><br>
 <form action="listSearch2.bo" method="get">
+<select name="selectSearch">
+    <option value="id" <%if(ss.equals("id")){%>selected<%}%>>작성자</option>
+    <option value="subject" <%if(ss.equals("subject")){%>selected<%}%>>제목</option>
+    <option value="content" <%if(ss.equals("content")){%>selected<%}%>>내용</option>
+</select>
 <input type="text" name="search" class="input_box">
 <input type="submit" value="검색" class="btn">
 </form>

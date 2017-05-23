@@ -57,12 +57,12 @@ public class BoardWriteAction2 implements Action {
 		System.out.println(sub);
 		System.out.println(con);
 		
-		String email = "equality91@naver.com";//받는사람의 이메일 주소
+		String email = "equality91@naver.com";//질문 등록시 메일받는사람(관리자)의 이메일 주소
 		
 		System.out.println(sub);
 		System.out.println(con);
 			
-		String sender="insup0117@naver.com";
+		String sender="insup0117@naver.com"; //보내는사람 메일 주소(수정X)
 		String receiver= email;
 		String subject = "새로운 문의가 왔습니다.["+sub+"]";
 		

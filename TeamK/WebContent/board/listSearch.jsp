@@ -20,6 +20,7 @@ int pageCount=((Integer)request.getAttribute("pageCount")).intValue();
 int pageBlock=((Integer)request.getAttribute("pageBlock")).intValue();
 int startPage=((Integer)request.getAttribute("startPage")).intValue();
 int endPage=((Integer)request.getAttribute("endPage")).intValue();
+String ss = (String)request.getAttribute("ss");
 
 String search=request.getParameter("search");
 
@@ -48,7 +49,7 @@ BoardDAO bdao = new BoardDAO();
 <tr><td><%=bb.getRe_ref()%></td>
 <td id="title">
 <a href="./BoardContent.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>">
-<%=bb.getSubject()%>[<%=bdao.getBoardReplyCount(bb.getNum())%>]</a><%if(bdao.getFile(bb.getNum())!=null){%><img src="./img/File_icon.gif" width="15" height="15>"><%}%></td>
+<span style="font-weight: bold">[<%=bb.getType_select()%>]</span><%=bb.getSubject()%>[<%=bdao.getBoardReplyCount(bb.getNum())%>]</a><%if(bdao.getFile(bb.getNum())!=null){%><img src="./img/File_icon.gif" width="15" height="15>"><%}%></td>
 <td><%=bb.getId()%></td><td><%=bb.getDate()%></td>
     <td><%=bb.getReadcount() %></td></tr>
     			<%
@@ -69,7 +70,7 @@ if(count!=0){
 	}
 	// 1..10 11..20 21..30
 	for(int i=startPage; i<=endPage; i++){
-		%><a href="./listSearch.bo?pageNum=<%=i%>&search=<%=search%>">[<%=i%>]</a><%
+		%><a href="./listSearch.bo?pageNum=<%=i%>&selectSearch=<%=ss%>&search=<%=search%>">[<%=i%>]</a><%
 	}
 	// 다음
 	if(endPage < pageCount){
@@ -79,6 +80,12 @@ if(count!=0){
 }
 %><br>
 <form action="listSearch.bo" method="get">
+<select name="selectSearch">
+    <option value="id" <%if(ss.equals("id")){%>selected<%}%>>작성자</option>
+    <option value="subject" <%if(ss.equals("subject")){%>selected<%}%>>제목</option>
+    <option value="content" <%if(ss.equals("content")){%>selected<%}%>>내용</option>
+    <option value="type_select" <%if(ss.equals("type_select")){%>selected<%}%>>분류</option>
+</select>
 <input type="text" name="search" class="input_box">
 <input type="submit" value="검색" class="btn">
 </form>

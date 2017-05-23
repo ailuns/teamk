@@ -13,6 +13,8 @@
 <link href="./css/subpage.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="./js/jquery-3.2.0.js"></script>
 <script type="text/javascript">
+
+/////////////////////AJAX 리플 달기, 삭제/////////////////////////
 	function replyupdate(){
 		 $.ajax({
 	         url:'./BoardReplyAction.bo',
@@ -40,7 +42,8 @@
 	         }
 		});
 	}
-	
+/////////////////////AJAX 리플 달기, 삭제/////////////////////////
+
 </script>
 </head>
 <body>
@@ -131,6 +134,7 @@ if(id!=null){
     %>
 </table>
 <form method="post" name="fr1" id="reply">
+<%if(id!=null){%>
 <span><%=id %></span>
 <input type="hidden" id="rNum" name="group_del" value="<%=bb.getNum()%>">
 <input type="hidden" id="pageNum" value="<%=pageNum%>">
@@ -138,11 +142,10 @@ if(id!=null){
 <div id="textarea">
 <textarea rows="3" cols="59" id="rContent" name="content" placeholder="타인을 향한 지나친 비방, 욕설은 자제해주세요."></textarea>
 </div>
-<%if(id!=null){%>
 <input type="button" value="댓글달기" onclick="replyupdate()">
     		<%}else{%>
-    			<input type="button" value="로그인필요" 
-    				   onclick="location.href='./MemberLogin.me'">
+    			<textarea rows="3" cols="59" name="content" placeholder="리플작성에는 로그인이 필요합니다." readonly></textarea>
+    			<input type="button" value="로그인" onclick="location.href='./MemberLogin.me'">
     		<%} %>
 </form>
 <!-- ///////////////////댓글///////////////// -->

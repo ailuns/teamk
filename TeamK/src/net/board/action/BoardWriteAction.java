@@ -36,7 +36,8 @@ public class BoardWriteAction implements Action {
 		bb.setFile3(multi.getFilesystemName("file3"));
 		bb.setFile4(multi.getFilesystemName("file4"));
 		bb.setFile5(multi.getFilesystemName("file5"));
-		
+		bb.setType_select(multi.getParameter("select"));
+		System.out.println(multi.getParameter("select"));
 	
 		
 		// BoardDAO bdao 객체생성
