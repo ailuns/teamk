@@ -341,7 +341,7 @@ div#package_list table #context
 	padding-left : 10px;
 }
 
-div#package_list table #price, #date 
+div#package_list table #price, div#package_list table #date 
 {
 	font-size: 20px;
 	font-weight: bold;
