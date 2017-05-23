@@ -63,6 +63,7 @@ public class BoardlistSearchAction implements Action {
 		request.setAttribute("pageBlock", pageBlock);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
+		request.setAttribute("ss", ss);
 		
 		
 		// 이동 ./board/list.jsp
