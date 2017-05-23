@@ -76,7 +76,7 @@ nhn.husky.EZCreator.createInIFrame({
 
 function pasteHTML(fname) {
 	var sHTML = '<img src="<%=request.getContextPath()%>/upload/'+ fname +'">';
-	alert(sHTML);
+	//alert(sHTML);
     oEditors.getById["ir1"].exec("PASTE_HTML", [sHTML]);
 }
 
