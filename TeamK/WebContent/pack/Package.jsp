@@ -196,19 +196,18 @@ img.ui-datepicker-trigger {
 				<label for="date_to">도착</label><input type="text" id="date_to" class="input_style" name="endDate" required="yes"><br><br>
 				<label for="city_search">지역</label>
 				<select id="area" name="area">
-						<option value="">선택하세요</option>
-						<option value="서울">서울특별시</option>
-						<option value="부산">부산광역시</option>
-						<option value="경기도">경기도</option>
-						<option value="강원도">강원도</option>
-						<option value="충청북도">충청북도</option>
-						<option value="충청남도">충청남도</option>
-						<option value="전라북도">전라북도</option>
-						<option value="전라남도">전라남도</option>
-						<option value="경상북도">경상북도</option>
-						<option value="경상남도">경상남도</option>
-						<option value="제주도">제주도</option>
-					</select>
+					<option value="">선택하세요</option>
+				<%
+					CategoryBean cb;
+				for (int i = 0; i < CategoryList.size(); i++)
+				{
+					cb =(CategoryBean)CategoryList.get(i);
+				%>	
+					<option value="<%=cb.getCar_name() %>"><%=cb.getCar_name() %></option>
+				<%
+				}
+				%>
+				</select>
 				<input type="submit" value="검색" id="search_btn" class="input_style">
 			</form>
 		</div>
@@ -233,14 +232,12 @@ img.ui-datepicker-trigger {
 		<form action="./Package.po" method="get" id="pf">
 		<!-- 탭 부분 -->
 		<ul class="tabs">
-		
 		<%
-			CategoryBean cb;
 			cb =(CategoryBean)CategoryList.get(0);
 		%>
-						
 			<li name="tab1" class="tab_color" style="color: #F29661; background-color: white; border-bottom:4px solid #F29661;" value="<%=cb.getCar_name() %>"><%=cb.getCar_name() %></li>
 		<%
+			
 			for (int i = 1; i < CategoryList.size(); i++)
 			{
 				cb =(CategoryBean)CategoryList.get(i);

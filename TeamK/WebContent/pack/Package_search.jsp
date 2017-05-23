@@ -3,6 +3,7 @@
     <%@ page import="net.pack.db.PackDAO" %>
     <%@ page import="net.pack.db.PackBean" %>
     <%@ page import="java.util.List" %>
+    <%@ page import="net.pack.db.CategoryBean" %>
     <%@ page import="java.text.DecimalFormat" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -69,7 +70,8 @@ img.ui-datepicker-trigger
 <%
 
 	List list = (List)request.getAttribute("list");
-	
+	List CategoryList = (List)request.getAttribute("CategoryList");
+
 	int count = ((Integer)request.getAttribute("count")).intValue();
 	String pageNum = (String)request.getAttribute("pageNum");
 	int pageCount = ((Integer)request.getAttribute("pageCount")).intValue();
@@ -100,19 +102,19 @@ img.ui-datepicker-trigger
 					<label for="date_from">출발</label><input type="text" id="date_from" class="input_style" name="startDate" value="<%=startDate%>" required="yes">
 					<label for="date_to">도착</label><input type="text" id="date_to" class="input_style" name="endDate" value="<%=endDate%>" required="yes"><br><br>
 					<label for="city_search">지역</label>
+	
 					<select id="area" name="area">
 						<option value="">선택하세요</option>
-						<option value="서울" <%if(search.equals("서울")) {%> selected<%} %>>서울특별시</option>
-						<option value="부산" <%if(search.equals("부산")) {%> selected<%} %>>부산광역시</option>
-						<option value="경기도" <%if(search.equals("경기도")) {%> selected<%} %>>경기도</option>
-						<option value="강원도" <%if(search.equals("강원도")) {%> selected<%} %>>강원도</option>
-						<option value="충청북도" <%if(search.equals("충청북도")) {%> selected<%} %>>충청북도</option>
-						<option value="충청남도" <%if(search.equals("충청남도")) {%> selected<%} %>>충청남도</option>
-						<option value="전라북도" <%if(search.equals("전라북도")) {%> selected<%} %>>전라북도</option>
-						<option value="전라남도" <%if(search.equals("전라남도")) {%> selected<%} %>>전라남도</option>
-						<option value="경상북도" <%if(search.equals("경상북도")) {%> selected<%} %>>경상북도</option>
-						<option value="경상남도" <%if(search.equals("경상남도")) {%> selected<%} %>>경상남도</option>
-						<option value="제주도" <%if(search.equals("제주도")) {%> selected<%} %>>제주도</option>
+						<%
+							CategoryBean cb;
+						for (int i = 0; i < CategoryList.size(); i++)
+						{
+							cb =(CategoryBean)CategoryList.get(i);
+						%>	
+							<option value="<%=cb.getCar_name() %>" <%if(search.equals(cb.getCar_name())) {%> selected <%}%>><%=cb.getCar_name() %></option>
+						<%
+						}
+						%>
 					</select>
 					<input type="submit" value="검색" id="search_btn" class="input_style">
 				</form>

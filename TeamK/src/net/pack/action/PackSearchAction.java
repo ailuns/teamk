@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.pack.db.CategoryDAO;
 import net.pack.db.PackDAO;
 
 public class PackSearchAction implements Action{
@@ -24,12 +25,15 @@ public class PackSearchAction implements Action{
 		
 		
 		
-		if (startDate == null && endDate == null)
+		if (startDate == null)
 		{
 			long time = System.currentTimeMillis(); 
 			SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-MM-dd");
 
 			startDate = dayTime.format(new Date(time));
+		}
+		if (endDate == null || endDate == "")
+		{
 			endDate = "";
 		}
 		
@@ -39,6 +43,8 @@ public class PackSearchAction implements Action{
 		System.out.println("search >> " + search);
 		// 디비 객체 생성 BoardDAO
 		PackDAO pdao = new PackDAO();
+		CategoryDAO cdao = new CategoryDAO();
+		
 		//전체글 횟수 구하기 int count = getBoardCount()
 		int count = pdao.getPackCount(search, startDate, endDate);
 		
@@ -77,6 +83,11 @@ public class PackSearchAction implements Action{
 		List list = pdao.getPackList_search(search, startDate, endDate);
 		request.setAttribute("list", list);
 
+		
+		// 지역 분류명 리스트 구하기&보내기
+		List CategoryList = cdao.getCategoryList();
+		request.setAttribute("CategoryList", CategoryList);
+		
 		
 		request.setAttribute("count", count);
 		request.setAttribute("pageNum", pageNum);
