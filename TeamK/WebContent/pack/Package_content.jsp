@@ -28,6 +28,7 @@
 	
 	List List = (List)request.getAttribute("replylist");
 	List CategoryList = (List)request.getAttribute("CategoryList");
+	
 	int count = ((Integer)request.getAttribute("count")).intValue();
 	String repageNum = (String)request.getAttribute("repageNum");
 	int pageCount = ((Integer)request.getAttribute("pageCount")).intValue();
@@ -48,9 +49,9 @@
 		numberOfMonths: 2,		   // 보여줄 달의 갯수
         dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],  // 일(Day) 표기 형식
         monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],   // 월(Month) 표기 형식
-//	        showOn: "both",		// 버튼을 표시      both : input과 buttom 둘다 클릭 시 달력 표시           bottom  :  buttom 클릭 했을 때만 달력 표시
-//	        buttonImage: "./img/calendar.png",   // 버튼에 사용될 이미지
-//	        buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
+        //showOn: "both",		// 버튼을 표시      both : input과 buttom 둘다 클릭 시 달력 표시           bottom  :  buttom 클릭 했을 때만 달력 표시
+        //buttonImage: "./img/calendar.png",   // 버튼에 사용될 이미지
+        //buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
         onClose: function(selectedDate){		// 닫힐 때 함수 호출
         	if (selectedDate == "")  // 시작날 선택 안했을때
        		{
@@ -69,14 +70,14 @@
 		numberOfMonths: 2,		   // 보여줄 달의 갯수
         dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],  // 일(Day) 표기 형식
         monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],   // 월(Month) 표기 형식
-//	        showOn: "both",			// 버튼을 표시      both : input과 buttom 둘다 클릭 시 달력 표시           bottom  :  buttom 클릭 했을 때만 달력 표시
-//	        buttonImage: "./img/calendar.png",   // 버튼에 사용될 이미지
-//	        buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
-        onClose: function(selectedDate){		// 닫힐 때 함수 호출
+        //showOn: "both",			// 버튼을 표시      both : input과 buttom 둘다 클릭 시 달력 표시           bottom  :  buttom 클릭 했을 때만 달력 표시
+        //buttonImage: "./img/calendar.png",   // 버튼에 사용될 이미지
+        //buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
+        onClose: function(selectedDate)// 닫힐 때 함수 호출
+        {		
         	$("#date_from").datepicker("option", "maxDate", selectedDate);   // #date_from의 최대 날짜를 #date_to에서 선택된 날짜로 설정
     	}
 	});
-	
 	
 	
 	// 찜하기, 예약하기 버튼 클릭 시 각각 버튼 마다 이동할 페이지
@@ -454,6 +455,17 @@
 		    return;
 	}
 
+	// 패키지 검색 시 지역 선택
+	function input_chk()
+    {
+    	var val = $("#area option:selected").val(); 
+    	if (val == "")
+		{
+    		alert("지역을 선택해주세요");
+	    		return false;
+		}
+		return true;
+    }
 
 </script>
 
@@ -794,7 +806,7 @@
 					<label for="date_from">출발</label>
 					<input type="text" id="date_from" class="input_style" name="startDate" required="yes">
 					<label for="date_to">도착</label>
-					<input type="text" id="date_to" class="input_style" name="endDate" required="yes">
+					<input type="text" id="date_to" class="input_style" name="endDate">
 					<br><br>
 					<label for="city_search">지역</label>
 					<select id="area" name="area">
