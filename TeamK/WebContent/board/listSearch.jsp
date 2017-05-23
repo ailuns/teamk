@@ -48,7 +48,7 @@ BoardDAO bdao = new BoardDAO();
 <tr><td><%=bb.getRe_ref()%></td>
 <td id="title">
 <a href="./BoardContent.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>">
-<%=bb.getSubject()%>[<%=bdao.getBoardReplyCount(bb.getNum())%>]</a><%if(bdao.getFile(bb.getNum())!=null){%><img src="./img/File_icon.gif" width="15" height="15>"><%}%></td>
+<span style="font-weight: bold">[<%=bb.getType_select()%>]</span><%=bb.getSubject()%>[<%=bdao.getBoardReplyCount(bb.getNum())%>]</a><%if(bdao.getFile(bb.getNum())!=null){%><img src="./img/File_icon.gif" width="15" height="15>"><%}%></td>
 <td><%=bb.getId()%></td><td><%=bb.getDate()%></td>
     <td><%=bb.getReadcount() %></td></tr>
     			<%
@@ -79,6 +79,12 @@ if(count!=0){
 }
 %><br>
 <form action="listSearch.bo" method="get">
+<select name="selectSearch">
+    <option value="id">작성자</option>
+    <option value="subject">제목</option>
+    <option value="content">내용</option>
+    <option value="select_type">분류</option>
+</select>
 <input type="text" name="search" class="input_box">
 <input type="submit" value="검색" class="btn">
 </form>

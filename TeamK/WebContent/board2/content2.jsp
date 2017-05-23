@@ -148,8 +148,12 @@ if(id.equals("admin")){%>
 		<textarea rows="3" cols="59" id="rContent" name="content"></textarea>
 		<input type="hidden" id="wContent" value="<%=bb.getContent()%>">
 </div>
-<input type="button" value="댓글달기" onclick="replyupdate()">		
-<%}}%>
+<input type="button" value="댓글달기" onclick="replyupdate()">	
+<%}else{%>
+<textarea rows="3" cols="59" name="content" placeholder="Q&A게시판 답변은 관리자만 작성가능합니다." readonly></textarea>	
+<%}}else{%>
+<textarea rows="3" cols="59" name="content" placeholder="Q&A게시판 답변은 관리자만 작성가능합니다." readonly></textarea>
+<%}%>
 </form>
 <!-- ///////////////////댓글///////////////// -->
 		</div>

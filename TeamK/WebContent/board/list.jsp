@@ -46,7 +46,7 @@ BoardDAO bdao = new BoardDAO();
 <tr><td><%=bb.getRe_ref()%></td>
 <td id="title">
 <a href="./BoardContent.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>">
-<%=bb.getSubject()%> [<%=bdao.getBoardReplyCount(bb.getNum())%>]</a><%if(bdao.getFile(bb.getNum())!=null){%><img src="./img/File_icon.gif" width="15" height="15>"><%}%></td>
+<span style="font-weight: bold">[<%=bb.getType_select()%>]</span><%=bb.getSubject()%> [<%=bdao.getBoardReplyCount(bb.getNum())%>]</a><%if(bdao.getFile(bb.getNum())!=null){%><img src="./img/File_icon.gif" width="15" height="15>"><%}%></td>
 <td><%=bb.getId()%></td><td><%=bb.getDate()%></td>
     <td><%=bb.getReadcount() %></td></tr>
     			<%
@@ -56,20 +56,15 @@ BoardDAO bdao = new BoardDAO();
 <%
 //페이지 출력
 if(count!=0){
-	//전체 페이지 수 구하기 게시판 글 50개 한화면에 보여줄 글 개수 10 => 5전체페이지
-			//    게시판 글 56개 한화면에 보여줄 글개수 10 =>  5전체페이지 +1 (나머지)=>6		
-	// 한 화면에 보여줄 페이지 번호 개수
-	// 시작페이지 번호구하기  1~10=>1  11~20=>11  21~30=>21
-	// 끝페이지 번호 구하기  
-	//이전
+
 	if(startPage>pageBlock){
 		%><a href="./BoardList.bo?pageNum=<%=startPage-pageBlock%>">[이전]</a><%
 	}
-	// 1..10 11..20 21..30
+
 	for(int i=startPage; i<=endPage; i++){
 		%><a href="./BoardList.bo?pageNum=<%=i%>">[<%=i%>]</a><%
 	}
-	// 다음
+
 	if(endPage < pageCount){
 		%><a href="./BoardList.bo?pageNum=<%=startPage+pageBlock%>">[다음]</a>
 		<%
@@ -77,6 +72,12 @@ if(count!=0){
 }
 %><br>
 <form action="listSearch.bo" method="get">
+<select name="selectSearch">
+    <option value="id">작성자</option>
+    <option value="subject">제목</option>
+    <option value="content">내용</option>
+    <option value="type_select">분류</option>
+</select>
 <input type="text" name="search" class="input_box">
 <input type="submit" value="검색" class="btn">
 </form>
