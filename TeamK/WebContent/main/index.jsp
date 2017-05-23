@@ -46,11 +46,11 @@
 		String id = (String) session.getAttribute("id");
 		if(id==null || id==""){ %>
 		<input type="button" value="　로그인" onclick="location.href='./MemberLogin.me'" class="login">
-		<input type="button" value="들어가기" onclick="location.href='./main.bo'" class="enter">
+		<input type="button" value="들어가기" onclick="location.href='./main.fo'" class="enter">
 		<input type="button" value="회원가입" onclick="location.href='./MemberJoin.me'" class="join">
 		<%}else if(id!=null){%>	
 		<input type="button" value="로그아웃" onclick="location.href='./MemberLogout.me'" class="login">
-		<input type="button" value="들어가기" onclick="location.href='./main.bo'" class="enter">
+		<input type="button" value="들어가기" onclick="location.href='./main.fo'" class="enter">
 		<input type="button" value="회원정보" onclick="location.href='./MemberInfo.me'" class="join">
 		<%} %>
 		</div>

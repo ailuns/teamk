@@ -76,9 +76,19 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>AdminFrontController</servlet-name>
-    <url-pattern>
-  	*.ao</url-pattern>
+    <url-pattern>*.ao</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+		<servlet-name>MainFrontController</servlet-name>
+		<servlet-class>net.main.action.MainFrontController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MainFrontController</servlet-name>
+		<url-pattern>*.fo</url-pattern>
+	</servlet-mapping>
+  
+  
 	<resource-ref>
 		<description>dkdkd</description>
 		<res-ref-name>jdbc/mysqlDB</res-ref-name>

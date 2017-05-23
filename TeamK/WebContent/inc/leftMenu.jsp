@@ -34,7 +34,7 @@
 		<span>M<br>E<br>N<br>U</span>
 	</div>
 	<div id="logo_menu">	
-		<img alt="로고" src="./img/log3.png" width="200px" height="200px" onclick="location.href='./index.bo'"><br><br>
+		<img alt="로고" src="./img/log3.png" width="200px" height="200px" onclick="location.href='./index.fo'"><br><br>
 		<h3><a href="./BoardList3.bo">공지사항</a></h3>
 	
 				<%
@@ -55,7 +55,7 @@ if(count!=0){
 	</div>
 	<div id="left_menu">
 		<ul id="menu_list">
-			<li id="home"><a href="./main.bo">메인</a></li>
+			<li id="home"><a href="./main.fo">메인</a></li>
 			<li id="pack"><a href="./PackList.po">패키지</a></li>
 			<li id="shop"><a href="./Productlist.bo">상품</a></li>
 			<li id="rvw"><a href="./BoardList.bo">리뷰게시판</a></li>

@@ -156,10 +156,10 @@
 </script>
 
 <style type="text/css">
-img.ui-datepicker-trigger {
-	cursor : pointer;
-	margin-left : 5px;
-}
+/* img.ui-datepicker-trigger { */
+/* 	cursor : pointer; */
+/* 	margin-left : 5px; */
+/* } */
 
 </style>
 

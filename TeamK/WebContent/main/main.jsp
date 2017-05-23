@@ -2,6 +2,8 @@
 <%@page import="java.util.List"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="net.board.db.BoardDAO"%>
+<%@ page import="net.pack.db.CategoryBean" %>
+<%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -111,7 +113,11 @@
 		}	
 		return true;
 	}
+	
 </script>
+<%
+	List CategoryList = (List)request.getAttribute("CategoryList");
+%>
 </head>
 <body>
 	<!--왼쪽 메뉴 -->
@@ -124,25 +130,24 @@
 			<div id="calendar"></div>
 			<div id="scheduler">
 				<p>내게 맞는 패키지 검색하기</p>
-				<form action="./PackSearchAction.po" method="post" name="fr" id="scheduler">
+				<form action="./PackSearchAction.po" method="post" name="fr" id="scheduler" onsubmit="return input_chk();">
 					<label for="from">출발</label>
-					<input type="text" id="from" name="startDate"><br>
+					<input type="text" id="from" name="startDate" required="yes"><br>
 					<label for="to">도착</label>
 					<input type="text" id="to" name="endDate"><br>
 					<label for="area">지역</label>
 					<select id="area" name="area">
 						<option value="">선택하세요</option>
-						<option value="서울">서울특별시</option>
-						<option value="부산">부산광역시</option>
-						<option value="경기도">경기도</option>
-						<option value="강원도">강원도</option>
-						<option value="충청북도">충청북도</option>
-						<option value="충청남도">충청남도</option>
-						<option value="전라북도">전라북도</option>
-						<option value="전라남도">전라남도</option>
-						<option value="경상북도">경상북도</option>
-						<option value="경상남도">경상남도</option>
-						<option value="제주도">제주도</option>
+						<%
+							CategoryBean cb;
+							for (int i = 0; i < CategoryList.size(); i++)
+							{
+								cb =(CategoryBean)CategoryList.get(i);
+						%>	
+							<option value="<%=cb.getCar_name() %>"><%=cb.getCar_name() %></option>
+						<%
+							}
+						%>
 					</select>
 					<input type="submit" value="검색">
 				</form>
