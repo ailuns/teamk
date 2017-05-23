@@ -170,7 +170,7 @@ img.ui-datepicker-trigger
 						<span><%=cost %>원</span>
 					</td>
 					<td rowspan="2"  id="date">
-						<span><%=pb.getDate() %></span>
+						<span><%=pb.getDate() %>~</span>
 					</td>
 				</tr>
 				<tr>
