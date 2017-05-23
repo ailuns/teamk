@@ -93,7 +93,7 @@ if(id.equals("admin")){
        onclick="location.href='./BoardWrite3.bo'">	
     		<%}}%>
 <input type="button" value="메인으로" 
-       onclick="location.href='./main.bo'">
+       onclick="location.href='./main.fo'">
        </div>
        </div>
 	</div>
