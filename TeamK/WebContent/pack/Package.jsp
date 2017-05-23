@@ -39,20 +39,19 @@
 	        	}
 	        }
 		});
-		
-		
+	
 		$("#date_to").datepicker({
 			dateFormat: 'yy-mm-dd',    // 날짜 포맷 형식
+			minDate : 0,			   // 최소 날짜 설정      0이면 오늘부터 선택 가능
 			numberOfMonths: 2,		   // 보여줄 달의 갯수
 	        dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],  // 일(Day) 표기 형식
 	        monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],   // 월(Month) 표기 형식
 	        //showOn: "both",			// 버튼을 표시      both : input과 buttom 둘다 클릭 시 달력 표시           bottom  :  buttom 클릭 했을 때만 달력 표시
 	        //buttonImage: "./img/calendar.png",   // 버튼에 사용될 이미지
 	        //buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
-	        onClose: function(selectedDate)// 닫힐 때 함수 호출
-	        {		
-	        	$("#date_from").datepicker("option", "maxDate", selectedDate);   // #date_from의 최대 날짜를 #date_to에서 선택된 날짜로 설정
-        	}
+	        onClose: function(selectedDate){		// 닫힐 때 함수 호출
+	        	$("#from").datepicker("option", "maxDate", selectedDate);   // #date_from의 최대 날짜를 #date_to에서 선택된 날짜로 설정
+	       	}
 		});
 
 	    // 탭 관련 소스
@@ -140,17 +139,27 @@
 	      $("#feat_con5").css('width', '75%');
 	      $("#feat_con5 span").css('display', 'block');
 	    });
-
 	});
 	
+	// 패키지 검색 시 지역 선택
+	function input_chk()
+    {
+    	var val = $("#area option:selected").val(); 
+    	if (val == "")
+		{
+    		alert("지역을 선택해주세요");
+	    		return false;
+		}
+		return true;
+    }
 
 </script>
 
 <style type="text/css">
-img.ui-datepicker-trigger {
-	cursor : pointer;
-	margin-left : 5px;
-}
+/* img.ui-datepicker-trigger { */
+/* 	cursor : pointer; */
+/* 	margin-left : 5px; */
+/* } */
 
 </style>
 
@@ -196,21 +205,21 @@ img.ui-datepicker-trigger {
 		</div>
 		<div id="package_search">
 			<p>내게 맞는 패키지 검색하기</p>
-			<form action="./PackSearchAction.po" name="fr" method="get" id="scheduler" onsubmit="return input_chk()">
+			<form action="./PackSearchAction.po" name="fr" method="get" id="scheduler" onsubmit="return input_chk();">
 				<label for="date_from">출발</label><input type="text" id="date_from" class="input_style" name="startDate" required="yes">
-				<label for="date_to">도착</label><input type="text" id="date_to" class="input_style" name="endDate" required="yes"><br><br>
+				<label for="date_to">도착</label><input type="text" id="date_to" class="input_style" name="endDate"><br><br>
 				<label for="city_search">지역</label>
 				<select id="area" name="area">
 					<option value="">선택하세요</option>
 				<%
 					CategoryBean cb;
-				for (int i = 0; i < CategoryList.size(); i++)
-				{
-					cb =(CategoryBean)CategoryList.get(i);
+					for (int i = 0; i < CategoryList.size(); i++)
+					{
+						cb =(CategoryBean)CategoryList.get(i);
 				%>	
 					<option value="<%=cb.getCar_name() %>"><%=cb.getCar_name() %></option>
 				<%
-				}
+					}
 				%>
 				</select>
 				<input type="submit" value="검색" id="search_btn" class="input_style">
