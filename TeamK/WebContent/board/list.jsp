@@ -92,7 +92,7 @@ if(id!=null){%>
     				   onclick="alert('로그인 해주세요')">
     		<%} %>
 <input type="button" value="메인으로" 
-       onclick="location.href='./main.bo'">
+       onclick="location.href='./main.fo'">
        </div>
        </div>
 	</div>
