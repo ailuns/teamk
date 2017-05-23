@@ -37,16 +37,16 @@ BoardDAO bdao = new BoardDAO();
 		<div id="board">
 		<div id="board_list">
 <table>
-<tr><th id="num">번호</th><th id="title">제목</th><th id="name">작성자</th><th id="date">날짜</th><th id="readcount">조회수</th></tr>
+<tr><th id="num">번호</th><th>분류</th><th id="title">제목</th><th id="name">작성자</th><th id="date">날짜</th><th id="readcount">조회수</th></tr>
     <%
     for(int i=0; i<boardList.size(); i++){
     	//자바빈(BoardBean) 변수 =배열한칸 접근  배열변수.get()
     	BoardBean bb = (BoardBean)boardList.get(i);
     			%>
-<tr><td><%=bb.getRe_ref()%></td>
+<tr><td><%=bb.getRe_ref()%></td><td><span style="font-weight: bold">[<%=bb.getType_select()%>]</span></td>
 <td id="title">
 <a href="./BoardContent.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>">
-<span style="font-weight: bold">[<%=bb.getType_select()%>]</span><%=bb.getSubject()%> [<%=bdao.getBoardReplyCount(bb.getNum())%>]</a><%if(bdao.getFile(bb.getNum())!=null){%><img src="./img/File_icon.gif" width="15" height="15>"><%}%></td>
+<%=bb.getSubject()%> [<%=bdao.getBoardReplyCount(bb.getNum())%>]</a><%if(bdao.getFile(bb.getNum())!=null){%><img src="./img/File_icon.gif" width="15" height="15>"><%}%></td>
 <td><%=bb.getId()%></td><td><%=bb.getDate()%></td>
     <td><%=bb.getReadcount() %></td></tr>
     			<%
