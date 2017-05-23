@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.pack.db.CategoryDAO;
 import net.pack.db.PackBean;
 import net.pack.db.PackDAO;
 import net.reply.db.ReplyBean;
@@ -25,6 +26,7 @@ public class PackContent implements Action{
 		PackBean pb = new PackBean();
 		ReplyDAO rdao = new ReplyDAO();
 		ReplyBean rb = new ReplyBean();
+		CategoryDAO cdao = new CategoryDAO();
 		
 		System.out.println("PackContent num >> " + num);
 		System.out.println("PackContent pagenum >> " + repageNum);
@@ -65,9 +67,12 @@ public class PackContent implements Action{
 		int endPage = startPage+pageBlock-1;
 
 		List replylist = rdao.getCommentList(startRow, pagesize, num);
-		
 		request.setAttribute("replylist", replylist);
 		
+		// 지역 분류명 리스트 구하기&보내기
+		List CategoryList = cdao.getCategoryList();
+		request.setAttribute("CategoryList", CategoryList);
+
 		request.setAttribute("count", count);
 		request.setAttribute("repageNum", repageNum);
 		request.setAttribute("pageCount", pageCount);
@@ -76,7 +81,6 @@ public class PackContent implements Action{
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("pagesize", pagesize);
-		
 		
 		System.out.println("count >> " + count);
 		System.out.println("repageNum >> " + repageNum);
