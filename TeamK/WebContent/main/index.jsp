@@ -9,26 +9,31 @@
 <link href="./css/subpage.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<!--왼쪽 메뉴 -->
-	<div>
-		<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
+	<!--지도 들어갈 부분 -->
+	<div id="map">
+		<object type="image/svg+xml" data="./img/Map_of_South_Korea-blank.svg">Your browser does not support SVGs</object>
+		<center>원하는 지역을 선택해주세요.</center>
+		<div id="seoul"><img alt="seoul" src="./img/home.png"><h2>서울</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sapien nisi, condimentum ac lorem et, blandit iaculis quam. Nunc mattis facilisis nisl nec efficitur. Maecenas tincidunt orci vel euismod condimentum. Duis nec nisi tincidunt est interdum porttitor. Donec et ante sapien.</p></div>
+		<div id="busan"><img alt="seoul" src="./img/home.png"><h2>부산</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sapien nisi, condimentum ac lorem et, blandit iaculis quam. Nunc mattis facilisis nisl nec efficitur. Maecenas tincidunt orci vel euismod condimentum. Duis nec nisi tincidunt est interdum porttitor. Donec et ante sapien.</p></div>
+		<div id="gyeonggi"><img alt="seoul" src="./img/home.png"><h2>경기도</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sapien nisi, condimentum ac lorem et, blandit iaculis quam. Nunc mattis facilisis nisl nec efficitur. Maecenas tincidunt orci vel euismod condimentum. Duis nec nisi tincidunt est interdum porttitor. Donec et ante sapien.</p></div>
+		<div id="gangwon"><img alt="seoul" src="./img/home.png"><h2>강원도</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sapien nisi, condimentum ac lorem et, blandit iaculis quam. Nunc mattis facilisis nisl nec efficitur. Maecenas tincidunt orci vel euismod condimentum. Duis nec nisi tincidunt est interdum porttitor. Donec et ante sapien.</p></div>
+		<div id="chungbuk"><img alt="seoul" src="./img/home.png"><h2>충청북도</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sapien nisi, condimentum ac lorem et, blandit iaculis quam. Nunc mattis facilisis nisl nec efficitur. Maecenas tincidunt orci vel euismod condimentum. Duis nec nisi tincidunt est interdum porttitor. Donec et ante sapien.</p></div>
+		<div id="chungnam"><img alt="seoul" src="./img/home.png"><h2>충청남도</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sapien nisi, condimentum ac lorem et, blandit iaculis quam. Nunc mattis facilisis nisl nec efficitur. Maecenas tincidunt orci vel euismod condimentum. Duis nec nisi tincidunt est interdum porttitor. Donec et ante sapien.</p></div>
+		<div id="jeonbuk"><img alt="seoul" src="./img/home.png"><h2>전라북도</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sapien nisi, condimentum ac lorem et, blandit iaculis quam. Nunc mattis facilisis nisl nec efficitur. Maecenas tincidunt orci vel euismod condimentum. Duis nec nisi tincidunt est interdum porttitor. Donec et ante sapien.</p></div>
+		<div id="jeonnam"><img alt="seoul" src="./img/home.png"><h2>전라남도</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sapien nisi, condimentum ac lorem et, blandit iaculis quam. Nunc mattis facilisis nisl nec efficitur. Maecenas tincidunt orci vel euismod condimentum. Duis nec nisi tincidunt est interdum porttitor. Donec et ante sapien.</p></div>
+		<div id="gyeongbuk"><img alt="seoul" src="./img/home.png"><h2>경상북도</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sapien nisi, condimentum ac lorem et, blandit iaculis quam. Nunc mattis facilisis nisl nec efficitur. Maecenas tincidunt orci vel euismod condimentum. Duis nec nisi tincidunt est interdum porttitor. Donec et ante sapien.</p></div>
+		<div id="gyeongnam"><img alt="seoul" src="./img/home.png"><h2>경상남도</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sapien nisi, condimentum ac lorem et, blandit iaculis quam. Nunc mattis facilisis nisl nec efficitur. Maecenas tincidunt orci vel euismod condimentum. Duis nec nisi tincidunt est interdum porttitor. Donec et ante sapien.</p></div>
+		<div id="jeju"><img alt="seoul" src="./img/home.png"><h2>제주도</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sapien nisi, condimentum ac lorem et, blandit iaculis quam. Nunc mattis facilisis nisl nec efficitur. Maecenas tincidunt orci vel euismod condimentum. Duis nec nisi tincidunt est interdum porttitor. Donec et ante sapien.</p></div>
 	</div>
-	<!--왼쪽 메뉴 -->
+	<!--지도 들어갈 부분 -->
 	
-		<!--지도 들어갈 부분 -->
-		<div id="map">
-			<object type="image/svg+xml" data="./img/Map_of_South_Korea-blank.svg">Your browser does not support SVGs</object>
-			<center>원하는 지역을 선택해주세요.</center>
-		</div>
-		<!--지도 들어갈 부분 -->
-		
-		<!--검색하는 부분 -->
-		<div id="search">
-			<form action="#" method="get" name="fr" id="search">
-				<input type="text" name="keyword">
-				<input type="submit" value="검색">
-			</form>
-		</div>
+	<!--검색하는 부분 -->
+	<div id="search">
+		<form action="#" method="get" name="fr" id="search">
+			<input type="text" name="keyword">
+			<input type="submit" value="검색">
+		</form>
+	</div>
 		<!--검색하는 부분 -->
 		
 		<!--클릭 시 메인 이동-->
@@ -55,6 +60,11 @@
 		<%} %>
 		</div>
 	</div>
+	<!--왼쪽 메뉴 -->
+	<div>
+		<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
+	</div>
+	<!--왼쪽 메뉴 -->
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->
 	<div>

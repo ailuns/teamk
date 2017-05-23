@@ -21,6 +21,7 @@ int pageCount=((Integer)request.getAttribute("pageCount")).intValue();
 int pageBlock=((Integer)request.getAttribute("pageBlock")).intValue();
 int startPage=((Integer)request.getAttribute("startPage")).intValue();
 int endPage=((Integer)request.getAttribute("endPage")).intValue();
+String ss = (String)request.getAttribute("ss");
 
 String search=request.getParameter("search");
 
@@ -74,12 +75,16 @@ if(count!=0){
 	}
 	// 다음
 	if(endPage < pageCount){
-		%><a href="./listSearch3.bo?pageNum=<%=startPage+pageBlock%>&search=<%=search%>">[다음]</a>
+		%><a href="./listSearch3.bo?pageNum=<%=startPage+pageBlock%>&selectSearch=<%=ss%>&search=<%=search%>">[다음]</a>
 		<%
 		}
 }
 %><br>
 <form action="listSearch3.bo" method="get">
+<select name="selectSearch">
+    <option value="subject" <%if(ss.equals("subject")){%>selected<%}%>>제목</option>
+    <option value="content" <%if(ss.equals("content")){%>selected<%}%>>내용</option>
+</select>
 <input type="text" name="search" class="input_box">
 <input type="submit" value="검색" class="btn">
 </form>

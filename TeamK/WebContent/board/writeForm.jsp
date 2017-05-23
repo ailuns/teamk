@@ -11,8 +11,7 @@
 <!-- Smart Editor -->
 <script type="text/javascript" src="./js/HuskyEZCreator.js" charset="utf-8">
 </script>
-<script type="text/javascript" src="<%=request.getContextPath()%>./photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js" charset="utf-8">
-</script>
+<script type="text/javascript" src="<%=request.getContextPath()%>./photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js" charset="utf-8"></script>
 <!-- Smart Editor -->
 </head>
 <body>
@@ -33,9 +32,9 @@
 <input type="hidden" value="1" name="type">
 <input type="hidden" name="id" value="<%=id%>">
 <select name="select">
+	<option value="기타">기타</option>
     <option value="상품리뷰">상품리뷰</option>
     <option value="패키지리뷰">패키지리뷰</option>
-    <option value="기타">기타</option>
 </select>
 <label for="subject">제목</label><input type="text" name="subject" id="subject" maxlength="20"><br><br>
 <textarea id="ir1" rows="30" cols="80" name="content" id="content"></textarea><br><br>
@@ -77,7 +76,7 @@ nhn.husky.EZCreator.createInIFrame({
 
 function pasteHTML(fname) {
 	var sHTML = '<img src="<%=request.getContextPath()%>/upload/'+ fname +'">';
-	alert(sHTML);
+	//alert(sHTML);
     oEditors.getById["ir1"].exec("PASTE_HTML", [sHTML]);
 }
 
