@@ -69,7 +69,7 @@ div#left_click {
 	width : 30px;
 	height : 100%;
 	transition: 0.5s;
-	background: linear-gradient(to top, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.2));
+	background: linear-gradient(to top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1));
 	position: fixed;
 	margin-left : 200px;
 	top : 0px;
@@ -102,7 +102,7 @@ div#submenu ul li {padding: 5px 0 0 30px;}
 div#submenu ul a {
 	text-decoration: none;
 	font-size: 15px;
-	color: #fff;
+	color: #000;
 }
 div#submenu embed {
 	position: fixed;
@@ -122,7 +122,7 @@ polyline#pl_HI2_1_, polyline#pl_HI3_1_,
 polyline#pl_HI4_1_, polyline#pl_HI5_1_, 
 polyline#pl_HI6_1_, polyline#pl_HI7_1_, 
 path#sejong {
-	fill: #2459da;
+	fill: #0382aa;
 	fill-opacity: 1;
 	stroke: #fff;
 	stroke-miterlimit: 1;
@@ -153,7 +153,7 @@ polyline#pl_HI2_1_:hover, polyline#pl_HI3_1_:hover,
 polyline#pl_HI4_1_:hover, polyline#pl_HI5_1_:hover, 
 polyline#pl_HI6_1_:hover, polyline#pl_HI7_1_:hover, 
 path#sejong:hover {
-	fill: #fff;
+	fill: #01385f;
 	fill-opacity: 1;
 }
 /* South Korea Map End */
@@ -163,11 +163,11 @@ path#sejong:hover {
 body {
 	margin: 0;
 	padding: 0;
-	background-color: #2459da;
-	background-image: url("../img/Jeju-bg.jpg");
-	background-repeat : no-repeat;
-	background-size: contain;
-	background-position: bottom center;
+	background: linear-gradient(to top, rgb(214, 161, 118), rgb(240, 227, 213));
+/* 	background-image: url("../img/Jeju-bg.jpg"); */
+/* 	background-repeat : no-repeat; */
+/* 	background-size: contain; */
+/* 	background-position: bottom center; */
 }
 div#wrap {
 	margin-top: 100px;
@@ -181,9 +181,12 @@ div#map {
 	width: 100%;
 	height: 700px;
 	margin: 0 auto;
+	margin-top: 100px;
 	border-top: 1px dotted #fff;
 	border-bottom: 3px double #fff;
 	padding-top: 20px;
+	background: #92dccd;
+	text-align: center;
 }
 center {
 	margin-top: 30px;
@@ -196,15 +199,18 @@ div#search {
 	height: 58px;
 	margin: 0 auto;
 	margin-top: 50px;
-	background-color: #39f;
+	background-color: #4a73b1;
 	border-radius: 30px;
 	text-align: center;
 	padding: 3px 0 0 0;
 }
-div#search input[type=submit]:hover {text-shadow: 1px 1px 3px #0080ff;}
+div#search input[type=submit]:hover {
+	text-shadow: 1px 1px 3px #000;
+	cursor: pointer;
+}
 div#search input[type=text] {
 	width: 400px;
-	border: 3px solid #39f;
+	border: 1px solid #4a73b1;
 	border-radius: 15px;
 	font-size: 20px;
 	padding: 10px;
@@ -212,8 +218,8 @@ div#search input[type=text] {
 div#search input[type=submit] {
 	width: 80px;
 	height: 49px;
-	border: 3px solid #39f;
-	background-color: #39f;
+	border: 3px solid #4a73b1;
+	background-color: #4a73b1;
 	color: #fff;
 	font-weight: bold;
 	font-size: 20px;
@@ -239,14 +245,17 @@ div#footer {
 }
 input.login, input.enter, input.join {
 	border: none;
-	background-color: #39f;
+	background-color: #4a73b1;
 	height: 60px;
 	margin: 50px 0 0 0;
 	font-weight: bold;
 	font-size: 25px;
 	color: #fff;
 }
-input.login:hover, input.enter:hover, input.join:hover {background-color: #afdcf0;}
+input.login:hover, input.enter:hover, input.join:hover {
+	background-color: #92dccd;
+	cursor: pointer;
+}
 input.enter {width: 300px;}
 input.login {
 	width: 200px;
