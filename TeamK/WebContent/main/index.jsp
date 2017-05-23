@@ -14,7 +14,7 @@
 		<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
 	</div>
 	<!--왼쪽 메뉴 -->
-	<div id="wrap">
+	
 		<!--지도 들어갈 부분 -->
 		<div id="map">
 			<object type="image/svg+xml" data="./img/Map_of_South_Korea-blank.svg">Your browser does not support SVGs</object>
@@ -40,6 +40,7 @@
 <!-- 			<a href="#" id="login">　로그인</a><a href="#" id="join">회원가입</a> -->
 <!-- 		</div> -->
 		<!--로그인 & 회원가입-->
+		<div id="wrap">
 		<div id="main_menu_box">
 		<%
 		String id = (String) session.getAttribute("id");

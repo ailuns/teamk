@@ -7,9 +7,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript">
-</script>
+<title>TeamK 여행사</title>
+<link href="../css/popup.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<%
@@ -18,14 +17,22 @@
 		MemberBean mb = mdao.getMember(id);
 		String pass = mb.getPass();		
 	%>
-	<form action="../MemberPasschangeAction.me" method="post" name="fr">
-		<br> 
-			아이디 : 		<input type="text" value="<%=id%>"><br> 
-						<input type="hidden" name="pass" value="<%=pass%>"> 
-			비밀번호 :		<input type="password" name="pass2"><br> 
-			변경할 비밀번호 : 	<input type="password" name="changepass"><br> 
-			변경할 비밀번호 확인 :	<input type="password" name="changepass2"><br> 
-							<input type="submit" value="변경"><input type="button" value="취소" onclick="window.close()">
-	</form>
+	<div id="passchange">
+	<form action="../MemberPasschangeAction.me" method="post" name="fr"><br><br> 
+			
+			<label>아이디</label>			<input type="text" value="<%=id%>" name="id"><br><br>
+					
+			<!-- 기존의 비밀번호값 -->
+			<input type="hidden" name="pass" value="<%=pass%>"> 					
+			 
+			<label>기존 비밀번호</label>		<input type="password" name="pass2"><br><br>
+			
+			<label>변경할 비밀번호</label>	<input type="password" name="changepass"><br><br>
+			  
+			<label>변경할 비밀번호 확인</label>	<input type="password" name="changepass2"><br><br><br> 
+										<input type="submit" value="변경">
+										<input type="button" value="취소" onclick="window.close()">
+		</form>
+			</div>
 </body>
 </html>

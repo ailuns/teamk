@@ -71,6 +71,7 @@
 	
 	$("#to").datepicker({
 		dateFormat: 'yy-mm-dd',    // 날짜 포맷 형식
+		minDate : 0,			   // 최소 날짜 설정      0이면 오늘부터 선택 가능
 		numberOfMonths: 2,		   // 보여줄 달의 갯수
         dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],  // 일(Day) 표기 형식
         monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],   // 월(Month) 표기 형식
@@ -137,7 +138,20 @@
 					<label for="to">도착</label>
 					<input type="text" id="to" name="endDate"><br>
 					<label for="area">지역</label>
-					<input type="text" id="city_search" name="city" class="input_style" required="yes" placeholder="도시를 입력해주세요">
+					<select id="area" name="area">
+						<option value="">선택하세요</option>
+						<option value="서울">서울특별시</option>
+						<option value="부산">부산광역시</option>
+						<option value="경기도">경기도</option>
+						<option value="강원도">강원도</option>
+						<option value="충청북도">충청북도</option>
+						<option value="충청남도">충청남도</option>
+						<option value="전라북도">전라북도</option>
+						<option value="전라남도">전라남도</option>
+						<option value="경상북도">경상북도</option>
+						<option value="경상남도">경상남도</option>
+						<option value="제주도">제주도</option>
+					</select>
 					<input type="submit" value="검색">
 				</form>
 			</div>

@@ -1,11 +1,14 @@
 package net.pack.action;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.pack.db.CategoryDAO;
 import net.pack.db.PackDAO;
 
 public class PackSearchAction implements Action{
@@ -16,11 +19,23 @@ public class PackSearchAction implements Action{
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		
-		String search = request.getParameter("city");
+		String search = request.getParameter("area");
 		String startDate = request.getParameter("startDate");
 		String endDate = request.getParameter("endDate");
 		
-//		String area = request.getParameter("area");
+		
+		
+		if (startDate == null)
+		{
+			long time = System.currentTimeMillis(); 
+			SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-MM-dd");
+
+			startDate = dayTime.format(new Date(time));
+		}
+		if (endDate == null || endDate == "")
+		{
+			endDate = "";
+		}
 		
 		System.out.println("start >> " + startDate);
 		System.out.println("end >> " + endDate);
@@ -28,6 +43,8 @@ public class PackSearchAction implements Action{
 		System.out.println("search >> " + search);
 		// 디비 객체 생성 BoardDAO
 		PackDAO pdao = new PackDAO();
+		CategoryDAO cdao = new CategoryDAO();
+		
 		//전체글 횟수 구하기 int count = getBoardCount()
 		int count = pdao.getPackCount(search, startDate, endDate);
 		
@@ -61,13 +78,17 @@ public class PackSearchAction implements Action{
 		// 끝페이지 구하기
 		int endPage = startPage+pageBlock-1;
 		
-		// city로 검색할때
-		List list = pdao.getPackList_search(search, startDate, endDate, 1);
-		
+
 		// area로 검색할때
-//		List mainSearch = pdao.getPackList_search(area, startDate, endDate, 2);
-		
+		List list = pdao.getPackList_search(search, startDate, endDate);
 		request.setAttribute("list", list);
+
+		
+		// 지역 분류명 리스트 구하기&보내기
+		List CategoryList = cdao.getCategoryList();
+		request.setAttribute("CategoryList", CategoryList);
+		
+		
 		request.setAttribute("count", count);
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("pageCount", pageCount);

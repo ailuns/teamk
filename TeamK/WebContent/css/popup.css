@@ -54,4 +54,25 @@ div#emailchkup form input[type="submit"] {
 	height: 25px;
 	margin-top: 10px;
 }
+/*passchange.jsp*/
+div#passchange{
+	background-color: #dedede;
+}
+div#passchange form label {
+float: left;
+margin-left: 10px;
+font-weight: bold;
+}
+div#passchange form input[type="text"] {width: 150px; float: right; margin-right: 30px;}
+div#passchange form input[type="password"] {width: 150px; float: right; margin-right: 30px; }
+div#passchange form input[type="submit"],div#passchange form input[type="button"]  {
+	border: 1px solid #000;
+	width: 100px;
+	height: 25px;
+	margin-top: 10px; 
+}
+
+
+
+
 
