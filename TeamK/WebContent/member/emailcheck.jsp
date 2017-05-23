@@ -12,6 +12,7 @@
 	<div id="emailchk">
 		<form action="./MemberEmailAction.me" method="post">
 			<input type="hidden" name="checknum" value="<%=checknum%>"> 
+			<%=checknum%>
 			<input type="text" name="number" id="number" 
 			placeholder="인증번호를 입력해주세요" maxlength="6">
 			<input type="submit" value="확인">

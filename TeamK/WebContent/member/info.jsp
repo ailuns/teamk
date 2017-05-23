@@ -37,7 +37,6 @@
 				%>
 				<table>
 				<tr><th>아이디</th><td><%=mb.getId()%></td></tr>
-				<tr><th>비밀번호</th><td>※ 비밀번호는 암호화 되어있습니다.</td></tr>
 				<tr><th>이름</th><td><%=mb.getName()%></td></tr>
 				<tr><th>우편번호</th><td><%=mb.getPostcode()%></td></tr>
 				<tr><th>주소</th><td><%=mb.getAddress1()%></td></tr>
