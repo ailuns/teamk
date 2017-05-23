@@ -125,27 +125,31 @@ public class PackDAO {
 	
 	
 	// 검색어(도시, 날짜) 있는 게시판 글 가져오기
-	public List getPackList_search(String search, String startDate, String endDate, int chk) {
+	public List getPackList_search(String search, String startDate, String endDate) {
 		List list = new ArrayList();
 
 		try {
 			conn = getConnection();
 
-			if (chk == 1)
+			if (endDate == "")
+			{
+				sql = "select * from pack where area like ? and date >= ? order by date asc";
+
+				pstm = conn.prepareStatement(sql);
+				pstm.setString(1, "%" +  search + "%");
+				pstm.setString(2, startDate);
+			}
+			else
 			{
 				sql = "select * from pack where area like ? and date >= ? and date <= ? order by date asc";
-			}
-			else if (chk == 2)
-			{
-				sql = "";
-			}
+
+				pstm = conn.prepareStatement(sql);
+				pstm.setString(1, "%" +  search + "%");
+				pstm.setString(2, startDate);
+				pstm.setString(3, endDate);
 				
+			}
 			
-	
-			pstm = conn.prepareStatement(sql);
-			pstm.setString(1, "%" +  search + "%");
-			pstm.setString(2, startDate);
-			pstm.setString(3, endDate);
 
 			rs = pstm.executeQuery();
 			while (rs.next()) {
@@ -267,12 +271,25 @@ public class PackDAO {
 		try {
 			conn = getConnection();
 
-			sql = "select count(*) from pack where city like ? and date >= ? and date <= ?";
+			if (endDate == "")
+			{
+				sql = "select count(*) from pack where area like ? and date >= ?";
+
+				pstm = conn.prepareStatement(sql);
+				pstm.setString(1, "%" +  search + "%");
+				pstm.setString(2, startDate);
+			}
+			else
+			{
+				sql = "select count(*) from pack where area like ? and date >= ? and date <= ?";
+
+				pstm = conn.prepareStatement(sql);
+				pstm.setString(1, "%" +  search + "%");
+				pstm.setString(2, startDate);
+				pstm.setString(3, endDate);
+				
+			}
 			
-			pstm = conn.prepareStatement(sql);
-			pstm.setString(1, "%" + search + "%");
-			pstm.setString(2, startDate);
-			pstm.setString(3, endDate);
 			rs = pstm.executeQuery();
 			if (rs.next()) {
 				count = rs.getInt(1);

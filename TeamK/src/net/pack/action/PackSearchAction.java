@@ -1,5 +1,7 @@
 package net.pack.action;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,11 +18,20 @@ public class PackSearchAction implements Action{
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		
-		String search = request.getParameter("city");
+		String search = request.getParameter("area");
 		String startDate = request.getParameter("startDate");
 		String endDate = request.getParameter("endDate");
 		
-//		String area = request.getParameter("area");
+		
+		
+		if (startDate == null && endDate == null)
+		{
+			long time = System.currentTimeMillis(); 
+			SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-MM-dd");
+
+			startDate = dayTime.format(new Date(time));
+			endDate = "";
+		}
 		
 		System.out.println("start >> " + startDate);
 		System.out.println("end >> " + endDate);
@@ -61,13 +72,12 @@ public class PackSearchAction implements Action{
 		// 끝페이지 구하기
 		int endPage = startPage+pageBlock-1;
 		
-		// city로 검색할때
-		List list = pdao.getPackList_search(search, startDate, endDate, 1);
-		
+
 		// area로 검색할때
-//		List mainSearch = pdao.getPackList_search(area, startDate, endDate, 2);
-		
+		List list = pdao.getPackList_search(search, startDate, endDate);
 		request.setAttribute("list", list);
+
+		
 		request.setAttribute("count", count);
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("pageCount", pageCount);

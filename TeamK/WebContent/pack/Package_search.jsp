@@ -9,7 +9,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link href="../css/inc.css" rel="stylesheet" type="text/css">
+<link href="./css/inc.css" rel="stylesheet" type="text/css">
+<link href="./css/subpage.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="./js/jquery-3.2.0.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -34,6 +35,7 @@
 		
 		$("#date_to").datepicker({
 			dateFormat: 'yy-mm-dd',    // 날짜 포맷 형식
+			minDate : 0,			   // 최소 날짜 설정      0이면 오늘부터 선택 가능
 			numberOfMonths: 2,		   // 보여줄 달의 갯수
 	        dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],  // 일(Day) 표기 형식
 	        monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],   // 월(Month) 표기 형식
@@ -57,69 +59,10 @@ img.ui-datepicker-trigger
 	margin-left : 5px;
 }
 
-
-#wrap_packlist 
-{ 
-	width : 1300px; 
-	min-height : 1000px; 
-	border : 1px solid black; 
-	margin : 0 auto; 
-	padding-top : 50px; 
-} 
-
-
-/* 패키지 리스트  */
-
-
-/* 패키지 리스트  */
-
-.clear {
+.clear 
+{
 	clear: both;
 }
-
-div#package_list {
-	width: 60%;
-	min-width: 850px;
-	height: 100%;
-	background-color: #fff;
-	margin: 0 auto;
-}
-div#package_list table {border-collapse: collapse;}
-div#package_list table tr {
-	padding-right: 10px;
-	text-align: left;
-}
-div#package_list table img {
-	width: 250px;
-	height: 150px;
-}
-div#package_list table #subject {
-	font-size: 20px;
-	font-weight: bold;
-	border-top: 1px solid #ccc;
-	width : 500px;
-	padding-left : 10px;
-}
-div#package_list table #context {
-	padding-left : 10px;
-}
-div#package_list table #price, #date {
-	font-size: 20px;
-	font-weight: bold;
-	border-left: 1px dotted #ddd;
-	border-top: 1px solid #ccc;
-	width : 200px;
-	text-align: center;
-}
-div#package_list table #context {text-align: justify;}
-div#pages {
-	width: 60%;
-	height: 40px;
-	margin: 0 auto;
-	background-color: #fff;
-	padding-top: 10px;
-}
-
 </style>
 </head>
 <body>
@@ -147,8 +90,6 @@ div#pages {
 	<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
 </div>
 <!--왼쪽 메뉴 -->
-
-<!-- <div id="wrap_packlist"> -->
 	<div id="wrap">
 		<div id="package_head">
 			<div id="package_title">패키지
@@ -158,7 +99,21 @@ div#pages {
 				<form action="./PackSearchAction.po" name="fr" method="get" id="scheduler" onsubmit="return input_chk()">
 					<label for="date_from">출발</label><input type="text" id="date_from" class="input_style" name="startDate" value="<%=startDate%>" required="yes">
 					<label for="date_to">도착</label><input type="text" id="date_to" class="input_style" name="endDate" value="<%=endDate%>" required="yes"><br><br>
-					<label for="city_search">지역</label><input type="text" id="city_search" name="city" value="<%=search %>" class="input_style" required="yes" placeholder="도시를 입력해주세요">
+					<label for="city_search">지역</label>
+					<select id="area" name="area">
+						<option value="">선택하세요</option>
+						<option value="서울" <%if(search.equals("서울")) {%> selected<%} %>>서울특별시</option>
+						<option value="부산" <%if(search.equals("부산")) {%> selected<%} %>>부산광역시</option>
+						<option value="경기도" <%if(search.equals("경기도")) {%> selected<%} %>>경기도</option>
+						<option value="강원도" <%if(search.equals("강원도")) {%> selected<%} %>>강원도</option>
+						<option value="충청북도" <%if(search.equals("충청북도")) {%> selected<%} %>>충청북도</option>
+						<option value="충청남도" <%if(search.equals("충청남도")) {%> selected<%} %>>충청남도</option>
+						<option value="전라북도" <%if(search.equals("전라북도")) {%> selected<%} %>>전라북도</option>
+						<option value="전라남도" <%if(search.equals("전라남도")) {%> selected<%} %>>전라남도</option>
+						<option value="경상북도" <%if(search.equals("경상북도")) {%> selected<%} %>>경상북도</option>
+						<option value="경상남도" <%if(search.equals("경상남도")) {%> selected<%} %>>경상남도</option>
+						<option value="제주도" <%if(search.equals("제주도")) {%> selected<%} %>>제주도</option>
+					</select>
 					<input type="submit" value="검색" id="search_btn" class="input_style">
 				</form>
 			</div>
@@ -177,7 +132,6 @@ div#pages {
 					for (int i = 0; i <list.size(); i++)
 					{
 						pb =(PackBean)list.get(i);
-// 						int inValues = Integer.parseInt(junsu);
 						DecimalFormat Commas = new DecimalFormat("#,###");
 						String cost = (String)Commas.format(pb.getCost());
 			%>
@@ -209,7 +163,6 @@ div#pages {
 			</table>
 		</div>
 		<div id="pages">
-			<center>
 				<%
 					if (count != 0) {
 						// 페이지 갯수 구하기
@@ -225,36 +178,37 @@ div#pages {
 						//이전
 						if (startPage > pageBlock) {
 				%>
-				<a href="./PackContent.po?pageNum=<%=startPage - pageBlock%>#QnA">[이전]</a>
+				<a href="./PackContent.po?pageNum=<%=startPage - pageBlock%>">[이전]</a>
 				<%
 					}
 
 						//페이지
 						for (int i = startPage; i <= endPage; i++) {
 				%>
-				<a href="./PackContent.po?repageNum=<%=i %>#QnA">[<%=i%>]</a>
+				<a href="./PackContent.po?pageNum=<%=i %>">[<%=i%>]</a>
 				<%
 					}
 
 						//다음
 						if (endPage < pageCount) {
 				%>
-				<a href="./PackContent.po?pageNum=<%=startPage + pageBlock%>#QnA">[다음]</a>
+				<a href="./PackContent.po?pageNum=<%=startPage + pageBlock%>">[다음]</a>
 				<%
 					}
 				}
 				%>
-			</center>
 		</div>
 	</div>
-<!-- </div> -->
 <!--오른쪽 메뉴 -->
 <div>
 	<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
 </div>
 <!--오른쪽 메뉴 -->
 <!--아래 메뉴-->
-<jsp:include page="../inc/footer.jsp"></jsp:include>
+<div>
+	<jsp:include page="../inc/footer.jsp"></jsp:include>
+</div>
+
 <!--아래 메뉴-->
 </body>
 </html>

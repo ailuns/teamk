@@ -10,8 +10,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link href="../css/inc.css" rel="stylesheet" type="text/css">
-<link href="../css/subpage.css" rel="stylesheet" type="text/css">
+<link href="./css/inc.css" rel="stylesheet" type="text/css">
+<link href="./css/subpage.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="./js/jquery-3.2.0.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -37,6 +37,7 @@
 		
 		$("#date_to").datepicker({
 			dateFormat: 'yy-mm-dd',    // 날짜 포맷 형식
+			minDate : 0,			   // 최소 날짜 설정      0이면 오늘부터 선택 가능
 			numberOfMonths: 2,		   // 보여줄 달의 갯수
 	        dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],  // 일(Day) 표기 형식
 	        monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],   // 월(Month) 표기 형식
@@ -193,7 +194,21 @@ img.ui-datepicker-trigger {
 			<form action="./PackSearchAction.po" name="fr" method="get" id="scheduler" onsubmit="return input_chk()">
 				<label for="date_from">출발</label><input type="text" id="date_from" class="input_style" name="startDate" required="yes">
 				<label for="date_to">도착</label><input type="text" id="date_to" class="input_style" name="endDate" required="yes"><br><br>
-				<label for="city_search">지역</label><input type="text" id="city_search" name="city" class="input_style" required="yes" placeholder="도시를 입력해주세요">
+				<label for="city_search">지역</label>
+				<select id="area" name="area">
+						<option value="">선택하세요</option>
+						<option value="서울">서울특별시</option>
+						<option value="부산">부산광역시</option>
+						<option value="경기도">경기도</option>
+						<option value="강원도">강원도</option>
+						<option value="충청북도">충청북도</option>
+						<option value="충청남도">충청남도</option>
+						<option value="전라북도">전라북도</option>
+						<option value="전라남도">전라남도</option>
+						<option value="경상북도">경상북도</option>
+						<option value="경상남도">경상남도</option>
+						<option value="제주도">제주도</option>
+					</select>
 				<input type="submit" value="검색" id="search_btn" class="input_style">
 			</form>
 		</div>
@@ -318,16 +333,16 @@ img.ui-datepicker-trigger {
 		}
 	%>
 </div>
-	<!--오른쪽 메뉴 -->
-	<div>
-		<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
-	</div>
-	<!--오른쪽 메뉴 -->
-	<!--푸터 메뉴 -->
-	<div>
-		<jsp:include page="../inc/footer.jsp"></jsp:include>
-	</div>
-	<!--푸터 메뉴 -->
+<!--오른쪽 메뉴 -->
+<div>
+	<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
+</div>
+<!--오른쪽 메뉴 -->
+<!--푸터 메뉴 -->
+<div>
+	<jsp:include page="../inc/footer.jsp"></jsp:include>
+</div>
+<!--푸터 메뉴 -->
 	
 </body>
 </html>

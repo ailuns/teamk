@@ -144,6 +144,7 @@ polyline#pl_HI5_1_ {}/*인천관역시*/
 polyline#pl_HI6_1_ {}/*서울특별시*/
 polyline#pl_HI7_1_ {}/*광주광역시*/
 path#sejong {}/*세종특별자치시*/
+
 polyline#pl_HD1_1_:hover, polyline#pl_HD2_1_:hover, 
 polyline#pl_HD3_1_:hover, polyline#pl_HD4_1_:hover, 
 polyline#pl_HD5_1_:hover, polyline#pl_HD6_1_:hover, 
@@ -163,19 +164,28 @@ path#sejong:hover {
 body {
 	margin: 0;
 	padding: 0;
+	position : relative;
+	border : 2px solid red;
+	width : 1920px;
+	min-height : 1080px;
 	background-color: #2459da;
 	background-image: url("../img/Jeju-bg.jpg");
+	background-attachment: fixed;
 	background-repeat : no-repeat;
-	background-size: contain;
+ /* 	background-size: contain; */
+ 	background-size: 100%;
 	background-position: bottom center;
 }
 div#wrap {
 	margin-top: 100px;
-	width: 1000px;
-	height: 100%;
+ 	width: 1000px;
+ 	min-height : 1080px;
+/* 	width : 100%; */
+/* 	height: 100%; */
 	padding-top: 50px;
 	margin: 0 auto;
 	text-align: center;
+	border : 2px solid black;
 }
 div#map {
 	width: 100%;

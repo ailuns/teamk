@@ -126,7 +126,7 @@ div#scheduler form input[type=text] {
 	font-size: 23px;
 	width: 70%;
 }
-div#scheduler form input#city_search {
+div#scheduler form input#area {
 	font-size: 23px;
 	width: 50%;
 }
@@ -277,7 +277,7 @@ div#package_search form input[type=text] {
 	font-size: 15px;
 	width: 36%;
 }
-div#package_search form input#city_search {
+div#package_search form select#area {
 	font-size: 15px;
 	width: 65%;
 }
@@ -300,6 +300,73 @@ div#package_feat {
 	margin: 0 auto;
 }
 div#package_feat div {float: right;}
+
+div#package_list
+{
+	width: 100%;
+	min-width: 850px;
+	height: 100%;
+	background-color: #fff;
+	margin: 0 auto;
+}
+
+div#package_list table 
+{
+	border-collapse: collapse;
+}
+
+div#package_list table tr 
+{
+	padding-right: 10px;
+	text-align: left;
+}
+
+div#package_list table img 
+{
+	width: 250px;
+	height: 150px;
+}
+
+div#package_list table #subject 
+{
+	font-size: 20px;
+	font-weight: bold;
+	border-top: 1px solid #ccc;
+	width : 500px;
+	padding-left : 10px;
+}
+
+div#package_list table #context 
+{
+	padding-left : 10px;
+}
+
+div#package_list table #price, #date 
+{
+	font-size: 20px;
+	font-weight: bold;
+	border-left: 1px dotted #ddd;
+	border-top: 1px solid #ccc;
+	width : 200px;
+	text-align: center;
+}
+
+div#package_list table #context 
+{
+	text-align: justify;
+}
+
+div#pages 
+{
+	width: 60%;
+	height: 40px;
+	margin: 0 auto;
+/* 	background-color: #fff; */
+	padding-top: 10px;
+}
+
+
+
 div#feat_ttl1, div#feat_ttl2,
 div#feat_ttl3, div#feat_ttl4,
 div#feat_ttl5 {
