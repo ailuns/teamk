@@ -31,7 +31,7 @@
 	        onClose: function(selectedDate){		// 닫힐 때 함수 호출
 	        	if (selectedDate == "")  // 시작날 선택 안했을때
 	       		{
-	        		$("#to").datepicker("option", "minDate", "0");   		// #date_to의 최소 날짜를 오늘 날짜로 설정
+	        		$("#to").datepicker("option", "minDate", 0);   		// #date_to의 최소 날짜를 오늘 날짜로 설정
 	       		}
 	        	else					// 시작날 선택 했을때
 	        	{
