@@ -202,7 +202,7 @@ img.ui-datepicker-trigger
 				
 				<tr>
 					<td><input type="submit" id="save" value="글쓰기"></td>
-					<td><input type="button" value="취소"></td>
+					<td><input type="button" value="취소" onclick="history.back()"></td>
 				</tr>
 			</table>
 			<script type="text/javascript">

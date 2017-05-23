@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>TeamK 여행사</title>
 </head>
 <body>
 	<h1>WebConTest/member/logout.jsp</h1>
