@@ -33,6 +33,7 @@ public class MemberDeleteAction implements Action {
 
 		mb = mdao.getMember(id);
 		String hashPass = mb.getPass();
+		
 
 		if (BCrypt.checkpw(pass, hashPass)) {
 
@@ -69,7 +70,16 @@ public class MemberDeleteAction implements Action {
 				out.close();
 				return null;
 			}
+		}else {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('비밀번호틀림');");
+			out.println("history.back();");
+			out.println("</script>");
+			out.close();
+			return null;
 		}
-		return null;
+		
 	}
 }

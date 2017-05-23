@@ -10,6 +10,15 @@
 <title>Insert title here</title>
 <link href="./css/inc.css" rel="stylesheet" type="text/css">
 <link href="./css/subpage.css" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+function passck() {
+	if(document.fr.pass.value==null || document.fr.pass.value==""){
+	alert("비밀번호를 입력해주세요.");
+	return false;
+	}
+	return;
+}
+</script>
 </head>
 <body>
 	<%
@@ -25,18 +34,19 @@
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
 		<div id="member_head">
-			<div id="member_title">로그인</div>
+			<div id="member_title">회원 탈퇴</div>
 			<div id="member_script"></div>
 		</div>
 		<div id="clear"></div>
 		<div id="member">
 			<div id="m_delete_form">
-			<form action="./MemberDeleteAction.me" method="post" name="fr">
+			<form action="./MemberDeleteAction.me" method="post" name="fr" onsubmit="return passck()">
 				<label for="id">아이디</label>
 				<input type="text" name="id" id="id" value="<%=id%>"><br>
 				<label for="pass">비밀번호</label>
 				<input type="password" name="pass" id="pass"><br> 
 				<input type="submit" value="회원탈퇴">
+				<input type="button" value="돌아가기" onclick="location.href='./main.bo'"> 
 			</form>
 			</div>
 		</div>

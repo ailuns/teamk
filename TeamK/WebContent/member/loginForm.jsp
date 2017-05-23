@@ -12,7 +12,7 @@
 <%
 String id = (String) session.getAttribute("id");
 if (id != null) {
-	response.sendRedirect("./main.bo");
+	response.sendRedirect("./main.bo"); 
 }
 %>
 	<!--왼쪽 메뉴 -->
@@ -20,7 +20,7 @@ if (id != null) {
 		<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
 	</div>
 	<!--왼쪽 메뉴 -->
-	<div id="wrap">
+	<div id="wrap"> 
 		<div id="member_head">
 			<div id="member_title">로그인</div>
 			<div id="member_script">로그인이 필요합니다.</div>
