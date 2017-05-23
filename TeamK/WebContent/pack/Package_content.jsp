@@ -103,12 +103,14 @@
 			
 	   		if (btn == "주변 명소")
 			{
-				value = "<%=PB.getCity()%> " + "<%=PB.getSarea()%> " + btn;   
+				value = "<%=PB.getCity()%> " + "<%=PB.getSarea()%> " + btn; 
+<%-- 				value = "<%=PB.getSarea()%> " + btn;  --%>
 				// ex) value = 부산 해운대 주변 명소
 			}
 			else if (btn == "주변 맛집")
 			{
 				value = "<%=PB.getCity()%> " + "<%=PB.getSarea()%> " + btn;
+<%-- 				value = "<%=PB.getSarea()%> " + btn; --%>
 				// ex) value = 부산 해운대 주변 맛집
 			}
 	   		
@@ -1016,7 +1018,7 @@
 						
 						%> 
 						
-						<%=rb.getContent()%>
+						<%=rb.getContent()%><span>(<%=rb.getDate() %>)</span>
 						<%
 						if(rb.getH_or_s() == 1)
 						{
@@ -1032,6 +1034,7 @@
 					%>
 					<td style="height:50px;">
 						비밀글입니다<img src="./img/lock.png" width="10px" height="10px">
+						<span>(<%=rb.getDate() %>)</span>
 					</td>
 					<%
 					}
@@ -1077,9 +1080,6 @@
 						<input type="checkbox" class="up_secretChk<%=rb.getNum() %>" name="secretChk" value="1" <%if(rb.getH_or_s() == 1){%>checked<%} %>>비밀글
 					</td>
 				<tr>
-				
-				
-				
 				<tr id="con<%=rb.getNum()%>" style="display: none;">
 					<td>
 						<input type="hidden" id="num" name="num" value="<%=PB.getNum()%>">

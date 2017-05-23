@@ -147,6 +147,11 @@ img.ui-datepicker-trigger
 
 		<div id="package_list">
 			<table>
+				<tr>
+					<td colspan="2">상품</td>
+					<td>가격</td>
+					<td>출발일자</td>
+				</tr>
 			<%
 				PackBean pb;
 				if (count!=0)
