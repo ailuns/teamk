@@ -6,6 +6,23 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src = "./js/jquery-3.2.0.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+});
+function leader_check(){
+	if($('#leader_name').val().length==0&&
+		$('#leader_mobile').val().length==0&&
+		$('#leader_birthday').val().length==0&&
+		$('#leader_first_name').val().length==0&&
+		$('#leader_last_name').val().length==0){
+		alert("대표자 정보를 정확히 입력해 주십시오");
+		return false;
+	}
+	return false;
+}
+</script>
 <title>여행자 정보 입력</title>
 </head>
 <%
@@ -13,7 +30,8 @@ request.setCharacterEncoding("utf-8");
 List<PackMemberBEAN> PM_List = (List<PackMemberBEAN>)request.getAttribute("PM_List");
 %>
 <body>
-<form>
+<form action="./PM_Info_Update.mo" method = "post"
+	name = "fr" onsubmit="return leader_check()">
 <h3>여행자 정보 입력</h3>
 <%
 if(PM_List.size()!=0){
@@ -21,6 +39,7 @@ if(PM_List.size()!=0){
 %>
 	<h4>대표자</h4>
 	<h6 style="color:red">※ 대표자 정보는 반드시 입력 하셔야합니다!</h6>
+	<input type="hidden" value = "<%=pm.getPm_num()%>" name = "pm_num">
 	<table>
 	<tr>
 		<td>이름</td>
@@ -72,6 +91,7 @@ if(PM_List.size()!=0){
 			out.print("어린이"+child);
 			child++;
 		}%></h5>
+		<input type="hidden" value = "<%=pm.getPm_num()%>" name = "pm_num">
 	<table>
 	<tr>
 		<td>이름</td>
