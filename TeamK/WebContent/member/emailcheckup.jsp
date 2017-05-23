@@ -5,14 +5,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>TeamK 여행사</title>
 <link href="./css/popup.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <%-- 	<%String checknum = (String) request.getAttribute("checknum");%> --%>
 	<div id="emailchkup">
 	<form action="./MemberEmailUp.me" method="post">
-		<label for="email">이메일</label><input type="text" name="email" id="email"> 
+		<label for="email">이메일</label>
+		<input type="text" name="email" id="email"> 
 		<input type="hidden" name="echeck" value="0"> 
 		<input type="hidden" name="checknum" value="checknum"><br>
 		<input type="submit" value="인증번호 받기">

@@ -761,11 +761,10 @@
 				</form>
 			</div>
 		</div>
-	</div>
+	
 	<div id="clear"></div>
 	<!--여행지 검색창 -->
 	
-	<div id="wrap_pack">
 		<!--글제목 -->
 		<h3><%=PB.getSubject()%></h3>
 		<!--글제목 -->

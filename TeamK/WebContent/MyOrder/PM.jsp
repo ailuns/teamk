@@ -12,15 +12,15 @@ $(document).ready(function(){
 	
 });
 function leader_check(){
-	if($('#leader_name').val().length==0&&
-		$('#leader_mobile').val().length==0&&
-		$('#leader_birthday').val().length==0&&
-		$('#leader_first_name').val().length==0&&
+	if($('#leader_name').val().length==0||
+		$('#leader_mobile').val().length==0||
+		$('#leader_birthday').val().length==0||
+		$('#leader_first_name').val().length==0||
 		$('#leader_last_name').val().length==0){
 		alert("대표자 정보를 정확히 입력해 주십시오");
 		return false;
 	}
-	return false;
+	
 }
 </script>
 <title>여행자 정보 입력</title>

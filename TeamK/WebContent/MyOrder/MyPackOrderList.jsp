@@ -54,6 +54,7 @@ function insertPM(num){
 						<td><%=mpb.getIntro() %></td>
 						<td>성인 : <%=pack_count[0] %>, 아동 : <%=pack_count[1] %></td>
 						<td><%=mpb.getCost() %>원</td>
+						<td><%=mpb.getStatus_text() %>
 					</tr>
 					<tr>
 						<td><input type = "button" value = "여행자 정보 입력" onclick="insertPM(<%=mpb.getNum()%>)"></td>
