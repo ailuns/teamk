@@ -2,6 +2,8 @@
 <%@page import="java.util.List"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="net.board.db.BoardDAO"%>
+<%@ page import="net.pack.db.CategoryBean" %>
+<%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -39,7 +41,7 @@
         onClose: function(selectedDate){		// 닫힐 때 함수 호출
         	if (selectedDate == "")  // 시작날 선택 안했을때
        		{
-        		$("#to").datepicker("option", "minDate", "0");   		// #date_to의 최소 날짜를 오늘 날짜로 설정
+        		$("#to").datepicker("option", "minDate", 0);   		// #date_to의 최소 날짜를 오늘 날짜로 설정
        		}
         	else					// 시작날 선택 했을때
         	{
@@ -50,6 +52,7 @@
 	
 	$("#to").datepicker({
 		dateFormat: 'yy-mm-dd',    // 날짜 포맷 형식
+		minDate : 0,			   // 최소 날짜 설정      0이면 오늘부터 선택 가능
 		numberOfMonths: 2,		   // 보여줄 달의 갯수
         dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],  // 일(Day) 표기 형식
         monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],   // 월(Month) 표기 형식
@@ -58,7 +61,7 @@
         //buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
         onClose: function(selectedDate){		// 닫힐 때 함수 호출
         	$("#from").datepicker("option", "maxDate", selectedDate);   // #date_from의 최대 날짜를 #date_to에서 선택된 날짜로 설정
-        	}
+       	}
 	});
 
     //Package
@@ -97,7 +100,24 @@
     });
     //
   });
+  
+  
+	//패키지 검색 시 지역 선택
+	function input_chk()
+	{
+		var val = $("#area option:selected").val(); 
+		if (val == "")
+		{
+			alert("지역을 선택해주세요");
+	   		return false;
+		}	
+		return true;
+	}
+	
 </script>
+<%
+	List CategoryList = (List)request.getAttribute("CategoryList");
+%>
 </head>
 <body>
 	<!--왼쪽 메뉴 -->
@@ -110,25 +130,24 @@
 			<div id="calendar"></div>
 			<div id="scheduler">
 				<p>내게 맞는 패키지 검색하기</p>
-				<form action="./PackSearchAction.po" method="post" name="fr" id="scheduler">
+				<form action="./PackSearchAction.po" method="post" name="fr" id="scheduler" onsubmit="return input_chk();">
 					<label for="from">출발</label>
-					<input type="text" id="from" name="startDate"><br>
+					<input type="text" id="from" name="startDate" required="yes"><br>
 					<label for="to">도착</label>
 					<input type="text" id="to" name="endDate"><br>
 					<label for="area">지역</label>
 					<select id="area" name="area">
 						<option value="">선택하세요</option>
-						<option value="서울">서울특별시</option>
-						<option value="부산">부산광역시</option>
-						<option value="경기도">경기도</option>
-						<option value="강원도">강원도</option>
-						<option value="충청북도">충청북도</option>
-						<option value="충청남도">충청남도</option>
-						<option value="전라북도">전라북도</option>
-						<option value="전라남도">전라남도</option>
-						<option value="경상북도">경상북도</option>
-						<option value="경상남도">경상남도</option>
-						<option value="제주도">제주도</option>
+						<%
+							CategoryBean cb;
+							for (int i = 0; i < CategoryList.size(); i++)
+							{
+								cb =(CategoryBean)CategoryList.get(i);
+						%>	
+							<option value="<%=cb.getCar_name() %>"><%=cb.getCar_name() %></option>
+						<%
+							}
+						%>
 					</select>
 					<input type="submit" value="검색">
 				</form>

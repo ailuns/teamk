@@ -244,15 +244,10 @@ public class BoardFrontController extends HttpServlet {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-	   	 }else if(command.equals("/main.bo")){
-				forward=new ActionForward();
-		   		forward.setPath("./main/main.jsp");
-		   		forward.setRedirect(false);			
-		}else if(command.equals("/index.bo")){
-			forward=new ActionForward();
-	   		forward.setPath("./main/index.jsp");
-	   		forward.setRedirect(false);			
-		}else if(command.equals("/listSearch.bo")){
+	   	 }
+	   	
+	   	 
+	   	 else if(command.equals("/listSearch.bo")){
 			action = new BoardlistSearchAction();
 			try {
 				forward = action.execute(request, response);
