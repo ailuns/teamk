@@ -141,7 +141,16 @@ public class PackFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 		}
-		
+		else if(command.equals("/PackDateAdd.po"))
+		{
+			action = new PackDateAdd();
+			try {
+				forward = action.excute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		
 		
