@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
     <%@ page import="net.pack.db.PackDAO" %>
     <%@ page import="net.pack.db.PackBean" %>
+    <%@ page import="net.pack.db.CategoryBean" %>
+    <%@ page import="net.pack.db.CategoryDAO" %>
     <%@ page import="java.util.List" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
@@ -81,12 +83,6 @@
 
 <style type="text/css">
 
-img.ui-datepicker-trigger
-{
-	cursor : pointer;
-	margin-left : 5px;
-}
-
 
 #wrap_pack
 {
@@ -98,7 +94,10 @@ img.ui-datepicker-trigger
 }
 
 </style>
-
+<%
+	CategoryDAO cdao = new CategoryDAO();
+	List CategoryList = cdao.getCategoryList();
+%>
 </head>
 <body>
 <!-- 왼쪽 메뉴 -->
@@ -121,9 +120,17 @@ img.ui-datepicker-trigger
 					<td>지역</td>
 					<td>
 						<select id="area" name="area">
-							<option value="서울">서울</option>
-							<option value="부산">부산</option>
-							<option value="경기도">경기도</option>
+							<option value="">선택하세요</option>
+							<%
+								CategoryBean cb;
+								for (int i = 0; i < CategoryList.size(); i++)
+								{
+									cb =(CategoryBean)CategoryList.get(i);
+							%>	
+								<option value="<%=cb.getCar_name() %>"><%=cb.getCar_name() %></option>
+							<%
+								}
+							%>
 						</select>
 					</td>
 				</tr>

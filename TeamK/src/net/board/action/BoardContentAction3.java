@@ -29,8 +29,6 @@ public class BoardContentAction3 implements Action {
 		request.setAttribute("bb", bb);
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("rcount", rcount);
-		List<BoardReplyBean> lrb = bdao.getBoardReplyList2(num);
-		request.setAttribute("lrb", lrb);
 		
 		ActionForward forward = new ActionForward();
    		forward.setPath("./board3/content3.jsp");

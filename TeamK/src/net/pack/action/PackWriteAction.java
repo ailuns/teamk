@@ -2,6 +2,7 @@ package net.pack.action;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import net.pack.db.CategoryDAO;
 import net.pack.db.PackBean;
 import net.pack.db.PackDAO;
 
@@ -53,6 +55,7 @@ public class PackWriteAction implements Action{
 		System.out.println("Write content >> " + content);
 		PackBean pb = new  PackBean();
 		PackDAO pdao = new PackDAO();
+		
 		
 		pb.setSerial(Integer.parseInt(serial));
 		pb.setIntro(intro);

@@ -1,8 +1,11 @@
 package net.pack.action;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.pack.db.CategoryDAO;
 import net.pack.db.PackBean;
 import net.pack.db.PackDAO;
 
@@ -16,13 +19,16 @@ public class PackModify implements Action{
 		System.out.println("PackModify excute()");
 		//int num가져오기
 		int num = Integer.parseInt(request.getParameter("num"));
-		//디비객체 생성 agdao
+		//디비객체 생성
 		PackDAO pdao=new PackDAO();
-		//GoodsBean goodsbean = 메서드호출 getGoods(num)
+		CategoryDAO cdao = new CategoryDAO();
+		
 		PackBean pb = pdao.getPack(num);
-		//저장 goodsbean
+		
+		List CategoryList = cdao.getCategoryList();
+		request.setAttribute("CategoryList", CategoryList);
+		
 		request.setAttribute("pb", pb);
-		//이동 ./admingoods/admin_goods_modify.jsp
 		request.setAttribute("num", num);
 		ActionForward forward=new ActionForward();
 		forward.setRedirect(false);

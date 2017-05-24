@@ -4,6 +4,7 @@
     <%@ page import="net.pack.db.PackDAO" %>
     <%@ page import="net.pack.db.PackBean" %>
     <%@ page import="net.pack.db.CategoryBean" %>
+    <%@ page import="java.text.DecimalFormat" %>
     <%@ page import="java.util.List" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -211,16 +212,16 @@
 				<label for="city_search">지역</label>
 				<select id="area" name="area">
 					<option value="">선택하세요</option>
-				<%
-					CategoryBean cb;
-					for (int i = 0; i < CategoryList.size(); i++)
-					{
-						cb =(CategoryBean)CategoryList.get(i);
-				%>	
-					<option value="<%=cb.getCar_name() %>"><%=cb.getCar_name() %></option>
-				<%
-					}
-				%>
+					<%
+						CategoryBean cb;
+						for (int i = 0; i < CategoryList.size(); i++)
+						{
+							cb =(CategoryBean)CategoryList.get(i);
+					%>	
+						<option value="<%=cb.getCar_name() %>"><%=cb.getCar_name() %></option>
+					<%
+						}
+					%>
 				</select>
 				<input type="submit" value="검색" id="search_btn" class="input_style">
 			</form>
@@ -290,6 +291,8 @@
 					{
 						pb =(PackBean)ListArr[i].get(j);
 						System.out.println(pb.getSubject());
+						DecimalFormat Commas = new DecimalFormat("#,###");
+						String cost = (String)Commas.format(pb.getCost());
 				%>				
 						<td>
 							<div>
@@ -306,7 +309,7 @@
 											<td><p><%=pb.getIntro() %></p></td>
 										</tr>
 										<tr>
-											<td><b><%=pb.getCost() %></b></td>
+											<td><b><%=cost %>원</b></td>
 										</tr>
 									</table>
 								</div>
