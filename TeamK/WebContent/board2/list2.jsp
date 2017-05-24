@@ -44,9 +44,11 @@ BoardDAO bdao = new BoardDAO();
     	BoardBean bb = (BoardBean)boardList2.get(i);
     			%>
 <tr><td><%=bb.getRe_ref()%></td>
+<td id="cate">[<%=bb.getType_select()%>]</td>
 <td id="title">
 <a href="./BoardContent2.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>">
-<%if(bdao.getBoardReplyCount(bb.getNum())>=1){%>[답변완료]<%}%><%=bb.getSubject()%>[<%=bdao.getBoardReplyCount(bb.getNum())%>]</a><%if(bdao.getFile(bb.getNum())!=null){%><img src="./img/File_icon.gif" width="15" height="15>"><%}%></td>
+<%-- <%if(bdao.getBoardReplyCount(bb.getNum())>=1){%>[답변완료]<%}%> --%>
+<%=bb.getSubject()%>[<%=bdao.getBoardReplyCount(bb.getNum())%>]</a><%if(bdao.getFile(bb.getNum())!=null){%><img src="./img/File_icon.gif" width="15" height="15>"><%}%></td>
 <td><%=bb.getId()%></td><td><%=bb.getDate() %></td>
     <td><%=bb.getReadcount() %></td></tr>
     			<%

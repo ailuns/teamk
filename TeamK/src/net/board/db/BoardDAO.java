@@ -95,7 +95,7 @@ public class BoardDAO {
 			}
 			
 			//3 sql insert now()
-			sql="insert into board(num,id,subject,content,readcount,date,file1,file2,file3,file4,file5,type,re_ref,email) values(?,?,?,?,?,now(),?,?,?,?,?,?,?,?)";
+			sql="insert into board(num,id,subject,content,readcount,date,file1,file2,file3,file4,file5,type,re_ref,email,type_select) values(?,?,?,?,?,now(),?,?,?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1,num);
 			pstmt.setString(2,bb.getId());
@@ -110,6 +110,7 @@ public class BoardDAO {
 			pstmt.setInt(11,bb.getType());
 			pstmt.setInt(12,re_ref); //re_ref 답변글 들여쓰기 일반글 들여쓰기 없음
 			pstmt.setString(13,bb.getEmail());
+			pstmt.setString(14,"답변준비중");
 			//4  실행
 			pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -471,7 +472,7 @@ public List getBoardList2(int startRow,int pageSize){
 		    	bb.setFile5(rs.getString("file5"));
 		    	bb.setType(rs.getInt("type"));
 		    	bb.setRe_ref(rs.getInt("re_ref"));
-		    		
+		    	bb.setType_select(rs.getString("type_select"));		
 		    	//boardList한칸저장
 		    	boardList2.add(bb);
 		    }
@@ -525,7 +526,7 @@ public List getBoardList2(int startRow,int pageSize,String search,String ss){
 	    	bb.setFile5(rs.getString("file5"));
 	    	bb.setType(rs.getInt("type"));
 	    	bb.setRe_ref(rs.getInt("re_ref"));
-	    		
+	    	bb.setType_select(rs.getString("type_select"));		
 	    	//boardList한칸저장
 	    	boardList.add(bb);
 	    }
@@ -577,7 +578,7 @@ public List getBoardList3(int startRow,int pageSize){
 	    	bb.setFile5(rs.getString("file5"));
 	    	bb.setType(rs.getInt("type"));
 	    	bb.setRe_ref(rs.getInt("re_ref"));
-	    		
+	    	
 	    	//boardList한칸저장
 	    	boardList3.add(bb);
 	    }
@@ -631,7 +632,7 @@ try {
     	bb.setFile5(rs.getString("file5"));
     	bb.setType(rs.getInt("type"));
     	bb.setRe_ref(rs.getInt("re_ref"));
-    		
+    	
     	//boardList한칸저장
     	boardList.add(bb);
     }
@@ -677,6 +678,7 @@ try {
 		    	bb.setType(rs.getInt("type"));
 		    	bb.setRe_ref(rs.getInt("re_ref"));
 		    	bb.setEmail(rs.getString("email"));
+		    	bb.setType_select(rs.getString("type_select"));
 				
 			}
 		} catch (Exception e) {
@@ -763,6 +765,50 @@ try {
 		}
 		return check;
 	}//updateBoard
+	
+	public int updateType_select(int rnum, String ts){
+		int check=-1;
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		String sql="";
+		ResultSet rs = null;
+		
+		try {
+			//1,2 디비연결 메서드호출
+			con = com.connect();
+			//3 sql num에 해당되는 id 가져오기
+			sql="select id from board where num=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1,rnum);
+			//4 rs 실행 저장
+			rs=pstmt.executeQuery();
+			//5 rs 데이터 있으면
+			//            비밀번호 비교 맞으면 check=1
+			//      3 num에 해당하는 name, subject, content 수정
+			//      4 실행
+			//                    틀리면 check=0
+			//         없으면 check=-1
+			if(rs.next()){
+				
+					check=1;
+					sql="update board set type_select=? where num=?";
+					pstmt=con.prepareStatement(sql);
+					pstmt.setString(1,ts);
+					pstmt.setInt(2,rnum);
+				
+					pstmt.executeUpdate();
+			}
+			else{
+				check=-1;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			com.close(con, pstmt, rs);
+		}
+		return check;
+	}//updateType_select
 	
 	public void deleteBoard(int num, String id){
 		
