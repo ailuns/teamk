@@ -127,6 +127,24 @@ path#sejong {
 	stroke: #fff;
 	stroke-miterlimit: 1;
 }
+polyline#pl_HD1_1_ {}/*충청남도*/
+polyline#pl_HD2_1_ {}/*제주도*/
+polyline#pl_HD3_1_ {}/*경상남도*/
+polyline#pl_HD4_1_ {}/*경상북도*/
+polyline#pl_HD5_1_ {}/*전라북도*/
+polyline#pl_HD6_1_ {}/*충청북도*/
+polyline#pl_HD7_1_ {}/*강원도*/
+polyline#pl_HD8_1_ {}/*경기도*/
+polyline#pl_HD9_1_ {}/*전라남도*/
+polyline#pl_HI1_1_ {}/*울산광역시*/
+polyline#pl_HI2_1_ {}/*부산광역시*/
+polyline#pl_HI3_1_ {}/*대구광역시*/
+polyline#pl_HI4_1_ {}/*대전광역시*/
+polyline#pl_HI5_1_ {}/*인천관역시*/
+polyline#pl_HI6_1_ {}/*서울특별시*/
+polyline#pl_HI7_1_ {}/*광주광역시*/
+path#sejong {}/*세종특별자치시*/
+
 polyline#pl_HD1_1_:hover, polyline#pl_HD2_1_:hover, 
 polyline#pl_HD3_1_:hover, polyline#pl_HD4_1_:hover, 
 polyline#pl_HD5_1_:hover, polyline#pl_HD6_1_:hover, 
@@ -139,23 +157,6 @@ path#sejong:hover {
 	fill: #01385f;
 	fill-opacity: 1;
 }
-polyline#pl_HD1_1_:HOVER div#chungnam {visibility: visible; opacity: 1;}/*충청남도*/
-polyline#pl_HD2_1_:HOVER div#jeju {visibility: visible; opacity: 1;}/*제주도*/
-polyline#pl_HD3_1_:HOVER div#gyeongnam {visibility: visible; opacity: 1;}/*경상남도*/
-polyline#pl_HD4_1_:HOVER div#gyeongbuk {visibility: visible; opacity: 1;}/*경상북도*/
-polyline#pl_HD5_1_:HOVER div#jeonbuk {visibility: visible; opacity: 1;}/*전라북도*/
-polyline#pl_HD6_1_:HOVER div#chungbuk {visibility: visible; opacity: 1;}/*충청북도*/
-polyline#pl_HD7_1_:HOVER div#gangwon {visibility: visible; opacity: 1;}/*강원도*/
-polyline#pl_HD8_1_:HOVER div#gyeonggi {visibility: visible; opacity: 1;}/*경기도*/
-polyline#pl_HD9_1_:HOVER div#jeonnam {visibility: visible; opacity: 1;}/*전라남도*/
-polyline#pl_HI1_1_:HOVER div#gyeongnam {visibility: visible; opacity: 1;}/*울산광역시*/
-polyline#pl_HI2_1_:HOVER div#busan {visibility: visible; opacity: 1;}/*부산광역시*/
-polyline#pl_HI3_1_:HOVER div#gyeongbuk {visibility: visible; opacity: 1;}/*대구광역시*/
-polyline#pl_HI4_1_:HOVER div#chungnam {visibility: visible; opacity: 1;}/*대전광역시*/
-polyline#pl_HI5_1_:HOVER div#gyeonggi {visibility: visible; opacity: 1;}/*인천관역시*/
-polyline#pl_HI6_1_:HOVER div#seoul {visibility: visible; opacity: 1;}/*서울특별시*/
-polyline#pl_HI7_1_:HOVER div#jeonnam {visibility: visible; opacity: 1;}/*광주광역시*/
-path#sejong:HOVER div#chungbuk {visibility: visible; opacity: 1;}/*세종특별자치시*/
 /* South Korea Map End */
 
 
@@ -207,9 +208,8 @@ div#map div {
 	padding: 10px;
 	color: #fff;
 	position: absolute;
-	visibility: hidden;
 	opacity: 0;
-	transition: opacity 1s;
+	visibility: hidden;
 }
 div#map div#seoul {top: 0%; right: 65%;}
 div#map div#busan {bottom: 0%; left: 65%;}
