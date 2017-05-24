@@ -22,6 +22,11 @@ function insertPM(num){
 			'left=200, top=100, width=600, height=640, scrollbars=yes, status=no,'+
 			'resizable=no, fullscreen=no, channelmode=no,location=no');
 }
+function Res_Cancel(num){
+	window.open('./Res_Cancel.mo?num='+num, '패키치 취소', 
+			'left=200, top=100, width=600, height=400, scrollbars=yes, status=no,'+
+			'resizable=no, fullscreen=no, channelmode=no,location=no');
+}
 </script>
 </head>
 <body>
@@ -54,11 +59,13 @@ function insertPM(num){
 						<td><%=mpb.getIntro() %></td>
 						<td>성인 : <%=pack_count[0] %>, 아동 : <%=pack_count[1] %></td>
 						<td><%=mpb.getCost() %>원</td>
-						<td><%=mpb.getStatus_text() %>
+						<td><%=mpb.getStatus_text() %></td>
 					</tr>
 					<tr>
 						<td><input type = "button" value = "여행자 정보 입력" onclick="insertPM(<%=mpb.getNum()%>)"></td>
-						<td><input type = "button" value = "예약 취소"></td>
+						<%if(mpb.getStatus()<4){ %>
+						<td><input type = "button" value = "예약 취소" onclick="Res_Cancel(<%=mpb.getNum()%>)"></td>
+						<%} %>
 					</tr>						
 				</table>
 				<%}
