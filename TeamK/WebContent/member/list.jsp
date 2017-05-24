@@ -22,7 +22,7 @@
 		String id = (String) session.getAttribute("id");
 
 		if (id != null && !id.equals("admin")) {
-			response.sendRedirect("./Main.me");
+			response.sendRedirect("./main.fo");
 		}
 
 		List memberList = (List) request.getAttribute("memberList");

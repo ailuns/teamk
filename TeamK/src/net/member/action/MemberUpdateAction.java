@@ -78,7 +78,7 @@ public class MemberUpdateAction implements Action {
 				session.setAttribute("id", id);
 				out.println("<script>");
 				out.println("alert('수정완료');");
-				out.println("location.href='./main.bo'");
+				out.println("location.href='./main.fo'");
 				out.println("</script>");
 				out.close();
 				return null;

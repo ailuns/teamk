@@ -31,11 +31,15 @@
 <form action="./BoardWriteAction.bo" method="post" name="fr" enctype="multipart/form-data">
 <input type="hidden" value="1" name="type">
 <input type="hidden" name="id" value="<%=id%>">
-<select name="select">
+<div style="float: left;">글머리
+<select name="select" id="type_select" style="margin-left: 66px;">
 	<option value="기타">기타</option>
     <option value="상품리뷰">상품리뷰</option>
     <option value="패키지리뷰">패키지리뷰</option>
 </select>
+</div>
+<div id="clear"></div>
+<br>
 <label for="subject">제목</label><input type="text" name="subject" id="subject" maxlength="20"><br><br>
 <textarea id="ir1" rows="30" cols="80" name="content" id="content"></textarea><br><br>
 <label for="file1">첨부파일1</label><input type="file" name="file1" id="file1"><br>

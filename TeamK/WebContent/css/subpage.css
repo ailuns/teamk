@@ -756,6 +756,7 @@ div#board div#board_list table a {
 	color: #000;
 }
 
+
 /*Board Content.jsp*/
 div#board div#board_content {
 	width: 90%;
@@ -779,6 +780,7 @@ div#board div#board_content table td#subject {
 	font-size: 20px;
 	font-weight: bold;
 	padding: 10px 0;
+	
 }
 div#board div#board_content table td#content {
 	max-width: 700px;

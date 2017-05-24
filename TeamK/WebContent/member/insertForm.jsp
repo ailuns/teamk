@@ -182,7 +182,7 @@ function sample6_execDaumPostcode() {
 <%
 String id = (String) session.getAttribute("id");
 if (id != null) {
-	response.sendRedirect("./main.bo");
+	response.sendRedirect("./main.fo");
 }
 %>
 	<!--왼쪽 메뉴 -->
