@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>TeamK 여행사</title>le>
+<title>TeamK 여행사</title>
 </head>
 <body>
 	<h1>WebConTest/member/main.jsp</h1>

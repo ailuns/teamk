@@ -46,7 +46,7 @@ function passck() {
 				<label for="pass">비밀번호</label>
 				<input type="password" name="pass" id="pass"><br> 
 				<input type="submit" value="회원탈퇴">
-				<input type="button" value="돌아가기" onclick="location.href='./main.bo'"> 
+				<input type="button" value="돌아가기" onclick="location.href='./main.fo'"> 
 			</form>
 			</div>
 		</div>

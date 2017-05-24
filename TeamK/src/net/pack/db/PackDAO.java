@@ -415,25 +415,26 @@ public class PackDAO {
 			int serial = Integer.parseInt(String.valueOf(pb.getSerial()) + String.valueOf(num));
 			System.out.println("WriteInsert content >> " + pb.getContent());
 
-			sql = "insert into pack(num, serial, subject, intro, content, area, city, sarea, cost, readcount, stock, date, file1, file2, file3, file4, file5) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			sql = "insert into pack(num, serial, subject, intro, content, type, area, city, sarea, cost, readcount, stock, date, file1, file2, file3, file4, file5) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			pstm = conn.prepareStatement(sql);
 			pstm.setInt(1, num);
 			pstm.setInt(2, serial);
 			pstm.setString(3, pb.getSubject());
 			pstm.setString(4, pb.getIntro());
 			pstm.setString(5, pb.getContent());
-			pstm.setString(6, pb.getArea());
-			pstm.setString(7, pb.getCity());
-			pstm.setString(8, pb.getSarea());
-			pstm.setInt(9, pb.getCost());
-			pstm.setInt(10, 0);
-			pstm.setInt(11, pb.getStock());
-			pstm.setString(12, pb.getDate());
-			pstm.setString(13, pb.getFile1());
-			pstm.setString(14, pb.getFile2());
-			pstm.setString(15, pb.getFile3());
-			pstm.setString(16, pb.getFile4());
-			pstm.setString(17, pb.getFile5());
+			pstm.setString(6, pb.getType());
+			pstm.setString(7, pb.getArea());
+			pstm.setString(8, pb.getCity());
+			pstm.setString(9, pb.getSarea());
+			pstm.setInt(10, pb.getCost());
+			pstm.setInt(11, 0);
+			pstm.setInt(12, pb.getStock());
+			pstm.setString(13, pb.getDate());
+			pstm.setString(14, pb.getFile1());
+			pstm.setString(15, pb.getFile2());
+			pstm.setString(16, pb.getFile3());
+			pstm.setString(17, pb.getFile4());
+			pstm.setString(18, pb.getFile5());
 
 			pstm.executeUpdate();
 
@@ -517,22 +518,23 @@ public class PackDAO {
 //
 //			if (rs.next()) {
 //				if (rs.getString(1).equals(bb.getPass())) {
-					sql = "update pack set subject=?, intro=?, content=?, area=?, city=?, sarea=?, cost=?, stock=?, file1=?, file2=?, file3=?, file4=?, file5=?  where num=?";
+					sql = "update pack set subject=?, intro=?, content=?, type=?, area=?, city=?, sarea=?, cost=?, stock=?, file1=?, file2=?, file3=?, file4=?, file5=?  where num=?";
 					pstm = conn.prepareStatement(sql);
 					pstm.setString(1, pb.getSubject());
 					pstm.setString(2, pb.getIntro());
 					pstm.setString(3, pb.getContent());
-					pstm.setString(4, pb.getArea());
-					pstm.setString(5, pb.getCity());
-					pstm.setString(6, pb.getSarea());
-					pstm.setInt(7, pb.getCost());
-					pstm.setInt(8, pb.getStock());
-					pstm.setString(9, pb.getFile1());
-					pstm.setString(10, pb.getFile2());
-					pstm.setString(11, pb.getFile3());
-					pstm.setString(12, pb.getFile4());
-					pstm.setString(13, pb.getFile5());
-					pstm.setInt(14, num);
+					pstm.setString(4, pb.getType());
+					pstm.setString(5, pb.getArea());
+					pstm.setString(6, pb.getCity());
+					pstm.setString(7, pb.getSarea());
+					pstm.setInt(8, pb.getCost());
+					pstm.setInt(9, pb.getStock());
+					pstm.setString(10, pb.getFile1());
+					pstm.setString(11, pb.getFile2());
+					pstm.setString(12, pb.getFile3());
+					pstm.setString(13, pb.getFile4());
+					pstm.setString(14, pb.getFile5());
+					pstm.setInt(15, num);
 					
 					pstm.executeUpdate();
 					return 1; // 수정 성공

@@ -26,6 +26,7 @@ public class BoardReplyAction2 implements Action {
 		request.setCharacterEncoding("utf-8");
 		
 		BoardReplyBean rb = new BoardReplyBean();
+		BoardBean bb = new BoardBean();
 		BoardDAO bdao = new BoardDAO();
 		
 		String rid = request.getParameter("rId");
@@ -34,14 +35,17 @@ public class BoardReplyAction2 implements Action {
 		String pageNum = request.getParameter("pageNum");
 		String wEmail = request.getParameter("wEmail");
 		String wContent = request.getParameter("wContent");
-	
-		
 		
 		rb.setId(rid);
 		rb.setGroup_del(rNum);
 		rb.setContent(rcontent);
-		
 		bdao.insertReplyBoard(rb);
+		
+		String ts = "답변완료";
+		bb.setNum(rNum);
+		bb.setType_select(ts);
+		bdao.updateType_select(rNum,ts);
+		
 		int rcount = bdao.getBoardReplyCount(rNum);
 		List<BoardReplyBean> lrb = bdao.getBoardReplyList(rNum);
 		request.setAttribute("lrb", lrb);

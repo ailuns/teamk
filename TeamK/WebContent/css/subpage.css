@@ -740,10 +740,11 @@ div#board div#board_list table tr {
 }
 div#board div#board_list table tr:HOVER {background-color: #eee;}
 div#board div#board_list table th#num {width: 50px;}
+div#board div#board_list table th#cate {width: 100px;}
 div#board div#board_list table th#date {width: 100px;}
 div#board div#board_list table th#readcount {width: 50px;}
 div#board div#board_list table th#name {width: 100px;}
-div#board div#board_list table th {}
+div#board div#board_list table td#cate {font-weight: bold;}
 div#board div#board_list table td#title {
 	text-align: left;
 	max-width: 200px;
@@ -755,6 +756,7 @@ div#board div#board_list table a {
 	text-decoration: none;
 	color: #000;
 }
+
 
 /*Board Content.jsp*/
 div#board div#board_content {
@@ -779,6 +781,7 @@ div#board div#board_content table td#subject {
 	font-size: 20px;
 	font-weight: bold;
 	padding: 10px 0;
+	
 }
 div#board div#board_content table td#content {
 	max-width: 700px;
