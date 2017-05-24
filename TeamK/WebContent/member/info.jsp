@@ -44,7 +44,7 @@
 				<tr><th>전화번호</th><td><%=mb.getMobile()%></td></tr>
 				<tr><th>이메일</th><td><%=mb.getEmail()%></td></tr>
 				</table>
-				<input type="button" value="메인으로" onclick="location.href='./main.bo'">
+				<input type="button" value="메인으로" onclick="location.href='./main.fo'">
 				<input type="button" value="회원정보수정" onclick="location.href='./MemberUpdate.me'">
 				<input type="button" value="회원정보삭제" onclick="location.href='./MemberDelete.me'">
 			</div>

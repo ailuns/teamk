@@ -65,7 +65,7 @@ public class MemberDeleteAction implements Action {
 				PrintWriter out = response.getWriter();
 				out.println("<script>");
 				out.println("alert('삭제완료');");
-				out.println("location.href='main.bo';");
+				out.println("location.href='main.fo';");
 				out.println("</script>");
 				out.close();
 				return null;
