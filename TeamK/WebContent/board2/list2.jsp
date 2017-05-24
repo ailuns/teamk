@@ -37,7 +37,7 @@ BoardDAO bdao = new BoardDAO();
 		<div id="board">
 		<div id="board_list">
 <table>
-<tr><th id="num">번호</th><th id="title">제목</th><th id="name">작성자</th><th id="date">날짜</th><th id="readcount">조회수</th></tr>
+<tr><th id="num">번호</th><th id="cate">답변</th><th id="title">제목</th><th id="name">작성자</th><th id="date">날짜</th><th id="readcount">조회수</th></tr>
     <%
     for(int i=0; i<boardList2.size(); i++){
     	//자바빈(BoardBean) 변수 =배열한칸 접근  배열변수.get()
