@@ -54,7 +54,7 @@ public class PackDAO {
 
 		try {
 			conn = getConnection();
-			sql = "select * from pack where area=? and date > now() order by num desc limit ?, ?";
+			sql = "select * from pack where area=? group by ? order by date desc limit ?, ?";
 			pstm = conn.prepareStatement(sql);
 			pstm.setString(1, area);
 			pstm.setInt(2, start - 1);
@@ -72,6 +72,7 @@ public class PackDAO {
 				PB.setType(rs.getString("type"));
 				PB.setArea(rs.getString("area"));
 				PB.setCity(rs.getString("city"));
+				PB.setCity(rs.getString("sarea"));
 				PB.setCost(rs.getInt("cost"));
 				PB.setReadcount(rs.getInt("readcount"));
 				PB.setStock(rs.getInt("stock"));
@@ -162,6 +163,7 @@ public class PackDAO {
 				PB.setType(rs.getString("type"));
 				PB.setArea(rs.getString("area"));
 				PB.setCity(rs.getString("city"));
+				PB.setCity(rs.getString("sarea"));
 				PB.setCost(rs.getInt("cost"));
 				PB.setReadcount(rs.getInt("readcount"));
 				PB.setStock(rs.getInt("stock"));
@@ -209,6 +211,82 @@ public class PackDAO {
 
 		return list;
 	}
+	
+	
+	// 지역별로 분류
+		public List getPackList(String subject) {
+			List list = new ArrayList();
+
+			try {
+				conn = getConnection();
+				sql = "select * from pack where subject=? and date > now() order by date";
+				pstm = conn.prepareStatement(sql);
+				pstm.setString(1, subject);
+
+				rs = pstm.executeQuery();
+				while (rs.next()) {
+					PackBean PB = new PackBean();
+
+					PB.setNum(rs.getInt("num"));
+					PB.setSerial(rs.getInt("serial"));
+					PB.setSubject(rs.getString("subject"));
+					PB.setIntro(rs.getString("intro"));
+					PB.setContent(rs.getString("content"));
+					PB.setType(rs.getString("type"));
+					PB.setArea(rs.getString("area"));
+					PB.setCity(rs.getString("city"));
+					PB.setSarea(rs.getString("sarea"));
+					PB.setCost(rs.getInt("cost"));
+					PB.setReadcount(rs.getInt("readcount"));
+					PB.setStock(rs.getInt("stock"));
+					PB.setDate(rs.getString("date"));
+					PB.setFile1(rs.getString("file1"));
+					PB.setFile2(rs.getString("file2"));
+					PB.setFile3(rs.getString("file3"));
+					PB.setFile4(rs.getString("file4"));
+					PB.setFile5(rs.getString("file5"));
+					
+					list.add(PB);
+				}
+
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			finally {
+				if (pstm != null) {
+					try {
+						pstm.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				if (conn != null) {
+					try {
+						conn.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+
+			return list;
+		}
+	
+	
+	
 	
 	// 해당 지역의 패키지 갯수 카운터
 	public int getPackCount(String area) {
@@ -415,7 +493,7 @@ public class PackDAO {
 			int serial = Integer.parseInt(String.valueOf(pb.getSerial()) + String.valueOf(num));
 			System.out.println("WriteInsert content >> " + pb.getContent());
 
-			sql = "insert into pack(num, serial, subject, intro, content, type, area, city, sarea, cost, readcount, stock, date, file1, file2, file3, file4, file5) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			sql = "insert into pack values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			pstm = conn.prepareStatement(sql);
 			pstm.setInt(1, num);
 			pstm.setInt(2, serial);

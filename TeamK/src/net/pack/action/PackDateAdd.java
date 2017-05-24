@@ -15,15 +15,16 @@ public class PackDateAdd implements Action{
 	public ActionForward excute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("PackDateAdd excute()");
-		//int num가져오기
-		int num = Integer.parseInt(request.getParameter("num"));
+		
+		String subject = request.getParameter("subject");
 		//디비객체 생성
 		PackDAO pdao=new PackDAO();
 		
-		PackBean pb = pdao.getPack(num);
-
-		request.setAttribute("pb", pb);
-		request.setAttribute("num", num);
+		List date_list;
+		date_list = pdao.getPackList(subject);
+		
+		request.setAttribute("date_list", date_list);
+		
 		ActionForward forward=new ActionForward();
 		forward.setRedirect(false);
 		forward.setPath("./pack/Package_dateAdd.jsp");

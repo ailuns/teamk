@@ -6,6 +6,7 @@
 <%@ page import="net.reply.db.ReplyDAO"%>
 <%@ page import="net.reply.db.ReplyBean"%>
 <%@ page import="net.pack.db.CategoryBean" %>
+<%@ page import="java.text.DecimalFormat" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -29,6 +30,7 @@
 	
 	List List = (List)request.getAttribute("replylist");
 	List CategoryList = (List)request.getAttribute("CategoryList");
+	List date_list = (List)request.getAttribute("date_list");
 	
 	int count = ((Integer)request.getAttribute("count")).intValue();
 	String repageNum = (String)request.getAttribute("repageNum");
@@ -483,9 +485,9 @@
 	});
 	
 	
-	function winOpen(num) {
-		win = window.open("./pack/Package_dateAdd.jsp?num=" + num, "idchk.jsp",
-				"width=500, height=700");
+	function winOpen(subject) {
+		win = window.open("./PackDateAdd.po?subject=" + subject, "Package_dateAdd.jsp",
+				"width=800, height=700");
 	}
 	
 // 	$("#date_add").click(function(){
@@ -899,7 +901,7 @@
 			if (user_id.equals("admin"))
 			{
 		%>
-			<input type="button" value="날짜추가" onclick="winOpen(<%=PB.getNum() %>);">
+			<input type="button" value="날짜추가" onclick="winOpen('<%=PB.getSubject() %>');">
 			<input type="button" value="글수정" onclick="location.href='PackModify.po?num=<%=PB.getNum() %>'">
 			<input type="button" value="글삭제" onclick="location.href='PackDeleteAction.po?num=<%=PB.getNum() %>'">
 		<%
@@ -1014,19 +1016,24 @@
 					<td id="date_cost">상품가격</td>
 					<td id="date_stock">갯수</td>
 				</tr>
+				
 				<%
-				for(int i = 0; i < 10; i++)
-				{
-				%>
-				<tr>
-					<td style="display:none;">글번호</td>
-					<td class="date_td_size">2017-05-05</td>
-					<td class="date_td_size">한옥마을</td>
-					<td class="date_td_size">50,000</td>
-					<td class="date_td_size">50</td>
+					PackBean pb;
+					for (int i = 0; i < date_list.size(); i++)
+					{
+						pb =(PackBean)date_list.get(i);
+						DecimalFormat Commas = new DecimalFormat("#,###");
+						String cost = (String)Commas.format(pb.getCost());
+				%>	
+					<tr>
+					<td style="display:none;"><%=pb.getNum() %></td>
+					<td class="date_td_size"><%=pb.getDate() %></td>
+					<td class="date_td_size"><%=pb.getSarea() %></td>
+					<td class="date_td_size"><%=cost %></td>
+					<td class="date_td_size"><%=pb.getStock() %></td>
 				</tr>
 				<%
-				}
+					}
 				%>
 			</table>
 		</div>
