@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
     <%@ page import="net.pack.db.PackDAO" %>
     <%@ page import="net.pack.db.PackBean" %>
+    <%@ page import="net.pack.db.CategoryBean" %>
+    <%@ page import="net.pack.db.CategoryDAO" %>
     <%@ page import="java.util.List" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
@@ -117,32 +119,7 @@ img.ui-datepicker-trigger
 	int num = ((Integer)request.getAttribute("num")).intValue();
 	System.out.println("Modify.jsp num >> " + num);
 	PackBean pb= (PackBean)request.getAttribute("pb");
-	// serial 값에서 날짜를 추출한다
-	String date_temp = String.valueOf(pb.getSerial());		// serial 값을 String으로 변환
-	String year = date_temp.substring(0, 4);				// serial 값에서 year값 추출
-	String month = date_temp.substring(4, 6);				// serial 값에서 month값 추출
-	String day = date_temp.substring(6, 8);					// serial 값에서 day값 추출
-	String date = "";
-	
-	System.out.println(year);
-	System.out.println(month);
-	System.out.println(day);
-	
-	
-	// 추출한 year, month, day 값을 하나로 합친다      형식   yyyy-mm-dd
-	for (int i = 0; i < date_temp.length(); i++)
-	{
-		if (i == 3) {
-			  date = year + "-";
-		}
-		else if (i == 5) {
-			  date = date + month + "-";
-		}
-		else if (i == 7) {
-			  date = date + day;
-		}
-	}
-	System.out.println(date);
+	List CategoryList = (List)request.getAttribute("CategoryList");
 %>
 
 </head>
@@ -161,15 +138,23 @@ img.ui-datepicker-trigger
 				</tr>
 				<tr>
 					<td>출발일자</td>
-					<td><input type="text" id="date_from" name="sdate" value="<%=date %>" class="input_style" name="startDate" required="yes"></td>
+					<td><input type="text" id="date_from" name="sdate" value="<%=pb.getDate() %>" class="input_style" name="startDate" required="yes"></td>
 				</tr>
 				<tr>
 					<td>지역</td>
 					<td>
 						<select id="area" name="area">
-							<option value="서울" <%="서울".equals(pb.getArea()) ? "selected" : ""%>>서울</option>
-							<option value="부산" <%="부산".equals(pb.getArea()) ? "selected" : ""%>>부산</option>
-							<option value="경기도" <%="경기도".equals(pb.getArea()) ? "selected" : ""%>>경기도</option>
+							<option value="">선택하세요</option>
+							<%
+								CategoryBean cb;
+								for (int i = 0; i < CategoryList.size(); i++)
+								{
+									cb =(CategoryBean)CategoryList.get(i);
+							%>	
+								<option value="<%=cb.getCar_name() %>" <%if(pb.getArea().equals(cb.getCar_name())) {%> selected <%}%>><%=cb.getCar_name() %></option>
+							<%
+								}
+							%>
 						</select>
 					</td>
 				</tr>

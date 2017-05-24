@@ -462,7 +462,7 @@ div#package_tab .tab_container {
 }
 div#package_tab div.tab_content table {margin: 0 auto;}
 div#package_tab .img_size {
-	width : 300px;
+	width : 280px;
 	height : 200px;
 }
 div#package_tab #img_content {
@@ -740,10 +740,11 @@ div#board div#board_list table tr {
 }
 div#board div#board_list table tr:HOVER {background-color: #eee;}
 div#board div#board_list table th#num {width: 50px;}
+div#board div#board_list table th#cate {width: 100px;}
 div#board div#board_list table th#date {width: 100px;}
 div#board div#board_list table th#readcount {width: 50px;}
 div#board div#board_list table th#name {width: 100px;}
-div#board div#board_list table th {}
+div#board div#board_list table td#cate {font-weight: bold;}
 div#board div#board_list table td#title {
 	text-align: left;
 	max-width: 200px;
