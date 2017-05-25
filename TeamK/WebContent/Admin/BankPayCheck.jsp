@@ -145,17 +145,9 @@ function Trade_Info_Delete(){
 		%>
 		</form>
 		<%
-		if (pageNum != 1) {
-	%>
-	<a href="./BankPayCheck.ao?pageNum=<%=pageNum - 1%>">[이전 페이지]</a>
-	<%
-		;
-		}
-		if (count != 0) {
-
-			if (endpage > pcount)
-				endpage = pcount;
-			if (startp > pblock) {
+	if (count != 0) {
+		if (endpage > pcount)endpage = pcount;
+		if (startp > pblock) {
 	%><a href="./BankPayCheck.ao?pageNum=<%=startp - 1%>">[이전]</a>
 	<%
 		}
@@ -168,17 +160,9 @@ function Trade_Info_Delete(){
 	%><a href="./BankPayCheck.ao?pageNum=<%=endpage + 1%>">[다음]</a>
 	<%
 		}
-		}
-		if (pcount != pageNum&&count!=0) {
-	%>
-	<a href="./BankPayCheck.ao?pageNum=<%=pageNum + 1%>">[다음 페이지]</a>
-	<br>
-	<%
-		;
-		}
+	}
 	%>
 	
-	<input type="button" value="Main"
-		onclick="location.href = './Main.bns'">
+	<input type = "button" value = "주문 관리" onclick="location.href='./AdminOrderList.ao'">
 </body>
 </html>

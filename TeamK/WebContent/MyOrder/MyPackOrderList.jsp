@@ -79,13 +79,7 @@ function Res_Cancel(num){
 		
 	</div>
 	<%
-		if (pageNum > 1) {
-	%>
-	<a href="./MyPackOrderList.mo?pageNum=<%=pageNum - 1%>">[이전 페이지]</a>
-	<%
-		;
-		}
-		if (count != 0) {
+	if (count != 0) {
 
 			if (endpage > pcount)
 				endpage = pcount;
@@ -103,15 +97,7 @@ function Res_Cancel(num){
 	<%
 		}
 		}
-		if (pcount != pageNum) {
 	%>
-	<a href="./MyPackOrderList.mo?pageNum=<%=pageNum + 1%>">[다음 페이지]</a>
-	
-	<%
-		;
-		}
-	%>
-	<br><input type="button" value="Main"
-		onclick="location.href = './Main.bns'">
+	<br><input type = "button" value = "내주문" onclick="location.href='./MyOrderList.mo'">
 </body>
 </html>

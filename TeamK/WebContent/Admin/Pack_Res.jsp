@@ -74,8 +74,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 </form>
 </div>
-	<%if(pageNum!=1){%>
-	<a href = "./Pack_Res.ao?pageNum=<%=pageNum-1%>">[이전 페이지]</a><%;}
+	<%
 	if(count!=0){
 				
 		if(endpage > pcount)endpage = pcount;
@@ -89,11 +88,8 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			%><a href = "./Pack_Res.ao?pageNum=<%=endpage+1%>">[다음]</a><%
 		}
 	}	//if(count%pagesize!=0)pcount+=1;
-	
-		
-		if(pcount!=pageNum){%>
-		<a href = "./Pack_Res.ao?pageNum=<%=pageNum+1%>">[다음 페이지]</a><%; }%>
+	%>
 		<br>
-		<input type="button" value="main" onclick="location.href='./Main.bns'">
+		<input type = "button" value = "주문 관리" onclick="location.href='./AdminOrderList.ao'">
 </body>
 </html>

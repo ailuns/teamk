@@ -128,8 +128,7 @@ List<TBasketBEAN> ThingBasket=(List<TBasketBEAN>)request.getAttribute("MyThingBa
 		<input type="button" value="구입" onclick="return basket_submit()">
 		<input type="button" value="삭제"	onclick="return basket_delete()">
 			</form>
-	<%if(pageNum!=1){%>
-	<a href = "./MyThingBasketList.bns?pageNum=<%=pageNum-1%>">[이전 페이지]</a><%;}
+	<%
 	if(count!=0){
 				
 		if(endpage > pcount)endpage = pcount;
@@ -143,9 +142,6 @@ List<TBasketBEAN> ThingBasket=(List<TBasketBEAN>)request.getAttribute("MyThingBa
 			%><a href = "./MyThingBasketList.bns?pageNum=<%=endpage+1%>">[다음]</a><%
 		}
 	}	//if(count%pagesize!=0)pcount+=1;
-	
-		
-		if(pcount!=pageNum){%>
-		<a href = "./MyThingBasketList.bns?pageNum=<%=pageNum+1%>">[다음 페이지]</a><%; }%>
+	%><br><input type = "button" value = "내주문" onclick="location.href='./MyOrderList.mo'">
 </body>
 </html>

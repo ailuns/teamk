@@ -88,6 +88,7 @@ List<interestBEAN> InterestThing = (List<interestBEAN>) request.getAttribute("In
 		<%
 			}
 		%>
+		<br><input type = "button" value = "내주문" onclick="location.href='./MyOrderList.mo'">
 	</div>
 </body>
 </html>

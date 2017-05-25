@@ -58,7 +58,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
 	</tr>
 	<%if(mtib.getTrade_type().equals("무통장 입금")){ %>
 	<tr>
-		<td>환불 받으실 계좌 정보 입력</td>
+		<td colspan="2">환불 받으실 계좌 정보 입력</td>
 	</tr>
 	<tr>
 		<td>은행명</td><td><input type="text" name="Cancel_info"></td>

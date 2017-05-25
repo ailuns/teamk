@@ -112,12 +112,6 @@ function Trans_Num_Fix(num){
 		 %>
 		 <div>무통장 입금 내역이 없습니다!</div>
 	 <%}
-		if (pageNum != 1) {
-	%>
-	<a href="./TransNum_Insert.ao?pageNum=<%=pageNum - 1%>">[이전 페이지]</a>
-	<%
-		;
-		}
 		if (count != 0) {
 
 			if (endpage > pcount)
@@ -136,16 +130,8 @@ function Trans_Num_Fix(num){
 	<%
 		}
 		}
-		if (pcount != pageNum&&count!=0) {
-	%>
-	<a href="./TransNum_Insert.ao?pageNum=<%=pageNum + 1%>">[다음 페이지]</a>
-	<br>
-	<%
-		;
-		}
-	%>
+		%>
 	
-	<input type="button" value="Main"
-		onclick="location.href = './Main.bns'">
+	<input type = "button" value = "주문 관리" onclick="location.href='./AdminOrderList.ao'">
 </body>
 </html>

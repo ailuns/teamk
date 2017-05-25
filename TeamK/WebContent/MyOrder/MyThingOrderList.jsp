@@ -118,12 +118,6 @@ function receive_change(i,ti_num){
 		}
 	%>
 	<%
-		if (pageNum != 1) {
-	%>
-	<a href="./MyThingOrderList.mo?pageNum=<%=pageNum - 1%>">[이전 페이지]</a>
-	<%
-		;
-		}
 		if (count != 0) {
 
 			if (endpage > pcount)
@@ -142,15 +136,7 @@ function receive_change(i,ti_num){
 	<%
 		}
 		}
-		if (pcount != pageNum) {
 	%>
-	<a href="./MyThingOrderList.mo?pageNum=<%=pageNum + 1%>">[다음 페이지]</a>
-	<br>
-	<%
-		;
-		}
-	%>
-	<input type="button" value="Main"
-		onclick="location.href = './Main.bns'">
+	<input type = "button" value = "내주문" onclick="location.href='./MyOrderList.mo'">
 </body>
 </html>

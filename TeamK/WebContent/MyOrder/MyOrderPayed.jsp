@@ -24,7 +24,7 @@ int check = Integer.parseInt(request.getParameter("check"));
 <body>
 결제가 정상적으로 완료 되었습니다.<br>
 이용해주셔서 감사합니다<br>
-<input type = "button" value = "main" onclick="location.href='./Main.bns'">
+<input type = "button" value = "내주문" onclick="location.href='./MyOrderList.mo'">
 <input type="button" value="Pack Order List" onclick="location.href='./MyPackOrderList.mo'">
 <input type="button" value="Thing Order List" onclick="location.href='./MyThingOrderList.mo'">
 </body>

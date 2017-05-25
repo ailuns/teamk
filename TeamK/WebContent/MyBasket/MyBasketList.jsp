@@ -232,6 +232,7 @@
 	</div>
 	<input type="button" value="구입" onclick = "return basket_submit()">
 	<input type="button" value ="삭제" onclick = "return basket_delete()">
+	<br><input type = "button" value = "내주문" onclick="location.href='./MyOrderList.mo'">
 	</form>
 	
 

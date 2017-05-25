@@ -49,11 +49,6 @@
 	</table>
 	<input type="button" value="관심 리스트" onclick="location.href='./MyInterestList.ins'"><br>
 	<%
-		if (pageNum != 1) {
-	%>
-	
-	<a href="./MyInterest.ins?pageNum=<%=pageNum - 1%>&TY=<%=ty%>">[이전 페이지]</a>
-	<%}
 		if (count != 0) {
 
 			if (endpage > pcount)
@@ -71,15 +66,7 @@
 	%><a href="./MyInterest.ins?pageNum=<%=endpage + 1%>&TY=<%=ty%>">[다음]</a>
 	<%
 		}
-		} //if(count%pagesize!=0)pcount+=1;
-
-		if (pcount != pageNum) {
-	%>
-	<a href="./MyInterest.ins?pageNum=<%=pageNum + 1%>&TY=<%=ty%>">[다음
-		페이지]</a>
-	<%
-		;
-		}
-	%>
+		} 
+	%><br><input type = "button" value = "내주문" onclick="location.href='./MyOrderList.mo'">
 </body>
 </html>
