@@ -152,8 +152,7 @@
 			$('#banner').hide();
 			$('#banner_sub').hide();
 		});
-
-			
+	
 	});
 
 	// 댓글 쓰기
@@ -410,9 +409,7 @@
 // 						google.maps.event.addListener(marker, 'mouseout', function() {
 // 				            infowindow1.close(map, this);
 // 				        });
-						
-								
-						
+
 						if (place.geometry.viewport) {
 							// Only geocodes have viewport.
 							bounds.union(place.geometry.viewport);
@@ -424,7 +421,7 @@
 				});
 			} else
 				$("#map_canvas").html("위도와 경도를 찾을 수 없습니다.");	
-		})
+		});
 	}
 
 	// 대댓글 작성 시 해당 댓글 밑에 입력창 보여주기/숨기기
@@ -460,6 +457,7 @@
 		return true;
     }
 	
+	// 리모컨 닫기 이벤트
 	function remote_close()
 	{
 		$('#remote_control').hide();
@@ -471,22 +469,27 @@
         $('html, body').animate({scrollTop : offset.top}, 400);
     }
 	
+	// 리모컨 마우스 Drag&Drop 이벤트
 	jQuery(document).ready(function($){
 		$("#remote_content").draggable();
 	});
 	
-
-	
+	// 날짜 추가 버튼 클릭 이벤트
 	function winOpen(subject) {
 		win = window.open("./PackDateAdd.po?subject=" + subject, "Package_dateAdd.jsp",
 				"width=800, height=700");
 	}
 	
-// 	$("#date_add").click(function(){
-// 		window.open("./pack/Package_dateAdd.jsp", 
-// 				"Package_dateAdd.jsp", "width=500, height=500");
-// 	}); 
-	
+	// 날짜 선택시 이벤트
+	function select_date(select_num)
+	{
+		var packnum = $("#select_rbtn" + select_num).val();
+// 		alert(packnum);
+		$(".select_color").css("background-color","");
+		$("#select_rbtn" + select_num).prop("checked", "true");
+		$("#select_date" + select_num).css("background-color", "#D5D5D5");
+	}
+
 
 </script>
 
@@ -724,6 +727,7 @@
 	background-color: white;
 	text-align: center;
 	font-size: 0.8em;
+	z-index : 1;
 }
 
 #banner
@@ -737,6 +741,7 @@
 	right : 150px;
 	bottom : 5px;
 	background-color: white;
+	z-index : 1;
 }
 
 #banner_content
@@ -789,6 +794,7 @@
 	background-color: white;
 	text-align: center;
 	border : 1px solid #BDBDBD;
+	z-index : 1;
 }
 
 #remote_content:HOVER
@@ -938,8 +944,13 @@
 				<form name="fr" method="post">
 					<table border="1">
 						<tr>
+						<%
+							DecimalFormat Commass = new DecimalFormat("#,###");
+							String cost_adult = (String)Commass.format(PB.getCost());
+							String cost_child = (String)Commass.format(PB.getCost() / 2);
+						%>
 							<td style="width:100px; text-align: center;">성인</td>
-							<td style="width:150px; text-align: center;">200,000</td>
+							<td style="width:150px; text-align: center;"><%=cost_adult %></td>
 							<td>
 								<!--최대 10명까지 선택가능하게 생성 -->
 								<select id="adult" name="adult" onchange="people_Calc(1)">
@@ -956,7 +967,7 @@
 						</tr>
 						<tr>
 							<td>아동</td>
-							<td>100,000</td>
+							<td><%=cost_child %></td>
 							<td>
 							<!--초기값은 1명까지 선택되게 생성 -->
 							<select id="child" name="child" onchange="people_Calc()">
@@ -968,7 +979,7 @@
 						</tr>
 						<tr>
 							<td>합계</td>
-							<td colspan="2"><p id="p">200000</p></td>
+							<td colspan="2"><p id="p"><%=cost_adult %></p></td>
 						</tr>
 						<tr>
 							<td></td>
@@ -994,7 +1005,12 @@
 										}
 									}
 									// 선택된 어른 수, 아이 수에 따라 가격 계산 후 출력
-									$('#p').html(val1 * 200000 + val2 * 100000);
+									var sum = val1 * <%=PB.getCost() %> + val2 * <%=PB.getCost()/2 %>
+									
+								    var str = String(sum);
+								    var commasum = str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+
+									$('#p').html(commasum);
 								});
 							}
 					</script>
@@ -1008,6 +1024,7 @@
 		<div id="datecontent">
 			<table>
 				<tr>
+					<td></td>
 					<td id="date_date">출발일자</td>
 					<td id="date_subject">상품명</td>
 					<td id="date_cost">상품가격</td>
@@ -1022,8 +1039,8 @@
 						DecimalFormat Commas = new DecimalFormat("#,###");
 						String cost = (String)Commas.format(pb.getCost());
 				%>	
-				<tr>
-					<td style="display:none;"><%=pb.getNum() %></td>
+				<tr id="select_date<%=i %>" class="select_color" onclick="select_date(<%=i %>)">
+					<td class="date_td_size"><input type="radio" id="select_rbtn<%=i %>" name="chk" value="<%=pb.getNum() %>"></td>
 					<td class="date_td_size"><%=pb.getDate() %></td>
 					<td class="date_td_size"><%=pb.getSarea() %></td>
 					<td class="date_td_size"><%=cost %></td>
