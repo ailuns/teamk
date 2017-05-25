@@ -52,6 +52,13 @@ public class INSFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else if (command.equals("/MyInterestCheck.ins")) {
+			action = new MyInterestCheck();
+			try {
+				afo = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		if (afo != null) {
 			if (afo.isRedirect()) {
