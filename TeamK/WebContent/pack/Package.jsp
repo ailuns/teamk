@@ -348,15 +348,8 @@
 	%>
 </div>
 <!--오른쪽 메뉴 -->
-<div>
 	<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
-</div>
 <!--오른쪽 메뉴 -->
-<!--푸터 메뉴 -->
-<div>
-	<jsp:include page="../inc/footer.jsp"></jsp:include>
-</div>
-<!--푸터 메뉴 -->
-	
+<jsp:include page="../inc/footer.jsp"></jsp:include>
 </body>
 </html>

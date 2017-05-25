@@ -22,6 +22,31 @@ public class interestDAO {
 		conn = ds.getConnection();
 		return conn;
 	}
+	public int MyInterestCheck(interestBEAN inb){
+		int check = 0;
+		try{
+			conn = getconn();
+			sql = "select * from interest "+
+			 "where id=? and type =? and ori_num = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, inb.getId());
+			pstmt.setString(2, inb.getType());
+			pstmt.setInt(3, inb.getOri_num());
+			rs = pstmt.executeQuery();
+			if(rs.next())check = 0;
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return check;
+	}
 	public void MyInterestAdd(interestBEAN inb){
 		try{
 			int i = 1;

@@ -15,6 +15,7 @@
 			<li id="shop"><a href="./Productlist.bo">상품</a></li>
 			<li id="rvw"><a href="./BoardList.bo">리뷰</a></li>
 			<li id="qna"><a href="./BoardList2.bo">Q&amp;A</a></li>
+			<li id="notice"><a href="./BoardList3.bo">공지사항</a></li>
 		</ul>
 		<div class="clear"></div>
 		<!-- All icons by Adrien Coquet from the Noun Project -->
