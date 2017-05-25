@@ -229,7 +229,7 @@
 				data:{
 					id:$("#id").val(),
 					content:$("#content").val(),
-					num:$("#num").val(),
+					num:num,
 					secretChk:$(".secretChk").val()	// 비밀글 아닐 시 값 1
 					},
 					success:function()
@@ -246,7 +246,7 @@
 				data:{
 					id:$("#id").val(),
 					content:$("#content").val(),
-					num:$("#num").val(),
+					num:num,
 					secretChk:"0"     // 비밀글 아닐 시 값 0
 				},
 				success:function(){
@@ -267,17 +267,17 @@
 				data:{
 					id:$("#reid").val(),
 					content:$("#recontent").val(),
-					num:$("#num").val(),
+					num:num,
 					repageNum:$("#repageNum").val(),
 					replynum:$("#replynum").val(),
 					re_ref:$("#re_ref").val(),
 					re_lev:$("#re_lev").val(),
 					re_seq:$("#re_seq").val(),
-					secretChk:$(".re_secretChk").val()
-				},
-				success:function(){
-					window.location.reload(true);
-				}
+					secretChk:$(".re_secretChk").val(),
+					success:function(){
+						window.location.reload(true);
+					}
+				}				
 			});
 		}
 		else		  // 비밀글 체크 x
@@ -288,17 +288,18 @@
 				data:{
 					id:$("#reid").val(),
 					content:$("#recontent").val(),
-					num:$("#num").val(),
+					num:num,
 					repageNum:$("#repageNum").val(),
 					replynum:$("#replynum").val(),
 					re_ref:$("#re_ref").val(),
 					re_lev:$("#re_lev").val(),
 					re_seq:$("#re_seq").val(),
-					secretChk:"0"					
-				},
-				success:function(){
-					window.location.reload(true);
+					secretChk:"0",
+					success:function(){
+						window.location.reload(true);
+					}
 				}
+				
 			});
 		}
 	}
@@ -311,10 +312,10 @@
 			url:"./ReplyDelAction.ro",
 			data:{
 				renum:renum,
-				id:id				
-			},
-			success:function(){
-				window.location.reload(true);
+				id:id,				
+				success:function(){
+					window.location.reload(true);
+				}
 			}
 		});
 	}
@@ -330,27 +331,29 @@
 				data:{
 					content:$("#contentup").val(),
 					num:num,
-					secretChk:$(".up_secretChk"+num).val()
-				},
-				success:function(){
-					window.location.reload(true);
-				}
+					secretChk:$(".up_secretChk"+num).val(),
+					success:function(){
+						window.location.reload(true);
+					}
+				}				
 			});
 		}
 		
 		else
 		{
 			$.ajax({
+				alert($("#contentup").val());
+				alert(num);
 				type:"post",
 				url:"./ReplyUpdateActoin.ro",
 				data:{
 					content:$("#contentup").val(),
 					num:num,
-					secretChk:"0"
-				},
-				success:function(){
-				window.location.reload(true);
-			}
+					secretChk:"0",
+					success:function(){
+						window.location.reload(true);
+					}				
+				}
 			});
 		}
 	}
