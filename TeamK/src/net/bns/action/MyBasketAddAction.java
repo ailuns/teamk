@@ -19,7 +19,6 @@ public class MyBasketAddAction implements Action{
 		HttpSession session = request.getSession();
 		String id = (String)session.getAttribute("id");
 		int cost = Integer.parseInt(request.getParameter("cost"));
-		int ori_num = Integer.parseInt(request.getParameter("num"));
 		bnsDAO bnsdao = new bnsDAO();
 		int check =0;
 		if(type.equals("P")){
@@ -28,7 +27,7 @@ public class MyBasketAddAction implements Action{
 			String [] countp = {request.getParameter("adult"), request.getParameter("child")};
 			pbb.setCountp(countp);
 			pbb.setCost(cost);
-			pbb.setOri_num(ori_num);
+			pbb.setOri_num(Integer.parseInt(request.getParameter("pnum")));
 			check = bnsdao.PBasketCheck(pbb);
 			if(check ==0)bnsdao.PBasketAddAction(pbb);
 		}
@@ -37,7 +36,7 @@ public class MyBasketAddAction implements Action{
 			tbb.setId(id);
 			tbb.setCount(Integer.parseInt("count"));
 			tbb.setCost(cost);
-			tbb.setOri_num(ori_num);
+			tbb.setOri_num(Integer.parseInt(request.getParameter("tnum")));
 			check = bnsdao.TBasketCheck(tbb);
 			if(check ==0)bnsdao.TBasketAddAction(tbb);
 		}
