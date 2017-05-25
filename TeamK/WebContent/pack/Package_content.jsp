@@ -1296,7 +1296,7 @@
 					</td>
 					<td><textarea cols="60" rows="2" id="recontent" name="content"></textarea></td>
 					<td>
-						<input type="button" id="re_reply_content" value="답글등록" onclick="Re_Reply_Write()">
+						<input type="button" id="re_reply_content" value="답글등록" onclick="Re_Reply_Write(<%=rb.getNum() %>)">
 					</td>
 					<td>
 						<input type="button" id="re_reply_content" value="취소" onclick="rewrite(<%=rb.getNum() %>)">
