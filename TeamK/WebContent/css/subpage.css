@@ -381,31 +381,6 @@ div#package_tab .tab_content a:VISITED {
 }
 
 /* LoginForm.jsp */
-div#member_head {
-	height: 150px;
-	width: 60%;
-	min-width: 1000px;
-	margin: 0 auto;
-	margin-top: 100px;
-}
-div#member_title, div#member_script {
-	height: 150px;
-	float: left;
-	color: #fff;
-}
-div#member_title {
-	background-color: #0c9;
-	width: 30%;
-	font-size: 50px;
-	padding-top: 50px;
-	font-weight: lighter;
-}
-div#member_script {
-	background-color: #06c;
-	width: 70%;
-	text-align: left;
-	font-weight: bold;
-}
 div#member {
 	width: 60%;
 	min-width: 1000px;
@@ -595,18 +570,18 @@ div#m_delete_form form input[type="password"] {width: 200px;}
 div#m_delete_form form input[type="button"] {}
 
 /* Board List.jsp */
-div#board_head {
+div#member_head, div#board_head {
 	width: 1000px;
 	margin-top: 10px;
 	text-align: left;
 }
-div#rvw_title, div#rvw_script {
+div#member_title, div#member_script, div#qna_title, div#qna_script, div#rvw_title, div#rvw_script {
 	height: 50px;
 	width: 900px;
 	margin: 0 auto;
 	color: #fff;
 }
-div#rvw_title {
+div#member_title, div#qna_title, div#rvw_title {
 	background-color: #fff;
 	padding-top: 5px;
 	border-bottom: 3px solid #06c;
@@ -614,7 +589,7 @@ div#rvw_title {
 	font-weight: lighter;
 	color: #06c
 }
-div#rvw_script {
+div#member_script, div#qna_script, div#rvw_script {
 	background-color: #fff;
 	color: #333;
 	font-size: 12px;
@@ -783,24 +758,7 @@ div#board div#board_delete form input[type="submit"] {
 div#board div#board_delete form input[type="submit"]:HOVER {cursor: pointer;}
 
 /*QnA Board List.jsp*/
-div#qna_title, div#qna_script {
-	height: 150px;
-	float: left;
-	color: #fff;
-}
-div#qna_title {
-	background-color: #0c9;
-	width: 30%;
-	font-size: 50px;
-	padding-top: 50px;
-	font-weight: lighter;
-}
-div#qna_script {
-	background-color: #06c;
-	width: 70%;
-	text-align: left;
-	font-weight: bold;
-}
+
 
 /* my order 페이지*/
 div.trade_type1 ul.agree_ul{
