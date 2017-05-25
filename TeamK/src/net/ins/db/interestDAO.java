@@ -33,7 +33,7 @@ public class interestDAO {
 			pstmt.setString(2, inb.getType());
 			pstmt.setInt(3, inb.getOri_num());
 			rs = pstmt.executeQuery();
-			if(rs.next())check = 0;
+			if(rs.next())check = 1;
 		}catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -142,6 +142,30 @@ public class interestDAO {
 			sql = "delete from interest where inter_num=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	public void InterestDel(interestBEAN inb){
+		try{
+			System.out.println(inb.getId());
+			System.out.println(inb.getOri_num());
+			System.out.println(inb.getType());
+			conn = getconn();
+			sql = "delete from interest where ori_num=? and id = ? and type=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, inb.getOri_num());
+			pstmt.setString(2, inb.getId());
+			pstmt.setString(3, inb.getType());
 			pstmt.executeUpdate();
 			
 		}catch (Exception e) {

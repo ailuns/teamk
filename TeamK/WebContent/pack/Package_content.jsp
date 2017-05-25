@@ -84,9 +84,9 @@
 	});
 	
 	// 찜하기, 예약하기 버튼 클릭 시 각각 버튼 마다 이동할 페이지
-	function submit_fun(i)
+	function submit_fun(i, user_id)
 	{
-		if (i == 1)
+		if (i == 1 && user_id != "") // 로그인 되어 있을 경우 찜추가
 		{
 			$.ajax({
 				type:"post",
@@ -96,20 +96,35 @@
 					num:$("input[type=radio][name=chk]:checked").val(),
 					success:function(){
 						alert("찜목록에 추가되었습니다");
-						window.location.reload(true);  // 페이지 새로고침
+						$("#jjim_o").hide();
+						$("#jjim_x").show();
+// 						window.location.reload(true);  // 페이지 새로고침
 					}
 				}
 			});
-			
-// 			$('#radioTest:checked').val() ;
-			
-// 			var packnum = $("#select_rbtn" + select_num).val();
-	
 		}
-// 		if (i == 2)
+		
+// 		else if(i == 1 && user_id != "")	// 로그인 안되어 있을 경우
 // 		{
-// 			document.fr.action = "selectTest1.jsp";  // 예약하기
+// 			loginChk();
 // 		}
+		if(i == 2 && user_id != "")
+		{
+			$.ajax({
+				type:"post",
+				url:"./MyInterestDel.ins",   // java로 보냄
+				data:{
+					type:"P",
+					num:$("input[type=radio][name=chk]:checked").val(),
+					success:function(){
+						$("#jjim_o").show();
+						$("#jjim_x").hide();
+						alert("찜목록에서 삭제되었습니다");
+// 						window.location.reload(true);  // 페이지 새로고침
+					}
+				}
+			});
+		}
 	}
 	
 	
@@ -454,7 +469,7 @@
 	// 비로그인 때 상품문의글 쓰려고 하면 실행
 	function loginChk()
 	{
-		if (confirm("로그인 화면으로 이동하시겠습니까?") == true){    //확인
+		if (confirm("로그인이 필요한 서비스입니다\n로그인 화면으로 이동하시겠습니까?") == true){    //확인
 		    location.href="./MemberLogin.me";
 		}
 		else //취소
@@ -508,23 +523,25 @@
 		
 		$.ajax({
 			type:"post",
-			url:"./MyInterstCheck.ins",
+			url:"./MyInterestCheck.ins",
 			data:{
 				num:packnum,
 				type:"P"
 			},
-			success:function(data){
-			if (data == 1)
+			success:function(data)
 			{
-				$("#jjim_o").hide();
-				$("#jjim_x").show();
+// 				alert(data);
+				if (data == 1)
+				{
+					$("#jjim_o").hide();
+					$("#jjim_x").show();
+				}
+				else
+				{
+					$("#jjim_o").show();
+					$("#jjim_x").hide();
+				}
 			}
-			else
-			{
-				$("#jjim_o").show();
-				$("#jjim_x").hide();
-			}
-		}
 		});
 	}
 
@@ -1021,8 +1038,10 @@
 						</tr>
 						<tr>
 							<td></td>
-							<td><input type="button" id="jjim_o" value="찜하기" onclick="submit_fun(1)"></td>
-							<td><input type="button" id="jjim_x" value="찜취소" style="display:none;" onclick="submit_fun(2)"></td>
+							<td>
+								<input type="button" id="jjim_o" value="찜하기" onclick="submit_fun(1, '<%=user_id %>')">
+								<input type="button" id="jjim_x" value="찜취소" style="display:none;" onclick="submit_fun(2, '<%=user_id %>')">
+							</td>
 							<td><input type="submit" value="예약하기" onclick="submit_fun(3)"></td>
 						</tr>
 					</table>
