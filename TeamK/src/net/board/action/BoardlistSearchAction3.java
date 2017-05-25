@@ -21,8 +21,8 @@ public class BoardlistSearchAction3 implements Action {
 		BoardBean bb = new BoardBean();
 		BoardDAO bdao = new BoardDAO();
 		
-		String search=request.getParameter("search");
-		String ss = request.getParameter("selectSearch");
+		String search=request.getParameter("search"); //search에 검색어
+		String ss = request.getParameter("selectSearch");  //ss 검색할 분류
 		//게시판 전체 글 개수
 		// int count=  getBoardCount() 메서드 호출
 		int count = bdao.getBoardCount3(search,ss);
