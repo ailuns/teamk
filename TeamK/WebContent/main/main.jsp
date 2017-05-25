@@ -11,7 +11,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link href="./css/inc.css" rel="stylesheet" type="text/css">
+<link href="../css/inc.css" rel="stylesheet" type="text/css">
 <link href="./css/subpage.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
@@ -119,7 +119,7 @@
 	<div id="wrap">
 		<div id="datepicker">
 			<div id="notice">
-			<h1>공지사항</h1>
+			<a href="./BoardList3.bo"><h1>공지사항</h1></a>
 			<table>
 				<%
 				BoardDAO bdao=new BoardDAO();
@@ -176,7 +176,7 @@
 		</div>
 		<div id="review_show">
 		<div id="gds_rv">
-		<h1>리뷰</h1>
+		<a href="./BoardList.bo"><h1>리뷰</h1></a>
 			<table>
 				<%
 if(count!=0){
@@ -194,7 +194,7 @@ if(count!=0){
 			</table>
 			</div>
 			<div id="trv_rv">
-			<h1>Q&amp;A</h1>
+			<a href="./BoardList2.bo"><h1>Q&amp;A</h1></a>
 			<table>
 				<%
 if(count!=0){

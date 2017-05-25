@@ -86,6 +86,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
   		<li>당일 취소시 여행경비 환불 불가</li>
 	</ul>
 </ul>
+<input type ="button" value = "예약 취소" onclick="">
  </div> 
 </div>  	
 </body>
