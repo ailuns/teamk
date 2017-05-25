@@ -24,10 +24,11 @@ public class ReplyDelAction implements Action{
 		rdao.deleteReply(renum, id);
 		
 		//ActoinForward 이동정보 담아서 로그인 이동
-		ActionForward forward = new ActionForward();
-		forward.setPath("./Package_content.jsp");
-		forward.setRedirect(false);
-		return forward;
+//		ActionForward forward = new ActionForward();
+//		forward.setPath("./Package_content.jsp");
+//		forward.setRedirect(false);
+//		return forward;
+		return null;
 	}
 	
 

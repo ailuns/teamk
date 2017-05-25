@@ -229,7 +229,7 @@
 				data:{
 					id:$("#id").val(),
 					content:$("#content").val(),
-					num:$("#num").val(),
+					num:num,
 					secretChk:$(".secretChk").val()	// 비밀글 아닐 시 값 1
 					},
 					success:function()
@@ -246,7 +246,7 @@
 				data:{
 					id:$("#id").val(),
 					content:$("#content").val(),
-					num:$("#num").val(),
+					num:num,
 					secretChk:"0"     // 비밀글 아닐 시 값 0
 				},
 				success:function(){
@@ -266,18 +266,18 @@
 				url:"./Re_ReplyWriteAction.ro",
 				data:{
 					id:$("#reid").val(),
-					content:$("#recontent").val(),
+					content:$("#recontent"+num).val(),
 					num:$("#num").val(),
 					repageNum:$("#repageNum").val(),
 					replynum:$("#replynum").val(),
-					re_ref:$("#re_ref").val(),
+					re_ref:$("#re_ref"+num).val(),
 					re_lev:$("#re_lev").val(),
 					re_seq:$("#re_seq").val(),
-					secretChk:$(".re_secretChk").val()
-				},
-				success:function(){
-					window.location.reload(true);
-				}
+					secretChk:$(".re_secretChk").val(),
+					success:function(){
+						window.location.reload(true);
+					}
+				}				
 			});
 		}
 		else		  // 비밀글 체크 x
@@ -286,19 +286,20 @@
 				type:"post",
 				url:"./Re_ReplyWriteAction.ro",
 				data:{
-					id:$("#reid").val(),
-					content:$("#recontent").val(),
 					num:$("#num").val(),
+					id:$("#reid").val(),
+					content:$("#recontent"+num).val(),
 					repageNum:$("#repageNum").val(),
 					replynum:$("#replynum").val(),
-					re_ref:$("#re_ref").val(),
+					re_ref:$("#re_ref"+num).val(),
 					re_lev:$("#re_lev").val(),
 					re_seq:$("#re_seq").val(),
-					secretChk:"0"					
-				},
-				success:function(){
-					window.location.reload(true);
+					secretChk:"0",
+					success:function(){
+						window.location.reload(true);
+					}
 				}
+				
 			});
 		}
 	}
@@ -311,10 +312,10 @@
 			url:"./ReplyDelAction.ro",
 			data:{
 				renum:renum,
-				id:id				
-			},
-			success:function(){
-				window.location.reload(true);
+				id:id,				
+				success:function(){
+					window.location.reload(true);
+				}
 			}
 		});
 	}
@@ -328,13 +329,13 @@
 				type:"post",
 				url:"./ReplyUpdateActoin.ro",
 				data:{
-					content:$("#contentup").val(),
+					content:$("#contentup"+num).val(),
 					num:num,
-					secretChk:$(".up_secretChk"+num).val()
-				},
-				success:function(){
-					window.location.reload(true);
-				}
+					secretChk:$(".up_secretChk"+num).val(),
+					success:function(){
+						window.location.reload(true);
+					}
+				}				
 			});
 		}
 		
@@ -344,13 +345,13 @@
 				type:"post",
 				url:"./ReplyUpdateActoin.ro",
 				data:{
-					content:$("#contentup").val(),
 					num:num,
-					secretChk:"0"
-				},
-				success:function(){
-				window.location.reload(true);
-			}
+					content:$("#contentup"+num).val(),
+					secretChk:"0",
+					success:function(){
+						window.location.reload(true);
+					}				
+				}
 			});
 		}
 	}
@@ -1266,45 +1267,42 @@
 				
 				<tr id="conup<%=rb.getNum()%>" style="display: none;">
 					<td>
-						<input type="hidden" name="num" value="<%=PB.getNum()%>">
-						<input type="hidden" name="pageNum" value="<%=repageNum%>">
-						<input type="hidden" name="replynum" value="<%=rb.getNum()%>">
 						<%=user_id %>
 					</td>
 					
-					<td><textarea cols="60" rows="2" id="contentup" name="contentup"><%=rb.getContent() %></textarea></td>
+					<td><textarea cols="60" rows="2" id="contentup<%=rb.getNum() %>" name="contentup"><%=rb.getContent() %></textarea></td>
 					<td>
-						<input type="button" id="re_reply_content" value="수정" onclick="reUpdateAction(<%=rb.getNum() %>)">
+						<input type="button" value="수정" onclick="reUpdateAction(<%=rb.getNum() %>)">
 					</td>
 					<td>
-						<input type="button" id="re_reply_content" value="취소" onclick="reupdate(<%=rb.getNum() %>)">
+						<input type="button" value="취소" onclick="reupdate(<%=rb.getNum() %>)">
 					</td>
 					<td>
 						<input type="checkbox" class="up_secretChk<%=rb.getNum() %>" name="secretChk" value="1" <%if(rb.getH_or_s() == 1){%>checked<%} %>>비밀글
 					</td>
-				<tr>
+				</tr>
 				<tr id="con<%=rb.getNum()%>" style="display: none;">
 					<td>
 						<input type="hidden" id="num" name="num" value="<%=PB.getNum()%>">
 						<input type="hidden" id="repageNum" name="repageNum" value="<%=repageNum%>">
 						<input type="hidden" id="replynum" name="replynum" value="<%=rb.getNum()%>">
-						<input type="hidden" id="re_ref" name="re_ref" value="<%=rb.getRe_ref()%>">
+						<input type="text" id="re_ref<%=rb.getNum() %>" name="re_ref" value="<%=rb.getRe_ref()%>">
 						<input type="hidden" id="re_lev" name="re_lev" value="<%=rb.getRe_lev()%>">
 						<input type="hidden" id="re_seq" name="re_seq" value="<%=rb.getRe_seq()%>">
 						<p><%=user_id %></p>
 						<input type="hidden" id="reid" name="id" class="box" value="<%=user_id %>">
 					</td>
-					<td><textarea cols="60" rows="2" id="recontent" name="content"></textarea></td>
+					<td><textarea cols="60" rows="2" id="recontent<%=rb.getNum() %>" name="recontent"></textarea></td>
 					<td>
-						<input type="button" id="re_reply_content" value="답글등록" onclick="Re_Reply_Write()">
+						<input type="button" value="답글등록" onclick="Re_Reply_Write(<%=rb.getNum() %>)">
 					</td>
 					<td>
-						<input type="button" id="re_reply_content" value="취소" onclick="rewrite(<%=rb.getNum() %>)">
+						<input type="button" value="취소" onclick="rewrite(<%=rb.getNum() %>)">
 					</td>
 					<td>
 						<input type="checkbox" class="re_secretChk" name="secretChk" value="1">비밀글
 					</td>
-				<tr>
+				</tr>
 			
 				<%
 					}
