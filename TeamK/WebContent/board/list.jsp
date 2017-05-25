@@ -10,6 +10,13 @@
 <title>Insert title here</title>
 <link href="../css/inc.css" rel="stylesheet" type="text/css">
 <link href="../css/subpage.css" rel="stylesheet" type="text/css">
+
+
+<%
+//세션 id값 불러오기
+String id = (String)session.getAttribute("id");
+%>
+
 </head>
 <body>
 <%
@@ -43,12 +50,16 @@ BoardDAO bdao = new BoardDAO();
     	//자바빈(BoardBean) 변수 =배열한칸 접근  배열변수.get()
     	BoardBean bb = (BoardBean)boardList.get(i);
     			%>
-<tr><td><%=bb.getRe_ref()%></td><td id="cate">[<%=bb.getType_select()%>]</td>
-<td id="title">
-<a href="./BoardContent.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>">
-<%=bb.getSubject()%> [<%=bdao.getBoardReplyCount(bb.getNum())%>]</a><%if(bdao.getFile(bb.getNum())!=null){%><img src="./img/File_icon.gif" width="15" height="15>"><%}%></td>
-<td><%=bb.getId()%></td><td><%=bb.getDate()%></td>
-    <td><%=bb.getReadcount() %></td></tr>
+<tr>
+<td><%=bb.getRe_ref()%></td> <%--글 번호 --%>
+<td id="cate">[<%=bb.getType_select()%>]</td> <%--글 타입--%>
+<td id="title"><a href="./BoardContent.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>"><%=bb.getSubject()%> <%--글 제목--%>
+[<%=bdao.getBoardReplyCount(bb.getNum())%>]</a> <%--해당 글의 리플 갯수--%>
+<%if(bdao.getFile(bb.getNum())!=null){%><img src="./img/File_icon.gif" width="15" height="15>"><%}%></td> <%--첨부파일이 있으면 파일모양 아이콘 표시--%>
+<td><%=bb.getId()%></td> <%--작성자 ID--%>
+<td><%=bb.getDate()%></td> <%--작성 날짜--%>
+<td><%=bb.getReadcount() %></td> <%--조회수--%>
+</tr>
     			<%
     }
     %>
@@ -72,6 +83,8 @@ if(count!=0){
 }
 %><br>
 <form action="listSearch.bo" method="get">
+
+<%--검색 옵션--%>
 <select name="selectSearch">
     <option value="id">작성자</option>
     <option value="subject">제목</option>
@@ -82,15 +95,18 @@ if(count!=0){
 <input type="text" name="search" class="input_box">
 <input type="submit" value="검색" class="btn">
 </form>
+<%--검색 옵션 --%>
 <%
-String id = (String)session.getAttribute("id");
-if(id!=null){%>
-<input type="button" value="글쓰기" 
+//id값이 없으면 버튼 글쓰기버튼 '로그인 해주세요' 알림창 뜸
+if(id!=null){
+%>
+<input type="button" value="글쓰기"
        onclick="location.href='./BoardWrite.bo'">
     		<%}else{%>
     			<input type="button" value="글쓰기" 
     				   onclick="alert('로그인 해주세요')">
     		<%} %>
+    		
 <input type="button" value="메인으로" 
        onclick="location.href='./main.fo'">
        </div>

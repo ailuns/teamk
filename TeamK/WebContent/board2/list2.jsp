@@ -10,6 +10,10 @@
 <title>Insert title here</title>
 <link href="./css/inc.css" rel="stylesheet" type="text/css">
 <link href="./css/subpage.css" rel="stylesheet" type="text/css">
+<%
+//세션 id값 불러오기
+String id = (String)session.getAttribute("id");
+%>
 </head>
 <body>
 <%
@@ -43,14 +47,15 @@ BoardDAO bdao = new BoardDAO();
     	//자바빈(BoardBean) 변수 =배열한칸 접근  배열변수.get()
     	BoardBean bb = (BoardBean)boardList2.get(i);
     			%>
-<tr><td><%=bb.getRe_ref()%></td>
-<td id="cate">[<%=bb.getType_select()%>]</td>
-<td id="title">
-<a href="./BoardContent2.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>">
-<%-- <%if(bdao.getBoardReplyCount(bb.getNum())>=1){%>[답변완료]<%}%> --%>
-<%=bb.getSubject()%>[<%=bdao.getBoardReplyCount(bb.getNum())%>]</a><%if(bdao.getFile(bb.getNum())!=null){%><img src="./img/File_icon.gif" width="15" height="15>"><%}%></td>
-<td><%=bb.getId()%></td><td><%=bb.getDate() %></td>
-    <td><%=bb.getReadcount() %></td></tr>
+<tr><td><%=bb.getRe_ref()%></td> <%--글 번호 --%>
+<td id="cate">[<%=bb.getType_select()%>]</td> <%--글 타입 --%>
+<td id="title"><a href="./BoardContent2.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>"><%=bb.getSubject()%> <%--글 제목 --%>
+[<%=bdao.getBoardReplyCount(bb.getNum())%>]</a> <%--해당 글의 리플 갯수 --%>
+<%if(bdao.getFile(bb.getNum())!=null){%><img src="./img/File_icon.gif" width="15" height="15>"><%}%></td> <%-- 첨부파일이 있을 시 파일 아이콘 표시 --%>
+<td><%=bb.getId()%></td> <%-- 작성자 id --%>
+<td><%=bb.getDate() %></td> <%-- 작성 날짜 --%>
+<td><%=bb.getReadcount() %></td> <%-- 조회수 --%>
+</tr>
     			<%
     }
     %>
@@ -58,26 +63,19 @@ BoardDAO bdao = new BoardDAO();
 <%
 //페이지 출력
 if(count!=0){
-	//전체 페이지 수 구하기 게시판 글 50개 한화면에 보여줄 글 개수 10 => 5전체페이지
-			//    게시판 글 56개 한화면에 보여줄 글개수 10 =>  5전체페이지 +1 (나머지)=>6		
-	// 한 화면에 보여줄 페이지 번호 개수
-	// 시작페이지 번호구하기  1~10=>1  11~20=>11  21~30=>21
-	// 끝페이지 번호 구하기  
-	//이전
 	if(startPage>pageBlock){
 		%><a href="./BoardList2.bo?pageNum=<%=startPage-pageBlock%>">[이전]</a><%
 	}
-	// 1..10 11..20 21..30
 	for(int i=startPage; i<=endPage; i++){
 		%><a href="./BoardList2.bo?pageNum=<%=i%>">[<%=i%>]</a><%
 	}
-	// 다음
 	if(endPage < pageCount){
 		%><a href="./BoardList2.bo?pageNum=<%=startPage+pageBlock%>">[다음]</a>
 		<%
 		}
 }
 %><br>
+<%--검색 옵션 --%>
 <form action="listSearch2.bo" method="get">
 <select name="selectSearch">
     <option value="id">작성자</option>
@@ -87,8 +85,9 @@ if(count!=0){
 <input type="text" name="search" class="input_box">
 <input type="submit" value="검색" class="btn">
 </form>
+<%--검색 옵션 --%>
 <%
-String id = (String)session.getAttribute("id");
+//id값이 없으면 버튼 글쓰기버튼 '로그인 해주세요' 알림창 뜸
 if(id!=null){%>
 <input type="button" value="글쓰기" 
        onclick="location.href='./BoardWrite2.bo'">
