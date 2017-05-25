@@ -261,7 +261,7 @@ public class ModDAO {
 		}
 		return count;
 	}
-	public List<ModTradeInfoBEAN> ReadModTI(String id,int start, int end){
+	/*public List<ModTradeInfoBEAN> ReadModTI(String id,int start, int end){
 		List<ModTradeInfoBEAN> ModList = new ArrayList<ModTradeInfoBEAN>();
 		try{
 			conn=getconn();
@@ -323,7 +323,7 @@ public class ModDAO {
 		}
 		
 		return ModList;
-	}
+	}*/
 	public List<ModTradeInfoBEAN> TO_ReadModTI(String id,int start, int end){
 		List<ModTradeInfoBEAN> ModList = new ArrayList<ModTradeInfoBEAN>();
 		try{
@@ -390,7 +390,8 @@ public class ModDAO {
 			conn =getconn();
 			sql = "select A.*, B.subject, B.intro, B.file1, B.date "
 					+"from pack_order A left outer join pack B "
-					+"on A.ori_num = B.num where A.po_id=? order by A.po_res_status, B.date limit ?,?";
+					+"on A.ori_num = B.num where A.po_id=? and A.po_res_status <= 5 "
+					+"order by B.date,A.po_res_status limit ?,?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setInt(2, start-1);
@@ -407,13 +408,15 @@ public class ModDAO {
 				mtib.setPack_count(rs.getString("po_count"));
 				mtib.setCost(rs.getInt("po_cost"));
 				mtib.setTrade_date(rs.getTimestamp("po_res_date"));
+				mtib.setStatus(rs.getInt("po_res_status"));
 				String statustext = "";
 				switch(rs.getInt("po_res_status")){
 					case 1: statustext = "입금 확인 중"; break;
 					case 2: statustext = "예약 대기 중"; break;
 					case 3: statustext = "예약 완료"; break;
-					case 4: statustext = "결제 취소 확인 중";break;
+					case 4: statustext = "예약 취소 확인 중";break;
 					case 5: statustext = "환불 완료";break;
+					case 9: statustext = "환불 처리됨";break;
 					case 10:statustext = "완료";break;
 				}
 				mtib.setDate(rs.getTimestamp("date"));
@@ -597,5 +600,54 @@ public class ModDAO {
 				e.printStackTrace();
 			}
 		}
+	}
+	public ModTradeInfoBEAN PO_Info_Read(int po_num){
+		ModTradeInfoBEAN mtib = new ModTradeInfoBEAN();
+		try{
+			conn =getconn();
+			sql = "select A.*, B.subject, B.intro, B.file1,C.ti_trade_type "
+					+"from pack_order A left outer join(pack B cross join trade_info C) "
+					+"on(A.ori_num = B.num and A.po_ti_num = C.ti_num)where A.po_num = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, po_num);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				mtib.setNum(rs.getInt("po_num"));
+				mtib.setOri_num(rs.getInt("ori_num"));
+				mtib.setIntro(rs.getString("intro"));
+				mtib.setSubject(rs.getString("subject"));
+				mtib.setImg(rs.getString("file1"));
+				mtib.setTrade_num(rs.getString("po_trade_num"));
+				mtib.setPack_count(rs.getString("po_count"));
+				mtib.setCost(rs.getInt("po_cost"));
+				String []t_type = rs.getString("ti_trade_type").split(",");
+				mtib.setTrade_type(t_type[0]);
+				mtib.setTrade_date(rs.getTimestamp("po_res_date"));
+				String statustext = "";
+				switch(rs.getInt("po_res_status")){
+					case 1: statustext = "입금 확인 중"; break;
+					case 2: statustext = "예약 대기 중"; break;
+					case 3: statustext = "예약 완료"; break;
+					case 4: statustext = "결제 취소 확인 중";break;
+					case 5: statustext = "환불 완료";break;
+					case 10:statustext = "완료";break;
+				}
+				mtib.setStatus_text(statustext);
+				mtib.setPo_receive_check(rs.getInt("po_receive_check"));
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return mtib;
+	
 	}
 }

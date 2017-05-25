@@ -15,26 +15,15 @@
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
-
-<%
-request.setCharacterEncoding("utf-8");
-session.setAttribute("id", "admin");
+<%request.setCharacterEncoding("utf-8");
 String id = (String)session.getAttribute("id");
+if(!(id.equals("admin"))){
 %>
-.Main.jsp<br>
-
-<%=id %> is Connected<br>
-<div>
-<h3>Client</h3>
-<input type = "button" value="My Basket" onclick ="location.href='./MyBasketList.bns'"><br>
-<input type = "button" value="My Interest" onclick ="location.href='./MyInterestList.ins'"><br>
-<input type ="button" value = "Basket" onclick = "location.href='./MyBasketAdd.bns'"><br>
-<input type="button" value="PackOrder" onclick = "location.href='./MyPackOrderList.mo'"><br>
-<input type="button" value="ThingOrder" onclick="location.href='./MyThingOrderList.mo'"><br>
-<input type = "button" value = "MyOrder" onclick = "location.href='./MyOrderList.mo'"><br>
-
-
-</div>
+<script type="text/javascript">
+alert("권한이 없습니다!");
+history.back();
+</script>
+<%} %>
 <div>
 <h3>Admin</h3>
 <input type="button"value = "adminmenu" onclick="location.href='./BankPayCheck.ao'"><br>

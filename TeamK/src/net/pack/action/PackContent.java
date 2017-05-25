@@ -39,6 +39,11 @@ public class PackContent implements Action{
 		
 		session.setAttribute("PackBean", pb);
 		
+		List date_list;
+		date_list = pdao.getPackList(pb.getSubject());
+		
+		request.setAttribute("date_list", date_list);
+		
 		
 		//전체글 횟수 구하기 int count = getBoardCount()
 		int count = rdao.getCommentCount(num);//pdao.getBoardCount();

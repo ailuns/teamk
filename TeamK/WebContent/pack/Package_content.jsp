@@ -6,16 +6,18 @@
 <%@ page import="net.reply.db.ReplyDAO"%>
 <%@ page import="net.reply.db.ReplyBean"%>
 <%@ page import="net.pack.db.CategoryBean" %>
+<%@ page import="java.text.DecimalFormat" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link href="../css/inc.css" rel="stylesheet" type="text/css">
-<link href="../css/subpage.css" rel="stylesheet" type="text/css">
+<link href="./css/inc.css" rel="stylesheet" type="text/css">
+<link href="./css/subpage.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="./js/jquery-3.2.0.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <%
 	PackBean PB = (PackBean) session.getAttribute("PackBean");
@@ -28,6 +30,7 @@
 	
 	List List = (List)request.getAttribute("replylist");
 	List CategoryList = (List)request.getAttribute("CategoryList");
+	List date_list = (List)request.getAttribute("date_list");
 	
 	int count = ((Integer)request.getAttribute("count")).intValue();
 	String repageNum = (String)request.getAttribute("repageNum");
@@ -39,9 +42,10 @@
 	int pagesize = ((Integer)request.getAttribute("pagesize")).intValue();
 %>
 <body>
-	<script>
+<script>
 
 	jQuery(document).ready(function($){
+		
 		// 달력 관련 소스
 		$("#date_from").datepicker({
 			dateFormat: 'yy-mm-dd',    // 날짜 포맷 형식
@@ -148,44 +152,30 @@
 			$('#banner').hide();
 			$('#banner_sub').hide();
 		});
-		
-		$('#remote_close').click(function(){
-			$('#remote_control').hide();
-			$('#remote_close').hide();
-		});
-		
-		
-// 		$(".secretChk").click(function(){
+
 			
-// 			if ($(".secretChk").is(":checked"))
-// 	 		{
-// 				alert("체크 시 관리자와 본인만 읽기 가능합니다");
-// 	 		}
-// 		});	
-			
-	
 	});
 
-
+	// 댓글 쓰기
 	function ReplyWrite(num)
 	{
-		if($(".secretChk").is(":checked"))
+		if($(".secretChk").is(":checked"))  // 비밀글 체크 o
 		{
 			$.ajax({
 				type:"post",
-				url:"./ReplyWrite.ro",
+				url:"./ReplyWrite.ro",   // java로 보냄
 				data:{
 					id:$("#id").val(),
 					content:$("#content").val(),
 					num:$("#num").val(),
-					secretChk:$(".secretChk").val(),
+					secretChk:$(".secretChk").val(),	// 비밀글 아닐 시 값 1
 					success:function(){
-						window.location.reload(true);
+						window.location.reload(true);  // 페이지 새로고침
 					}
 				}
 			});
 		}
-		else
+		else							 // 비밀글 체크 x
 		{
 			$.ajax({
 				type:"post",
@@ -194,18 +184,19 @@
 					id:$("#id").val(),
 					content:$("#content").val(),
 					num:$("#num").val(),
-					secretChk:"0",
+					secretChk:"0",     // 비밀글 아닐 시 값 0
 					success:function(){
-						window.location.reload(true);
+						window.location.reload(true);   // 페이지 새로고침
 					}
 				}
 			});
 		}
 	}
 
+	// 대댓글 작성 시 
 	function Re_Reply_Write(num)
 	{
-		if($(".re_secretChk").is(":checked"))
+		if($(".re_secretChk").is(":checked"))  // 비밀글 체크 o
 		{
 			$.ajax({
 				type:"post",
@@ -226,7 +217,7 @@
 				}
 			});
 		}
-		else
+		else		  // 비밀글 체크 x
 		{
 			$.ajax({
 				type:"post",
@@ -249,7 +240,7 @@
 		}
 	}
 
-
+	// 댓글 삭제
 	function ReplyDel(renum, id)
 	{
 		$.ajax({
@@ -265,6 +256,7 @@
 		});
 	}
 
+	// 댓글 수정
 	function reUpdateAction(num)
 	{
 		if($(".up_secretChk"+num).is(":checked"))
@@ -467,6 +459,34 @@
 		}
 		return true;
     }
+	
+	function remote_close()
+	{
+		$('#remote_control').hide();
+	}
+	
+	// 리모컨으로 태그 화면 이동
+	function fnMove(seq){
+        var offset = $(seq).offset();
+        $('html, body').animate({scrollTop : offset.top}, 400);
+    }
+	
+	jQuery(document).ready(function($){
+		$("#remote_content").draggable();
+	});
+	
+
+	
+	function winOpen(subject) {
+		win = window.open("./PackDateAdd.po?subject=" + subject, "Package_dateAdd.jsp",
+				"width=800, height=700");
+	}
+	
+// 	$("#date_add").click(function(){
+// 		window.open("./pack/Package_dateAdd.jsp", 
+// 				"Package_dateAdd.jsp", "width=500, height=500");
+// 	}); 
+	
 
 </script>
 
@@ -546,6 +566,59 @@
 /* 인원, 가격 정보 부분 */
 
 	
+/* 날짜정보 내용 */
+
+#datecontent {
+	width: 960px;
+	height: 350px;
+	border: 3px solid gray;
+	overflow: auto;
+}
+
+#datecontent table
+{
+	border-collapse: collapse;
+}	
+
+
+#datecontent tr:FIRST-CHILD
+{
+	background-color: gray;
+	height : 30px;
+}
+
+#datecontent tr:HOVER
+{
+	background-color: #D5D5D5;
+}
+
+#datecontent .date_td_size
+{
+	height : 50px;
+	border-bottom : 1px solid black;
+}
+
+#datecontent #date_date
+{
+	width : 225px;
+}
+
+#datecontent #date_subject
+{
+	width : 525px;
+}
+
+#datecontent #date_cost
+{
+	width : 170px;
+}
+
+#datecontent #date_stock
+{
+	width : 70px;
+}
+
+/* 날짜정보 내용 */
 	
 
 /* 여행정보 내용 */
@@ -705,73 +778,57 @@
 
 
 /* 화면이동 리모컨 */
-#remote_control
+
+#remote_content
 {
-	padding-left : 20px;
-	padding-top : 15px;
 	width : 100px;
 	height : 170px;
 	position : fixed;
-	right : 510px;
+	right : 310px;
 	bottom : 220px;
 	background-color: white;
 	text-align: center;
 	border : 1px solid #BDBDBD;
 }
 
-#remote_control td
+#remote_content:HOVER
 {
-	border-top : 1px solid gray;
-	border-bottom : 1px solid gray;
-	padding-top : 10px;
-	padding-bottom : 5px;
+	cursor: move;
 }
 
-#remote_control td:HOVER, #remote_close
+#remote_control td
+{
+	border-bottom : 1px solid gray;
+	color : #BBBBBB;
+	text-decoration: none;
+	font-size: 0.8em;
+}
+
+#remote_control td span:HOVER, #remote_close
 {
 	cursor: pointer;
 }
 
-#remote_close
-{
-	margin : 0px;
-	padding : 0px;
-	width : 30px;
-	height : 20px;
-	position : fixed;
-	right : 545px;
-	bottom : 390px;
-	background-color: white;
-	text-align: center;
-	font-size: 0.8em;
-	border : 1px solid #BDBDBD;
-	border-bottom: none;
-}
-
-#remote_control a:LINK, #remote_control a:VISITED
-{
-	color : #BBBBBB;
-	text-decoration: none;
-	font-size: 0.8em;	
-}
 /* 화면이동 리모컨 */
 
 </style>
 
 	<div id="remote_control">
-		<div id="remote_close">x</div>
 		<table id="remote_content">
 			<tr>
-				<td><a href="#">Top</a></td>
+				<td><span onclick="remote_close()">close</span></td>
 			</tr>
 			<tr>
-				<td><a href="./PackContent.po?num=<%=PB.getNum() %>#contentdiv2">여행정보</a></td>
+				<td><span onclick="fnMove('#wrap')">Top</span></td>
 			</tr>
 			<tr>
-				<td><a href="./PackContent.po?num=<%=PB.getNum() %>#middle2">지도뷰</a></td>
+				<td><span onclick="fnMove('#contentdiv2')">여행정보</span></td>
 			</tr>
 			<tr>
-				<td><a href="./PackContent.po?num=<%=PB.getNum() %>#QnA">상품문의</a></td>
+				<td><span onclick="fnMove('#middle2')">지도뷰</span></td>
+			</tr>
+			<tr>
+				<td style="border-bottom: none;"><span onclick="fnMove('#QnA')">상품문의</span></td>
 			</tr>
 		</table>
 	</div>
@@ -841,6 +898,7 @@
 			if (user_id.equals("admin"))
 			{
 		%>
+			<input type="button" value="날짜추가" onclick="winOpen('<%=PB.getSubject() %>');">
 			<input type="button" value="글수정" onclick="location.href='PackModify.po?num=<%=PB.getNum() %>'">
 			<input type="button" value="글삭제" onclick="location.href='PackDeleteAction.po?num=<%=PB.getNum() %>'">
 		<%
@@ -945,7 +1003,39 @@
 			<!--인원수, 가격 -->
 		</div>
 		<div class="clear"></div>
-
+		
+		<!--날짜정보 영역 -->
+		<div id="datecontent">
+			<table>
+				<tr>
+					<td id="date_date">출발일자</td>
+					<td id="date_subject">상품명</td>
+					<td id="date_cost">상품가격</td>
+					<td id="date_stock">갯수</td>
+				</tr>
+				
+				<%
+					PackBean pb;
+					for (int i = 0; i < date_list.size(); i++)
+					{
+						pb =(PackBean)date_list.get(i);
+						DecimalFormat Commas = new DecimalFormat("#,###");
+						String cost = (String)Commas.format(pb.getCost());
+				%>	
+				<tr>
+					<td style="display:none;"><%=pb.getNum() %></td>
+					<td class="date_td_size"><%=pb.getDate() %></td>
+					<td class="date_td_size"><%=pb.getSarea() %></td>
+					<td class="date_td_size"><%=cost %></td>
+					<td class="date_td_size"><%=pb.getStock() %></td>
+				</tr>
+				<%
+					}
+				%>
+			</table>
+		</div>
+		<!--날짜정보 영역 -->
+		
 		<!--상품 정보, 내용이 들어가는 영역 -->
 		<div id="middle1">
 			<div id="contentdiv2">

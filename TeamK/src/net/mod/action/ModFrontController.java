@@ -102,6 +102,17 @@ public class ModFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}	
+		}else if(command.equals("/Res_Cancel.mo")){
+			action = new Res_Cancel();
+			try {
+				afo = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/MyOrderList.mo")){
+			afo = new ActionForward();
+			afo.setPath("/MyOrder/MyOrderList.jsp");
+			afo.setRedirect(false);
 		}
 		if (afo != null) {
 			if (afo.isRedirect()) {
