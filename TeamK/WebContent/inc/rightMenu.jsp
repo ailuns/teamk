@@ -15,8 +15,6 @@
 		<li><a href="./MemberLogout.me">로그아웃</a></li>
 		<li><a href="./MemberInfo.me">회원정보</a></li>
 		<%} %>
-		
-<!-- 		<li><a href="#">언어설정</a></li> -->
 	</ul>
 	<embed height="250px" width="150px" src="http://www.gagalive.kr/livechat1.swf?chatroom=~~~new_TeamK"></embed>
 </div>

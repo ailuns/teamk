@@ -19,15 +19,6 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
   jQuery(document).ready(function($){
-	//Calendar
-	$('#calendar').datepicker({
-      inline: true,
-      firstDay: 0,
-      showOtherMonths: true,
-      dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-      monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
-    });
-
 	//Scheduler
 	$("#from").datepicker({
 		dateFormat: 'yy-mm-dd',    // 날짜 포맷 형식
@@ -127,7 +118,9 @@
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
 		<div id="datepicker">
-			<div id="calendar"></div>
+			<div id="notice">
+			여기다가 공지사항 넣어주셈
+			</div>
 			<div id="scheduler">
 				<p>내게 맞는 패키지 검색하기</p>
 				<form action="./PackSearchAction.po" method="post" name="fr" id="scheduler" onsubmit="return input_chk();">
@@ -206,8 +199,8 @@ if(count!=0){
 			</div>
 		</div>
 		<div id="clear"></div>
+		<jsp:include page="../inc/footer.jsp"></jsp:include>
 	</div>
-	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->
 	<div>
 		<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
