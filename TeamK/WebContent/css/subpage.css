@@ -551,13 +551,13 @@ div#member_title, div#qna_title, div#rvw_title {
 	padding-top: 18px;
 	border-bottom: 3px solid #06c;
 	font-size: 30px;
-	font-weight: lighter;
+	font-weight: bold;
 	color: #06c
 }
 div#member_script, div#qna_script, div#rvw_script {
 	background-color: #fff;
 	color: #333;
-	font-size: 12px;
+	font-size: 15px;
 	padding-top: 5px;
 }
 div#board {
