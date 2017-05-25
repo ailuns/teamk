@@ -45,14 +45,16 @@ public class MyBasketAddAction implements Action{
 		PrintWriter out = response.getWriter();
 		if(check == 1){
 			out.println("<script>");
-			out.println("alert('동일 물품이 이미 장바구니에 있습니다');");
+			out.println("alert('동일 상품이 이미 장바구니에 있습니다');");
 			out.println("history.back();");
 			out.println("</script>");
 			out.close();
 		}else{
 			out.println("<script>");
-			out.println("alert('장바구니에 담았습니다!');");
-			out.println("location.href='"+request.getHeader("referer")+"';");
+			out.println("if(confirm('지금 바로 장바구니 페이지로 이동하시겠습니까?'))"
+					+ "{location.href='./MyBasketList.bns';} "
+					+ "else {location.href='"+request.getHeader("referer")+"';}");
+
 			out.println("</script>");
 			out.close();
 		}

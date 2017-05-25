@@ -147,26 +147,50 @@ div#datepicker div table td#num, div#review_show div table td#num {width: 20px;}
 div#datepicker div table td#date, div#review_show div table td#date {width: 70px;}
 
 /* Package.jsp */
-div#package_head {
-	height: 150px;
+div#package_feat {
+	height: 300px;
 	width: 60%;
 	min-width: 1000px;
 	margin: 0 auto;
 }
-div#package_title, div#package_search {float: left;}
-div#package_title {
-	background-color: #0c9;
-	width: 30%;
-	height: 150px;
-	color: #fff;
-	font-size: 50px;
-	padding-top: 50px;
-	font-weight: lighter;
+div#package_slide, div#package_search {float: left;}
+div#package_slide {
+	width: 700px;
+	height: 300px;
+	position:relative;
+	background-image: url("../img/군항제3.jpg");
+	background-size: cover;
+}
+div#package_slide img {
+	width: 700px;
+	height: 300px;
+}
+.slider {display:none;}
+.controller {
+	text-align:center!important;
+	padding:0.01em 16px;
+	margin-top:16px!important;
+	margin-bottom:16px!important;
+	font-size:18px!important;
+	color:#fff!important;
+	position:absolute;
+	left:50%;
+	bottom:120px;
+	transform:translate(-50%,0%);
+	-ms-transform:translate(-50%,0%);
+	text-shadow: 1px 1px 3px #000;
+}
+.prev, .next {cursor:pointer;}
+.prev {float:left!important;}
+.next {float:right!important;}
+.white,.white-hover:HOVER{
+	color:#000!important;
+	background-color:#fff!important
 }
 div#package_search {
 	background-color: #06c;
-	width: 70%;
-	height: 150px;
+	width: 300px;
+	height: 300px;
 	color: #fff;
 	text-align: left;
 	font-weight: bold;
@@ -178,15 +202,15 @@ div#package_search p {
 div#package_search form label {margin: 0 10px 0 20px;}
 div#package_search form input[type=text] {
 	font-size: 15px;
-	width: 36%;
+	width: 200px;
 }
 div#package_search form select#area {
 	font-size: 15px;
-	width: 65%;
+	width: 140px;
 }
 div#package_search form input[type=submit] {
 	font-size: 15px;
-	width: 18%;
+	width: 50px;
 	border: 1px solid #fff;
 	background-color: #06c;
 	color: #fff;
@@ -195,14 +219,16 @@ div#package_search form input[type=submit] {
 div#package_search form input[type=submit]:hover {
 	background-color: #09f;
 }
-div#package_feat {
-	width: 60%;
-	min-width: 1000px;
-	height: 300px;
-	background-color: #222;
-	margin: 0 auto;
+div#package_head {
+	background-color: #fff;
+	padding-top: 5px;
+	border-bottom: 3px solid #06c;
+	font-size: 30px;
+	font-weight: lighter;
+	color: #06c;
+	text-align: left;
+	padding-left: 70px;
 }
-div#package_feat div {float: right;}
 
 div#package_list
 {
@@ -264,76 +290,14 @@ div#pages
 	width: 60%;
 	height: 40px;
 	margin: 0 auto;
-/* 	background-color: #fff; */
 	padding-top: 10px;
 }
 
-
-
-div#feat_ttl1, div#feat_ttl2,
-div#feat_ttl3, div#feat_ttl4,
-div#feat_ttl5 {
-	width: 5%;
-	height: 300px;
-	background-color: red;
-	transition: 0.5s;
-	padding-top: 10px;
-	color: #fff;
-}
-div#feat_con0 {
-	width: 75%;
-	height: 300px;
-	background-color: #222;
-	color: #fff;
-	font-weight: bold;
-	transition: 0.5s;
-}
-div#feat_con1, div#feat_con2,
-div#feat_con3, div#feat_con4,
-div#feat_con5 {
-	width: 0%;
-	height: 300px;
-	transition: 0.5s;
-}
-div#feat_con1 {
-	background-image: url("../img/20101021182610.jpg");
-	background-repeat : no-repeat;
-	background-size: cover;
-	background-position: center center;
-}
-div#feat_con2 {
-	background-image: url("../img/491021_374477_1553.jpg");
-	background-repeat : no-repeat;
-	background-size: cover;
-	background-position: center center;
-}
-div#feat_con3 {
-	background-image: url("../img/군항제3.jpg");
-	background-repeat : no-repeat;
-	background-size: cover;
-	background-position: center center;
-}
-div#feat_con4 {
-	background-image: url("../img/i.jpg");
-	background-repeat : no-repeat;
-	background-size: cover;
-	background-position: center center;
-}
-div#feat_con5 {
-	background-image: url("../img/Jeju-bg.jpg");
-	background-repeat : no-repeat;
-	background-size: cover;
-	background-position: center center;
-}
-div#feat_con1 span, div#feat_con2 span,
-div#feat_con3 span, div#feat_con4 span,
-div#feat_con5 span {display: none;}
 div#package_feat a {}
 
 div#package_tab {
 	width: 60%;
 	min-width: 1000px;
-/* 	background-color: #fff; */
 	margin : 20px auto;
 	height: 1000px;
 }

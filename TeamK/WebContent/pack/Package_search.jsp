@@ -149,16 +149,18 @@ img.ui-datepicker-trigger
 		%>
 				<p>검색조건에 해당하는 상품이 총 <%=count %>개 있습니다</p>
 				<hr>
-				<table>
-					<tr>
-						<td colspan="2">상품</td>
-						<td>가격</td>
-						<td>출발일자</td>
-					</tr>
-					<tr>
-						<td colspan="4">검색조건에 해당하는 상품이 없습니다</td>
-					</tr>
-				</table>
+				<div id="package_list">
+					<table style="width:1000px;">
+						<tr>
+							<td colspan="2">상품</td>
+							<td>가격</td>
+							<td>출발일자</td>
+						</tr>
+						<tr>
+							<td colspan="5"><p style="text-align: center;">해당 검색 조건에 해당하는 상품이 없습니다</p></td>
+						</tr>
+					</table>
+				</div>
 		<%
 			}
 			if (count != 0)
@@ -166,7 +168,7 @@ img.ui-datepicker-trigger
 		%>
 		
 		
-		<p>검색조건에 해당하는 상품이 총 <%=count %>개 있습니다</p>
+<%-- 		<p>검색조건에 해당하는 상품이 총 <%=count %>개 있습니다</p> --%>
 		<hr>	
 
 		<div id="package_list">
