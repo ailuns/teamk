@@ -170,6 +170,7 @@ public class BoardDAO {
 		}			
 	}//insertBoard3(bb)
 	
+	//type=1(리뷰게시판)의 글 갯수 가져오기
 	public int getBoardCount(){
 		Connection con=null;
 		PreparedStatement pstmt=null;
@@ -195,6 +196,7 @@ public class BoardDAO {
 		return count;
 	}//getBoardCount	
 	
+	//type=1(리뷰게시판)의 검색된 글 갯수 가져오기 search=검색어, ss=컬럼명
 	public int getBoardCount(String search, String ss){
 		Connection con=null;
 		PreparedStatement pstmt=null;
@@ -221,6 +223,7 @@ public class BoardDAO {
 		return count;
 	}//getBoardCount	
 	
+	//type=2(Q&A게시판)의 글 갯수 가져오기
 	public int getBoardCount2(){
 		Connection con=null;
 		PreparedStatement pstmt=null;
@@ -246,6 +249,7 @@ public class BoardDAO {
 		return count;
 	}//getBoardCount2	
 	
+	//type=2(Q&A게시판)의 검색된 글 갯수 가져오기 search=검색어, ss=컬럼명
 	public int getBoardCount2(String search, String ss){
 		Connection con=null;
 		PreparedStatement pstmt=null;
@@ -272,6 +276,7 @@ public class BoardDAO {
 		return count;
 	}//getBoardCount2	
 	
+	//type=3(공지사항)의 글 갯수 가져오기
 	public int getBoardCount3(){
 		Connection con=null;
 		PreparedStatement pstmt=null;
@@ -297,6 +302,7 @@ public class BoardDAO {
 		return count;
 	}//getBoardCount3	
 	
+	//type=3(공지사항)의 검색된 글 갯수 가져오기 search=검색어, ss=컬럼명
 	public int getBoardCount3(String search, String ss){
 		Connection con=null;
 		PreparedStatement pstmt=null;
@@ -323,6 +329,7 @@ public class BoardDAO {
 		return count;
 	}//getBoardCount3	
 	
+	//게시판의 한 페이지 글을 전부 boardList에 저장
 	public List getBoardList(int startRow,int pageSize){
 		
 		Connection con=null;
@@ -644,6 +651,7 @@ try {
 }return boardList;
 }//getBoardList3 search
 
+    //num값에 해당하는 게시물 정보 전부 BoardBean bb에 저장
 	public BoardBean getBoard(int num){
 		BoardBean bb = null;
 		Connection con=null;
@@ -940,6 +948,7 @@ public List getBoardReplyList(int num){
 		    	rb.setRe_lev(rs.getInt("re_lev"));
 		    	rb.setRe_seq(rs.getInt("re_seq"));	
 		    	rb.setGroup_del(rs.getInt("group_del"));
+		    	
 		    	//boardReplyList한칸저장
 		    	boardReplyList.add(rb);
 		    }
@@ -950,6 +959,7 @@ public List getBoardReplyList(int num){
 			
 		}return boardReplyList;
 	}//getBoardReplyList
+
 public List getBoardReplyList2(int num){
 	
 	Connection con=null;
@@ -1030,6 +1040,8 @@ public List getBoardReplyList2(int num){
 		}
 		return rb;	
 	}
+	
+	//num 값의 게시물의 리플 갯수 불러오기
 	public int getBoardReplyCount(int num){
 		Connection con=null;
 		PreparedStatement pstmt=null;

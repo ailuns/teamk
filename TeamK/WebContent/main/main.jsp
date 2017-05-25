@@ -119,7 +119,26 @@
 	<div id="wrap">
 		<div id="datepicker">
 			<div id="notice">
-			여기다가 공지사항 넣어주셈
+			<h1>공지사항</h1>
+			<table>
+				<%
+BoardDAO bdao=new BoardDAO();
+
+int count=bdao.getBoardCount();
+SimpleDateFormat sdf=new SimpleDateFormat("yyyy.MM.dd");
+if(count!=0){
+	List<BoardBean> boardList3=bdao.getBoardList3(1, 5);
+	for(int i=0;i<boardList3.size();i++){
+		BoardBean bb=boardList3.get(i);
+		%>
+<tr><td id="num"><%=bb.getRe_ref()%></td><td class="contxt">
+<a href="./BoardContent3.bo?num=<%=bb.getNum()%>&pageNum=1"><%=bb.getSubject()%></a></td>
+    <td id="date"><%=sdf.format(bb.getDate())%></td></tr>		
+		<%
+	}
+}
+%>
+			</table>
 			</div>
 			<div id="scheduler">
 				<p>내게 맞는 패키지 검색하기</p>
@@ -161,10 +180,6 @@
 		<h1>리뷰</h1>
 			<table>
 				<%
-BoardDAO bdao=new BoardDAO();
-
-int count=bdao.getBoardCount();
-SimpleDateFormat sdf=new SimpleDateFormat("yyyy.MM.dd");
 if(count!=0){
 	List<BoardBean> boardList=bdao.getBoardList(1, 5);
 	for(int i=0;i<boardList.size();i++){

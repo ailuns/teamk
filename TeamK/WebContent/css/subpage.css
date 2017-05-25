@@ -750,7 +750,7 @@ div#board div#board_write {
 	width: 800px;
 	margin: 20px auto;
 }
-div#board div#board_write form {width: 100%;}
+div#board div#board_write form {width: 100%; text-align: left;}
 div#board div#board_write form label {
 	width: 100px;
 	float: left;
@@ -764,6 +764,7 @@ div#board div#board_write form input {
 div#board div#board_write form textarea {width: 797px;}
 div#board div#board_write form input[type="submit"],
 div#board div#board_write form input[type="button"] {width: 150px;}
+
 
 /*Board Delete.jsp*/
 div#board div#board_delete {

@@ -22,8 +22,8 @@ public class BoardListAction implements Action {
 		BoardBean bb = new BoardBean();
 		BoardDAO bdao = new BoardDAO();
 		
-		//게시판 전체 글 개수
-		// int count=  getBoardCount() 메서드 호출
+		
+		// count = type이 1인 모든 글 갯수(리뷰게시판)
 		int count = bdao.getBoardCount();
 		//한페이지에 보여줄 글의 개수 설정
 		int pageSize=15;
@@ -40,6 +40,7 @@ public class BoardListAction implements Action {
 		
 		//List boardList =   메서드호출 getBoardList(시작행, 몇개)
 		List boardList=bdao.getBoardList(startRow, pageSize);
+		
 		//전체 페이지 수 구하기 게시판 글 50개 한화면에 보여줄 글 개수 10 => 5전체페이지
 		//    게시판 글 56개 한화면에 보여줄 글개수 10 =>  5전체페이지 +1 (나머지)=>6
 		int pageCount=count/pageSize+(count%pageSize==0?0:1);

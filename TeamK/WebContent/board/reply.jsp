@@ -10,14 +10,15 @@
 </head>
 <link href="./css/inc.css" rel="stylesheet" type="text/css">
 <link href="./css/subpage.css" rel="stylesheet" type="text/css">
+
+<%-- board/content.jsp 페이지의 댓글부분이 밑의 페이지로 대체됨 --%>
 <body>
 <%
 request.setCharacterEncoding("utf-8");
-System.out.println("insertReplyworked");
 List lrb = null;
-int rcount = (int)request.getAttribute("rcount");
-if(rcount!=0){lrb=(List)request.getAttribute("lrb");}
-String id = (String)session.getAttribute("id");
+int rcount = (int)request.getAttribute("rcount"); //리플갯수 불러오기
+if(rcount!=0){lrb=(List)request.getAttribute("lrb");} //리플정보 불러오기
+String id = (String)session.getAttribute("id"); 
 String pageNum = request.getParameter("pageNum");
 String rNum = (String)request.getAttribute("rNum");
 %>

@@ -29,44 +29,40 @@ public class BoardReplyAction2 implements Action {
 		BoardBean bb = new BoardBean();
 		BoardDAO bdao = new BoardDAO();
 		
-		String rid = request.getParameter("rId");
-		String rcontent = request.getParameter("rContent");
-		int rNum = Integer.parseInt(request.getParameter("rNum"));
+		String rid = request.getParameter("rId"); //rid에 리플 작성자 아이디 저장
+		String rcontent = request.getParameter("rContent"); //rcontent에 리플내용 저장
+		int rNum = Integer.parseInt(request.getParameter("rNum")); //rNum에 글번호 저장
 		String pageNum = request.getParameter("pageNum");
-		String wEmail = request.getParameter("wEmail");
-		String wContent = request.getParameter("wContent");
+		String wEmail = request.getParameter("wEmail"); //wEmail에 글작성자 email주소 저장
+		String wContent = request.getParameter("wContent"); //wContent에 글작성자의 글내용 저장
 		
 		rb.setId(rid);
 		rb.setGroup_del(rNum);
 		rb.setContent(rcontent);
-		bdao.insertReplyBoard(rb);
+		bdao.insertReplyBoard(rb); //리플 db서버에 저장
 		
 		String ts = "답변완료";
-		bb.setNum(rNum);
-		bb.setType_select(ts);
-		bdao.updateType_select(rNum,ts);
+		bb.setNum(rNum); //글번호
+		bb.setType_select(ts); //"답변완료"
+		bdao.updateType_select(rNum,ts); //해당 번호의 글의 type_select 컬럼에 "답변완료" 추가
 		
 		int rcount = bdao.getBoardReplyCount(rNum);
 		List<BoardReplyBean> lrb = bdao.getBoardReplyList(rNum);
+		//AJAX 페이지 board2/reply2.jsp 때문에 값 다시한번 저장
 		request.setAttribute("lrb", lrb);
 		request.setAttribute("rcount", rcount);
 		request.setAttribute("rNum", String.valueOf(rNum));
 		request.setAttribute("wEmail", wEmail);
 		request.setAttribute("wContent", wContent);
 		
-		System.out.println("rid : "+rid);
-		System.out.println("wEmail : "+wEmail);
-		System.out.println("wContent : "+wContent);
-		System.out.println("rcontent : "+rcontent);
-		
-String email = wEmail;//받는사람의 이메일 주소
-		
+String email = wEmail;//받는사람의 이메일 주소에 글작성자의 이메일주소 wEmail 넣기
 			
-		String sender="insup0117@naver.com";
-		String receiver= email;
-		String subject = "답변이 왔습니다.";
-		
+		String sender="insup0117@naver.com"; // 이메일 발신자
+		String receiver= email; //받는사람
+		String subject = "답변이 왔습니다."; //메일 제목
+	
 		String content1=  "문의내용 : ["+wContent+"] <br> 답변내용 : ["+rcontent+"]";
+		//메일 내용 content1에  wContent 글작성자의 글내용, rcontent 리플 작성자의 리플내용 넣음.
 		
 		String server = "smtp.naver.com";
 		

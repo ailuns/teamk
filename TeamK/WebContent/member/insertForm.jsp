@@ -200,10 +200,10 @@ if (id != null) {
 			<div id="insert_form">
 			<form action="./MemberJoinAction.me" method="post" name="fr" onsubmit="return winopen()">
 				<label for="id">아이디</label><input type="text" name="id" id="id" 
-				onkeypress="nonHangulSpecialKey()"placeholder="ID는 영문, 숫자만 가능"  maxlength="10">
+				onkeypress="nonHangulSpecialKey()" placeholder="ID는 영문, 숫자만 가능"  maxlength="10">
 				<input type="hidden" name="idchecknum"> 
 				<input type="hidden" name="name2" value="0"> 
-				<input type="button"value="중복확인" onclick="idCheck()"><br>
+				<input type="button" value="중복확인" onclick="idCheck()"><br>
 				
 				<label for="pass">비밀번호</label><input type="password" name="pass" id="pass"><br> 
 				<label for="pass2">비밀번호 확인</label><input type="password" name="pass2" id="pass2"><br> 
