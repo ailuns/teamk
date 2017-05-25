@@ -143,6 +143,8 @@
 			<p>내게 맞는 패키지 검색하기</p>
 			<form action="./PackSearchAction.po" name="fr" method="get" id="scheduler" onsubmit="return input_chk();">
 				<label for="date_from">출발</label><input type="text" id="date_from" class="input_style" name="startDate" required="yes"><br><br>
+				<label for="date_from">날짜</label><input type="text" id="date_from" class="input_style" name="startDate" required="yes">
+<!-- 				<label for="date_to">~</label><input type="text" id="date_to" class="input_style" name="endDate"><br><br> -->
 				<label for="city_search">지역</label>
 				<select id="area" name="area">
 					<option value="">선택하세요</option>

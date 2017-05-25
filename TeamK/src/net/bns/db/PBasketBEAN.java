@@ -5,6 +5,13 @@ import java.sql.Timestamp;
 public class PBasketBEAN {
 	private String [] countp;
 	private int cost,ori_cost,pb_num,ori_num;
+	private String id;
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public int getOri_num() {
 		return ori_num;
 	}

@@ -14,7 +14,7 @@ public class BoardBean {
 	  private String file3;
 	  private String file4;
 	  private String file5;
-	  private int type; //type 1일때는 리뷰게시판, 2일때는 Q&A 게시판 
+	  private int type; //type 1일때는 리뷰게시판, 2일때는 Q&A 게시판 , 3일때는 공지사항
 	  private int re_ref; //게시판에 표시되는 글번호(글쓸때마다 type에 따라서 각각 1씩 증가)
 	  private String email; // Q&A게시판에 글남길때 답변받을 메일주소
 	  private String type_select; // 글 분류 

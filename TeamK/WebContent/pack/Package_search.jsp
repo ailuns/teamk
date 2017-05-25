@@ -117,9 +117,9 @@ img.ui-datepicker-trigger
 			<div id="package_search">
 				<p>내게 맞는 패키지 검색하기</p>
 				<form action="./PackSearchAction.po" name="fr" method="get" id="scheduler" onsubmit="return input_chk()">
-					<label for="date_from">출발</label>
+					<label for="date_from">날짜</label>
 					<input type="text" id="date_from" class="input_style" name="startDate" value="<%=startDate%>" required="yes">
-					<label for="date_to">도착</label>
+					<label for="date_to">~</label>
 					<input type="text" id="date_to" class="input_style" name="endDate" value="<%=endDate%>"><br><br>
 					<label for="city_search">지역</label>
 	
@@ -142,7 +142,33 @@ img.ui-datepicker-trigger
 		</div>
 		
 		<div id="clear"></div>
-		<p>검색조건에 해당하는 상품이 총 <%=count %>개 있습니다</p>
+		
+		<%
+			if(count == 0)
+			{
+		%>
+				<p>검색조건에 해당하는 상품이 총 <%=count %>개 있습니다</p>
+				<hr>
+				<div id="package_list">
+					<table style="width:1000px;">
+						<tr>
+							<td colspan="2">상품</td>
+							<td>가격</td>
+							<td>출발일자</td>
+						</tr>
+						<tr>
+							<td colspan="5"><p style="text-align: center;">해당 검색 조건에 해당하는 상품이 없습니다</p></td>
+						</tr>
+					</table>
+				</div>
+		<%
+			}
+			if (count != 0)
+			{
+		%>
+		
+		
+<%-- 		<p>검색조건에 해당하는 상품이 총 <%=count %>개 있습니다</p> --%>
 		<hr>	
 
 		<div id="package_list">
@@ -225,6 +251,9 @@ img.ui-datepicker-trigger
 				}
 				%>
 		</div>
+		<%
+			}
+		%>
 	</div>
 <!--오른쪽 메뉴 -->
 	<jsp:include page="../inc/rightMenu.jsp"></jsp:include>

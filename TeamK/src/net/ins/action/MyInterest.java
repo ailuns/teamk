@@ -40,13 +40,13 @@ public class MyInterest implements Action{
 			MyInterest = insdao.MyInterest(id,ty,start,pagesize);
 		}
 		int pblock = 10;
-		//½ÃÀÛÆäÀÌÁö ¹øÈ£¤Á ±¸ÇÏ±â 1~10=>1  11~20=>11
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½Ï±ï¿½ 1~10=>1  11~20=>11
 		int startp=((curpage-1)/pblock)*pblock+1;
-		//³¡ÆäÀÌÁö ±¸ÇÏ±â
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï±ï¿½
 		int endpage=startp+pblock-1;
 		if(endpage > pcount)endpage = pcount;
-		if(ty.equals("P"))type = "°ü½É ÆĞÅ°Áö ¸ñ·Ï";
-		else if(ty.equals("T"))type = "°ü½É »óÇ° ¸ñ·Ï";
+		if(ty.equals("P"))type = "ë‚´ê°€ ì°œí•œ ì—¬í–‰ íŒ¨í‚¤ì§€ ìƒí’ˆ";
+		else if(ty.equals("T"))type = "ë‚´ê°€ ì°œí•œ ì—¬í–‰ì— í•„ìš”í•œ ê²ƒë“¤";
 		request.setAttribute("type", type);
 		request.setAttribute("ty", ty);
 		request.setAttribute("pblock", pblock);

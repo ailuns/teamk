@@ -86,6 +86,7 @@
 	// 찜하기, 예약하기 버튼 클릭 시 각각 버튼 마다 이동할 페이지
 	function submit_fun(i, user_id)
 	{
+		// i = 1  찜추가   i = 2 찜취소    i = 3  예약하기
 		if (i == 1 && user_id != "") // 로그인 되어 있을 경우 찜추가
 		{
 			$.ajax({
@@ -93,37 +94,73 @@
 				url:"./MyInterestAdd.ins",   // java로 보냄
 				data:{
 					type:"P",
-					num:$("input[type=radio][name=chk]:checked").val(),
-					success:function(){
-						alert("찜목록에 추가되었습니다");
-						$("#jjim_o").hide();
-						$("#jjim_x").show();
-// 						window.location.reload(true);  // 페이지 새로고침
-					}
+					num:$("input[type=radio][name=chk]:checked").val()					
+				},
+				success:function(){
+					alert("찜목록에 추가되었습니다");
+					$("#jjim_o").hide();
+					$("#jjim_x").show();
+//						window.location.reload(true);  // 페이지 새로고침
 				}
 			});
 		}
 		
-// 		else if(i == 1 && user_id != "")	// 로그인 안되어 있을 경우
-// 		{
-// 			loginChk();
-// 		}
-		if(i == 2 && user_id != "")
+		else if(i == 2 && user_id != "")   // 로그인에 되어 있을 경우 찜취소
 		{
 			$.ajax({
 				type:"post",
 				url:"./MyInterestDel.ins",   // java로 보냄
 				data:{
 					type:"P",
-					num:$("input[type=radio][name=chk]:checked").val(),
-					success:function(){
-						$("#jjim_o").show();
-						$("#jjim_x").hide();
-						alert("찜목록에서 삭제되었습니다");
-// 						window.location.reload(true);  // 페이지 새로고침
-					}
+					num:$("input[type=radio][name=chk]:checked").val()					
+				},
+				success:function(){
+					$("#jjim_o").show();
+					$("#jjim_x").hide();
+					alert("찜목록에서 삭제되었습니다");
+//						window.location.reload(true);  // 페이지 새로고침
 				}
 			});
+		}
+		
+		else if (i == 3 && user_id != "")
+		{
+			var cost_temp = $("#p").html();
+			str = String(cost_temp);
+		    cost = str.replace(/[^\d]+/g, '');
+			
+		    $("#cost").val(cost);
+		    $("#ori_num").val($("input[type=radio][name=chk]:checked").val());
+		    
+// 		    alert("sdf");
+		    document.input_fr.action = "./MyBasketAddAction.bns";
+		    document.input_fr.method = "post";
+		    document.input_fr.submit();
+		    
+// 			$.ajax({
+// 				type:"post",
+// 				url:"./MyBasketAddAction.bns",   // java로 보냄
+// 				data:{
+// 					아이, 어른, 글번호, 총가격
+// 					num:$("input[type=radio][name=chk]:checked").val(),
+// 					adult:$("#adult option:selected").val(),
+// 					child:$("#child option:selected").val(),
+// 					cost:cost,
+// 					type:"P"
+// 				}
+// 				success:function(){
+// 					$("#jjim_o").show();
+// 					$("#jjim_x").hide();
+// 					alert("찜목록에서 삭제되었습니다");
+// //						window.location.reload(true);  // 페이지 새로고침
+// 				}
+// 			});
+		}
+		
+		
+		else if(user_id == "")	// 로그인 안되어 있을 경우
+		{
+			loginChk();
 		}
 	}
 	
@@ -198,12 +235,13 @@
 					id:$("#id").val(),
 					content:$("#content").val(),
 					num:$("#num").val(),
-					secretChk:$(".secretChk").val(),	// 비밀글 아닐 시 값 1
-					success:function(){
+					secretChk:$(".secretChk").val()	// 비밀글 아닐 시 값 1
+					},
+					success:function()
+					{
 						window.location.reload(true);  // 페이지 새로고침
 					}
-				}
-			});
+				});
 		}
 		else							 // 비밀글 체크 x
 		{
@@ -214,10 +252,10 @@
 					id:$("#id").val(),
 					content:$("#content").val(),
 					num:$("#num").val(),
-					secretChk:"0",     // 비밀글 아닐 시 값 0
-					success:function(){
-						window.location.reload(true);   // 페이지 새로고침
-					}
+					secretChk:"0"     // 비밀글 아닐 시 값 0
+				},
+				success:function(){
+					window.location.reload(true);   // 페이지 새로고침
 				}
 			});
 		}
@@ -240,10 +278,10 @@
 					re_ref:$("#re_ref").val(),
 					re_lev:$("#re_lev").val(),
 					re_seq:$("#re_seq").val(),
-					secretChk:$(".re_secretChk").val(),
-					success:function(){
-						window.location.reload(true);
-					}
+					secretChk:$(".re_secretChk").val()
+				},
+				success:function(){
+					window.location.reload(true);
 				}
 			});
 		}
@@ -261,10 +299,10 @@
 					re_ref:$("#re_ref").val(),
 					re_lev:$("#re_lev").val(),
 					re_seq:$("#re_seq").val(),
-					secretChk:"0",
-					success:function(){
-						window.location.reload(true);
-					}
+					secretChk:"0"					
+				},
+				success:function(){
+					window.location.reload(true);
 				}
 			});
 		}
@@ -278,10 +316,10 @@
 			url:"./ReplyDelAction.ro",
 			data:{
 				renum:renum,
-				id:id,
-				success:function(){
-					window.location.reload(true);
-				}
+				id:id				
+			},
+			success:function(){
+				window.location.reload(true);
 			}
 		});
 	}
@@ -297,10 +335,10 @@
 				data:{
 					content:$("#contentup").val(),
 					num:num,
-					secretChk:$(".up_secretChk"+num).val(),
-					success:function(){
-						window.location.reload(true);
-					}
+					secretChk:$(".up_secretChk"+num).val()
+				},
+				success:function(){
+					window.location.reload(true);
 				}
 			});
 		}
@@ -996,7 +1034,7 @@
 			
 			<!--인원수, 가격 -->
 			<div id="contentdiv1">
-				<form name="fr" method="post">
+				<form name="input_fr" method="post">
 					<table border="1">
 						<tr>
 						<%
@@ -1034,15 +1072,20 @@
 						</tr>
 						<tr>
 							<td>합계</td>
-							<td colspan="2"><p id="p"><%=cost_adult %></p></td>
+							<td colspan="2">
+								<input type="hidden" id="cost" name="cost" value="">
+								<input type="hidden" id="ori_num" name="num" value="">
+								<input type="hidden" name="type" value="P">
+								<p id="p"><%=cost_adult %></p>
+							</td>
 						</tr>
 						<tr>
-							<td></td>
 							<td>
 								<input type="button" id="jjim_o" value="찜하기" onclick="submit_fun(1, '<%=user_id %>')">
 								<input type="button" id="jjim_x" value="찜취소" style="display:none;" onclick="submit_fun(2, '<%=user_id %>')">
 							</td>
-							<td><input type="submit" value="예약하기" onclick="submit_fun(3)"></td>
+							<td><input type="button" value="장바구니" onclick="submit_fun(3, '<%=user_id %>')"></td>
+							<td><input type="button" value="예약하기" onclick="submit_fun(4, '<%=user_id %>')"></td>
 						</tr>
 					</table>
 					
@@ -1277,7 +1320,51 @@
 				%>
 				
 			</table>
-
+			<br>
+			
+			<table id="replyWrite">
+				<tr>
+					<%
+						if (user_id.equals(""))
+						{
+					%>
+					<td>
+						<textarea type="text" id="content" name="content" class="box" style="width:790px; height:50px;" placeholder="로그인이 필요한 서비스입니다" readonly onclick="loginChk()"></textarea>
+					</td>
+					<tr>
+							<td>
+								<div style="text-align:right; margin-top:15px; width:790px;">
+									<input type="checkbox" class="secretChk" name="secretChk" value="1" onclick="loginChk()">비밀글
+									<input type="button" value="문의글쓰기" onclick="loginChk()">
+								</div>
+							</td>
+						</tr>
+					<td>
+					<%
+						}
+						else
+						{
+					%>
+						<td>
+							<textarea type="text" id="content" name="content" class="box" placeholder="문의글을 입력해주세요" style="width:790px; height:50px;"></textarea>
+							<input type="hidden" id="id" name="id" class="box" value="<%=user_id %>">
+							<input type="hidden" name="pageNum" value="<%=repageNum%>">
+							<input type="hidden" id="num" name="num" value="<%=PB.getNum() %>">
+						</td>
+						<tr>
+							<td>
+								<div style="text-align:right; margin-top:15px; width:790px;">
+									<input type="checkbox" class="secretChk" name="secretChk" value="1">비밀글
+									<input type="button" value="문의글쓰기" onclick="ReplyWrite(<%=PB.getNum() %>)">
+								</div>
+							</td>
+						</tr>
+					<%
+						}
+					%>
+				</tr>
+			</table>
+			
 			<center>
 				<%
 					if (count != 0) {
@@ -1314,51 +1401,7 @@
 				}
 				%>
 			</center>
-
-			<br>
 			
-			<table id="replyWrite">
-				<tr>
-					<%
-						if (user_id.equals(""))
-						{
-					%>
-					<td>
-						<textarea type="text" id="content" name="content" class="box" style="width:790px; height:50px;" placeholder="로그인이 필요한 서비스입니다" readonly onclick="loginChk()"></textarea>
-					</td>
-					<tr>
-							<td>
-								<div style="text-align:right; margin-top:15px; width:790px;">
-									<input type="checkbox" class="secretChk" name="secretChk" value="1" onclick="loginChk()">비밀글
-									<input type="button" value="문의글쓰기" onclick="loginChk()">
-								</div>
-							</td>
-						</tr>
-					<td>
-					<%
-						}
-						else
-						{
-					%>
-						<td>
-							<textarea type="text" id="content" name="content" class="box" style="width:790px; height:50px;"></textarea>
-							<input type="hidden" id="id" name="id" class="box" value="<%=user_id %>">
-							<input type="hidden" name="pageNum" value="<%=repageNum%>">
-							<input type="hidden" id="num" name="num" value="<%=PB.getNum() %>">
-						</td>
-						<tr>
-							<td>
-								<div style="text-align:right; margin-top:15px; width:790px;">
-									<input type="checkbox" class="secretChk" name="secretChk" value="1">비밀글
-									<input type="button" value="문의글쓰기" onclick="ReplyWrite(<%=PB.getNum() %>)">
-								</div>
-							</td>
-						</tr>
-					<%
-						}
-					%>
-				</tr>
-			</table>
 		</div>
 	</div>
 	<!--상품 문의 -->

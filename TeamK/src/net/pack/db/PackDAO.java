@@ -132,49 +132,56 @@ public class PackDAO {
 		try {
 			conn = getConnection();
 
-			if (endDate == "")
-			{
-				sql = "select * from pack where area like ? and date >= ? order by date asc";
+//			if (endDate == "")
+//			{
+//				sql = "select * from pack where area like ? and date >= ? order by date asc";
 
-				pstm = conn.prepareStatement(sql);
-				pstm.setString(1, "%" +  search + "%");
-				pstm.setString(2, startDate);
-			}
-			else
+//				sql = "select num, subject, intro, cost, min(date) from pack where area=? and date >= ? group by subject order by date asc";
+			sql = "select num, subject, intro, cost, min(date) as date, file1 from pack where area=? and date >= ? group by subject";
+			
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, search);
+			pstm.setString(2, startDate);
+//			}
+//			else
+//			{
+////				sql = "select * from pack where area like ? and date >= ? and date <= ? order by date asc";
+//				
+//				sql = "select * from pack where area=? and date >= ? and date <= ? group by subject order by date asc";
+//
+//				pstm = conn.prepareStatement(sql);
+//				pstm.setString(1, "%" +  search + "%");
+//				pstm.setString(2, startDate);
+//				pstm.setString(3, endDate);
+//				
+//			}
+			rs = pstm.executeQuery();
+			if (rs.next())
 			{
-				sql = "select * from pack where area like ? and date >= ? and date <= ? order by date asc";
-
-				pstm = conn.prepareStatement(sql);
-				pstm.setString(1, "%" +  search + "%");
-				pstm.setString(2, startDate);
-				pstm.setString(3, endDate);
+				PackBean PB = new PackBean();
+				PB.setDate(rs.getString("date"));
 				
+				sql = "select min(num) as num, subject, intro, cost, date, file1 from pack where subject=? group by subject";
+				
+				pstm = conn.prepareStatement(sql);
+				pstm.setString(1, rs.getString("subject"));
+				System.out.println(rs.getString("subject"));
+				rs = pstm.executeQuery();
+				while (rs.next()) {
+					
+					
+					PB.setNum(rs.getInt("num"));
+					PB.setSubject(rs.getString("subject"));
+					PB.setIntro(rs.getString("intro"));
+					PB.setCost(rs.getInt("cost"));
+//					PB.setDate(rs.getString("date"));
+					PB.setFile1(rs.getString("file1"));
+					
+					list.add(PB);
+				}
 			}
 			
-
-			rs = pstm.executeQuery();
-			while (rs.next()) {
-				PackBean PB = new PackBean();
-				PB.setNum(rs.getInt("num"));
-				PB.setSerial(rs.getInt("serial"));
-				PB.setSubject(rs.getString("subject"));
-				PB.setIntro(rs.getString("intro"));
-				PB.setContent(rs.getString("content"));
-				PB.setType(rs.getString("type"));
-				PB.setArea(rs.getString("area"));
-				PB.setCity(rs.getString("city"));
-				PB.setCity(rs.getString("sarea"));
-				PB.setCost(rs.getInt("cost"));
-				PB.setReadcount(rs.getInt("readcount"));
-				PB.setStock(rs.getInt("stock"));
-				PB.setDate(rs.getString("date"));
-				PB.setFile1(rs.getString("file1"));
-				PB.setFile2(rs.getString("file2"));
-				PB.setFile3(rs.getString("file3"));
-				PB.setFile4(rs.getString("file4"));
-				PB.setFile5(rs.getString("file5"));
-				list.add(PB);
-			}
+			
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -349,24 +356,26 @@ public class PackDAO {
 		try {
 			conn = getConnection();
 
-			if (endDate == "")
-			{
-				sql = "select count(*) from pack where area like ? and date >= ?";
-
-				pstm = conn.prepareStatement(sql);
-				pstm.setString(1, "%" +  search + "%");
-				pstm.setString(2, startDate);
-			}
-			else
-			{
-				sql = "select count(*) from pack where area like ? and date >= ? and date <= ?";
-
-				pstm = conn.prepareStatement(sql);
-				pstm.setString(1, "%" +  search + "%");
-				pstm.setString(2, startDate);
-				pstm.setString(3, endDate);
+//			if (endDate == "")
+//			{
+				sql = "select count(*) from pack where area = ? and date >= ?";
+			
+//				sql = "select count(*) from pack where area = ? and date >= ? group by subject";
 				
-			}
+				pstm = conn.prepareStatement(sql);
+				pstm.setString(1, search);
+				pstm.setString(2, startDate);
+//			}
+//			else
+//			{
+//				sql = "select count(*) from pack where area like ? and date >= ? and date <= ?";
+//
+//				pstm = conn.prepareStatement(sql);
+//				pstm.setString(1, "%" +  search + "%");
+//				pstm.setString(2, startDate);
+//				pstm.setString(3, endDate);
+//				
+//			}
 			
 			rs = pstm.executeQuery();
 			if (rs.next()) {
