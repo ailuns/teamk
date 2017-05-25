@@ -125,36 +125,31 @@
 		
 		else if (i == 3 && user_id != "")
 		{
-			var cost_temp = $("#p").html();
-			str = String(cost_temp);
-		    cost = str.replace(/[^\d]+/g, '');
+			var cost_temp = $("#p").html(); // 총금액 받아오기
+			str = String(cost_temp);		// 총금액 천원단위로 , 찍혀있는걸
+		    cost = str.replace(/[^\d]+/g, '');   // 풉니다
 			
 		    $("#cost").val(cost);
 		    $("#ori_num").val($("input[type=radio][name=chk]:checked").val());
-		    
-// 		    alert("sdf");
-		    document.input_fr.action = "./MyBasketAddAction.bns";
+
+		    document.input_fr.action = "./MyBasketAddAction.bns";	// 장바구니 페이지로 이동
 		    document.input_fr.method = "post";
 		    document.input_fr.submit();
-		    
-// 			$.ajax({
-// 				type:"post",
-// 				url:"./MyBasketAddAction.bns",   // java로 보냄
-// 				data:{
-// 					아이, 어른, 글번호, 총가격
-// 					num:$("input[type=radio][name=chk]:checked").val(),
-// 					adult:$("#adult option:selected").val(),
-// 					child:$("#child option:selected").val(),
-// 					cost:cost,
-// 					type:"P"
-// 				}
-// 				success:function(){
-// 					$("#jjim_o").show();
-// 					$("#jjim_x").hide();
-// 					alert("찜목록에서 삭제되었습니다");
-// //						window.location.reload(true);  // 페이지 새로고침
-// 				}
-// 			});
+		}
+		
+		else if (i == 4 && user_id != "")
+		{
+			var cost_temp = $("#p").html(); // 총금액 받아오기
+			str = String(cost_temp);		// 총금액 천원단위로 , 찍혀있는걸
+		    cost = str.replace(/[^\d]+/g, '');  // 풉니다
+			
+		    // 폼태그로 보내기때문에 hidden 숨겨둔 곳에 각각 값을 넣는다
+		    $("#cost").val(cost);
+		    $("#ori_num").val($("input[type=radio][name=chk]:checked").val());
+
+		    document.input_fr.action = "./MyOrderPay.mo";  // 예약하기 페이지로 이동
+		    document.input_fr.method = "post";
+		    document.input_fr.submit();
 		}
 		
 		
@@ -1074,7 +1069,7 @@
 							<td>합계</td>
 							<td colspan="2">
 								<input type="hidden" id="cost" name="cost" value="">
-								<input type="hidden" id="ori_num" name="num" value="">
+								<input type="hidden" id="ori_num" name="pnum" value="">
 								<input type="hidden" name="type" value="P">
 								<p id="p"><%=cost_adult %></p>
 							</td>
