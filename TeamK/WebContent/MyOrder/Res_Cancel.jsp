@@ -7,6 +7,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>패키지 예약 취소 요청 페이지</title>
+<link href="./css/inc.css" rel="stylesheet" type="text/css">
+<link href="./css/subpage.css" rel="stylesheet" type="text/css">
 <script src = "./js/jquery-3.2.0.js"></script>
 	<script type="text/javascript">
 	var check = 0;
@@ -34,6 +36,12 @@ String[] countp = mtib.getPack_count().split(",");
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
 %>
 <body>
+	<!--왼쪽 메뉴 -->
+	<div>
+		<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
+	</div>
+	<!--왼쪽 메뉴 -->
+	<div id="wrap">
 <h4>패키지 정보</h4>
 <table>
 	<tr>
@@ -92,5 +100,12 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
   </ul>
   </ol>
   </div> 
+  	</div>
+	<jsp:include page="../inc/footer.jsp"></jsp:include>
+	<!--오른쪽 메뉴 -->
+	<div>
+		<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
+	</div>
+	<!--오른쪽 메뉴 -->
 </body>
 </html>

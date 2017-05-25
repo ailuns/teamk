@@ -11,6 +11,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="./css/inc.css" rel="stylesheet" type="text/css">
+<link href="./css/subpage.css" rel="stylesheet" type="text/css">
 <%
 		request.setCharacterEncoding("utf-8");
 		List<PBasketBEAN> ModPackList = (ArrayList<PBasketBEAN>) request.getAttribute("ModPackList");
@@ -46,6 +48,12 @@ function receive_setting(){
 </script>
 </head>
 <body>
+	<!--왼쪽 메뉴 -->
+	<div>
+		<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
+	</div>
+	<!--왼쪽 메뉴 -->
+	<div id="wrap">
 	<form action ="./MyOrderAddAction.mo" method ="post" name = "fr" onsubmit="return submit_check()">
 	<div id ="buyer_info">
 		<table>
@@ -518,6 +526,13 @@ function selectreset(){
 
 <input type = "submit" value="구매하기" id="fr_submit"><input type="button" value="취소" onclick="history.back();">
 </form>
-	
+	</div>
+	</div>
+	<jsp:include page="../inc/footer.jsp"></jsp:include>
+	<!--오른쪽 메뉴 -->
+	<div>
+		<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
+	</div>
+	<!--오른쪽 메뉴 -->
 </body>
 </html>

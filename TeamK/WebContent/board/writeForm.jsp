@@ -32,7 +32,7 @@
 <input type="hidden" value="1" name="type">
 <input type="hidden" name="id" value="<%=id%>">
 <div style="float: left;">글머리
-<select name="select" id="type_select" style="margin-left: 66px;">
+<select name="select" id="type_select" style="margin-left: 68px;">
 	<option value="기타">기타</option>
     <option value="상품리뷰">상품리뷰</option>
     <option value="패키지리뷰">패키지리뷰</option>

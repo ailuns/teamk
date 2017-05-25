@@ -6,6 +6,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="./css/inc.css" rel="stylesheet" type="text/css">
+<link href="./css/subpage.css" rel="stylesheet" type="text/css">
 <script src = "./js/jquery-3.2.0.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -30,6 +32,12 @@ request.setCharacterEncoding("utf-8");
 List<PackMemberBEAN> PM_List = (List<PackMemberBEAN>)request.getAttribute("PM_List");
 %>
 <body>
+	<!--왼쪽 메뉴 -->
+	<div>
+		<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
+	</div>
+	<!--왼쪽 메뉴 -->
+	<div id="wrap">
 <form action="./PM_Info_Update.mo" method = "post"
 	name = "fr" onsubmit="return leader_check()">
 <h3>여행자 정보 입력</h3>
@@ -131,5 +139,12 @@ if(PM_List.size()!=0){
 <input type="submit" value = "입력">
 <input type ="Button" value = "취소">
 </form>
+	</div>
+	<jsp:include page="../inc/footer.jsp"></jsp:include>
+	<!--오른쪽 메뉴 -->
+	<div>
+		<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
+	</div>
+	<!--오른쪽 메뉴 -->
 </body>
 </html>
