@@ -22,6 +22,33 @@ public class interestDAO {
 		conn = ds.getConnection();
 		return conn;
 	}
+	public void MyInterestAdd(interestBEAN inb){
+		try{
+			int i = 1;
+			conn =getconn();
+			sql = "select max(inter_num) from interest";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next())i = rs.getInt(1)+1;
+			sql = "insert into interest values(?,?,?,?,now())";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, i);
+			pstmt.setString(2, inb.getId());
+			pstmt.setInt(3, inb.getOri_num());
+			pstmt.setString(4, inb.getType());
+			pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	public List<interestBEAN> MyInterest(String id,String type,int start, int end){
 		List<interestBEAN> MyInterest = new ArrayList<interestBEAN>();
 		if(type.equals("P"))sql = "select B.inter_num, A.file1, A.subject, A.intro, A.cost, B.ori_num, B.date from pack A right outer join interest B on A.num = B.ori_num where B.id = ? and B.type =? order by B.inter_num desc limit ?,?";
