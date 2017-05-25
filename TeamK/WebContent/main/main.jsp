@@ -119,7 +119,7 @@
 	<div id="wrap">
 		<div id="datepicker">
 			<div id="notice">
-			<h1>공지사항</h1>
+			<a href="./BoardList3.bo"><h1>공지사항</h1></a>
 			<table>
 				<%
 BoardDAO bdao=new BoardDAO();
@@ -177,7 +177,7 @@ if(count!=0){
 		</div>
 		<div id="review_show">
 		<div id="gds_rv">
-		<h1>리뷰</h1>
+		<a href="./BoardList.bo"><h1>리뷰</h1></a>
 			<table>
 				<%
 if(count!=0){
@@ -195,7 +195,7 @@ if(count!=0){
 			</table>
 			</div>
 			<div id="trv_rv">
-			<h1>Q&amp;A</h1>
+			<a href="./BoardList2.bo"><h1>Q&amp;A</h1></a>
 			<table>
 				<%
 if(count!=0){
