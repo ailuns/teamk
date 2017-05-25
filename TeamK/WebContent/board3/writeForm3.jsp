@@ -31,14 +31,14 @@
 <div id="board_write">
 <form action="./BoardWriteAction3.bo" method="post" name="fr" enctype="multipart/form-data">
 <input type="hidden" value="3" name="type">
-ID:<input type="text" name="id" value="<%=id%>" readonly><br>
-첨부파일1:<input type="file" name="file1"><br>
-첨부파일2:<input type="file" name="file2"><br>
-첨부파일3:<input type="file" name="file3"><br>
-첨부파일4:<input type="file" name="file4"><br>
-첨부파일5:<input type="file" name="file5"><br>
-제목:<input type="text" name="subject" maxlength="20"><br>
-내용:<textarea id="ir1" rows="30" cols="90" name="content"></textarea><br>
+<input type="hidden" name="id" value="<%=id%>"><br>
+<label for="subject">제목</label><input type="text" name="subject" id="subject" maxlength="20"><br><br>
+<textarea id="ir1" rows="30" cols="80" name="content" id="content"></textarea><br><br>
+<label for="file1">첨부파일1</label><input type="file" name="file1" id="file1"><br>
+<label for="file2">첨부파일2</label><input type="file" name="file2" id="file2"><br>
+<label for="file3">첨부파일3</label><input type="file" name="file3" id="file3"><br>
+<label for="file4">첨부파일4</label><input type="file" name="file4" id="file4"><br>
+<label for="file5">첨부파일5</label><input type="file" name="file5" id="file5"><br>
 <input type="submit" id="save" value="글쓰기">
 <input type="button" value="글목록" 
        onclick="location.href='./BoardList3.bo?pageNum=1'">
