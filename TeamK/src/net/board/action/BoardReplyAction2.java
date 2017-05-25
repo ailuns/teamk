@@ -83,7 +83,7 @@ String email = wEmail;//받는사람의 이메일 주소에 글작성자의 이�
 			message.setSentDate(new java.util.Date());
 			
 			Transport transport= s.getTransport("smtp") ;
-			transport.connect(server,"insup0117","spdlqj0117");
+			transport.connect(server,"insup0117","dlstjq2@@");
 			transport.sendMessage(message,message.getAllRecipients());
 			transport.close();
 			
