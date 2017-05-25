@@ -86,6 +86,7 @@
 	// 찜하기, 예약하기 버튼 클릭 시 각각 버튼 마다 이동할 페이지
 	function submit_fun(i, user_id)
 	{
+		// i = 1  찜추가   i = 2 찜취소    i = 3  예약하기
 		if (i == 1 && user_id != "") // 로그인 되어 있을 경우 찜추가
 		{
 			$.ajax({
@@ -93,37 +94,44 @@
 				url:"./MyInterestAdd.ins",   // java로 보냄
 				data:{
 					type:"P",
-					num:$("input[type=radio][name=chk]:checked").val(),
-					success:function(){
-						alert("찜목록에 추가되었습니다");
-						$("#jjim_o").hide();
-						$("#jjim_x").show();
-// 						window.location.reload(true);  // 페이지 새로고침
-					}
+					num:$("input[type=radio][name=chk]:checked").val()					
+				},
+				success:function(){
+					alert("찜목록에 추가되었습니다");
+					$("#jjim_o").hide();
+					$("#jjim_x").show();
+//						window.location.reload(true);  // 페이지 새로고침
 				}
 			});
 		}
 		
-// 		else if(i == 1 && user_id != "")	// 로그인 안되어 있을 경우
-// 		{
-// 			loginChk();
-// 		}
-		if(i == 2 && user_id != "")
+		else if(i == 2 && user_id != "")   // 로그인에 되어 있을 경우 찜취소
 		{
 			$.ajax({
 				type:"post",
 				url:"./MyInterestDel.ins",   // java로 보냄
 				data:{
 					type:"P",
-					num:$("input[type=radio][name=chk]:checked").val(),
-					success:function(){
-						$("#jjim_o").show();
-						$("#jjim_x").hide();
-						alert("찜목록에서 삭제되었습니다");
-// 						window.location.reload(true);  // 페이지 새로고침
-					}
+					num:$("input[type=radio][name=chk]:checked").val()					
+				},
+				success:function(){
+					$("#jjim_o").show();
+					$("#jjim_x").hide();
+					alert("찜목록에서 삭제되었습니다");
+//						window.location.reload(true);  // 페이지 새로고침
 				}
 			});
+		}
+		
+		else if (i == 3 && user_id != "")
+		{
+			alert("예약하기");
+		}
+		
+		
+		else if(i == 1 || i == 2 && user_id != "")	// 로그인 안되어 있을 경우
+		{
+			loginChk();
 		}
 	}
 	
@@ -198,12 +206,13 @@
 					id:$("#id").val(),
 					content:$("#content").val(),
 					num:$("#num").val(),
-					secretChk:$(".secretChk").val(),	// 비밀글 아닐 시 값 1
-					success:function(){
+					secretChk:$(".secretChk").val()	// 비밀글 아닐 시 값 1
+					},
+					success:function()
+					{
 						window.location.reload(true);  // 페이지 새로고침
 					}
-				}
-			});
+				});
 		}
 		else							 // 비밀글 체크 x
 		{
@@ -214,10 +223,10 @@
 					id:$("#id").val(),
 					content:$("#content").val(),
 					num:$("#num").val(),
-					secretChk:"0",     // 비밀글 아닐 시 값 0
-					success:function(){
-						window.location.reload(true);   // 페이지 새로고침
-					}
+					secretChk:"0"     // 비밀글 아닐 시 값 0
+				},
+				success:function(){
+					window.location.reload(true);   // 페이지 새로고침
 				}
 			});
 		}
@@ -240,10 +249,10 @@
 					re_ref:$("#re_ref").val(),
 					re_lev:$("#re_lev").val(),
 					re_seq:$("#re_seq").val(),
-					secretChk:$(".re_secretChk").val(),
-					success:function(){
-						window.location.reload(true);
-					}
+					secretChk:$(".re_secretChk").val()
+				},
+				success:function(){
+					window.location.reload(true);
 				}
 			});
 		}
@@ -261,10 +270,10 @@
 					re_ref:$("#re_ref").val(),
 					re_lev:$("#re_lev").val(),
 					re_seq:$("#re_seq").val(),
-					secretChk:"0",
-					success:function(){
-						window.location.reload(true);
-					}
+					secretChk:"0"					
+				},
+				success:function(){
+					window.location.reload(true);
 				}
 			});
 		}
@@ -278,10 +287,10 @@
 			url:"./ReplyDelAction.ro",
 			data:{
 				renum:renum,
-				id:id,
-				success:function(){
-					window.location.reload(true);
-				}
+				id:id				
+			},
+			success:function(){
+				window.location.reload(true);
 			}
 		});
 	}
@@ -297,10 +306,10 @@
 				data:{
 					content:$("#contentup").val(),
 					num:num,
-					secretChk:$(".up_secretChk"+num).val(),
-					success:function(){
-						window.location.reload(true);
-					}
+					secretChk:$(".up_secretChk"+num).val()
+				},
+				success:function(){
+					window.location.reload(true);
 				}
 			});
 		}
@@ -1042,7 +1051,7 @@
 								<input type="button" id="jjim_o" value="찜하기" onclick="submit_fun(1, '<%=user_id %>')">
 								<input type="button" id="jjim_x" value="찜취소" style="display:none;" onclick="submit_fun(2, '<%=user_id %>')">
 							</td>
-							<td><input type="submit" value="예약하기" onclick="submit_fun(3)"></td>
+							<td><input type="button" value="예약하기" onclick="submit_fun(3, '<%=user_id %>')"></td>
 						</tr>
 					</table>
 					
