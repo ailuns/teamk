@@ -152,15 +152,6 @@
 			$('#banner').hide();
 			$('#banner_sub').hide();
 		});
-		
-		
-// 		$(".secretChk").click(function(){
-			
-// 			if ($(".secretChk").is(":checked"))
-// 	 		{
-// 				alert("체크 시 관리자와 본인만 읽기 가능합니다");
-// 	 		}
-// 		});	
 
 			
 	});
@@ -484,6 +475,7 @@
 		$("#remote_content").draggable();
 	});
 	
+
 	
 	function winOpen(subject) {
 		win = window.open("./PackDateAdd.po?subject=" + subject, "Package_dateAdd.jsp",
@@ -585,8 +577,8 @@
 
 #datecontent table
 {
-	border : 1px solid black;
-}
+	border-collapse: collapse;
+}	
 
 
 #datecontent tr:FIRST-CHILD
@@ -595,10 +587,15 @@
 	height : 30px;
 }
 
+#datecontent tr:HOVER
+{
+	background-color: #D5D5D5;
+}
+
 #datecontent .date_td_size
 {
 	height : 50px;
-	border : 1px solid black;
+	border-bottom : 1px solid black;
 }
 
 #datecontent #date_date
@@ -1025,7 +1022,7 @@
 						DecimalFormat Commas = new DecimalFormat("#,###");
 						String cost = (String)Commas.format(pb.getCost());
 				%>	
-					<tr>
+				<tr>
 					<td style="display:none;"><%=pb.getNum() %></td>
 					<td class="date_td_size"><%=pb.getDate() %></td>
 					<td class="date_td_size"><%=pb.getSarea() %></td>

@@ -9,6 +9,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="./css/inc.css" rel="stylesheet" type="text/css">
+<link href="./css/subpage.css" rel="stylesheet" type="text/css">
 <script src = "./js/jquery-3.2.0.js"></script>
 <script type="text/javascript">
 
@@ -38,6 +40,12 @@ function Trans_Num_Fix(num){
 </script>
 </head>
 <body>
+	<!--왼쪽 메뉴 -->
+	<div>
+		<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
+	</div>
+	<!--왼쪽 메뉴 -->
+	<div id="wrap">
 <%	
 		request.setCharacterEncoding("utf-8");
 		int pblock = ((Integer) request.getAttribute("pblock")).intValue();
@@ -112,12 +120,6 @@ function Trans_Num_Fix(num){
 		 %>
 		 <div>무통장 입금 내역이 없습니다!</div>
 	 <%}
-		if (pageNum != 1) {
-	%>
-	<a href="./TransNum_Insert.ao?pageNum=<%=pageNum - 1%>">[이전 페이지]</a>
-	<%
-		;
-		}
 		if (count != 0) {
 
 			if (endpage > pcount)
@@ -136,16 +138,15 @@ function Trans_Num_Fix(num){
 	<%
 		}
 		}
-		if (pcount != pageNum&&count!=0) {
-	%>
-	<a href="./TransNum_Insert.ao?pageNum=<%=pageNum + 1%>">[다음 페이지]</a>
-	<br>
-	<%
-		;
-		}
-	%>
+		%>
 	
-	<input type="button" value="Main"
-		onclick="location.href = './Main.bns'">
+	<input type = "button" value = "주문 관리" onclick="location.href='./AdminOrderList.ao'">
+		</div>
+	<jsp:include page="../inc/footer.jsp"></jsp:include>
+	<!--오른쪽 메뉴 -->
+	<div>
+		<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
+	</div>
+	<!--오른쪽 메뉴 -->
 </body>
 </html>

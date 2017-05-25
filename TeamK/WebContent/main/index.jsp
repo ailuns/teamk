@@ -9,6 +9,9 @@
 <link href="./css/subpage.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+	<!--왼쪽 메뉴 -->
+	<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
+	<!--왼쪽 메뉴 -->
 	<!--지도 들어갈 부분 -->
 	<div id="map">
 		<object type="image/svg+xml" data="./img/Map_of_South_Korea-blank.svg">Your browser does not support SVGs</object>
@@ -28,6 +31,7 @@
 	<!--지도 들어갈 부분 -->
 	
 	<!--검색하는 부분 -->
+	<div id="wrap">
 	<div id="search">
 		<form action="#" method="get" name="fr" id="search">
 			<input type="text" name="keyword">
@@ -35,16 +39,6 @@
 		</form>
 	</div>
 		<!--검색하는 부분 -->
-		
-		<!--클릭 시 메인 이동-->
-<!-- 		<div id="main_go"><a href="#">들어가기</a></div> -->
-		<!--클릭 시 메인 이동-->
-		
-		<!--로그인 & 회원가입-->
-<!-- 		<div id="login_join"> -->
-<!-- 			<a href="#" id="login">　로그인</a><a href="#" id="join">회원가입</a> -->
-<!-- 		</div> -->
-		<!--로그인 & 회원가입-->
 	<div id="index_wrap">
 		<div id="main_menu_box">
 		<%
@@ -60,12 +54,8 @@
 		<%} %>
 		</div>
 	</div>
-	<!--왼쪽 메뉴 -->
-	<div>
-		<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
-	</div>
-	<!--왼쪽 메뉴 -->
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
+	</div>
 	<!--오른쪽 메뉴 -->
 	<div>
 		<jsp:include page="../inc/rightMenu.jsp"></jsp:include>

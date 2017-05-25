@@ -66,6 +66,10 @@ public class AdminFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else if(command.equals("/AdminOrderList.ao")){
+			afo = new ActionForward();
+			afo.setPath("/Admin/AdminOrderList.jsp");
+			afo.setRedirect(false);
 		}
 		if (afo != null) {
 			if (afo.isRedirect()) {

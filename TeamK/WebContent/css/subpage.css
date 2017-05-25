@@ -12,106 +12,11 @@ div#datepicker {
 	min-width: 1000px;
 	margin: 0 auto;
 }
-div#calendar, div#scheduler {float: left;}
-
-/* Calendar Start */
-div#calendar {
-	height: 300px;
-	width: 40%;
-	box-sizing: border-box;
-}
-div#calendar .ui-datepicker,
-div#calendar .ui-datepicker table,
-div#calendar .ui-datepicker tr,
-div#calendar .ui-datepicker td,
-div#calendar .ui-datepicker th {
-    margin: 0;
-    padding: 0;
-    border: none;
-    border-spacing: 0;
-}
-div#calendar .ui-datepicker {
-    display: none;
-    width: 100%;
-    height: 100%;
-    padding: 10px;
-    cursor: default;
-    text-transform: uppercase;
-    font-family: Tahoma;
-    font-size: 15px;
-    background: #fff;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 10px 0 0 10px;
-}
-div#calendar .ui-datepicker-header {
-    position: relative;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #d6d6d6;
-}
-div#calendar .ui-datepicker-title { text-align: center; }
-div#calendar .ui-datepicker-month {
-    position: relative;
-    padding-right: 15px;
-    color: #565656;
-}
-div#calendar .ui-datepicker-year {
-    padding-left: 8px;
-    color: #004080;
-}
-div#calendar .ui-datepicker-month:before {
-    display: block;
-    position: absolute;
-    top: 5px;
-    right: 0;
-    width: 5px;
-    height: 5px;
-    content: '';
-    background: #0080ff;
-    background: -moz-linear-gradient(top, #0080ff 0%, #004080 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#0080ff), color-stop(100%,#004080));
-    background: -webkit-linear-gradient(top, #0080ff 0%,#004080 100%);
-    background: -o-linear-gradient(top, #0080ff 0%,#004080 100%);
-    background: -ms-linear-gradient(top, #0080ff 0%,#004080 100%);
-    background: linear-gradient(top, #0080ff 0%,#004080 100%);
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-}
-div#calendar .ui-datepicker-calendar th {
-    padding-top: 15px;
-    padding-bottom: 10px;
-    text-align: center;
-    font-weight: normal;
-    color: #0080ff;
-}
-div#calendar .ui-datepicker-calendar td {
-    padding: 0 7px;
- 	font-weight: bold;
-    text-align: center;
-    line-height: 26px;
-}
-div#calendar .ui-datepicker-calendar .ui-state-default {
-    display: block;
-    width: 26px;
-    outline: none;
-    text-decoration: none;
-    color: #808080;
-    border: 1px solid transparent;
-}
-div#calendar .ui-datepicker-calendar .ui-state-active {
-    color: #000;
-    border: 1px solid #0080ff;
-}
-div#calendar .ui-datepicker-other-month .ui-state-default { color: #565656; }
-/* Calendar End */
-
-
+div#notice, div#scheduler {float: left;}
 div#scheduler {
 	background-color: #06c;
 	height: 300px;
-	width: 60%;
-	border-radius: 0 10px 10px 0;
+	width: 50%;
 	color: #fff;
 	font-weight: bold;
 	font-size: 30px;
@@ -161,7 +66,6 @@ div#package_show a#pack1 {
 	background-repeat : no-repeat;
 	background-size: cover;
 	background-position: center center;
-	border-radius: 10px 0 0 10px;
 	transition: 0.5s;
 }
 div#package_show a#pack2 {
@@ -176,7 +80,6 @@ div#package_show a#pack3 {
 	background-repeat : no-repeat;
 	background-size: cover;
 	background-position: center center;
-	border-radius: 0 10px 10px 0;
 	transition: 0.5s;
 }
 a#pack1 span, a#pack2 span, a#pack3 span {
@@ -199,7 +102,7 @@ div#goods_show {
 	min-width: 1000px;
 	margin: 0 auto;
 	margin-top: 15px;
-	background-color: #fff;
+	background-color: #ccc;
 }
 div#review_show {
 	height: 200px;
@@ -208,7 +111,6 @@ div#review_show {
 	margin: 0 auto;
 	margin-top: 15px;
 	background-color: #fff;
-	border-radius: 10px;
 	padding: 10px;
 }
 div#review_show div {

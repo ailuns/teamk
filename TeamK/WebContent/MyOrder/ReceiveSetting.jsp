@@ -13,6 +13,8 @@ String id = (String)session.getAttribute("id");
 
 %>
 <title>Insert title here</title>
+<link href="./css/inc.css" rel="stylesheet" type="text/css">
+<link href="./css/subpage.css" rel="stylesheet" type="text/css">
 <script src = "./js/jquery-3.2.0.js"></script>
 <script type="text/javascript">
 $(function(){
@@ -51,6 +53,12 @@ function address_select(ra_num){
 </script>
 </head>
 <body>
+	<!--왼쪽 메뉴 -->
+	<div>
+		<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
+	</div>
+	<!--왼쪽 메뉴 -->
+	<div id="wrap">
 <%if(ribList.size() != 0){
 	for(int i=0; i<ribList.size(); i++){
 		ReceiveInfoBEAN rib = ribList.get(i);%>
@@ -80,5 +88,12 @@ function address_select(ra_num){
 <%	}
 }else{ %>등록 된 정보가 없습니다<%} %>
 <input type = "button" id="Add_address" value = "배송지 추가">
+	</div>
+	<jsp:include page="../inc/footer.jsp"></jsp:include>
+	<!--오른쪽 메뉴 -->
+	<div>
+		<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
+	</div>
+	<!--오른쪽 메뉴 -->
 </body>
 </html>

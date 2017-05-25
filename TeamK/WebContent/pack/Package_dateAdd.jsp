@@ -90,11 +90,11 @@
 				file2:$("#file2").val(),
 				file3:$("#file3").val(),
 				file4:$("#file4").val(),
-				file5:$("#file5").val(),
-				
-				success:function(){
-					window.location.reload(true);  // 페이지 새로고침
-				}
+				file5:$("#file5").val()
+				},
+			success:function()
+			{
+				window.location.reload(true);  // 페이지 새로고침
 			}
 		});
 	}
@@ -158,7 +158,6 @@
 		<%
 			}
 		%>
-		
 	</table>
 </div>
 <label>추가할 날짜</label><input type="text" id="add_date"><br>

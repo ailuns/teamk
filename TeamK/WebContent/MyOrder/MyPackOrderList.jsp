@@ -11,7 +11,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script src = "./js/jquery-3.2.0.js"></script>
+<link href="./css/inc.css" rel="stylesheet" type="text/css">
+<link href="./css/subpage.css" rel="stylesheet" type="text/css">
+<script src="./js/jquery-3.2.0.js"></script>
 <script type="text/javascript">
 
 $(document).ready(function(){
@@ -30,88 +32,97 @@ function Res_Cancel(num){
 </script>
 </head>
 <body>
-
-	<%	
-		request.setCharacterEncoding("utf-8");
-		int pblock = ((Integer) request.getAttribute("pblock")).intValue();
-		int endpage = ((Integer) request.getAttribute("endpage")).intValue();
-		int startp = ((Integer) request.getAttribute("startp")).intValue();
-		int pcount = ((Integer) request.getAttribute("pcount")).intValue();
-		int count = ((Integer) request.getAttribute("count")).intValue();
-		String pagenum = (String) request.getAttribute("pageNum");
-		int pageNum = Integer.parseInt(pagenum);
-		List<ModTradeInfoBEAN> ModPList = (List<ModTradeInfoBEAN>)request.getAttribute("ModPList");
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
-				
-	%>
+	<!--왼쪽 메뉴 -->
 	<div>
-		<form>
-			<%if(ModPList.size()!=0){
-				for(int i =0; i< ModPList.size();i++){
-					ModTradeInfoBEAN mpb = ModPList.get(i);
-					String []pack_count = mpb.getPack_count().split(",");%>
-				<h5><%=mpb.getSubject() %></h5>
-				<table border = "1">
+		<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
+	</div>
+	<!--왼쪽 메뉴 -->
+	<div id="wrap">
+
+		<%
+			request.setCharacterEncoding("utf-8");
+			int pblock = ((Integer) request.getAttribute("pblock")).intValue();
+			int endpage = ((Integer) request.getAttribute("endpage")).intValue();
+			int startp = ((Integer) request.getAttribute("startp")).intValue();
+			int pcount = ((Integer) request.getAttribute("pcount")).intValue();
+			int count = ((Integer) request.getAttribute("count")).intValue();
+			String pagenum = (String) request.getAttribute("pageNum");
+			int pageNum = Integer.parseInt(pagenum);
+			List<ModTradeInfoBEAN> ModPList = (List<ModTradeInfoBEAN>) request.getAttribute("ModPList");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
+		%>
+		<div>
+			<form>
+				<%
+					if (ModPList.size() != 0) {
+						for (int i = 0; i < ModPList.size(); i++) {
+							ModTradeInfoBEAN mpb = ModPList.get(i);
+							String[] pack_count = mpb.getPack_count().split(",");
+				%>
+				<h5><%=mpb.getSubject()%></h5>
+				<table border="1">
 					<tr onclick="location.href='#'">
-						<td rowspan = "2"><%=mpb.getImg() %></td>
-						<td><%=mpb.getTrade_num() %></td>
-						<td><%=sdf.format(mpb.getDate()) %></td>
-						<td><%=mpb.getIntro() %></td>
-						<td>성인 : <%=pack_count[0] %>, 아동 : <%=pack_count[1] %></td>
-						<td><%=mpb.getCost() %>원</td>
-						<td><%=mpb.getStatus_text() %></td>
+						<td rowspan="2"><%=mpb.getImg()%></td>
+						<td><%=mpb.getTrade_num()%></td>
+						<td><%=sdf.format(mpb.getDate())%></td>
+						<td><%=mpb.getIntro()%></td>
+						<td>성인 : <%=pack_count[0]%>, 아동 : <%=pack_count[1]%></td>
+						<td><%=mpb.getCost()%>원</td>
+						<td><%=mpb.getStatus_text()%></td>
 					</tr>
 					<tr>
-						<td><input type = "button" value = "여행자 정보 입력" onclick="insertPM(<%=mpb.getNum()%>)"></td>
-						<%if(mpb.getStatus()<4){ %>
-						<td><input type = "button" value = "예약 취소" onclick="Res_Cancel(<%=mpb.getNum()%>)"></td>
-						<%} %>
-					</tr>						
+						<td><input type="button" value="여행자 정보 입력"
+							onclick="insertPM(<%=mpb.getNum()%>)"></td>
+						<%
+							if (mpb.getStatus() < 4) {
+						%>
+						<td><input type="button" value="예약 취소"
+							onclick="Res_Cancel(<%=mpb.getNum()%>)"></td>
+						<%
+							}
+						%>
+					</tr>
 				</table>
-				<%}
-				}else {%>
-					
-		주문 내역 없음
+				<%
+					}
+					} else {
+				%>
+
+				주문 내역 없음
+				<%
+					}
+				%>
+			</form>
+
+		</div>
+		<%
+			if (count != 0) {
+
+				if (endpage > pcount)
+					endpage = pcount;
+				if (startp > pblock) {
+		%><a href="./MyPackOrderList.mo?pageNum=<%=startp - 1%>">[이전]</a>
 		<%
 			}
+				for (int i = startp; i <= endpage; i++) {
+		%><a href="./MyPackOrderList.mo?pageNum=<%=i%>">[<%=i%>]
+		</a>
+		<%
+			}
+				if (endpage < pcount) {
+		%><a href="./MyPackOrderList.mo?pageNum=<%=endpage + 1%>">[다음]</a>
+		<%
+			}
+			}
 		%>
-			</form>				
-		
+		<br> <input type="button" value="내주문"
+			onclick="location.href='./MyOrderList.mo'">
 	</div>
-	<%
-		if (pageNum > 1) {
-	%>
-	<a href="./MyPackOrderList.mo?pageNum=<%=pageNum - 1%>">[이전 페이지]</a>
-	<%
-		;
-		}
-		if (count != 0) {
-
-			if (endpage > pcount)
-				endpage = pcount;
-			if (startp > pblock) {
-	%><a href="./MyPackOrderList.mo?pageNum=<%=startp - 1%>">[이전]</a>
-	<%
-		}
-			for (int i = startp; i <= endpage; i++) {
-	%><a href="./MyPackOrderList.mo?pageNum=<%=i%>">[<%=i%>]
-	</a>
-	<%
-		}
-			if (endpage < pcount) {
-	%><a href="./MyPackOrderList.mo?pageNum=<%=endpage + 1%>">[다음]</a>
-	<%
-		}
-		}
-		if (pcount != pageNum) {
-	%>
-	<a href="./MyPackOrderList.mo?pageNum=<%=pageNum + 1%>">[다음 페이지]</a>
-	
-	<%
-		;
-		}
-	%>
-	<br><input type="button" value="Main"
-		onclick="location.href = './Main.bns'">
+	<jsp:include page="../inc/footer.jsp"></jsp:include>
+	<!--오른쪽 메뉴 -->
+	<div>
+		<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
+	</div>
+	<!--오른쪽 메뉴 -->
 </body>
 </html>
