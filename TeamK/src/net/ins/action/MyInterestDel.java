@@ -12,11 +12,11 @@ public class MyInterestDel implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {	
 		interestDAO insdao = new interestDAO();
-		//insdao.InterestDel(Integer.parseInt(request.getParameter("n")));
-		response.setContentType("text/html; charset=UTF-8");//JAVA¿¡¼­ JSPÈ£ÃâÇÒ¶§ »ç¿ë(response Å¸ÀÔ ¼³Á¤)
+		insdao.InterestDel(Integer.parseInt(request.getParameter("n")));
+		response.setContentType("text/html; charset=UTF-8");//JAVAï¿½ï¿½ï¿½ï¿½ JSPÈ£ï¿½ï¿½ï¿½Ò¶ï¿½ ï¿½ï¿½ï¿½(response Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
-		out.println("alert('°ü½É¸ñ·Ï¿¡¼­ ÇØÁ¦ µÇ¾ú½À´Ï´Ù.');");
+		out.println("alert('ì°œ ëª©ë¡ì´ í•´ì œ ë˜ì—ˆìŠµë‹ˆë‹¤.');");
 		out.println("location.href='"+request.getHeader("referer")+"'");
 		out.println("</script>");
 		out.close();
