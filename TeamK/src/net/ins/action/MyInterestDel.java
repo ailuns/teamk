@@ -15,8 +15,16 @@ public class MyInterestDel implements Action{
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {	
 		interestDAO insdao = new interestDAO();
 		System.out.println(request.getParameter("num"));
-		if(request.getParameter("n")!=null)
+		if(request.getParameter("n")!=null){
 			insdao.InterestDel(Integer.parseInt(request.getParameter("n")));
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('찜 목록에서 제거 되었습니다!');");
+			out.println("location.href='"+request.getHeader("referer")+"';");
+			out.println("</script>");
+			out.close();
+		}
 		if(request.getParameter("num")!=null){
 			System.out.println(request.getParameter("num"));
 			interestBEAN inb = new interestBEAN();

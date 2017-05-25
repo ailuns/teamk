@@ -22,40 +22,112 @@ public class bnsDAO {
 		conn = ds.getConnection();
 		return conn;
 	}
-	public int BasketAddAction(String id, int ori_num, String type){
-		int check =0;
-		if(type.equals("P")){
-			try{
-				conn =getconn();
-				sql = "select * from ";
-			}catch (Exception e) {
+	public int PBasketCheck(PBasketBEAN pbb){
+		int check = 0;
+		try{
+			conn =getconn();
+			sql = "select * from pack_basket where id=? ori_num=?";
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, pbb.getId());
+			pstmt.setInt(2, pbb.getOri_num());
+			rs = pstmt.executeQuery();
+			if(rs.next())check=1;
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
 				e.printStackTrace();
-			} finally {
-				try {
-					rs.close();
-					pstmt.close();
-					conn.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}else{
-			try{
-				conn =getconn();
-			}catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				try {
-					rs.close();
-					pstmt.close();
-					conn.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
 			}
 		}
 		return check;
 	}
+	public int TBasketCheck(TBasketBEAN tbb){
+		int check = 0;
+		try{
+			conn =getconn();
+			sql = "select * from thing_basket where id=? ori_num=?";
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, tbb.getId());
+			pstmt.setInt(2, tbb.getOri_num());
+			rs = pstmt.executeQuery();
+			if(rs.next())check=1;
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return check;
+	}
+	public void PBasketAddAction(PBasketBEAN pbb){
+		
+		try{
+			int i = 1;
+			conn =getconn();
+			sql = "select max(pb_num) from pack_basket";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next())i=rs.getInt(1)+1;
+			sql = "insert into pack_basket values(?,?,?,?,?,now())";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, i);
+			pstmt.setInt(2,pbb.getOri_num());
+			pstmt.setString(3, pbb.getId());
+			String [] countp = pbb.getCountp();
+			pstmt.setString(4,countp[0]+","+countp[1]);
+			pstmt.setInt(5, pbb.getCost());
+			pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	public void TBasketAddAction(TBasketBEAN tbb){
+		try{
+			int i = 1;
+			conn =getconn();
+			sql = "select max(tb_num) from thing_basket";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next())i=rs.getInt(1)+1;
+			sql = "insert into pack_basket values(?,?,?,?,?,now())";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, i);
+			pstmt.setInt(2,tbb.getOri_num());
+			pstmt.setString(3, tbb.getId());
+			pstmt.setInt(4, tbb.getCount());
+			pstmt.setInt(5, tbb.getCost());
+			pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	public int TBasketUpdate(TBasketBEAN tbb){
 		int check = 0;
 		try{

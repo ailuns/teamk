@@ -3,8 +3,14 @@ package net.bns.db;
 import java.sql.Timestamp;
 
 public class TBasketBEAN {
-	private String img, subject, intro, color, size;
+	private String img, subject, intro, color, size, id;
 	private int cost, count,num, maxcount,ori_cost,ori_num;
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public int getOri_num() {
 		return ori_num;
 	}
