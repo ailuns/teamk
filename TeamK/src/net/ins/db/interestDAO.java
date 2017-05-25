@@ -157,6 +157,9 @@ public class interestDAO {
 	}
 	public void InterestDel(interestBEAN inb){
 		try{
+			System.out.println(inb.getId());
+			System.out.println(inb.getOri_num());
+			System.out.println(inb.getType());
 			conn = getconn();
 			sql = "delete from interest where ori_num=? and id = ? and type=?";
 			pstmt = conn.prepareStatement(sql);

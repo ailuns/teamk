@@ -96,19 +96,34 @@
 					num:$("input[type=radio][name=chk]:checked").val(),
 					success:function(){
 						alert("찜목록에 추가되었습니다");
+						$("#jjim_o").hide();
+						$("#jjim_x").show();
 // 						window.location.reload(true);  // 페이지 새로고침
 					}
 				}
 			});
 		}
 		
-		else // 로그인 안되어 있을 경우
+// 		else if(i == 1 && user_id != "")	// 로그인 안되어 있을 경우
+// 		{
+// 			loginChk();
+// 		}
+		if(i == 2 && user_id != "")
 		{
-			loginChk();
-		}
-		if(i == 2)
-		{
-		
+			$.ajax({
+				type:"post",
+				url:"./MyInterestDel.ins",   // java로 보냄
+				data:{
+					type:"P",
+					num:$("input[type=radio][name=chk]:checked").val(),
+					success:function(){
+						$("#jjim_o").show();
+						$("#jjim_x").hide();
+						alert("찜목록에서 삭제되었습니다");
+// 						window.location.reload(true);  // 페이지 새로고침
+					}
+				}
+			});
 		}
 	}
 	
