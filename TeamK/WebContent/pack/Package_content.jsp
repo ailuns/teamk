@@ -1286,7 +1286,51 @@
 				%>
 				
 			</table>
-
+			<br>
+			
+			<table id="replyWrite">
+				<tr>
+					<%
+						if (user_id.equals(""))
+						{
+					%>
+					<td>
+						<textarea type="text" id="content" name="content" class="box" style="width:790px; height:50px;" placeholder="로그인이 필요한 서비스입니다" readonly onclick="loginChk()"></textarea>
+					</td>
+					<tr>
+							<td>
+								<div style="text-align:right; margin-top:15px; width:790px;">
+									<input type="checkbox" class="secretChk" name="secretChk" value="1" onclick="loginChk()">비밀글
+									<input type="button" value="문의글쓰기" onclick="loginChk()">
+								</div>
+							</td>
+						</tr>
+					<td>
+					<%
+						}
+						else
+						{
+					%>
+						<td>
+							<textarea type="text" id="content" name="content" class="box" placeholder="문의글을 입력해주세요" style="width:790px; height:50px;"></textarea>
+							<input type="hidden" id="id" name="id" class="box" value="<%=user_id %>">
+							<input type="hidden" name="pageNum" value="<%=repageNum%>">
+							<input type="hidden" id="num" name="num" value="<%=PB.getNum() %>">
+						</td>
+						<tr>
+							<td>
+								<div style="text-align:right; margin-top:15px; width:790px;">
+									<input type="checkbox" class="secretChk" name="secretChk" value="1">비밀글
+									<input type="button" value="문의글쓰기" onclick="ReplyWrite(<%=PB.getNum() %>)">
+								</div>
+							</td>
+						</tr>
+					<%
+						}
+					%>
+				</tr>
+			</table>
+			
 			<center>
 				<%
 					if (count != 0) {
@@ -1323,51 +1367,7 @@
 				}
 				%>
 			</center>
-
-			<br>
 			
-			<table id="replyWrite">
-				<tr>
-					<%
-						if (user_id.equals(""))
-						{
-					%>
-					<td>
-						<textarea type="text" id="content" name="content" class="box" style="width:790px; height:50px;" placeholder="로그인이 필요한 서비스입니다" readonly onclick="loginChk()"></textarea>
-					</td>
-					<tr>
-							<td>
-								<div style="text-align:right; margin-top:15px; width:790px;">
-									<input type="checkbox" class="secretChk" name="secretChk" value="1" onclick="loginChk()">비밀글
-									<input type="button" value="문의글쓰기" onclick="loginChk()">
-								</div>
-							</td>
-						</tr>
-					<td>
-					<%
-						}
-						else
-						{
-					%>
-						<td>
-							<textarea type="text" id="content" name="content" class="box" style="width:790px; height:50px;"></textarea>
-							<input type="hidden" id="id" name="id" class="box" value="<%=user_id %>">
-							<input type="hidden" name="pageNum" value="<%=repageNum%>">
-							<input type="hidden" id="num" name="num" value="<%=PB.getNum() %>">
-						</td>
-						<tr>
-							<td>
-								<div style="text-align:right; margin-top:15px; width:790px;">
-									<input type="checkbox" class="secretChk" name="secretChk" value="1">비밀글
-									<input type="button" value="문의글쓰기" onclick="ReplyWrite(<%=PB.getNum() %>)">
-								</div>
-							</td>
-						</tr>
-					<%
-						}
-					%>
-				</tr>
-			</table>
 		</div>
 	</div>
 	<!--상품 문의 -->
