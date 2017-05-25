@@ -16,7 +16,7 @@ public class Re_ReplyWriteAction implements Action{
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		String pageNum = request.getParameter("pageNum");
+		String pageNum = request.getParameter("repageNum");
 		int num = Integer.parseInt(request.getParameter("num"));
 		int re_ref = Integer.parseInt(request.getParameter("re_ref"));
 		int re_lev = Integer.parseInt(request.getParameter("re_lev"));
@@ -47,10 +47,11 @@ public class Re_ReplyWriteAction implements Action{
 		
 		
 		//ActoinForward 이동정보 담아서 로그인 이동
-		ActionForward forward = new ActionForward();
-		forward.setPath("./PackContent.po");
-		forward.setRedirect(false);
-		return forward;
+//		ActionForward forward = new ActionForward();
+//		forward.setPath("./PackContent.po");
+//		forward.setRedirect(false);
+//		return forward;
+		return null;
 	}
 
 }
