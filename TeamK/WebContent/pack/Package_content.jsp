@@ -88,12 +88,28 @@
 	{
 		if (i == 1)
 		{
-			document.fr.action = "selectTest.jsp";  // 찜하기
+			$.ajax({
+				type:"post",
+				url:"./MyInterestAdd.ins",   // java로 보냄
+				data:{
+					type:"P",
+					num:$("input[type=radio][name=chk]:checked").val(),
+					success:function(){
+						alert("찜목록에 추가되었습니다");
+						window.location.reload(true);  // 페이지 새로고침
+					}
+				}
+			});
+			
+// 			$('#radioTest:checked').val() ;
+			
+// 			var packnum = $("#select_rbtn" + select_num).val();
+	
 		}
-		if (i == 2)
-		{
-			document.fr.action = "selectTest1.jsp";  // 예약하기
-		}
+// 		if (i == 2)
+// 		{
+// 			document.fr.action = "selectTest1.jsp";  // 예약하기
+// 		}
 	}
 	
 	
@@ -480,6 +496,7 @@
 				"width=800, height=700");
 	}
 	
+	
 	// 날짜 선택시 이벤트
 	function select_date(select_num)
 	{
@@ -488,6 +505,27 @@
 		$(".select_color").css("background-color","");
 		$("#select_rbtn" + select_num).prop("checked", "true");
 		$("#select_date" + select_num).css("background-color", "#D5D5D5");
+		
+		$.ajax({
+			type:"post",
+			url:"./MyInterstCheck.ins",
+			data:{
+				num:packnum,
+				type:"P"
+			},
+			success:function(data){
+			if (data == 1)
+			{
+				$("#jjim_o").hide();
+				$("#jjim_x").show();
+			}
+			else
+			{
+				$("#jjim_o").show();
+				$("#jjim_x").hide();
+			}
+		}
+		});
 	}
 
 
@@ -983,8 +1021,9 @@
 						</tr>
 						<tr>
 							<td></td>
-							<td><input type="submit" value="찜하기" onclick="submit_fun(1)"></td>
-							<td><input type="submit" value="예약하기" onclick="submit_fun(2)"></td>
+							<td><input type="button" id="jjim_o" value="찜하기" onclick="submit_fun(1)"></td>
+							<td><input type="button" id="jjim_x" value="찜취소" style="display:none;" onclick="submit_fun(2)"></td>
+							<td><input type="submit" value="예약하기" onclick="submit_fun(3)"></td>
 						</tr>
 					</table>
 					
@@ -1308,10 +1347,6 @@
 	<!-- 오른쪽 메뉴 -->
 	<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
 	<!-- 오른쪽 메뉴 -->
-	<!--푸터 메뉴 -->
-	<div>
-		<jsp:include page="../inc/footer.jsp"></jsp:include>
-	</div>
-	<!--푸터 메뉴 -->
+	<jsp:include page="../inc/footer.jsp"></jsp:include>
 </body>
 </html>

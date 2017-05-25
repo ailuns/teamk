@@ -227,15 +227,10 @@ img.ui-datepicker-trigger
 		</div>
 	</div>
 <!--오른쪽 메뉴 -->
-<div>
 	<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
-</div>
 <!--오른쪽 메뉴 -->
 <!--아래 메뉴-->
-<div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
-</div>
-
 <!--아래 메뉴-->
 </body>
 </html>
