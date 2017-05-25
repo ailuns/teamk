@@ -122,22 +122,21 @@
 			<h1>공지사항</h1>
 			<table>
 				<%
-BoardDAO bdao=new BoardDAO();
-
-int count=bdao.getBoardCount();
-SimpleDateFormat sdf=new SimpleDateFormat("yyyy.MM.dd");
-if(count!=0){
-	List<BoardBean> boardList3=bdao.getBoardList3(1, 5);
-	for(int i=0;i<boardList3.size();i++){
-		BoardBean bb=boardList3.get(i);
-		%>
-<tr><td id="num"><%=bb.getRe_ref()%></td><td class="contxt">
-<a href="./BoardContent3.bo?num=<%=bb.getNum()%>&pageNum=1"><%=bb.getSubject()%></a></td>
-    <td id="date"><%=sdf.format(bb.getDate())%></td></tr>		
-		<%
-	}
-}
-%>
+				BoardDAO bdao=new BoardDAO();
+				int count=bdao.getBoardCount();
+				SimpleDateFormat sdf=new SimpleDateFormat("yyyy.MM.dd");
+				if(count!=0){
+					List<BoardBean> boardList3=bdao.getBoardList3(1, 5);
+					for(int i=0;i<boardList3.size();i++){
+						BoardBean bb=boardList3.get(i);
+						%>
+						<tr><td id="num"><%=bb.getRe_ref()%></td><td class="contxt">
+						<a href="./BoardContent3.bo?num=<%=bb.getNum()%>&pageNum=1"><%=bb.getSubject()%></a></td>
+    					<td id="date"><%=sdf.format(bb.getDate())%></td></tr>		
+						<%
+					}
+				}
+				%>
 			</table>
 			</div>
 			<div id="scheduler">
@@ -214,12 +213,10 @@ if(count!=0){
 			</div>
 		</div>
 		<div id="clear"></div>
-		<jsp:include page="../inc/footer.jsp"></jsp:include>
 	</div>
 	<!--오른쪽 메뉴 -->
-	<div>
-		<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
-	</div>
+	<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->
+	<jsp:include page="../inc/footer.jsp"></jsp:include>
 </body>
 </html>

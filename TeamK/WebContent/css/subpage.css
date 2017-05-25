@@ -7,32 +7,35 @@ div#clear {clear: both;}
 
 /* Main.jsp */
 div#datepicker {
-	height: 300px;
+	height: 200px;
 	width: 60%;
 	min-width: 1000px;
 	margin: 0 auto;
+	background-color: #fff;
 }
-div#notice, div#scheduler {float: left;}
+div#notice, div#scheduler {
+	float: left;
+	width: 500px;
+}
 div#scheduler {
 	background-color: #06c;
-	height: 300px;
-	width: 50%;
+	height: 200px;
 	color: #fff;
 	font-weight: bold;
-	font-size: 30px;
+	font-size: 20px;
 }
 div#scheduler form {
 	text-align: left;
 	margin-left: 30px;
-	line-height: 1.75em;
+	line-height: 1.5em;
 }
 div#scheduler form label {margin: 0 20px 10px 0;}
 div#scheduler form input[type=text] {
-	font-size: 23px;
+	font-size: 20px;
 	width: 70%;
 }
 div#scheduler form select#area {
-	font-size: 23px;
+	font-size: 20px;
 	width: 50%;
 }
 div#scheduler form input[type=submit] {
@@ -98,16 +101,14 @@ a#pack1 #pkpr, a#pack2 #pkpr, a#pack3 #pkpr {
 }
 div#goods_show {
 	height: 200px;
-	width: 60%;
-	min-width: 1000px;
+	width: 1000px;
 	margin: 0 auto;
 	margin-top: 15px;
 	background-color: #ccc;
 }
 div#review_show {
 	height: 200px;
-	width: 60%;
-	min-width: 1000px;
+	width: 1000px;
 	margin: 0 auto;
 	margin-top: 15px;
 	background-color: #fff;
@@ -115,35 +116,35 @@ div#review_show {
 }
 div#review_show div {
 	height: 200px;
-	width: 50%;
+	width: 490px;
 	float: left;
-	padding-left: 10px;
+	padding: 10px;
 }
-div#review_show div h1 {
+div#datepicker div h1, div#review_show div h1 {
 	text-align: left;
 	font-size: 25px;
 	height: 30px;
 	margin: 0 0 10px 0;
 }
-div#review_show div table {
-	width: 95%;
+div#datepicker div table, div#review_show div table {
+	width: 100%;
 	font-size: 12px;
 	border-collapse: collapse;
 }
-div#review_show div table tr {
+div#datepicker div table tr, div#review_show div table tr {
 	color: #565656;
 	text-align: left;
 	border-bottom: 1px dotted #999;
 	height: 25px;
 }
-div#review_show div table tr:hover {background-color: #cef;}
-div#review_show div table a {
+div#datepicker div table tr:HOVER, #review_show div table tr:hover {background-color: #cef;}
+div#datepicker div table a, div#review_show div table a {
 	text-decoration: none;
 	color: #565656;
 	padding-left: 10px;
 }
-div#review_show div table td#num {width: 20px;}
-div#review_show div table td#date {width: 70px;}
+div#datepicker div table td#num, div#review_show div table td#num {width: 20px;}
+div#datepicker div table td#date, div#review_show div table td#date {width: 70px;}
 
 /* Package.jsp */
 div#package_head {
@@ -595,29 +596,29 @@ div#m_delete_form form input[type="button"] {}
 
 /* Board List.jsp */
 div#board_head {
-	height: 150px;
-	width: 60%;
-	min-width: 1000px;
-	margin: 0 auto;
-	margin-top: 100px;
+	width: 1000px;
+	margin-top: 10px;
+	text-align: left;
 }
 div#rvw_title, div#rvw_script {
-	height: 150px;
-	float: left;
+	height: 50px;
+	width: 900px;
+	margin: 0 auto;
 	color: #fff;
 }
 div#rvw_title {
-	background-color: #0c9;
-	width: 30%;
-	font-size: 50px;
-	padding-top: 50px;
+	background-color: #fff;
+	padding-top: 5px;
+	border-bottom: 3px solid #06c;
+	font-size: 30px;
 	font-weight: lighter;
+	color: #06c
 }
 div#rvw_script {
-	background-color: #06c;
-	width: 70%;
-	text-align: left;
-	font-weight: bold;
+	background-color: #fff;
+	color: #333;
+	font-size: 12px;
+	padding-top: 5px;
 }
 div#board {
 	width: 60%;
