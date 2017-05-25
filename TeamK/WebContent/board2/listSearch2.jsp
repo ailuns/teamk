@@ -27,6 +27,12 @@ String search=request.getParameter("search");
 
 BoardDAO bdao = new BoardDAO();
 %>
+<script type="text/javascript" src="./js/jquery-3.2.0.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#selectSearch').val('<%=ss%>').attr('selected', 'selected');
+})
+</script>
 	<!--왼쪽 메뉴 -->
 	<div>
 		<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
@@ -81,10 +87,10 @@ if(count!=0){
 }
 %><br>
 <form action="listSearch2.bo" method="get">
-<select name="selectSearch">
-    <option value="id" <%if(ss.equals("id")){%>selected<%}%>>작성자</option>
-    <option value="subject" <%if(ss.equals("subject")){%>selected<%}%>>제목</option>
-    <option value="content" <%if(ss.equals("content")){%>selected<%}%>>내용</option>
+<select name="selectSearch" id="selectSearch">
+    <option value="id">작성자</option>
+    <option value="subject">제목</option>
+    <option value="content">내용</option>
 </select>
 <input type="text" name="search" class="input_box">
 <input type="submit" value="검색" class="btn">
