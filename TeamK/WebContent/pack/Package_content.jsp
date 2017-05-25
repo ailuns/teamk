@@ -84,9 +84,9 @@
 	});
 	
 	// 찜하기, 예약하기 버튼 클릭 시 각각 버튼 마다 이동할 페이지
-	function submit_fun(i)
+	function submit_fun(i, user_id)
 	{
-		if (i == 1)
+		if (i == 1 && user_id != "") // 로그인 되어 있을 경우 찜추가
 		{
 			$.ajax({
 				type:"post",
@@ -96,20 +96,20 @@
 					num:$("input[type=radio][name=chk]:checked").val(),
 					success:function(){
 						alert("찜목록에 추가되었습니다");
-						window.location.reload(true);  // 페이지 새로고침
+// 						window.location.reload(true);  // 페이지 새로고침
 					}
 				}
 			});
-			
-// 			$('#radioTest:checked').val() ;
-			
-// 			var packnum = $("#select_rbtn" + select_num).val();
-	
 		}
-// 		if (i == 2)
-// 		{
-// 			document.fr.action = "selectTest1.jsp";  // 예약하기
-// 		}
+		
+		else // 로그인 안되어 있을 경우
+		{
+			loginChk();
+		}
+		if(i == 2)
+		{
+		
+		}
 	}
 	
 	
@@ -454,7 +454,7 @@
 	// 비로그인 때 상품문의글 쓰려고 하면 실행
 	function loginChk()
 	{
-		if (confirm("로그인 화면으로 이동하시겠습니까?") == true){    //확인
+		if (confirm("로그인이 필요한 서비스입니다\n로그인 화면으로 이동하시겠습니까?") == true){    //확인
 		    location.href="./MemberLogin.me";
 		}
 		else //취소
@@ -496,6 +496,7 @@
 				"width=800, height=700");
 	}
 	
+	
 	// 날짜 선택시 이벤트
 	function select_date(select_num)
 	{
@@ -504,6 +505,29 @@
 		$(".select_color").css("background-color","");
 		$("#select_rbtn" + select_num).prop("checked", "true");
 		$("#select_date" + select_num).css("background-color", "#D5D5D5");
+		
+		$.ajax({
+			type:"post",
+			url:"./MyInterestCheck.ins",
+			data:{
+				num:packnum,
+				type:"P"
+			},
+			success:function(data)
+			{
+// 				alert(data);
+				if (data == 1)
+				{
+					$("#jjim_o").hide();
+					$("#jjim_x").show();
+				}
+				else
+				{
+					$("#jjim_o").show();
+					$("#jjim_x").hide();
+				}
+			}
+		});
 	}
 
 
@@ -999,8 +1023,11 @@
 						</tr>
 						<tr>
 							<td></td>
-							<td><input type="button" value="찜하기" onclick="submit_fun(1)"></td>
-							<td><input type="submit" value="예약하기" onclick="submit_fun(2)"></td>
+							<td>
+								<input type="button" id="jjim_o" value="찜하기" onclick="submit_fun(1, '<%=user_id %>')">
+								<input type="button" id="jjim_x" value="찜취소" style="display:none;" onclick="submit_fun(2, '<%=user_id %>')">
+							</td>
+							<td><input type="submit" value="예약하기" onclick="submit_fun(3)"></td>
 						</tr>
 					</table>
 					
@@ -1324,10 +1351,6 @@
 	<!-- 오른쪽 메뉴 -->
 	<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
 	<!-- 오른쪽 메뉴 -->
-	<!--푸터 메뉴 -->
-	<div>
-		<jsp:include page="../inc/footer.jsp"></jsp:include>
-	</div>
-	<!--푸터 메뉴 -->
+	<jsp:include page="../inc/footer.jsp"></jsp:include>
 </body>
 </html>

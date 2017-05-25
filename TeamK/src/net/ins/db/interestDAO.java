@@ -33,7 +33,7 @@ public class interestDAO {
 			pstmt.setString(2, inb.getType());
 			pstmt.setInt(3, inb.getOri_num());
 			rs = pstmt.executeQuery();
-			if(rs.next())check = 0;
+			if(rs.next())check = 1;
 		}catch (Exception e) {
 			e.printStackTrace();
 		} finally {

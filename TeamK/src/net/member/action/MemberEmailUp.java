@@ -63,7 +63,7 @@ public class MemberEmailUp implements Action {
 				message.setSentDate(new java.util.Date());
 
 				Transport transport = s.getTransport("smtp");
-				transport.connect(server, "insup0117", "spdlqj0117");
+				transport.connect(server, "insup0117", "dlstjq2@@");
 				transport.sendMessage(message, message.getAllRecipients());
 				transport.close();
 
