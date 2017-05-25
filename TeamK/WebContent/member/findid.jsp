@@ -29,7 +29,7 @@ if (id != null) {
 		<div id="member">
 			<div id="findid_form">
 				<form action="./MemberFindIdAction.me" method="post">
-					<label for="id">이름</label><input type="text" name="name" id="id"><br>
+					<label for="name">이름</label><input type="text" name="name" id="name"><br>
 					<label for="email">이메일</label><input type="text" name="email" id="email"><br>
 					<input type="submit" value="확인">
 					<input type="button" value="돌아가기" onclick="history.back()">
