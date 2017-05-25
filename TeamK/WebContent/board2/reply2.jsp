@@ -54,10 +54,10 @@ if(id!=null){
 	<input type="hidden" id="rNum" name="group_del" value="<%=rNum%>">
 	<input type="hidden" id="pageNum" value="<%=pageNum%>">
 	<input type="hidden" id="rId" name="id" value="<%=id%>" readonly>
-	<input type="hidden" id="wContent" value="<%=wContent%>">
-	<input type="hidden" id="wEmail" value="<%=wEmail%>">
+	<input type="hidden" id="wContent" value="<%=wContent%>"><%--글작성자 글내용 넘기기  --%>
+	<input type="hidden" id="wEmail" value="<%=wEmail%>"><%--글작성자 메일주소 넘기기 --%>
 	<div id="textarea">
-		<textarea rows="3" cols="59" id="rContent" name="content"></textarea>
+		<textarea rows="3" cols="59" id="rContent" name="content"></textarea><%--리플내용 넘기기 --%>
 	</div>
 	<input type="button" value="댓글달기" onclick="replyupdate()">
 </form>
