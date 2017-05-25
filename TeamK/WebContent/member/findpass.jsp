@@ -29,6 +29,7 @@ function winopen(){
 		document.fr.email.focus();
 		return false;
 	}
+	document.fr.id.style.imeMode = "disabled"
 }
 function sendmail() {			
 	var email = document.fr.email.value;
