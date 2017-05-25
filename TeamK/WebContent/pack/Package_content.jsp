@@ -88,12 +88,28 @@
 	{
 		if (i == 1)
 		{
-			document.fr.action = "selectTest.jsp";  // 찜하기
+			$.ajax({
+				type:"post",
+				url:"./MyInterestAdd.ins",   // java로 보냄
+				data:{
+					type:"P",
+					num:$("input[type=radio][name=chk]:checked").val(),
+					success:function(){
+						alert("찜목록에 추가되었습니다");
+						window.location.reload(true);  // 페이지 새로고침
+					}
+				}
+			});
+			
+// 			$('#radioTest:checked').val() ;
+			
+// 			var packnum = $("#select_rbtn" + select_num).val();
+	
 		}
-		if (i == 2)
-		{
-			document.fr.action = "selectTest1.jsp";  // 예약하기
-		}
+// 		if (i == 2)
+// 		{
+// 			document.fr.action = "selectTest1.jsp";  // 예약하기
+// 		}
 	}
 	
 	
@@ -983,7 +999,7 @@
 						</tr>
 						<tr>
 							<td></td>
-							<td><input type="submit" value="찜하기" onclick="submit_fun(1)"></td>
+							<td><input type="button" value="찜하기" onclick="submit_fun(1)"></td>
 							<td><input type="submit" value="예약하기" onclick="submit_fun(2)"></td>
 						</tr>
 					</table>
