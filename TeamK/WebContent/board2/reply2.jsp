@@ -11,18 +11,19 @@
 </head>
 <link href="./css/inc.css" rel="stylesheet" type="text/css">
 <link href="./css/subpage.css" rel="stylesheet" type="text/css">
+
+<%-- board2/content2.jsp 페이지의 댓글부분이 밑의 페이지로 대체됨 --%>
 <body>
 <%
 request.setCharacterEncoding("utf-8");
-System.out.println("insertReplyworked");
 List lrb = null;
-int rcount = (int)request.getAttribute("rcount");
-if(rcount!=0){lrb=(List)request.getAttribute("lrb");}
+int rcount = (int)request.getAttribute("rcount"); //리플갯수 rcount에 불러오기
+if(rcount!=0){lrb=(List)request.getAttribute("lrb");} //rcount가 0이 아니면 리플정보 불러오기
 String id = (String)session.getAttribute("id");
 String pageNum = request.getParameter("pageNum");
-String rNum = (String)request.getAttribute("rNum");
-String wEmail = (String)request.getAttribute("wEmail");
-String wContent = (String)request.getAttribute("wContent");
+String rNum = (String)request.getAttribute("rNum"); // rNum에 글 번호 불러오기
+String wEmail = (String)request.getAttribute("wEmail"); //wEmail에 작성자의 메일주소 불러오기
+String wContent = (String)request.getAttribute("wContent"); //wContent에 작성한 댓글 내용 불러오기
 %>
 <p>댓글(<%=rcount%>개)</p>
 <table id="reply">
@@ -53,10 +54,10 @@ if(id!=null){
 	<input type="hidden" id="rNum" name="group_del" value="<%=rNum%>">
 	<input type="hidden" id="pageNum" value="<%=pageNum%>">
 	<input type="hidden" id="rId" name="id" value="<%=id%>" readonly>
-	<input type="hidden" id="wContent" value="<%=wContent%>">
-	<input type="hidden" id="wEmail" value="<%=wEmail%>">
+	<input type="hidden" id="wContent" value="<%=wContent%>"><%--글작성자 글내용 넘기기  --%>
+	<input type="hidden" id="wEmail" value="<%=wEmail%>"><%--글작성자 메일주소 넘기기 --%>
 	<div id="textarea">
-		<textarea rows="3" cols="59" id="rContent" name="content"></textarea>
+		<textarea rows="3" cols="59" id="rContent" name="content"></textarea><%--리플내용 넘기기 --%>
 	</div>
 	<input type="button" value="댓글달기" onclick="replyupdate()">
 </form>

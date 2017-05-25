@@ -10,6 +10,12 @@
 <title>Insert title here</title>
 <link href="../css/inc.css" rel="stylesheet" type="text/css">
 <link href="../css/subpage.css" rel="stylesheet" type="text/css">
+
+<%
+//세션 id값 불러오기
+String id = (String)session.getAttribute("id");
+%>
+
 </head>
 <body>
 <%
@@ -43,24 +49,19 @@ BoardDAO bdao = new BoardDAO();
     	//자바빈(BoardBean) 변수 =배열한칸 접근  배열변수.get()
     	BoardBean bb = (BoardBean)boardList3.get(i);
     			%>
-<tr><td><%=bb.getRe_ref()%></td>
-<td id="title">
-<a href="./BoardContent3.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>">
-<%=bb.getSubject()%></a></td>
-<td><%=bb.getId()%></td><td><%=bb.getDate()%></td>
-    <td><%=bb.getReadcount() %></td></tr>
+<tr><td><%=bb.getRe_ref()%></td> <%--글 번호 --%>
+<td id="title"><a href="./BoardContent3.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>"><%=bb.getSubject()%></a></td><%--글 제목 --%>
+<td><%=bb.getId()%></td><%--작성자 Id --%>
+<td><%=bb.getDate()%></td><%--작성 날짜 --%>
+<td><%=bb.getReadcount() %></td><%--조회수 --%>
+    </tr>
     			<%
     }
     %>
 </table>
 <%
 //페이지 출력
-if(count!=0){
-	//전체 페이지 수 구하기 게시판 글 50개 한화면에 보여줄 글 개수 10 => 5전체페이지
-			//    게시판 글 56개 한화면에 보여줄 글개수 10 =>  5전체페이지 +1 (나머지)=>6		
-	// 한 화면에 보여줄 페이지 번호 개수
-	// 시작페이지 번호구하기  1~10=>1  11~20=>11  21~30=>21
-	// 끝페이지 번호 구하기  
+if(count!=0){ 
 	//이전
 	if(startPage>pageBlock){
 		%><a href="./BoardList.bo?pageNum=<%=startPage-pageBlock%>">[이전]</a><%
@@ -85,7 +86,6 @@ if(count!=0){
 <input type="submit" value="검색" class="btn">
 </form>
 <%
-String id = (String)session.getAttribute("id");
 if(id!=null){
 if(id.equals("admin")){
 %>

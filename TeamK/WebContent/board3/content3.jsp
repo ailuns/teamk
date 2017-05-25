@@ -37,6 +37,8 @@ int num = Integer.parseInt(request.getParameter("num"));
 <tr><td id="num"><%=bb.getRe_ref()%></td><td id="date"><%=bb.getDate()%></td><td id="readcount">조회수: <%=bb.getReadcount()%></td></tr>
 <tr><td colspan="2" id="subject"><%=bb.getSubject()%></td><td id="id"><%=bb.getId()%></td></tr>
 <tr><td colspan="3" id="content"><br><br><%=bb.getContent()%><br><br></td></tr>
+
+<%--첨부파일이 있을때만 첨부파일 표시--%>
 <%if(bb.getFile1()!=null){%>
 <tr><td>첨부파일1</td><td colspan="3"><%if(bb.getFile1()!=null){%><a href="./upload/<%=bb.getFile1()%>"><%=bb.getFile1()%></a><%}%></td></tr>
 <%}%>
@@ -55,14 +57,17 @@ int num = Integer.parseInt(request.getParameter("num"));
 </table>
 <%
 if(id!=null){
+	
+//자신의 Id일때만 글수정 가능
 if(id.equals(bb.getId())){ %>
 <input type="button" value="글수정" 
        onclick="location.href= './BoardUpdate3.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'">     
-<%}if(id.equals(bb.getId())||id.equals("admin")){ %>
+<%}
+//자신의 Id이거나 admin 일때 글삭제 가능
+if(id.equals(bb.getId())||id.equals("admin")){ %>
 <input type="button" value="글삭제" 
        onclick="location.href= './BoardDelete3.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'">
 <%}}%>
-
 <input type="button" value="글목록" 
        onclick="location.href='./BoardList3.bo?pageNum=<%=pageNum%>'">
 

@@ -71,6 +71,8 @@ int num = Integer.parseInt(request.getParameter("num"));
 <tr><td id="num"><%=bb.getRe_ref()%></td><td id="date"><%=bb.getDate()%></td><td id="readcount">조회수: <%=bb.getReadcount()%></td></tr>
 <tr><td colspan="2" id="subject"><%=bb.getSubject()%></td><td id="id"><%=bb.getId()%></td></tr>
 <tr><td colspan="3" id="content"><br><br><%=bb.getContent()%><br><br></td></tr>
+
+<%--첨부파일이 있을때만 첨부파일 표시--%>
 <%if(bb.getFile1()!=null){%>
 <tr><td>첨부파일1</td><td colspan="3"><%if(bb.getFile1()!=null){%><a href="./upload/<%=bb.getFile1()%>"><%=bb.getFile1()%></a><%}%></td></tr>
 <%}%>
@@ -89,10 +91,14 @@ int num = Integer.parseInt(request.getParameter("num"));
 </table>
 <%
 if(id!=null){
+	
+//자신의 Id일때만 글수정 가능
 if(id.equals(bb.getId())){ %>
 <input type="button" value="글수정" 
-       onclick="location.href= './BoardUpdate.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'">     
-<%}if(id.equals(bb.getId())||id.equals("admin")){ %>
+       onclick="location.href= './BoardUpdate.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'">  
+<%}
+//자신의 Id이거나 admin 일때 글삭제 가능
+if(id.equals(bb.getId())||id.equals("admin")){ %>
 <input type="button" value="글삭제" 
        onclick="location.href= './BoardDelete.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'">
 <%}}%>
@@ -101,13 +107,13 @@ if(id.equals(bb.getId())){ %>
 
 
 <!-- ///////////////////댓글///////////////// -->
+<!-- 댓글부분 댓글 하나 달면 그때부터 board/reply.jsp 페이지로 대체됨, 새로고침시 초기화-->
 <%
-//List boardReplyList=(List)request.getAttribute("boardReplyList");
 List lrb = null;
 
-//List<BoardReplyBean> lrb = (List)request.getAttribute("lrb");
 int rcount = (int)request.getAttribute("rcount");
-if(rcount!=0){lrb=(List)request.getAttribute("lrb");}//
+if(rcount!=0){lrb=(List)request.getAttribute("lrb");}
+
 %>
 <div id="replyUpdate">
 <p>댓글(<%=rcount%>개)</p>
@@ -121,9 +127,11 @@ if(rcount!=0){lrb=(List)request.getAttribute("lrb");}//
 <td id="content"><%=rb.getContent()%></td>
 <td id="delete"><%
 if(id!=null){
+	//같은 Id이거나 admin만 리플 삭제 가능
 	if(id.equals(rb.getId())||id.equals("admin")){ 
 %>
 <form method="post" name="replydel">
+<%--리플삭제버튼 replydelete로 AJAX 실행 --%>
 <input type="button" value="×" onclick="replydelete(<%=rb.getNum()%>)">
 </form>
 <%}}%></td>
@@ -135,13 +143,15 @@ if(id!=null){
 </table>
 <form method="post" name="fr1" id="reply">
 <%if(id!=null){%>
-<span><%=id %></span>
+<span><%=id%></span>
+<%--id값으로 AJAX로 값 넘기기 --%>
 <input type="hidden" id="rNum" name="group_del" value="<%=bb.getNum()%>">
 <input type="hidden" id="pageNum" value="<%=pageNum%>">
 <input type="hidden" id="rId" name="id" value="<%=id%>" readonly>
 <div id="textarea">
 <textarea rows="3" cols="59" id="rContent" name="content" placeholder="타인을 향한 지나친 비방, 욕설은 자제해주세요."></textarea>
 </div>
+<%--댓글달기버튼 replyupdate로 AJAX 실행 --%>
 <input type="button" value="댓글달기" onclick="replyupdate()">
     		<%}else{%>
     			<textarea rows="3" cols="59" name="content" placeholder="리플작성에는 로그인이 필요합니다." readonly></textarea>

@@ -14,6 +14,8 @@
 <link href="./css/subpage.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="./js/jquery-3.2.0.js"></script>
 <script type="text/javascript">
+
+/////////////////////AJAX 리플 달기, 삭제/////////////////////////
 	function replyupdate(){
 		 $.ajax({
 	         url:'./BoardReplyAction2.bo',
@@ -43,6 +45,7 @@
 	         }
 		});
 	}
+/////////////////////AJAX 리플 달기, 삭제/////////////////////////
 	
 </script>
 </head>
@@ -73,6 +76,8 @@ int num = Integer.parseInt(request.getParameter("num"));
 <%=bb.getSubject()%></td><td id="id"><%=bb.getId()%></td></tr>
 <%if(id!=null){if(id.equals("admin")){%><tr><td id="num">메일주소 : <%=bb.getEmail()%></td></tr><%}}%>
 <tr><td colspan="3" id="content"><br><br><%=bb.getContent()%><br><br></td></tr>
+
+<%--첨부파일이 있을때만 첨부파일 표시--%>
 <%if(bb.getFile1()!=null){%>
 <tr><td>첨부파일1</td><td colspan="3"><%if(bb.getFile1()!=null){%><a href="./upload/<%=bb.getFile1()%>"><%=bb.getFile1()%></a><%}%></td></tr>
 <%}%>
@@ -104,13 +109,13 @@ if(id.equals(bb.getId())){ %>
 
 
 <!-- ///////////////////댓글///////////////// -->
+<!-- 댓글부분 댓글 하나 달면 그때부터 board2/reply2.jsp 페이지로 대체됨, 새로고침시 초기화-->
 <%
-//List boardReplyList=(List)request.getAttribute("boardReplyList");
 List lrb = null;
 
-//List<BoardReplyBean> lrb = (List)request.getAttribute("lrb");
 int rcount = (int)request.getAttribute("rcount");
-if(rcount!=0){lrb=(List)request.getAttribute("lrb");}//
+if(rcount!=0){lrb=(List)request.getAttribute("lrb");}
+
 %>
 <div id="replyUpdate">
 <p>댓글(<%=rcount%>개)</p>
@@ -127,6 +132,7 @@ if(id!=null){
 	if(id.equals(rb.getId())||id.equals("admin")){ 
 %>
 <form method="post" name="replydel">
+<%--리플삭제버튼 replydelete로 AJAX 실행 --%>
 <input type="button" value="×" onclick="replydelete(<%=rb.getNum()%>)">
 </form>
 <%}}%></td>
@@ -141,14 +147,16 @@ if(id!=null){
 if(id.equals("admin")){%>
 <form method="post" name="fr1" id="reply">
 <span><%=id%></span>
-	<input type="hidden" id="wEmail" value="<%=bb.getEmail()%>">
+<%--id값으로 AJAX로 값 넘기기 --%>
+	<input type="hidden" id="wEmail" value="<%=bb.getEmail()%>"> <%--작성자에게 답변 메일보내기위해 작성자의 Email값 넘기기 --%>
 	<input type="hidden" id="rNum" name="group_del" value="<%=bb.getNum()%>">
 	<input type="hidden" id="pageNum" value="<%=pageNum%>">
 	<input type="hidden" id="rId" name="id" value="<%=id%>" readonly>
 	<div id="textarea">
-		<textarea rows="3" cols="59" id="rContent" name="content"></textarea>
-		<input type="hidden" id="wContent" value="<%=bb.getContent()%>">
+		<textarea rows="3" cols="59" id="rContent" name="content"></textarea> <%-- 리플내용 넘기기 --%>
+		<input type="hidden" id="wContent" value="<%=bb.getContent()%>"> <%-- 작성자가 쓴 게시물 내용 wContent 넘기기 --%>
 </div>
+<%--댓글달기버튼 replyupdate로 AJAX 실행 --%>
 <input type="button" value="댓글달기" onclick="replyupdate()">	
 <%}else{%>
 <textarea rows="3" cols="59" name="content" placeholder="Q&A게시판 답변은 관리자만 작성가능합니다." readonly></textarea>	
