@@ -7,6 +7,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>패키지 예약 취소 요청 페이지</title>
+<%
+request.setCharacterEncoding("utf-8");
+ModTradeInfoBEAN mtib = (ModTradeInfoBEAN)request.getAttribute("mtib");
+String[] countp = mtib.getPack_count().split(",");
+int po_num = Integer.parseInt(request.getParameter("num"));
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
+%>
 <link href="./css/inc.css" rel="stylesheet" type="text/css">
 <link href="./css/subpage.css" rel="stylesheet" type="text/css">
 <script src = "./js/jquery-3.2.0.js"></script>
@@ -26,18 +33,33 @@
 			check = 0;
 		}
 	}
+	function bankcheck(){
+		if(confirm("환불 규정을 확인하지 않은데에 대한 불이익은 본사에서 책임 지지 않습니다")){
+			if("<%=mtib.getTrade_type()%>"=="무통장 입금"&&<%=mtib.getCost()%>!=0){
+				if($('#bank_name').val().length==0){
+					alert('환불 받을실 은행을 입력해 주세요');
+					$('#bank_name').select();
+					return false;
+				}else if($('#name').val().length==0){
+					alert('예금주를 입력해 주세요');
+					$('#name').select();
+					return false;
+				}else if($('#bank_number').val().length==0){
+					alert('계좌번호를 입력해 주세요');
+					$('#bank_number').select();
+					return false;
+				}
+			}
+		}else return false;
+	}
 	
 </script>
 </head>
-<%
-request.setCharacterEncoding("utf-8");
-ModTradeInfoBEAN mtib = (ModTradeInfoBEAN)request.getAttribute("mtib");
-String[] countp = mtib.getPack_count().split(",");
-SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
-%>
+
 <body>
 <div align="center">
 <h4>패키지 정보</h4>
+<form action = "./Res_Cancel_Action.mo" method = "post" onsubmit="return bankcheck()">
 <table>
 	<tr>
 		<td>예약번호 </td>
@@ -57,18 +79,24 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
 	</tr>
 	<tr>
 		<td>결제 환불 금액</td>
-		<td><%=mtib.getCost() %>원</td>
+		<td><%=mtib.getCost() %>원<input type="hidden" name="Cancel_info" value="<%=mtib.getCost()%>">
+			<input type="hidden" name="Cancel_info" value="<%=mtib.getTrade_type()%>">
+			<input type="hidden"  name = "pnum" value ="<%=po_num %>"></td>
 	</tr>
-	<%if(mtib.getTrade_type().equals("무통장 입금")){ %>
+	<%if(mtib.getTrade_type().equals("무통장 입금")&&mtib.getCost()!=0){ %>
 	<tr>
 		<td colspan="2">환불 받으실 계좌 정보 입력</td>
 	</tr>
 	<tr>
-		<td>은행명</td><td><input type="text" name="Cancel_info"></td>
-		<td>예금주</td><td><input type="text" name="Cancel_info"></td>
+		<td>은행명</td><td><input type="text" id="bank_name" name="Cancel_info"
+							placeholder="EX)콩팥 머니 은행"></td>
+		<td>예금주</td><td><input type="text" id="name" name="Cancel_info"
+							placeholder="EX)홍길동"></td>
 	</tr>
 	<tr>
-		<td>계좌 번호</td><td><input type="text" name="Cancel_info"></td>
+		<td>계좌 번호</td><td><input type="text" id="bank_number" name="Cancel_info"
+							placeholder="EX)12-007-2245-777">
+			</td>
 	</tr>
 	<%} %>
 </table>
@@ -76,8 +104,6 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
 <span onclick = "cancel_rule_view()"
 	id = "cancel_rule_view">환불 규정▼</span>
  <div id="Cancel_Rule" style="display: none" align="center">
-<ul style="text-align: left;">
-  <li>비수기 일반규정</li>
 	<ul style="text-align: left;"> 
   		<li>출발 7일전 취소시 총 여행경비 10%공제 후 환불</li>
  		<li>출발 5일전 취소시 총 여행경비 20%공제 후 환불</li>
@@ -85,9 +111,10 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
   		<li>출발 1일전 취소시 총 여행경비 50%공제 후 환불</li>
   		<li>당일 취소시 여행경비 환불 불가</li>
 	</ul>
-</ul>
-<input type ="button" value = "예약 취소" onclick="">
- </div> 
+</div><br>
+ <input type ="submit" value = "예약 취소">
+<input type = "button" value ="닫기" onclick ="window.close()">
+ </form> 
 </div>  	
 </body>
 </html>

@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -648,6 +647,28 @@ public class ModDAO {
 		}
 		
 		return mtib;
-	
+	}
+	public int Res_Cancel(ModTradeInfoBEAN mtib){
+		int check = 0;
+		try{
+			conn = getconn();
+			sql = "update pack_order set po_res_status=4, "+
+					"po_memo = ? where po_num = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mtib.getMemo());
+			pstmt.setInt(2, mtib.getNum());
+			pstmt.executeUpdate();
+			check = 1;
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return check ;
 	}
 }
