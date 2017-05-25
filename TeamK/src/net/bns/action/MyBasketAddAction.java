@@ -43,6 +43,7 @@ public class MyBasketAddAction implements Action{
 		}
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
+		System.out.println(check);
 		if(check == 1){
 			out.println("<script>");
 			out.println("alert('동일 물품이 이미 장바구니에 있습니다');");

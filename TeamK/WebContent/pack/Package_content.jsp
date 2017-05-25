@@ -125,11 +125,40 @@
 		
 		else if (i == 3 && user_id != "")
 		{
-			alert("예약하기");
+			var cost_temp = $("#p").html();
+			str = String(cost_temp);
+		    cost = str.replace(/[^\d]+/g, '');
+			
+		    $("#cost").val(cost);
+		    $("#ori_num").val($("input[type=radio][name=chk]:checked").val());
+		    
+// 		    alert("sdf");
+		    document.input_fr.action = "./MyBasketAddAction.bns";
+		    document.input_fr.method = "post";
+		    document.input_fr.submit();
+		    
+// 			$.ajax({
+// 				type:"post",
+// 				url:"./MyBasketAddAction.bns",   // java로 보냄
+// 				data:{
+// 					아이, 어른, 글번호, 총가격
+// 					num:$("input[type=radio][name=chk]:checked").val(),
+// 					adult:$("#adult option:selected").val(),
+// 					child:$("#child option:selected").val(),
+// 					cost:cost,
+// 					type:"P"
+// 				}
+// 				success:function(){
+// 					$("#jjim_o").show();
+// 					$("#jjim_x").hide();
+// 					alert("찜목록에서 삭제되었습니다");
+// //						window.location.reload(true);  // 페이지 새로고침
+// 				}
+// 			});
 		}
 		
 		
-		else if(i == 1 || i == 2 && user_id != "")	// 로그인 안되어 있을 경우
+		else if(user_id == "")	// 로그인 안되어 있을 경우
 		{
 			loginChk();
 		}
@@ -1005,7 +1034,7 @@
 			
 			<!--인원수, 가격 -->
 			<div id="contentdiv1">
-				<form name="fr" method="post">
+				<form name="input_fr" method="post">
 					<table border="1">
 						<tr>
 						<%
@@ -1043,15 +1072,20 @@
 						</tr>
 						<tr>
 							<td>합계</td>
-							<td colspan="2"><p id="p"><%=cost_adult %></p></td>
+							<td colspan="2">
+								<input type="hidden" id="cost" name="cost" value="">
+								<input type="hidden" id="ori_num" name="num" value="">
+								<input type="hidden" name="type" value="P">
+								<p id="p"><%=cost_adult %></p>
+							</td>
 						</tr>
 						<tr>
-							<td></td>
 							<td>
 								<input type="button" id="jjim_o" value="찜하기" onclick="submit_fun(1, '<%=user_id %>')">
 								<input type="button" id="jjim_x" value="찜취소" style="display:none;" onclick="submit_fun(2, '<%=user_id %>')">
 							</td>
-							<td><input type="button" value="예약하기" onclick="submit_fun(3, '<%=user_id %>')"></td>
+							<td><input type="button" value="장바구니" onclick="submit_fun(3, '<%=user_id %>')"></td>
+							<td><input type="button" value="예약하기" onclick="submit_fun(4, '<%=user_id %>')"></td>
 						</tr>
 					</table>
 					
