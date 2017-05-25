@@ -98,7 +98,7 @@ $("#save").click(function(){
 
     if (content == "<br>")  // 빈공간 값 <br>
     {
-       alert("글을 써주세요");  // 메시지 띄움
+       alert("글을 입력해주세요");  // 메시지 띄움
        return false;
     }
     

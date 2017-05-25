@@ -85,9 +85,7 @@ $("#save").click(function(){
 		document.fr.subject.focus();
 		return false;
 	}
-    
-
-
+  
     if (content == "<br>")  // 빈공간 값 <br>
     {
        alert("글을 써주세요");  // 메시지 띄움
