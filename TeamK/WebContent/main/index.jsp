@@ -57,9 +57,7 @@
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	</div>
 	<!--오른쪽 메뉴 -->
-	<div>
-		<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
-	</div>
+	<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->
 </body>
 </html>
