@@ -800,3 +800,11 @@ div#qna_script {
 	text-align: left;
 	font-weight: bold;
 }
+
+/* my order 페이지*/
+div.trade_type1 ul.agree_ul{
+	margin-left: 95px;
+}
+div.trade_type1 ul.agree_ul li{
+	margin-right: 200px;	
+}
