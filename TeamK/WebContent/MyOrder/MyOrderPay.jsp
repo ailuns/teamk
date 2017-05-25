@@ -1,3 +1,4 @@
+<%@page import="net.member.db.MemberBean"%>
 <%@page import="net.bns.db.PBasketBEAN"%>
 <%@page import="net.bns.db.TBasketBEAN"%>
 <%@page import="net.mod.db.ReceiveInfoBEAN"%>
@@ -17,6 +18,7 @@
 		request.setCharacterEncoding("utf-8");
 		List<PBasketBEAN> ModPackList = (ArrayList<PBasketBEAN>) request.getAttribute("ModPackList");
 		List<TBasketBEAN> ModThingList = (ArrayList<TBasketBEAN>) request.getAttribute("ModThingList");
+		MemberBean mb = (MemberBean)request.getAttribute("mb");
 		ReceiveInfoBEAN rib = (ReceiveInfoBEAN)request.getAttribute("rib");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
 		int cost_sum = 0;
@@ -61,15 +63,15 @@ function receive_setting(){
 			<tbody>
 				<tr>
 					<td>ID</td>
-					<td>mb.getID()</td>
-				</tr>
-				<tr>
-					<td>E-mail</td>
-					<td>mb.getEmail()</td>
+					<td><%=mb.getId() %></td>
 				</tr>
 				<tr>
 					<td>Tel.</td>
-					<td>mb.getMobile()</td>
+					<td><%=mb.getMobile() %></td>
+				</tr>
+				<tr>
+					<td>E-mail</td>
+					<td><%=mb.getEmail() %></td>
 				</tr>
 			</tbody>
 		</table>
