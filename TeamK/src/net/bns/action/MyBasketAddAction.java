@@ -45,7 +45,7 @@ public class MyBasketAddAction implements Action{
 		PrintWriter out = response.getWriter();
 		if(check == 1){
 			out.println("<script>");
-			out.println("alert('동일 물품이 이미 장바구니에 있습니다');");
+			out.println("alert('동일 상품이 이미 장바구니에 있습니다');");
 			out.println("history.back();");
 			out.println("</script>");
 			out.close();
