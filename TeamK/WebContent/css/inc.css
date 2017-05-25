@@ -1,102 +1,62 @@
 @CHARSET "UTF-8";
 /* Left Menu */
-div#left_menu {
-	width : 0px;
-	height : 100%;
-	transition: 0.5s;
-	background-color: #06c;
-	position: fixed;
-	top : 220px;
-	padding: 10px 0 0 0;
-	float: left;
+header {
+	background: linear-gradient(to right, #8ed5ff, #62b2f7);
+	position: relative;
+	width: 1000px;
+	margin: 0 auto;
 }
-div#left_menu ul#menu_list {
-	display: none;
+header img {
+	width: 150px;
+	height: 150px;
+}
+nav {
+	position: absolute;
+	left: 20%;
+	bottom: 10px;
+}
+nav ul {
 	list-style: none;
-	margin-left: -40px;
+	font-size: 20px;
+	font-weight: bold;
 }
-div#left_menu ul#menu_list li {
-	padding: 5px 0 5px 40px;
+nav li {
+	float: left;
 	background-repeat: no-repeat;
 	background-size: 20px;
-	background-position: 5% 50%;
+	background-position: 0 50%;
+	padding-left: 30px;
+	margin: 10px 20px;
+	border: 3px solid rgba(0, 0, 0, 0);
 }
-div#left_menu ul#menu_list li:HOVER {
-	background-color: #09f;
-	border-left: 10px solid #6f3;
+nav li:HOVER {
+	border-bottom: 3px solid #06c;
 }
-div#left_menu ul#menu_list li#home {background-image: url("../img/home.png");}
-div#left_menu ul#menu_list li#pack {background-image: url("../img/travel.png");}
-div#left_menu ul#menu_list li#shop {background-image: url("../img/shop.png");}
-div#left_menu ul#menu_list li#rvw {background-image: url("../img/review.png");}
-div#left_menu ul#menu_list li#qna {background-image: url("../img/qna.png");}
-div#left_menu ul#menu_list a {
+nav li#home {background-image: url("../img/home.png");}
+nav li#pack {background-image: url("../img/travel.png");}
+nav li#shop {background-image: url("../img/shop.png");}
+nav li#rvw {background-image: url("../img/review.png");}
+nav li#qna {background-image: url("../img/qna.png");}
+nav li a {
 	color: #fff;
-	font-weight: bold;
 	text-decoration: none;
-	font-size: 20px;
+	display: block;
 }
-div#logo_menu {
-	width : 200px;
-	height : 100%;
-	transition: 0.5s;
-	background: linear-gradient(to top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.1));
-	position: fixed;
-	margin-left : 0px;
-	top : 0px;
-	padding-top: 10px;
-}
-div#logo_menu img:HOVER
-{
-	cursor: pointer;
-}
-div#logo_menu h3 {
-	color: #fff;
-	margin-left: 10px;
-}
-div#logo_menu p {
-	text-align: left;
-	width: 100%;
-	padding: 0 10px;
-}
-div#logo_menu p:hover {background-color: rgba(255, 255, 255, 0.75);}
-div#logo_menu p a {
-	text-decoration: none;
-	color: #000;
-}
-div#logo_menu p a span {font-size: 12px; color: #333}
-div#left_click {
-	width : 30px;
-	height : 100%;
-	transition: 0.5s;
-	background: linear-gradient(to top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1));
-	position: fixed;
-	margin-left : 200px;
-	top : 0px;
-	text-align: center;
-	font-weight: bold;
-	padding-top: 230px;
-	color: #fff;
-	border-right: 1px dotted #fff;
-}
-div#left_click:HOVER {
-	background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2));
-	cursor: pointer;
-}
+
 /* Right Menu */
 div#submenu {
 	width : 150px;
 	height : 100%;
-	background: linear-gradient(to top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.1));
+	background-color: #fff;
 	position: fixed;
 	right : 0px;
 	top : 0px;
-	border-left: 1px dotted #fff;
+	border-left: 1px dotted #ccc;
 }
 div#submenu ul {
 	list-style: none;
 	margin-left: -40px;
-	margin-top: 100%;
+	margin-top: 120%;
 }
 div#submenu ul li {padding: 5px 0 0 30px;}
 div#submenu ul a {
@@ -164,18 +124,17 @@ path#sejong:hover {
 body {
 	margin: 0;
 	padding: 0;
-	background: linear-gradient(to top, rgb(214, 161, 118), rgb(240, 227, 213));
+	background: linear-gradient(to top, #d6a176, #f0e3d5);
 }
 div#wrap {
-	margin-top: 100px;
  	width: 1000px;
 	height: 100%;
 	padding-top: 50px;
 	margin: 0 auto;
 	text-align: center;
+	background-color: #fff;
 }
 div#index_wrap {
-	margin-top: 100px;
  	width: 1000px;
 	height: 100%;
 	padding-top: 50px;
@@ -186,7 +145,6 @@ div#map {
 	width: 100%;
 	height: 700px;
 	margin: 0 auto;
-	margin-top: 100px;
 	border-top: 1px dotted #fff;
 	border-bottom: 3px double #fff;
 	padding-top: 20px;
@@ -303,11 +261,12 @@ input.join {
 /* Footer.jsp */
 footer {
 	width: 100%;
+	margin-top: 200px;
 	background-color: #eee;
 	height: 100px;
-	margin-top: 200px;
 	font-size: 12px;
 	color: #333;
+	text-align: center;
 }
 footer a {
 	text-decoration: none;
@@ -318,16 +277,14 @@ footer div#footer_bar {
 	width: 100%;
 	background-color: #ccc;
 	height: 25px;
-	padding-top: 7px;
+	padding-top: 5px;
 }
 footer div#footer_bar div {
-	width: 60%;
-	min-width: 1000px;
+	width: 1000px;
 	margin: 0 auto;
 }
 footer div#footer_misc {
-	width: 60%;
-	min-width: 1000px;
+	width: 1000px;
 	margin: 0 auto;
 	padding-top: 10px;
 	line-height: 1.5em;
