@@ -71,14 +71,15 @@
 			if (check == 1) {
 				%>
 				<script type="text/javascript">
-				alert("사용 중인 아이디입니다.");
 				document.wfr.userid.focus();
 				</script>
+				<%
+				out.println(id + "는 사용 불가능한<br>아이디 입니다.");
+				%>
 				<%
 			} else if (check == 0) {
 				%>
 				<script type="text/javascript">
-				alert("사용 가능한 아이디 입니다.");
 				document.wfr.select.focus();
 				</script>
 				<%
