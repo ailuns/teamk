@@ -26,7 +26,7 @@ public class bnsDAO {
 		int check = 0;
 		try{
 			conn =getconn();
-			sql = "select * from pack_basket where id=? ori_num=?";
+			sql = "select * from pack_basket where id=? and ori_num=?";
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, pbb.getId());
 			pstmt.setInt(2, pbb.getOri_num());
@@ -49,7 +49,7 @@ public class bnsDAO {
 		int check = 0;
 		try{
 			conn =getconn();
-			sql = "select * from thing_basket where id=? ori_num=?";
+			sql = "select * from thing_basket where id=? and ori_num=?";
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, tbb.getId());
 			pstmt.setInt(2, tbb.getOri_num());
