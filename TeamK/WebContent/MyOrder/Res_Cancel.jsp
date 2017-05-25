@@ -36,12 +36,7 @@ String[] countp = mtib.getPack_count().split(",");
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
 %>
 <body>
-	<!--왼쪽 메뉴 -->
-	<div>
-		<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
-	</div>
-	<!--왼쪽 메뉴 -->
-	<div id="wrap">
+<div align="center">
 <h4>패키지 정보</h4>
 <table>
 	<tr>
@@ -62,7 +57,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
 	</tr>
 	<tr>
 		<td>결제 환불 금액</td>
-		<td></td>
+		<td><%=mtib.getCost() %>원</td>
 	</tr>
 	<%if(mtib.getTrade_type().equals("무통장 입금")){ %>
 	<tr>
@@ -80,32 +75,18 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
 
 <span onclick = "cancel_rule_view()"
 	id = "cancel_rule_view">환불 규정▼</span>
- <div id="Cancel_Rule" style="display: none">
-  <ol>
+ <div id="Cancel_Rule" style="display: none" align="center">
+<ul style="text-align: left;">
   <li>비수기 일반규정</li>
-  	<ul>
-  <li>출발 7일전 취소시 총 여행경비 10%공제 후 환불</li>
-  <li>출발 5일전 취소시 총 여행경비 20%공제 후 환불</li>
-  <li>출발 3일전 취소시 총 여행경비 30%공제후 환불</li>
-  <li>출발 1일전 취소시 총 여행경비 50%공제 후 환불</li>
-  <li>당일 취소시 여행경비 환불 불가</li>
+	<ul style="text-align: left;"> 
+  		<li>출발 7일전 취소시 총 여행경비 10%공제 후 환불</li>
+ 		<li>출발 5일전 취소시 총 여행경비 20%공제 후 환불</li>
+  		<li>출발 3일전 취소시 총 여행경비 30%공제후 환불</li>
+  		<li>출발 1일전 취소시 총 여행경비 50%공제 후 환불</li>
+  		<li>당일 취소시 여행경비 환불 불가</li>
 	</ul>
-  <li>연휴 및 성수기 특별규정</li>
-  	<ul>
-  <li>출발 15일전 취소시 총 여행경비 30%공제 후 환불</li>
-  <li>출발 10일전 취소시 총 여행경비 40%공제 후 환불</li>
-  <li>출발 07일전 취소시 총 여행경비 50%공제 후 환불</li>
-  <li>출발 04일전 취소시 총 여행경비 70%공제 후 환불</li>
-  <li>출발 03일전 ~ 당일 취소시 여행경비 환불 불가</li>
-  </ul>
-  </ol>
-  </div> 
-  	</div>
-	<jsp:include page="../inc/footer.jsp"></jsp:include>
-	<!--오른쪽 메뉴 -->
-	<div>
-		<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
-	</div>
-	<!--오른쪽 메뉴 -->
+</ul>
+ </div> 
+</div>  	
 </body>
 </html>
