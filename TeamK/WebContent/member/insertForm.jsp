@@ -9,6 +9,7 @@
 <link href="./css/inc.css" rel="stylesheet" type="text/css">
 <link href="./css/subpage.css" rel="stylesheet" type="text/css">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<%request.setCharacterEncoding("UTF-8"); %>
 <script type="text/javascript">
 function sample6_execDaumPostcode() {
     new daum.Postcode({
@@ -57,11 +58,14 @@ function sample6_execDaumPostcode() {
 			alert("id입력하세요");
 			document.fr.id.focus();
 			return;
-		}
+		}else{ 
 		fid = document.fr.id.value;
 		window.open("./member/joinIdCheck.jsp?userid=" + fid, "",
 				"width=400,height=200");
-
+		}
+		
+		//한글입력 불가
+		document.fr.id.style.imeMode = "disabled"
 	}
 	function check_key() {
 		var char_ASCII = event.keyCode;
@@ -199,7 +203,7 @@ if (id != null) {
 		<div id="member">
 			<div id="insert_form">
 			<form action="./MemberJoinAction.me" method="post" name="fr" onsubmit="return winopen()">
-				<label for="id">아이디</label><input type="text" name="id" id="id" 
+				<label for="id">아이디</label><input type="text" name="id" id="id" style="ime-mode:disabled"
 				onkeypress="nonHangulSpecialKey()" placeholder="ID는 영문, 숫자만 가능"  maxlength="10">
 				<input type="hidden" name="idchecknum"> 
 				<input type="hidden" name="name2" value="0"> 

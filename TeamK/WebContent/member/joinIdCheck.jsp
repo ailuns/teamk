@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>TeamK 여행사</title>
 <link href="../css/popup.css" rel="stylesheet" type="text/css">
+<%request.setCharacterEncoding("UTF-8"); %>
 <script type="text/javascript">
 	function result() {
 		if(document.wfr.userid.value<4){
@@ -43,7 +44,6 @@
 	}
 
 	//텍스트 박스에 숫자와 영문만 입력할수있도록
-
 	function nonHangulSpecialKey() {
 
 		if (check_key() != 1 && check_key() != 2) {
@@ -52,6 +52,8 @@
 			location.reload();
 			return false;
 		}
+		//한글입력 불가
+		document.wfr.userid.style.imeMode = "disabled"
 	}
 </script>
 </head>
@@ -63,7 +65,8 @@
 	%>
 	<div id="idcheck">
 	<form action="joinIdCheck.jsp" method="post" name="wfr">
-		<input type="text" name="userid" value="<%=id%>" onkeypress="nonHangulSpecialKey()" maxlength="10">
+		<input type="text" name="userid" value="<%=id%>" onkeypress="nonHangulSpecialKey()" 
+		style="ime-mode:disabled" maxlength="10">
 		<input type="submit" value="중복확인">
 		<p>
 		<%if(id.length()>=4 && id.length()<=10){
@@ -90,10 +93,9 @@
 		<%
 			}
 		}else if(id.length()<4 || id.length()>10){
-			out.println("아이디는 4~10글자 사이로 정해주세요.");
+			out.println("아이디는 4~10글자<br>영문 + 숫자로 정해주세요.");
 			%>
 			<script type="text/javascript">
-			alert("아이디는 4~10글자로 정해주세요");
 			document.wfr.userid.focus();
 			</script>
 			<%
