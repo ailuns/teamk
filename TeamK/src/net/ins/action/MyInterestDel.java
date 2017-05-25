@@ -4,7 +4,9 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import net.ins.db.interestBEAN;
 import net.ins.db.interestDAO;
 
 public class MyInterestDel implements Action{
@@ -12,7 +14,16 @@ public class MyInterestDel implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {	
 		interestDAO insdao = new interestDAO();
-		insdao.InterestDel(Integer.parseInt(request.getParameter("n")));
+		if(request.getParameter("n")!=null)
+			insdao.InterestDel(Integer.parseInt(request.getParameter("n")));
+		if(request.getParameter("num")!=null){
+			interestBEAN inb = new interestBEAN();
+			inb.setOri_num(Integer.parseInt(request.getParameter("num")));
+			HttpSession session = request.getSession();
+			inb.setId((String)session.getAttribute("num"));
+			inb.setType(request.getParameter("type"));
+			insdao.InterestDel(inb);
+		}
 		response.setContentType("text/html; charset=UTF-8");//JAVA���� JSPȣ���Ҷ� ���(response Ÿ�� ����)
 		PrintWriter out = response.getWriter();
 		out.println("<script>");

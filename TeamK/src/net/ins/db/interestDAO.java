@@ -155,6 +155,27 @@ public class interestDAO {
 			}
 		}
 	}
+	public void InterestDel(interestBEAN inb){
+		try{
+			conn = getconn();
+			sql = "delete from interest where ori_num=? and id = ? and type=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, inb.getOri_num());
+			pstmt.setString(2, inb.getId());
+			pstmt.setString(3, inb.getType());
+			pstmt.executeUpdate();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	
 }
  
