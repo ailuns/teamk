@@ -40,11 +40,7 @@ $(document).ready(function(){
 	<div id="wrap">
 		<div id="board_head">
 			<div id="rvw_title">리뷰</div>
-<<<<<<< HEAD
 			<div id="rvw_script">물건이나 여행 후기를 쓰는 곳 입니다.[검색된 글의 개수 :<%=count%>]</div>
-=======
-			<div id="rvw_script">물건이나 여행후기를 쓰는 곳 입니다.<br>[검색된 글의 개수 :<%=count%>]</div>
->>>>>>> branch 'master' of https://github.com/ailuns/teamk.git
 		</div>
 		<div id="clear"></div>
 		<div id="board">

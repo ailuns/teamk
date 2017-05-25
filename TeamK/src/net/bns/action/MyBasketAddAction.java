@@ -52,8 +52,10 @@ public class MyBasketAddAction implements Action{
 			out.close();
 		}else{
 			out.println("<script>");
-			out.println("alert('장바구니에 담았습니다!');");
-			out.println("location.href='"+request.getHeader("referer")+"';");
+			out.println("if(confirm('장바구니에 담았습니다!"+
+					"\n지금 바로 장바구니 페이지로 이동하시겠습니까?')){");
+			out.println("location.href='./MyBasketList.bns';}");
+			out.println("else{location.href='"+request.getHeader("referer")+"';}");
 			out.println("</script>");
 			out.close();
 		}

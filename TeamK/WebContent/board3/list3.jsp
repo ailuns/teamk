@@ -64,15 +64,15 @@ BoardDAO bdao = new BoardDAO();
 if(count!=0){ 
 	//이전
 	if(startPage>pageBlock){
-		%><a href="./BoardList.bo?pageNum=<%=startPage-pageBlock%>">[이전]</a><%
+		%><a href="./BoardList3.bo?pageNum=<%=startPage-pageBlock%>">[이전]</a><%
 	}
 	// 1..10 11..20 21..30
 	for(int i=startPage; i<=endPage; i++){
-		%><a href="./BoardList.bo?pageNum=<%=i%>">[<%=i%>]</a><%
+		%><a href="./BoardList3.bo?pageNum=<%=i%>">[<%=i%>]</a><%
 	}
 	// 다음
 	if(endPage < pageCount){
-		%><a href="./BoardList.bo?pageNum=<%=startPage+pageBlock%>">[다음]</a>
+		%><a href="./BoardList3.bo?pageNum=<%=startPage+pageBlock%>">[다음]</a>
 		<%
 		}
 }

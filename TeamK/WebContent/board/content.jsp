@@ -54,11 +54,11 @@ String pageNum = (String)request.getAttribute("pageNum");
 String id = (String)session.getAttribute("id");
 int num = Integer.parseInt(request.getParameter("num"));
 %>
-	<!--왼쪽 메뉴 -->
+	<!--상단 메뉴 -->
 	<div>
 		<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
 	</div>
-	<!--왼쪽 메뉴 -->
+	<!--상단 메뉴 -->
 	<div id="wrap">
 		<div id="board_head">
 			<div id="rvw_title">리뷰</div>
