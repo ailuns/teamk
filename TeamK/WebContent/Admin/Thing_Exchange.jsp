@@ -5,9 +5,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="./css/inc.css" rel="stylesheet" type="text/css">
+<link href="./css/subpage.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-
+	<!--왼쪽 메뉴 -->
+	<div>
+		<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
+	</div>
+	<!--왼쪽 메뉴 -->
+	<div id="wrap">
 <%if(mtb.getTrans_num().length()!=0){ %>
 							<td id="Trans_Num_View<%=mtb.getNum()%>" class= "Trans_Num_View">
 								<%=mtb.getTrans_num() %>
@@ -25,5 +32,12 @@
 								id="trans_num<%=mtb.getNum()%>">
 							<input type="button" value="입력" onclick = "Trans_Num_Insert(<%=mtb.getNum()%>)"></td>
 						<%} %>
+							</div>
+	<jsp:include page="../inc/footer.jsp"></jsp:include>
+	<!--오른쪽 메뉴 -->
+	<div>
+		<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
+	</div>
+	<!--오른쪽 메뉴 -->
 </body>
 </html>

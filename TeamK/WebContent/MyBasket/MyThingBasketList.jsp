@@ -9,6 +9,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="./css/inc.css" rel="stylesheet" type="text/css">
+<link href="./css/subpage.css" rel="stylesheet" type="text/css">
 <script src = "./js/jquery-3.2.0.js"></script>
 <script type="text/javascript">
 function thing_cal(cost, num) {
@@ -64,6 +66,12 @@ function check(){
 </script>
 </head>
 <body>
+	<!--왼쪽 메뉴 -->
+	<div>
+		<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
+	</div>
+	<!--왼쪽 메뉴 -->
+	<div id="wrap">
 <%
 request.setCharacterEncoding("utf-8");
 int pblock = ((Integer)request.getAttribute("pblock")).intValue();
@@ -143,5 +151,13 @@ List<TBasketBEAN> ThingBasket=(List<TBasketBEAN>)request.getAttribute("MyThingBa
 		}
 	}	//if(count%pagesize!=0)pcount+=1;
 	%><br><input type = "button" value = "내주문" onclick="location.href='./MyOrderList.mo'">
+		</div>
+	<jsp:include page="../inc/footer.jsp"></jsp:include>
+	<!--오른쪽 메뉴 -->
+	<div>
+		<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
+	</div>
+	<!--오른쪽 메뉴 -->
+</body>
 </body>
 </html>

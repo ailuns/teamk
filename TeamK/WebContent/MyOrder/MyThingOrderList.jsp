@@ -11,6 +11,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="./css/inc.css" rel="stylesheet" type="text/css">
+<link href="./css/subpage.css" rel="stylesheet" type="text/css">
 <script src = "./js/jquery-3.2.0.js"></script>
 <script type="text/javascript">
 
@@ -35,7 +37,12 @@ function receive_change(i,ti_num){
 </script>
 </head>
 <body>
-
+	<!--왼쪽 메뉴 -->
+	<div>
+		<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
+	</div>
+	<!--왼쪽 메뉴 -->
+	<div id="wrap">
 	<%	
 		request.setCharacterEncoding("utf-8");
 		int pblock = ((Integer) request.getAttribute("pblock")).intValue();
@@ -138,5 +145,12 @@ function receive_change(i,ti_num){
 		}
 	%>
 	<input type = "button" value = "내주문" onclick="location.href='./MyOrderList.mo'">
+		</div>
+	<jsp:include page="../inc/footer.jsp"></jsp:include>
+	<!--오른쪽 메뉴 -->
+	<div>
+		<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
+	</div>
+	<!--오른쪽 메뉴 -->
 </body>
 </html>

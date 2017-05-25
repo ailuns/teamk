@@ -7,7 +7,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-
+<link href="./css/inc.css" rel="stylesheet" type="text/css">
+<link href="./css/subpage.css" rel="stylesheet" type="text/css">
 <%
 request.setCharacterEncoding("utf-8");
 int []count = (int[])request.getAttribute("count");
@@ -15,6 +16,12 @@ List<interestBEAN> InterestPack = (List<interestBEAN>) request.getAttribute("Int
 List<interestBEAN> InterestThing = (List<interestBEAN>) request.getAttribute("InterestThing"); %>
 </head>
 <body>
+	<!--왼쪽 메뉴 -->
+	<div>
+		<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
+	</div>
+	<!--왼쪽 메뉴 -->
+	<div id="wrap">
 <div>
 		<h3>패키지 찜 리스트</h3>
 		<%
@@ -90,5 +97,12 @@ List<interestBEAN> InterestThing = (List<interestBEAN>) request.getAttribute("In
 		%>
 		<br><input type = "button" value = "내주문" onclick="location.href='./MyOrderList.mo'">
 	</div>
+		</div>
+	<jsp:include page="../inc/footer.jsp"></jsp:include>
+	<!--오른쪽 메뉴 -->
+	<div>
+		<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
+	</div>
+	<!--오른쪽 메뉴 -->
 </body>
 </html>
