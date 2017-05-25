@@ -153,8 +153,9 @@ function receive_setting(){
 		<%
 			}
 		%>
+		</tbody>
 	</table>
-	</tbody>
+	
 </div>
 <%} %>
 <div id="receive_info">
@@ -372,8 +373,8 @@ function selectreset(){
 				<td colspan="2" class="trade_type1" >
 					<div>
 						<ul>
-							<li><label>카드 종류 
-								<select id ="select_card" name="select_card">
+							<li><label><span style="float: left;">카드 종류</span> 
+								<select id ="select_card" name="select_card" style="margin-right: 104px;">
 									<option value="none">선택</option>
 									<option value="신한 카드">신한 카드</option>
 									<option value="비씨카드">비씨카드</option>
@@ -393,13 +394,13 @@ function selectreset(){
 									<option value="우체국카드">우체국카드</option>
 									<option value="신협카드">신협카드</option>
 								</select>
-								</label>
-								<p id="select_card_check" style="color: red">! 카드사를 선택해 주세요</p>
-								<p id = "monthly_pay_disable">할부는 결제 금액이 5만원 이상인 경우에 가능합니다 </p>
+								</label><br>
+								<span id="select_card_check" style="color: red;">! 카드사를 선택해 주세요</span>
+								<span id = "monthly_pay_disable">할부는 결제 금액이 5만원 이상인 경우에 가능합니다 </span>
 							</li>
 							<li  id="monthly_pay">
-							<label>할부 기간
-								<select name="monthly_pay">
+							<label><span  style="float: left;">할부 기간</span>
+								<select name="monthly_pay" style="margin-right: 170px;">
 									<option value ="1">일시불</option>
 									<%for(int i = 2; i<13;i++){ %>
 									<option value="<%=i %>"><%=i %>개월</option>
@@ -419,9 +420,9 @@ function selectreset(){
 					<div>
 						<ul>
 							<li>
-							<span>입금 은행</span>
+							<span style="float: left;">입금 은행</span>
 								<div>
-								<select name="select_bank" id="select_bank">
+								<select name="select_bank" id="select_bank" style="margin-right: 130px;">
 									<option value="none">선택</option>
 									<option value="신한은행">신한은행</option>
 									<option value="국민은행">국민은행</option>
@@ -438,11 +439,13 @@ function selectreset(){
 									<option value="신협">신협</option>								
 								</select>
 								</div>
-							<p id="select_bank_check" style="color: red">! 은행을 선택해 주세요</p>
+							<span id="select_bank_check" style="color: red">! 은행을 선택해 주세요</span>
 							</li>
-							<li><span>입금기한</span><div></div>
+							<li><span style="float: left;">입금기한</span><div></div>
 							</li>
-							<li><span>현금 영수증</span><label><input type="checkbox" value="1" name = "cash_receipt_check" id="cash_receipt_check">현금 영수증 발급</label>
+							<li><span style="float: left;">현금 영수증</span><br>
+							<label><input type="checkbox" value="1" 
+							name = "cash_receipt_check" id="cash_receipt_check">현금 영수증 발급</label>
 							<div id="cash_receipt">
 								<ul>
 									<li>용도
@@ -473,15 +476,14 @@ function selectreset(){
 			
 	</tbody>
 </table>
-<script type="text/javascript">
 
-</script>
 <div class="trade_type1">
 	<label><input type ="checkbox" name = "card_agree" checked="checked">
-		결제 대행 서비스 약관에 모두 동의 합니다.</label><span id="card_agree_ul_select" class = "agree_ul_select">내용 보기▼</span>
+		결제 대행 서비스 약관에 모두 동의 합니다.</label><br>
+		<span id="card_agree_ul_select" class = "agree_ul_select">내용 보기▼</span>
 			<span id="card_agree_ul_selected" class="agree_ul_selected">내용보기▲</span>
 			<ul class="agree_ul" id="card_agree_ul">
-				<li>서비스 이용약관 동의<span id="card_agree_li_select1" class="agree_li_select" 
+				<li class="card_agree_li" >서비스 이용약관 동의<span id="card_agree_li_select1" class="agree_li_select" 
 					onclick="card_agree_select(1)">내용보기▼</span>
 						<span id="card_agree_li_selected1" class="agree_li_selected" onclick="card_agree_selected(1)">내용보기▲</span>
 						<div id="card_agree_li_view1" class="agree_li_view">카드 약관1</div></li>
@@ -494,6 +496,7 @@ function selectreset(){
 						<span id="card_agree_li_selected3" class="agree_li_selected" onclick="card_agree_selected(3)">내용보기▲</span>
 						<div id="card_agree_li_view3" class="agree_li_view">카드 약관3</div></li>
 			</ul>
+		
 </div>
 <div class="trade_type2">
 	<label><input type ="checkbox" name = "mobile_agree" checked="checked">
@@ -528,7 +531,6 @@ function selectreset(){
 
 <input type = "submit" value="구매하기" id="fr_submit"><input type="button" value="취소" onclick="history.back();">
 </form>
-	</div>
 	</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->
