@@ -40,20 +40,6 @@
 	        	}
 	        }
 		});
-	
-		$("#date_to").datepicker({
-			dateFormat: 'yy-mm-dd',    // 날짜 포맷 형식
-			minDate : 0,			   // 최소 날짜 설정      0이면 오늘부터 선택 가능
-			numberOfMonths: 2,		   // 보여줄 달의 갯수
-	        dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],  // 일(Day) 표기 형식
-	        monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],   // 월(Month) 표기 형식
-	        //showOn: "both",			// 버튼을 표시      both : input과 buttom 둘다 클릭 시 달력 표시           bottom  :  buttom 클릭 했을 때만 달력 표시
-	        //buttonImage: "./img/calendar.png",   // 버튼에 사용될 이미지
-	        //buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
-	        onClose: function(selectedDate){		// 닫힐 때 함수 호출
-	        	$("#from").datepicker("option", "maxDate", selectedDate);   // #date_from의 최대 날짜를 #date_to에서 선택된 날짜로 설정
-	       	}
-		});
 
 	    // 탭 관련 소스
 		$(".tab_content").hide();  // 탭 내용 전체 숨김
@@ -68,78 +54,6 @@
 			var activeTab = $(this).attr("name");		// 클릭된 탭부분 name 속성값 가져와서 저장
 			$("#" + activeTab).fadeIn();		// 해당 탭내용 부분을 보여준다  흐릿 -> 또렷하게 애니메이션 효과			
 		});
-		
-		//Featured Packages List
-	    $("#feat_ttl1").mouseenter(function() {
-	      $("#feat_con0").css('width', '0');
-	      $("#feat_con0 span").css('display', 'none');
-	      $("#feat_con1").css('width', '75%');
-	      $("#feat_con1 span").css('display', 'block');
-	      $("#feat_con2").css('width', '0');
-	      $("#feat_con2 span").css('display', 'none');
-	      $("#feat_con3").css('width', '0');
-	      $("#feat_con3 span").css('display', 'none');
-	      $("#feat_con4").css('width', '0');
-	      $("#feat_con4 span").css('display', 'none');
-	      $("#feat_con5").css('width', '0');
-	      $("#feat_con5 span").css('display', 'none');
-	    });
-	    $("#feat_ttl2").mouseenter(function() {
-	      $("#feat_con0").css('width', '0');
-	      $("#feat_con0 span").css('display', 'none');
-	      $("#feat_con1").css('width', '0');
-	      $("#feat_con1 span").css('display', 'none');
-	      $("#feat_con2").css('width', '75%');
-	      $("#feat_con2 span").css('display', 'block');
-	      $("#feat_con3").css('width', '0');
-	      $("#feat_con3 span").css('display', 'none');
-	      $("#feat_con4").css('width', '0');
-	      $("#feat_con4 span").css('display', 'none');
-	      $("#feat_con5").css('width', '0');
-	      $("#feat_con5 span").css('display', 'none');
-	    });
-	    $("#feat_ttl3").mouseenter(function() {
-	      $("#feat_con0").css('width', '0');
-	      $("#feat_con0 span").css('display', 'none');
-	      $("#feat_con1").css('width', '0');
-	      $("#feat_con1 span").css('display', 'none');
-	      $("#feat_con2").css('width', '0');
-	      $("#feat_con2 span").css('display', 'none');
-	      $("#feat_con3").css('width', '75%');
-	      $("#feat_con3 span").css('display', 'block');
-	      $("#feat_con4").css('width', '0');
-	      $("#feat_con4 span").css('display', 'none');
-	      $("#feat_con5").css('width', '0');
-	      $("#feat_con5 span").css('display', 'none');
-	    });
-	    $("#feat_ttl4").mouseenter(function() {
-	      $("#feat_con0").css('width', '0');
-	      $("#feat_con0 span").css('display', 'none');
-	      $("#feat_con1").css('width', '0');
-	      $("#feat_con1 span").css('display', 'none');
-	      $("#feat_con2").css('width', '0');
-	      $("#feat_con2 span").css('display', 'none');
-	      $("#feat_con3").css('width', '0');
-	      $("#feat_con3 span").css('display', 'none');
-	      $("#feat_con4").css('width', '75%');
-	      $("#feat_con4 span").css('display', 'block');
-	      $("#feat_con5").css('width', '0');
-	      $("#feat_con5 span").css('display', 'none');
-	    });
-	    $("#feat_ttl5").mouseenter(function() {
-	      $("#feat_con0").css('width', '0');
-	      $("#feat_con0 span").css('display', 'none');
-	      $("#feat_con1").css('width', '0');
-	      $("#feat_con1 span").css('display', 'none');
-	      $("#feat_con2").css('width', '0');
-	      $("#feat_con2 span").css('display', 'none');
-	      $("#feat_con3").css('width', '0');
-	      $("#feat_con3 span").css('display', 'none');
-	      $("#feat_con4").css('width', '0');
-	      $("#feat_con4 span").css('display', 'none');
-	      $("#feat_con5").css('width', '75%');
-	      $("#feat_con5 span").css('display', 'block');
-	    });
 	});
 	
 	// 패키지 검색 시 지역 선택
@@ -153,17 +67,26 @@
 		}
 		return true;
     }
-
+	//슬라이드
+	var slideIndex = 1;
+	showDivs(slideIndex);
+	function plusDivs(n) {
+	  showDivs(slideIndex += n);
+	}
+	function currentDiv(n) {
+	  showDivs(slideIndex = n);
+	}
+	function showDivs(n) {
+	  var i;
+	  var x = document.getElementsByClassName("slider");
+	  if (n > x.length) {slideIndex = 1}    
+	  if (n < 1) {slideIndex = x.length}
+	  for (i = 0; i < x.length; i++) {
+	     x[i].style.display = "none";  
+	  }
+	  x[slideIndex-1].style.display = "block";  
+	}
 </script>
-
-<style type="text/css">
-/* img.ui-datepicker-trigger { */
-/* 	cursor : pointer; */
-/* 	margin-left : 5px; */
-/* } */
-
-</style>
-
 </head>
 <body>
 <!-- 왼쪽 메뉴 -->
@@ -200,13 +123,26 @@
 %>
 
 <div id="wrap">
-	<!--여행지 검색창 -->
 	<div id="package_head">
-		<div id="package_title">패키지
+		패키지
+	</div>
+	<!--여행지 검색창 -->
+	<div id="package_feat">
+		<div id="package_slide">
+			<a href="#" class="slider"><img alt="" src="./img/i.jpg"></a>
+			<a href="#" class="slider"><img alt="" src="./img/20101021182610.jpg"></a>
+			<a href="#" class="slider"><img alt="" src="./img/491021_374477_1553.jpg"></a>
+			<a href="#" class="slider"><img alt="" src="./img/군항제3.jpg"></a>
+			<a href="#" class="slider"><img alt="" src="./img/Jeju-bg.jpg"></a>
+			<div class="controller" style="width:100%">
+				<div class="prev" onclick="plusDivs(-1)">&#10094;</div>
+				<div class="next" onclick="plusDivs(1)">&#10095;</div>
+			</div>
 		</div>
 		<div id="package_search">
 			<p>내게 맞는 패키지 검색하기</p>
 			<form action="./PackSearchAction.po" name="fr" method="get" id="scheduler" onsubmit="return input_chk();">
+				<label for="date_from">출발</label><input type="text" id="date_from" class="input_style" name="startDate" required="yes"><br><br>
 				<label for="date_from">날짜</label><input type="text" id="date_from" class="input_style" name="startDate" required="yes">
 <!-- 				<label for="date_to">~</label><input type="text" id="date_to" class="input_style" name="endDate"><br><br> -->
 				<label for="city_search">지역</label>
@@ -229,20 +165,7 @@
 	</div>
 	<div id="clear"></div>
 	<!--여행지 검색창 -->
-	<div id="package_feat">
-			<div id="feat_con5"><a href="#"><span id="pktt">Lorem ipsum</span><br><span id="pksc">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span><br><span id="pkpr">￦123,456~</span></a></div>
-			<div id="feat_ttl5">타<br>이<br>틀<br>5</div>
-			<div id="feat_con4"><a href="#"><span id="pktt">Lorem ipsum</span><br><span id="pksc">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span><br><span id="pkpr">￦123,456~</span></a></div>
-			<div id="feat_ttl4">타<br>이<br>틀<br>4</div>
-			<div id="feat_con3"><a href="#"><span id="pktt">Lorem ipsum</span><br><span id="pksc">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span><br><span id="pkpr">￦123,456~</span></a></div>
-			<div id="feat_ttl3">타<br>이<br>틀<br>3</div>
-			<div id="feat_con2"><a href="#"><span id="pktt">Lorem ipsum</span><br><span id="pksc">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span><br><span id="pkpr">￦123,456~</span></a></div>
-			<div id="feat_ttl2">타<br>이<br>틀<br>2</div>
-			<div id="feat_con1"><a href="#"><span id="pktt">Lorem ipsum</span><br><span id="pksc">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span><br><span id="pkpr">￦123,456~</span></a></div>
-			<div id="feat_ttl1">타<br>이<br>틀<br>1</div>
-			<div id="feat_con0"><span>추천 상품<br>소개</span></div>
-		</div>
-		<div id="clear"></div>
+	<div id="clear"></div>
 	<div id="package_tab">
 		<form action="./Package.po" method="get" id="pf">
 		<!-- 탭 부분 -->
