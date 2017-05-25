@@ -10,7 +10,6 @@
 	<img alt="로고" src="./img/log3.png" onclick="location.href='./index.fo'">
 	<nav id="left_menu">
 		<ul id="menu_list">
-			<li><a href="./BoardList3.bo">공지사항</a></li>
 			<li id="home"><a href="./main.fo">메인</a></li>
 			<li id="pack"><a href="./PackList.po">패키지</a></li>
 			<li id="shop"><a href="./Productlist.bo">상품</a></li>
