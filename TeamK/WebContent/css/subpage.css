@@ -12,12 +12,12 @@ div#datepicker {
 	min-width: 1000px;
 	margin: 0 auto;
 	background-color: #fff;
-	padding-top: 10px;
 }
 div#notice, div#scheduler {
 	float: left;
 	width: 500px;
 }
+div#notice {padding: 20px;}
 div#scheduler {
 	background-color: #06c;
 	height: 200px;
@@ -27,7 +27,7 @@ div#scheduler {
 }
 div#scheduler form {
 	text-align: left;
-	margin-left: 30px;
+	margin-left: 40px;
 	line-height: 1.5em;
 }
 div#scheduler form label {margin: 0 20px 10px 0;}
@@ -116,7 +116,7 @@ div#review_show {
 	background-color: #fff;
 	padding: 10px;
 }
-div#datepicker div#notice, div#review_show div {
+div#review_show div {
 	height: 200px;
 	width: 490px;
 	float: left;
