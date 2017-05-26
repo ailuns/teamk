@@ -111,16 +111,14 @@ img.ui-datepicker-trigger
 </div>
 <!--왼쪽 메뉴 -->
 	<div id="wrap">
-		<div id="package_head">
-			<div id="package_title">패키지
+		<div id="package_title">
+			<div id="package_head">패키지
 			</div>
-			<div id="package_search">
-				<p>내게 맞는 패키지 검색하기</p>
+			<div id="package_search_sub">
 				<form action="./PackSearchAction.po" name="fr" method="get" id="scheduler" onsubmit="return input_chk()">
 					<label for="date_from">날짜</label>
 					<input type="text" id="date_from" class="input_style" name="startDate" value="<%=startDate%>" required="yes">
-					<label for="date_to">~</label>
-					<input type="text" id="date_to" class="input_style" name="endDate" value="<%=endDate%>"><br><br>
+<%-- 					<label for="date_to">~</label><input type="text" id="date_to" class="input_style" name="endDate" value="<%=endDate%>"><br><br> --%>
 					<label for="city_search">지역</label>
 	
 					<select id="area" name="area">

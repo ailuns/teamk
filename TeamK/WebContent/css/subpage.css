@@ -12,6 +12,7 @@ div#datepicker {
 	min-width: 1000px;
 	margin: 0 auto;
 	background-color: #fff;
+	padding-top: 10px;
 }
 div#notice, div#scheduler {
 	float: left;
@@ -32,6 +33,7 @@ div#scheduler form {
 div#scheduler form label {margin: 0 20px 10px 0;}
 div#scheduler form input[type=text] {
 	font-size: 20px;
+	margin-bottom: 20px;
 	width: 70%;
 }
 div#scheduler form select#area {
@@ -114,7 +116,7 @@ div#review_show {
 	background-color: #fff;
 	padding: 10px;
 }
-div#review_show div {
+div#datepicker div#notice, div#review_show div {
 	height: 200px;
 	width: 490px;
 	float: left;
@@ -126,6 +128,14 @@ div#datepicker div h1, div#review_show div h1 {
 	height: 30px;
 	margin: 0 0 10px 0;
 }
+div#datepicker div h1 a, div#review_show div h1 a {
+	text-decoration: none;
+	color: #333;
+}
+div#datepicker div h1 a span,
+div#review_show div h1 a span {float: right;}
+div#datepicker div h1 a span:HOVER,
+div#review_show div h1 a span:HOVER {color: #f00;}
 div#datepicker div table, div#review_show div table {
 	width: 100%;
 	font-size: 12px;
@@ -147,6 +157,16 @@ div#datepicker div table td#num, div#review_show div table td#num {width: 20px;}
 div#datepicker div table td#date, div#review_show div table td#date {width: 70px;}
 
 /* Package.jsp */
+div#package_head {
+	background-color: #fff;
+	padding-top: 5px;
+	border-bottom: 3px solid #06c;
+	font-size: 30px;
+	font-weight: lighter;
+	color: #06c;
+	text-align: left;
+	padding-left: 70px;
+}
 div#package_feat {
 	height: 300px;
 	width: 60%;
@@ -194,6 +214,7 @@ div#package_search {
 	color: #fff;
 	text-align: left;
 	font-weight: bold;
+	padding-top: 60px;
 }
 div#package_search p {
 	text-align: center;
@@ -216,18 +237,37 @@ div#package_search form input[type=submit] {
 	color: #fff;
 	font-weight: bold;
 }
+div#package_search_sub form input[type=submit]:hover,
 div#package_search form input[type=submit]:hover {
 	background-color: #09f;
+	cursor: pointer;
 }
-div#package_head {
-	background-color: #fff;
-	padding-top: 5px;
-	border-bottom: 3px solid #06c;
-	font-size: 30px;
-	font-weight: lighter;
-	color: #06c;
+div#package_search_sub {
+	width: 1000px;
+	height: 70px;
+	font-size: 25px;
+	background-color: #06c;
 	text-align: left;
-	padding-left: 70px;
+	color: #fff;
+	padding: 15px 0 0 70px;
+	font-weight: bold;
+}
+div#package_search_sub form input[type=text] {
+	font-size: 20px;
+	margin: 0 50px 0 30px;
+}
+div#package_search_sub form select#area {
+	font-size: 20px;
+	width: 200px;
+	margin: 0 50px 0 30px;
+}
+div#package_search_sub form input[type=submit] {
+	font-size: 20px;
+	width: 100px;
+	border: 1px solid #fff;
+	background-color: #06c;
+	color: #fff;
+	font-weight: bold;
 }
 
 div#package_list
