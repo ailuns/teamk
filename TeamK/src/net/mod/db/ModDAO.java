@@ -28,11 +28,11 @@ public class ModDAO {
 		conn = ds.getConnection();
 		return conn;
 	}
-	public int PO_Count(String id){
+	public int PO_Count(String id, String status){
 		int count = 0;
 		try{
 			conn = getconn();
-			sql = "select count(po_num) from pack_order where po_id=? and po_res_status<5";
+			sql = "select count(po_num) from pack_order where po_id=? and po_res_status"+status;
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -320,13 +320,13 @@ public class ModDAO {
 		
 		return ModList;
 	}
-	public List<ModTradeInfoBEAN> MyPackOrder(String id, int start, int end){
+	public List<ModTradeInfoBEAN> MyPackOrder(String id, int start, int end,String status){
 		List<ModTradeInfoBEAN> ModPackList = new ArrayList<ModTradeInfoBEAN>();
 		try{
 			conn =getconn();
 			sql = "select A.*, B.subject, B.intro, B.file1, B.date "
 					+"from pack_order A left outer join pack B "
-					+"on A.ori_num = B.num where A.po_id=? and A.po_res_status <= 5 "
+					+"on A.ori_num = B.num where A.po_id=? and A.po_res_status"+status
 					+"order by B.date,A.po_res_status limit ?,?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);

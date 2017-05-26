@@ -3,7 +3,6 @@ package net.mod.action;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -11,17 +10,17 @@ import javax.servlet.http.HttpSession;
 import net.mod.db.ModDAO;
 import net.mod.db.ModTradeInfoBEAN;
 
-public class MyPackOrderList implements Action {
+public class MyPackOrderList_Completed implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		ActionForward afo = new ActionForward();
 		HttpSession session = request.getSession();
-		String id = (String) session.getAttribute("id");
+		String id = (String)session.getAttribute("id");
 		ModDAO moddao = new ModDAO();
 		String pageNum = request.getParameter("pageNum");
-		int count = moddao.PO_Count(id, "<5");
+		int count = moddao.PO_Count(id,">8");
 		if (pageNum == null)
 			pageNum = "1";
 		int curpage = Integer.parseInt(pageNum);
@@ -33,7 +32,7 @@ public class MyPackOrderList implements Action {
 		int endpage=startp+pblock-1;
 		if(endpage > pcount)endpage = pcount;
 		List<ModTradeInfoBEAN> ModPList = new ArrayList<ModTradeInfoBEAN>();
-		ModPList = moddao.MyPackOrder(id, start, pagesize,"<5");
+		ModPList = moddao.MyPackOrder(id, start, pagesize,">8");
 		
 		request.setAttribute("ModPList", ModPList);
 		request.setAttribute("pblock", pblock);
@@ -44,7 +43,8 @@ public class MyPackOrderList implements Action {
 		request.setAttribute("count", count);
 		afo.setPath("./MyOrder/MyPackOrderList.jsp");
 		afo.setRedirect(false);
-		return afo;
+		return null;
 	}
+	
 
 }

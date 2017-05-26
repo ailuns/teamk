@@ -53,7 +53,7 @@ function Res_Cancel(num){
 		%>
 		<select>
 			<option value="ing">주문 목록 확인</option>
-			<option value="complete">지난 주문 확인</option>
+			<option value="completed">지난 주문 확인</option>
 		</select>
 		<div id = "list_view">
 			<form>
@@ -80,9 +80,10 @@ function Res_Cancel(num){
 					<tr>
 						<td><input type="button" value="여행자 정보 입력"
 							onclick="insertPM(<%=mpb.getNum()%>)"></td>
-						
+						<%if(mpb.getStatus()>1){ %>
 						<td><input type="button" value="예약 취소"
 							onclick="Res_Cancel(<%=mpb.getNum()%>)"></td>
+							<%} %>
 						</tr>
 					<%
 						}
