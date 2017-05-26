@@ -3,6 +3,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="net.board.db.BoardDAO"%>
 <%@ page import="net.pack.db.CategoryBean" %>
+<%@ page import="net.pack.db.PackBean" %>
 <%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -15,7 +16,7 @@
 <link href="./css/subpage.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="./js/jquery-3.2.0.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
   jQuery(document).ready(function($){
@@ -105,9 +106,28 @@
 		return true;
 	}
 	
+	
+	function bg(num)
+	{
+		var imgname = $("#pack_img" + num).val();
+		$("#pack" + num).css({
+			"background-image" : "url(./upload/" + imgname + ")",
+			"background-repeat" : "no-repeat",
+			"background-size" : "cover", 
+			"background-position" : "center center",
+			"width" : "333px",
+			"overflow" : "hidden"
+		});
+	}
+
+	
 </script>
+<style type="text/css">
+
+</style>
 <%
 	List CategoryList = (List)request.getAttribute("CategoryList");
+	List PackList = (List)request.getAttribute("PackList");
 %>
 </head>
 <body>
@@ -142,10 +162,8 @@
 			<div id="scheduler">
 				<p>내게 맞는 패키지 검색하기</p>
 				<form action="./PackSearchAction.po" method="post" name="fr" id="scheduler" onsubmit="return input_chk();">
-					<label for="from">날짜</label>
-					<input type="text" id="from" name="startDate" required="yes"><br>
-					<label for="to">~</label>
-					<input type="text" id="to" name="endDate"><br>
+					<label for="from">날짜</label><input type="text" id="from" name="startDate" required="yes"><br>
+<!-- 					<label for="to">~</label><input type="text" id="to" name="endDate"><br> -->
 					<label for="area">지역</label>
 					<select id="area" name="area">
 						<option value="">선택하세요</option>
@@ -166,9 +184,23 @@
 		</div>
 		<div id="clear"></div>
 		<div id="package_show">
-		<a href="#" id="pack1"><span id="pktt">Lorem ipsum</span><br><span id="pksc">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span><br><span id="pkpr">￦123,456~</span></a>
-		<a href="#" id="pack2"><span id="pktt">Lorem ipsum</span><br><span id="pksc">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span><br><span id="pkpr">￦123,456~</span></a>
-		<a href="#" id="pack3"><span id="pktt">Lorem ipsum</span><br><span id="pksc">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span><br><span id="pkpr">￦123,456~</span></a>
+			<%
+				PackBean pb;
+				for (int i = 0; i < PackList.size(); i++)
+				{
+					int j = i + 1;
+					int z = PackList.size();
+					pb =(PackBean)PackList.get(i);
+					
+			%>
+				<input type="hidden" id="pack_img<%=j %>" value=<%=pb.getFile1() %>>
+				<a href="#" id="pack<%=j %>"><span id="pktt"><%=pb.getSubject() %></span><br><span id="pksc"><%=pb.getIntro() %></span><br><span id="pkpr"><%=pb.getCost() %></span></a>
+				<script> bg(<%=j %>);</script>
+			<%
+				}
+			%>
+			
+<!-- 			<a href="#" id="pack1"><span id="pktt">제목이라네</span><br><span id="pksc">소제목이야</span><br><span id="pkpr">가격이지</span></a> -->
 		</div>
 		<div id="clear"></div>
 		<div id="goods_show">
