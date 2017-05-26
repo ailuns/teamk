@@ -51,7 +51,11 @@ function Res_Cancel(num){
 			List<ModTradeInfoBEAN> ModPList = (List<ModTradeInfoBEAN>) request.getAttribute("ModPList");
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
 		%>
-		<div>
+		<select>
+			<option value="ing">주문 목록 확인</option>
+			<option value="complete">지난 주문 확인</option>
+		</select>
+		<div id = "list_view">
 			<form>
 				<%
 					if (ModPList.size() != 0) {
@@ -70,18 +74,20 @@ function Res_Cancel(num){
 						<td><%=mpb.getCost()%>원</td>
 						<td><%=mpb.getStatus_text()%></td>
 					</tr>
+					<%
+						if (mpb.getStatus() < 4) {
+					%>
 					<tr>
 						<td><input type="button" value="여행자 정보 입력"
 							onclick="insertPM(<%=mpb.getNum()%>)"></td>
-						<%
-							if (mpb.getStatus() < 4) {
-						%>
+						
 						<td><input type="button" value="예약 취소"
 							onclick="Res_Cancel(<%=mpb.getNum()%>)"></td>
-						<%
-							}
-						%>
-					</tr>
+						</tr>
+					<%
+						}
+					%>
+			
 				</table>
 				<%
 					}
@@ -93,9 +99,7 @@ function Res_Cancel(num){
 					}
 				%>
 			</form>
-
-		</div>
-		<%
+			<%
 			if (count != 0) {
 
 				if (endpage > pcount)
@@ -115,6 +119,8 @@ function Res_Cancel(num){
 			}
 			}
 		%>
+
+		</div>
 		<br> <input type="button" value="내주문"
 			onclick="location.href='./MyOrderList.mo'">
 	</div>

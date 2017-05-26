@@ -32,7 +32,7 @@ public class ModDAO {
 		int count = 0;
 		try{
 			conn = getconn();
-			sql = "select count(po_num) from pack_order where po_id=?";
+			sql = "select count(po_num) from pack_order where po_id=? and po_res_status<5";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -260,69 +260,6 @@ public class ModDAO {
 		}
 		return count;
 	}
-	/*public List<ModTradeInfoBEAN> ReadModTI(String id,int start, int end){
-		List<ModTradeInfoBEAN> ModList = new ArrayList<ModTradeInfoBEAN>();
-		try{
-			conn=getconn();
-			sql = "select * from trade_info where id = ? "+
-					"order by ti_num desc limit ?,?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
-			pstmt.setInt(2, start-1);
-			pstmt.setInt(3, end);
-			rs = pstmt.executeQuery();
-			while(rs.next()){
-				int count = TO_TINum_Search(rs.getInt("ti_num"));
-				if (count != 0) {
-					ModTradeInfoBEAN mtib = new ModTradeInfoBEAN();
-					mtib.setTi_num(rs.getInt("ti_num"));
-					mtib.setName(rs.getString("ti_receive_name"));
-					mtib.setMobile(rs.getString("ti_receive_mobile"));
-					mtib.setPostcode(rs.getString("ti_receive_postcode"));
-					mtib.setAddress1(rs.getString("ti_receive_address1"));
-					mtib.setAddress2(rs.getString("ti_receive_address2"));
-					mtib.setMemo(rs.getString("ti_receive_memo"));
-					mtib.setTrade_type(rs.getString("ti_trade_type"));
-					mtib.setPayer(rs.getString("ti_trade_payer"));
-					mtib.setTrade_date(rs.getTimestamp("ti_trade_date"));
-					mtib.setTotal_cost(rs.getInt("ti_total_cost"));
-					mtib.setStatus(rs.getInt("ti_status"));
-					String status_text = "";
-					switch (rs.getInt("ti_status")) {
-					case 1:
-						status_text = "입금 확인 중";
-						break;
-					case 2:
-						status_text = "결제 완료";
-						break;
-					case 3:
-						status_text = "환불 완료";
-						break;
-					case 9:
-						status_text = "대기중";
-						break;
-					case 10:
-						status_text = "완료";
-						break;
-					}
-					mtib.setStatus_text(status_text);
-					ModList.add(mtib);
-				}
-			}
-		}catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				rs.close();
-				pstmt.close();
-				conn.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		
-		return ModList;
-	}*/
 	public List<ModTradeInfoBEAN> TO_ReadModTI(String id,int start, int end){
 		List<ModTradeInfoBEAN> ModList = new ArrayList<ModTradeInfoBEAN>();
 		try{
@@ -406,16 +343,15 @@ public class ModDAO {
 				mtib.setTrade_num(rs.getString("po_trade_num"));
 				mtib.setPack_count(rs.getString("po_count"));
 				mtib.setCost(rs.getInt("po_cost"));
-				mtib.setTrade_date(rs.getTimestamp("po_res_date"));
+				mtib.setTrade_date(rs.getTimestamp("date"));
 				mtib.setStatus(rs.getInt("po_res_status"));
 				String statustext = "";
 				switch(rs.getInt("po_res_status")){
 					case 1: statustext = "입금 확인 중"; break;
 					case 2: statustext = "예약 대기 중"; break;
 					case 3: statustext = "예약 완료"; break;
-					case 4: statustext = "예약 취소 확인 중";break;
-					case 5: statustext = "환불 완료";break;
-					case 9: statustext = "환불 처리됨";break;
+					case 4: statustext = "예약 취소 중";break;
+					case 9: statustext = "취소 완료";break;
 					case 10:statustext = "완료";break;
 				}
 				mtib.setDate(rs.getTimestamp("date"));
@@ -604,7 +540,7 @@ public class ModDAO {
 		ModTradeInfoBEAN mtib = new ModTradeInfoBEAN();
 		try{
 			conn =getconn();
-			sql = "select A.*, B.subject, B.intro, B.file1,C.ti_trade_type "
+			sql = "select A.*, B.subject, B.intro, B.file1,C.ti_trade_type,B.date "
 					+"from pack_order A left outer join(pack B cross join trade_info C) "
 					+"on(A.ori_num = B.num and A.po_ti_num = C.ti_num)where A.po_num = ?";
 			pstmt = conn.prepareStatement(sql);
@@ -621,6 +557,7 @@ public class ModDAO {
 				mtib.setCost(rs.getInt("po_cost"));
 				String []t_type = rs.getString("ti_trade_type").split(",");
 				mtib.setTrade_type(t_type[0]);
+				mtib.setDate(rs.getTimestamp("date"));
 				mtib.setTrade_date(rs.getTimestamp("po_res_date"));
 				String statustext = "";
 				switch(rs.getInt("po_res_status")){

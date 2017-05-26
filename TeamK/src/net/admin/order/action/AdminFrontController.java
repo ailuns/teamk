@@ -70,6 +70,20 @@ public class AdminFrontController extends HttpServlet{
 			afo = new ActionForward();
 			afo.setPath("/Admin/AdminOrderList.jsp");
 			afo.setRedirect(false);
+		}else if(command.equals("/Admin_Pack_Res_Cancel.ao")){
+			action = new Admin_Pack_Res_Cancel();
+			try {
+				afo = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/Admin_Pack_Res_Cancel_Action.ao")){
+			action = new Admin_Pack_Res_Cancel_Action();
+			try {
+				afo = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		if (afo != null) {
 			if (afo.isRedirect()) {
