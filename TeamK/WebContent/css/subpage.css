@@ -611,6 +611,7 @@ div#board {
 	margin: 0 auto;
 	background-color: #fff;
 	padding: 5px;
+	border-bottom: 3px solid #06c;
 }
 div#board div#board_list {
 	width: 90%;

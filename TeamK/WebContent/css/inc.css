@@ -11,9 +11,6 @@ header img {
 	height: 140px;
 	margin: 5px 0;
 }
-header img:HOVER {
-	cursor: pointer;
-}
 nav {
 	position: absolute;
 	left: 15%;
@@ -203,8 +200,8 @@ div#search input[type=submit]:hover {
 	text-shadow: 1px 1px 3px #000;
 	cursor: pointer;
 }
-div#search #area {
-	width: 300px;
+div#search input[type=text] {
+	width: 400px;
 	border: 1px solid #4a73b1;
 	border-radius: 15px;
 	font-size: 20px;
