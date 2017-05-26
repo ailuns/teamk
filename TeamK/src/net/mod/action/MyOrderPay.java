@@ -22,8 +22,8 @@ public class MyOrderPay implements Action{
 		request.setCharacterEncoding("utf-8");
 		String []tch = request.getParameterValues("tch");
 		String []pch = request.getParameterValues("pch");
-		String pnum = (String)request.getAttribute("pnum");
-		String tnum = (String)request.getAttribute("tnum");
+		String pnum = request.getParameter("pnum");
+		String tnum = request.getParameter("tnum");
 		ActionForward afo = new ActionForward();
 		List<TBasketBEAN>ModThingList = new ArrayList<TBasketBEAN>();
 		List<PBasketBEAN>ModPackList= new ArrayList<PBasketBEAN>();
@@ -61,6 +61,7 @@ public class MyOrderPay implements Action{
 			ModThingList.add(tbb);
 		}
 		if(pnum!=null){
+			System.out.println(pnum);
 			pbb =new PBasketBEAN();
 			pbb.setPb_num(0);
 			pbb.setOri_num(Integer.parseInt(pnum));

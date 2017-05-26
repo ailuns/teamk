@@ -580,15 +580,15 @@ div#member_head, div#board_head {
 	text-align: left;
 }
 div#member_title, div#member_script, div#qna_title, div#qna_script, div#rvw_title, div#rvw_script {
-	height: 50px;
+	height: 60px;
 	width: 1000px;
 	margin: 0 auto;
 	color: #fff;
-	padding-left: 70px;
+	padding-left: 100px;
 }
 div#member_title, div#qna_title, div#rvw_title {
 	background-color: #fff;
-	padding-top: 5px;
+	padding-top: 18px;
 	border-bottom: 3px solid #06c;
 	font-size: 30px;
 	font-weight: lighter;
@@ -605,11 +605,11 @@ div#board {
 	min-width: 1000px;
 	margin: 0 auto;
 	background-color: #fff;
-	padding: 20px;
+	padding: 5px;
 }
 div#board div#board_list {
 	width: 90%;
-	margin: 20px auto;
+	margin: 10px auto;
 }
 div#board div#board_list table {
 	border-collapse: collapse;

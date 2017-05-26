@@ -133,6 +133,26 @@ public class ReplyFrontController extends HttpServlet{
 		}
 		
 		
+		else if(command.equals("/ReplyUpdateActoin.ro"))
+		{
+			//회원가입 처리작업 자바파일 객체 생성 메서드호출()
+			//처리작업할 파일의 틀을 제시 interface 만들고
+			//그 틀에 맞추어서 처리파일 만들기
+			//interface
+			//패키지 net.member.action 파일Action
+			
+			action = new ReplyUpdateActoin();
+			try {
+				forward = action.excute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			//패키지 net.member.action 파일MemberJoinAction
+		}
+		
+		
 		
 		
 		

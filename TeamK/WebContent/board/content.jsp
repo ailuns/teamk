@@ -5,7 +5,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
@@ -68,7 +68,7 @@ int num = Integer.parseInt(request.getParameter("num"));
 		<div id="board">
 		<div id="board_content">
 <table>
-<tr><td id="num"><%=bb.getRe_ref()%></td><td id="date"><%=bb.getDate()%></td><td id="readcount">조회수: <%=bb.getReadcount()%></td></tr>
+<tr><td id="num"><%=bb.getRe_ref()%></td><td id="date"><%=bb.getDate()%></td><td id="readcount">조회수:<%=bb.getReadcount()%></td></tr>
 <tr><td colspan="2" id="subject"><%=bb.getSubject()%></td><td id="id"><%=bb.getId()%></td></tr>
 <tr><td colspan="3" id="content"><br><br><%=bb.getContent()%><br><br></td></tr>
 
@@ -91,7 +91,6 @@ int num = Integer.parseInt(request.getParameter("num"));
 </table>
 <%
 if(id!=null){
-	
 //자신의 Id일때만 글수정 가능
 if(id.equals(bb.getId())){ %>
 <input type="button" value="글수정" 

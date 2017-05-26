@@ -5,12 +5,14 @@ header {
 	position: relative;
 	width: 1000px;
 	margin: 0 auto;
-	border-bottom: 3px solid #0c9;
 }
 header img {
 	width: 140px;
 	height: 140px;
 	margin: 5px 0;
+}
+header img:HOVER {
+	cursor: pointer;
 }
 nav {
 	position: absolute;

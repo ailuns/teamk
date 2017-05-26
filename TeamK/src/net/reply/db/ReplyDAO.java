@@ -405,14 +405,16 @@ public class ReplyDAO {
 	}
 	
 	
-	public void updateReply(String content, int num) {
+	public void updateReply(String content, int num, int h_or_s) {
 		try {
 			conn = getConnection();
-			sql = "update reply set content=? where num=?";
+			sql = "update reply set content=?, h_or_s=? where num=?";
 			pstm = conn.prepareStatement(sql);
 			pstm.setString(1, content);
-			pstm.setInt(2, num);
-			rs = pstm.executeQuery();
+			pstm.setInt(2, h_or_s);
+			pstm.setInt(3, num);
+			
+			pstm.executeUpdate();
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

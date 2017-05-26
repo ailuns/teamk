@@ -83,9 +83,19 @@
 		});
 	});
 	
+	jQuery(document).ready(function($){
+		$("#select_rbtn0").prop("checked", "true");	
+	});
+	
+	
+	
 	// 찜하기, 예약하기 버튼 클릭 시 각각 버튼 마다 이동할 페이지
 	function submit_fun(i, user_id)
 	{
+		if ($("input[type=radio][name=chk]").is(":checked"))
+		{
+		
+		}
 		// i = 1  찜추가   i = 2 찜취소    i = 3  예약하기
 		if (i == 1 && user_id != "") // 로그인 되어 있을 경우 찜추가
 		{
@@ -125,36 +135,31 @@
 		
 		else if (i == 3 && user_id != "")
 		{
-			var cost_temp = $("#p").html();
-			str = String(cost_temp);
-		    cost = str.replace(/[^\d]+/g, '');
+			var cost_temp = $("#p").html(); // 총금액 받아오기
+			str = String(cost_temp);		// 총금액 천원단위로 , 찍혀있는걸
+		    cost = str.replace(/[^\d]+/g, '');   // 풉니다
 			
 		    $("#cost").val(cost);
 		    $("#ori_num").val($("input[type=radio][name=chk]:checked").val());
-		    
-// 		    alert("sdf");
-		    document.input_fr.action = "./MyBasketAddAction.bns";
+
+		    document.input_fr.action = "./MyBasketAddAction.bns";	// 장바구니 페이지로 이동
 		    document.input_fr.method = "post";
 		    document.input_fr.submit();
-		    
-// 			$.ajax({
-// 				type:"post",
-// 				url:"./MyBasketAddAction.bns",   // java로 보냄
-// 				data:{
-// 					아이, 어른, 글번호, 총가격
-// 					num:$("input[type=radio][name=chk]:checked").val(),
-// 					adult:$("#adult option:selected").val(),
-// 					child:$("#child option:selected").val(),
-// 					cost:cost,
-// 					type:"P"
-// 				}
-// 				success:function(){
-// 					$("#jjim_o").show();
-// 					$("#jjim_x").hide();
-// 					alert("찜목록에서 삭제되었습니다");
-// //						window.location.reload(true);  // 페이지 새로고침
-// 				}
-// 			});
+		}
+		
+		else if (i == 4 && user_id != "")
+		{
+			var cost_temp = $("#p").html(); // 총금액 받아오기
+			str = String(cost_temp);		// 총금액 천원단위로 , 찍혀있는걸
+		    cost = str.replace(/[^\d]+/g, '');  // 풉니다
+			
+		    // 폼태그로 보내기때문에 hidden 숨겨둔 곳에 각각 값을 넣는다
+		    $("#cost").val(cost);
+		    $("#ori_num").val($("input[type=radio][name=chk]:checked").val());
+
+		    document.input_fr.action = "./MyOrderPay.mo";  // 예약하기 페이지로 이동
+		    document.input_fr.method = "post";
+		    document.input_fr.submit();
 		}
 		
 		
@@ -234,7 +239,7 @@
 				data:{
 					id:$("#id").val(),
 					content:$("#content").val(),
-					num:$("#num").val(),
+					num:num,
 					secretChk:$(".secretChk").val()	// 비밀글 아닐 시 값 1
 					},
 					success:function()
@@ -251,7 +256,7 @@
 				data:{
 					id:$("#id").val(),
 					content:$("#content").val(),
-					num:$("#num").val(),
+					num:num,
 					secretChk:"0"     // 비밀글 아닐 시 값 0
 				},
 				success:function(){
@@ -271,18 +276,18 @@
 				url:"./Re_ReplyWriteAction.ro",
 				data:{
 					id:$("#reid").val(),
-					content:$("#recontent").val(),
+					content:$("#recontent"+num).val(),
 					num:$("#num").val(),
 					repageNum:$("#repageNum").val(),
 					replynum:$("#replynum").val(),
-					re_ref:$("#re_ref").val(),
+					re_ref:$("#re_ref"+num).val(),
 					re_lev:$("#re_lev").val(),
 					re_seq:$("#re_seq").val(),
-					secretChk:$(".re_secretChk").val()
-				},
-				success:function(){
-					window.location.reload(true);
-				}
+					secretChk:$(".re_secretChk").val(),
+					success:function(){
+						window.location.reload(true);
+					}
+				}				
 			});
 		}
 		else		  // 비밀글 체크 x
@@ -291,19 +296,20 @@
 				type:"post",
 				url:"./Re_ReplyWriteAction.ro",
 				data:{
-					id:$("#reid").val(),
-					content:$("#recontent").val(),
 					num:$("#num").val(),
+					id:$("#reid").val(),
+					content:$("#recontent"+num).val(),
 					repageNum:$("#repageNum").val(),
 					replynum:$("#replynum").val(),
-					re_ref:$("#re_ref").val(),
+					re_ref:$("#re_ref"+num).val(),
 					re_lev:$("#re_lev").val(),
 					re_seq:$("#re_seq").val(),
-					secretChk:"0"					
-				},
-				success:function(){
-					window.location.reload(true);
+					secretChk:"0",
+					success:function(){
+						window.location.reload(true);
+					}
 				}
+				
 			});
 		}
 	}
@@ -316,10 +322,10 @@
 			url:"./ReplyDelAction.ro",
 			data:{
 				renum:renum,
-				id:id				
-			},
-			success:function(){
-				window.location.reload(true);
+				id:id,				
+				success:function(){
+					window.location.reload(true);
+				}
 			}
 		});
 	}
@@ -333,13 +339,13 @@
 				type:"post",
 				url:"./ReplyUpdateActoin.ro",
 				data:{
-					content:$("#contentup").val(),
+					content:$("#contentup"+num).val(),
 					num:num,
-					secretChk:$(".up_secretChk"+num).val()
-				},
-				success:function(){
-					window.location.reload(true);
-				}
+					secretChk:$(".up_secretChk"+num).val(),
+					success:function(){
+						window.location.reload(true);
+					}
+				}				
 			});
 		}
 		
@@ -349,13 +355,13 @@
 				type:"post",
 				url:"./ReplyUpdateActoin.ro",
 				data:{
-					content:$("#contentup").val(),
 					num:num,
-					secretChk:"0"
-				},
-				success:function(){
-				window.location.reload(true);
-			}
+					content:$("#contentup"+num).val(),
+					secretChk:"0",
+					success:function(){
+						window.location.reload(true);
+					}				
+				}
 			});
 		}
 	}
@@ -1073,7 +1079,7 @@
 							<td>합계</td>
 							<td colspan="2">
 								<input type="hidden" id="cost" name="cost" value="">
-								<input type="hidden" id="ori_num" name="num" value="">
+								<input type="hidden" id="ori_num" name="pnum" value="">
 								<input type="hidden" name="type" value="P">
 								<p id="p"><%=cost_adult %></p>
 							</td>
@@ -1270,45 +1276,42 @@
 				
 				<tr id="conup<%=rb.getNum()%>" style="display: none;">
 					<td>
-						<input type="hidden" name="num" value="<%=PB.getNum()%>">
-						<input type="hidden" name="pageNum" value="<%=repageNum%>">
-						<input type="hidden" name="replynum" value="<%=rb.getNum()%>">
 						<%=user_id %>
 					</td>
 					
-					<td><textarea cols="60" rows="2" id="contentup" name="contentup"><%=rb.getContent() %></textarea></td>
+					<td><textarea cols="60" rows="2" id="contentup<%=rb.getNum() %>" name="contentup"><%=rb.getContent() %></textarea></td>
 					<td>
-						<input type="button" id="re_reply_content" value="수정" onclick="reUpdateAction(<%=rb.getNum() %>)">
+						<input type="button" value="수정" onclick="reUpdateAction(<%=rb.getNum() %>)">
 					</td>
 					<td>
-						<input type="button" id="re_reply_content" value="취소" onclick="reupdate(<%=rb.getNum() %>)">
+						<input type="button" value="취소" onclick="reupdate(<%=rb.getNum() %>)">
 					</td>
 					<td>
 						<input type="checkbox" class="up_secretChk<%=rb.getNum() %>" name="secretChk" value="1" <%if(rb.getH_or_s() == 1){%>checked<%} %>>비밀글
 					</td>
-				<tr>
+				</tr>
 				<tr id="con<%=rb.getNum()%>" style="display: none;">
 					<td>
 						<input type="hidden" id="num" name="num" value="<%=PB.getNum()%>">
 						<input type="hidden" id="repageNum" name="repageNum" value="<%=repageNum%>">
 						<input type="hidden" id="replynum" name="replynum" value="<%=rb.getNum()%>">
-						<input type="hidden" id="re_ref" name="re_ref" value="<%=rb.getRe_ref()%>">
+						<input type="hidden" id="re_ref<%=rb.getNum() %>" name="re_ref" value="<%=rb.getRe_ref()%>">
 						<input type="hidden" id="re_lev" name="re_lev" value="<%=rb.getRe_lev()%>">
 						<input type="hidden" id="re_seq" name="re_seq" value="<%=rb.getRe_seq()%>">
 						<p><%=user_id %></p>
 						<input type="hidden" id="reid" name="id" class="box" value="<%=user_id %>">
 					</td>
-					<td><textarea cols="60" rows="2" id="recontent" name="content"></textarea></td>
+					<td><textarea cols="60" rows="2" id="recontent<%=rb.getNum() %>" name="recontent"></textarea></td>
 					<td>
-						<input type="button" id="re_reply_content" value="답글등록" onclick="Re_Reply_Write()">
+						<input type="button" value="답글등록" onclick="Re_Reply_Write(<%=rb.getNum() %>)">
 					</td>
 					<td>
-						<input type="button" id="re_reply_content" value="취소" onclick="rewrite(<%=rb.getNum() %>)">
+						<input type="button" value="취소" onclick="rewrite(<%=rb.getNum() %>)">
 					</td>
 					<td>
 						<input type="checkbox" class="re_secretChk" name="secretChk" value="1">비밀글
 					</td>
-				<tr>
+				</tr>
 			
 				<%
 					}
