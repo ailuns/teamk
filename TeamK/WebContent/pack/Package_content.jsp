@@ -83,9 +83,19 @@
 		});
 	});
 	
+	jQuery(document).ready(function($){
+		$("#select_rbtn0").prop("checked", "true");	
+	});
+	
+	
+	
 	// 찜하기, 예약하기 버튼 클릭 시 각각 버튼 마다 이동할 페이지
 	function submit_fun(i, user_id)
 	{
+		if ($("input[type=radio][name=chk]").is(":checked"))
+		{
+		
+		}
 		// i = 1  찜추가   i = 2 찜취소    i = 3  예약하기
 		if (i == 1 && user_id != "") // 로그인 되어 있을 경우 찜추가
 		{
@@ -956,10 +966,8 @@
 			<div id="package_search">
 				<p>내게 맞는 패키지 검색하기</p>
 				<form action="./PackSearchAction.po" name="fr" method="get" id="scheduler" onsubmit="return input_chk()">
-					<label for="date_from">출발</label>
-					<input type="text" id="date_from" class="input_style" name="startDate" required="yes">
-					<label for="date_to">도착</label>
-					<input type="text" id="date_to" class="input_style" name="endDate">
+					<label for="date_from">날짜</label><input type="text" id="date_from" class="input_style" name="startDate" required="yes">
+<!-- 					<label for="date_to">도착</label><input type="text" id="date_to" class="input_style" name="endDate"> -->
 					<br><br>
 					<label for="city_search">지역</label>
 					<select id="area" name="area">
@@ -1286,7 +1294,7 @@
 						<input type="hidden" id="num" name="num" value="<%=PB.getNum()%>">
 						<input type="hidden" id="repageNum" name="repageNum" value="<%=repageNum%>">
 						<input type="hidden" id="replynum" name="replynum" value="<%=rb.getNum()%>">
-						<input type="text" id="re_ref<%=rb.getNum() %>" name="re_ref" value="<%=rb.getRe_ref()%>">
+						<input type="hidden" id="re_ref<%=rb.getNum() %>" name="re_ref" value="<%=rb.getRe_ref()%>">
 						<input type="hidden" id="re_lev" name="re_lev" value="<%=rb.getRe_lev()%>">
 						<input type="hidden" id="re_seq" name="re_seq" value="<%=rb.getRe_seq()%>">
 						<p><%=user_id %></p>

@@ -11,6 +11,9 @@ header img {
 	height: 140px;
 	margin: 5px 0;
 }
+header img:HOVER {
+	cursor: pointer;
+}
 nav {
 	position: absolute;
 	left: 15%;
