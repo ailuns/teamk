@@ -3,6 +3,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="net.board.db.BoardDAO"%>
 <%@ page import="net.pack.db.CategoryBean" %>
+<%@ page import="net.pack.db.PackBean" %>
 <%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -15,7 +16,7 @@
 <link href="./css/subpage.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="./js/jquery-3.2.0.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
   jQuery(document).ready(function($){
@@ -41,19 +42,19 @@
         }
 	});
 	
-	$("#to").datepicker({
-		dateFormat: 'yy-mm-dd',    // 날짜 포맷 형식
-		minDate : 0,			   // 최소 날짜 설정      0이면 오늘부터 선택 가능
-		numberOfMonths: 2,		   // 보여줄 달의 갯수
-        dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],  // 일(Day) 표기 형식
-        monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],   // 월(Month) 표기 형식
-        //showOn: "both",			// 버튼을 표시      both : input과 buttom 둘다 클릭 시 달력 표시           bottom  :  buttom 클릭 했을 때만 달력 표시
-        //buttonImage: "./img/calendar.png",   // 버튼에 사용될 이미지
-        //buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
-        onClose: function(selectedDate){		// 닫힐 때 함수 호출
-        	$("#from").datepicker("option", "maxDate", selectedDate);   // #date_from의 최대 날짜를 #date_to에서 선택된 날짜로 설정
-       	}
-	});
+// 	$("#to").datepicker({
+// 		dateFormat: 'yy-mm-dd',    // 날짜 포맷 형식
+// 		minDate : 0,			   // 최소 날짜 설정      0이면 오늘부터 선택 가능
+// 		numberOfMonths: 2,		   // 보여줄 달의 갯수
+//         dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],  // 일(Day) 표기 형식
+//         monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],   // 월(Month) 표기 형식
+//         //showOn: "both",			// 버튼을 표시      both : input과 buttom 둘다 클릭 시 달력 표시           bottom  :  buttom 클릭 했을 때만 달력 표시
+//         //buttonImage: "./img/calendar.png",   // 버튼에 사용될 이미지
+//         //buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
+//         onClose: function(selectedDate){		// 닫힐 때 함수 호출
+//         	$("#from").datepicker("option", "maxDate", selectedDate);   // #date_from의 최대 날짜를 #date_to에서 선택된 날짜로 설정
+//        	}
+// 	});
 
     //Package
     $("#pack1")
@@ -105,9 +106,25 @@
 		return true;
 	}
 	
+	
+	function bg(num)
+	{
+		var imgname = $("#pack_img" + num).val();
+		$("#pack" + num).css({
+			"background-image" : "url(./upload/" + imgname + ")",
+// 			"width" : "333px",
+			"overflow" : "hidden"
+		});
+	}
+
+	
 </script>
+<style type="text/css">
+
+</style>
 <%
 	List CategoryList = (List)request.getAttribute("CategoryList");
+	List PackList = (List)request.getAttribute("PackList");
 %>
 </head>
 <body>
@@ -119,7 +136,7 @@
 	<div id="wrap">
 		<div id="datepicker">
 			<div id="notice">
-			<a href="./BoardList3.bo"><h1>공지사항</h1></a>
+			<h1><a href="./BoardList3.bo">공지사항<span>＋</span></a></h1>
 			<table>
 				<%
 				BoardDAO bdao=new BoardDAO();
@@ -141,11 +158,11 @@
 			</div>
 			<div id="scheduler">
 				<p>내게 맞는 패키지 검색하기</p>
-				<form action="./PackSearchAction.po" method="post" name="fr" id="scheduler" onsubmit="return input_chk();">
+				<form action="./PackSearchAction.po" method="post" name="fr" id="scheduler" onsubmit="return input_chk();">					
 					<label for="from">날짜</label>
 					<input type="text" id="from" name="startDate" required="yes"><br>
-					<label for="to">~</label>
-					<input type="text" id="to" name="endDate"><br>
+<!-- 					<label for="to">~</label> -->
+<!-- 					<input type="text" id="to" name="endDate"><br> -->
 					<label for="area">지역</label>
 					<select id="area" name="area">
 						<option value="">선택하세요</option>
@@ -166,9 +183,23 @@
 		</div>
 		<div id="clear"></div>
 		<div id="package_show">
-		<a href="#" id="pack1"><span id="pktt">Lorem ipsum</span><br><span id="pksc">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span><br><span id="pkpr">￦123,456~</span></a>
-		<a href="#" id="pack2"><span id="pktt">Lorem ipsum</span><br><span id="pksc">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span><br><span id="pkpr">￦123,456~</span></a>
-		<a href="#" id="pack3"><span id="pktt">Lorem ipsum</span><br><span id="pksc">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span><br><span id="pkpr">￦123,456~</span></a>
+			<%
+				PackBean pb;
+				for (int i = 0; i < PackList.size(); i++)
+				{
+					int j = i + 1;
+					int z = PackList.size();
+					pb =(PackBean)PackList.get(i);
+					
+			%>
+				<input type="hidden" id="pack_img<%=j %>" value=<%=pb.getFile1() %>>
+				<a href="#" id="pack<%=j %>"><span id="pktt"><%=pb.getSubject() %></span><br><span id="pksc"><%=pb.getIntro() %></span><br><span id="pkpr"><%=pb.getCost() %></span></a>
+				<script> bg(<%=j %>);</script>
+			<%
+				}
+			%>
+			
+<!-- 			<a href="#" id="pack1"><span id="pktt">제목이라네</span><br><span id="pksc">소제목이야</span><br><span id="pkpr">가격이지</span></a> -->
 		</div>
 		<div id="clear"></div>
 		<div id="goods_show">
@@ -176,7 +207,7 @@
 		</div>
 		<div id="review_show">
 		<div id="gds_rv">
-		<a href="./BoardList.bo"><h1>리뷰</h1></a>
+		<h1><a href="./BoardList.bo">리뷰<span>＋</span></a></h1>
 			<table>
 				<%
 if(count!=0){
@@ -194,7 +225,7 @@ if(count!=0){
 			</table>
 			</div>
 			<div id="trv_rv">
-			<a href="./BoardList2.bo"><h1>Q&amp;A</h1></a>
+			<h1><a href="./BoardList2.bo">Q&amp;A<span>＋</span></a></h1>
 			<table>
 				<%
 if(count!=0){
