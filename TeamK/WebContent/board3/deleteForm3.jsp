@@ -20,7 +20,7 @@ String id = (String)session.getAttribute("id");
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
-		<div id="rvw_head">
+		<div id="board_head">
 			<div id="rvw_title">공지사항</div>
 			<div id="rvw_script">공지사항 게시판 입니다.</div>
 		</div>

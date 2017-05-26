@@ -38,7 +38,7 @@ BoardDAO bdao = new BoardDAO();
 	<div id="wrap">
 		<div id="board_head">
 			<div id="rvw_title">리뷰</div>
-			<div id="rvw_script">물건이나 여행 후기를 쓰는 곳 입니다.<br>[전체글 개수 :<%=count%>]</div>
+			<div id="rvw_script">상품이나 패키지 후기를 쓰는 곳 입니다.<br>[전체글 개수 :<%=count%>]</div>
 		</div>
 		<div id="clear"></div>
 		<div id="board">
