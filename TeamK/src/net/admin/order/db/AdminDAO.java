@@ -205,6 +205,25 @@ public class AdminDAO {
 		}
 		return check;
 	}
+	public void PO_Status_Update(int status, String po_num){
+		try{
+			conn = getconn();
+			sql = "update pack_order set po_res_status = ? where po_num = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,status);
+			pstmt.setInt(2,Integer.parseInt(po_num));
+			pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	public void PO_Status_Update(int status, int ti_num){
 		try{
 			conn = getconn();
@@ -450,7 +469,8 @@ public class AdminDAO {
 					case 10: statustext="완료";break;
 				}
 				mtib.setStatus(stat);
-				mtib.setStatus_text(statustext);				
+				mtib.setStatus_text(statustext);
+				mtib.setMemo(rs.getString("po_memo"));
 				Pack_Res_List.add(mtib);
 			}
 			
@@ -493,4 +513,5 @@ public class AdminDAO {
 		} 
 		return mtib;
 	}
+	
 }

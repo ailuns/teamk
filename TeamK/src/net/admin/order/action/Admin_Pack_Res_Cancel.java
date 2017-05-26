@@ -6,18 +6,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.admin.order.db.AdminDAO;
-import net.mod.db.ModDAO;
 import net.mod.db.ModTradeInfoBEAN;
 
-public class Pack_Res implements Action{
+public class Admin_Pack_Res_Cancel implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
+		String pageNum=request.getParameter("pageNum");
+		AdminDAO admindao = new AdminDAO();
 		ActionForward afo = new ActionForward();
-		String pageNum = request.getParameter("pageNum");
-		AdminDAO adao = new AdminDAO();
-		int count = adao.Pack_Res_Count(2);
+		int count = admindao.Pack_Res_Count(4);
 		if (pageNum == null)
 			pageNum = "1";
 		int curpage = Integer.parseInt(pageNum);
@@ -28,15 +27,15 @@ public class Pack_Res implements Action{
 		int startp=((curpage-1)/pblock)*pblock+1;
 		int endpage=startp+pblock-1;
 		if(endpage > pcount)endpage = pcount;
-		List<ModTradeInfoBEAN>Pack_Res_List = adao.Pack_Res(2, start, pagesize);
-		request.setAttribute("Pack_Res_List", Pack_Res_List);
+		List<ModTradeInfoBEAN>CancelPackList = admindao.Pack_Res(4, start, pagesize); 
+		request.setAttribute("CancelPackList", CancelPackList);
 		request.setAttribute("pblock", pblock);
 		request.setAttribute("endpage", endpage);
 		request.setAttribute("startp", startp);
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("pcount", pcount);
 		request.setAttribute("count", count);
-		afo.setPath("./Admin/Pack_Res.jsp");
+		afo.setPath("./Admin/PackResCancel.jsp");
 		afo.setRedirect(false);
 		return afo;
 	}

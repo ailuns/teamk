@@ -18,7 +18,7 @@ public class Res_Cancel implements Action{
 		ModDAO moddao = new ModDAO();
 		ModTradeInfoBEAN mtib = moddao.PO_Info_Read(po_num);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		String po_date = sdf.format(mtib.getTrade_date());
+		String po_date = sdf.format(mtib.getDate());
 		String today = sdf.format(new Date());
 		Date startDate = sdf.parse(po_date);
 		Date endDate = sdf.parse(today);
