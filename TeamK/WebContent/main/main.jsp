@@ -112,10 +112,7 @@
 		var imgname = $("#pack_img" + num).val();
 		$("#pack" + num).css({
 			"background-image" : "url(./upload/" + imgname + ")",
-			"background-repeat" : "no-repeat",
-			"background-size" : "cover", 
-			"background-position" : "center center",
-			"width" : "333px",
+// 			"width" : "333px",
 			"overflow" : "hidden"
 		});
 	}

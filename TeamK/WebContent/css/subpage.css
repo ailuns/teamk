@@ -68,26 +68,26 @@ div#package_show a {
 }
 #package_show #pack1 {
 /* 	background-image: url("../img/i.jpg"); */
-/* 	background-repeat : no-repeat; */
-/* 	background-size: cover; */
-/* 	background-position: center center; */
- 	transition: 0.3s;
+	background-repeat : no-repeat;
+	background-size: cover;
+	background-position: center center;
+ 	transition: 0.4s;
  	background-position: left;
 }
 div#package_show a#pack2 {
 /* 	background-image: url("../img/491021_374477_1553.jpg"); */
-/* 	background-repeat : no-repeat; */
-/* 	background-size: cover; */
-/* 	background-position: center center; */
- 	transition: 0.3s;
+	background-repeat : no-repeat;
+	background-size: cover;
+	background-position: center center;
+ 	transition: 0.4s;
  	background-position: center;
 }
 div#package_show a#pack3 {
 /* 	background-image: url("../img/군항제3.jpg"); */
-/* 	background-repeat : no-repeat; */
-/* 	background-size: cover; */
-/* 	background-position: center center; */
- 	transition: 0.3s;
+	background-repeat : no-repeat;
+	background-size: cover;
+	background-position: center center;
+ 	transition: 0.4s;
  	background-position: right;
 }
 a#pack1 span, a#pack2 span, a#pack3 span {
