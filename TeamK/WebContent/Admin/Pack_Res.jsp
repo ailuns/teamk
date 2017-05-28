@@ -73,11 +73,12 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 					<%} %>
 				</table>
 				
+				<%}
+				%>
 				<input type="submit" value="예약 완료">
 				
-				<%}
-				
-			}else {%>
+				<%
+				}else {%>
 					
 		주문 내역 없음
 		<%

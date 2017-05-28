@@ -21,9 +21,9 @@ String id = (String)session.getAttribute("id"); %>
 <h3><%=id %> Order List</h3>
 <input type = "button" value="My Basket" onclick ="location.href='./MyBasketList.bns'"><br>
 <input type = "button" value="My Interest" onclick ="location.href='./MyInterestList.ins'"><br>
+<input type ="button" value = "Basket" onclick = "location.href='./MyBasketAdd.bns'"><br>
 <input type="button" value="PackOrder" onclick = "location.href='./MyPackOrderList.mo'"><br>
 <input type="button" value="ThingOrder" onclick="location.href='./MyThingOrderList.mo'"><br>
-<input type = "button" value = "MyOrder" onclick = "location.href='./MyOrderList.mo'"><br>
 
 
 </div>
