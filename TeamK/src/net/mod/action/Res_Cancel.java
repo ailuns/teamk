@@ -23,7 +23,6 @@ public class Res_Cancel implements Action{
 		Date startDate = sdf.parse(po_date);
 		Date endDate = sdf.parse(today);
 		long mul_date = (startDate.getTime()-endDate.getTime())/(24 * 60 * 60 * 1000);
-		System.out.println(mul_date);
 		int cost = mtib.getCost();
 		if(mul_date<0)cost = 0;
 		else if(mul_date<2)cost*=0.5;

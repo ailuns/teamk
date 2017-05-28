@@ -61,9 +61,10 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 					<%} %>
 					
 				</table>
-				<input type="submit" value="취소 확인">
-				<%}
 				
+				<%}%>
+				<input type="submit" value="취소 확인">
+				<%
 			}else {%>
 					
 		주문 내역 없음

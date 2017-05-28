@@ -72,6 +72,9 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 					</tr>
 					<%} %>
 				</table>
+				
+				<input type="submit" value="예약 완료">
+				
 				<%}
 				
 			}else {%>
@@ -83,8 +86,6 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 						
 		
 	
-<input type="submit" value="예약 완료">
-
 
 </form>
 </div>
