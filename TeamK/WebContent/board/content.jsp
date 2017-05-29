@@ -24,8 +24,9 @@
 	            rNum:$('#rNum').val(),
 		        rId:$('#rId').val(),
 		        pageNum:$('#pageNum').val()
-	         },success:function(data){
-	        	 $('#replyUpdate').html(data);
+	         },
+	         success:function(data){
+	        	$('#replyUpdate').html(data);
 	         }
 	      });
 	}

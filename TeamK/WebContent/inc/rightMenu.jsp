@@ -6,7 +6,6 @@
 	<ul>
 		<%
 		String id = (String)session.getAttribute("id");
-		System.out.print(id);
 		if(id==null || id==""){
 		%>
 		<li><a href="./MemberLogin.me">로그인</a></li>
