@@ -14,10 +14,21 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>TeamK 여행사</title>
+<link href="./css/inc.css" rel="stylesheet" type="text/css">
+<link href="./css/subpage.css" rel="stylesheet" type="text/css">
+<title>관리자가 보는 회원 정보</title>
 </head>
 <body>
-	<h1>WebConTest/member/list.jsp</h1>
+	<!--왼쪽 메뉴 -->
+	<div>
+		<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
+	</div>
+	<!--왼쪽 메뉴 -->
+	<div id="wrap">
+			<div id="member_head">
+			<div id="member_title">고객 정보 관리</div>
+			<div id="member_script"></div>
+		</div>
 	<%
 		String id = (String) session.getAttribute("id");
 
@@ -30,11 +41,10 @@
 	<table border="1">
 		<tr>
 			<td>아이디</td>
-			<td>비밀번호</td>
 			<td>이름</td>
-			<td>가입일자</td>
-			<td>나이</td>
-			<td>성별</td>
+			<td>주소</td>
+			<td>상세주소</td>
+			<td>전화번호</td>
 			<td>이메일</td>
 		</tr>
 		<%
@@ -43,7 +53,6 @@
 		%>
 		<tr>
 			<td><%=mb.getId()%></td>
-			<td><%=mb.getPass()%></td>
 			<td><%=mb.getName()%></td>
 			<td><%=mb.getAddress1()%></td>
 			<td><%=mb.getAddress2()%></td>
@@ -55,6 +64,13 @@
 			}
 		%>
 	</table>
+	</div>
+	<jsp:include page="../inc/footer.jsp"></jsp:include>
+	<!--오른쪽 메뉴 -->
+	<div>
+		<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
+	</div>
+	<!--오른쪽 메뉴 -->
 
 </body>
 </html>

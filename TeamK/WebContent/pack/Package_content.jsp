@@ -959,35 +959,33 @@
 	<!-- 왼쪽 메뉴 -->
 	<!--여행지 검색창 -->
 	<div id="wrap"> 
-		<div id="package_title">
-			<div id="package_head">패키지
-			</div>
-			<div id="package_search_sub">
-				<form action="./PackSearchAction.po" name="fr" method="get" id="scheduler" onsubmit="return input_chk()">
-					<label for="date_from">출발</label>
-					<input type="text" id="date_from" class="input_style" name="startDate" required="yes">
-<!-- 					<label for="date_to">도착</label> -->
-<!-- 					<input type="text" id="date_to" class="input_style" name="endDate"> -->
-<!-- 					<br><br> -->
-					<label for="city_search">지역</label>
-					<select id="area" name="area">
-						<option value="">선택하세요</option>
-						<%
-							CategoryBean cb;
-							for (int i = 0; i < CategoryList.size(); i++)
-							{
-								cb =(CategoryBean)CategoryList.get(i);
-						%>	
-							<option value="<%=cb.getCar_name() %>"><%=cb.getCar_name() %></option>
-						<%
-							}
-						%>
-					</select>
-					<input type="submit" value="검색" id="search_btn" class="input_style">
-				</form>
-			</div>
+	<div id="package_head">
+		패키지
+	</div>
+		<div id="package_feat">
+		<jsp:include page="../inc/packSlide.jsp"></jsp:include>
+		<div id="package_search">
+			<p>내게 맞는 패키지 검색하기</p>
+			<form action="./PackSearchAction.po" name="fr" method="get" id="scheduler" onsubmit="return input_chk();">
+				<label for="date_from">출발</label><input type="text" id="date_from" class="input_style" name="startDate" required="yes"><br><br>
+				<label for="city_search">지역</label>
+				<select id="area" name="area">
+					<option value="">선택하세요</option>
+					<%
+						CategoryBean cb;
+						for (int i = 0; i < CategoryList.size(); i++)
+						{
+							cb =(CategoryBean)CategoryList.get(i);
+					%>	
+						<option value="<%=cb.getCar_name() %>"><%=cb.getCar_name() %></option>
+					<%
+						}
+					%>
+				</select>
+				<input type="submit" value="검색" id="search_btn" class="input_style">
+			</form>
 		</div>
-	
+	</div>
 	<div id="clear"></div>
 	<!--여행지 검색창 -->
 	
