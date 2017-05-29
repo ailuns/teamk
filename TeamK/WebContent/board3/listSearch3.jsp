@@ -57,7 +57,7 @@ $(document).ready(function(){
 <td>
 <a href="./BoardContent3.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>">
 <%=bb.getSubject()%>[<%=bdao.getBoardReplyCount(bb.getNum())%>]</a></td>
-<td><%=bb.getId()%></td><td><%=bb.getDate() %></td>
+<td>관리자</td><td><%=bb.getDate() %></td>
     <td><%=bb.getReadcount() %></td></tr>
     			<%
     }

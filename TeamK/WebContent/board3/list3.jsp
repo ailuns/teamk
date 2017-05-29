@@ -51,7 +51,7 @@ BoardDAO bdao = new BoardDAO();
     			%>
 <tr><td><%=bb.getRe_ref()%></td> <%--글 번호 --%>
 <td id="title"><a href="./BoardContent3.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>"><%=bb.getSubject()%></a></td><%--글 제목 --%>
-<td><%=bb.getId()%></td><%--작성자 Id --%>
+<td>관리자</td><%--작성자 Id --%>
 <td><%=bb.getDate()%></td><%--작성 날짜 --%>
 <td><%=bb.getReadcount() %></td><%--조회수 --%>
     </tr>
