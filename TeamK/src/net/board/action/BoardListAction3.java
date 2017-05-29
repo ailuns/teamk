@@ -25,7 +25,6 @@ public class BoardListAction3 implements Action {
 		//게시판 전체 글 개수
 		// int count=  getBoardCount() 메서드 호출
 		int count=bdao.getBoardCount3();
-		
 		//한페이지에 보여줄 글의 개수 설정
 		int pageSize=10;
 		//한페이지가 몇페이지인지 가져오기 없으면 1페이지 설정
