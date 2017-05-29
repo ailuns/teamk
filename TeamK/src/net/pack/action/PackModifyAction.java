@@ -27,8 +27,10 @@ public class PackModifyAction implements Action{
 		int maxSize = 10*1024*1024;
 		MultipartRequest multi=new MultipartRequest(request, realPath,maxSize,"utf-8",new DefaultFileRenamePolicy());
 
-		int num = Integer.parseInt(request.getParameter("num"));
-		System.out.println("Modify num >> " + num);
+//		int num = Integer.parseInt(request.getParameter("num"));
+		String ori_subject = request.getParameter("ori_subject");
+//		System.out.println("Modify num >> " + num);
+		System.out.println("Modify ori_subject >> " + ori_subject);
 			
 		String subject = multi.getParameter("subject");
 		String intro = multi.getParameter("intro");
@@ -91,7 +93,9 @@ public class PackModifyAction implements Action{
 			pb.setFile5(file5);
 		}
 				
-		pdao.updatePackcontent(pb, num);
+//		pdao.updatePackcontent(pb, num);
+		
+		pdao.updatePackcontent(pb, ori_subject);
 			
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();

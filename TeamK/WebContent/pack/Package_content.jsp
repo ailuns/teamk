@@ -46,6 +46,26 @@
 
 	jQuery(document).ready(function($){
 		
+		var num = $("input:radio[name=chk]:checked").val();
+		
+//			alert(num);
+		
+		var cost = $("#aa" + num).html();
+		
+	    var str = String(cost);
+	    var uncomma_cost = str.replace(/[^\d]+/g, '');
+	    var uncomma_cost2 = uncomma_cost/2;
+		
+		
+		str = String(uncomma_cost);
+		var comma_cost =  str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+		str1 = String(uncomma_cost);
+		var comma_cost2 =  str1.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+		
+		$("#cost_adult").html(comma_cost);
+		$("#cost_child").html(comma_cost2);
+		$("#p").html(comma_cost);
+		
 		// 달력 관련 소스
 		$("#date_from").datepicker({
 			dateFormat: 'yy-mm-dd',    // 날짜 포맷 형식
@@ -475,9 +495,9 @@
 	
 	
 	// 날짜 추가 버튼 클릭 이벤트
-	function winOpen(subject) {
-		win = window.open("./PackDateAdd.po?subject=" + subject, "Package_dateAdd.jsp",
-				"width=800, height=700");
+	function winOpen(subject, num) {
+		win = window.open("./PackDateAdd.po?subject=" + subject + "&num=" + num, "Package_dateAdd.jsp",
+				"width=800, height=700, left=100, top=100");
 	}
 	
 	
@@ -488,6 +508,23 @@
 		$(".select_color").css("background-color","");		// tr 부분 모든 배경색을 없앤다
 		$("#select_rbtn" + select_num).prop("checked", "true"); // 클릭된 라디오 버튼을 체크로 바꾼다
 		$("#select_date" + select_num).css("background-color", "#D5D5D5");  // 클릭된 tr 부분의 배경색을 #D5D5D5로 바꾼다
+		
+		
+		var cost = $("#aa" + packnum).html();
+		
+	    var str = String(cost);
+	    var uncomma_cost = str.replace(/[^\d]+/g, '');
+	    var uncomma_cost2 = uncomma_cost/2;
+		
+		
+		str = String(uncomma_cost);
+		var comma_cost =  str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+		str1 = String(uncomma_cost);
+		var comma_cost2 =  str1.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+		
+		$("#cost_adult").html(comma_cost);
+		$("#cost_child").html(comma_cost2);
+		$("#p").html(comma_cost);
 		
 		$.ajax({   // 날짜를 클릭할때 마다 찜목록과 비교
 			type:"post",
@@ -510,6 +547,7 @@
 				}
 			}
 		});
+		
 	}
 	
 	// 찜하기, 예약하기 버튼 클릭 시 각각 버튼 마다 이동할 페이지
@@ -688,9 +726,10 @@
 	height : 30px;
 }
 
-#datecontent tr:HOVER
+#datecontent tr.select_color:HOVER
 {
 	background-color: #D5D5D5;
+	cursor: pointer;
 }
 
 #datecontent .date_td_size
@@ -916,7 +955,6 @@
 /* 화면이동 리모컨 */
 
 </style>
-
 	<div id="remote_control">
 		<table id="remote_content">
 			<tr>
@@ -999,9 +1037,9 @@
 			if (user_id.equals("admin"))
 			{
 		%>
-			<input type="button" value="날짜추가" onclick="winOpen('<%=PB.getSubject() %>');">
-			<input type="button" value="글수정" onclick="location.href='PackModify.po?num=<%=PB.getNum() %>'">
-			<input type="button" value="글삭제" onclick="location.href='PackDeleteAction.po?num=<%=PB.getNum() %>'">
+			<input type="button" value="날짜편집" onclick="winOpen('<%=PB.getSubject() %>', <%=PB.getNum() %>);">
+			<input type="button" value="상품내용수정" onclick="location.href='PackModify.po?num=<%=PB.getNum() %>'">
+<%-- 			<input type="button" value="상품삭제" onclick="location.href='PackDeleteAction.po?num=<%=PB.getNum() %>'"> --%>
 		<%
 			}
 		}
@@ -1040,12 +1078,12 @@
 					<table border="1">
 						<tr>
 						<%
-							DecimalFormat Commass = new DecimalFormat("#,###");
-							String cost_adult = (String)Commass.format(PB.getCost());
-							String cost_child = (String)Commass.format(PB.getCost() / 2);
+// 							DecimalFormat Commass = new DecimalFormat("#,###");
+// 							String cost_adult = (String)Commass.format(PB.getCost());
+// 							String cost_child = (String)Commass.format(PB.getCost() / 2);
 						%>
 							<td style="width:100px; text-align: center;">성인</td>
-							<td style="width:150px; text-align: center;"><%=cost_adult %></td>
+							<td style="width:150px; text-align: center;" id="cost_adult"></td>
 							<td>
 								<!--최대 10명까지 선택가능하게 생성 -->
 								<select id="adult" name="adult" onchange="people_Calc(1)">
@@ -1062,7 +1100,7 @@
 						</tr>
 						<tr>
 							<td>아동</td>
-							<td><%=cost_child %></td>
+							<td id="cost_child"></td>
 							<td>
 							<!--초기값은 1명까지 선택되게 생성 -->
 							<select id="child" name="child" onchange="people_Calc()">
@@ -1078,7 +1116,7 @@
 								<input type="hidden" id="cost" name="cost" value="">
 								<input type="hidden" id="ori_num" name="pnum" value="">
 								<input type="hidden" name="type" value="P">
-								<p id="p"><%=cost_adult %></p>
+								<p id="p"></p>
 							</td>
 						</tr>
 						<tr>
@@ -1143,10 +1181,11 @@
 						String cost = (String)Commas.format(pb.getCost());
 				%>	
 				<tr id="select_date<%=i %>" class="select_color" onclick="select_date(<%=i %>)">
-					<td class="date_td_size"><input type="radio" id="select_rbtn<%=i %>" name="chk" value="<%=pb.getNum() %>"></td>
+					<td class="date_td_size"><input type="radio" id="select_rbtn<%=i %>" name="chk" value="<%=pb.getNum() %>"
+						<%if(i == 0){ %> checked <%} %> ></td>
 					<td class="date_td_size"><%=pb.getDate() %></td>
 					<td class="date_td_size"><%=pb.getSarea() %></td>
-					<td class="date_td_size"><%=cost %></td>
+					<td class="date_td_size" id="aa<%=pb.getNum() %>"><%=cost %></td>
 					<td class="date_td_size"><%=pb.getStock() %></td>
 				</tr>
 				<%

@@ -25,13 +25,19 @@
 #datecontent table
 {
 	border : 1px solid black;
-	
+	border-collapse: collapse;
 }
 
 #datecontent tr:FIRST-CHILD
 {
 	background-color: gray;
 	height : 30px;
+}
+
+#datecontent tr:HOVER
+{
+	cursor: pointer;
+	background-color: #D5D5D5;
 }
 
 #datecontent .date_td_size
@@ -53,6 +59,13 @@
 {
 	width : 70px;
 }
+
+#sub_notice
+{
+	font-size: 0.8em;
+	color : gray;
+}
+
 </style>
 <script type="text/javascript">
 
@@ -68,6 +81,8 @@
 	        //buttonImage: "./img/calendar.png",   // 버튼에 사용될 이미지
 	        //buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
 		});
+		
+		$("#Date_modify").hide();
 	});
 
 	// 날짜 추가
@@ -98,6 +113,75 @@
 			}
 		});
 	}
+	
+	
+	function date_chk()
+	{
+		$("#subject").val();
+		$("#add_date").val();
+		
+		
+		$.ajax({   // 날짜를 클릭할때 마다 찜목록과 비교
+			type:"post",
+			url:"./PackDateAddChk.po",
+			data:{
+// 				제목, 날짜
+				subject:$("#subject").val(),
+				date:$("#add_date").val()
+			},
+			success:function(date)
+			{
+				if (date == 1)
+				{
+					alert("이미 추가된 날짜입니다");
+					$("#add_date").val("");
+				}
+			}
+		});
+	}
+	
+	
+	// 날짜 수정 버튼 클릭 이벤트
+	function winOpen(num) {
+		win = window.open("./PackDateModify.po?num=" + num, "Package_date_modify.jsp",
+				"width=500, height=300, left=800, top=100");
+	}
+	
+	
+	
+	// 날짜 선택시 이벤트
+	function select_date(select_num)
+	{
+		var packnum = $("#select_rbtn" + select_num).val();  // 해당 라디오버튼의 글번호 값을 불러온다
+		$(".select_color").css("background-color","");		// tr 부분 모든 배경색을 없앤다
+		$("#select_rbtn" + select_num).prop("checked", "true"); // 클릭된 라디오 버튼을 체크로 바꾼다
+		$("#select_date" + select_num).css("background-color", "#D5D5D5");  // 클릭된 tr 부분의 배경색을 #D5D5D5로 바꾼다		
+		
+		var num = $("#num" + select_num).val();
+		winOpen(num);
+// 		var num = $("#num"+select_num).val();
+// 		var subject = $("#subject").val();
+// 		location.href="./PackDateAdd.po?num=" + num + "&subject=" + subject;
+		
+		
+// 		$("#Date_modify").show();
+// 		$("#Date_add").hide();
+		
+// 		$.ajax({   // 날짜를 클릭할때 마다 찜목록과 비교
+// 			type:"post",
+// 			url:"./PackDateAdd.po",
+// 			async: false,
+// 			data:{
+// 				num:$("#num"+select_num).val(),
+// 				subject:$("#subject").val()
+// 			},
+// 			success:function(data)
+// 			{
+// // 				alert(data);
+// 				window.location.reload(true); 
+// 			}
+// 		});
+	}
 
 	// 창닫기
 	function cls()
@@ -114,15 +198,20 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 
+	String subject = request.getParameter("subject");
 	List date_list;
 	date_list = (List)request.getAttribute("date_list");
+	
+	PackBean pb_up = (PackBean)request.getAttribute("pb_up");
+	
 %>
-
+ 
 
 <form name="fr" method="POST">
 <%-- <input type="text" name="id" value="<%=id %>"> --%>
 <!-- <input type="button" value="중복확인" onclick="idchk(document.fr.id.value)"><br><br> -->
-<label>상품명</label><p>솰라솰라</p>
+<p><b>상품명 : <%=subject %></b></p>
+<p id="sub_notice">※해당 날짜 클릭 시 수정/삭제 페이지로 이동합니다</p>
 <div id="datecontent">
 	<table>
 		<tr>
@@ -139,7 +228,8 @@
 				DecimalFormat Commas = new DecimalFormat("#,###");
 				String cost = (String)Commas.format(pb.getCost());
 		%>	
-			<tr>
+			<tr id="select_date<%=i %>" class="select_color" onclick="select_date(<%=i %>)">
+				<input id="num<%=i %>" style="display:none;" value="<%=pb.getNum() %>"></input>
 				<input id="subject" style="display:none;" value="<%=pb.getSubject() %>"></input>
 				<input id="intro" style="display:none;" value="<%=pb.getIntro() %>"></input>
 				<input id="type" style="display:none;" value="<%=pb.getType() %>"></input>
@@ -160,14 +250,47 @@
 		%>
 	</table>
 </div>
-<label>추가할 날짜</label><input type="text" id="add_date"><br>
-<label>금액</label><input type="text" id="add_cost"><br>
-<label>수량</label><input type="text" id="add_stock"><br>
-<input type="button" value="추가" onclick="dateAdd()">
-<input type="button" value="닫기" onclick="cls()">
+
 </form>
-<br><br>
- 
+ <div id="Date_add">
+		<h4>추가 페이지</h4>
+		<table>
+			<tr>
+				<td>
+					날짜
+				</td>
+				<td>
+					<input type="text" id="add_date" onchange="date_chk()"><br>
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+					가격
+				</td>
+				<td>
+					<input type="text" id="add_cost">
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+					수량
+				</td>
+				<td>
+					<input type="text" id="add_stock">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="button" value="추가" onclick="dateAdd()">
+				</td>
+				<td>
+					<input type="button" value="닫기" onclick="cls()">
+				</td>
+			</tr>
+		</table>
+	</div>
 </center>
 </body>
 </html>

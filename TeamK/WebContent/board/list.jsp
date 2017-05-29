@@ -66,6 +66,20 @@ BoardDAO bdao = new BoardDAO();
     }
     %>
 </table>
+<div id="board_menu_bar">
+<%
+//id값이 없으면 버튼 글쓰기버튼 '로그인 해주세요' 알림창 뜸
+if(id!=null){
+%>
+<input type="button" value="글쓰기"
+       onclick="location.href='./BoardWrite.bo'">
+    		<%}else{%>
+    			<input type="button" value="글쓰기" 
+    				   onclick="alert('로그인 해주세요')">
+    		<%} %>
+    		
+<input type="button" value="메인으로" 
+       onclick="location.href='./main.fo'">
 <%
 //페이지 출력
 if(count!=0){
@@ -84,36 +98,23 @@ if(count!=0){
 		<%
 		}
 }
-%><br>
-<form action="listSearch.bo" method="get">
-
+%>
 <%--검색 옵션--%>
+<form action="listSearch.bo" method="get">
 <select name="selectSearch">
     <option value="id">작성자</option>
     <option value="subject">제목</option>
     <option value="content">내용</option>
     <option value="type_select">분류</option>
 </select>
-
 <input type="text" name="search" class="input_box">
 <input type="submit" value="검색" class="btn">
 </form>
 <%--검색 옵션 --%>
-<%
-//id값이 없으면 버튼 글쓰기버튼 '로그인 해주세요' 알림창 뜸
-if(id!=null){
-%>
-<input type="button" value="글쓰기"
-       onclick="location.href='./BoardWrite.bo'">
-    		<%}else{%>
-    			<input type="button" value="글쓰기" 
-    				   onclick="alert('로그인 해주세요')">
-    		<%} %>
-    		
-<input type="button" value="메인으로" 
-       onclick="location.href='./main.fo'">
-       </div>
-       </div>
+		</div>
+		<div class="clear"></div>
+		</div>
+		</div>
 	</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->
