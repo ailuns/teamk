@@ -22,6 +22,7 @@ int pageBlock=((Integer)request.getAttribute("pageBlock")).intValue();
 int startPage=((Integer)request.getAttribute("startPage")).intValue();
 int endPage=((Integer)request.getAttribute("endPage")).intValue();
 String ss = (String)request.getAttribute("ss");
+int pNum = Integer.parseInt(pageNum);
 
 String search=request.getParameter("search");
 
@@ -41,28 +42,41 @@ $(document).ready(function(){
 	<div id="wrap">
 		<div id="board_head">
 			<div id="qna_title">공지사항</div>
-			<div id="qna_script">공지사항 게시판 입니다.<br>[검색된 글의 개수 :<%=count%>]</div>
+			<div id="qna_script">공지사항 게시판 입니다.<span class="count">[검색된 글의 개수 :<%=count%>]</span></div>
 		</div>
 		<div id="clear"></div>
 		<div id="board">
 		<div id="board_list">
 <table>
-<tr><td>번호</td><td>제목</td><td>ID</td><td>날짜</td><td>조회수</td></tr>
+<tr><th id="num">번호</th><th id="title">제목</th><th id="name">작성자</th><th id="date">날짜</th><th id="readcount">조회수</th></tr>
     <%
+    if(count==0){%><tr><td colspan="5">검색결과가 없습니다.</td></tr><%}else{
     for(int i=0; i<boardList3.size(); i++){
     	//자바빈(BoardBean) 변수 =배열한칸 접근  배열변수.get()
     	BoardBean bb = (BoardBean)boardList3.get(i);
     			%>
 <tr><td><%=bb.getRe_ref()%></td>
-<td>
+<td id="title">
 <a href="./BoardContent3.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>">
 <%=bb.getSubject()%>[<%=bdao.getBoardReplyCount(bb.getNum())%>]</a></td>
-<td><%=bb.getId()%></td><td><%=bb.getDate() %></td>
+<td>관리자</td><td><%=bb.getDate() %></td>
     <td><%=bb.getReadcount() %></td></tr>
     			<%
-    }
+    }}
     %>
 </table>
+<div id="board_menu_bar">
+<%
+String id = (String)session.getAttribute("id");
+if(id!=null){%>
+<input type="button" value="글쓰기" 
+       onclick="location.href='./BoardWrite3.bo'">
+    		<%}else{%>
+    			<input type="button" value="글쓰기" 
+    				   onclick="alert('로그인 해주세요')">
+    		<%} %>
+<input type="button" value="메인으로" 
+       onclick="location.href='./main.fo0'">
 <%
 //페이지 출력
 if(count!=0){
@@ -77,15 +91,16 @@ if(count!=0){
 	}
 	// 1..10 11..20 21..30
 	for(int i=startPage; i<=endPage; i++){
-		%><a href="./listSearch3.bo?pageNum=<%=i%>&search=<%=search%>">[<%=i%>]</a><%
-	}
+		if(i==pNum){%><span id="i"><%=i%></span><%}else{
+		%><a id="i" href="./listSearch3.bo?pageNum=<%=i%>&search=<%=search%>"><%=i%></a><%
+	}}
 	// 다음
 	if(endPage < pageCount){
 		%><a href="./listSearch3.bo?pageNum=<%=startPage+pageBlock%>&selectSearch=<%=ss%>&search=<%=search%>">[다음]</a>
 		<%
 		}
 }
-%><br>
+%>
 <form action="listSearch3.bo" method="get">
 <select name="selectSearch" id="selectSearch">
     <option value="subject">제목</option>
@@ -94,17 +109,8 @@ if(count!=0){
 <input type="text" name="search" class="input_box">
 <input type="submit" value="검색" class="btn">
 </form>
-<%
-String id = (String)session.getAttribute("id");
-if(id!=null){%>
-<input type="button" value="글쓰기" 
-       onclick="location.href='./BoardWrite3.bo'">
-    		<%}else{%>
-    			<input type="button" value="글쓰기" 
-    				   onclick="alert('로그인 해주세요')">
-    		<%} %>
-<input type="button" value="메인으로" 
-       onclick="location.href='./main.fo0'">
+</div>
+		<div class="clear"></div>
 </div>
 </div>
 	</div>

@@ -5,12 +5,52 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, 
+maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Cache-Control" content="no-cache" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Imagetoolbar" content="no" />
 <title>TeamK 여행사</title>
 <link href="./css/inc.css" rel="stylesheet" type="text/css">
 <link href="./css/subpage.css" rel="stylesheet" type="text/css">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<%request.setCharacterEncoding("UTF-8"); %>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+
+<%
+request.setCharacterEncoding("UTF-8"); 
+String ctx = request.getContextPath(); //콘텍스트명 얻어오기.
+response.setHeader("Pragma-directive", "no-cache");
+response.setHeader("Cache-directive", "no-cache");
+response.setHeader("Pragma", "no-cache");
+response.setHeader("Cache-Control", "no-cache");
+response.setDateHeader("Expires",0); 
+String id = (String) session.getAttribute("id");
+String catpchavalue ="";
+%>
+
 <script type="text/javascript">
+
+//구글 리캡차 시작--자동가입방지
+
+      var verifyCallback = function(response) {
+        document.fr.catpchavalue.value="1";
+		catpchavalue="1";
+      };
+      
+      var onloadCallback = function() {
+          grecaptcha.render('html_element', {
+              'sitekey' : '6Ld-QiMUAAAAAF0iwNhurnWiHaHYRhKhnjZxicIQ',
+              callback : verifyCallback
+            });
+          };
+          
+//구글 리캡차 끝
+
+	
+	
+	
 function sample6_execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {
@@ -105,6 +145,14 @@ function sample6_execDaumPostcode() {
 		window.open("./MemberEmail.me?email="+email+"&echeck=0","","width=400,height=200");
 		}
 	}
+	
+	function answer() {
+		if (document.fr.catpchavalue.value == "1") {
+			alert("자동가입인증이 완료되었습니다");
+			document.fr.submit.focus();
+			return false;
+		}
+	}
 
 	function winopen() {
 
@@ -178,13 +226,19 @@ function sample6_execDaumPostcode() {
 			document.fr.email.focus();
 			return false;
 		}
+		if (document.fr.catpchavalue.value == "") {
+			alert("자동가입 인증 체크를 완료해주세요");
+			return false;
+		}
+		
 	}
 	document.fr.submit();
+
 </script>
 </head>
 <body>
 <%
-String id = (String) session.getAttribute("id");
+
 if (id != null) {
 	response.sendRedirect("./main.fo");
 }
@@ -216,18 +270,28 @@ if (id != null) {
 				
 				<label for="mobile">전화번호</label><input type="text"name="mobile" id="mobile"><br>
 				
+				
+				<!-- 주소 다음api -->
 				<label for="address">주소</label>
 				<input type="text" id="sample6_postcode" placeholder="우편번호" name="postcode">
 				<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" name="btnPostcode"><br>
 				<input type="text" id="sample6_address" placeholder="주소" name="address1"><br>
 				<input type="text" id="sample6_address2" placeholder="상세주소" name="address2"><br>
-				
+
+				<!-- 이메일체크 -->
 				<label for="email">이메일</label>
 				<input type="text" name="email" id="email" placeholder="반드시 이메일 인증을 해주세요.">
 				<input type="button" value="이메일 인증" onclick="sendmail()">
 				<input type="hidden" name="eckecknum"> <br>
-				<input type="submit" value="가입">
+				
+				<!-- 자동가입방지 -->
+				<br>
+				<input type="hidden" name="catpchavalue">
+				<div id="html_element" style="margin-left: 150px;"></div>
+				<input type="submit" name="submit" value="가입">
 			</form>
+
+  				
 			</div>
 		</div>
 	</div>
