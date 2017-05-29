@@ -640,7 +640,7 @@ div#board div#board_content table td#subject {
 	padding: 10px 0;
 	
 }
-div#board div#board_content table td#content {
+div#board div#board_content table#content td#content {
 	max-width: 600px;
 	text-align: justify;
 	font-size: 15px;
