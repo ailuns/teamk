@@ -12,7 +12,7 @@ public class Pack_Res_Action implements Action{
 		String [] pnum = request.getParameterValues("pnum");
 		for(int i =0; i<pnum.length;i++){
 			AdminDAO adao = new AdminDAO();
-			adao.PO_Status_Update(3, Integer.parseInt(pnum[i]));
+			adao.PO_Status_Update(3, pnum[i]);
 		}
 		ActionForward afo = new ActionForward();
 		afo.setPath("./Pack_res.ao");

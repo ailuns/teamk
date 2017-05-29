@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -28,11 +29,11 @@ public class ModDAO {
 		conn = ds.getConnection();
 		return conn;
 	}
-	public int PO_Count(String id){
+	public int PO_Count(String id, String status){
 		int count = 0;
 		try{
 			conn = getconn();
-			sql = "select count(po_num) from pack_order where po_id=? and po_res_status<5";
+			sql = "select count(po_num) from pack_order where po_id=? and po_res_status"+status;
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -320,14 +321,14 @@ public class ModDAO {
 		
 		return ModList;
 	}
-	public List<ModTradeInfoBEAN> MyPackOrder(String id, int start, int end){
+	public List<ModTradeInfoBEAN> MyPackOrder(String id, int start, int end,String status, String orderby){
 		List<ModTradeInfoBEAN> ModPackList = new ArrayList<ModTradeInfoBEAN>();
 		try{
 			conn =getconn();
 			sql = "select A.*, B.subject, B.intro, B.file1, B.date "
 					+"from pack_order A left outer join pack B "
-					+"on A.ori_num = B.num where A.po_id=? and A.po_res_status <= 5 "
-					+"order by B.date,A.po_res_status limit ?,?";
+					+"on A.ori_num = B.num where A.po_id=? and A.po_res_status"+status
+					+" order by "+orderby+" limit ?,?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setInt(2, start-1);
@@ -345,6 +346,7 @@ public class ModDAO {
 				mtib.setCost(rs.getInt("po_cost"));
 				mtib.setTrade_date(rs.getTimestamp("date"));
 				mtib.setStatus(rs.getInt("po_res_status"));
+				mtib.setMemo(rs.getString("po_memo"));
 				String statustext = "";
 				switch(rs.getInt("po_res_status")){
 					case 1: statustext = "입금 확인 중"; break;
@@ -607,5 +609,42 @@ public class ModDAO {
 			}
 		}
 		return check ;
+	}
+	public void Res_Completed(String id){
+		try{
+			conn=getconn();
+			sql ="select A.po_num, B.date from pack_order A left outer join pack B "+
+					"on A.ori_num = B.num where A.po_id = ? and A.po_res_status =3";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				String po_date = sdf.format(rs.getDate("date"));
+				String today = sdf.format(new Date());
+				Date startDate = sdf.parse(po_date);
+				Date endDate = sdf.parse(today);
+				long mul_date = (startDate.getTime()-endDate.getTime())/(24 * 60 * 60 * 1000);
+				if(mul_date<0){
+					Connection conn2 = getconn();
+					String sql2 = "update pack_order set po_res_status = 10 where po_num=?";
+					PreparedStatement pstmt2 = conn2.prepareStatement(sql2);
+					pstmt2.setInt(1, rs.getInt(1));
+					pstmt2.executeUpdate();
+					pstmt2.close();
+					conn2.close();
+				}
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
 	}
 }
