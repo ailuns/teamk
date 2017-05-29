@@ -32,6 +32,7 @@ nav li {
 }
 nav li:HOVER {
 	border-bottom: 3px solid #06c;
+	cursor: pointer;
 }
 nav li#home {background-image: url("../img/home.png");}
 nav li#pack {background-image: url("../img/travel.png");}
@@ -39,11 +40,6 @@ nav li#shop {background-image: url("../img/shop.png");}
 nav li#rvw {background-image: url("../img/review.png");}
 nav li#qna {background-image: url("../img/qna.png");}
 nav li#notice {background-image: url("../img/notice.png");}
-nav li a {
-	color: #000;
-	text-decoration: none;
-	display: block;
-}
 
 /* Right Menu */
 div#submenu {
@@ -58,7 +54,7 @@ div#submenu {
 div#submenu ul {
 	list-style: none;
 	margin-left: -40px;
-	margin-top: 120%;
+	margin-top: 90px;
 }
 div#submenu ul li {padding: 5px 0 0 30px;}
 div#submenu ul a {
@@ -66,15 +62,53 @@ div#submenu ul a {
 	font-size: 15px;
 	color: #000;
 }
-div#submenu embed {
+/* div#submenu embed {position: fixed;right: 0;bottom: 20%;} */
+div#map {
+	width: 150px;
+	height: 300px;
+	background: #92dccd;
+	text-align: center;
 	position: fixed;
 	right: 0;
 	bottom: 20%;
 }
-
+div#map p {
+	margin-top: 0;
+	padding: 5px 0;
+	background-color: #06c;
+	font-weight: bold;
+	color: #fff;
+	font-size: 15px;
+}
+/* div#map div { */
+/* 	width: 250px; */
+/* 	height: 500px; */
+/* 	background-color: #000; */
+/* 	text-align: left; */
+/* 	padding: 10px; */
+/* 	color: #fff; */
+/* 	position: absolute; */
+/* 	opacity: 0; */
+/* 	visibility: hidden; */
+/* } */
+/* div#map div#seoul {top: 0%; right: 65%;} */
+/* div#map div#busan {bottom: 0%; left: 65%;} */
+/* div#map div#gyeonggi {top: 0%; right: 65%;} */
+/* div#map div#gangwon {top: 0%; left: 65%;} */
+/* div#map div#chungbuk {top: 0%; left: 65%;} */
+/* div#map div#chungnam {top: 0%; right: 65%;} */
+/* div#map div#jeonbuk {top: 0%; right: 65%;} */
+/* div#map div#jeonnam {bottom: 0%; right: 65%;} */
+/* div#map div#gyeongbuk {top: 0%; left: 65%;} */
+/* div#map div#gyeongnam {bottom: 0%; left: 65%;} */
+/* div#map div#jeju {bottom: 0%; right: 65%;} */
+/* div#map div img { */
+/* 	width: 230px; */
+/* 	height: 150px; */
+/* } */
 
 /* South Korea Map Start */
-div#map object {height: 600px;}
+div#map object {width: 150px;}
 polyline#pl_HD1_1_, polyline#pl_HD2_1_, 
 polyline#pl_HD3_1_, polyline#pl_HD4_1_, 
 polyline#pl_HD5_1_, polyline#pl_HD6_1_, 
@@ -144,47 +178,6 @@ div#index_wrap {
 	padding-top: 50px;
 	margin: 0 auto;
 	text-align: center;
-}
-div#map {
-	width: 1000px;
-	height: 700px;
-	margin: 0 auto;
-	padding-top: 20px;
-	background: #92dccd;
-	text-align: center;
-	position: relative;
-}
-center {
-	margin-top: 30px;
-	font-weight: bold;
-	color: #fff;
-	font-size: 20px;
-}
-div#map div {
-	width: 250px;
-	height: 500px;
-	background-color: #000;
-	text-align: left;
-	padding: 10px;
-	color: #fff;
-	position: absolute;
-	opacity: 0;
-	visibility: hidden;
-}
-div#map div#seoul {top: 0%; right: 65%;}
-div#map div#busan {bottom: 0%; left: 65%;}
-div#map div#gyeonggi {top: 0%; right: 65%;}
-div#map div#gangwon {top: 0%; left: 65%;}
-div#map div#chungbuk {top: 0%; left: 65%;}
-div#map div#chungnam {top: 0%; right: 65%;}
-div#map div#jeonbuk {top: 0%; right: 65%;}
-div#map div#jeonnam {bottom: 0%; right: 65%;}
-div#map div#gyeongbuk {top: 0%; left: 65%;}
-div#map div#gyeongnam {bottom: 0%; left: 65%;}
-div#map div#jeju {bottom: 0%; right: 65%;}
-div#map div img {
-	width: 230px;
-	height: 150px;
 }
 div#search {
 	width: 600px;
@@ -291,3 +284,47 @@ footer div#footer_misc {
 	padding-top: 10px;
 	line-height: 1.5em;
 }
+
+/*Pack Slide.jsp*/
+div#package_slide {
+	width: 600px;
+	height: 300px;
+	position:relative;
+}
+div#package_slide img {
+	width: 600px;
+	height: 300px;
+}
+.jssorb05 {
+position: absolute;
+}
+.jssorb05 div, .jssorb05 div:hover, .jssorb05 .av {
+position: absolute;
+/* size of bullet elment */
+width: 16px;
+height: 16px;
+background: url('../img/b05.png') no-repeat;
+overflow: hidden;
+cursor: pointer;
+}
+.jssorb05 div { background-position: -7px -7px; }
+.jssorb05 div:hover, .jssorb05 .av:hover { background-position: -37px -7px; }
+.jssorb05 .av { background-position: -67px -7px; }
+.jssorb05 .dn, .jssorb05 .dn:hover { background-position: -97px -7px; }
+.jssora12l, .jssora12r {
+display: block;
+position: absolute;
+/* size of arrow element */
+width: 30px;
+height: 46px;
+cursor: pointer;
+background: url('../img/a12.png') no-repeat;
+overflow: hidden;
+}
+.jssora12l { background-position: -16px -37px; }
+.jssora12r { background-position: -75px -37px; }
+.jssora12l:hover { background-position: -136px -37px; }
+.jssora12r:hover { background-position: -195px -37px; }
+.jssora12l.jssora12ldn { background-position: -256px -37px; }
+.jssora12r.jssora12rdn { background-position: -315px -37px; }
+
