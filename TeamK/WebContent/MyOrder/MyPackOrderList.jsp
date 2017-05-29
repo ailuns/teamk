@@ -22,7 +22,8 @@
 			int pageNum = Integer.parseInt(pagenum);
 			List<ModTradeInfoBEAN> ModPList = (List<ModTradeInfoBEAN>) request.getAttribute("ModPList");
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
-			String status = (String)request.getAttribute("status");		%>
+			String status = (String)request.getAttribute("status");	
+			String status2 = (String)request.getAttribute("status2");%>
 <link href="./css/inc.css" rel="stylesheet" type="text/css">
 <link href="./css/subpage.css" rel="stylesheet" type="text/css">
 <script src="./js/jquery-3.2.0.js"></script>
@@ -30,8 +31,17 @@
 
 $(document).ready(function(){
 	$('#status').val('<%=status%>').attr('selected','selected');
-	
-	
+	if("<%=status%>"=="completed"){
+		$('#status2').find('option').remove();
+		$('#status2').html("<option value='none'>전체</option>"+
+				"<option value='completed'>진행 완료</option>"+
+				"<option value='canceled'>취소 완료</option>");
+		//$('#status2 option:eq[2]').val('canceled');
+		//$('#status2 option:eq[2]').text('취소된 상품');
+	}
+	$('#status2').val('<%=status2%>').attr('selected','selected');
+	$('#title').html($('#status option:selected').text()+
+			" "+$('#status2 option:selected').text()+" 목록");
 })
 function insertPM(num){
 	window.open('./PM_Insert.mo?num='+num, '여행자 정보 입력', 
@@ -46,6 +56,10 @@ function Res_Cancel(num){
 function status_change(){
 	location.href="./MyPackOrderList.mo?status="+$('#status').val();
 }
+function status_change2(){
+	location.href="./MyPackOrderList.mo?status="+$('#status').val()+
+			"&status2="+$('#status2').val();
+}
 </script>
 </head>
 <body>
@@ -58,9 +72,16 @@ function status_change(){
 
 		
 		<select id="status" onchange="status_change()">
-			<option value="ing">주문 목록 확인</option>
-			<option value="completed">지난 주문 확인</option>
+			<option value="ing">현재 주문</option>
+			<option value="completed">과거 주문</option>
 		</select>
+		<select id="status2" onchange="status_change2()">
+			<option value="none">전체</option>
+			<option value="confirmyet">예약 대기</option>
+			<option value="confirm">예약 완료</option>
+			<option value="canceling">예약 취소중</option>
+		</select>
+		<h3 id = "title"></h3>
 		<div id = "list_view">
 			
 				<%
@@ -78,7 +99,7 @@ function status_change(){
 						<td><%=mtib.getIntro()%></td>
 						<td>성인 : <%=pack_count[0]%>, 아동 : <%=pack_count[1]%></td>
 						<td><%=mtib.getCost()%>원</td>
-						<%if(mtib.getStatus()!=10){ %><td><%=mtib.getStatus_text()%></td><%} %>
+						<%if(status2.equals("none")){ %><td><%=mtib.getStatus_text()%></td><%} %>
 					</tr>
 					<%if(status.equals("ing")){
 						if (mtib.getStatus() < 4) {
@@ -121,16 +142,16 @@ function status_change(){
 				if (endpage > pcount)
 					endpage = pcount;
 				if (startp > pblock) {
-		%><a href="./MyPackOrderList.mo?status=<%=status %>&pageNum=<%=startp - 1%>">[이전]</a>
+		%><a href="./MyPackOrderList.mo?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=startp - 1%>">[이전]</a>
 		<%
 			}
 				for (int i = startp; i <= endpage; i++) {
-		%><a href="./MyPackOrderList.mo?status=<%=status %>&pageNum=<%=i%>">[<%=i%>]
+		%><a href="./MyPackOrderList.mo?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=i%>">[<%=i%>]
 		</a>
 		<%
 			}
 				if (endpage < pcount) {
-		%><a href="./MyPackOrderList.mo?status=<%=status %>&pageNum=<%=endpage + 1%>">[다음]</a>
+		%><a href="./MyPackOrderList.mo?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=endpage + 1%>">[다음]</a>
 		<%
 			}
 			}

@@ -54,6 +54,7 @@ public class AdminFrontController extends HttpServlet{
 			}
 		}else if(command.equals("/Pack_res.ao")){
 			action = new Pack_Res();
+			System.out.println("call");
 			try {
 				afo = action.execute(request, response);
 			} catch (Exception e) {
@@ -70,15 +71,15 @@ public class AdminFrontController extends HttpServlet{
 			afo = new ActionForward();
 			afo.setPath("/Admin/AdminOrderList.jsp");
 			afo.setRedirect(false);
-		}else if(command.equals("/Admin_Pack_Res_Cancel.ao")){
-			action = new Admin_Pack_Res_Cancel();
+		}else if(command.equals("/Res_Cancel.ao")){
+			action = new Admin_Res_Cancel();
 			try {
 				afo = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/Admin_Pack_Res_Cancel_Action.ao")){
-			action = new Admin_Pack_Res_Cancel_Action();
+		}else if(command.equals("/Pack_Res_Search.ao")){
+			action = new Pack_Res_Search();
 			try {
 				afo = action.execute(request, response);
 			} catch (Exception e) {

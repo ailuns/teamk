@@ -333,6 +333,7 @@ public class ModDAO {
 			pstmt.setString(1, id);
 			pstmt.setInt(2, start-1);
 			pstmt.setInt(3, end);	
+			System.out.println(sql);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				ModTradeInfoBEAN mtib = new ModTradeInfoBEAN();
@@ -557,6 +558,7 @@ public class ModDAO {
 				mtib.setTrade_num(rs.getString("po_trade_num"));
 				mtib.setPack_count(rs.getString("po_count"));
 				mtib.setCost(rs.getInt("po_cost"));
+				mtib.setTotal_cost(rs.getInt("po_cost"));
 				String []t_type = rs.getString("ti_trade_type").split(",");
 				mtib.setTrade_type(t_type[0]);
 				mtib.setDate(rs.getTimestamp("date"));
@@ -587,15 +589,15 @@ public class ModDAO {
 		
 		return mtib;
 	}
-	public int Res_Cancel(ModTradeInfoBEAN mtib){
+	public int Res_Cancel(String memo, int num){
 		int check = 0;
 		try{
 			conn = getconn();
 			sql = "update pack_order set po_res_status=4, "+
 					"po_memo = ? where po_num = ?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, mtib.getMemo());
-			pstmt.setInt(2, mtib.getNum());
+			pstmt.setString(1, memo);
+			pstmt.setInt(2, num);
 			pstmt.executeUpdate();
 			check = 1;
 		}catch (Exception e) {
