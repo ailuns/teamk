@@ -8,9 +8,10 @@ div#clear {clear: both;}
 /* 페이징 */
 a#i{
 	margin: 0 6px;
-	color: #06c;
+	color: #000;
 	text-decoration:none;
 }
+a#i:HOVER {color: #06c;}
 span#i{
 	color: red;
 	margin: 0 6px;
@@ -613,7 +614,31 @@ div#board div#board_list table a {
 	text-decoration: none;
 	color: #000;
 }
-
+div#board_menu_bar input[type="button"] {
+	float: left;
+	margin: 0 5px;
+	border: 1px dashed #06c;
+	background-color: #fff;
+	color: #06c;
+}
+div#board_menu_bar input:HOVER {
+	border: 1px solid #06c;
+	font-weight: bold;
+	cursor: pointer;
+}
+div#board_menu_bar form {float: right;}
+div#board_menu_bar form input[type="text"] {
+	width: 150px;
+}
+div#board_menu_bar form input, div#board_menu_bar form select {
+	border: 1px dashed #06c;
+	background-color: #fff;
+	color: #06c;
+}
+div#board_menu_bar form input:FOCUS, div#board_menu_bar form select:HOVER, div#board_menu_bar form select:FOCUS {
+	border: 1px solid #06c;
+	cursor: pointer;
+}
 
 /*Board Content.jsp*/
 div#board div#board_content {

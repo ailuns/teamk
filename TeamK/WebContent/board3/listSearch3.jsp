@@ -65,6 +65,18 @@ $(document).ready(function(){
     }}
     %>
 </table>
+<div id="board_menu_bar">
+<%
+String id = (String)session.getAttribute("id");
+if(id!=null){%>
+<input type="button" value="글쓰기" 
+       onclick="location.href='./BoardWrite3.bo'">
+    		<%}else{%>
+    			<input type="button" value="글쓰기" 
+    				   onclick="alert('로그인 해주세요')">
+    		<%} %>
+<input type="button" value="메인으로" 
+       onclick="location.href='./main.fo0'">
 <%
 //페이지 출력
 if(count!=0){
@@ -88,7 +100,7 @@ if(count!=0){
 		<%
 		}
 }
-%><br>
+%>
 <form action="listSearch3.bo" method="get">
 <select name="selectSearch" id="selectSearch">
     <option value="subject">제목</option>
@@ -97,17 +109,8 @@ if(count!=0){
 <input type="text" name="search" class="input_box">
 <input type="submit" value="검색" class="btn">
 </form>
-<%
-String id = (String)session.getAttribute("id");
-if(id!=null){%>
-<input type="button" value="글쓰기" 
-       onclick="location.href='./BoardWrite3.bo'">
-    		<%}else{%>
-    			<input type="button" value="글쓰기" 
-    				   onclick="alert('로그인 해주세요')">
-    		<%} %>
-<input type="button" value="메인으로" 
-       onclick="location.href='./main.fo0'">
+</div>
+		<div class="clear"></div>
 </div>
 </div>
 	</div>
