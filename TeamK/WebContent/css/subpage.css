@@ -699,7 +699,7 @@ div#board div#board_content table td#subject {
 	
 }
 div#board div#board_content table td#content {
-	max-width: 700px;
+	max-width: 600px;
 	text-align: justify;
 	font-size: 15px;
 	font-weight: normal;
