@@ -42,7 +42,7 @@ $(document).ready(function(){
 	<div id="wrap">
 		<div id="board_head">
 			<div id="qna_title">Q&A 게시판</div>
-			<div id="qna_script">궁금한것은 질문해주세요.<br>[검색된 글의 개수 :<%=count%>]</div>
+			<div id="qna_script">궁금한것은 질문해주세요.<span class="count">[검색된 글의 개수 :<%=count%>]</span></div>
 		</div>
 		<div id="clear"></div>
 		<div id="board">
@@ -58,7 +58,7 @@ $(document).ready(function(){
 <tr><td><%=bb.getRe_ref()%></td>
 <td id="title">
 <a href="./BoardContent2.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>">
-<%if(bdao.getBoardReplyCount(bb.getNum())>=1){%>[답변완료]<%}%><%=bb.getSubject()%>[<%=bdao.getBoardReplyCount(bb.getNum())%>]</a><%if(bdao.getFile(bb.getNum())!=null){%><img src="./img/File_icon.gif" width="15" height="15>"><%}%></td>
+<%if(bdao.getBoardReplyCount(bb.getNum())>=1){%>[답변완료]<%}%><%=bb.getSubject()%>[<%=bdao.getBoardReplyCount(bb.getNum())%>]</a><%if(bdao.getFile(bb.getNum())!=null){%><img src="./img/disk.png" width="15" height="15>"><%}%></td>
 <td><%=bb.getId()%></td><td><%=bb.getDate() %></td>
     <td><%=bb.getReadcount() %></td></tr>
     			<%

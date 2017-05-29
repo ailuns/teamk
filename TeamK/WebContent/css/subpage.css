@@ -187,7 +187,7 @@ div#package_feat {
 }
 div#package_slide, div#package_search {float: left;}
 div#package_search {
-	background-color: #06c;
+	background-color: #333;
 	width: 400px;
 	height: 300px;
 	color: #fff;
@@ -545,8 +545,12 @@ div#m_delete_form form input[type="button"] {}
 /* Board List.jsp */
 div#member_head, div#board_head {
 	width: 1000px;
-	margin-top: 10px;
 	text-align: left;
+}
+div#board_head span.count {
+	float: right;
+	font-size: 12px;
+	margin-right: 55px;
 }
 div#member_title, div#member_script, div#qna_title, div#qna_script, div#rvw_title, div#rvw_script, div#package_head{
 	height: 60px;

@@ -959,6 +959,9 @@
 	<!-- 왼쪽 메뉴 -->
 	<!--여행지 검색창 -->
 	<div id="wrap"> 
+	<div id="package_head">
+		패키지
+	</div>
 		<div id="package_feat">
 		<jsp:include page="../inc/packSlide.jsp"></jsp:include>
 		<div id="package_search">
