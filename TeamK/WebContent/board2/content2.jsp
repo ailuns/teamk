@@ -70,7 +70,7 @@ int num = Integer.parseInt(request.getParameter("num"));
 		<div id="clear"></div>
 		<div id="board">
 		<div id="board_content">
-<table>
+<table id="content">
 <tr><td id="num"><%=bb.getRe_ref()%></td><td id="date"><%=bb.getDate()%></td><td id="readcount">조회수: <%=bb.getReadcount()%></td></tr>
 <tr><td colspan="2" id="subject"> 
 <%=bb.getSubject()%></td><td id="id"><%=bb.getId()%></td></tr>
@@ -158,11 +158,7 @@ if(id.equals("admin")){%>
 </div>
 <%--댓글달기버튼 replyupdate로 AJAX 실행 --%>
 <input type="button" value="댓글달기" onclick="replyupdate()">	
-<%}else{%>
-<textarea rows="3" cols="59" name="content" placeholder="Q&A게시판 답변은 관리자만 작성가능합니다." readonly></textarea>	
-<%}}else{%>
-<textarea rows="3" cols="59" name="content" placeholder="Q&A게시판 답변은 관리자만 작성가능합니다." readonly></textarea>
-<%}%>
+<%}} %>
 </form>
 <!-- ///////////////////댓글///////////////// -->
 		</div>

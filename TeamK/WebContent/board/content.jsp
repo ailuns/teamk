@@ -68,7 +68,7 @@ int num = Integer.parseInt(request.getParameter("num"));
 		<div id="clear"></div>
 		<div id="board">
 		<div id="board_content">
-<table>
+<table id="content">
 <tr><td id="num"><%=bb.getRe_ref()%></td><td id="date"><%=bb.getDate()%></td><td id="readcount">조회수:<%=bb.getReadcount()%></td></tr>
 <tr><td colspan="2" id="subject"><%=bb.getSubject()%></td><td id="id"><%=bb.getId()%></td></tr>
 <tr><td colspan="3" id="content"><br><br><%=bb.getContent()%><br><br></td></tr>
@@ -124,7 +124,7 @@ if(rcount!=0){lrb=(List)request.getAttribute("lrb");}
     	BoardReplyBean rb = (BoardReplyBean)lrb.get(i);%>
 <tr>
 <td id="name"><%=rb.getId()%></td>
-<td id="rContent"><%=rb.getContent()%></td>
+<td id="content"><%=rb.getContent()%></td>
 <td id="delete"><%
 if(id!=null){
 	//같은 Id이거나 admin만 리플 삭제 가능
