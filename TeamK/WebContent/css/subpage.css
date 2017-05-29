@@ -5,6 +5,15 @@ div#clear {clear: both;}
 	font-family: "나눔 고딕", "Noto Sans", sans-serif;
 }
 
+/* 페이징 */
+a#i{
+	margin: 0 6px;
+}
+span#i{
+	color: red;
+	margin: 0 6px;
+}
+
 /* Main.jsp */
 div#datepicker {
 	height: 200px;
@@ -691,6 +700,7 @@ div#board div#board_content table td#content {
 	text-align: justify;
 	font-size: 15px;
 	font-weight: normal;
+	min-height: 300px;
 }
 div#board div#board_content table td#content img {max-width: 100%;}
 div#board div#board_content table#reply {text-align: justify;}

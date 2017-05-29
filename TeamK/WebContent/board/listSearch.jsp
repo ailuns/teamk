@@ -21,6 +21,7 @@ int pageBlock=((Integer)request.getAttribute("pageBlock")).intValue();
 int startPage=((Integer)request.getAttribute("startPage")).intValue();
 int endPage=((Integer)request.getAttribute("endPage")).intValue();
 String ss = (String)request.getAttribute("ss");
+int pNum = Integer.parseInt(pageNum);
 
 String search=request.getParameter("search");
 
@@ -48,10 +49,11 @@ $(document).ready(function(){
 <table>
 <tr><th id="num">번호</th><th id="cate">분류</th><th id="title">제목</th><th id="name">작성자</th><th id="date">날짜</th><th id="readcount">조회수</th></tr>
     <%
+    if(count==0){%><tr> <td colspan="6">검색결과가 없습니다.</td></tr><%}else{			
     for(int i=0; i<boardList.size(); i++){
     	//자바빈(BoardBean) 변수 =배열한칸 접근  배열변수.get()
     	BoardBean bb = (BoardBean)boardList.get(i);
-    			%>
+    	%>
 <tr><td><%=bb.getRe_ref()%></td><td id="cate">[<%=bb.getType_select()%>]</td>
 <td id="title">
 <a href="./BoardContent.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>">
@@ -59,7 +61,7 @@ $(document).ready(function(){
 <td><%=bb.getId()%></td><td><%=bb.getDate()%></td>
     <td><%=bb.getReadcount() %></td></tr>
     			<%
-    }
+    }}
     %>
 </table>
 <%
@@ -76,8 +78,9 @@ if(count!=0){
 	}
 	// 1..10 11..20 21..30
 	for(int i=startPage; i<=endPage; i++){
-		%><a href="./listSearch.bo?pageNum=<%=i%>&selectSearch=<%=ss%>&search=<%=search%>">[<%=i%>]</a><%
-	}
+		if(i==pNum){%><span id="i"><%=i%></span><%}else{
+		%><a id="i" href="./listSearch.bo?pageNum=<%=i%>&selectSearch=<%=ss%>&search=<%=search%>"><%=i%></a><%
+	}}
 	// 다음
 	if(endPage < pageCount){
 		%><a href="./listSearch.bo?pageNum=<%=startPage+pageBlock%>&search=<%=search%>">[다음]</a>
