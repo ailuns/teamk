@@ -401,6 +401,20 @@ div#member {
 	padding: 100px 0;
 	text-align: center;
 }
+div#member form input:HOVER {border: 1px solid #000;}
+div#member form input:FOCUS {border: 1px solid #06c;}
+div#member input[type="button"], div#member input[type="submit"] {
+	border: 1px solid #06c;
+	background-color: #fff;
+	color: #06c;
+}
+div#member input[type="button"]:HOVER, div#member input[type="submit"]:HOVER {
+	border: 1px solid #06c;
+	background-color: #06c;
+	color: #fff;
+	cursor: pointer;
+	font-weight: bold;
+}
 div#login_form {
 	margin: 0 auto;
 	padding: 5px 20px;

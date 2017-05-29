@@ -93,12 +93,5 @@
 	<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
-<<<<<<< HEAD
-=======
-	</div>
-	<!--오른쪽 메뉴 -->
-	<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
-	<!--오른쪽 메뉴 -->
->>>>>>> branch 'master' of https://github.com/ailuns/teamk.git
 </body>
 </html>
