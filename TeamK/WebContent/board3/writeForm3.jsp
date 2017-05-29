@@ -22,9 +22,9 @@
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
-		<div id="login_head">
-		<div id="login_title">공지사항</div>
-			<div id="login_script">공지사항 게시판 입니다.</div>
+		<div id="board_head">
+		<div id="rvw_title">공지사항</div>
+			<div id="rvw_script">공지사항 게시판 입니다.</div>
 		</div>
 		<div id="clear"></div>
 <div id="board">
@@ -39,6 +39,7 @@
 <label for="file3">첨부파일3</label><input type="file" name="file3" id="file3"><br>
 <label for="file4">첨부파일4</label><input type="file" name="file4" id="file4"><br>
 <label for="file5">첨부파일5</label><input type="file" name="file5" id="file5"><br>
+<div class="clear"></div><br>
 <input type="submit" id="save" value="글쓰기">
 <input type="button" value="글목록" 
        onclick="location.href='./BoardList3.bo?pageNum=1'">
@@ -72,7 +73,7 @@ nhn.husky.EZCreator.createInIFrame({
 
 function pasteHTML(fname) {
 	var sHTML = '<img src="<%=request.getContextPath()%>/upload/'+ fname +'">';
-	alert(sHTML);
+	//(sHTML);
     oEditors.getById["ir1"].exec("PASTE_HTML", [sHTML]);
 }
 

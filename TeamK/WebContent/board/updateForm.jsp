@@ -34,7 +34,6 @@ String id = (String)session.getAttribute("id");
 		<div id="board">
 		<div id="board_write">
 <form action="./BoardUpdateAction.bo?pageNum=<%=pageNum%>" method="post" name="fr" enctype="multipart/form-data">
-<input type="hidden" value="1" name="type">
 <input type="hidden" name="num" value="<%=bb.getNum()%>">
 <input type="hidden" name="id" value="<%=id%>" readonly><br>
 <label for="subject">제목</label><input type="text" name="subject" id="subject" value="<%=bb.getSubject()%>"><br><br>

@@ -29,14 +29,13 @@ public class BoardUpdateAction3 implements Action {
 		BoardDAO bdao = new BoardDAO();
 		BoardBean bb = new BoardBean();
 		
-		System.out.println(request.getParameter("id"));
-		System.out.println(request.getParameter("num"));
+		System.out.println(multi.getParameter("id"));
+		System.out.println(multi.getParameter("num"));
 		bb.setNum(Integer.parseInt(multi.getParameter("num")));
 		bb.setId(multi.getParameter("id"));
 		bb.setSubject(multi.getParameter("subject"));
 		bb.setContent(multi.getParameter("content"));
 		bb.setEmail(multi.getParameter("email"));
-		System.out.println("이메일"+multi.getParameter("email"));
 		if(multi.getFilesystemName("file1")!=null){
 			bb.setFile1(multi.getFilesystemName("file1"));
 		}else{
