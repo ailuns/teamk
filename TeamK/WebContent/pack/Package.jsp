@@ -104,8 +104,10 @@
 %>
 
 <div id="wrap">
+	<div id="board_head">
 	<div id="package_head">
 		패키지
+	</div>
 	</div>
 	<!--여행지 검색창 -->
 	<div id="package_feat">

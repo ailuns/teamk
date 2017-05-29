@@ -27,6 +27,7 @@ int pageCount=((Integer)request.getAttribute("pageCount")).intValue();
 int pageBlock=((Integer)request.getAttribute("pageBlock")).intValue();
 int startPage=((Integer)request.getAttribute("startPage")).intValue();
 int endPage=((Integer)request.getAttribute("endPage")).intValue();
+int pNum = Integer.parseInt(pageNum);
 
 BoardDAO bdao = new BoardDAO();
 %>
@@ -73,8 +74,9 @@ if(count!=0){
 	}
 
 	for(int i=startPage; i<=endPage; i++){
-		%><a href="./BoardList.bo?pageNum=<%=i%>">[<%=i%>]</a><%
-	}
+		if(i==pNum){%><span id="i"><%=i%></span><%}else{
+		%><a id="i" href="./BoardList.bo?pageNum=<%=i%>"><%=i%></a><%
+	}}
 
 	if(endPage < pageCount){
 		%><a href="./BoardList.bo?pageNum=<%=startPage+pageBlock%>">[다음]</a>

@@ -193,7 +193,7 @@
 					
 			%>
 				<input type="hidden" id="pack_img<%=j %>" value=<%=pb.getFile1() %>>
-				<a href="#" id="pack<%=j %>"><span id="pktt"><%=pb.getSubject() %></span><br><span id="pksc"><%=pb.getIntro() %></span><br><span id="pkpr"><%=pb.getCost() %></span></a>
+				<a href="./PackContent.po?num=<%=pb.getNum() %>" id="pack<%=j %>"><span id="pktt"><%=pb.getSubject() %></span><br><span id="pksc"><%=pb.getIntro() %></span><br><span id="pkpr"><%=pb.getCost() %></span></a>
 				<script> bg(<%=j %>);</script>
 			<%
 				}

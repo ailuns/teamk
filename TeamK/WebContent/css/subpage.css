@@ -5,6 +5,17 @@ div#clear {clear: both;}
 	font-family: "나눔 고딕", "Noto Sans", sans-serif;
 }
 
+/* 페이징 */
+a#i{
+	margin: 0 6px;
+	color: #06c;
+	text-decoration:none;
+}
+span#i{
+	color: red;
+	margin: 0 6px;
+}
+
 /* Main.jsp */
 div#datepicker {
 	height: 200px;
@@ -308,7 +319,10 @@ div#package_tab .tab_container {
 	margin-top : 20px;
 	text-align: center;
 }
-div#package_tab div.tab_content table {margin: 0 auto;}
+div#package_tab  
+{
+	margin: 0 auto;
+}
 div#package_tab .img_size {
 	width : 280px;
 	height : 200px;
@@ -534,14 +548,14 @@ div#member_head, div#board_head {
 	margin-top: 10px;
 	text-align: left;
 }
-div#member_title, div#member_script, div#qna_title, div#qna_script, div#rvw_title, div#rvw_script {
+div#member_title, div#member_script, div#qna_title, div#qna_script, div#rvw_title, div#rvw_script, div#package_head{
 	height: 60px;
 	width: 1000px;
 	margin: 0 auto;
 	color: #fff;
 	padding-left: 100px;
 }
-div#member_title, div#qna_title, div#rvw_title {
+div#member_title, div#qna_title, div#rvw_title, div#package_head {
 	background-color: #fff;
 	padding-top: 18px;
 	border-bottom: 3px solid #06c;
@@ -623,10 +637,11 @@ div#board div#board_content table td#subject {
 	
 }
 div#board div#board_content table td#content {
-	max-width: 700px;
+	max-width: 600px;
 	text-align: justify;
 	font-size: 15px;
 	font-weight: normal;
+	min-height: 300px;
 }
 div#board div#board_content table td#content img {max-width: 100%;}
 div#board div#board_content table#reply {text-align: justify;}
