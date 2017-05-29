@@ -188,7 +188,7 @@ div#package_feat {
 }
 div#package_slide, div#package_search {float: left;}
 div#package_search {
-	background-color: #333;
+	background-color: #f5b8d7;
 	width: 400px;
 	height: 300px;
 	color: #fff;
@@ -215,12 +215,12 @@ div#package_search form input[type=submit] {
 	font-size: 15px;
 	width: 70px;
 	border: 1px solid #fff;
-	background-color: #06c;
+	background-color: #f5b8d7;
 	color: #fff;
 	font-weight: bold;
 }
 div#package_search form input[type=submit]:hover {
-	background-color: #09f;
+	background-color: #ec8ed0;
 	cursor: pointer;
 }
 div#package_list
