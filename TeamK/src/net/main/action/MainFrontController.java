@@ -49,16 +49,26 @@ public class MainFrontController extends HttpServlet{
 //			rd.forward(request, response);
 			
 			// ActionForward 객체 생성 기억장소 할당
-			forward = new ActionForward();
+//			forward = new ActionForward();
 //			path 이동할 페이지 주소 값 저장
-			forward.setPath("./main/index.jsp");
+//			forward.setPath("./main/index.jsp");
 //			isRedirect 이동할 방식 저장
-			forward.setRedirect(false);		
+//			forward.setRedirect(false);
+			
+			action = new Index();
+			try {
+				forward = action.excute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
 		}
 		
 		else if(command.equals("/main.fo"))
 		{
-			action = new MainAction();
+			action = new Main();
 			try {
 				forward = action.excute(request, response);
 			} catch (Exception e) {
@@ -67,18 +77,6 @@ public class MainFrontController extends HttpServlet{
 			}
 		}
 
-		
-//		else if(command.equals("/PackWrite.po"))
-//		{
-//			forward = new ActionForward();
-//			//path 이동할 페이지 주소 값 저장
-//			forward.setPath("./pack/Package_write.jsp");
-//			//isRedirect 이동할 방식 저장
-//			forward.setRedirect(false);
-//		}
-		
-		
-		
 		
 		
 		

@@ -19,7 +19,10 @@
 		<%}
 		}
 		 %>
-<!-- 		<li><a href="#">언어설정</a></li> -->
 	</ul>
-	<embed height="250px" width="150px" src="http://www.gagalive.kr/livechat1.swf?chatroom=~~~new_TeamK"></embed>
+	<div id="map">
+	<p>원하는 지역을<br>선택해주세요.</p>
+	<object type="image/svg+xml" data="./img/Map_of_South_Korea-blank.svg">Your browser does not support SVGs</object>
+	</div>
+<!-- 	<embed height="250px" width="150px" src="http://www.gagalive.kr/livechat1.swf?chatroom=~~~new_TeamK"></embed> -->
 </div>

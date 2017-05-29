@@ -27,6 +27,7 @@ int pageCount=((Integer)request.getAttribute("pageCount")).intValue();
 int pageBlock=((Integer)request.getAttribute("pageBlock")).intValue();
 int startPage=((Integer)request.getAttribute("startPage")).intValue();
 int endPage=((Integer)request.getAttribute("endPage")).intValue();
+int pNum = Integer.parseInt(pageNum);
 
 BoardDAO bdao = new BoardDAO();
 %>
@@ -38,7 +39,7 @@ BoardDAO bdao = new BoardDAO();
 	<div id="wrap">
 		<div id="board_head">
 			<div id="rvw_title">리뷰</div>
-			<div id="rvw_script">물건이나 여행 후기를 쓰는 곳 입니다.<br>[전체글 개수 :<%=count%>]</div>
+			<div id="rvw_script">상품이나 패키지 후기를 쓰는 곳 입니다.<span class="count">[전체글 개수 :<%=count%>]</span></div>
 		</div>
 		<div id="clear"></div>
 		<div id="board">
@@ -55,7 +56,7 @@ BoardDAO bdao = new BoardDAO();
 <td id="cate">[<%=bb.getType_select()%>]</td> <%--글 타입--%>
 <td id="title"><a href="./BoardContent.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>"><%=bb.getSubject()%> <%--글 제목--%>
 [<%=bdao.getBoardReplyCount(bb.getNum())%>]</a> <%--해당 글의 리플 갯수--%>
-<%if(bdao.getFile(bb.getNum())!=null){%><img src="./img/File_icon.gif" width="15" height="15>"><%}%></td> <%--첨부파일이 있으면 파일모양 아이콘 표시--%>
+<%if(bdao.getFile(bb.getNum())!=null){%><img src="./img/disk.png" width="15" height="15>"><%}%></td> <%--첨부파일이 있으면 파일모양 아이콘 표시--%>
 <td><%=bb.getId()%></td> <%--작성자 ID--%>
 <td><%=bb.getDate()%></td> <%--작성 날짜--%>
 <td><%=bb.getReadcount() %></td> <%--조회수--%>
@@ -73,8 +74,9 @@ if(count!=0){
 	}
 
 	for(int i=startPage; i<=endPage; i++){
-		%><a href="./BoardList.bo?pageNum=<%=i%>">[<%=i%>]</a><%
-	}
+		if(i==pNum){%><span id="i"><%=i%></span><%}else{
+		%><a id="i" href="./BoardList.bo?pageNum=<%=i%>"><%=i%></a><%
+	}}
 
 	if(endPage < pageCount){
 		%><a href="./BoardList.bo?pageNum=<%=startPage+pageBlock%>">[다음]</a>

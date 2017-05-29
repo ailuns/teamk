@@ -83,91 +83,8 @@
 		});
 	});
 	
-	jQuery(document).ready(function($){
-		$("#select_rbtn0").prop("checked", "true");	
-	});
 	
 	
-	
-	// 찜하기, 예약하기 버튼 클릭 시 각각 버튼 마다 이동할 페이지
-	function submit_fun(i, user_id)
-	{
-		if ($("input[type=radio][name=chk]").is(":checked"))
-		{
-		
-		}
-		// i = 1  찜추가   i = 2 찜취소    i = 3  예약하기
-		if (i == 1 && user_id != "") // 로그인 되어 있을 경우 찜추가
-		{
-			$.ajax({
-				type:"post",
-				url:"./MyInterestAdd.ins",   // java로 보냄
-				data:{
-					type:"P",
-					num:$("input[type=radio][name=chk]:checked").val()					
-				},
-				success:function(){
-					alert("찜목록에 추가되었습니다");
-					$("#jjim_o").hide();
-					$("#jjim_x").show();
-//						window.location.reload(true);  // 페이지 새로고침
-				}
-			});
-		}
-		
-		else if(i == 2 && user_id != "")   // 로그인에 되어 있을 경우 찜취소
-		{
-			$.ajax({
-				type:"post",
-				url:"./MyInterestDel.ins",   // java로 보냄
-				data:{
-					type:"P",
-					num:$("input[type=radio][name=chk]:checked").val()					
-				},
-				success:function(){
-					$("#jjim_o").show();
-					$("#jjim_x").hide();
-					alert("찜목록에서 삭제되었습니다");
-//						window.location.reload(true);  // 페이지 새로고침
-				}
-			});
-		}
-		
-		else if (i == 3 && user_id != "")
-		{
-			var cost_temp = $("#p").html(); // 총금액 받아오기
-			str = String(cost_temp);		// 총금액 천원단위로 , 찍혀있는걸
-		    cost = str.replace(/[^\d]+/g, '');   // 풉니다
-			
-		    $("#cost").val(cost);
-		    $("#ori_num").val($("input[type=radio][name=chk]:checked").val());
-
-		    document.input_fr.action = "./MyBasketAddAction.bns";	// 장바구니 페이지로 이동
-		    document.input_fr.method = "post";
-		    document.input_fr.submit();
-		}
-		
-		else if (i == 4 && user_id != "")
-		{
-			var cost_temp = $("#p").html(); // 총금액 받아오기
-			str = String(cost_temp);		// 총금액 천원단위로 , 찍혀있는걸
-		    cost = str.replace(/[^\d]+/g, '');  // 풉니다
-			
-		    // 폼태그로 보내기때문에 hidden 숨겨둔 곳에 각각 값을 넣는다
-		    $("#cost").val(cost);
-		    $("#ori_num").val($("input[type=radio][name=chk]:checked").val());
-
-		    document.input_fr.action = "./MyOrderPay.mo";  // 예약하기 페이지로 이동
-		    document.input_fr.method = "post";
-		    document.input_fr.submit();
-		}
-		
-		
-		else if(user_id == "")	// 로그인 안되어 있을 경우
-		{
-			loginChk();
-		}
-	}
 	
 	
 	// 주변 명소, 주변 맛집 클릭 시  검색할 값을 구글맵으로 보낸다
@@ -549,6 +466,14 @@
 		$("#remote_content").draggable();
 	});
 	
+	
+	// 패키지 내용 로딩 될 때 첫번째 날짜가 선택되어 있게 한다.
+	jQuery(document).ready(function($){
+		$("#select_rbtn0").prop("checked", "true");  // 첫번째 라디오 버튼 체크 되어 있게
+		$("#select_date0").css("background-color", "#D5D5D5");  // 첫번째 날짜 부분 배경색 #D5D5D5로 변경
+	});
+	
+	
 	// 날짜 추가 버튼 클릭 이벤트
 	function winOpen(subject) {
 		win = window.open("./PackDateAdd.po?subject=" + subject, "Package_dateAdd.jsp",
@@ -559,13 +484,12 @@
 	// 날짜 선택시 이벤트
 	function select_date(select_num)
 	{
-		var packnum = $("#select_rbtn" + select_num).val();
-// 		alert(packnum);
-		$(".select_color").css("background-color","");
-		$("#select_rbtn" + select_num).prop("checked", "true");
-		$("#select_date" + select_num).css("background-color", "#D5D5D5");
+		var packnum = $("#select_rbtn" + select_num).val();  // 해당 라디오버튼의 글번호 값을 불러온다
+		$(".select_color").css("background-color","");		// tr 부분 모든 배경색을 없앤다
+		$("#select_rbtn" + select_num).prop("checked", "true"); // 클릭된 라디오 버튼을 체크로 바꾼다
+		$("#select_date" + select_num).css("background-color", "#D5D5D5");  // 클릭된 tr 부분의 배경색을 #D5D5D5로 바꾼다
 		
-		$.ajax({
+		$.ajax({   // 날짜를 클릭할때 마다 찜목록과 비교
 			type:"post",
 			url:"./MyInterestCheck.ins",
 			data:{
@@ -574,19 +498,94 @@
 			},
 			success:function(data)
 			{
-// 				alert(data);
-				if (data == 1)
+				if (data == 1)  // 찜목록에 해당 날짜 패키지가 있을 시
 				{
-					$("#jjim_o").hide();
-					$("#jjim_x").show();
+					$("#jjim_o").hide();  // 찜추가   버튼  숨기기
+					$("#jjim_x").show();  // 찜삭제   버튼 보이기
 				}
-				else
+				else   // 찜목록에 해당 날짜 패키지가 없을 시
 				{
-					$("#jjim_o").show();
-					$("#jjim_x").hide();
+					$("#jjim_o").show();  // 찜추가 버튼 보이기
+					$("#jjim_x").hide();  // 찜삭제 버튼 숨기기
 				}
 			}
 		});
+	}
+	
+	// 찜하기, 예약하기 버튼 클릭 시 각각 버튼 마다 이동할 페이지
+	function submit_fun(i, user_id)
+	{
+		// i = 1  찜추가   i = 2 찜취소    i = 3  예약하기
+		if (i == 1 && user_id != "") // 로그인 되어 있을 경우 찜추가
+		{
+			$.ajax({
+				type:"post",
+				url:"./MyInterestAdd.ins",   // java로 보냄
+				data:{
+					type:"P",
+					num:$("input[type=radio][name=chk]:checked").val()					
+				},
+				success:function(){
+					alert("찜목록에 추가되었습니다");
+					$("#jjim_o").hide();
+					$("#jjim_x").show();
+//						window.location.reload(true);  // 페이지 새로고침
+				}
+			});
+		}
+		
+		else if(i == 2 && user_id != "")   // 로그인에 되어 있을 경우 찜취소
+		{
+			$.ajax({
+				type:"post",
+				url:"./MyInterestDel.ins",   // java로 보냄
+				data:{
+					type:"P",
+					num:$("input[type=radio][name=chk]:checked").val()					
+				},
+				success:function(){
+					$("#jjim_o").show();
+					$("#jjim_x").hide();
+					alert("찜목록에서 삭제되었습니다");
+//						window.location.reload(true);  // 페이지 새로고침
+				}
+			});
+		}
+		
+		else if (i == 3 && user_id != "")  // 로그인 되어 있을 경우  장바구니
+		{
+			var cost_temp = $("#p").html(); // 총금액 받아오기
+			str = String(cost_temp);		// 총금액 천원단위로 , 찍혀있는걸
+		    cost = str.replace(/[^\d]+/g, '');   // 풉니다
+			
+		    $("#cost").val(cost);
+		    $("#ori_num").val($("input[type=radio][name=chk]:checked").val());
+
+		    document.input_fr.action = "./MyBasketAddAction.bns";	// 장바구니 페이지로 이동
+		    document.input_fr.method = "post";
+		    document.input_fr.submit();
+		}
+		
+		else if (i == 4 && user_id != "")  // 로그인 되어 있을 경우  예약하기
+		{
+			var cost_temp = $("#p").html(); // 총금액 받아오기
+			str = String(cost_temp);		// 총금액 천원단위로 , 찍혀있는걸
+		    cost = str.replace(/[^\d]+/g, '');  // 풉니다
+			
+		    // 폼태그로 보내기때문에 hidden 숨겨둔 곳에 각각 값을 넣는다
+		    $("#cost").val(cost);
+		    $("#ori_num").val($("input[type=radio][name=chk]:checked").val());
+
+		    document.input_fr.action = "./MyOrderPay.mo";  // 예약하기 페이지로 이동
+		    document.input_fr.method = "post";
+		    document.input_fr.submit();
+		}
+		
+		
+		else if(user_id == "")	// 로그인 안되어 있을 경우
+		{
+			loginChk();
+		}
 	}
 
 
@@ -888,8 +887,8 @@
 	width : 100px;
 	height : 170px;
 	position : fixed;
-	right : 310px;
-	bottom : 220px;
+	right : 250px;
+	bottom : 420px;
 	background-color: white;
 	text-align: center;
 	border : 1px solid #BDBDBD;
@@ -924,7 +923,7 @@
 				<td><span onclick="remote_close()">close</span></td>
 			</tr>
 			<tr>
-				<td><span onclick="fnMove('#wrap')">Top</span></td>
+				<td><span onclick="fnMove('body')">Top</span></td>
 			</tr>
 			<tr>
 				<td><span onclick="fnMove('#contentdiv2')">여행정보</span></td>
@@ -960,35 +959,33 @@
 	<!-- 왼쪽 메뉴 -->
 	<!--여행지 검색창 -->
 	<div id="wrap"> 
-		<div id="package_title">
-			<div id="package_head">패키지
-			</div>
-			<div id="package_search_sub">
-				<form action="./PackSearchAction.po" name="fr" method="get" id="scheduler" onsubmit="return input_chk()">
-					<label for="date_from">출발</label>
-					<input type="text" id="date_from" class="input_style" name="startDate" required="yes">
-<!-- 					<label for="date_to">도착</label> -->
-<!-- 					<input type="text" id="date_to" class="input_style" name="endDate"> -->
-<!-- 					<br><br> -->
-					<label for="city_search">지역</label>
-					<select id="area" name="area">
-						<option value="">선택하세요</option>
-						<%
-							CategoryBean cb;
-							for (int i = 0; i < CategoryList.size(); i++)
-							{
-								cb =(CategoryBean)CategoryList.get(i);
-						%>	
-							<option value="<%=cb.getCar_name() %>"><%=cb.getCar_name() %></option>
-						<%
-							}
-						%>
-					</select>
-					<input type="submit" value="검색" id="search_btn" class="input_style">
-				</form>
-			</div>
+	<div id="package_head">
+		패키지
+	</div>
+		<div id="package_feat">
+		<jsp:include page="../inc/packSlide.jsp"></jsp:include>
+		<div id="package_search">
+			<p>내게 맞는 패키지 검색하기</p>
+			<form action="./PackSearchAction.po" name="fr" method="get" id="scheduler" onsubmit="return input_chk();">
+				<label for="date_from">출발</label><input type="text" id="date_from" class="input_style" name="startDate" required="yes"><br><br>
+				<label for="city_search">지역</label>
+				<select id="area" name="area">
+					<option value="">선택하세요</option>
+					<%
+						CategoryBean cb;
+						for (int i = 0; i < CategoryList.size(); i++)
+						{
+							cb =(CategoryBean)CategoryList.get(i);
+					%>	
+						<option value="<%=cb.getCar_name() %>"><%=cb.getCar_name() %></option>
+					<%
+						}
+					%>
+				</select>
+				<input type="submit" value="검색" id="search_btn" class="input_style">
+			</form>
 		</div>
-	
+	</div>
 	<div id="clear"></div>
 	<!--여행지 검색창 -->
 	

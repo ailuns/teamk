@@ -5,6 +5,17 @@ div#clear {clear: both;}
 	font-family: "나눔 고딕", "Noto Sans", sans-serif;
 }
 
+/* 페이징 */
+a#i{
+	margin: 0 6px;
+	color: #06c;
+	text-decoration:none;
+}
+span#i{
+	color: red;
+	margin: 0 6px;
+}
+
 /* Main.jsp */
 div#datepicker {
 	height: 200px;
@@ -12,12 +23,12 @@ div#datepicker {
 	min-width: 1000px;
 	margin: 0 auto;
 	background-color: #fff;
-	padding-top: 10px;
 }
 div#notice, div#scheduler {
 	float: left;
 	width: 500px;
 }
+div#notice {padding: 20px;}
 div#scheduler {
 	background-color: #06c;
 	height: 200px;
@@ -27,7 +38,7 @@ div#scheduler {
 }
 div#scheduler form {
 	text-align: left;
-	margin-left: 30px;
+	margin-left: 40px;
 	line-height: 1.5em;
 }
 div#scheduler form label {margin: 0 20px 10px 0;}
@@ -66,26 +77,26 @@ div#package_show a {
 	color: #fff;
 	text-shadow: 1px 1px 1px #000;
 }
-div#package_show a#pack1 {
-	background-image: url("../img/i.jpg");
+#package_show #pack1 {
 	background-repeat : no-repeat;
 	background-size: cover;
 	background-position: center center;
-	transition: 0.5s;
+ 	transition: 0.4s;
+ 	background-position: left;
 }
 div#package_show a#pack2 {
-	background-image: url("../img/491021_374477_1553.jpg");
 	background-repeat : no-repeat;
 	background-size: cover;
 	background-position: center center;
-	transition: 0.5s;
+ 	transition: 0.4s;
+ 	background-position: center;
 }
 div#package_show a#pack3 {
-	background-image: url("../img/군항제3.jpg");
 	background-repeat : no-repeat;
 	background-size: cover;
 	background-position: center center;
-	transition: 0.5s;
+ 	transition: 0.4s;
+ 	background-position: right;
 }
 a#pack1 span, a#pack2 span, a#pack3 span {
 	margin-left: 10px;
@@ -96,7 +107,9 @@ a#pack1 #pktt, a#pack2 #pktt, a#pack3 #pktt {
 	font-weight: bold;
 	margin-top: 20px;
 }
-a#pack1 #pksc, a#pack2 #pksc, a#pack3 #pksc {height: 50px;}
+a#pack1 #pksc, a#pack2 #pksc, a#pack3 #pksc {
+	height: 50px;
+}
 a#pack1 #pkpr, a#pack2 #pkpr, a#pack3 #pkpr {
 	font-size: 30px;
 	font-weight: bold;
@@ -116,7 +129,7 @@ div#review_show {
 	background-color: #fff;
 	padding: 10px;
 }
-div#datepicker div#notice, div#review_show div {
+div#review_show div {
 	height: 200px;
 	width: 490px;
 	float: left;
@@ -160,7 +173,6 @@ div#datepicker div table td#date, div#review_show div table td#date {width: 70px
 div#package_head {
 	background-color: #fff;
 	padding-top: 5px;
-	border-bottom: 3px solid #06c;
 	font-size: 30px;
 	font-weight: lighter;
 	color: #06c;
@@ -174,42 +186,9 @@ div#package_feat {
 	margin: 0 auto;
 }
 div#package_slide, div#package_search {float: left;}
-div#package_slide {
-	width: 700px;
-	height: 300px;
-	position:relative;
-	background-image: url("../img/군항제3.jpg");
-	background-size: cover;
-}
-div#package_slide img {
-	width: 700px;
-	height: 300px;
-}
-.slider {display:none;}
-.controller {
-	text-align:center!important;
-	padding:0.01em 16px;
-	margin-top:16px!important;
-	margin-bottom:16px!important;
-	font-size:18px!important;
-	color:#fff!important;
-	position:absolute;
-	left:50%;
-	bottom:120px;
-	transform:translate(-50%,0%);
-	-ms-transform:translate(-50%,0%);
-	text-shadow: 1px 1px 3px #000;
-}
-.prev, .next {cursor:pointer;}
-.prev {float:left!important;}
-.next {float:right!important;}
-.white,.white-hover:HOVER{
-	color:#000!important;
-	background-color:#fff!important
-}
 div#package_search {
-	background-color: #06c;
-	width: 300px;
+	background-color: #333;
+	width: 400px;
 	height: 300px;
 	color: #fff;
 	text-align: left;
@@ -218,58 +197,31 @@ div#package_search {
 }
 div#package_search p {
 	text-align: center;
-	font-size: 18px;
+	font-size: 20px;
 }
-div#package_search form label {margin: 0 10px 0 20px;}
+div#package_search form label {margin: 0 15px 0 25px;}
 div#package_search form input[type=text] {
 	font-size: 15px;
-	width: 200px;
+	width: 280px;
+	margin-left: 4px;
 }
 div#package_search form select#area {
 	font-size: 15px;
-	width: 140px;
+	width: 200px;
 }
 div#package_search form input[type=submit] {
+	margin-left: 5px;
 	font-size: 15px;
-	width: 50px;
+	width: 70px;
 	border: 1px solid #fff;
 	background-color: #06c;
 	color: #fff;
 	font-weight: bold;
 }
-div#package_search_sub form input[type=submit]:hover,
 div#package_search form input[type=submit]:hover {
 	background-color: #09f;
 	cursor: pointer;
 }
-div#package_search_sub {
-	width: 1000px;
-	height: 70px;
-	font-size: 25px;
-	background-color: #06c;
-	text-align: left;
-	color: #fff;
-	padding: 15px 0 0 70px;
-	font-weight: bold;
-}
-div#package_search_sub form input[type=text] {
-	font-size: 20px;
-	margin: 0 50px 0 30px;
-}
-div#package_search_sub form select#area {
-	font-size: 20px;
-	width: 200px;
-	margin: 0 50px 0 30px;
-}
-div#package_search_sub form input[type=submit] {
-	font-size: 20px;
-	width: 100px;
-	border: 1px solid #fff;
-	background-color: #06c;
-	color: #fff;
-	font-weight: bold;
-}
-
 div#package_list
 {
 	width: 100%;
@@ -367,7 +319,10 @@ div#package_tab .tab_container {
 	margin-top : 20px;
 	text-align: center;
 }
-div#package_tab div.tab_content table {margin: 0 auto;}
+div#package_tab  
+{
+	margin: 0 auto;
+}
 div#package_tab .img_size {
 	width : 280px;
 	height : 200px;
@@ -392,6 +347,20 @@ div#member {
 	background-color: #fff;
 	padding: 100px 0;
 	text-align: center;
+}
+div#member form input:HOVER {border: 1px solid #000;}
+div#member form input:FOCUS {border: 1px solid #06c;}
+div#member input[type="button"], div#member input[type="submit"] {
+	border: 1px solid #06c;
+	background-color: #fff;
+	color: #06c;
+}
+div#member input[type="button"]:HOVER, div#member input[type="submit"]:HOVER {
+	border: 1px solid #06c;
+	background-color: #06c;
+	color: #fff;
+	cursor: pointer;
+	font-weight: bold;
 }
 div#login_form {
 	margin: 0 auto;
@@ -576,28 +545,32 @@ div#m_delete_form form input[type="button"] {}
 /* Board List.jsp */
 div#member_head, div#board_head {
 	width: 1000px;
-	margin-top: 10px;
 	text-align: left;
 }
-div#member_title, div#member_script, div#qna_title, div#qna_script, div#rvw_title, div#rvw_script {
+div#board_head span.count {
+	float: right;
+	font-size: 12px;
+	margin-right: 55px;
+}
+div#member_title, div#member_script, div#qna_title, div#qna_script, div#rvw_title, div#rvw_script, div#package_head{
 	height: 60px;
 	width: 1000px;
 	margin: 0 auto;
 	color: #fff;
 	padding-left: 100px;
 }
-div#member_title, div#qna_title, div#rvw_title {
+div#member_title, div#qna_title, div#rvw_title, div#package_head {
 	background-color: #fff;
 	padding-top: 18px;
 	border-bottom: 3px solid #06c;
 	font-size: 30px;
-	font-weight: lighter;
+	font-weight: bold;
 	color: #06c
 }
 div#member_script, div#qna_script, div#rvw_script {
 	background-color: #fff;
 	color: #333;
-	font-size: 12px;
+	font-size: 15px;
 	padding-top: 5px;
 }
 div#board {
@@ -606,6 +579,7 @@ div#board {
 	margin: 0 auto;
 	background-color: #fff;
 	padding: 5px;
+	border-bottom: 3px solid #06c;
 }
 div#board div#board_list {
 	width: 90%;
@@ -667,10 +641,11 @@ div#board div#board_content table td#subject {
 	
 }
 div#board div#board_content table td#content {
-	max-width: 700px;
+	max-width: 600px;
 	text-align: justify;
 	font-size: 15px;
 	font-weight: normal;
+	min-height: 300px;
 }
 div#board div#board_content table td#content img {max-width: 100%;}
 div#board div#board_content table#reply {text-align: justify;}

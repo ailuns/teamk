@@ -63,7 +63,7 @@ int num = Integer.parseInt(request.getParameter("num"));
 	<div id="wrap">
 		<div id="board_head">
 			<div id="rvw_title">리뷰</div>
-			<div id="rvw_script">물건이나 여행 후기를 쓰는 곳 입니다.</div>
+			<div id="rvw_script">상품이나 패키지 후기를 쓰는 곳 입니다.</div>
 		</div>
 		<div id="clear"></div>
 		<div id="board">

@@ -18,6 +18,11 @@ function select_check(){
 		return false;	
 	}
 }
+function Res_Cancel(num){
+	window.open('./Res_Cancel.mo?num='+num, '패키치 취소', 
+			'left=200, top=100, width=600, height=400, scrollbars=yes, status=no,'+
+			'resizable=no, fullscreen=no, channelmode=no,location=no');
+}
 </script>
 </head>
 <body>
@@ -56,16 +61,20 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 						<td><%=mtib.getIntro() %></td>
 						<td>성인 : <%=pack_count[0] %>, 아동 : <%=pack_count[1] %></td>
 						<td><%=sdf.format(mtib.getDate()) %></td>
+						<%-- <td><input type="button" value="예약 취소" onclick="Res_Cancel(<%=mtib.getNum()%>)"></td> --%>
 					</tr>
 					<%if(mtib.getPo_receive_check()==1) {%>
 					<tr>
 						<td>정보지 요청</td>
 						<td><%=mtib.getName() %></td>
 						<td><%=mtib.getMobile() %></td>
-						<td>[<%=mtib.getPostcode() %>] <%=mtib.getAddress1() %> <%=mtib.getAddress2() %></td>
+						<td colspan="4">[<%=mtib.getPostcode() %>] <%=mtib.getAddress1() %> <%=mtib.getAddress2() %></td>
 					</tr>
 					<%} %>
 				</table>
+				
+				<input type="submit" value="예약 완료">
+				
 				<%}
 				
 			}else {%>
@@ -77,8 +86,6 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 						
 		
 	
-<input type="submit" value="예약 완료">
-<input type="button" value="예약 취소">
 
 </form>
 </div>

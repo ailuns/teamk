@@ -5,19 +5,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.admin.order.db.AdminDAO;
 
-public class Pack_Res_Action implements Action{
+public class Admin_Pack_Res_Cancel_Action implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String [] pnum = request.getParameterValues("pnum");
-		for(int i =0; i<pnum.length;i++){
-			AdminDAO adao = new AdminDAO();
-			adao.PO_Status_Update(3, pnum[i]);
+		AdminDAO admindao = new AdminDAO();
+		for(int i = 0; i<pnum.length; i++){
+			admindao.PO_Status_Update(9, pnum[i]);	
 		}
 		ActionForward afo = new ActionForward();
-		afo.setPath("./Pack_res.ao");
+		afo.setPath(request.getHeader("referer"));
 		afo.setRedirect(true);
 		return afo;
 	}
+	
 
 }
