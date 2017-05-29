@@ -475,9 +475,9 @@
 	
 	
 	// 날짜 추가 버튼 클릭 이벤트
-	function winOpen(subject) {
-		win = window.open("./PackDateAdd.po?subject=" + subject, "Package_dateAdd.jsp",
-				"width=800, height=700");
+	function winOpen(subject, num) {
+		win = window.open("./PackDateAdd.po?subject=" + subject + "&num=" + num, "Package_dateAdd.jsp",
+				"width=800, height=700, left=100, top=100");
 	}
 	
 	
@@ -691,6 +691,7 @@
 #datecontent tr:HOVER
 {
 	background-color: #D5D5D5;
+	cursor: pointer;
 }
 
 #datecontent .date_td_size
@@ -916,7 +917,6 @@
 /* 화면이동 리모컨 */
 
 </style>
-
 	<div id="remote_control">
 		<table id="remote_content">
 			<tr>
@@ -1001,9 +1001,9 @@
 			if (user_id.equals("admin"))
 			{
 		%>
-			<input type="button" value="날짜추가" onclick="winOpen('<%=PB.getSubject() %>');">
-			<input type="button" value="글수정" onclick="location.href='PackModify.po?num=<%=PB.getNum() %>'">
-			<input type="button" value="글삭제" onclick="location.href='PackDeleteAction.po?num=<%=PB.getNum() %>'">
+			<input type="button" value="날짜편집" onclick="winOpen('<%=PB.getSubject() %>', <%=PB.getNum() %>);">
+			<input type="button" value="상품내용수정" onclick="location.href='PackModify.po?num=<%=PB.getNum() %>'">
+<%-- 			<input type="button" value="상품삭제" onclick="location.href='PackDeleteAction.po?num=<%=PB.getNum() %>'"> --%>
 		<%
 			}
 		}

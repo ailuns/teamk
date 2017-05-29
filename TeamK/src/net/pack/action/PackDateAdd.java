@@ -17,8 +17,16 @@ public class PackDateAdd implements Action{
 		System.out.println("PackDateAdd excute()");
 		
 		String subject = request.getParameter("subject");
+		
+		int num = Integer.parseInt(request.getParameter("num"));
+		System.out.println("PackDateAdd num >> " + num);
+		
 		//디비객체 생성
 		PackDAO pdao=new PackDAO();
+		
+		PackBean pb = pdao.getPack(num);
+		
+		request.setAttribute("pb_up", pb);
 		
 		List date_list;
 		date_list = pdao.getPackList(subject);
@@ -29,6 +37,7 @@ public class PackDateAdd implements Action{
 		forward.setRedirect(false);
 		forward.setPath("./pack/Package_dateAdd.jsp");
 		return forward;
+//		return null;
 	}
 
 }

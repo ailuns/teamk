@@ -653,7 +653,7 @@ public class PackDAO {
 	
 	
 	
-	public int updatePackcontent(PackBean pb, int num) {
+	public int updatePackcontent(PackBean pb, String ori_subject) {
 		try {
 			conn = getConnection();
 
@@ -664,7 +664,7 @@ public class PackDAO {
 //
 //			if (rs.next()) {
 //				if (rs.getString(1).equals(bb.getPass())) {
-					sql = "update pack set subject=?, intro=?, content=?, type=?, area=?, city=?, sarea=?, cost=?, stock=?, file1=?, file2=?, file3=?, file4=?, file5=?  where num=?";
+					sql = "update pack set subject=?, intro=?, content=?, type=?, area=?, city=?, sarea=?, cost=?, stock=?, file1=?, file2=?, file3=?, file4=?, file5=?  where subject=?";
 					pstm = conn.prepareStatement(sql);
 					pstm.setString(1, pb.getSubject());
 					pstm.setString(2, pb.getIntro());
@@ -680,7 +680,7 @@ public class PackDAO {
 					pstm.setString(12, pb.getFile3());
 					pstm.setString(13, pb.getFile4());
 					pstm.setString(14, pb.getFile5());
-					pstm.setInt(15, num);
+					pstm.setString(15, ori_subject);
 					
 					pstm.executeUpdate();
 					return 1; // 수정 성공
@@ -758,4 +758,98 @@ public class PackDAO {
 		}
 		return -1;
 	}
+	
+	
+	
+	public int PackDateAddChk(String subject, String date) {
+		try {
+			conn = getConnection();
+
+			sql = "select subject, date from pack where subject=? and date=?";
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, subject);
+			pstm.setString(2, date);
+			rs = pstm.executeQuery();
+			
+			if (rs.next())
+			{
+				return 1;
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (pstm != null) {
+				try {
+					pstm.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return 0;
+	}
+	
+	
+	public int updatePackDate(PackBean pb) {
+		try {
+			conn = getConnection();
+
+//			sql = "select pass from pack where num=?";
+//			pstm = conn.prepareStatement(sql);
+//			pstm.setInt(1, bb.getNum());
+//			rs = pstm.executeQuery();
+//
+//			if (rs.next()) {
+//				if (rs.getString(1).equals(bb.getPass())) {
+					sql = "update pack set date=?, cost=?, stock=?  where num=?";
+					pstm = conn.prepareStatement(sql);
+					pstm.setString(1, pb.getDate());
+					pstm.setInt(2, pb.getCost());
+					pstm.setInt(3, pb.getStock());
+					pstm.setInt(4, pb.getNum());
+					
+					pstm.executeUpdate();
+					return 1; // 수정 성공
+//				} else
+//					return -1; // 비번 틀림
+//			}
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		finally {
+			if (pstm != null) {
+				try {
+					pstm.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return 0; // 글번호 없음
+	}
+	
+	
 }

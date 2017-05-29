@@ -48,58 +48,58 @@ public class CategoryDAO {
 	}
 	
 	// 지역별로 분류
-		public List getCategoryList() {
-			List list = new ArrayList();
-			try {
-				conn = getConnection();
-				sql = "select * from category where car_pt=? order by car_num";
-				pstm = conn.prepareStatement(sql);
-				pstm.setString(1, "P");
+	public List getCategoryList() {
+		List list = new ArrayList();
+		try {
+			conn = getConnection();
+			sql = "select * from category where car_pt=? order by car_num";
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, "P");
 
-				rs = pstm.executeQuery();
-				while (rs.next()) {
-					CategoryBean CB = new CategoryBean();
+			rs = pstm.executeQuery();
+			while (rs.next()) {
+				CategoryBean CB = new CategoryBean();
 
-					CB.setCar_num(rs.getInt("car_num"));
-					CB.setCar_name(rs.getString("car_name"));
-					CB.setCar_pt(rs.getString("car_pt"));
-					
-					list.add(CB);
-				}
-
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				CB.setCar_num(rs.getInt("car_num"));
+				CB.setCar_name(rs.getString("car_name"));
+				CB.setCar_pt(rs.getString("car_pt"));
+				
+				list.add(CB);
 			}
 
-			finally {
-				if (pstm != null) {
-					try {
-						pstm.close();
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				if (conn != null) {
-					try {
-						conn.close();
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-
-				if (rs != null) {
-					try {
-						rs.close();
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}
-
-			return list;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+
+		finally {
+			if (pstm != null) {
+				try {
+					pstm.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return list;
+	}
 }
