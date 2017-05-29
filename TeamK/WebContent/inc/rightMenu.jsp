@@ -10,12 +10,15 @@
 		%>
 		<li><a href="./MemberLogin.me">로그인</a></li>
 		<li><a href="./MemberJoin.me">회원가입</a></li>
+		<br> 
 		<%}else if(id!=null || id!=""){%>
 		<li><a href="./MemberLogout.me">로그아웃</a></li>
-		<li><a href="./MemberInfo.me">회원정보</a></li>
+		<li><a href="./MemberInfo.me">내 정보</a></li>
 		<li><a href="./MyOrderList.mo">내 주문 현황</a></li>
+		<br><br>
 		<%if(id.equals("admin")){%>
-			<li><a href="./AdminOrderList.ao">고객 주문 관리</a></li>
+			<li><a href="./AdminOrderList.ao">고객 주문 관리</a></li> 
+			<li><a href="./MemberList.me">고객 정보 관리</a></li>
 		<%}
 		}
 		 %>

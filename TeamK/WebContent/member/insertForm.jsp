@@ -285,6 +285,7 @@ if (id != null) {
 				<input type="hidden" name="eckecknum"> <br>
 				
 				<!-- 자동가입방지 -->
+				<br>
 				<input type="hidden" name="catpchavalue">
 				<div id="html_element" style="margin-left: 150px;"></div>
 				<input type="submit" name="submit" value="가입">
