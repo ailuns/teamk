@@ -8,6 +8,8 @@ div#clear {clear: both;}
 /* 페이징 */
 a#i{
 	margin: 0 6px;
+	color: #06c;
+	text-decoration:none;
 }
 span#i{
 	color: red;
@@ -610,14 +612,14 @@ div#member_head, div#board_head {
 	margin-top: 10px;
 	text-align: left;
 }
-div#member_title, div#member_script, div#qna_title, div#qna_script, div#rvw_title, div#rvw_script {
+div#member_title, div#member_script, div#qna_title, div#qna_script, div#rvw_title, div#rvw_script, div#package_head{
 	height: 60px;
 	width: 1000px;
 	margin: 0 auto;
 	color: #fff;
 	padding-left: 100px;
 }
-div#member_title, div#qna_title, div#rvw_title {
+div#member_title, div#qna_title, div#rvw_title, div#package_head {
 	background-color: #fff;
 	padding-top: 18px;
 	border-bottom: 3px solid #06c;
