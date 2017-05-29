@@ -28,11 +28,30 @@ public class MyPackOrderList implements Action {
 		if(stat==null){
 			stat ="ing";
 		}
+		String stat2 = request.getParameter("status2");
+		if(stat2==null){
+			stat2="none";
+		}
 		if(stat.equals("ing")){
-			status = "<5";
+			if(stat2.equals("confirmyet")){
+				status = "<3";
+			}else if(stat2.equals("confirm")){
+				status = "=3";
+			}else if(stat2.equals("canceling")){
+				status = "=4";
+			}else{
+				status = "<5"; 
+			}
 			orderby="B.date,A.po_res_status";
+			
 		}else{
-			status =">8";
+			if(stat2.equals("completed")){
+				status ="=10";
+			}else if(stat2.equals("canceled")){
+				status ="=9";
+			}else{
+				status =">8";
+			}
 			orderby = "A.po_num desc";
 		}
 		ModDAO moddao = new ModDAO();
@@ -49,6 +68,7 @@ public class MyPackOrderList implements Action {
 		List<ModTradeInfoBEAN> ModPList = new ArrayList<ModTradeInfoBEAN>();
 		ModPList = moddao.MyPackOrder(id, start, pagesize,status,orderby);
 		request.setAttribute("status",stat);
+		request.setAttribute("status2",stat2);
 		request.setAttribute("ModPList", ModPList);
 		request.setAttribute("pblock", pblock);
 		request.setAttribute("endpage", endpage);

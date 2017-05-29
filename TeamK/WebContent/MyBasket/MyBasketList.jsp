@@ -109,11 +109,16 @@
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
-
-	<h1>장바구니</h1>
+<div id="board_head">
+<div id="rvw_title">
+	장바구니
+</div>
+</div>
 	<form name="fr">
 	<div>
 		<h3>패키지</h3>
+		<div id="board">
+		<div id="board_list">
 		<%
 			if (packcount == 0) {
 		%>
@@ -125,16 +130,16 @@
 				
 				
 		%>
-		<table border="1">
+		<table>
 			<tr>
-				<th></th>
-				<th>이미지</th>
-				<th>상품명</th>
-				<th>성인</th>
-				<th>유아</th>
-				<th>가격</th>
-				<th>등록일</th>
-				<th>비고</th>
+				<th id="num"></th>
+				<th id="num">이미지</th>
+				<th id="num">상품명</th>
+				<th id="num">성인</th>
+				<th id="num">유아</th>
+				<th id="num">가격</th>
+				<th id="num">등록일</th>
+				<th id="num">비고</th>
 			</tr>
 			<%
 				for (int i = 0; i < PackBasket.size(); i++) {
@@ -143,8 +148,8 @@
 			%>
 			<tr>
 				<td><input type="checkbox" id="pch<%=i %>" name="pch"value="<%=pbb.getPb_num()%>"></td>
-				<td><img src ="./upload/<%=pbb.getImg() %>"></td>
-				<td><%=pbb.getSubject()%><br>
+				<td id="cate"><img src ="./upload/<%=pbb.getImg()%>" height="70"></td>
+				<td id="title"><%=pbb.getSubject()%><br>
 				<%=pbb.getIntro() %></td>
 				
 				<td><select id = "adult<%=i%>" name="adult<%=i%>" onchange="people_Calc(<%=pbb.getOri_cost()%>,<%=i%>)">
@@ -176,8 +181,12 @@
 			}
 		%>
 	</div>
+	</div>
+	</div>
 	<div>
 	<h3>상품</h3>
+	<div id="board">
+	<div id="board_list">
 			<%
 			if (thingcount == 0) {
 		%>
@@ -187,17 +196,17 @@
 				List<TBasketBEAN> ThingBasket = (List<TBasketBEAN>) request.getAttribute("ThingBasket");
 		%>
 		
-		<table border="1">
+		<table>
 			<tr>
-				<th></th>
-				<th>이미지</th>
-				<th>상품명</th>
-				<th>색상</th>
-				<th>사이즈</th>
-				<th>수량</th>
-				<th>가격</th>
-				<th>등록일</th>
-				<th>비고</th>
+				<th id="num"></th>
+				<th id="num">이미지</th>
+				<th id="num">상품명</th>
+				<th id="num">색상</th>
+				<th id="num">사이즈</th>
+				<th id="num">수량</th>
+				<th id="num">가격</th>
+				<th id="num">등록일</th>
+				<th id="num">비고</th>
 			</tr>
 			<%
 				for (int i = 0; i <ThingBasket.size(); i++) {
@@ -206,7 +215,7 @@
 			%>
 			<tr>
 				<td><input type="checkbox" id="tch<%=i %>"name="tch" value="<%=tbb.getNum()%>"></td>
-				<td><img src ="./upload/<%=tbb.getImg() %>"></td>
+				<td><img src ="./upload/<%=tbb.getImg()%>"  height="70"></td>
 				<td><%=tbb.getSubject() %><br>
 				<%=tbb.getIntro() %></td>
 				
@@ -237,6 +246,8 @@
 			}
 		%>
 		
+	</div>
+	</div>
 	</div>
 	<input type="button" value="구입" onclick = "return basket_submit()">
 	<input type="button" value ="삭제" onclick = "return basket_delete()">

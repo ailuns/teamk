@@ -33,7 +33,7 @@ String wContent = (String)request.getAttribute("wContent"); //wContent에 작성
     	BoardReplyBean rb = (BoardReplyBean)lrb.get(i);%>
 <tr>
 <td id="name"><%=rb.getId()%></td>
-<td id="content"><%=rb.getContent()%></td>
+<td id="rContent"><%=rb.getContent()%></td>
 <td id="delete"><%
 if(id!=null){
 	if(id.equals(rb.getId())||id.equals("admin")){ 

@@ -27,6 +27,10 @@ public class BoardWriteAction implements Action {
 		// BoardBean bb 객체생성
 		BoardBean bb = new BoardBean();
 		// 자바빈 멤버변수 <= 파라미터 저장
+		System.out.println("아이디 "+multi.getParameter("id"));
+		System.out.println("서브젝트 "+multi.getParameter("subject"));
+		System.out.println("컨텐츠 "+multi.getParameter("content"));
+		System.out.println("셀렉트 "+multi.getParameter("select"));
 		bb.setId(multi.getParameter("id"));
 		bb.setSubject(multi.getParameter("subject"));
 		bb.setContent(multi.getParameter("content"));
@@ -37,7 +41,7 @@ public class BoardWriteAction implements Action {
 		bb.setFile4(multi.getFilesystemName("file4"));
 		bb.setFile5(multi.getFilesystemName("file5"));
 		bb.setType_select(multi.getParameter("select"));
-		System.out.println(multi.getParameter("select"));
+		
 	
 		
 		// BoardDAO bdao 객체생성

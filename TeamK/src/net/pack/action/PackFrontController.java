@@ -163,8 +163,51 @@ public class PackFrontController extends HttpServlet{
 			}
 		}
 		
+		else if(command.equals("/PackDateAddChk.po"))
+		{
+			action = new PackDateAddChk();
+			try {
+				forward = action.excute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		
+		else if(command.equals("/PackDateModify.po"))
+		{
+			action = new PackDateModify();
+			try {
+				forward = action.excute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		else if(command.equals("/PackDateModifyAction.po"))
+		{
+			action = new PackDateModifyAction();
+			try {
+				forward = action.excute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
+		else if(command.equals("/PackDateDeleteAction.po"))
+		{
+			action = new PackDateDeleteAction();
+			try {
+				forward = action.excute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		
 		

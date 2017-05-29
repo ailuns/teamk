@@ -24,12 +24,22 @@ public class PackList implements Action{
 		// 디비 객체 생성 BoardDAO
 		PackDAO pdao = new PackDAO();
 		CategoryDAO cdao = new CategoryDAO();
-		//전체글 횟수 구하기 int count = getBoardCount()
-		int count = 8;
+		
 		
 		//한페이지에 보여줄 글의 갯수
-		int pagesize = 6;
+		int pagesize = 9;
 		//시작행 구하기   1,  11,  21,  31,  41  ...... 
+		
+		String area[] = {"서울","부산","경기도","강원도","충청북도","충청남도","전라북도","전라남도","경상북도","경상남도","제주도"};
+		
+		//전체글 횟수 구하기 int count = getBoardCount()
+		// 지역별 패키지 갯수 구하기
+		int count = 8;
+//		for (int i = 0; i < area.length; i++)
+//		{
+//			count[i] = pdao.getPackCount(area[i]);
+//		}
+		
 		
 		//현재페이지가 몇페이지인지 가져오기
 		String pageNum = request.getParameter("pageNum");
@@ -51,10 +61,9 @@ public class PackList implements Action{
 		// 끝페이지 구하기
 		int endPage = startPage+pageBlock-1;
 		
-		String area[] = {"서울","부산","경기도","강원도","충청북도","충청남도","전라북도","전라남도","경상북도","경상남도","제주도"};
 		
 		// 지역별 패키지 갯수 받을 저장 장소
-		int areaCount[] = new int[11];
+		int areaCount[] = new int[area.length];
 		
 		// 지역별 패키지 갯수 구하기
 		for (int i = 0; i < area.length; i++)
@@ -88,11 +97,13 @@ public class PackList implements Action{
 		request.setAttribute("CategoryList", CategoryList);
 
 		request.setAttribute("count", count);
-		request.setAttribute("pageNum", pageNum);
+		request.setAttribute("repageNum", pageNum);
 		request.setAttribute("pageCount", pageCount);
 		request.setAttribute("pageBlock", pageBlock);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
+		request.setAttribute("currentPage", currentPage);
+		request.setAttribute("pagesize", pagesize);
 		
 		//ActoinForward 이동정보 담아서 로그인 이동
 		ActionForward forward = new ActionForward();

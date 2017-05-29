@@ -67,25 +67,6 @@
 		}
 		return true;
     }
-	//슬라이드
-	var slideIndex = 1;
-	showDivs(slideIndex);
-	function plusDivs(n) {
-	  showDivs(slideIndex += n);
-	}
-	function currentDiv(n) {
-	  showDivs(slideIndex = n);
-	}
-	function showDivs(n) {
-	  var i;
-	  var x = document.getElementsByClassName("slider");
-	  if (n > x.length) {slideIndex = 1}    
-	  if (n < 1) {slideIndex = x.length}
-	  for (i = 0; i < x.length; i++) {
-	     x[i].style.display = "none";  
-	  }
-	  x[slideIndex-1].style.display = "block";  
-	}
 </script>
 </head>
 <body>
@@ -114,11 +95,13 @@
 	List CategoryList = (List)request.getAttribute("CategoryList");
 	
 	int count = ((Integer)request.getAttribute("count")).intValue();
-	String pageNum = (String)request.getAttribute("pageNum");
+	String repageNum = (String)request.getAttribute("repageNum");
 	int pageCount = ((Integer)request.getAttribute("pageCount")).intValue();
 	int pageBlock = ((Integer)request.getAttribute("pageBlock")).intValue();
 	int startPage = ((Integer)request.getAttribute("startPage")).intValue();
 	int endPage = ((Integer)request.getAttribute("endPage")).intValue();
+	int currentPage = ((Integer)request.getAttribute("currentPage")).intValue();
+	int pagesize = ((Integer)request.getAttribute("pagesize")).intValue();
 
 %>
 
@@ -128,22 +111,11 @@
 	</div>
 	<!--여행지 검색창 -->
 	<div id="package_feat">
-		<div id="package_slide">
-			<a href="#" class="slider"><img alt="" src="./img/i.jpg"></a>
-			<a href="#" class="slider"><img alt="" src="./img/20101021182610.jpg"></a>
-			<a href="#" class="slider"><img alt="" src="./img/491021_374477_1553.jpg"></a>
-			<a href="#" class="slider"><img alt="" src="./img/군항제3.jpg"></a>
-			<a href="#" class="slider"><img alt="" src="./img/Jeju-bg.jpg"></a>
-			<div class="controller" style="width:100%">
-				<div class="prev" onclick="plusDivs(-1)">&#10094;</div>
-				<div class="next" onclick="plusDivs(1)">&#10095;</div>
-			</div>
-		</div>
+		<jsp:include page="../inc/packSlide.jsp"></jsp:include>
 		<div id="package_search">
 			<p>내게 맞는 패키지 검색하기</p>
 			<form action="./PackSearchAction.po" name="fr" method="get" id="scheduler" onsubmit="return input_chk();">
-				<label for="date_from">출발</label><input type="text" id="date_from" class="input_style" name="startDate" required="yes"><br><br>
-<!-- 				<label for="date_from">날짜</label><input type="text" id="date_from" class="input_style" name="startDate" required="yes"> -->
+				<label for="date_from">출발</label><input type="text" id="date_from" class="input_style" name="startDate"><br><br>
 				<label for="city_search">지역</label>
 				<select id="area" name="area">
 					<option value="">선택하세요</option>
@@ -252,10 +224,23 @@
 					</div>
 					<%
 				}
+				
+// 				<%
+// 				for (int j = 0; j < areaCount.length; i++)
+// 				{
+					if (areaCount[i] > 3)
+					{
+				%>
+						<p>More+</p>
+				<%
+					}
+// 				}
+				
 			}
-		%>
+			%>
 		</div>
 		<!-- 탭 내용 -->
+		
 	</div>
 	<%
 		if (user_id != null)

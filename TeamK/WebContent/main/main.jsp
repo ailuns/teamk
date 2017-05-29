@@ -160,7 +160,7 @@
 				<p>내게 맞는 패키지 검색하기</p>
 				<form action="./PackSearchAction.po" method="post" name="fr" id="scheduler" onsubmit="return input_chk();">					
 					<label for="from">날짜</label>
-					<input type="text" id="from" name="startDate" required="yes"><br>
+					<input type="text" id="from" name="startDate"><br>
 <!-- 					<label for="to">~</label> -->
 <!-- 					<input type="text" id="to" name="endDate"><br> -->
 					<label for="area">지역</label>
@@ -193,7 +193,7 @@
 					
 			%>
 				<input type="hidden" id="pack_img<%=j %>" value=<%=pb.getFile1() %>>
-				<a href="#" id="pack<%=j %>"><span id="pktt"><%=pb.getSubject() %></span><br><span id="pksc"><%=pb.getIntro() %></span><br><span id="pkpr"><%=pb.getCost() %></span></a>
+				<a href="./PackContent.po?num=<%=pb.getNum() %>" id="pack<%=j %>"><span id="pktt"><%=pb.getSubject() %></span><br><span id="pksc"><%=pb.getIntro() %></span><br><span id="pkpr"><%=pb.getCost() %></span></a>
 				<script> bg(<%=j %>);</script>
 			<%
 				}

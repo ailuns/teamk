@@ -7,96 +7,110 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 <%
 request.setCharacterEncoding("utf-8");
-int pblock = ((Integer)request.getAttribute("pblock")).intValue();
-
-int endpage = ((Integer)request.getAttribute("endpage")).intValue();
-int startp = ((Integer)request.getAttribute("startp")).intValue();
-int pcount = ((Integer)request.getAttribute("pcount")).intValue();
-int count = ((Integer)request.getAttribute("count")).intValue();
-String pagenum = (String)request.getAttribute("pageNum");
-int pageNum = Integer.parseInt(pagenum);
-List<ModTradeInfoBEAN> CancelPackList=(List<ModTradeInfoBEAN>)request.getAttribute("CancelPackList");
-SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+ModTradeInfoBEAN mtib = (ModTradeInfoBEAN)request.getAttribute("mtib");
+String[] countp = mtib.getPack_count().split(",");
+int po_num = Integer.parseInt(request.getParameter("num"));
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
 %>
-</head>
-<body>
-
-	<div id = "wrap">
-	<div>
-		<form action="./Admin_Pack_Res_Cancel_Action.ao" method="post" name="fr" onsubmit="return select_check()">
-			<%if(CancelPackList.size()!=0){
-				for(int i =0; i< CancelPackList.size();i++){
-					ModTradeInfoBEAN mtib = CancelPackList.get(i);
-					String []pack_count = mtib.getPack_count().split(",");
-					String [] memo = mtib.getMemo().split(",");%>
-				<h5><%=mtib.getSubject() %></h5>
-				<table border = "1">
-					<tr>
-						<td rowspan="4"><input type="checkbox" value="<%=mtib.getNum() %>" name="pnum"></td>
-						<td><%=mtib.getTrade_num() %></td>
-						<td><%=mtib.getIntro() %></td>
-						<td>성인 : <%=pack_count[0] %>, 아동 : <%=pack_count[1] %></td>
-						<td><%=sdf.format(mtib.getDate()) %></td>
-					</tr>
-					<tr>
-						<td>환불 방식</td>
-						<td><%=memo[0] %></td>
-						<td>환불 금액</td>
-						<td><%=memo[1] %>원</td>
-					</tr>
-					<%if(memo.length >2){ %>
-					<tr>
-						<td>은행명</td>
-						<td><%=memo[2] %></td>
-						<td>예금주</td>
-						<td><%=memo[3] %></td>
-					</tr>
-					<tr>
-						<td>계좌번호</td>
-						<td colspan="3"><%=memo[4] %></td>
-					</tr>
-					<%} %>
-					
-				</table>
-				
-				<%}%>
-				<input type="submit" value="취소 확인">
-				<%
-			}else {%>
-					
-		주문 내역 없음
-		<%
+<link href="./css/inc.css" rel="stylesheet" type="text/css">
+<link href="./css/subpage.css" rel="stylesheet" type="text/css">
+<script src = "./js/jquery-3.2.0.js"></script>
+	<script type="text/javascript">
+	var check = 0;
+	$(window).ready(function(){
+		alert("취소 및 환불 규정을 꼭 확인하시길 바랍니다");
+	})
+	function bankcheck(){
+		if("<%=mtib.getTrade_type()%>"=="무통장 입금"&&<%=mtib.getCost()%>!=0){
+			if($('#bank_name').val().length==0){
+				alert('환불 받을실 은행을 입력해 주세요');
+				$('#bank_name').select();
+				return false;
+			}else if($('#name').val().length==0){
+				alert('예금주를 입력해 주세요');
+				$('#name').select();
+				return false;
+			}else if($('#bank_number').val().length==0){
+				alert('계좌번호를 입력해 주세요');
+				$('#bank_number').select();
+				return false;
 			}
-		%>
+		}else return false;
+	}
+	
+</script>
+</head>
 
-</form>
-</div>
-	<%
-	if(count!=0){
-				
-		if(endpage > pcount)endpage = pcount;
-		if(startp>pblock){
-			 %><a href = "./Admin_Pack_Res_Cancel.ao?pageNum=<%=startp-1%>">[이전]</a><%
-		}
-		for(int i = startp;i<=endpage;i++){
-			%><a href="./Admin_Pack_Res_Cancel.ao?pageNum=<%=i %>">[<%=i %>]</a><%
-		}
-		if(endpage<pcount){
-			%><a href = "./Admin_Pack_Res_Cancel.ao?pageNum=<%=endpage+1%>">[다음]</a><%
-		}
-	}	//if(count%pagesize!=0)pcount+=1;
-	%>
-		<br>
-		<input type = "button" value = "주문 관리" onclick="location.href='./AdminOrderList.ao'">
-			</div>
-	<jsp:include page="../inc/footer.jsp"></jsp:include>
-	<!--오른쪽 메뉴 -->
-	<div>
-		<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
-	</div>
-	<!--오른쪽 메뉴 -->
+<body>
+<div align="center">
+<h4>패키지 정보</h4>
+<form action = "./Pack_Res_Action.ao" method = "post" onsubmit="return bankcheck()">
+<table>
+	<tr>
+		<td>예약번호 </td>
+		<td><%=mtib.getTrade_num() %></td>
+	</tr>
+	<tr>
+		<td>상품명</td>
+		<td><%=mtib.getSubject() %></td>
+	</tr>
+	<tr>
+		<td>출발 날짜</td>
+		<td><%=sdf.format(mtib.getTrade_date()) %></td>
+	</tr>
+	<tr>
+		<td>예약 인원</td>
+		<td>성인 : <%=countp[0] %>, 아동 : <%=countp[1] %></td>
+	</tr>
+	<tr>
+		<td>결제 금액</td>
+		<td><%=mtib.getTotal_cost() %>원</td>
+	</tr>
+	<tr>
+		<td>공제율</td>
+		<td><%=mtib.getMemo()%></td>
+	</tr>
+	<tr>
+		<td>결제 환불 금액</td>
+		<td><%=mtib.getCost() %>원<input type="hidden" name="Cancel_info" value="<%=mtib.getCost()%>">
+			<input type="hidden" name="Cancel_info" value="<%=mtib.getTrade_type()%>">
+			<input type="hidden"  name = "pnum" value ="<%=po_num %>">
+			<input type="hidden" name="stat" value="cancel_call">
+			</td>
+	</tr>
+	<%if(mtib.getTrade_type().equals("무통장 입금")&&mtib.getCost()!=0){ %>
+	<tr>
+		<td colspan="2">환불 받으실 계좌 정보 입력</td>
+	</tr>
+	<tr>
+		<td>은행명</td><td><input type="text" id="bank_name" name="Cancel_info"
+							placeholder="EX)콩팥 머니 은행"></td>
+		<td>예금주</td><td><input type="text" id="name" name="Cancel_info"
+							placeholder="EX)홍길동"></td>
+	</tr>
+	<tr>
+		<td>계좌 번호</td><td><input type="text" id="bank_number" name="Cancel_info"
+							placeholder="EX)12-007-2245-777">
+			</td>
+	</tr>
+	<%} %>
+</table>
+
+	<h3>환불 규정</h3>
+ 
+	<ul style="text-align: left;"> 
+  		<li>출발 7일전 취소시 총 여행경비 10%공제 후 환불</li>
+ 		<li>출발 5일전 취소시 총 여행경비 20%공제 후 환불</li>
+  		<li>출발 3일전 취소시 총 여행경비 30%공제후 환불</li>
+  		<li>출발 1일전 취소시 총 여행경비 50%공제 후 환불</li>
+  		<li>당일 취소시 여행경비 환불 불가</li>
+	</ul>
+<br>
+ <input type ="submit" value = "예약 취소">
+<input type = "button" value ="닫기" onclick ="window.close()">
+ </form> 
+</div>  	
 </body>
 </html>

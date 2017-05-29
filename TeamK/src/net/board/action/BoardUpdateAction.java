@@ -29,8 +29,10 @@ public class BoardUpdateAction implements Action {
 		BoardDAO bdao = new BoardDAO();
 		BoardBean bb = new BoardBean();
 		
-		System.out.println(request.getParameter("id"));
-		System.out.println(request.getParameter("num"));
+		System.out.println("업데이트아이디 "+multi.getParameter("id"));
+		System.out.println("서브젝트 "+multi.getParameter("subject"));
+		System.out.println("컨텐츠 "+multi.getParameter("content"));
+		System.out.println("셀렉트 "+multi.getParameter("select"));
 		bb.setNum(Integer.parseInt(multi.getParameter("num")));
 		bb.setId(multi.getParameter("id"));
 		bb.setSubject(multi.getParameter("subject"));

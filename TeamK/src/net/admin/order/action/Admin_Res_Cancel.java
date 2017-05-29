@@ -1,4 +1,4 @@
-package net.mod.action;
+package net.admin.order.action;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.mod.db.ModDAO;
 import net.mod.db.ModTradeInfoBEAN;
 
-public class Res_Cancel implements Action{
+public class Admin_Res_Cancel implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -44,14 +44,17 @@ public class Res_Cancel implements Action{
 		else if(mul_date<8){
 			cost *= 0.9;
 			memo = "10%";
+		}else{
+			memo="0%";
 		}
 		mtib.setMemo(memo);
 		mtib.setCost(cost);
 		request.setAttribute("mtib", mtib);
 		ActionForward afo = new ActionForward();
-		afo.setPath("./MyOrder/Res_Cancel.jsp");
+		afo.setPath("./Admin/PackResCancel.jsp");
 		afo.setRedirect(false);
 		return afo;
 	}
+	
 
 }
