@@ -67,25 +67,6 @@
 		}
 		return true;
     }
-	//슬라이드
-	var slideIndex = 1;
-	showDivs(slideIndex);
-	function plusDivs(n) {
-	  showDivs(slideIndex += n);
-	}
-	function currentDiv(n) {
-	  showDivs(slideIndex = n);
-	}
-	function showDivs(n) {
-	  var i;
-	  var x = document.getElementsByClassName("slider");
-	  if (n > x.length) {slideIndex = 1}    
-	  if (n < 1) {slideIndex = x.length}
-	  for (i = 0; i < x.length; i++) {
-	     x[i].style.display = "none";  
-	  }
-	  x[slideIndex-1].style.display = "block";  
-	}
 </script>
 </head>
 <body>
@@ -123,29 +104,16 @@
 %>
 
 <div id="wrap">
-	<div id="board_head">
 	<div id="package_head">
 		패키지
 	</div>
-	</div>
 	<!--여행지 검색창 -->
 	<div id="package_feat">
-		<div id="package_slide">
-			<a href="#" class="slider"><img alt="" src="./img/i.jpg"></a>
-			<a href="#" class="slider"><img alt="" src="./img/20101021182610.jpg"></a>
-			<a href="#" class="slider"><img alt="" src="./img/491021_374477_1553.jpg"></a>
-			<a href="#" class="slider"><img alt="" src="./img/군항제3.jpg"></a>
-			<a href="#" class="slider"><img alt="" src="./img/Jeju-bg.jpg"></a>
-			<div class="controller" style="width:100%">
-				<div class="prev" onclick="plusDivs(-1)">&#10094;</div>
-				<div class="next" onclick="plusDivs(1)">&#10095;</div>
-			</div>
-		</div>
+		<jsp:include page="../inc/packSlide.jsp"></jsp:include>
 		<div id="package_search">
 			<p>내게 맞는 패키지 검색하기</p>
 			<form action="./PackSearchAction.po" name="fr" method="get" id="scheduler" onsubmit="return input_chk();">
 				<label for="date_from">출발</label><input type="text" id="date_from" class="input_style" name="startDate" required="yes"><br><br>
-<!-- 				<label for="date_from">날짜</label><input type="text" id="date_from" class="input_style" name="startDate" required="yes"> -->
 				<label for="city_search">지역</label>
 				<select id="area" name="area">
 					<option value="">선택하세요</option>

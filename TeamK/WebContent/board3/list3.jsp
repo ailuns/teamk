@@ -38,7 +38,7 @@ BoardDAO bdao = new BoardDAO();
 	<div id="wrap">
 		<div id="board_head">
 			<div id="rvw_title">공지사항</div>
-			<div id="rvw_script"><br>공지사항 게시판 입니다.<br>[전체글 개수 :<%=count%>]</div>
+			<div id="rvw_script">공지사항 게시판 입니다.<span class="count">[전체글 개수 :<%=count%>]</span></div>
 		</div>
 		<div id="clear"></div>
 		<div id="board">
@@ -52,7 +52,8 @@ BoardDAO bdao = new BoardDAO();
     	BoardBean bb = (BoardBean)boardList3.get(i);
     			%>
 <tr><td><%=bb.getRe_ref()%></td> <%--글 번호 --%>
-<td id="title"><a href="./BoardContent3.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>"><%=bb.getSubject()%></a></td><%--글 제목 --%>
+<td id="title"><a href="./BoardContent3.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>"><%=bb.getSubject()%></a><%--글 제목 --%>
+<%if(bdao.getFile(bb.getNum())!=null){%><img src="./img/disk.png" width="15" height="15>"><%}%></td>
 <td>관리자</td><%--작성자 Id --%>
 <td><%=bb.getDate()%></td><%--작성 날짜 --%>
 <td><%=bb.getReadcount() %></td><%--조회수 --%>
