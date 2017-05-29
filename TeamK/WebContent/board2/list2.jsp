@@ -36,7 +36,7 @@ BoardDAO bdao = new BoardDAO();
 	<div id="wrap">
 		<div id="board_head">
 			<div id="qna_title">Q&A 게시판</div>
-			<div id="qna_script">궁금한것은 질문해주세요.<br>[전체글 개수 :<%=count%>]</div>
+			<div id="qna_script"><br>궁금한것은 질문해주세요.<br>[전체글 개수 :<%=count%>]</div>
 		</div>
 		<div id="clear"></div>
 		<div id="board">

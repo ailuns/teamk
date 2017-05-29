@@ -38,7 +38,7 @@ BoardDAO bdao = new BoardDAO();
 	<div id="wrap">
 		<div id="board_head">
 			<div id="rvw_title">공지사항</div>
-			<div id="rvw_script">공지사항 게시판 입니다.<br>[전체글 개수 :<%=count%>]</div>
+			<div id="rvw_script"><br>공지사항 게시판 입니다.<br>[전체글 개수 :<%=count%>]</div>
 		</div>
 		<div id="clear"></div>
 		<div id="board">
