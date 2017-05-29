@@ -74,19 +74,19 @@ int num = Integer.parseInt(request.getParameter("num"));
 
 <%--첨부파일이 있을때만 첨부파일 표시--%>
 <%if(bb.getFile1()!=null){%>
-<tr><td>첨부파일1</td><td colspan="3"><%if(bb.getFile1()!=null){%><a href="./upload/<%=bb.getFile1()%>"><%=bb.getFile1()%></a><%}%></td></tr>
+<tr><td>첨부파일1</td><td colspan="3"><%if(bb.getFile1()!=null){%><a href="./file_down.jsp?file_name=<%=bb.getFile1()%>"><%=bb.getFile1()%></a><%}%></td></tr>
 <%}%>
 <%if(bb.getFile2()!=null){%>
-<tr><td>첨부파일2</td><td colspan="3"><%if(bb.getFile2()!=null){%><a href="./upload/<%=bb.getFile2()%>"><%=bb.getFile2()%></a><%}%></td></tr>
+<tr><td>첨부파일2</td><td colspan="3"><%if(bb.getFile2()!=null){%><a href="./file_down.jsp?file_name=<%=bb.getFile2()%>"><%=bb.getFile2()%></a><%}%></td></tr>
 <%}%>
 <%if(bb.getFile3()!=null){%>
-<tr><td>첨부파일3</td><td colspan="3"><%if(bb.getFile3()!=null){%><a href="./upload/<%=bb.getFile3()%>"><%=bb.getFile3()%></a><%}%></td></tr>
+<tr><td>첨부파일3</td><td colspan="3"><%if(bb.getFile3()!=null){%><a href="./file_down.jsp?file_name=<%=bb.getFile3()%>"><%=bb.getFile3()%></a><%}%></td></tr>
 <%}%>
 <%if(bb.getFile4()!=null){%>
-<tr><td>첨부파일4</td><td colspan="3"><%if(bb.getFile4()!=null){%><a href="./upload/<%=bb.getFile4()%>"><%=bb.getFile4()%></a><%}%></td></tr>
+<tr><td>첨부파일4</td><td colspan="3"><%if(bb.getFile4()!=null){%><a href="./file_down.jsp?file_name=<%=bb.getFile4()%>"><%=bb.getFile4()%></a><%}%></td></tr>
 <%}%>
 <%if(bb.getFile5()!=null){%>
-<tr><td>첨부파일5</td><td colspan="3"><%if(bb.getFile5()!=null){%><a href="./upload/<%=bb.getFile5()%>"><%=bb.getFile5()%></a><%}%></td></tr>
+<tr><td>첨부파일5</td><td colspan="3"><%if(bb.getFile5()!=null){%><a href="./file_down.jsp?file_name=<%=bb.getFile5()%>"><%=bb.getFile5()%></a><%}%></td></tr>
 <%}%>
 </table>
 <%
@@ -123,7 +123,7 @@ if(rcount!=0){lrb=(List)request.getAttribute("lrb");}
     	BoardReplyBean rb = (BoardReplyBean)lrb.get(i);%>
 <tr>
 <td id="name"><%=rb.getId()%></td>
-<td id="content"><%=rb.getContent()%></td>
+<td id="rContent"><%=rb.getContent()%></td>
 <td id="delete"><%
 if(id!=null){
 	//같은 Id이거나 admin만 리플 삭제 가능
