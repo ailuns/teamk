@@ -61,12 +61,7 @@ function receive_change(num,ra_num){
 </script>
 </head>
 <body>
-	<!--왼쪽 메뉴 -->
-	<div>
-		<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
-	</div>
-	<!--왼쪽 메뉴 -->
-	<div id="wrap">
+
 <%if(ribList.size() != 0){
 	for(int i=0; i<ribList.size(); i++){
 		ReceiveInfoBEAN rib = ribList.get(i);%>
@@ -96,12 +91,5 @@ function receive_change(num,ra_num){
 <%	}
 }else{ %>등록 된 정보가 없습니다<%} %>
 <input type = "button" id="Add_address" value = "배송지 추가">
-	</div>
-	<jsp:include page="../inc/footer.jsp"></jsp:include>
-	<!--오른쪽 메뉴 -->
-	<div>
-		<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
-	</div>
-	<!--오른쪽 메뉴 -->
 </body>
 </html>
