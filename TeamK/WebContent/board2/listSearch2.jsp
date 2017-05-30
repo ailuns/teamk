@@ -63,7 +63,7 @@ $(document).ready(function(){
 <%if(bdao.getBoardReplyCount(bb.getNum())!=0){%>[<%=bdao.getBoardReplyCount(bb.getNum())%>]<%}%></a><%if(bdao.getFile(bb.getNum())!=null){%><img src="./img/disk.png" width="15" height="15>"><%}%></td>
 <td><%=bb.getId()%></td><td><%=bb.getDate() %></td>
     <td><%=bb.getReadcount() %></td></tr>
-    			<%
+    		<%
     }}
     %>
 </table>
