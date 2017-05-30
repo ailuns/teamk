@@ -31,6 +31,40 @@ article {
 	background-color: #fff;
 	padding: 30px 0;
 }
+div#article_head {
+	width: 1000px;
+	text-align: left;
+	background-color: white;
+}
+div#article_head span.count {
+	float: right;
+	font-size: 12px;
+	margin-right: 55px;
+}
+div#article_title, div#article_script{
+	height: 80px;
+	width: 1000px;
+	margin: 0 auto;
+	color: #fff;
+	padding-left: 100px;
+}
+div#article_title {
+	background-color: #fff;
+	padding: 30px 0 30px 0px;
+	border-bottom: 3px solid #06c;
+	font-size: 30px;
+	font-weight: bold;
+	color: #06c;
+	width: 900px;
+	float: right;
+}
+div#article_script {
+	background-color: #fff;
+	color: #333;
+	font-size: 15px;
+	padding-top: 5px;
+	height: 50px;
+}
 
 /* Main.jsp */
 div#datepicker {
@@ -555,39 +589,7 @@ table#memberList td#imsi {
 }
 
 /* Board List.jsp */
-div#article_head {
-	width: 1000px;
-	text-align: left;
-	background-color: white;
-}
-div#article_head span.count {
-	float: right;
-	font-size: 12px;
-	margin-right: 55px;
-}
-div#article_title, div#article_script{
-	height: 80px;
-	width: 1000px;
-	margin: 0 auto;
-	color: #fff;
-	padding-left: 100px;
-}
-div#article_title {
-	background-color: #fff;
-	padding: 30px 0 30px 0px;
-	border-bottom: 3px solid #06c;
-	font-size: 30px;
-	font-weight: bold;
-	color: #06c;
-	width:900px;
-	float: right;
-}
-div#article_script {
-	background-color: #fff;
-	color: #333;
-	font-size: 15px;
-	padding-top: 5px;
-}
+
 div#board {
 	width: 60%;
 	min-width: 1000px;
@@ -599,7 +601,7 @@ div#board {
 }
 div#board_list {
 	width: 90%;
-	margin: 10px auto;
+	margin: 0 auto;
 }
 div#board_list table {
 	border-collapse: collapse;
@@ -637,9 +639,7 @@ div#board_menu_bar input[type="button"] {
 	margin: 0 5px;
 }
 div#board_menu_bar form {float: right;}
-div#board_menu_bar form input[type="text"] {
-	width: 150px;
-}
+div#board_menu_bar form input[type="text"] {width: 150px;}
 div#board_menu_bar form input[type="text"], div#board_menu_bar form select {
 	border: 1px solid #06c;
 	background-color: #fff;
