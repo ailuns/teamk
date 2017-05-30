@@ -33,12 +33,12 @@ function passck() {
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
-		<div id="member_head">
-			<div id="member_title">회원 탈퇴</div>
-			<div id="member_script"></div>
+		<div id="article_head">
+			<div id="article_title">회원 탈퇴</div>
+			<div id="article_script"></div>
 		</div>
 		<div id="clear"></div>
-		<div id="member">
+		<article>
 			<div id="m_delete_form">
 			<form action="./MemberDeleteAction.me" method="post" name="fr" onsubmit="return passck()">
 				<label for="id">아이디</label>
@@ -49,7 +49,7 @@ function passck() {
 				<input type="button" value="돌아가기" onclick="location.href='./main.fo'"> 
 			</form>
 			</div>
-		</div>
+		</article>
 	</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->

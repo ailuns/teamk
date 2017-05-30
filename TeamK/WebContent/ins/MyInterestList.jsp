@@ -22,8 +22,15 @@ List<interestBEAN> InterestThing = (List<interestBEAN>) request.getAttribute("In
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
-<div>
+<div id="article_head">
+<div id="article_title">
+	찜 리스트
+</div>
+</div>
+<article>
 		<h3>패키지 찜 리스트</h3>
+		<div id="board">
+		<div id="board_list">
 		<%
 			if (InterestPack.size() == 0) {
 		%>
@@ -31,10 +38,11 @@ List<interestBEAN> InterestThing = (List<interestBEAN>) request.getAttribute("In
 		<%
 			} else {
 		%>
-		<table border="1">
+		<table>
 			<tr>
-				<th>상품명</th>
-				<th>가격</th>
+				<th id="num">상품명</th>
+				<th id="num">가격</th>
+				<th id="num"></th>
 				
 				
 			</tr>
@@ -60,8 +68,11 @@ List<interestBEAN> InterestThing = (List<interestBEAN>) request.getAttribute("In
 			}
 		%>
 	</div>
+	</div>
 	<div>
 		<h3>상품 찜 리스트</h3>
+		<div id="board">
+		<div id="board_list">
 		<%
 			if (InterestThing.size() == 0) {
 		%>
@@ -69,10 +80,10 @@ List<interestBEAN> InterestThing = (List<interestBEAN>) request.getAttribute("In
 		<%
 			} else {
 		%>
-		<table border="1">
+		<table>
 			<tr>
-				<th>상품명</th>
-				<th>가격</th>
+				<th id="num">상품명</th>
+				<th id="num">가격</th>
 				
 				
 			</tr>
@@ -95,8 +106,13 @@ List<interestBEAN> InterestThing = (List<interestBEAN>) request.getAttribute("In
 		<%
 			}
 		%>
-		<br><input type = "button" value = "내주문" onclick="location.href='./MyOrderList.mo'">
-	</div>
+		</div>
+		</div>
+		<br>
+	
+		
+		</div>
+		</article>
 		</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->

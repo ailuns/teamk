@@ -29,7 +29,7 @@ public class MemberList implements Action {
 		
 		request.setAttribute("memberList",memberList);
 		
-		forward.setPath("./main.fo");
+		forward.setPath("./member/list.jsp");
 		forward.setRedirect(false);
 		return forward;
 	}

@@ -122,6 +122,7 @@ public class MyOrderAddAction implements Action{
 			mtib=moddao.CreateTradeInfo(mtib);
 			int num = Integer.parseInt(pnum);
 			mtib.setOri_num(num);
+			mtib.setCost(mtib.getTotal_cost());
 			String adult = request.getParameter("adult");
 			String child= request.getParameter("child");
 			

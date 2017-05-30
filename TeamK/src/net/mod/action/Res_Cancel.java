@@ -18,18 +18,34 @@ public class Res_Cancel implements Action{
 		ModDAO moddao = new ModDAO();
 		ModTradeInfoBEAN mtib = moddao.PO_Info_Read(po_num);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		String po_date = sdf.format(mtib.getTrade_date());
+		String po_date = sdf.format(mtib.getDate());
 		String today = sdf.format(new Date());
 		Date startDate = sdf.parse(po_date);
 		Date endDate = sdf.parse(today);
 		long mul_date = (startDate.getTime()-endDate.getTime())/(24 * 60 * 60 * 1000);
-		System.out.println(mul_date);
 		int cost = mtib.getCost();
-		if(mul_date<0)cost = 0;
-		else if(mul_date<2)cost*=0.5;
-		else if(mul_date<4)cost*=0.7;
-		else if(mul_date<6)cost*=0.8;
-		else if(mul_date<8)cost*=0.9;
+		String memo = "";
+		if(mul_date<=0){
+			cost = 0;
+			memo = "100%";
+		}
+		else if(mul_date<2){
+			cost *= 0.5;
+			memo = "50%";
+		}
+		else if(mul_date<4){
+			cost *= 0.7;
+			memo = "30%";
+		}
+		else if(mul_date<6){
+			cost *= 0.8;
+			memo = "20%";
+		}
+		else if(mul_date<8){
+			cost *= 0.9;
+			memo = "10%";
+		}
+		mtib.setMemo(memo);
 		mtib.setCost(cost);
 		request.setAttribute("mtib", mtib);
 		ActionForward afo = new ActionForward();

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+    <%@ page import="net.pack.db.CategoryBean" %>
+    <%@ page import="java.util.List" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,8 +9,26 @@
 <title>Insert title here</title>
 <link href="./css/inc.css" rel="stylesheet" type="text/css">
 <link href="./css/subpage.css" rel="stylesheet" type="text/css">
+<script src="./js/jquery-3.2.0.js"></script>
 </head>
 <body>
+
+<%
+	List CategoryList = (List)request.getAttribute("CategoryList");
+%>
+<script type="text/javascript">
+	//패키지 검색 시 지역 선택
+	function input_chk()
+	{
+		var val = $("#area option:selected").val(); 
+		if (val == "")
+		{
+			alert("지역을 선택해주세요");
+	    		return false;
+		}
+		return true;
+	}
+</script>
 	<!--왼쪽 메뉴 -->
 	<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
 	<!--왼쪽 메뉴 -->
@@ -33,12 +53,25 @@
 	<!--검색하는 부분 -->
 	<div id="wrap">
 	<div id="search">
-		<form action="#" method="get" name="fr" id="search">
-			<input type="text" name="keyword">
+		<form action="./PackSearchAction.po" method="get" name="fr" id="search" onsubmit="return input_chk();">
+<!-- 			<input type="text" name="keyword"> -->
+			<select id="area" name="area">
+				<option value="">선택하세요</option>
+				<%
+					CategoryBean cb;
+					for (int i = 0; i < CategoryList.size(); i++)
+					{
+						cb =(CategoryBean)CategoryList.get(i);
+				%>	
+					<option value="<%=cb.getCar_name() %>"><%=cb.getCar_name() %></option>
+				<%
+					}
+				%>
+			</select>
 			<input type="submit" value="검색">
 		</form>
 	</div>
-		<!--검색하는 부분 -->
+	<!--검색하는 부분 -->
 	<div id="index_wrap">
 		<div id="main_menu_box">
 		<%
@@ -60,12 +93,5 @@
 	<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
-<<<<<<< HEAD
-=======
-	</div>
-	<!--오른쪽 메뉴 -->
-	<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
-	<!--오른쪽 메뉴 -->
->>>>>>> branch 'master' of https://github.com/ailuns/teamk.git
 </body>
 </html>

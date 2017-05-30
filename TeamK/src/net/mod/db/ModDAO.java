@@ -6,12 +6,15 @@ import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
+
+import net.admin.order.db.AdminDAO;
 
 public class ModDAO {
 	Connection conn = null;
@@ -28,11 +31,11 @@ public class ModDAO {
 		conn = ds.getConnection();
 		return conn;
 	}
-	public int PO_Count(String id){
+	public int PO_Count(String id, String status){
 		int count = 0;
 		try{
 			conn = getconn();
-			sql = "select count(po_num) from pack_order where po_id=?";
+			sql = "select count(po_num) from pack_order where po_id=? and po_res_status"+status;
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -50,11 +53,12 @@ public class ModDAO {
 		}
 		return count;
 	}
-	public int TI_Count(String id){
+	public int TI_Count(String id, String status){
 		int count=0;
 		try{
 			conn = getconn();
-			sql = "select count(ti_num) from trade_info where id=? and to_null_check = 0";
+			sql = "select count(ti_num) from trade_info where id=? and ti_status"+status
+					+ " and to_null_check = 0";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -260,75 +264,12 @@ public class ModDAO {
 		}
 		return count;
 	}
-	/*public List<ModTradeInfoBEAN> ReadModTI(String id,int start, int end){
+	public List<ModTradeInfoBEAN> TO_ReadModTI(String id,int start, int end,String status){
 		List<ModTradeInfoBEAN> ModList = new ArrayList<ModTradeInfoBEAN>();
 		try{
 			conn=getconn();
-			sql = "select * from trade_info where id = ? "+
-					"order by ti_num desc limit ?,?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
-			pstmt.setInt(2, start-1);
-			pstmt.setInt(3, end);
-			rs = pstmt.executeQuery();
-			while(rs.next()){
-				int count = TO_TINum_Search(rs.getInt("ti_num"));
-				if (count != 0) {
-					ModTradeInfoBEAN mtib = new ModTradeInfoBEAN();
-					mtib.setTi_num(rs.getInt("ti_num"));
-					mtib.setName(rs.getString("ti_receive_name"));
-					mtib.setMobile(rs.getString("ti_receive_mobile"));
-					mtib.setPostcode(rs.getString("ti_receive_postcode"));
-					mtib.setAddress1(rs.getString("ti_receive_address1"));
-					mtib.setAddress2(rs.getString("ti_receive_address2"));
-					mtib.setMemo(rs.getString("ti_receive_memo"));
-					mtib.setTrade_type(rs.getString("ti_trade_type"));
-					mtib.setPayer(rs.getString("ti_trade_payer"));
-					mtib.setTrade_date(rs.getTimestamp("ti_trade_date"));
-					mtib.setTotal_cost(rs.getInt("ti_total_cost"));
-					mtib.setStatus(rs.getInt("ti_status"));
-					String status_text = "";
-					switch (rs.getInt("ti_status")) {
-					case 1:
-						status_text = "입금 확인 중";
-						break;
-					case 2:
-						status_text = "결제 완료";
-						break;
-					case 3:
-						status_text = "환불 완료";
-						break;
-					case 9:
-						status_text = "대기중";
-						break;
-					case 10:
-						status_text = "완료";
-						break;
-					}
-					mtib.setStatus_text(status_text);
-					ModList.add(mtib);
-				}
-			}
-		}catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				rs.close();
-				pstmt.close();
-				conn.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		
-		return ModList;
-	}*/
-	public List<ModTradeInfoBEAN> TO_ReadModTI(String id,int start, int end){
-		List<ModTradeInfoBEAN> ModList = new ArrayList<ModTradeInfoBEAN>();
-		try{
-			conn=getconn();
-			sql = "select * from trade_info where id = ? and "+
-					"to_null_check = 0 order by ti_num desc limit ?,?";
+			sql = "select * from trade_info where id = ? and ti_status"+status+
+					" and to_null_check = 0 order by ti_num desc limit ?,?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setInt(2, start-1);
@@ -356,9 +297,6 @@ public class ModDAO {
 				case 2:
 					status_text = "결제 완료";
 					break;
-				case 3:
-					status_text = "환불 완료";
-					break;
 				case 9:
 					status_text = "대기중";
 					break;
@@ -383,18 +321,19 @@ public class ModDAO {
 		
 		return ModList;
 	}
-	public List<ModTradeInfoBEAN> MyPackOrder(String id, int start, int end){
+	public List<ModTradeInfoBEAN> MyPackOrder(String id, int start, int end,String status, String orderby){
 		List<ModTradeInfoBEAN> ModPackList = new ArrayList<ModTradeInfoBEAN>();
 		try{
 			conn =getconn();
 			sql = "select A.*, B.subject, B.intro, B.file1, B.date "
 					+"from pack_order A left outer join pack B "
-					+"on A.ori_num = B.num where A.po_id=? and A.po_res_status <= 5 "
-					+"order by B.date,A.po_res_status limit ?,?";
+					+"on A.ori_num = B.num where A.po_id=? and A.po_res_status"+status
+					+" order by "+orderby+" limit ?,?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setInt(2, start-1);
 			pstmt.setInt(3, end);	
+			System.out.println(sql);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				ModTradeInfoBEAN mtib = new ModTradeInfoBEAN();
@@ -406,16 +345,16 @@ public class ModDAO {
 				mtib.setTrade_num(rs.getString("po_trade_num"));
 				mtib.setPack_count(rs.getString("po_count"));
 				mtib.setCost(rs.getInt("po_cost"));
-				mtib.setTrade_date(rs.getTimestamp("po_res_date"));
+				mtib.setTrade_date(rs.getTimestamp("date"));
 				mtib.setStatus(rs.getInt("po_res_status"));
+				mtib.setMemo(rs.getString("po_memo"));
 				String statustext = "";
 				switch(rs.getInt("po_res_status")){
 					case 1: statustext = "입금 확인 중"; break;
 					case 2: statustext = "예약 대기 중"; break;
 					case 3: statustext = "예약 완료"; break;
-					case 4: statustext = "예약 취소 확인 중";break;
-					case 5: statustext = "환불 완료";break;
-					case 9: statustext = "환불 처리됨";break;
+					case 4: statustext = "예약 취소 중";break;
+					case 9: statustext = "취소 완료";break;
 					case 10:statustext = "완료";break;
 				}
 				mtib.setDate(rs.getTimestamp("date"));
@@ -509,16 +448,17 @@ public class ModDAO {
 				mtib.setSize(rs.getString("o_size"));
 				mtib.setTrade_date(rs.getTimestamp("o_date"));
 				mtib.setTrans_num(rs.getString("o_trans_num"));
+				mtib.setStatus(rs.getInt("o_status"));
 				String statustext = "";
 				switch(rs.getInt("o_status")){
-					case 0: statustext = "환불 완료";break;
 					case 1: statustext = "입금 확인중"; break;
 					case 2: statustext = "배송 준비중"; break;
-					case 3: statustext = "배송중";break;
+					case 3: statustext = "배송 중";break;
 					case 4: statustext = "배송완료";break;
-					case 5: statustext = "구매완료";break;
-					case 6: statustext = "반송중";break;
-					case 10: statustext = "완료";break;
+					case 5: statustext = "교환 중";break;
+					case 6: statustext = "환불 중";break;
+					case 9: statustext = "환불 완료";break;
+					case 10: statustext = "구매 완료";break;
 				}
 				mtib.setStatus_text(statustext);
 				mtib.setTrans_num(rs.getString("o_trans_num"));
@@ -544,7 +484,7 @@ public class ModDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, status);
 			pstmt.setInt(2, po_num);
-			pstmt.executeQuery();
+			pstmt.executeUpdate();
 		}catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -556,19 +496,19 @@ public class ModDAO {
 			}
 		}
 	}
-	public void To_Status_Update(int status, int o_num){
+	public void To_Status_Update(int status, int o_num, String memo){
 		try{
 			conn = getconn();
-			sql = "update thing_order set o_status = ? where o_num=?";
+			sql = "update thing_order set o_status = ?, o_memo=? where o_num=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, status);
-			pstmt.setInt(2, o_num);
-			pstmt.executeQuery();
+			pstmt.setString(2, memo);
+			pstmt.setInt(3, o_num);
+			pstmt.executeUpdate();
 		}catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				rs.close();
 				pstmt.close();
 				conn.close();
 			} catch (Exception e) {
@@ -604,7 +544,7 @@ public class ModDAO {
 		ModTradeInfoBEAN mtib = new ModTradeInfoBEAN();
 		try{
 			conn =getconn();
-			sql = "select A.*, B.subject, B.intro, B.file1,C.ti_trade_type "
+			sql = "select A.*, B.subject, B.intro, B.file1,C.ti_trade_type,B.date "
 					+"from pack_order A left outer join(pack B cross join trade_info C) "
 					+"on(A.ori_num = B.num and A.po_ti_num = C.ti_num)where A.po_num = ?";
 			pstmt = conn.prepareStatement(sql);
@@ -619,8 +559,10 @@ public class ModDAO {
 				mtib.setTrade_num(rs.getString("po_trade_num"));
 				mtib.setPack_count(rs.getString("po_count"));
 				mtib.setCost(rs.getInt("po_cost"));
+				mtib.setTotal_cost(rs.getInt("po_cost"));
 				String []t_type = rs.getString("ti_trade_type").split(",");
 				mtib.setTrade_type(t_type[0]);
+				mtib.setDate(rs.getTimestamp("date"));
 				mtib.setTrade_date(rs.getTimestamp("po_res_date"));
 				String statustext = "";
 				switch(rs.getInt("po_res_status")){
@@ -648,15 +590,15 @@ public class ModDAO {
 		
 		return mtib;
 	}
-	public int Res_Cancel(ModTradeInfoBEAN mtib){
+	public int Res_Cancel(String memo, int num){
 		int check = 0;
 		try{
 			conn = getconn();
 			sql = "update pack_order set po_res_status=4, "+
 					"po_memo = ? where po_num = ?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, mtib.getMemo());
-			pstmt.setInt(2, mtib.getNum());
+			pstmt.setString(1, memo);
+			pstmt.setInt(2, num);
 			pstmt.executeUpdate();
 			check = 1;
 		}catch (Exception e) {
@@ -670,5 +612,42 @@ public class ModDAO {
 			}
 		}
 		return check ;
+	}
+	public void Res_Completed(String id){
+		try{
+			conn=getconn();
+			sql ="select A.po_num, B.date from pack_order A left outer join pack B "+
+					"on A.ori_num = B.num where A.po_id = ? and A.po_res_status =3";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				String po_date = sdf.format(rs.getDate("date"));
+				String today = sdf.format(new Date());
+				Date startDate = sdf.parse(po_date);
+				Date endDate = sdf.parse(today);
+				long mul_date = (startDate.getTime()-endDate.getTime())/(24 * 60 * 60 * 1000);
+				if(mul_date<0){
+					Connection conn2 = getconn();
+					String sql2 = "update pack_order set po_res_status = 10 where po_num=?";
+					PreparedStatement pstmt2 = conn2.prepareStatement(sql2);
+					pstmt2.setInt(1, rs.getInt(1));
+					pstmt2.executeUpdate();
+					pstmt2.close();
+					conn2.close();
+				}
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
 	}
 }

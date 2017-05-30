@@ -21,12 +21,12 @@ if (id != null) {
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap"> 
-		<div id="member_head">
-			<div id="member_title">로그인</div>
-			<div id="member_script">로그인이 필요합니다.</div>
+		<div id="article_head">
+			<div id="article_title">로그인</div>
+			<div id="article_script">로그인이 필요합니다.</div>
 		</div>
 		<div id="clear"></div>
-		<div id="member">
+		<article>
 			<div id="login_form">
 				<form action="./MemberLoginAction.me" method="post" name="fr">
 					<label for="id">아이디</label><input type="text" name="id" id="id" autofocus><br> 
@@ -52,7 +52,7 @@ if (id != null) {
 					</tr>
 				</table>
 			</div>
-		</div>
+		</article>
 	</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->

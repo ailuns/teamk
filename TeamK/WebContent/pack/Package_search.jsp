@@ -78,6 +78,11 @@ img.ui-datepicker-trigger
 	margin-left : 5px;
 }
 
+#package_list tr:HOVER
+{
+/* 	cursor: pointer; */
+}
+
 .clear 
 {
 	clear: both;
@@ -111,36 +116,34 @@ img.ui-datepicker-trigger
 </div>
 <!--왼쪽 메뉴 -->
 	<div id="wrap">
-		<div id="package_head">
-			<div id="package_title">패키지
-			</div>
-			<div id="package_search">
-				<p>내게 맞는 패키지 검색하기</p>
-				<form action="./PackSearchAction.po" name="fr" method="get" id="scheduler" onsubmit="return input_chk()">
-					<label for="date_from">날짜</label>
-					<input type="text" id="date_from" class="input_style" name="startDate" value="<%=startDate%>" required="yes">
-					<label for="date_to">~</label>
-					<input type="text" id="date_to" class="input_style" name="endDate" value="<%=endDate%>"><br><br>
-					<label for="city_search">지역</label>
-	
-					<select id="area" name="area">
-						<option value="">선택하세요</option>
-						<%
-							CategoryBean cb;
+		<div id="article_title">
+		패키지
+	</div>
+	<!--여행지 검색창 -->
+	<div id="package_feat">
+		<jsp:include page="../inc/packSlide.jsp"></jsp:include>
+		<div id="package_search">
+			<p>내게 맞는 패키지 검색하기</p>
+			<form action="./PackSearchAction.po" name="fr" method="get" id="scheduler" onsubmit="return input_chk();">
+				<label for="date_from">출발</label><input type="text" id="date_from" class="input_style" name="startDate" value="<%=startDate %>"><br><br>
+				<label for="city_search">지역</label>
+				<select id="area" name="area">
+					<option value="">선택하세요</option>
+					<%
+						CategoryBean cb;
 						for (int i = 0; i < CategoryList.size(); i++)
 						{
 							cb =(CategoryBean)CategoryList.get(i);
-						%>	
-							<option value="<%=cb.getCar_name() %>" <%if(search.equals(cb.getCar_name())) {%> selected <%}%>><%=cb.getCar_name() %></option>
-						<%
+					%>	
+						<option value="<%=cb.getCar_name() %>" <%if(search.equals(cb.getCar_name())){ %> selected <%} %>><%=cb.getCar_name() %></option>
+					<%
 						}
-						%>
-					</select>
-					<input type="submit" value="검색" id="search_btn" class="input_style">
-				</form>
-			</div>
+					%>
+				</select>
+				<input type="submit" value="검색" id="search_btn" class="input_style">
+			</form>
 		</div>
-		
+	</div>
 		<div id="clear"></div>
 		
 		<%
@@ -168,7 +171,7 @@ img.ui-datepicker-trigger
 		%>
 		
 		
-<%-- 		<p>검색조건에 해당하는 상품이 총 <%=count %>개 있습니다</p> --%>
+		<p>검색조건에 해당하는 상품이 총 <%=count %>개 있습니다</p>
 		<hr>	
 
 		<div id="package_list">
@@ -198,17 +201,19 @@ img.ui-datepicker-trigger
 						<%=pb.getSubject() %>
 					</td>
 					<td rowspan="2"  id="price">
-						<span><%=cost %>원</span>
+						<span><%=cost %>원~</span>
 					</td>
 					<td rowspan="2"  id="date">
 						<span><%=pb.getDate() %>~</span>
 					</td>
+					
 				</tr>
 				<tr>
 					<td id="context">
 						<span><%=pb.getIntro() %></span>
 					</td>
 				</tr>
+				
 			<%
 					}
 				}
@@ -231,21 +236,21 @@ img.ui-datepicker-trigger
 						//이전
 						if (startPage > pageBlock) {
 				%>
-				<a href="./PackContent.po?pageNum=<%=startPage - pageBlock%>">[이전]</a>
+				<a href="./PackSearchAction.po?pageNum=<%=startPage - pageBlock%>">[이전]</a>
 				<%
 					}
 
 						//페이지
 						for (int i = startPage; i <= endPage; i++) {
 				%>
-				<a href="./PackContent.po?pageNum=<%=i %>">[<%=i%>]</a>
+				<a href="./PackSearchAction.po?pageNum=<%=i %>&area=<%=search %>">[<%=i%>]</a>
 				<%
 					}
 
 						//다음
 						if (endPage < pageCount) {
 				%>
-				<a href="./PackContent.po?pageNum=<%=startPage + pageBlock%>">[다음]</a>
+				<a href="./PackSearchAction.po?pageNum=<%=startPage + pageBlock%>">[다음]</a>
 				<%
 					}
 				}

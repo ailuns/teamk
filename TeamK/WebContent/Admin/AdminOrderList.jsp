@@ -27,11 +27,8 @@ history.back();
 <div>
 <h3>Admin</h3>
 <input type="button"value = "adminmenu" onclick="location.href='./BankPayCheck.ao'"><br>
-<input type="button"value = "adminControl" onclick="location.href='./TransNum_Insert.ao'"><br>
-<input type="button" value ="pack_res" onclick ="location.href = './Pack_res.ao'"><br>
-<input type="button" value="res_cancel" onclick="location.href='./Pack_Res_Cancel.ao'"><br>
-<input type="button" value="Thing_Exchange" onclick="location.href='./Thing_Exchange.ao'"><br>
-<input type="button" value="Thing_Cancel" onclick="location.href='./Thing_Cancel.ao'">
+<input type="button" value ="Admin_pack_Order" onclick ="location.href = './Pack_res.ao'"><br>
+<input type="button" value="Admin_thing_Order" onclick="location.href='./Trans_num_Insert.ao'"><br>
 
 </div>
 	</div>

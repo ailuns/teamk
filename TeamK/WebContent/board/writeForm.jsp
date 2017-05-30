@@ -9,8 +9,7 @@
 <link href="./css/subpage.css" rel="stylesheet" type="text/css">
 <%String id = (String)session.getAttribute("id");%>
 <!-- Smart Editor -->
-<script type="text/javascript" src="./js/HuskyEZCreator.js" charset="utf-8">
-</script>
+<script type="text/javascript" src="./js/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>./photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js" charset="utf-8"></script>
 <!-- Smart Editor -->
 </head>
@@ -21,12 +20,12 @@
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
-		<div id="board_head">
-			<div id="rvw_title">리뷰 작성</div>
-			<div id="rvw_script">리뷰를 작성합니다.</div>
+		<div id="article_head">
+			<div id="article_title">리뷰 작성</div>
+			<div id="article_script">상품이나 패키지 후기를 쓰는 곳 입니다.</div>
 		</div>
 		<div id="clear"></div>
-		<div id="board">
+		<article>
 		<div id="board_write">
 <form action="./BoardWriteAction.bo" method="post" name="fr" enctype="multipart/form-data">
 <input type="hidden" value="1" name="type">
@@ -41,18 +40,18 @@
 <div id="clear"></div>
 <br>
 <label for="subject">제목</label><input type="text" name="subject" id="subject" maxlength="20"><br><br>
-<textarea id="ir1" rows="30" cols="80" name="content" id="content"></textarea><br><br>
+<textarea id="ir1" rows="30" cols="80" name="content"></textarea><br><br>
 <label for="file1">첨부파일1</label><input type="file" name="file1" id="file1"><br>
 <label for="file2">첨부파일2</label><input type="file" name="file2" id="file2"><br>
 <label for="file3">첨부파일3</label><input type="file" name="file3" id="file3"><br>
 <label for="file4">첨부파일4</label><input type="file" name="file4" id="file4"><br>
 <label for="file5">첨부파일5</label><input type="file" name="file5" id="file5"><br>
 <div class="clear"></div><br>
-<input type="submit" id="save" value="글쓰기">
+<input type="submit" id="save" value="글쓰기" onclick="submitContents(this);">
 <input type="button" value="글목록" onclick="location.href='./BoardList.bo?pageNum=1'">
 </form>
 </div>
-</div>
+</article>
 	</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->
@@ -61,13 +60,12 @@
 	</div>
 	<!--오른쪽 메뉴 -->
 </body>
-
 <script type="text/javascript">
 var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({
 	oAppRef: oEditors,
 	elPlaceHolder: "ir1",
-	sSkinURI: "./SmartEditor2Skin.html",
+	sSkinURI: "./SmartEditor2Skin.html",	
 	htParams : {
 		bUseToolbar : true,				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
 		bUseVerticalResizer : true,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
@@ -78,10 +76,26 @@ nhn.husky.EZCreator.createInIFrame({
 	fCreator: "createSEditor2"
 });
 
+
 function pasteHTML(fname) {
 	var sHTML = '<img src="<%=request.getContextPath()%>/upload/'+ fname +'">';
 	//alert(sHTML);
     oEditors.getById["ir1"].exec("PASTE_HTML", [sHTML]);
+}
+
+function showHTML() {
+	var sHTML = oEditors.getById["ir1"].getIR();
+	alert(sHTML);
+}
+
+function submitContents(elClickedObj) {
+	oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
+	
+	// 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("ir1").value를 이용해서 처리하면 됩니다.
+	
+	try {
+		elClickedObj.form.submit();
+	} catch(e) {}
 }
 
 $("#save").click(function(){

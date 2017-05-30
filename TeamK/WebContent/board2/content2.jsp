@@ -63,35 +63,46 @@ int num = Integer.parseInt(request.getParameter("num"));
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
-		<div id="board_head">
-			<div id="qna_title">Q&A 게시판</div>
-			<div id="qna_script">궁금한것은 질문해주세요.</div>
+		<div id="article_head">
+			<div id="article_title">Q&A 게시판</div>
+			<div id="article_script">궁금한것은 질문해주세요.</div>
 		</div>
 		<div id="clear"></div>
-		<div id="board">
+		<article>
 		<div id="board_content">
-<table>
-<tr><td id="num"><%=bb.getRe_ref()%></td><td id="date"><%=bb.getDate()%></td><td id="readcount">조회수: <%=bb.getReadcount()%></td></tr>
-<tr><td colspan="2" id="subject"> 
-<%=bb.getSubject()%></td><td id="id"><%=bb.getId()%></td></tr>
-<%if(id!=null){if(id.equals("admin")){%><tr><td id="num">메일주소 : <%=bb.getEmail()%></td></tr><%}}%>
-<tr><td colspan="3" id="content"><br><br><%=bb.getContent()%><br><br></td></tr>
+<table id="content">
+ <tr>
+  <td id="num"><%=bb.getRe_ref()%></td>
+  <td id="date"><%=bb.getDate()%></td>
+  <td id="readcount">조회수: <%=bb.getReadcount()%></td>
+ </tr>
+ <tr>
+  <td colspan="2" id="subject"><%=bb.getSubject()%></td>
+  <td id="id"><%=bb.getId()%></td>
+ </tr>
+ <%if(id!=null){if(id.equals("admin")){%>
+ <tr>
+  <td id="num">메일주소 : <%=bb.getEmail()%></td>
+ </tr><%}}%>
+ <tr>
+  <td colspan="3" id="content"><br><br><%=bb.getContent()%><br><br></td>
+ </tr>
 
 <%--첨부파일이 있을때만 첨부파일 표시--%>
 <%if(bb.getFile1()!=null){%>
-<tr><td>첨부파일1</td><td colspan="3"><%if(bb.getFile1()!=null){%><a href="./upload/<%=bb.getFile1()%>"><%=bb.getFile1()%></a><%}%></td></tr>
+<tr><td>첨부파일1</td><td colspan="3"><%if(bb.getFile1()!=null){%><a href="./file_down.jsp?file_name=<%=bb.getFile1()%>"><%=bb.getFile1()%></a><%}%></td></tr>
 <%}%>
 <%if(bb.getFile2()!=null){%>
-<tr><td>첨부파일2</td><td colspan="3"><%if(bb.getFile2()!=null){%><a href="./upload/<%=bb.getFile2()%>"><%=bb.getFile2()%></a><%}%></td></tr>
+<tr><td>첨부파일2</td><td colspan="3"><%if(bb.getFile2()!=null){%><a href="./file_down.jsp?file_name=<%=bb.getFile2()%>"><%=bb.getFile2()%></a><%}%></td></tr>
 <%}%>
 <%if(bb.getFile3()!=null){%>
-<tr><td>첨부파일3</td><td colspan="3"><%if(bb.getFile3()!=null){%><a href="./upload/<%=bb.getFile3()%>"><%=bb.getFile3()%></a><%}%></td></tr>
+<tr><td>첨부파일3</td><td colspan="3"><%if(bb.getFile3()!=null){%><a href="./file_down.jsp?file_name=<%=bb.getFile3()%>"><%=bb.getFile3()%></a><%}%></td></tr>
 <%}%>
 <%if(bb.getFile4()!=null){%>
-<tr><td>첨부파일4</td><td colspan="3"><%if(bb.getFile4()!=null){%><a href="./upload/<%=bb.getFile4()%>"><%=bb.getFile4()%></a><%}%></td></tr>
+<tr><td>첨부파일4</td><td colspan="3"><%if(bb.getFile4()!=null){%><a href="./file_down.jsp?file_name=<%=bb.getFile4()%>"><%=bb.getFile4()%></a><%}%></td></tr>
 <%}%>
 <%if(bb.getFile5()!=null){%>
-<tr><td>첨부파일5</td><td colspan="3"><%if(bb.getFile5()!=null){%><a href="./upload/<%=bb.getFile5()%>"><%=bb.getFile5()%></a><%}%></td></tr>
+<tr><td>첨부파일5</td><td colspan="3"><%if(bb.getFile5()!=null){%><a href="./file_down.jsp?file_name=<%=bb.getFile5()%>"><%=bb.getFile5()%></a><%}%></td></tr>
 <%}%>
 </table>
 <%
@@ -118,16 +129,16 @@ if(rcount!=0){lrb=(List)request.getAttribute("lrb");}
 
 %>
 <div id="replyUpdate">
-<p>댓글(<%=rcount%>개)</p>
+<p>답변(<%=rcount%>개)</p>
 <table id="reply">
     <%if(rcount!=0){
     for(int i=0; i<lrb.size(); i++){
     	//자바빈(BoardBean) 변수 =배열한칸 접근  배열변수.get()
     	BoardReplyBean rb = (BoardReplyBean)lrb.get(i);%>
 <tr>
-<td id="name"><%=rb.getId()%></td>
-<td id="content"><%=rb.getContent()%></td>
-<td id="delete"><%
+ <td id="name"><%=rb.getId()%></td>
+ <td id="rContent"><%=rb.getContent()%></td>
+ <td id="delete"><%
 if(id!=null){
 	if(id.equals(rb.getId())||id.equals("admin")){ 
 %>
@@ -135,8 +146,9 @@ if(id!=null){
 <%--리플삭제버튼 replydelete로 AJAX 실행 --%>
 <input type="button" value="×" onclick="replydelete(<%=rb.getNum()%>)">
 </form>
-<%}}%></td>
-<td id="date"><%=rb.getDate()%></td>
+<%}}%>
+ </td>
+ <td id="date"><%=rb.getDate()%></td>
 </tr>
     <%
     }}
@@ -158,16 +170,12 @@ if(id.equals("admin")){%>
 </div>
 <%--댓글달기버튼 replyupdate로 AJAX 실행 --%>
 <input type="button" value="댓글달기" onclick="replyupdate()">	
-<%}else{%>
-<textarea rows="3" cols="59" name="content" placeholder="Q&A게시판 답변은 관리자만 작성가능합니다." readonly></textarea>	
-<%}}else{%>
-<textarea rows="3" cols="59" name="content" placeholder="Q&A게시판 답변은 관리자만 작성가능합니다." readonly></textarea>
-<%}%>
+<%}} %>
 </form>
 <!-- ///////////////////댓글///////////////// -->
 		</div>
 		</div>
-	</div>
+	</article>
 	</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->

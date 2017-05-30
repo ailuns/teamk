@@ -56,21 +56,25 @@ function receive_setting(){
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
-	<form action ="./MyOrderAddAction.mo" method ="post" name = "fr" onsubmit="return submit_check()">
+	<div id="article_head">
+			<div id="article_title">결제 페이지</div>
+		</div>
+	<article>
+	<form action ="./MyOrderAddAction.mo" method ="post" name = "fr" onsubmit="return submit_check()" class="gyeolje">
 	<div id ="buyer_info">
 		<table>
 			<caption>구매자 정보</caption>
 			<tbody>
 				<tr>
-					<td>ID</td>
+					<th>ID</th>
 					<td><%=mb.getId() %></td>
 				</tr>
 				<tr>
-					<td>Tel.</td>
+					<th>Tel.</th>
 					<td><%=mb.getMobile() %></td>
 				</tr>
 				<tr>
-					<td>E-mail</td>
+					<th>E-mail</th>
 					<td><%=mb.getEmail() %></td>
 				</tr>
 			</tbody>
@@ -86,7 +90,7 @@ function receive_setting(){
 	<div id = "packList">
 	<table border="1" id="packtable">
 	<caption>예약하신 패키지 상품 정보<br>
-		<span>예약하신 패키지 상품의 판플랫을 받아 보시겠습니까?
+		<span>예약하신 패키지 상품의 팜플랫을 받아 보시겠습니까?
 			<input name = "po_receive_check" type ="radio" id ="po_receive_check" value="1" checked="checked">예
 			<input name = "po_receive_check" type ="radio" id ="po_receive_check" value="0">아니오
 		</span>
@@ -163,23 +167,23 @@ function receive_setting(){
 			<caption>배송지<input type = "button" value="배송지 설정" id="receive_setting"></caption>
 			<tbody>
 			<tr>
-				<td>성함</td>
+				<th>성함</th>
 				<td id="receive_name"><%if(rib.getId()==null)out.print("등록된 정보가 없습니다!");
 					 else out.print(rib.getName());%></td>
 			</tr>
 			<tr>
-				<td>연락처</td>
+				<th>연락처</th>
 				<td id="receive_mobile"><%if(rib.getId()==null)out.print("등록된 정보가 없습니다!");
 					 else out.print(rib.getMobile());%></td>
 			</tr>
 			<tr>
-				<td>주소</td>
+				<th>주소</th>
 				<td id="receive_address"><%if(rib.getId()==null)out.print("등록된 정보가 없습니다!");
 					 else out.print("["+rib.getPostcode()+"] "+rib.getAddress1()+" "+rib.getAddress2());%></td>
 			</tr>
 			<%if(ModThingList != null){ %>
 			<tr id = "receive_memo">
-				<td>배송시 요청사항</td>
+				<th>배송시 요청사항</th>
 				<td><textarea cols="50" rows="4" placeholder="200자 이내로 입력해 주세요" id="o_memo" name = "o_memo"></textarea></td>
 			</tr>
 			<%} %>
@@ -276,7 +280,16 @@ $(document).ready(function() {
 		$('#card_agree_ul').show();
 	});
 	$('#card_agree_ul_selected').on('click',function(){
-		selectreset();
+		$('.agree_li_view').hide();
+		$('#card_agree_ul').hide();
+		$('#mobile_agree_ul').hide();
+		$('.agree_ul_selected').hide();
+		$('.agree_li_selected').hide();
+		$('.agree_li_select').show();
+		$('.agree_ul_select').show();
+		$('#select_bank option:eq(0)').prop('selected',true);
+		$('#cash_receipt_check').prop('checked',false);
+		$('#cash_receipt').hide();
 	});
 	$('#mobile_agree_ul_select').on('click',function(){
 		$('#mobile_agree_ul_selected').show();
@@ -350,20 +363,20 @@ function selectreset(){
 	<caption>결제 정보</caption>
 	<tbody>
 		<tr>
-			<td>총 상품 가격</td>
+			<th>총 상품 가격</th>
 			<td id="cost_sum"></td>
 		</tr>
 		<%if(ModThingList.size()!=0){ %>
 		<tr>
-			<td>배송료</td>
+			<th>배송료</th>
 			<td id="trans_cost"> 상품에 해당하는 금액이 2만원 이상일 경우 무료입니다</td>
 		</tr><%} %>
 		<tr>
-			<td>결제 금액</td>
+			<th>결제 금액</th>
 			<td id="t_cost"></td>
 		</tr>
 		<tr>
-			<td rowspan="2">결제 방법</td>
+			<th rowspan="2">결제 방법</th>
 			<td colspan="2">
 				<label><input type="radio" name="t_type" id="trade_type1" value="카드 결제" checked="checked">카드 결제</label>
 				<label><input type="radio" name="t_type" id="trade_type2" value="모바일 결제">모바일 결제</label>
@@ -500,7 +513,8 @@ function selectreset(){
 </div>
 <div class="trade_type2">
 	<label><input type ="checkbox" name = "mobile_agree" checked="checked">
-		결제 대행 서비스 약관에 모두 동의 합니다.</label><span id="mobile_agree_ul_select" class = "agree_ul_select">내용 보기▼</span>
+		결제 대행 서비스 약관에 모두 동의 합니다.</label><br>
+		<span id="mobile_agree_ul_select" class = "agree_ul_select">내용 보기▼</span>
 		<span id="mobile_agree_ul_selected" class="agree_ul_selected">내용보기▲</span>
 		<ul class="agree_ul" id="mobile_agree_ul">
 				<li>서비스 이용약관 동의<span id="mobile_agree_li_select1" class="agree_li_select"
@@ -531,6 +545,7 @@ function selectreset(){
 
 <input type = "submit" value="구매하기" id="fr_submit"><input type="button" value="취소" onclick="history.back();">
 </form>
+</article>
 	</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->

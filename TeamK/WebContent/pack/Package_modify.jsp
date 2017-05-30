@@ -111,6 +111,11 @@ img.ui-datepicker-trigger
 	padding-top : 50px;
 }
 
+#subject, #intro
+{
+	width : 500px;
+}
+
 
 
 </style>
@@ -130,15 +135,11 @@ img.ui-datepicker-trigger
 
 <div id="wrap_pack">
 	<div>
-		<form action="./PackModifyAction.po?num=<%=pb.getNum() %>" id="fr" method="post" enctype="multipart/form-data">
+		<form action="./PackModifyAction.po?ori_subject=<%=pb.getSubject() %>" id="fr" method="post" enctype="multipart/form-data">
 			<table>
 				<tr>
-					<td>소제목</td>
-					<td><input type="text" name="intro" required="yes" value="<%=pb.getIntro() %>"></td>
-				</tr>
-				<tr>
-					<td>출발일자</td>
-					<td><input type="text" id="date_from" name="sdate" value="<%=pb.getDate() %>" class="input_style" name="startDate" required="yes"></td>
+<!-- 					<td>출발일자</td> -->
+<%-- 					<td><input type="text" id="date_from" name="sdate" value="<%=pb.getDate() %>" class="input_style" name="startDate" required="yes"></td> --%>
 				</tr>
 				<tr>
 					<td>지역</td>
@@ -177,16 +178,20 @@ img.ui-datepicker-trigger
 					</td>
 				</tr>
 				<tr>
-					<td>가격</td>
-					<td><input type="text" name="cost" required="yes" value="<%=pb.getCost() %>"></td>
+<!-- 					<td>가격</td> -->
+<%-- 					<td><input type="text" name="cost" required="yes" value="<%=pb.getCost() %>"></td> --%>
 				</tr>
 				<tr>
-					<td>수량</td>
-					<td><input type="text" name="stock" required="yes" value="<%=pb.getStock() %>"></td>
+<!-- 					<td>수량</td> -->
+<%-- 					<td><input type="text" name="stock" required="yes" value="<%=pb.getStock() %>"></td> --%>
 				</tr>
 				<tr>
 					<td>글제목</td>
-					<td><input type="text" name="subject" required="yes" value="<%=pb.getSubject() %>"></td>
+					<td><input type="text" id="subject" name="subject" required="yes" value="<%=pb.getSubject() %>"></td>
+				</tr>
+				<tr>
+					<td>소제목</td>
+					<td><input type="text" id="intro" name="intro" required="yes" value="<%=pb.getIntro() %>"></td>
 				</tr>
 				<tr>
 					<td>글내용</td>
@@ -289,7 +294,7 @@ img.ui-datepicker-trigger
 				
 				function pasteHTML(filepath) {
 					// textarea에 이미지를 넣어줍니다
-					var sHTML = '<img src="<%=request.getContextPath()%>/writeAPI/upload/'+filepath+'">';
+					var sHTML = '<img src="<%=request.getContextPath()%>/upload/'+filepath+'">';
 				    oEditors.getById["ir1"].exec("PASTE_HTML", [sHTML]);
 				}
 				
@@ -352,5 +357,8 @@ img.ui-datepicker-trigger
 <!-- 오른쪽 메뉴 -->
 <jsp:include page="../inc/rightMenu.jsp"></jsp:include>
 <!-- 오른쪽 메뉴 -->
+<!-- 푸터 메뉴 -->
+	<jsp:include page="../inc/footer.jsp"></jsp:include>
+<!-- 푸터 메뉴 -->
 </body>
 </html>

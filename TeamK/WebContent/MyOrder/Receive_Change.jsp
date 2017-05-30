@@ -44,6 +44,7 @@ function receive_change(num,ra_num){
         url:"./receive_changeAction.mo",
         data:{
            ra_num:ra_num,
+           name:$('#name'+num).html(),
            mobile: $('#mobile'+num).html(),
            postcode:$('#postcode'+num).val(),
            address1:$('#address1'+num).val(),
@@ -51,22 +52,15 @@ function receive_change(num,ra_num){
         },
         success:function(){
             alert("배송지가 변경 되었습니다!");
-        	$('#receive_name'+<%=num%>,opener.document).html($('#name'+num).html());
-        	$('#receive_mobile'+<%=num%>,opener.document).html( $('#mobile'+num).html());
-        	$('#receive_addr'+<%=num%>,opener.document).html($('#address'+num).html());
-        	//window.close();
+        	opener.window.location.reload(true);
+        	window.close();
         }
      });
 }
 </script>
 </head>
 <body>
-	<!--왼쪽 메뉴 -->
-	<div>
-		<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
-	</div>
-	<!--왼쪽 메뉴 -->
-	<div id="wrap">
+
 <%if(ribList.size() != 0){
 	for(int i=0; i<ribList.size(); i++){
 		ReceiveInfoBEAN rib = ribList.get(i);%>
@@ -96,12 +90,5 @@ function receive_change(num,ra_num){
 <%	}
 }else{ %>등록 된 정보가 없습니다<%} %>
 <input type = "button" id="Add_address" value = "배송지 추가">
-	</div>
-	<jsp:include page="../inc/footer.jsp"></jsp:include>
-	<!--오른쪽 메뉴 -->
-	<div>
-		<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
-	</div>
-	<!--오른쪽 메뉴 -->
 </body>
 </html>

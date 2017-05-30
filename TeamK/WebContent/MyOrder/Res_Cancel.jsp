@@ -78,6 +78,14 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
 		<td>성인 : <%=countp[0] %>, 아동 : <%=countp[1] %></td>
 	</tr>
 	<tr>
+		<td>결제 금액</td>
+		<td><%=mtib.getTotal_cost()%>원</td>
+	</tr>
+	<tr>
+		<td>공제율</td>
+		<td><%=mtib.getMemo()%></td>
+	</tr>
+	<tr>
 		<td>결제 환불 금액</td>
 		<td><%=mtib.getCost() %>원<input type="hidden" name="Cancel_info" value="<%=mtib.getCost()%>">
 			<input type="hidden" name="Cancel_info" value="<%=mtib.getTrade_type()%>">

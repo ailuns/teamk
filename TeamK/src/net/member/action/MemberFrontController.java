@@ -174,7 +174,7 @@ public class MemberFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} 
+		}
 		// 이동
 		if (forward != null) {
 			if (forward.isRedirect()) {

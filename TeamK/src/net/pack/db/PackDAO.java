@@ -48,17 +48,76 @@ public class PackDAO {
 	}
 
 	
-	// 지역별로 분류
-	public List getBoardList(int start, int count, String area) {
+	// 메인 페이지 패키지 3개
+	public List getPackList() {
 		List list = new ArrayList();
 
 		try {
 			conn = getConnection();
-			sql = "select * from pack where area=? group by subject order by date desc limit ?, ?";
+			sql = "select num, subject, intro, cost, file1 from pack where date > now() group by subject order by cost desc limit 0, 3";
+			pstm = conn.prepareStatement(sql);
+
+			rs = pstm.executeQuery();
+			while (rs.next()) {
+				PackBean PB = new PackBean();
+
+				PB.setNum(rs.getInt("num"));
+				PB.setSubject(rs.getString("subject"));
+				PB.setIntro(rs.getString("intro"));
+				PB.setCost(rs.getInt("cost"));
+				PB.setFile1(rs.getString("file1"));
+				
+				list.add(PB);
+			}
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		finally {
+			if (pstm != null) {
+				try {
+					pstm.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return list;
+	}
+	
+	
+	// 지역별로 분류
+	public List getBoardList(int startRow, int pagesize, String area) {
+		List list = new ArrayList();
+
+		try {
+			conn = getConnection();
+			sql = "select * from pack where area=? and date > now() group by subject order by date desc limit ?, ?";
 			pstm = conn.prepareStatement(sql);
 			pstm.setString(1, area);
-			pstm.setInt(2, start - 1);
-			pstm.setInt(3, count);
+			pstm.setInt(2, startRow - 1);
+			pstm.setInt(3, pagesize);
 
 			rs = pstm.executeQuery();
 			while (rs.next()) {
@@ -132,54 +191,36 @@ public class PackDAO {
 		try {
 			conn = getConnection();
 
-//			if (endDate == "")
-//			{
-//				sql = "select * from pack where area like ? and date >= ? order by date asc";
-
-//				sql = "select num, subject, intro, cost, min(date) from pack where area=? and date >= ? group by subject order by date asc";
-			sql = "select num, subject, intro, cost, min(date) as date, file1 from pack where area=? and date >= ? group by subject";
+			sql = "select num, subject, intro, min(cost) as cost, min(date) as date, file1 from pack where area=? and date > ? group by subject order by date";
 			
 			pstm = conn.prepareStatement(sql);
 			pstm.setString(1, search);
 			pstm.setString(2, startDate);
-//			}
-//			else
-//			{
-////				sql = "select * from pack where area like ? and date >= ? and date <= ? order by date asc";
-//				
-//				sql = "select * from pack where area=? and date >= ? and date <= ? group by subject order by date asc";
-//
-//				pstm = conn.prepareStatement(sql);
-//				pstm.setString(1, "%" +  search + "%");
-//				pstm.setString(2, startDate);
-//				pstm.setString(3, endDate);
-//				
-//			}
+
 			rs = pstm.executeQuery();
-			if (rs.next())
-			{
+//			if (rs.next())
+//			{
+			while (rs.next()) {
 				PackBean PB = new PackBean();
-				PB.setDate(rs.getString("date"));
+//				PB.setDate(rs.getString("date"));
+//				
+//				sql = "select min(num) as num, subject, intro, cost, date, file1 from pack where subject=? group by subject";
+//				
+//				pstm = conn.prepareStatement(sql);
+//				pstm.setString(1, rs.getString("subject"));
+//				System.out.println(rs.getString("subject"));
+//				rs = pstm.executeQuery();
 				
-				sql = "select min(num) as num, subject, intro, cost, date, file1 from pack where subject=? group by subject";
-				
-				pstm = conn.prepareStatement(sql);
-				pstm.setString(1, rs.getString("subject"));
-				System.out.println(rs.getString("subject"));
-				rs = pstm.executeQuery();
-				while (rs.next()) {
-					
-					
 					PB.setNum(rs.getInt("num"));
 					PB.setSubject(rs.getString("subject"));
 					PB.setIntro(rs.getString("intro"));
 					PB.setCost(rs.getInt("cost"));
-//					PB.setDate(rs.getString("date"));
+					PB.setDate(rs.getString("date"));
 					PB.setFile1(rs.getString("file1"));
 					
 					list.add(PB);
 				}
-			}
+//			}
 			
 			
 
@@ -221,76 +262,76 @@ public class PackDAO {
 	
 	
 	// 지역별로 분류
-		public List getPackList(String subject) {
-			List list = new ArrayList();
+	public List getPackList(String subject) {
+		List list = new ArrayList();
 
-			try {
-				conn = getConnection();
-				sql = "select * from pack where subject=? and date > now() order by date";
-				pstm = conn.prepareStatement(sql);
-				pstm.setString(1, subject);
+		try {
+			conn = getConnection();
+			sql = "select * from pack where subject=? and date > now() order by date";
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, subject);
 
-				rs = pstm.executeQuery();
-				while (rs.next()) {
-					PackBean PB = new PackBean();
+			rs = pstm.executeQuery();
+			while (rs.next()) {
+				PackBean PB = new PackBean();
 
-					PB.setNum(rs.getInt("num"));
-					PB.setSerial(rs.getInt("serial"));
-					PB.setSubject(rs.getString("subject"));
-					PB.setIntro(rs.getString("intro"));
-					PB.setContent(rs.getString("content"));
-					PB.setType(rs.getString("type"));
-					PB.setArea(rs.getString("area"));
-					PB.setCity(rs.getString("city"));
-					PB.setSarea(rs.getString("sarea"));
-					PB.setCost(rs.getInt("cost"));
-					PB.setReadcount(rs.getInt("readcount"));
-					PB.setStock(rs.getInt("stock"));
-					PB.setDate(rs.getString("date"));
-					PB.setFile1(rs.getString("file1"));
-					PB.setFile2(rs.getString("file2"));
-					PB.setFile3(rs.getString("file3"));
-					PB.setFile4(rs.getString("file4"));
-					PB.setFile5(rs.getString("file5"));
-					
-					list.add(PB);
-				}
-
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				PB.setNum(rs.getInt("num"));
+				PB.setSerial(rs.getInt("serial"));
+				PB.setSubject(rs.getString("subject"));
+				PB.setIntro(rs.getString("intro"));
+				PB.setContent(rs.getString("content"));
+				PB.setType(rs.getString("type"));
+				PB.setArea(rs.getString("area"));
+				PB.setCity(rs.getString("city"));
+				PB.setSarea(rs.getString("sarea"));
+				PB.setCost(rs.getInt("cost"));
+				PB.setReadcount(rs.getInt("readcount"));
+				PB.setStock(rs.getInt("stock"));
+				PB.setDate(rs.getString("date"));
+				PB.setFile1(rs.getString("file1"));
+				PB.setFile2(rs.getString("file2"));
+				PB.setFile3(rs.getString("file3"));
+				PB.setFile4(rs.getString("file4"));
+				PB.setFile5(rs.getString("file5"));
+				
+				list.add(PB);
 			}
 
-			finally {
-				if (pstm != null) {
-					try {
-						pstm.close();
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				if (conn != null) {
-					try {
-						conn.close();
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-
-				if (rs != null) {
-					try {
-						rs.close();
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}
-
-			return list;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+
+		finally {
+			if (pstm != null) {
+				try {
+					pstm.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return list;
+	}
 	
 	
 	
@@ -302,7 +343,9 @@ public class PackDAO {
 			conn = getConnection();
 //				sql = "select count(*) from pack where city like ?";
 			
-			sql = "select count(*) from pack where area=?";
+//			sql = "select count(*) from pack where area=?";
+			
+			sql = "select count(DISTINCT subject) from pack where area=? and date > now()";
 
 			pstm = conn.prepareStatement(sql);
 			pstm.setString(1, area);
@@ -358,8 +401,8 @@ public class PackDAO {
 
 //			if (endDate == "")
 //			{
-				sql = "select count(*) from pack where area = ? and date >= ?";
-			
+//				sql = "select count(*) from pack where area = ? and date >= ?";
+				sql = "select count(DISTINCT subject) from pack where area = ? and date > ?";
 //				sql = "select count(*) from pack where area = ? and date >= ? group by subject";
 				
 				pstm = conn.prepareStatement(sql);
@@ -594,7 +637,7 @@ public class PackDAO {
 	
 	
 	
-	public int updatePackcontent(PackBean pb, int num) {
+	public int updatePackcontent(PackBean pb, String ori_subject) {
 		try {
 			conn = getConnection();
 
@@ -605,7 +648,7 @@ public class PackDAO {
 //
 //			if (rs.next()) {
 //				if (rs.getString(1).equals(bb.getPass())) {
-					sql = "update pack set subject=?, intro=?, content=?, type=?, area=?, city=?, sarea=?, cost=?, stock=?, file1=?, file2=?, file3=?, file4=?, file5=?  where num=?";
+					sql = "update pack set subject=?, intro=?, content=?, type=?, area=?, city=?, sarea=?, file1=?, file2=?, file3=?, file4=?, file5=?  where subject=?";
 					pstm = conn.prepareStatement(sql);
 					pstm.setString(1, pb.getSubject());
 					pstm.setString(2, pb.getIntro());
@@ -614,14 +657,12 @@ public class PackDAO {
 					pstm.setString(5, pb.getArea());
 					pstm.setString(6, pb.getCity());
 					pstm.setString(7, pb.getSarea());
-					pstm.setInt(8, pb.getCost());
-					pstm.setInt(9, pb.getStock());
-					pstm.setString(10, pb.getFile1());
-					pstm.setString(11, pb.getFile2());
-					pstm.setString(12, pb.getFile3());
-					pstm.setString(13, pb.getFile4());
-					pstm.setString(14, pb.getFile5());
-					pstm.setInt(15, num);
+					pstm.setString(8, pb.getFile1());
+					pstm.setString(9, pb.getFile2());
+					pstm.setString(10, pb.getFile3());
+					pstm.setString(11, pb.getFile4());
+					pstm.setString(12, pb.getFile5());
+					pstm.setString(13, ori_subject);
 					
 					pstm.executeUpdate();
 					return 1; // 수정 성공
@@ -699,4 +740,98 @@ public class PackDAO {
 		}
 		return -1;
 	}
+	
+	
+	
+	public int PackDateAddChk(String subject, String date) {
+		try {
+			conn = getConnection();
+
+			sql = "select subject, date from pack where subject=? and date=?";
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, subject);
+			pstm.setString(2, date);
+			rs = pstm.executeQuery();
+			
+			if (rs.next())
+			{
+				return 1;
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (pstm != null) {
+				try {
+					pstm.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return 0;
+	}
+	
+	
+	public int updatePackDate(PackBean pb) {
+		try {
+			conn = getConnection();
+
+//			sql = "select pass from pack where num=?";
+//			pstm = conn.prepareStatement(sql);
+//			pstm.setInt(1, bb.getNum());
+//			rs = pstm.executeQuery();
+//
+//			if (rs.next()) {
+//				if (rs.getString(1).equals(bb.getPass())) {
+					sql = "update pack set date=?, cost=?, stock=?  where num=?";
+					pstm = conn.prepareStatement(sql);
+					pstm.setString(1, pb.getDate());
+					pstm.setInt(2, pb.getCost());
+					pstm.setInt(3, pb.getStock());
+					pstm.setInt(4, pb.getNum());
+					
+					pstm.executeUpdate();
+					return 1; // 수정 성공
+//				} else
+//					return -1; // 비번 틀림
+//			}
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		finally {
+			if (pstm != null) {
+				try {
+					pstm.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return 0; // 글번호 없음
+	}
+	
+	
 }

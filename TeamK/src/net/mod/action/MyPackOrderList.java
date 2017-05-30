@@ -19,11 +19,44 @@ public class MyPackOrderList implements Action {
 		ActionForward afo = new ActionForward();
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
-		ModDAO moddao = new ModDAO();
+		String status ="";
+		String orderby ="";
 		String pageNum = request.getParameter("pageNum");
-		int count = moddao.PO_Count(id);
-		if (pageNum == null)
-			pageNum = "1";
+		if (pageNum == null)pageNum = "1";
+		
+		String stat = request.getParameter("status");
+		if(stat==null){
+			stat ="ing";
+		}
+		String stat2 = request.getParameter("status2");
+		if(stat2==null){
+			stat2="none";
+		}
+		if(stat.equals("ing")){
+			if(stat2.equals("confirmyet")){
+				status = "<3";
+			}else if(stat2.equals("confirm")){
+				status = "=3";
+			}else if(stat2.equals("canceling")){
+				status = "=4";
+			}else{
+				status = "<5"; 
+			}
+			orderby="B.date,A.po_res_status";
+			
+		}else{
+			if(stat2.equals("completed")){
+				status ="=10";
+			}else if(stat2.equals("canceled")){
+				status ="=9";
+			}else{
+				status =">8";
+			}
+			orderby = "A.po_num desc";
+		}
+		ModDAO moddao = new ModDAO();
+		moddao.Res_Completed(id);
+		int count = moddao.PO_Count(id, status);
 		int curpage = Integer.parseInt(pageNum);
 		int pagesize = 10;
 		int start = (curpage - 1) * pagesize + 1;
@@ -33,8 +66,9 @@ public class MyPackOrderList implements Action {
 		int endpage=startp+pblock-1;
 		if(endpage > pcount)endpage = pcount;
 		List<ModTradeInfoBEAN> ModPList = new ArrayList<ModTradeInfoBEAN>();
-		ModPList = moddao.MyPackOrder(id, start, pagesize);
-		
+		ModPList = moddao.MyPackOrder(id, start, pagesize,status,orderby);
+		request.setAttribute("status",stat);
+		request.setAttribute("status2",stat2);
 		request.setAttribute("ModPList", ModPList);
 		request.setAttribute("pblock", pblock);
 		request.setAttribute("endpage", endpage);

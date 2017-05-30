@@ -46,6 +46,38 @@
 
 	jQuery(document).ready(function($){
 		
+		// 페이지 로딩 될 때 첫번쨰 선택된 날짜 값으로 초기값 설정 부분
+		var num = $("input:radio[name=chk]:checked").val();
+
+		var cost = $("#aa" + num).html();
+		
+	    var str = String(cost);
+	    uncomma_cost = str.replace(/[^\d]+/g, ''); // 금액 자릿수 ,를 없앤다
+	    uncomma_cost2 = uncomma_cost / 2;  // cost2는 아이들 금액
+		
+		str = String(uncomma_cost);
+		var comma_cost =  str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');  // 금액 자릿수 ,를 붙인다
+		str1 = String(uncomma_cost2);
+		var comma_cost2 =  str1.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');  // 금액 자릿수 ,를 붙인다
+		
+		$("#cost_adult").html(comma_cost);
+		$("#cost_child").html(comma_cost2);
+		$("#p").html(comma_cost);
+		
+		$.ajax({
+			type:"post",
+			url:"./MyInterestAdd.ins",   // java로 보냄
+			data:{
+				type:"P",
+				num:$("input[type=radio][name=chk]:checked").val()					
+			},
+			success:function(){
+				$("#jjim_o").hide();
+				$("#jjim_x").show();
+			}
+		});
+		// 페이지 로딩 될 때 첫번쨰 선택된 날짜 값으로 초기값 설정 부분
+		
 		// 달력 관련 소스
 		$("#date_from").datepicker({
 			dateFormat: 'yy-mm-dd',    // 날짜 포맷 형식
@@ -83,81 +115,8 @@
 		});
 	});
 	
-	// 찜하기, 예약하기 버튼 클릭 시 각각 버튼 마다 이동할 페이지
-	function submit_fun(i, user_id)
-	{
-		// i = 1  찜추가   i = 2 찜취소    i = 3  예약하기
-		if (i == 1 && user_id != "") // 로그인 되어 있을 경우 찜추가
-		{
-			$.ajax({
-				type:"post",
-				url:"./MyInterestAdd.ins",   // java로 보냄
-				data:{
-					type:"P",
-					num:$("input[type=radio][name=chk]:checked").val()					
-				},
-				success:function(){
-					alert("찜목록에 추가되었습니다");
-					$("#jjim_o").hide();
-					$("#jjim_x").show();
-//						window.location.reload(true);  // 페이지 새로고침
-				}
-			});
-		}
-		
-		else if(i == 2 && user_id != "")   // 로그인에 되어 있을 경우 찜취소
-		{
-			$.ajax({
-				type:"post",
-				url:"./MyInterestDel.ins",   // java로 보냄
-				data:{
-					type:"P",
-					num:$("input[type=radio][name=chk]:checked").val()					
-				},
-				success:function(){
-					$("#jjim_o").show();
-					$("#jjim_x").hide();
-					alert("찜목록에서 삭제되었습니다");
-//						window.location.reload(true);  // 페이지 새로고침
-				}
-			});
-		}
-		
-		else if (i == 3 && user_id != "")
-		{
-			var cost_temp = $("#p").html(); // 총금액 받아오기
-			str = String(cost_temp);		// 총금액 천원단위로 , 찍혀있는걸
-		    cost = str.replace(/[^\d]+/g, '');   // 풉니다
-			
-		    $("#cost").val(cost);
-		    $("#ori_num").val($("input[type=radio][name=chk]:checked").val());
-
-		    document.input_fr.action = "./MyBasketAddAction.bns";	// 장바구니 페이지로 이동
-		    document.input_fr.method = "post";
-		    document.input_fr.submit();
-		}
-		
-		else if (i == 4 && user_id != "")
-		{
-			var cost_temp = $("#p").html(); // 총금액 받아오기
-			str = String(cost_temp);		// 총금액 천원단위로 , 찍혀있는걸
-		    cost = str.replace(/[^\d]+/g, '');  // 풉니다
-			
-		    // 폼태그로 보내기때문에 hidden 숨겨둔 곳에 각각 값을 넣는다
-		    $("#cost").val(cost);
-		    $("#ori_num").val($("input[type=radio][name=chk]:checked").val());
-
-		    document.input_fr.action = "./MyOrderPay.mo";  // 예약하기 페이지로 이동
-		    document.input_fr.method = "post";
-		    document.input_fr.submit();
-		}
-		
-		
-		else if(user_id == "")	// 로그인 안되어 있을 경우
-		{
-			loginChk();
-		}
-	}
+	
+	
 	
 	
 	// 주변 명소, 주변 맛집 클릭 시  검색할 값을 구글맵으로 보낸다
@@ -539,23 +498,47 @@
 		$("#remote_content").draggable();
 	});
 	
+	
+	// 패키지 내용 로딩 될 때 첫번째 날짜가 선택되어 있게 한다.
+	jQuery(document).ready(function($){
+		$("#select_rbtn0").prop("checked", "true");  // 첫번째 라디오 버튼 체크 되어 있게
+		$("#select_date0").css("background-color", "#D5D5D5");  // 첫번째 날짜 부분 배경색 #D5D5D5로 변경
+	});
+	
+	
 	// 날짜 추가 버튼 클릭 이벤트
-	function winOpen(subject) {
-		win = window.open("./PackDateAdd.po?subject=" + subject, "Package_dateAdd.jsp",
-				"width=800, height=700");
+	function winOpen(subject, num) {
+		win = window.open("./PackDateAdd.po?subject=" + subject + "&num=" + num, "Package_dateAdd.jsp",
+				"width=800, height=700, left=100, top=100");
 	}
 	
 	
 	// 날짜 선택시 이벤트
 	function select_date(select_num)
 	{
-		var packnum = $("#select_rbtn" + select_num).val();
-// 		alert(packnum);
-		$(".select_color").css("background-color","");
-		$("#select_rbtn" + select_num).prop("checked", "true");
-		$("#select_date" + select_num).css("background-color", "#D5D5D5");
+		var packnum = $("#select_rbtn" + select_num).val();  // 해당 라디오버튼의 글번호 값을 불러온다
+		$(".select_color").css("background-color","");		// tr 부분 모든 배경색을 없앤다
+		$("#select_rbtn" + select_num).prop("checked", "true"); // 클릭된 라디오 버튼을 체크로 바꾼다
+		$("#select_date" + select_num).css("background-color", "#D5D5D5");  // 클릭된 tr 부분의 배경색을 #D5D5D5로 바꾼다
 		
-		$.ajax({
+		
+		var cost = $("#aa" + packnum).html();
+		
+	    var str = String(cost);
+	    var uncomma_cost = str.replace(/[^\d]+/g, '');
+	    var uncomma_cost2 = uncomma_cost/2;
+		
+		
+		str = String(uncomma_cost);
+		var comma_cost =  str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+		str1 = String(uncomma_cost);
+		var comma_cost2 =  str1.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+		
+		$("#cost_adult").html(comma_cost);
+		$("#cost_child").html(comma_cost2);
+		$("#p").html(comma_cost);
+		
+		$.ajax({   // 날짜를 클릭할때 마다 찜목록과 비교
 			type:"post",
 			url:"./MyInterestCheck.ins",
 			data:{
@@ -564,19 +547,95 @@
 			},
 			success:function(data)
 			{
-// 				alert(data);
-				if (data == 1)
+				if (data == 1)  // 찜목록에 해당 날짜 패키지가 있을 시
 				{
-					$("#jjim_o").hide();
-					$("#jjim_x").show();
+					$("#jjim_o").hide();  // 찜추가   버튼  숨기기
+					$("#jjim_x").show();  // 찜삭제   버튼 보이기
 				}
-				else
+				else   // 찜목록에 해당 날짜 패키지가 없을 시
 				{
-					$("#jjim_o").show();
-					$("#jjim_x").hide();
+					$("#jjim_o").show();  // 찜추가 버튼 보이기
+					$("#jjim_x").hide();  // 찜삭제 버튼 숨기기
 				}
 			}
 		});
+		
+	}
+	
+	// 찜하기, 예약하기 버튼 클릭 시 각각 버튼 마다 이동할 페이지
+	function submit_fun(i, user_id)
+	{
+		// i = 1  찜추가   i = 2 찜취소    i = 3  예약하기
+		if (i == 1 && user_id != "") // 로그인 되어 있을 경우 찜추가
+		{
+			$.ajax({
+				type:"post",
+				url:"./MyInterestAdd.ins",   // java로 보냄
+				data:{
+					type:"P",
+					num:$("input[type=radio][name=chk]:checked").val()					
+				},
+				success:function(){
+					alert("찜목록에 추가되었습니다");
+					$("#jjim_o").hide();
+					$("#jjim_x").show();
+//						window.location.reload(true);  // 페이지 새로고침
+				}
+			});
+		}
+		
+		else if(i == 2 && user_id != "")   // 로그인에 되어 있을 경우 찜취소
+		{
+			$.ajax({
+				type:"post",
+				url:"./MyInterestDel.ins",   // java로 보냄
+				data:{
+					type:"P",
+					num:$("input[type=radio][name=chk]:checked").val()					
+				},
+				success:function(){
+					$("#jjim_o").show();
+					$("#jjim_x").hide();
+					alert("찜목록에서 삭제되었습니다");
+//						window.location.reload(true);  // 페이지 새로고침
+				}
+			});
+		}
+		
+		else if (i == 3 && user_id != "")  // 로그인 되어 있을 경우  장바구니
+		{
+			var cost_temp = $("#p").html(); // 총금액 받아오기
+			str = String(cost_temp);		// 총금액 천원단위로 , 찍혀있는걸
+		    cost = str.replace(/[^\d]+/g, '');   // 풉니다
+			
+		    $("#cost").val(cost);
+		    $("#ori_num").val($("input[type=radio][name=chk]:checked").val());
+
+		    document.input_fr.action = "./MyBasketAddAction.bns";	// 장바구니 페이지로 이동
+		    document.input_fr.method = "post";
+		    document.input_fr.submit();
+		}
+		
+		else if (i == 4 && user_id != "")  // 로그인 되어 있을 경우  예약하기
+		{
+			var cost_temp = $("#p").html(); // 총금액 받아오기
+			str = String(cost_temp);		// 총금액 천원단위로 , 찍혀있는걸
+		    cost = str.replace(/[^\d]+/g, '');  // 풉니다
+			
+		    // 폼태그로 보내기때문에 hidden 숨겨둔 곳에 각각 값을 넣는다
+		    $("#cost").val(cost);
+		    $("#ori_num").val($("input[type=radio][name=chk]:checked").val());
+
+		    document.input_fr.action = "./MyOrderPay.mo";  // 예약하기 페이지로 이동
+		    document.input_fr.method = "post";
+		    document.input_fr.submit();
+		}
+		
+		
+		else if(user_id == "")	// 로그인 안되어 있을 경우
+		{
+			loginChk();
+		}
 	}
 
 
@@ -608,6 +667,16 @@
 /* 이미지 정보 부분 */
 #top {
 	width: 960px;
+	height: 450px;
+	padding-top : 20px;
+/*  	border: 2px solid red;  */
+}
+
+#top_content
+{
+	width: 928px;
+	height: 400px;
+/* 	border: 2px solid green; */
 }
 
 
@@ -619,7 +688,7 @@
 #imgdiv{
 	width: 470px;
 	height: 400px;
-	border: 3px solid orange;
+/* 	border: 3px solid orange; */
 	float: left;
 }
 
@@ -650,9 +719,67 @@
 #contentdiv1 {
 	width: 400px;
 	height: 400px;
-	border: 3px solid blue;
+ 	border: 1px solid #F6F6F6;
+	background-color : white;
 	float: left;
 	margin-left : 50px;
+}
+
+#content_notice
+{
+	font-size: 0.8em;
+	color: gray;
+}
+
+
+#contentdiv1 table
+{
+	margin : 0 auto;
+	margin-top : 30px;
+ 	border-collapse: collapse;
+}
+
+
+#contentdiv1 table tr
+{
+ 	border-bottom : 1px dashed #D5D5D5;
+}
+
+.contentdiv1_1
+{
+	background-color: #F6F6F6;
+}
+
+.contentdiv1_1, .contentdiv1_2
+{
+	width : 120px;
+	height : 50px; 
+	text-align: center;
+}
+
+.contentdiv1_3
+{
+	width : 80px;
+	height : 50px; 
+	text-align: center;
+}
+
+#contentdiv1 #adult, #contentdiv1 #child 
+{
+	width : 40px;
+}
+
+
+.contentbtn
+{
+	width : 50px;
+	height : 50px;
+}
+
+.contentbtn2
+{
+	width : 100px;
+	height : 50px;	
 }
 
 /* 인원, 가격 정보 부분 */
@@ -663,7 +790,7 @@
 #datecontent {
 	width: 960px;
 	height: 350px;
-	border: 3px solid gray;
+	border: 1px solid gray;
 	overflow: auto;
 }
 
@@ -679,9 +806,10 @@
 	height : 30px;
 }
 
-#datecontent tr:HOVER
+#datecontent tr.select_color:HOVER
 {
 	background-color: #D5D5D5;
+	cursor: pointer;
 }
 
 #datecontent .date_td_size
@@ -710,6 +838,12 @@
 	width : 70px;
 }
 
+#datecontent, #contentdiv2, #QnA, #top, #top_content
+{
+	margin: 0 auto;
+}
+
+
 /* 날짜정보 내용 */
 	
 
@@ -718,7 +852,16 @@
 #contentdiv2 {
 	width: 960px;
 	min-height: 700px;
-	border: 3px solid gray;
+	border: 1px solid gray;
+}
+
+#contentdiv2_1
+{
+	width: 730px;
+	min-height: 700px;
+	margin : 0 auto;
+	padding-top : 30px;
+/* 	border: 3px solid red;	 */
 }
 
 /* 여행정보 내용 */
@@ -729,6 +872,7 @@
 #map_canvas {
 	width: 800px;
 	height: 500px;
+	margin: 0 auto;
 }
 
 .controls {
@@ -765,7 +909,7 @@
 #QnA {
 	width: 800px;
 	min-height: 300px;
-	border: 3px solid pink;
+	border: 1px solid pink;
 }
 
 #replyTable
@@ -878,8 +1022,8 @@
 	width : 100px;
 	height : 170px;
 	position : fixed;
-	right : 310px;
-	bottom : 220px;
+	right : 250px;
+	bottom : 420px;
 	background-color: white;
 	text-align: center;
 	border : 1px solid #BDBDBD;
@@ -907,14 +1051,13 @@
 /* 화면이동 리모컨 */
 
 </style>
-
 	<div id="remote_control">
 		<table id="remote_content">
 			<tr>
 				<td><span onclick="remote_close()">close</span></td>
 			</tr>
 			<tr>
-				<td><span onclick="fnMove('#wrap')">Top</span></td>
+				<td><span onclick="fnMove('body')">Top</span></td>
 			</tr>
 			<tr>
 				<td><span onclick="fnMove('#contentdiv2')">여행정보</span></td>
@@ -950,36 +1093,33 @@
 	<!-- 왼쪽 메뉴 -->
 	<!--여행지 검색창 -->
 	<div id="wrap"> 
-		<div id="package_head">
-			<div id="package_title">패키지
-			</div>
-			<div id="package_search">
-				<p>내게 맞는 패키지 검색하기</p>
-				<form action="./PackSearchAction.po" name="fr" method="get" id="scheduler" onsubmit="return input_chk()">
-					<label for="date_from">출발</label>
-					<input type="text" id="date_from" class="input_style" name="startDate" required="yes">
-					<label for="date_to">도착</label>
-					<input type="text" id="date_to" class="input_style" name="endDate">
-					<br><br>
-					<label for="city_search">지역</label>
-					<select id="area" name="area">
-						<option value="">선택하세요</option>
-						<%
-							CategoryBean cb;
-							for (int i = 0; i < CategoryList.size(); i++)
-							{
-								cb =(CategoryBean)CategoryList.get(i);
-						%>	
-							<option value="<%=cb.getCar_name() %>"><%=cb.getCar_name() %></option>
-						<%
-							}
-						%>
-					</select>
-					<input type="submit" value="검색" id="search_btn" class="input_style">
-				</form>
-			</div>
+	<div id="article_title">
+		패키지
+	</div>
+		<div id="package_feat">
+		<jsp:include page="../inc/packSlide.jsp"></jsp:include>
+		<div id="package_search">
+			<p>내게 맞는 패키지 검색하기</p>
+			<form action="./PackSearchAction.po" name="fr" method="get" id="scheduler" onsubmit="return input_chk();">
+				<label for="date_from">출발</label><input type="text" id="date_from" class="input_style" name="startDate"><br><br>
+				<label for="city_search">지역</label>
+				<select id="area" name="area">
+					<option value="">선택하세요</option>
+					<%
+						CategoryBean cb;
+						for (int i = 0; i < CategoryList.size(); i++)
+						{
+							cb =(CategoryBean)CategoryList.get(i);
+					%>	
+						<option value="<%=cb.getCar_name() %>"><%=cb.getCar_name() %></option>
+					<%
+						}
+					%>
+				</select>
+				<input type="submit" value="검색" id="search_btn" class="input_style">
+			</form>
 		</div>
-	
+	</div>
 	<div id="clear"></div>
 	<!--여행지 검색창 -->
 	
@@ -993,9 +1133,9 @@
 			if (user_id.equals("admin"))
 			{
 		%>
-			<input type="button" value="날짜추가" onclick="winOpen('<%=PB.getSubject() %>');">
-			<input type="button" value="글수정" onclick="location.href='PackModify.po?num=<%=PB.getNum() %>'">
-			<input type="button" value="글삭제" onclick="location.href='PackDeleteAction.po?num=<%=PB.getNum() %>'">
+			<input type="button" value="날짜편집" onclick="winOpen('<%=PB.getSubject() %>', <%=PB.getNum() %>);">
+			<input type="button" value="상품내용수정" onclick="location.href='PackModify.po?num=<%=PB.getNum() %>'">
+<%-- 			<input type="button" value="상품삭제" onclick="location.href='PackDeleteAction.po?num=<%=PB.getNum() %>'"> --%>
 		<%
 			}
 		}
@@ -1003,6 +1143,7 @@
 		<!--관리자만 보이게 -->
 		<hr>
 		<div id="top">
+		<div id="top_content">
 			<!--상품 이미지 -->
 			<div id="imgdiv">
 				<!--첫번째 이미지는 무조건 첨부하게 제어 -->
@@ -1031,16 +1172,11 @@
 			<!--인원수, 가격 -->
 			<div id="contentdiv1">
 				<form name="input_fr" method="post">
-					<table border="1">
+					<table>
 						<tr>
-						<%
-							DecimalFormat Commass = new DecimalFormat("#,###");
-							String cost_adult = (String)Commass.format(PB.getCost());
-							String cost_child = (String)Commass.format(PB.getCost() / 2);
-						%>
-							<td style="width:100px; text-align: center;">성인</td>
-							<td style="width:150px; text-align: center;"><%=cost_adult %></td>
-							<td>
+							<td class="contentdiv1_1">성인(12세이상)</td>
+							<td class="contentdiv1_2" id="cost_adult"></td>
+							<td class="contentdiv1_3">
 								<!--최대 10명까지 선택가능하게 생성 -->
 								<select id="adult" name="adult" onchange="people_Calc(1)">
 										<%
@@ -1055,9 +1191,9 @@
 							</td>
 						</tr>
 						<tr>
-							<td>아동</td>
-							<td><%=cost_child %></td>
-							<td>
+							<td class="contentdiv1_1">아동(12세미만)</td>
+							<td id="cost_child" class="contentdiv1_2"></td>
+							<td class="contentdiv1_3">
 							<!--초기값은 1명까지 선택되게 생성 -->
 							<select id="child" name="child" onchange="people_Calc()">
 									<option value="0">0</option>
@@ -1067,23 +1203,23 @@
 							</td>
 						</tr>
 						<tr>
-							<td>합계</td>
+							<td class="contentdiv1_1">합계</td>
 							<td colspan="2">
 								<input type="hidden" id="cost" name="cost" value="">
 								<input type="hidden" id="ori_num" name="pnum" value="">
 								<input type="hidden" name="type" value="P">
-								<p id="p"><%=cost_adult %></p>
+								<p id="p"></p>
 							</td>
-						</tr>
-						<tr>
-							<td>
-								<input type="button" id="jjim_o" value="찜하기" onclick="submit_fun(1, '<%=user_id %>')">
-								<input type="button" id="jjim_x" value="찜취소" style="display:none;" onclick="submit_fun(2, '<%=user_id %>')">
-							</td>
-							<td><input type="button" value="장바구니" onclick="submit_fun(3, '<%=user_id %>')"></td>
-							<td><input type="button" value="예약하기" onclick="submit_fun(4, '<%=user_id %>')"></td>
 						</tr>
 					</table>
+					<br>
+					<input type="button" class="contentbtn" id="jjim_o" value="♡ 찜" onclick="submit_fun(1, '<%=user_id %>')">
+					<input type="button" class="contentbtn" id="jjim_x" value="♥ 찜" style="display:none;" onclick="submit_fun(2, '<%=user_id %>')">
+					<input type="button" class="contentbtn2" value="장바구니" onclick="submit_fun(3, '<%=user_id %>')">
+					<input type="button" class="contentbtn2" value="예약하기" onclick="submit_fun(4, '<%=user_id %>')">
+					
+					
+					<p id="content_notice">※성인 1명당 아이 1명으로 제한됩니다</p>
 					
 					<script type="text/javascript">
 							// 선택된 인원 수에 따라 가격 변경, 어른 인원에 따라 아이인원제한
@@ -1115,6 +1251,7 @@
 			</div>
 			<!--인원수, 가격 -->
 		</div>
+		</div>
 		<div class="clear"></div>
 		
 		<!--날짜정보 영역 -->
@@ -1137,10 +1274,11 @@
 						String cost = (String)Commas.format(pb.getCost());
 				%>	
 				<tr id="select_date<%=i %>" class="select_color" onclick="select_date(<%=i %>)">
-					<td class="date_td_size"><input type="radio" id="select_rbtn<%=i %>" name="chk" value="<%=pb.getNum() %>"></td>
+					<td class="date_td_size"><input type="radio" id="select_rbtn<%=i %>" name="chk" value="<%=pb.getNum() %>"
+						<%if(i == 0){ %> checked <%} %> ></td>
 					<td class="date_td_size"><%=pb.getDate() %></td>
 					<td class="date_td_size"><%=pb.getSarea() %></td>
-					<td class="date_td_size"><%=cost %></td>
+					<td class="date_td_size" id="aa<%=pb.getNum() %>"><%=cost %></td>
 					<td class="date_td_size"><%=pb.getStock() %></td>
 				</tr>
 				<%
@@ -1153,7 +1291,9 @@
 		<!--상품 정보, 내용이 들어가는 영역 -->
 		<div id="middle1">
 			<div id="contentdiv2">
+				<div id="contentdiv2_1">
 				<%=PB.getContent() %>
+				</div>
 			</div>
 		</div>
 		<!--상품 정보, 내용이 들어가는 영역 -->
@@ -1286,7 +1426,7 @@
 						<input type="hidden" id="num" name="num" value="<%=PB.getNum()%>">
 						<input type="hidden" id="repageNum" name="repageNum" value="<%=repageNum%>">
 						<input type="hidden" id="replynum" name="replynum" value="<%=rb.getNum()%>">
-						<input type="text" id="re_ref<%=rb.getNum() %>" name="re_ref" value="<%=rb.getRe_ref()%>">
+						<input type="hidden" id="re_ref<%=rb.getNum() %>" name="re_ref" value="<%=rb.getRe_ref()%>">
 						<input type="hidden" id="re_lev" name="re_lev" value="<%=rb.getRe_lev()%>">
 						<input type="hidden" id="re_seq" name="re_seq" value="<%=rb.getRe_seq()%>">
 						<p><%=user_id %></p>
@@ -1402,6 +1542,8 @@
 	<!-- 오른쪽 메뉴 -->
 	<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
 	<!-- 오른쪽 메뉴 -->
+	<!-- 푸터 메뉴 -->
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
+	<!-- 푸터 메뉴 -->
 </body>
 </html>
