@@ -10,6 +10,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="./css/inc.css" rel="stylesheet" type="text/css">
+<link href="./css/subpage.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="./js/HuskyEZCreator.js" charset="utf-8"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="./js/jquery-3.2.0.js"></script>
@@ -91,7 +93,29 @@
 	border : 1px solid black;
 	margin : 0 auto;
 	padding-top : 50px;
+	padding-bottom : 100px;
 }
+
+#subject, #intro
+{
+	width : 500px;
+}
+
+#ir1
+{
+	width:770px; 
+	height:500px; 
+	display:none;"
+}
+
+#content_write
+{
+	width:770px; 
+	height:500px;
+}
+
+
+
 
 </style>
 <%
@@ -108,10 +132,6 @@
 	<div>
 		<form action="./PackWriteAction.po" id="fr" method="post" enctype="multipart/form-data">
 			<table border="1">
-				<tr>
-					<td>소제목</td>
-					<td><input type="text" name="intro" id="intro" required="yes"></td>
-				</tr>
 				<tr>
 					<td>출발일자</td>
 					<td><input type="text" id="date_from" class="input_style" name="startDate"  required="yes"></td>	
@@ -165,9 +185,13 @@
 					<td><input type="text" id="subject" name="subject" required="yes"></td>
 				</tr>
 				<tr>
+					<td>소제목</td>
+					<td><input type="text" name="intro" id="intro" required="yes"></td>
+				</tr>
+				<tr>
 					<td>글내용</td>
-					<td style="width:770px; height:412px;">
-					<textarea name="content" id="ir1" rows="10" cols="100" style="width:770px; height:412px; display:none;"></textarea>
+					<td id="content_write">
+					<textarea name="content" id="ir1" rows="10" cols="100"></textarea>
 					</td>
 				</tr>
 				
@@ -301,5 +325,8 @@
 <!-- 오른쪽 메뉴 -->
 <jsp:include page="../inc/rightMenu.jsp"></jsp:include>
 <!-- 오른쪽 메뉴 -->
+<!-- 푸터 메뉴 -->
+	<jsp:include page="../inc/footer.jsp"></jsp:include>
+<!-- 푸터 메뉴 -->
 </body>
 </html>

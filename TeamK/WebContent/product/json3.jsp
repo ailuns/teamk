@@ -28,7 +28,7 @@ if (rs.next()) {
 }
 
 
-sql = "select size,stock from thing where name = ? && color = ?";
+sql = "select size from thing where name = ? && color = ?";
  pstmt = con.prepareStatement(sql);
 pstmt.setString(1, name);
 pstmt.setString(2, color);
@@ -45,7 +45,6 @@ JSONArray arr = new JSONArray();
 while(rs.next()){
 	JSONObject obj = new JSONObject();
 	obj.put("size",rs.getString(1));
-	obj.put("stock",rs.getString(2));
 	arr.add(obj);
 }
 %>

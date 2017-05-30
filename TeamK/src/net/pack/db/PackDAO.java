@@ -54,7 +54,7 @@ public class PackDAO {
 
 		try {
 			conn = getConnection();
-			sql = "select num, subject, intro, cost, file1 from pack order by cost desc limit 0, 3";
+			sql = "select num, subject, intro, cost, file1 from pack where date > now() group by subject order by cost desc limit 0, 3";
 			pstm = conn.prepareStatement(sql);
 
 			rs = pstm.executeQuery();
@@ -191,54 +191,36 @@ public class PackDAO {
 		try {
 			conn = getConnection();
 
-//			if (endDate == "")
-//			{
-//				sql = "select * from pack where area like ? and date >= ? order by date asc";
-
-//				sql = "select num, subject, intro, cost, min(date) from pack where area=? and date >= ? group by subject order by date asc";
-			sql = "select num, subject, intro, cost, min(date) as date, file1 from pack where area=? and date >= ? group by subject";
+			sql = "select num, subject, intro, min(cost) as cost, min(date) as date, file1 from pack where area=? and date > ? group by subject order by date";
 			
 			pstm = conn.prepareStatement(sql);
 			pstm.setString(1, search);
 			pstm.setString(2, startDate);
-//			}
-//			else
-//			{
-////				sql = "select * from pack where area like ? and date >= ? and date <= ? order by date asc";
-//				
-//				sql = "select * from pack where area=? and date >= ? and date <= ? group by subject order by date asc";
-//
-//				pstm = conn.prepareStatement(sql);
-//				pstm.setString(1, "%" +  search + "%");
-//				pstm.setString(2, startDate);
-//				pstm.setString(3, endDate);
-//				
-//			}
+
 			rs = pstm.executeQuery();
-			if (rs.next())
-			{
+//			if (rs.next())
+//			{
+			while (rs.next()) {
 				PackBean PB = new PackBean();
-				PB.setDate(rs.getString("date"));
+//				PB.setDate(rs.getString("date"));
+//				
+//				sql = "select min(num) as num, subject, intro, cost, date, file1 from pack where subject=? group by subject";
+//				
+//				pstm = conn.prepareStatement(sql);
+//				pstm.setString(1, rs.getString("subject"));
+//				System.out.println(rs.getString("subject"));
+//				rs = pstm.executeQuery();
 				
-				sql = "select min(num) as num, subject, intro, cost, date, file1 from pack where subject=? group by subject";
-				
-				pstm = conn.prepareStatement(sql);
-				pstm.setString(1, rs.getString("subject"));
-				System.out.println(rs.getString("subject"));
-				rs = pstm.executeQuery();
-				while (rs.next()) {
-					
-					
 					PB.setNum(rs.getInt("num"));
 					PB.setSubject(rs.getString("subject"));
 					PB.setIntro(rs.getString("intro"));
 					PB.setCost(rs.getInt("cost"));
-//					PB.setDate(rs.getString("date"));
+					PB.setDate(rs.getString("date"));
 					PB.setFile1(rs.getString("file1"));
 					
 					list.add(PB);
 				}
-			}
+//			}
 			
 			
 
@@ -420,7 +402,7 @@ public class PackDAO {
 //			if (endDate == "")
 //			{
 //				sql = "select count(*) from pack where area = ? and date >= ?";
-				sql = "select count(DISTINCT subject) from pack where area = ? and date >= ?";
+				sql = "select count(DISTINCT subject) from pack where area = ? and date > ?";
 //				sql = "select count(*) from pack where area = ? and date >= ? group by subject";
 				
 				pstm = conn.prepareStatement(sql);
@@ -666,7 +648,7 @@ public class PackDAO {
 //
 //			if (rs.next()) {
 //				if (rs.getString(1).equals(bb.getPass())) {
-					sql = "update pack set subject=?, intro=?, content=?, type=?, area=?, city=?, sarea=?, cost=?, stock=?, file1=?, file2=?, file3=?, file4=?, file5=?  where subject=?";
+					sql = "update pack set subject=?, intro=?, content=?, type=?, area=?, city=?, sarea=?, file1=?, file2=?, file3=?, file4=?, file5=?  where subject=?";
 					pstm = conn.prepareStatement(sql);
 					pstm.setString(1, pb.getSubject());
 					pstm.setString(2, pb.getIntro());
@@ -675,14 +657,12 @@ public class PackDAO {
 					pstm.setString(5, pb.getArea());
 					pstm.setString(6, pb.getCity());
 					pstm.setString(7, pb.getSarea());
-					pstm.setInt(8, pb.getCost());
-					pstm.setInt(9, pb.getStock());
-					pstm.setString(10, pb.getFile1());
-					pstm.setString(11, pb.getFile2());
-					pstm.setString(12, pb.getFile3());
-					pstm.setString(13, pb.getFile4());
-					pstm.setString(14, pb.getFile5());
-					pstm.setString(15, ori_subject);
+					pstm.setString(8, pb.getFile1());
+					pstm.setString(9, pb.getFile2());
+					pstm.setString(10, pb.getFile3());
+					pstm.setString(11, pb.getFile4());
+					pstm.setString(12, pb.getFile5());
+					pstm.setString(13, ori_subject);
 					
 					pstm.executeUpdate();
 					return 1; // 수정 성공

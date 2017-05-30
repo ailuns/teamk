@@ -142,7 +142,7 @@ public class ProductDAO {
 				car_name = rs.getString(1);
 			}
 				
-			sql = "insert into thing(num,name,subject,intro,content,color,size,car_num,type,cost,readcount,country,area,stock,img) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
+			sql = "insert into thing(num,name,subject,intro,content,color,size,car_num,type,cost,readcount,country,area,stock,img,img2,img3,img4,img5) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
 			pstmt =  con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.setString(2, pb.getName());
@@ -159,6 +159,10 @@ public class ProductDAO {
 			pstmt.setString(13, pb.getArea());
 			pstmt.setInt(14, pb.getStock());
 			pstmt.setString(15, pb.getImg());
+			pstmt.setString(16, pb.getImg2());
+			pstmt.setString(17, pb.getImg3());
+			pstmt.setString(18, pb.getImg4());
+			pstmt.setString(19, pb.getImg5());
 			pstmt.executeUpdate();
 			// 4단계 실행
 		} catch (Exception e) {
@@ -283,6 +287,74 @@ public class ProductDAO {
 		}
 		return productList;
 	}
+	public List getProdcutList(int startRow, int pageSize,int a,int b) {
+		System.out.println(startRow);
+		Connection con = null;
+		String sql = "";
+		ResultSet rs = null;
+		int count = 0;
+		List productList = new ArrayList();
+		try {
+			//1,2 디비연결 메서드호출
+			// 3 sql 객체 생성
+			// 4 rs실행저장
+			// rs while 데이터 이씅면
+			// 자바빈 객체 생성 BoardBean bb
+			// bb 멤버변수 <= rs열데이터 가져와서 저장
+			// bb 게시판 글 하나 => 저장
+			con = getConnection();
+			sql = "select * from thing where car_num = ? && num = ? group by name order by num desc ,num limit ?,? ";
+			pstmt =con.prepareStatement(sql);
+			pstmt.setInt(1, a);
+			pstmt.setInt(2, b);
+			pstmt.setInt(3, startRow-1);//시작행-1
+			pstmt.setInt(4, pageSize);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				ProductBean pb = new ProductBean();
+				pb.setNum(rs.getInt("num"));
+				pb.setName(rs.getString("name"));
+				pb.setSubject(rs.getString("subject"));
+				pb.setType(rs.getString("type"));
+				pb.setCost(rs.getInt("cost"));
+				pb.setReadcount(rs.getInt("readcount"));
+				pb.setContent(rs.getString("content"));
+				pb.setCountry(rs.getString("country"));
+				pb.setArea(rs.getString("area"));
+				pb.setStock(rs.getInt("stock"));
+				pb.setImg(rs.getString("img"));
+				pb.setImg2(rs.getString("img2"));
+				pb.setImg3(rs.getString("img3"));
+				pb.setImg4(rs.getString("img4"));
+				pb.setImg5(rs.getString("img5"));
+				pb.setCar_num(rs.getInt("car_num"));
+				productList.add(pb);
+		} }catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ex) {
+				}
+			}
+		}
+		return productList;
+	}
+	
+	
 	
 	public List getProdcutList(int a) {
 		Connection con = null;

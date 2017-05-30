@@ -5,6 +5,7 @@
 <%@ page import="net.pack.db.CategoryBean" %>
 <%@ page import="net.pack.db.PackBean" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.text.DecimalFormat" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -190,16 +191,19 @@
 					int j = i + 1;
 					int z = PackList.size();
 					pb =(PackBean)PackList.get(i);
+					DecimalFormat df = new DecimalFormat("#,###");
+				    String cost = df.format(pb.getCost());
 					
 			%>
 				<input type="hidden" id="pack_img<%=j %>" value=<%=pb.getFile1() %>>
-				<a href="./PackContent.po?num=<%=pb.getNum() %>" id="pack<%=j %>"><span id="pktt"><%=pb.getSubject() %></span><br><span id="pksc"><%=pb.getIntro() %></span><br><span id="pkpr"><%=pb.getCost() %></span></a>
+				<a href="./PackContent.po?num=<%=pb.getNum() %>" id="pack<%=j %>">
+				<span id="pktt"><%=pb.getSubject() %></span><br>
+				<span id="pksc"><%=pb.getIntro() %></span><br>
+				<span id="pkpr"><%=cost %>원~</span></a>
 				<script> bg(<%=j %>);</script>
 			<%
 				}
-			%>
-			
-<!-- 			<a href="#" id="pack1"><span id="pktt">제목이라네</span><br><span id="pksc">소제목이야</span><br><span id="pkpr">가격이지</span></a> -->
+			%>	
 		</div>
 		<div id="clear"></div>
 		<div id="goods_show">
@@ -210,38 +214,38 @@
 		<h1><a href="./BoardList.bo">리뷰<span>＋</span></a></h1>
 			<table>
 				<%
-if(count!=0){
-	List<BoardBean> boardList=bdao.getBoardList(1, 5);
-	for(int i=0;i<boardList.size();i++){
-		BoardBean bb=boardList.get(i);
-		%>
-<tr><td id="num"><%=bb.getRe_ref()%></td><td class="contxt">
-<a href="./BoardContent.bo?num=<%=bb.getNum()%>&pageNum=1"><%=bb.getSubject()%>
-<%if(bdao.getBoardReplyCount(bb.getNum())!=0){%>[<%=bdao.getBoardReplyCount(bb.getNum())%>]<%}%></a></td>
-    <td id="date"><%=sdf.format(bb.getDate())%></td></tr>		
-		<%
-	}
-}
-%>
+				if(count!=0){
+					List<BoardBean> boardList=bdao.getBoardList(1, 5);
+					for(int i=0;i<boardList.size();i++){
+						BoardBean bb=boardList.get(i);
+						%>
+				<tr><td id="num"><%=bb.getRe_ref()%></td><td class="contxt">
+				<a href="./BoardContent.bo?num=<%=bb.getNum()%>&pageNum=1"><%=bb.getSubject()%>
+				<%if(bdao.getBoardReplyCount(bb.getNum())!=0){%>[<%=bdao.getBoardReplyCount(bb.getNum())%>]<%}%></a></td>
+				    <td id="date"><%=sdf.format(bb.getDate())%></td></tr>		
+						<%
+					}
+				}
+				%>
 			</table>
 			</div>
 			<div id="trv_rv">
 			<h1><a href="./BoardList2.bo">Q&amp;A<span>＋</span></a></h1>
 			<table>
 				<%
-if(count!=0){
-	List<BoardBean> boardList2=bdao.getBoardList2(1, 5);
-	for(int i=0;i<boardList2.size();i++){
-		BoardBean bb=boardList2.get(i);
-		%>
-<tr><td id="num"><%=bb.getRe_ref()%></td><td class="contxt">
-<a href="./BoardContent2.bo?num=<%=bb.getNum()%>&pageNum=1"><%=bb.getSubject()%>
-<%if(bdao.getBoardReplyCount(bb.getNum())!=0){%>[<%=bdao.getBoardReplyCount(bb.getNum())%>]<%}%></a></td>
-    <td id="date"><%=sdf.format(bb.getDate())%></td></tr>		
-		<%
-	}
-}
-%>
+				if(count!=0){
+					List<BoardBean> boardList2=bdao.getBoardList2(1, 5);
+					for(int i=0;i<boardList2.size();i++){
+						BoardBean bb=boardList2.get(i);
+						%>
+				<tr><td id="num"><%=bb.getRe_ref()%></td><td class="contxt">
+				<a href="./BoardContent2.bo?num=<%=bb.getNum()%>&pageNum=1"><%=bb.getSubject()%>
+				<%if(bdao.getBoardReplyCount(bb.getNum())!=0){%>[<%=bdao.getBoardReplyCount(bb.getNum())%>]<%}%></a></td>
+				    <td id="date"><%=sdf.format(bb.getDate())%></td></tr>		
+						<%
+					}
+				}
+				%>
 			</table>
 			</div>
 		</div>

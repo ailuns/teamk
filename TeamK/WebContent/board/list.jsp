@@ -42,7 +42,6 @@ BoardDAO bdao = new BoardDAO();
 			<div id="clear"></div>
 			<div id="article_script">상품이나 패키지 후기를 쓰는 곳 입니다.<span class="count">[전체글 개수 :<%=count%>]</span></div>
 		</div>
-		<div id="clear"></div>
 		<article>
 		<div id="board_list">
 <br>

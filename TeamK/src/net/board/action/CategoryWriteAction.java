@@ -20,17 +20,18 @@ public class CategoryWriteAction implements Action{
 		// TODO Auto-generated method stub
 		System.out.println("CategoryWriteAction excute()");
 		
+		
 		request.setCharacterEncoding("UTF-8");
 		//request 파라미터 정보 가져오기
-		String caname = request.getParameter("caname");
-		String catype = request.getParameter("catype");
+		String car_name = request.getParameter("car_name");
+		String car_pt = request.getParameter("car_pt");
 
 		//자바빈 패키지 net.member.db 파일 MemberBean
 				//MemberBean 객체 생성
 		CategoryBean cb = new CategoryBean();
 				//파라미터 정보 => 자바빈 저장
-		cb.setCaname(caname);
-		cb.setCatype(catype);
+		cb.setCar_name(car_name);
+		cb.setCar_pt(car_pt);
 
 				//디비연동 lib  context.xml  web.xml 설정
 				//디비패키지 net.member.db 파일 MemberDAO
