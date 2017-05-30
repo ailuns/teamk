@@ -11,6 +11,7 @@ public class CommentBean {
 	private int re_lev;
 	private int re_seq;
 	private Timestamp date;
+	private int rock;
 	public int getNum() {
 		return num;
 	}
@@ -58,6 +59,12 @@ public class CommentBean {
 	}
 	public void setDate(Timestamp date) {
 		this.date = date;
+	}
+	public int getRock() {
+		return rock;
+	}
+	public void setRock(int rock) {
+		this.rock = rock;
 	}
 	
 	

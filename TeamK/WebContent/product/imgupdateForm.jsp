@@ -1,273 +1,452 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ page import="net.member.db.*"%>
 <%@ page import="java.util.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="./css/default.css" rel="stylesheet" type="text/css">
-<link href="./css/subpage.css" rel="stylesheet" type="text/css">
 <title>Insert title here</title>
-<script type="text/javascript" src="./se1/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="./js/HuskyEZCreator.js" charset="utf-8"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="./js/jquery-3.2.0.js"></script>
-</head>
-	<%
-		request.setCharacterEncoding("utf-8");
-		List productList = (List) request.getAttribute("productList");
-		List productList2 = (List) request.getAttribute("productList2");
-		ProductBean pb2= (ProductBean)request.getAttribute("pb");
-		//디비 객체 생성 BoardDAO bdao
-		// int count = getBoardCount() 메서드호출 count(*)
-		ProductBean pb = new ProductBean();
-		ProductDAO pdao = new ProductDAO();
-		CategoryBean cb = new CategoryBean();
-		CategoryDAO cdao = new CategoryDAO();
-	%>
-	<div id="wrap">
-		<!-- 헤더들어가는 곳 -->
-		<!-- 헤더들어가는 곳 -->
-
-		<!-- 본문들어가는 곳 -->
-		<!-- 본문메인이미지 -->
-		<div id="sub_img_center"></div>
-		<!-- 본문메인이미지 -->
-		<!-- 왼쪽메뉴 -->
-		<nav id="sub_menu">
-		<ul>
-			<%
-				for (int i = 0; i < productList2.size(); i++) {
-
-					cb = (CategoryBean) productList2.get(i);
-			%>
-			<li><a href="./Productlist.bo?canum=<%=cb.getCanum()%>"><%=cb.getCaname()%></a></li>
-			<%
-				}
-			%>
-
-		</ul>
-		</nav>
-		<!-- 왼쪽메뉴 -->
-		<!-- 본문내용 -->
-		<!-- 게시판 -->
-		<article>
-		<h1>Notice</h1>
-		<form action="./ProductWriteAction.bo" method="POST" name="fr" id=join
-			onsubmit="return check()" enctype="multipart/form-data">
-			<fieldset>
-				<legend>상품 추가</legend>
-				 <label>상품명</label>
-				<td><input type="type" name="name" value="<%=pb2.getName()%>">&nbsp;&nbsp;&nbsp;</td>
-				
-				<span id = "select1"><br><br>
-				<label>글제목</label> <input type="type" name="subject"> </span><br>
-				<br> <label>카테고리</label>
-				<td><select name="car_num">
-						<option value="">선택하세요</option>
-						<%
-							for (int i = 0; i < productList2.size(); i++) {
-
-								cb = (CategoryBean) productList2.get(i);
-						%>
-						<option value="<%=cb.getCanum()%>"><%=cb.getCaname()%></option>
-						<%
-							}
-						%>
-				</select></td>
-				<br>
-				<br> <label>나라</label> <input type="type" name="country"
-					value="한국" readonly><br><br> <label>지역</label>
-				<td><select name="area">
-						<option value="">선택하세요</option>
-						<option value="서울">서울</option>
-						<option value="경기도">경기도</option>
-				</select></td>
-				<br><br>
-				<span id="select6"><label>가격</label> <input type="type" name="cost"><br></span>
-				 <label>색깔</label> <input type="type" name="color"><br>
-				<label>사이즈</label> <input type="type" name="size"><br>
-				<label>재고</label> <input type="type" name="stock"><br>
-				<span id = "select5"><label>인트로</label> <input type="type" name="intro"><br></span>
-				<span id = "select2"><label>이미지첨부</label> <input type="file" name="file1">&nbsp;&nbsp;&nbsp;
-				<input type="button" value="이미지추가" onclick="winopen()"></span><br>
-				
-				<span id="aa"><label>이미지첨부</label> <input type="file" name="file2">&nbsp;&nbsp;&nbsp;
-				<input type="button" value="이미지추가" class="submit" onclick="return winopen2()"><br></span>
-				<span id="aa2"><label>이미지첨부</label> <input type="file" name="file3">&nbsp;&nbsp;&nbsp;
-				<input type="button" value="이미지추가" class="submit" onclick="return winopen3()"><br></span>
-				<span id="aa3"><label>이미지첨부</label> <input type="file" name="file4">&nbsp;&nbsp;&nbsp;
-				<input type="button" value="이미지추가" class="submit" onclick="return winopen4()"><br></span>
-				<span id="aa4"><label>이미지첨부</label> <input type="file" name="file5"><br></span>
-				<span id ="select3"><label>내용</label>
-				<table>
-				<td style="width:900px; height:412px;">
-				<textarea name="content" id="ir1" rows="10" cols="100" style="width:900px; height:412px; display:none;"></textarea>
-				</td></table>
-				</span>
-				<br>
-			</fieldset>
-			<div class="clear"></div>
-			<div id="buttons">
-				<input type="submit" id ="save" value="회원가입" class="submit"> <input
-					type="reset" value="다시작성" class="cancel" onclick="return winopen5()">
-			</div>
-		</form>
-		<div class="clear"></div>
-		</article>
-		<!-- 본문내용 -->
-		<!-- 본문들어가는 곳 -->
-
-		<div class="clear"></div>
-		<!-- 푸터들어가는 곳 -->
-		<!-- 푸터들어가는 곳 -->
-	</div>
-
-<script type="text/javascript">
-
-
-	function check() {
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script>
+	jQuery(document).ready(function($){
+		$("#date_from").datepicker({
+			dateFormat: 'yy-mm-dd',    // 날짜 포맷 형식
+			minDate : 0,			   // 최소 날짜 설정      0이면 오늘부터 선택 가능
+			numberOfMonths: 1,		   // 보여줄 달의 갯수
+	        dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],  // 일(Day) 표기 형식
+	        monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],   // 월(Month) 표기 형식
+	        showOn: "both",		// 버튼을 표시      both : input과 buttom 둘다 클릭 시 달력 표시           bottom  :  buttom 클릭 했을 때만 달력 표시
+	        buttonImage: "./img/calendar.png",   // 버튼에 사용될 이미지
+	        buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
+	        onClose: function(selectedDate){		// 닫힐 때 함수 호출
+	        	$("#date_to").datepicker("option", "minDate", selectedDate);    // #date_to의 최소 날짜를 #date_from에서 선택된 날짜로 설정
+	    		$('img.ui-datepicker-trigger').attr('align', 'absmiddle');
+	        }
+		});
+		$("#txt_prodStart").datepicker();
+	    $('img.ui-datepicker-trigger').attr('align', 'absmiddle');
 		
-		if (document.fr.name.value == "select") {
-
-			if (document.fr.name2.value == "") {
-				alert("상품명을 넣어주세요.")
-				document.fr.name2.focus();
-				return false;
-			}
-			if (document.fr.name.value == "") {
-				alert("상품명을 골라주세요.")
-				document.fr.name.focus();
-				return false;
-			}
-			if (document.fr.canum.value == "") {
-				alert("카테고리를 골라주세요.")
-				document.fr.canum.focus();
-				return false;
-			}
-			if (document.fr.country.value == "") {
-				alert("나라를 골라주세요.")
-				document.fr.country.focus();
-				return false;
-			}
-			if (document.fr.area.value == "") {
-				alert("지역을 골라주세요.")
-				document.fr.area.focus();
-				return false;
-			}
-			if (document.fr.cost.value == "") {
-				alert("가격을 넣어주세요.")
-				document.fr.cost.focus();
-				return false;
-			}
-			if (document.fr.color.value == "") {
-				alert("색상을 넣어주세요.")
-				document.fr.color.focus();
-				return false;
-			}
-			if (document.fr.size.value == "") {
-				alert("사이즈을 넣어주세요.")
-				document.fr.size.focus();
-				return false;
-			}
+	    
+	    
+	 	// 파일 크기 제한 5MB
+		var maxSize = 5*1024*1024;
+		$("#file11").bind('change', function() {   // 파일 첨부 할 때 함수 호출
+			var filesize_temp = (this.files[0].size)/1048576;
+			var filesize = filesize_temp.toString().substring(0, 4);
 			
-			if (document.fr.stock.value == "") {
-				alert("재고를 넣어주세요.")
-				document.fr.stock.focus();
-				return false;
+			if (this.files[0].size > maxSize)
+			{
+				alert("5MB 이하의 이미지를 선택해주세요  (" + filesize + "MB)");
+				$("#file1").val("");
 			}
-			if (document.fr.subject.value == "") {
-				alert("글제목을 넣어주세요.")
-				document.fr.subject.focus();
-				return false;
-			}
-			if (document.fr.intro.value == "") {
-				alert("상품소개를 넣어주세요.")
-				document.fr.intro.focus();
-				return false;
-			}
-			if (document.fr.content.value == "") {
-				alert("내용을 넣어주세요.")
-				document.fr.content.focus();
-				return false;
-			}
-			if (document.fr.file1.value == "") {
-				alert("이미지를 넣어주세요.")
-				document.fr.file1.focus();
-				return false;
-			}else if (document.fr.file2.value == "") {
-				alert("이미지를 넣어주세요.")
-				document.fr.file2.focus();
-				return false;
-			}
-			
-			
-			var imgname = document.fr.file1.value.length;
-			var imgname2 = document.fr.file2.value.length;
-			/** 
-			 * lastIndexOf('.') 
-			 * 뒤에서부터 '.'의 위치를 찾기위한 함수
-			 * 검색 문자의 위치를 반환한다.
-			 * 파일 이름에 '.'이 포함되는 경우가 있기 때문에 lastIndexOf() 사용
-			 */
-			var lastDot = document.fr.file1.value.lastIndexOf('.');
-			var lastDot2 = document.fr.file2.value.lastIndexOf('.');
-			// 확장자 명만 추출한 후 소문자로 변경
-			var fileExt = document.fr.file1.value.substring(lastDot, imgname)
-					.toLowerCase();
-			var fileExt2 = document.fr.file2.value.substring(lastDot, imgname)
-			.toLowerCase();
-			if (fileExt != ".png" && fileExt != ".jpg") {
-				alert("이미지파일이 아닙니다.\n이미지파일을 넣어주세요");
-				return false;
-			} else if(fileExt2 != ".png" && fileExt2 != ".jpg"){
-				alert("이미지파일이 아닙니다.\n이미지파일을 넣어주세요");
-				return false;
-			}
-			else {
-				return true;
-			}
-		}else{
-			if (document.fr.name.value == "") {
-				alert("상품명을 골라주세요.")
-				document.fr.name.focus();
-				return false;
-			}
-			if (document.fr.canum.value == "") {
-				alert("카테고리를 골라주세요.")
-				document.fr.canum.focus();
-				return false;
-			}
-			if (document.fr.country.value == "") {
-				alert("나라를 골라주세요.")
-				document.fr.country.focus();
-				return false;
-			}
-			if (document.fr.area.value == "") {
-				alert("지역을 골라주세요.")
-				document.fr.area.focus();
-				return false;
-			}
-			if (document.fr.color.value == "") {
-				alert("색상을 넣어주세요.")
-				document.fr.color.focus();
-				return false;
-			}
-			if (document.fr.size.value == "") {
-				alert("사이즈을 넣어주세요.")
-				document.fr.size.focus();
-				return false;
-			}
-			
-			if (document.fr.stock.value == "") {
-				alert("재고를 넣어주세요.")
-				document.fr.stock.focus();
-				return false;
-			}
-		}
+		});
 		
+		$("#file22").bind('change', function() {   // 파일 첨부 할 때 함수 호출
+			var filesize_temp = (this.files[0].size)/1048576;
+			var filesize = filesize_temp.toString().substring(0, 4);
+			
+			if (this.files[0].size > maxSize)
+			{
+				alert("5MB 이하의 이미지를 선택해주세요  (" + filesize + "MB)");
+				$("#file2").val("");
+			}
+		});
+		
+		$("#file33").bind('change', function() {   // 파일 첨부 할 때 함수 호출
+			var filesize_temp = (this.files[0].size)/1048576;
+			var filesize = filesize_temp.toString().substring(0, 4);
+			
+			if (this.files[0].size > maxSize)
+			{
+				alert("5MB 이하의 이미지를 선택해주세요  (" + filesize + "MB)");
+				$("#file3").val("");
+			}
+		});
+		
+		$("#file44").bind('change', function() {   // 파일 첨부 할 때 함수 호출
+			var filesize_temp = (this.files[0].size)/1048576;
+			var filesize = filesize_temp.toString().substring(0, 4);
+			
+			if (this.files[0].size > maxSize)
+			{
+				alert("5MB 이하의 이미지를 선택해주세요  (" + filesize + "MB)");
+				$("#file4").val("");
+			}
+		});
+		
+		$("#file55").bind('change', function() {   // 파일 첨부 할 때 함수 호출
+			var filesize_temp = (this.files[0].size)/1048576;
+			var filesize = filesize_temp.toString().substring(0, 4);
+			
+			if (this.files[0].size > maxSize)
+			{
+				alert("5MB 이하의 이미지를 선택해주세요  (" + filesize + "MB)");
+				$("#file5").val("");
+			}
+		});
+	});
+	
+	
+	function people_Calc2(str){			
+		$(document).ready(function(){
+			var val1 = $("#color option:selected").val();
+			var val2 = str
+			alert(val1);
+
+			$("#size").find("option").remove();
+			$('#size').append("<option  value = '' >선택하세요</option>");
+			$.getJSON('./product/json3.jsp?num='+val2+'&color='+val1,function(data){
+				$.each(data,function(index,qwer){
+				//body태그 추가 key:value	
+					$('#size').append("<option value=" + qwer.size + ">" + qwer.size + "</option");
+				});
+			});
+		});
 	}
+				
+				function people_Calc(num){			
+					$(document).ready(function(){
+						var val1 = $("#adult option:selected").val();
+						var val2 = $("#child option:selected").val();
+						
+						if (num == 1)
+						{
+							$("#child").find("option").remove();
+							for (i = 0; i <= val1; i++)
+							{
+								$('#child').append("<option value=" + i + ">" + i + "</option");
+							}
+						}
+						
+						$('#p').html(val1 * 200000 + val2 * 100000);
+					});
+				}
+		
+				function people_Calc3(str){			
+					$(document).ready(function(){
+						var val1 = $("#size option:selected").val();
+						var val2 = $("#color option:selected").val();
+						var val3 = str
+						
+					
+						$("#stock2").remove();
+						$.getJSON('./product/json4.jsp?color='+val2+'&size='+val1+'&num='+str,function(data){
+							$.each(data,function(index,qwer){
+							//body태그 추가 key:value	
+							alert(val1);
+							alert(val2);
+							alert(qwer.stock);
+								$('#stock').append("<input type='type' id = 'stock2' name='stock' value ='"+qwer.stock+"'>" );
+							});
+						});
+					
+
+					
+					});
+				}
 	
 	
 </script>
+
+<style type="text/css">
+
+img.ui-datepicker-trigger
+{
+	cursor : pointer;
+	margin-left : 5px;
+}
+
+#wrap_pack
+{
+	width : 1000px;
+	min-height : 1000px;
+	border : 1px solid black;
+	margin : 0 auto;
+	padding-top : 50px;
+}
+
+
+
+</style>
+
+<%
+request.setCharacterEncoding("utf-8");
+List productList = (List) request.getAttribute("productList");
+List productList2 = (List) request.getAttribute("productList2");
+List productList3 = (List) request.getAttribute("productList3");
+ProductBean pb2= (ProductBean)request.getAttribute("pb");
+String pageNum = request.getParameter("pageNum");
+//디비 객체 생성 BoardDAO bdao
+// int count = getBoardCount() 메서드호출 count(*)
+ProductBean pb = new ProductBean();
+ProductDAO pdao = new ProductDAO();
+CategoryBean cb = new CategoryBean();
+CategoryDAO cdao = new CategoryDAO();
+%>
+
+</head>
+<body>
+<!-- 왼쪽 메뉴 -->
+<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
+<!-- 왼쪽 메뉴 -->
+
+<div id="wrap_pack">
+	<div>
+		<form action="./ProductUpdateAction.bo?&pageNum=<%=pageNum%>" id="fr" method="post" enctype="multipart/form-data">
+			<table>
+				<tr>
+					<td>상품명</td>
+					<td><input type="type" name="name" value="<%=pb2.getName()%>"></td>
+				</tr>
+				<tr>
+					<td>글제목</td>
+					<td><input type="type" name="subject" value="<%=pb2.getSubject()%>"></td>
+				</tr>
+				<tr>
+					<td>카테고리</td>
+					<td>
+						<select id="area" name="car_num">
+							<option value="">선택하세요</option>
+							<%
+								
+							for (int i = 0; i < productList2.size(); i++) {
+
+								cb = (CategoryBean) productList2.get(i);
+							%>	
+								<option value="<%=cb.getCar_num()%>" <%if(pb2.getType().equals(cb.getCar_name())) {%> selected <%}%>><%=cb.getCar_name() %></option>
+							<%
+								}
+							%>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>나라</td>
+					<td><input type="type" name="country"
+					value="<%=pb2.getCountry() %>" readonly></td>
+				</tr>
+				<tr>
+					<td>지역</td>
+					<td>
+						<select id="area" name="area">
+							<option value="">선택하세요</option>
+							<%
+								
+							for (int i = 0; i < productList.size(); i++) {
+
+								pb = (ProductBean) productList.get(i);
+							%>	
+								<option value="<%=pb.getArea()%>" <%if(pb2.getArea().equals(pb.getArea())) {%> selected <%}%>><%=pb.getArea() %></option>
+							<%
+								}
+							%>
+						</select>
+					</td>
+			
+				<tr>
+					<td>가격</td>
+					<td><input type="type" name="cost" value="<%=pb2.getCost()%>"></td>
+				</tr>
+				<tr>
+					<td>color</td>
+					<td><select id="color" name="color" onchange="people_Calc2(<%=pb2.getNum()%>)">
+								<option value = "">선택하세요</option>
+								<%
+				for (int i = 0; i < productList3.size(); i++) {
+
+						pb = (ProductBean) productList3.get(i);
+			%>
+	
+								<option value = "<%=pb.getColor()%>"><%=pb.getColor()%></option>
+								<%} %>
+							</select></td>
+				</tr>
+				<tr>
+					<td>사이즈</td>
+					<td><select  name="size" id="size" class="size" onchange="people_Calc3(<%=pb2.getNum()%>)">
+								<option  value = "" >선택하세요</option>
+								
+								</select></td>
+				</tr>
+				<tr>
+					<td>재고</td>
+					<td><span id="stock"></span></td>
+				</tr>
+				<tr>
+					<td>인트로</td>
+					<td><input type="type" name="intro" value="<%=pb2.getIntro()%>"></td>
+				</tr>
+				
+				<tr>
+					<td>글내용</td>
+					<td style="width:770px; height:412px;"><textarea name="content" id="ir1" rows="10" cols="100" style="width:770px; height:412px;"></textarea></td>
+				</tr>
+				
+				<tr>
+					<td>이미지첨부</td>
+					<td>
+						<input type="text" name="file1" id="file1" value="<%=pb2.getImg()%>" readonly style="width: 300px;">
+												
+						<input type="button" value="파일수정" class="dup" id="button" onclick="document.getElementById('file11').click();">
+						
+						<input type="button" value="파일삭제" class="dup" id="button" onclick="document.getElementById('file1').value='';">
+						
+						<input type="file" size="30" name="file1" id="file11" style="display: none;"
+						onchange="document.getElementById('file1').value=this.value;" />
+					</td>
+				</tr>
+				<tr>
+					<td>이미지첨부</td>
+					<td>
+						<input type="text" name="file2" id="file2" value="<%=pb2.getImg2()%>" readonly style="width: 300px;">
+						
+						<input type="button" value="파일수정" class="dup" id="button" onclick="document.getElementById('file22').click();">
+						
+						<input type="button" value="파일삭제" class="dup" id="button" onclick="document.getElementById('file2').value='';">
+						
+						<input type="file" size="30" name="file2" id="file22" style="display: none;"
+						onchange="document.getElementById('file2').value=this.value;" />
+					</td>
+				</tr>
+				<tr>
+					<td>이미지첨부</td>
+					<td>
+						<input type="text" name="file3" id="file3" value="<%=pb2.getImg3()%>" readonly style="width: 300px;">
+						
+						<input type="button" value="파일수정" class="dup" id="button" onclick="document.getElementById('file33').click();"
+						onchange="document.getElementById('file3').value=this.value;">
+						
+						<input type="button" value="파일삭제" class="dup" id="button" onclick="document.getElementById('file3').value='';">
+						
+						<input type="file" size="30" name="file3" id="file33" style="display: none;"
+						onchange="document.getElementById('file3').value=this.value;" />
+					</td>
+				</tr>
+				<tr>
+					<td>이미지첨부</td>
+					<td>
+						<input type="text" name="file4" id="file4" value="<%=pb2.getImg4()%>" readonly style="width: 300px;">
+						
+						<input type="button" value="파일수정" class="dup" id="button" onclick="document.getElementById('file44').click();"
+						onchange="document.getElementById('file4').value=this.value;">
+						
+						<input type="button" value="파일삭제" class="dup" id="button" onclick="document.getElementById('file4').value='';">
+						
+						<input type="file" size="30" name="file4" id="file44" style="display: none;"
+						onchange="document.getElementById('file4').value=this.value;" />
+					</td>
+				</tr>
+				<tr>
+					<td>이미지첨부</td>
+					<td>
+						<input type="text" name="file5" id="file5" value="<%=pb2.getImg5()%>" readonly style="width: 300px;">
+						
+						<input type="button" value="파일수정" class="dup" id="button" onclick="document.getElementById('file55').click();"
+						onchange="document.getElementById('file5').value=this.value;">
+						
+						<input type="button" value="파일삭제" class="dup" id="button" onclick="document.getElementById('file5').value='';">
+						
+						<input type="file" size="30" name="file5" id="file55" style="display: none;"
+						onchange="document.getElementById('file5').value=this.value;" >
+					</td>
+				</tr>
+				<tr>
+					<td><input type="submit" value="글수정" id="modify"></td>
+					<td><input type="button" value="취소" onclick="history.go(-1)"></td>
+				</tr>
+			</table>
+			<script type="text/javascript">
+				var oEditors = [];
+				nhn.husky.EZCreator.createInIFrame({
+					oAppRef: oEditors,
+					elPlaceHolder: "ir1",
+					sSkinURI: "./SmartEditor2Skin.html",	
+					htParams : {
+						bUseToolbar : true,				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+						bUseVerticalResizer : true,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+						bUseModeChanger : true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+						fOnBeforeUnload : function(){
+						}
+					}, //boolean
+					fOnAppLoad : function(){
+						//예제 코드 로딩이 완료되면 본문에 삽입되는 내용
+				 		var sHTML = '<%=pb2.getContent() %>';
+						oEditors.getById["ir1"].exec("PASTE_HTML", [sHTML]);
+					},
+					fCreator: "createSEditor2"
+				});
+				
+				function pasteHTML(filepath) {
+					// textarea에 이미지를 넣어줍니다
+					var sHTML = '<img src="<%=request.getContextPath()%>/upload/'+filepath+'">';
+				    oEditors.getById["ir1"].exec("PASTE_HTML", [sHTML]);
+				}
+				
+				// 글자체, 크기 기본 셋팅
+				function setDefaultFont() {
+					var sDefaultFont = '궁서';
+					var nFontSize = 24;
+					oEditors.getById["ir1"].setDefaultFont(sDefaultFont, nFontSize);
+				}
+	
+				
+				// 글수정 버튼 클릭 이벤트
+				$("#fr").submit(function(){
+					var file1 = $("#file1").val();
+					var file2 = $("#file2").val();
+					var file3 = $("#file3").val();
+					var file4 = $("#file4").val();
+					var file5 = $("#file5").val();
+					
+					var fileArr = [file1, file2, file3, file4, file5];
+					
+					if(file1 == "")
+					{
+						alert("첫번째 이미지는 필수로 넣어주세요");
+						return false;
+					}
+
+					
+					for(var i = 0; i < fileArr.length; i++)
+					{
+						var file = fileArr[i].substring(fileArr[i].lastIndexOf(".") + 1)
+
+				 		if (file != "jpg" && file != "png" && file != "gif" && 
+				 				file != "JPG" && file != "PNG" && file != "GIF" && file != "" && file != "null")
+				 		{
+				 			alert("jpg, png, gif 파일만 업로드 가능합니다");
+				 			return false;
+				 		}
+					}
+			 		
+					
+					var content = oEditors.getById["ir1"].getIR(); // Edit에 쓴 내용을 content 변수에 저장    값 : <br>
+					
+					if (content == "<br>")  // 빈공간 값 <br>
+					{
+						alert("글을 입력해주세요");  // 메시지 띄움
+						return false;
+					}
+					else // 글내용 있을 시
+					{
+						oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []); // Edit에 쓴 내용을 textarea에 붙여넣어준다
+// 					    $("#fr").submit();  // form을 submit 시킨다
+					}
+				});
+				
+				
+				
+				
+			</script>
+		</form>
+	</div>
+</div>
+<!-- 오른쪽 메뉴 -->
+<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
+<!-- 오른쪽 메뉴 -->
 </body>
 </html>
