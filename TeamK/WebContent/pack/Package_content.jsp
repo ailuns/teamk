@@ -1277,7 +1277,7 @@
 					<td class="date_td_size"><input type="radio" id="select_rbtn<%=i %>" name="chk" value="<%=pb.getNum() %>"
 						<%if(i == 0){ %> checked <%} %> ></td>
 					<td class="date_td_size"><%=pb.getDate() %></td>
-					<td class="date_td_size"><%=pb.getSarea() %></td>
+					<td class="date_td_size"><%=pb.getSubject() %></td>
 					<td class="date_td_size" id="aa<%=pb.getNum() %>"><%=cost %></td>
 					<td class="date_td_size"><%=pb.getStock() %></td>
 				</tr>
