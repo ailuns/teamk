@@ -47,19 +47,28 @@ $(document).ready(function(){
 		<div id="board">
 		<div id="board_list">
 <table>
-<tr><th id="num">번호</th><th id="cate">분류</th><th id="title">제목</th><th id="name">작성자</th><th id="date">날짜</th><th id="readcount">조회수</th></tr>
+<tr>
+ <th id="num">번호</th>
+ <th id="cate">분류</th>
+ <th id="title">제목</th>
+ <th id="name">작성자</th>
+ <th id="date">날짜</th>
+ <th id="readcount">조회수</th>
+</tr>
     <%
-    if(count==0){%><tr> <td colspan="6">검색결과가 없습니다.</td></tr><%}else{			
+    if(count==0){%><tr><td colspan="6">검색결과가 없습니다.</td></tr><%}else{			
     for(int i=0; i<boardList.size(); i++){
     	//자바빈(BoardBean) 변수 =배열한칸 접근  배열변수.get()
     	BoardBean bb = (BoardBean)boardList.get(i);
     	%>
-<tr><td><%=bb.getRe_ref()%></td><td id="cate">[<%=bb.getType_select()%>]</td>
-<td id="title">
-<a href="./BoardContent.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>">
-<%=bb.getSubject()%>[<%=bdao.getBoardReplyCount(bb.getNum())%>]</a><%if(bdao.getFile(bb.getNum())!=null){%><img src="./img/disk.png" width="15" height="15>"><%}%></td>
-<td><%=bb.getId()%></td><td><%=bb.getDate()%></td>
-    <td><%=bb.getReadcount() %></td></tr>
+<tr>
+ <td><%=bb.getRe_ref()%></td>
+ <td id="cate">[<%=bb.getType_select()%>]</td>
+ <td id="title"><a href="./BoardContent.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>"><%=bb.getSubject()%>[<%=bdao.getBoardReplyCount(bb.getNum())%>]</a><%if(bdao.getFile(bb.getNum())!=null){%><img src="./img/disk.png" width="15" height="15>"><%}%></td>
+ <td><%=bb.getId()%></td>
+ <td><%=bb.getDate()%></td>
+ <td><%=bb.getReadcount() %></td>
+</tr>
     			<%
     }}
     %>

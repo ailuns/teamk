@@ -34,9 +34,18 @@ int num = Integer.parseInt(request.getParameter("num"));
 		<div id="board">
 		<div id="board_content">
 <table id="content">
-<tr><td id="num"><%=bb.getRe_ref()%></td><td id="date"> <%=bb.getDate()%></td><td id="readcount">조회수: <%=bb.getReadcount()%></td></tr>
-<tr><td colspan="2" id="subject"><%=bb.getSubject()%></td><td id="id"><%=bb.getId()%></td></tr>
-<tr><td colspan="3" id="content"><br><br><%=bb.getContent()%><br><br></td></tr>
+<tr>
+ <td id="num"><%=bb.getRe_ref()%></td>
+ <td id="date"> <%=bb.getDate()%></td>
+ <td id="readcount">조회수: <%=bb.getReadcount()%></td>
+</tr>
+<tr>
+ <td colspan="2" id="subject"><%=bb.getSubject()%></td>
+ <td id="id"><%=bb.getId()%></td>
+</tr>
+<tr>
+ <td colspan="3" id="content"><br><br><%=bb.getContent()%><br><br></td>
+</tr>
 
 <%--첨부파일이 있을때만 첨부파일 표시--%>
 <%if(bb.getFile1()!=null){%>

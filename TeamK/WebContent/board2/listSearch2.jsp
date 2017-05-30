@@ -55,10 +55,12 @@ $(document).ready(function(){
     	//자바빈(BoardBean) 변수 =배열한칸 접근  배열변수.get()
     	BoardBean bb = (BoardBean)boardList2.get(i);
     			%>
-<tr><td><%=bb.getRe_ref()%></td>
+<tr>
+<td><%=bb.getRe_ref()%></td>
+<td id="cate">[<%=bb.getType_select()%>]</td> <%--글 타입 --%>
 <td id="title">
 <a href="./BoardContent2.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>">
-<%if(bdao.getBoardReplyCount(bb.getNum())>=1){%>[답변완료]<%}%><%=bb.getSubject()%>[<%=bdao.getBoardReplyCount(bb.getNum())%>]</a><%if(bdao.getFile(bb.getNum())!=null){%><img src="./img/disk.png" width="15" height="15>"><%}%></td>
+<%=bb.getSubject()%>[<%=bdao.getBoardReplyCount(bb.getNum())%>]</a><%if(bdao.getFile(bb.getNum())!=null){%><img src="./img/disk.png" width="15" height="15>"><%}%></td>
 <td><%=bb.getId()%></td><td><%=bb.getDate() %></td>
     <td><%=bb.getReadcount() %></td></tr>
     			<%
