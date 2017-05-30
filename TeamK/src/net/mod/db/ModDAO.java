@@ -450,12 +450,12 @@ public class ModDAO {
 				switch(rs.getInt("o_status")){
 					case 1: statustext = "입금 확인중"; break;
 					case 2: statustext = "배송 준비중"; break;
-					case 3: statustext = "배송중";break;
+					case 3: statustext = "배송 중";break;
 					case 4: statustext = "배송완료";break;
-					case 5: statustext = "구매완료";break;
-					case 6: statustext = "반송중";break;
+					case 5: statustext = "교환 중";break;
+					case 6: statustext = "환불 중";break;
 					case 9: statustext = "환불 완료";break;
-					case 10: statustext = "완료";break;
+					case 10: statustext = "구매 완료";break;
 				}
 				mtib.setStatus_text(statustext);
 				mtib.setTrans_num(rs.getString("o_trans_num"));
@@ -481,7 +481,7 @@ public class ModDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, status);
 			pstmt.setInt(2, po_num);
-			pstmt.executeQuery();
+			pstmt.executeUpdate();
 		}catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -493,19 +493,19 @@ public class ModDAO {
 			}
 		}
 	}
-	public void To_Status_Update(int status, int o_num){
+	public void To_Status_Update(int status, int o_num, String memo){
 		try{
 			conn = getconn();
-			sql = "update thing_order set o_status = ? where o_num=?";
+			sql = "update thing_order set o_status = ?, o_memo=? where o_num=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, status);
-			pstmt.setInt(2, o_num);
-			pstmt.executeQuery();
+			pstmt.setString(2, memo);
+			pstmt.setInt(3, o_num);
+			pstmt.executeUpdate();
 		}catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				rs.close();
 				pstmt.close();
 				conn.close();
 			} catch (Exception e) {

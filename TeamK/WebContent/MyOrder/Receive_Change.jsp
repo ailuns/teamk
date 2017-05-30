@@ -44,6 +44,7 @@ function receive_change(num,ra_num){
         url:"./receive_changeAction.mo",
         data:{
            ra_num:ra_num,
+           name:$('#name'+num).html(),
            mobile: $('#mobile'+num).html(),
            postcode:$('#postcode'+num).val(),
            address1:$('#address1'+num).val(),
@@ -51,10 +52,8 @@ function receive_change(num,ra_num){
         },
         success:function(){
             alert("배송지가 변경 되었습니다!");
-        	$('#receive_name'+<%=num%>,opener.document).html($('#name'+num).html());
-        	$('#receive_mobile'+<%=num%>,opener.document).html( $('#mobile'+num).html());
-        	$('#receive_addr'+<%=num%>,opener.document).html($('#address'+num).html());
-        	//window.close();
+        	opener.window.location.reload(true);
+        	window.close();
         }
      });
 }
