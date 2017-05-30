@@ -108,16 +108,16 @@ public class PackDAO {
 	
 	
 	// 지역별로 분류
-	public List getBoardList(int start, int count, String area) {
+	public List getBoardList(int startRow, int pagesize, String area) {
 		List list = new ArrayList();
 
 		try {
 			conn = getConnection();
-			sql = "select * from pack where area=? group by subject order by date desc limit ?, ?";
+			sql = "select * from pack where area=? and date > now() group by subject order by date desc limit ?, ?";
 			pstm = conn.prepareStatement(sql);
 			pstm.setString(1, area);
-			pstm.setInt(2, start - 1);
-			pstm.setInt(3, count);
+			pstm.setInt(2, startRow - 1);
+			pstm.setInt(3, pagesize);
 
 			rs = pstm.executeQuery();
 			while (rs.next()) {
@@ -361,7 +361,9 @@ public class PackDAO {
 			conn = getConnection();
 //				sql = "select count(*) from pack where city like ?";
 			
-			sql = "select count(*) from pack where area=?";
+//			sql = "select count(*) from pack where area=?";
+			
+			sql = "select count(DISTINCT subject) from pack where area=? and date > now()";
 
 			pstm = conn.prepareStatement(sql);
 			pstm.setString(1, area);
@@ -417,8 +419,8 @@ public class PackDAO {
 
 //			if (endDate == "")
 //			{
-				sql = "select count(*) from pack where area = ? and date >= ?";
-			
+//				sql = "select count(*) from pack where area = ? and date >= ?";
+				sql = "select count(DISTINCT subject) from pack where area = ? and date >= ?";
 //				sql = "select count(*) from pack where area = ? and date >= ? group by subject";
 				
 				pstm = conn.prepareStatement(sql);
