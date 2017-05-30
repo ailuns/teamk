@@ -27,7 +27,7 @@ String id = (String)session.getAttribute("id");
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
 		<div id="board_head">
-			<div id="rvw_title">리뷰 작성</div>
+			<div id="rvw_title">리뷰</div>
 			<div id="rvw_script">상품이나 패키지 후기를 쓰는 곳 입니다.</div>
 		</div>
 		<div id="clear"></div>

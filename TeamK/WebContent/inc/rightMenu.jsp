@@ -15,6 +15,10 @@
 		<li><a href="./MemberLogout.me">로그아웃</a></li>
 		<li><a href="./MemberInfo.me">내 정보</a></li>
 		<li><a href="./MyOrderList.mo">내 주문 현황</a></li>
+		<li><a href="./MyBasketList.bns">장바구니</a></li>
+		<li><a href="./MyInterestList.ins">찜 리스트</a></li>
+		<li><a href="./MyPackOrderList.mo">패키지 주문목록</a></li>
+		<li><a href="./MyThingOrderList.mo">상품 주문목록</a></li>
 		<br><br>
 		<%if(id.equals("admin")){%>
 			<li><a href="./AdminOrderList.ao">고객 주문 관리</a></li> 

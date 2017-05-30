@@ -30,8 +30,6 @@ String id = (String)session.getAttribute("id");
 <input type = "button" value="My Interest" onclick ="location.href='./MyInterestList.ins'"><br>
 <input type="button" value="PackOrder" onclick = "location.href='./MyPackOrderList.mo'"><br>
 <input type="button" value="ThingOrder" onclick="location.href='./MyThingOrderList.mo'"><br>
-
-
 </div>
 <div>
 <h3>Admin</h3>
