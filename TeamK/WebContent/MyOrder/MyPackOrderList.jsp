@@ -36,8 +36,6 @@ $(document).ready(function(){
 		$('#status2').html("<option value='none'>전체</option>"+
 				"<option value='completed'>진행 완료</option>"+
 				"<option value='canceled'>취소 완료</option>");
-		//$('#status2 option:eq[2]').val('canceled');
-		//$('#status2 option:eq[2]').text('취소된 상품');
 	}
 	$('#status2').val('<%=status2%>').attr('selected','selected');
 	$('#title').html($('#status option:selected').text()+

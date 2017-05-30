@@ -14,6 +14,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import net.admin.order.db.AdminDAO;
+
 public class ModDAO {
 	Connection conn = null;
 	PreparedStatement pstmt = null;
@@ -51,11 +53,12 @@ public class ModDAO {
 		}
 		return count;
 	}
-	public int TI_Count(String id){
+	public int TI_Count(String id, String status){
 		int count=0;
 		try{
 			conn = getconn();
-			sql = "select count(ti_num) from trade_info where id=? and to_null_check = 0";
+			sql = "select count(ti_num) from trade_info where id=? and ti_status"+status
+					+ " and to_null_check = 0";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -261,12 +264,12 @@ public class ModDAO {
 		}
 		return count;
 	}
-	public List<ModTradeInfoBEAN> TO_ReadModTI(String id,int start, int end){
+	public List<ModTradeInfoBEAN> TO_ReadModTI(String id,int start, int end,String status){
 		List<ModTradeInfoBEAN> ModList = new ArrayList<ModTradeInfoBEAN>();
 		try{
 			conn=getconn();
-			sql = "select * from trade_info where id = ? and "+
-					"to_null_check = 0 order by ti_num desc limit ?,?";
+			sql = "select * from trade_info where id = ? and ti_status"+status+
+					" and to_null_check = 0 order by ti_num desc limit ?,?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setInt(2, start-1);

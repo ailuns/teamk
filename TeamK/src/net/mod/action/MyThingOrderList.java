@@ -20,9 +20,16 @@ public class MyThingOrderList implements Action{
 		String id = (String) session.getAttribute("id");
 		ModDAO moddao = new ModDAO();
 		String pageNum = request.getParameter("pageNum");
-		int count = moddao.TI_Count(id);
-		if (pageNum == null)
-			pageNum = "1";
+		if (pageNum == null)pageNum = "1";
+		String stat = request.getParameter("status");
+		if(stat==null)stat = "ing";
+		String status="";
+		if(stat.equals("ing")){
+			status = "<10"; 
+		}else if(stat.equals("completed")){
+			status ="=10";
+		}
+		int count = moddao.TI_Count(id,status);
 		int curpage = Integer.parseInt(pageNum);
 		int pagesize = 5;
 		int start = (curpage - 1) * pagesize + 1;
@@ -35,7 +42,7 @@ public class MyThingOrderList implements Action{
 		ModTradeInfoBEAN mtib;
 		Vector v;
 		if (count != 0) {
-			List<ModTradeInfoBEAN> TradeInfoList = moddao.TO_ReadModTI(id, start, pagesize);
+			List<ModTradeInfoBEAN> TradeInfoList = moddao.TO_ReadModTI(id, start, pagesize,status);
 			for (int i = 0; i < TradeInfoList.size(); i++) {
 				v = new Vector();
 				mtib = TradeInfoList.get(i);
@@ -47,6 +54,7 @@ public class MyThingOrderList implements Action{
 				ModList.add(v);
 			}
 		}
+		request.setAttribute("status", stat);
 		request.setAttribute("ModList", ModList);
 		request.setAttribute("pblock", pblock);
 		request.setAttribute("endpage", endpage);
