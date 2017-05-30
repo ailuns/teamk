@@ -294,7 +294,7 @@ img.ui-datepicker-trigger
 				
 				function pasteHTML(filepath) {
 					// textarea에 이미지를 넣어줍니다
-					var sHTML = '<img src="<%=request.getContextPath()%>/writeAPI/upload/'+filepath+'">';
+					var sHTML = '<img src="<%=request.getContextPath()%>/upload/'+filepath+'">';
 				    oEditors.getById["ir1"].exec("PASTE_HTML", [sHTML]);
 				}
 				

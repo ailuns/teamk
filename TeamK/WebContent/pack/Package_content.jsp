@@ -719,7 +719,8 @@
 #contentdiv1 {
 	width: 400px;
 	height: 400px;
-	border: 3px solid blue;
+ 	border: 1px solid #F6F6F6;
+	background-color : white;
 	float: left;
 	margin-left : 50px;
 }
@@ -730,26 +731,44 @@
 	color: gray;
 }
 
-.contentdiv1_1, .contentdiv1_3
+
+#contentdiv1 table
 {
-	width : 150px;
-	height : 50px; 
-	text-align: center;
+	margin : 0 auto;
+	margin-top : 30px;
+ 	border-collapse: collapse;
 }
 
-.contentdiv1_2
+
+#contentdiv1 table tr
 {
-	width : 150px;
+ 	border-bottom : 1px dashed #D5D5D5;
+}
+
+.contentdiv1_1
+{
+	background-color: #F6F6F6;
+}
+
+.contentdiv1_1, .contentdiv1_2
+{
+	width : 120px;
 	height : 50px; 
 	text-align: center;
 }
 
 .contentdiv1_3
 {
-	width : 100px;
+	width : 80px;
 	height : 50px; 
 	text-align: center;
 }
+
+#contentdiv1 #adult, #contentdiv1 #child 
+{
+	width : 40px;
+}
+
 
 .contentbtn
 {
@@ -1082,7 +1101,7 @@
 		<div id="package_search">
 			<p>내게 맞는 패키지 검색하기</p>
 			<form action="./PackSearchAction.po" name="fr" method="get" id="scheduler" onsubmit="return input_chk();">
-				<label for="date_from">출발</label><input type="text" id="date_from" class="input_style" name="startDate" required="yes"><br><br>
+				<label for="date_from">출발</label><input type="text" id="date_from" class="input_style" name="startDate"><br><br>
 				<label for="city_search">지역</label>
 				<select id="area" name="area">
 					<option value="">선택하세요</option>
@@ -1153,7 +1172,7 @@
 			<!--인원수, 가격 -->
 			<div id="contentdiv1">
 				<form name="input_fr" method="post">
-					<table border="1">
+					<table>
 						<tr>
 							<td class="contentdiv1_1">성인(12세이상)</td>
 							<td class="contentdiv1_2" id="cost_adult"></td>
@@ -1184,16 +1203,13 @@
 							</td>
 						</tr>
 						<tr>
-							<td>합계</td>
+							<td class="contentdiv1_1">합계</td>
 							<td colspan="2">
 								<input type="hidden" id="cost" name="cost" value="">
 								<input type="hidden" id="ori_num" name="pnum" value="">
 								<input type="hidden" name="type" value="P">
 								<p id="p"></p>
 							</td>
-						</tr>
-						<tr>
-							
 						</tr>
 					</table>
 					<br>

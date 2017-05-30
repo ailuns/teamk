@@ -78,6 +78,11 @@ img.ui-datepicker-trigger
 	margin-left : 5px;
 }
 
+#package_list tr:HOVER
+{
+/* 	cursor: pointer; */
+}
+
 .clear 
 {
 	clear: both;
@@ -196,17 +201,19 @@ img.ui-datepicker-trigger
 						<%=pb.getSubject() %>
 					</td>
 					<td rowspan="2"  id="price">
-						<span><%=cost %>원</span>
+						<span><%=cost %>원~</span>
 					</td>
 					<td rowspan="2"  id="date">
 						<span><%=pb.getDate() %>~</span>
 					</td>
+					
 				</tr>
 				<tr>
 					<td id="context">
 						<span><%=pb.getIntro() %></span>
 					</td>
 				</tr>
+				
 			<%
 					}
 				}
@@ -229,21 +236,21 @@ img.ui-datepicker-trigger
 						//이전
 						if (startPage > pageBlock) {
 				%>
-				<a href="./PackContent.po?pageNum=<%=startPage - pageBlock%>">[이전]</a>
+				<a href="./PackSearchAction.po?pageNum=<%=startPage - pageBlock%>">[이전]</a>
 				<%
 					}
 
 						//페이지
 						for (int i = startPage; i <= endPage; i++) {
 				%>
-				<a href="./PackContent.po?pageNum=<%=i %>">[<%=i%>]</a>
+				<a href="./PackSearchAction.po?pageNum=<%=i %>&area=<%=search %>">[<%=i%>]</a>
 				<%
 					}
 
 						//다음
 						if (endPage < pageCount) {
 				%>
-				<a href="./PackContent.po?pageNum=<%=startPage + pageBlock%>">[다음]</a>
+				<a href="./PackSearchAction.po?pageNum=<%=startPage + pageBlock%>">[다음]</a>
 				<%
 					}
 				}
