@@ -145,7 +145,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			%><a href = "./MyPackBasketList.bns?pageNum=<%=endpage+1%>">[다음]</a><%
 		}
 	}	//if(count%pagesize!=0)pcount+=1;
-	%><br><input type = "button" value = "내주문" onclick="location.href='./MyOrderList.mo'">
+	%>
 		</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->

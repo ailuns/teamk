@@ -139,8 +139,7 @@ function receive_change(i,ti_num){
 	<%
 		}
 		}
-	%><br>
-	<input type = "button" value = "내주문" onclick="location.href='./MyOrderList.mo'">
+	%> 
 		</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->

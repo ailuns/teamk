@@ -4,7 +4,9 @@ header {
 	background-color: #eee;
 	position: relative;
 	width: 1000px;
+	height: 180px;
 	margin: 0 auto;
+	padding-top: 25px;
 }
 header img {
 	width: 140px;
