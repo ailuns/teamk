@@ -279,7 +279,16 @@ $(document).ready(function() {
 		$('#card_agree_ul').show();
 	});
 	$('#card_agree_ul_selected').on('click',function(){
-		selectreset();
+		$('.agree_li_view').hide();
+		$('#card_agree_ul').hide();
+		$('#mobile_agree_ul').hide();
+		$('.agree_ul_selected').hide();
+		$('.agree_li_selected').hide();
+		$('.agree_li_select').show();
+		$('.agree_ul_select').show();
+		$('#select_bank option:eq(0)').prop('selected',true);
+		$('#cash_receipt_check').prop('checked',false);
+		$('#cash_receipt').hide();
 	});
 	$('#mobile_agree_ul_select').on('click',function(){
 		$('#mobile_agree_ul_selected').show();
@@ -503,7 +512,8 @@ function selectreset(){
 </div>
 <div class="trade_type2">
 	<label><input type ="checkbox" name = "mobile_agree" checked="checked">
-		결제 대행 서비스 약관에 모두 동의 합니다.</label><span id="mobile_agree_ul_select" class = "agree_ul_select">내용 보기▼</span>
+		결제 대행 서비스 약관에 모두 동의 합니다.</label><br>
+		<span id="mobile_agree_ul_select" class = "agree_ul_select">내용보기▼</span>
 		<span id="mobile_agree_ul_selected" class="agree_ul_selected">내용보기▲</span>
 		<ul class="agree_ul" id="mobile_agree_ul">
 				<li>서비스 이용약관 동의<span id="mobile_agree_li_select1" class="agree_li_select"
