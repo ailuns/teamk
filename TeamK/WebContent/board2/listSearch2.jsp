@@ -40,12 +40,13 @@ $(document).ready(function(){
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
-		<div id="board_head">
-			<div id="qna_title">Q&A 게시판</div>
-			<div id="qna_script">궁금한것은 질문해주세요.<span class="count">[검색된 글의 개수 :<%=count%>]</span></div>
+		<div id="article_head">
+			<div id="article_title">Q&A 게시판</div>
+			<div id="clear"></div>
+			<div id="article_script">궁금한것은 질문해주세요.<span class="count">[검색된 글의 개수 :<%=count%>]</span></div>
 		</div>
 		<div id="clear"></div>
-		<div id="board">
+		<article>
 		<div id="board_list">
 <table>
 <tr><th id="num">번호</th><th id="cate">답변</th><th id="title">제목</th><th id="name">작성자</th><th id="date">날짜</th><th id="readcount">조회수</th></tr>
@@ -115,7 +116,7 @@ if(count!=0){
        </div>
 		<div class="clear"></div>
 </div>
-</div>
+</article>
 	</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->

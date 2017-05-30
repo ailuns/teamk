@@ -54,6 +54,28 @@
 			var activeTab = $(this).attr("name");		// 클릭된 탭부분 name 속성값 가져와서 저장
 			$("#" + activeTab).fadeIn();		// 해당 탭내용 부분을 보여준다  흐릿 -> 또렷하게 애니메이션 효과			
 		});
+		
+		
+// 		$("#more_pack0").click(function(){
+			
+// // 	 		var str = $("ul li.tab_color").attr("name");
+// // 	 		alert(str);
+	 		
+// 			var ss = $('[name=tab1]').attr("value");
+	 		
+// 	 		alert(ss);
+// // 			alert("우와");
+// 		});
+// 		$("#more_pack1").click(function(){
+			
+// // 			var str = $("ul li.tab_color").attr("name");
+// // 	 		alert(str);
+	 		
+// 			var ss = $('[name=tab2]').attr("value");
+	 		
+// 	 		alert(ss);
+// // 			alert("우와");
+// 		});
 	});
 	
 	// 패키지 검색 시 지역 선택
@@ -67,6 +89,17 @@
 		}
 		return true;
     }
+	
+	
+	function more_packlist(num)
+	{
+		var area = $('[name=tab'+ num +']').attr("value");
+// 		alert(ss);
+		location.href="./PackSearchAction.po?area=" + area;
+	}
+	
+	
+	
 </script>
 </head>
 <body>
@@ -106,8 +139,8 @@
 %>
 
 <div id="wrap">
-	<div id="package_head">
-		패키지
+	<div id="article_head">
+		<div id="article_title"><img src="./img/travel2.png" width="30px" style="margin-right: 8px; vertical-align: bottom;">패키지</div>
 	</div>
 	<!--여행지 검색창 -->
 	<div id="package_feat">
@@ -179,6 +212,16 @@
 				%>
 					<div id="tab<%=i+1 %>" class="tab_content">
 					<table>
+					<%
+					if(areaCount[i] > 3)
+					{
+					%>
+					<tr>
+						<td colspan="3" style="text-align: right;"><span id="more_pack<%=i %>" onclick="more_packlist(<%=i+1 %>);">More</span></td>
+					</tr>
+					<%
+					}
+					%>
 				<%
 					PackBean pb;
 					for (int j = 0; j < ListArr[i].size(); j++)
@@ -220,22 +263,20 @@
 						}
 					}
 					%>
+					<%
+					if(areaCount[i] > 3)
+					{
+					%>
+					<tr>
+						<td colspan="3" style="text-align: right;"><span id="more_pack<%=i %>" onclick="more_packlist(<%=i+1 %>);">More</span></td>
+					</tr>
+					<%
+					}
+					%>
 					</table>
 					</div>
 					<%
-				}
-				
-// 				<%
-// 				for (int j = 0; j < areaCount.length; i++)
-// 				{
-					if (areaCount[i] > 3)
-					{
-				%>
-						<p>More+</p>
-				<%
-					}
-// 				}
-				
+				}				
 			}
 			%>
 		</div>

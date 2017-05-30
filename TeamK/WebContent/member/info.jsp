@@ -21,12 +21,12 @@
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
-		<div id="member_head">
-			<div id="member_title">회원정보</div>
-			<div id="member_script"></div>
+		<div id="article_head">
+			<div id="article_title">회원정보</div>
+			<div id="article_script"></div>
 		</div>
 		<div id="clear"></div>
-		<div id="member">
+		<article>
 			<div id="info_form">
 				<%
 				String id = (String) session.getAttribute("id");
@@ -48,7 +48,7 @@
 				<input type="button" value="회원정보수정" onclick="location.href='./MemberUpdate.me'">
 				<input type="button" value="회원정보삭제" onclick="location.href='./MemberDelete.me'">
 			</div>
-		</div>
+		</article>
 	</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->

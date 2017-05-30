@@ -997,7 +997,7 @@
 	<!-- 왼쪽 메뉴 -->
 	<!--여행지 검색창 -->
 	<div id="wrap"> 
-	<div id="package_head">
+	<div id="article_title">
 		패키지
 	</div>
 		<div id="package_feat">

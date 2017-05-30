@@ -27,7 +27,6 @@ response.setHeader("Pragma", "no-cache");
 response.setHeader("Cache-Control", "no-cache");
 response.setDateHeader("Expires",0); 
 String id = (String) session.getAttribute("id");
-String catpchavalue ="";
 %>
 
 <script type="text/javascript">
@@ -36,7 +35,6 @@ String catpchavalue ="";
 
       var verifyCallback = function(response) {
         document.fr.catpchavalue.value="1";
-		catpchavalue="1";
       };
       
       var onloadCallback = function() {
@@ -145,15 +143,6 @@ function sample6_execDaumPostcode() {
 		window.open("./MemberEmail.me?email="+email+"&echeck=0","","width=400,height=200");
 		}
 	}
-	
-	function answer() {
-		if (document.fr.catpchavalue.value == "1") {
-			alert("자동가입인증이 완료되었습니다");
-			document.fr.submit.focus();
-			return false;
-		}
-	}
-
 	function winopen() {
 
 		if (document.fr.id.value == "") {
@@ -249,12 +238,12 @@ if (id != null) {
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
-		<div id="member_head">
-			<div id="member_title">회원가입</div>
-			<div id="member_script"></div>
+		<div id="article_head">
+			<div id="article_title">회원가입</div>
+			<div id="article_script"></div>
 		</div>
 		<div id="clear"></div>
-		<div id="member">
+		<article>
 			<div id="insert_form">
 			<form action="./MemberJoinAction.me" method="post" name="fr" onsubmit="return winopen()">
 				<label for="id">아이디</label><input type="text" name="id" id="id" style="ime-mode:disabled"
@@ -284,16 +273,17 @@ if (id != null) {
 				<input type="button" value="이메일 인증" onclick="sendmail()">
 				<input type="hidden" name="eckecknum"> <br>
 				
-				<!-- 자동가입방지 -->
+				<!-- 자동가입방지 구글 recaptcha-->
 				<br>
 				<input type="hidden" name="catpchavalue">
 				<div id="html_element" style="margin-left: 150px;"></div>
+				
 				<input type="submit" name="submit" value="가입">
 			</form>
 
   				
 			</div>
-		</div>
+		</article>
 	</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->

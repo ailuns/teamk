@@ -34,12 +34,13 @@ BoardDAO bdao = new BoardDAO();
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
-		<div id="board_head">
-			<div id="qna_title">Q&A 게시판</div>
-			<div id="qna_script">궁금한것은 질문해주세요.<span class="count">[전체글 개수 :<%=count%>]</span></div>
+		<div id="article_head">
+			<div id="article_title"><img src="./img/qna2.png" width="35px" style="margin-right: 8px; vertical-align: bottom;">Q&A 게시판</div>
+			<div id="clear"></div>
+			<div id="article_script">궁금한것은 질문해주세요.<span class="count">[전체글 개수 :<%=count%>]</span></div>
 		</div>
 		<div id="clear"></div>
-		<div id="board">
+		<article>
 		<div id="board_list">
 <table>
 <br>
@@ -113,7 +114,7 @@ if(count!=0){
 </div>
 		<div class="clear"></div>
 </div>
-</div>
+</article>
 	</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->

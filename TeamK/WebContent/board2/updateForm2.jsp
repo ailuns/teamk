@@ -52,12 +52,12 @@ MemberBean mb = mdao.getMember(id);
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
-		<div id="board_head">
-			<div id="qna_title">Q&A 게시판</div>
-			<div id="qna_script">궁금한것은 질문해주세요.</div>
+		<div id="article_head">
+			<div id="article_title">Q&A 게시판</div>
+			<div id="article_script">궁금한것은 질문해주세요.</div>
 		</div>
 		<div id="clear"></div>
-		<div id="board">
+		<article>
 		<div id="board_write">
 <form action="./BoardUpdateAction2.bo?pageNum=<%=pageNum%>" method="post" name="fr" enctype="multipart/form-data">
 <input type="hidden" name="num" value="<%=bb.getNum()%>">
@@ -80,7 +80,7 @@ MemberBean mb = mdao.getMember(id);
 <input type="button" value="취소" OnClick="javascript:history.back(-1)">
 </form>
 </div>
-	</div>
+	</article>
 	</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->

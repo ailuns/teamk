@@ -4,7 +4,9 @@ header {
 	background-color: #eee;
 	position: relative;
 	width: 1000px;
+	height: 180px;
 	margin: 0 auto;
+	padding-top: 25px;
 }
 header img {
 	width: 140px;
@@ -80,32 +82,6 @@ div#map p {
 	color: #fff;
 	font-size: 15px;
 }
-/* div#map div { */
-/* 	width: 250px; */
-/* 	height: 500px; */
-/* 	background-color: #000; */
-/* 	text-align: left; */
-/* 	padding: 10px; */
-/* 	color: #fff; */
-/* 	position: absolute; */
-/* 	opacity: 0; */
-/* 	visibility: hidden; */
-/* } */
-/* div#map div#seoul {top: 0%; right: 65%;} */
-/* div#map div#busan {bottom: 0%; left: 65%;} */
-/* div#map div#gyeonggi {top: 0%; right: 65%;} */
-/* div#map div#gangwon {top: 0%; left: 65%;} */
-/* div#map div#chungbuk {top: 0%; left: 65%;} */
-/* div#map div#chungnam {top: 0%; right: 65%;} */
-/* div#map div#jeonbuk {top: 0%; right: 65%;} */
-/* div#map div#jeonnam {bottom: 0%; right: 65%;} */
-/* div#map div#gyeongbuk {top: 0%; left: 65%;} */
-/* div#map div#gyeongnam {bottom: 0%; left: 65%;} */
-/* div#map div#jeju {bottom: 0%; right: 65%;} */
-/* div#map div img { */
-/* 	width: 230px; */
-/* 	height: 150px; */
-/* } */
 
 /* South Korea Map Start */
 div#map object {width: 150px;}
@@ -300,7 +276,6 @@ position: absolute;
 }
 .jssorb05 div, .jssorb05 div:hover, .jssorb05 .av {
 position: absolute;
-/* size of bullet elment */
 width: 16px;
 height: 16px;
 background: url('../img/b05.png') no-repeat;
@@ -314,7 +289,6 @@ cursor: pointer;
 .jssora12l, .jssora12r {
 display: block;
 position: absolute;
-/* size of arrow element */
 width: 30px;
 height: 46px;
 cursor: pointer;

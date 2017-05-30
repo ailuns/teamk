@@ -111,7 +111,7 @@ img.ui-datepicker-trigger
 </div>
 <!--왼쪽 메뉴 -->
 	<div id="wrap">
-		<div id="package_head">
+		<div id="article_title">
 		패키지
 	</div>
 	<!--여행지 검색창 -->
@@ -130,7 +130,7 @@ img.ui-datepicker-trigger
 						{
 							cb =(CategoryBean)CategoryList.get(i);
 					%>	
-						<option value="<%=cb.getCar_name() %>"><%=cb.getCar_name() %></option>
+						<option value="<%=cb.getCar_name() %>" <%if(search.equals(cb.getCar_name())){ %> selected <%} %>><%=cb.getCar_name() %></option>
 					<%
 						}
 					%>
@@ -166,7 +166,7 @@ img.ui-datepicker-trigger
 		%>
 		
 		
-<%-- 		<p>검색조건에 해당하는 상품이 총 <%=count %>개 있습니다</p> --%>
+		<p>검색조건에 해당하는 상품이 총 <%=count %>개 있습니다</p>
 		<hr>	
 
 		<div id="package_list">
