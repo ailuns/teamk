@@ -503,7 +503,8 @@ function selectreset(){
 </div>
 <div class="trade_type2">
 	<label><input type ="checkbox" name = "mobile_agree" checked="checked">
-		결제 대행 서비스 약관에 모두 동의 합니다.</label><span id="mobile_agree_ul_select" class = "agree_ul_select">내용 보기▼</span>
+		결제 대행 서비스 약관에 모두 동의 합니다.</label><br>
+		<span id="mobile_agree_ul_select" class = "agree_ul_select">내용 보기▼</span>
 		<span id="mobile_agree_ul_selected" class="agree_ul_selected">내용보기▲</span>
 		<ul class="agree_ul" id="mobile_agree_ul">
 				<li>서비스 이용약관 동의<span id="mobile_agree_li_select1" class="agree_li_select"

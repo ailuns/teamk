@@ -792,10 +792,8 @@ div#packList caption span input {
 	margin: 0 10px;
 }
 div#receive_info input[type="button"] {margin-left: 90px;}
-td.trade_type1 *, td.trade_type2 *, td.trade_type3 * {
-	border: 1px dotted #ddd;
-}
-td.trade_type1 div {
-	width: 100%;
-}
+td.trade_type1 div, td.trade_type2 div, td.trade_type3 div,
+div.trade_type1, div.trade_type2 {width: 100%;}
 td.trade_type1 div label {margin-right: 20px;}
+div.trade_type1, div.trade_type2,
+div.trade_type1 *, div.trade_type2 * {border-top: none !important;}
