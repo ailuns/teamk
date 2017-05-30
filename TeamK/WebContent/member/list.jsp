@@ -25,9 +25,9 @@
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
-			<div id="member_head">
-			<div id="member_title">고객 정보 관리</div>
-			<div id="member_script"></div>
+			<div id="article_head">
+			<div id="article_title">고객 정보 관리</div>
+			<div id="article_script"></div>
 		</div>
 	<%
 		String id = (String) session.getAttribute("id");
@@ -38,6 +38,7 @@
 
 		List memberList = (List) request.getAttribute("memberList");
 	%>
+	<article>
 	<table id="memberList">
 		<tr>
 			<th>아이디</th>
@@ -64,6 +65,7 @@
 			}
 		%>
 	</table>
+	</article>
 	</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->

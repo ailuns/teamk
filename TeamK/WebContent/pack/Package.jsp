@@ -106,8 +106,8 @@
 %>
 
 <div id="wrap">
-	<div id="board_head">
-		<div id="rvw_title"><img src="./img/travel2.png" width="30px" style="margin-right: 8px; vertical-align: bottom;">패키지</div>
+	<div id="article_head">
+		<div id="article_title"><img src="./img/travel2.png" width="30px" style="margin-right: 8px; vertical-align: bottom;">패키지</div>
 	</div>
 	<!--여행지 검색창 -->
 	<div id="package_feat">

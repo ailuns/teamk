@@ -22,12 +22,12 @@ List<interestBEAN> InterestThing = (List<interestBEAN>) request.getAttribute("In
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
-<div id="board_head">
-<div id="rvw_title">
+<div id="article_head">
+<div id="article_title">
 	찜 리스트
 </div>
 </div>
-<div>
+<article>
 		<h3>패키지 찜 리스트</h3>
 		<div id="board">
 		<div id="board_list">
@@ -67,7 +67,6 @@ List<interestBEAN> InterestThing = (List<interestBEAN>) request.getAttribute("In
 		<%
 			}
 		%>
-	</div>
 	</div>
 	</div>
 	<div>
@@ -113,6 +112,7 @@ List<interestBEAN> InterestThing = (List<interestBEAN>) request.getAttribute("In
 	
 		
 		</div>
+		</article>
 		</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->

@@ -56,9 +56,10 @@ function receive_setting(){
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
-	<div id="board_head">
-			<div id="rvw_title">결제 페이지</div>
+	<div id="article_head">
+			<div id="article_title">결제 페이지</div>
 		</div>
+	<article>
 	<form action ="./MyOrderAddAction.mo" method ="post" name = "fr" onsubmit="return submit_check()" class="gyeolje">
 	<div id ="buyer_info">
 		<table>
@@ -544,6 +545,7 @@ function selectreset(){
 
 <input type = "submit" value="구매하기" id="fr_submit"><input type="button" value="취소" onclick="history.back();">
 </form>
+</article>
 	</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->

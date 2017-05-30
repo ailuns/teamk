@@ -30,9 +30,9 @@
 		String ty = (String) request.getAttribute("ty");
 		List<interestBEAN> MyInterest = (List<interestBEAN>) request.getAttribute("MyInterest");
 	%>
-	<div id="board_head">
-<div id="rvw_title"><%=type%></div>
-<div id="rvw_script">subject Count :<%=count%></div>
+	<div id="article_head">
+<div id="article_title"><%=type%></div>
+<div id="article_script">subject Count :<%=count%></div>
 </div>
 <article>
 	<table border="1">

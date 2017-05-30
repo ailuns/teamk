@@ -61,12 +61,12 @@ int num = Integer.parseInt(request.getParameter("num"));
 	</div>
 	<!--상단 메뉴 -->
 	<div id="wrap">
-		<div id="board_head">
-			<div id="rvw_title">리뷰</div>
-			<div id="rvw_script">상품이나 패키지 후기를 쓰는 곳 입니다.</div>
+		<div id="article_head">
+			<div id="article_title">리뷰</div>
+			<div id="article_script">상품이나 패키지 후기를 쓰는 곳 입니다.</div>
 		</div>
 		<div id="clear"></div>
-		<div id="board">
+		<article>
 		<div id="board_content">
 <table id="content">
 <tr>
@@ -171,7 +171,7 @@ if(id!=null){
 <!-- ///////////////////댓글///////////////// -->
 </div>
 </div>
-</div>
+</article>
 	</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->
