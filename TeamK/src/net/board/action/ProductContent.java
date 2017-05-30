@@ -36,15 +36,23 @@ public class ProductContent implements Action {
 		}
 		int count = pdao.getProductCount(Integer.parseInt(car_num));
 		int pageSize= 10;//한페이지에 보여줄 글의 개수
+		int pageSize2= 5;
 		String pageNum = request.getParameter("pageNum");
+		String pageNum2 = request.getParameter("pageNum2");
 		if(pageNum == null){
 			pageNum="1";
 		}
+		if(pageNum2 == null){
+			pageNum2="1";
+		}
 		//시작행구하기 1 11 21 31 ... <=  pagenum, pageSize 조합
 		int currentPage = Integer.parseInt(pageNum);
+		int currentPage2 = Integer.parseInt(pageNum2);
 		int startRow = (currentPage-1)* pageSize+1;
+		int startRow2 = (currentPage2-1)* pageSize2+1;
 		// 현페이지가 몇페이지 인지 가져오기
 		int endRow = currentPage*pageSize;
+		int endRow2 = currentPage2*pageSize2;
 		List productList2 = null;
 		productList2 =cdao.getTypeList();
 		
@@ -53,10 +61,10 @@ public class ProductContent implements Action {
 		
 		List productList = null;
 		if(count!=0){
-			productList = pdao.getProdcutList(startRow, pageSize,Integer.parseInt(car_num));
+			productList = pdao.getProdcutList(startRow, pageSize,Integer.parseInt(car_num),num);
 		}
 		if(commentcount!=0){
-			commentList = comdao.getCommentList(startRow, pageSize,num);
+			commentList = comdao.getCommentList(startRow2, pageSize2,num);
 			//sql select * from board
 			// 최근글위로  re_ref 그룹별내림차순 정렬 re_seq오름차순 
 			// 	re_ref desc, re_seq asc
@@ -68,12 +76,16 @@ public class ProductContent implements Action {
 		
 		
 		int pageCount = count/pageSize+(count%pageSize==0?0:1); // 삼항연산자를 써서 나머지 부분을 0과 1을 구한다
+		int pageCount2 = commentcount/pageSize2+(commentcount%pageSize2==0?0:1);
 		//한화면에 보여줄 페이지 번호 개수
 		int pageBlock=10;
+		int pageBlock2=10;
 		// 시작 페이지 번호 구하기 1~10=>1 11~20=>11 21~30=>21
 		int startPage=((currentPage-1)/pageBlock)*pageBlock+1;
+		int startPage2=((currentPage2-1)/pageBlock2)*pageBlock2+1;
 		//끝페이지 번호 구하기
 		int endPage = startPage+pageBlock-1;
+		int endPage2 = startPage2+pageBlock2-1;
 		request.setAttribute("num", num);
 		request.setAttribute("count", count);
 		request.setAttribute("pageSize", pageSize);
@@ -90,8 +102,15 @@ public class ProductContent implements Action {
 		request.setAttribute("productList3", productList3);
 		request.setAttribute("commentcount", commentcount);
 		request.setAttribute("commentList", commentList);
-		
-		
+		request.setAttribute("pageSize2", pageSize2);
+		request.setAttribute("pageNum2", pageNum2);
+		request.setAttribute("currentPage2", currentPage2);
+		request.setAttribute("startRow2", startRow2);
+		request.setAttribute("endRow2", endRow2);
+		request.setAttribute("startPage2", startPage2);
+		request.setAttribute("endPage2", endPage2);
+		request.setAttribute("pageCount2", pageCount2);
+		request.setAttribute("pageBlock2", pageBlock2);
 		
 		
 		

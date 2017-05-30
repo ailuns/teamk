@@ -71,7 +71,7 @@ public class CommentDAO {
 			if (rs.next()) {
 				num = rs.getInt(1) + 1;
 			}
-			sql = "insert into comment(num,id,content,ref_fk,re_ref,re_lev,re_seq,date) values(?,?,?,?,?,?,?,now()) ";
+			sql = "insert into comment(num,id,content,ref_fk,re_ref,re_lev,re_seq,rock,date) values(?,?,?,?,?,?,?,?,now()) ";
 			pstmt =  con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.setString(2, comb.getId());
@@ -80,6 +80,7 @@ public class CommentDAO {
 			pstmt.setInt(5, num); // re_ref 답변글 그룹 == 일반글번호랑 같게
 			pstmt.setInt(6, 0);// re_lev 답변글 들여쓰기 일반글 들여쓰기 없음
 			pstmt.setInt(7, 0);// re_seq 답변글 순서 일반글 순서 맨위
+			pstmt.setInt(8, comb.getRock());
 			pstmt.executeUpdate();
 			// 4단계 실행
 		
@@ -212,7 +213,7 @@ public class CommentDAO {
 		return commentList;
 	}
 	
-	public int updateComment(CommentBean cb, int str) {
+	public int updateComment(CommentBean comb) {
 		// 1단계 드라이버로더
 		// 2단계 디비연결
 		// 3단게 sql 객체 생성
@@ -221,18 +222,19 @@ public class CommentDAO {
 		try {
 			
 			con = getConnection();
-			System.out.println(cb.getRef_fk());
+			
 			String sql2 = "select num from comment where num=?";
 			pstmt =  con.prepareStatement(sql2);
-			pstmt.setInt(1, str);
+			pstmt.setInt(1, comb.getNum());
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) { // 디비중에서 하나라도 맞을경우에 쓰면 나온다.
-				if (rs.getInt("num")== str ) {
-					String sql = "update comment set content =? WHERE  num = ? ";
+				if (rs.getInt("num")== comb.getNum()) {
+					String sql = "update comment set content =?, rock =? WHERE  num = ? ";
 					pstmt = (PreparedStatement) con.prepareStatement(sql);
 					// ? 값 저장 // 첫번째 물음표1, id에 입력될값
-					pstmt.setString(1, cb.getContent());// 두번째 물음표2, pass에 입력될값
-					pstmt.setInt(2, str);
+					pstmt.setString(1, comb.getContent());// 두번째 물음표2, pass에 입력될값
+					pstmt.setInt(2, comb.getRock());
+					pstmt.setInt(3, comb.getNum());
 					pstmt.executeUpdate();
 					return 1;
 				}else {
@@ -265,7 +267,7 @@ public class CommentDAO {
 	}
 	
 
-	public int deleteComment(int num, String id ,int str) {
+	public int deleteComment(CommentBean comb) {
 		// 1단계 드라이버로더
 		// 2단계 디비연결
 		// 3단게 sql 객체 생성
@@ -273,16 +275,16 @@ public class CommentDAO {
 		try {
 
 			con = getConnection();
-			String sql2 = "select id,num from comment where ref_fk= ?";
+			String sql2 = "select id,num from comment where id= ?";
 			pstmt =  con.prepareStatement(sql2);
-			pstmt.setInt(1, num);
+			pstmt.setString(1, comb.getId());
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) { // 디비중에서 하나라도 맞을경우에 쓰면 나온다.
-				if (rs.getString("id").equals(id)) {
+				if (rs.getString("id").equals(comb.getId())) {
 					String sql = "delete from comment where num = ? ";
 					pstmt = (PreparedStatement) con.prepareStatement(sql);
 					// ? 값 저장 // 첫번째 물음표1, id에 입력될값
-					pstmt.setInt(1, str);// 두번째 물음표2, pass에 입력될값
+					pstmt.setInt(1, comb.getNum());// 두번째 물음표2, pass에 입력될값
 					pstmt.executeUpdate();
 					return 1;
 				}else {
@@ -343,7 +345,7 @@ public class CommentDAO {
 			pstmt.executeUpdate();
 			//3 sql insert num 구현값 re_ref 그대로 re_lev+1 re_sql+1
 			//4 실행
-			sql = "insert into comment(num,id,content,ref_fk,re_ref,re_lev,re_seq,date) values(?,?,?,?,?,?,?,now()) ";
+			sql = "insert into comment(num,id,content,ref_fk,re_ref,re_lev,re_seq,rock,date) values(?,?,?,?,?,?,?,?,now()) ";
 			pstmt =  con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.setString(2, comb.getId());
@@ -351,7 +353,8 @@ public class CommentDAO {
 			pstmt.setInt(4, comb.getRef_fk());
 			pstmt.setInt(5, comb.getRe_ref()); // re_ref 기존글 그룹번호 같게
 			pstmt.setInt(6, comb.getRe_lev()+1);// re_lev 답변글 들여쓰기 일반글 들여쓰기 없음
-			pstmt.setInt(7, comb.getRe_seq()+1);// re_seq 답변글 순서 일반글 순서 맨위
+			pstmt.setInt(7, comb.getRe_seq()+1);// re_seq 답변글 순서 일반글 순서 맨
+			pstmt.setInt(8, comb.getRock());
 			pstmt.executeUpdate();
 			// 4단계 실행
 		} catch (Exception e) {
