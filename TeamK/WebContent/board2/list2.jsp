@@ -35,7 +35,8 @@ BoardDAO bdao = new BoardDAO();
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
 		<div id="board_head">
-			<div id="qna_title">Q&A 게시판</div>
+			<div id="qna_title"><img src="./img/qna2.png" width="35px" style="margin-right: 8px; vertical-align: bottom;">Q&A 게시판</div>
+			<div id="clear"></div>
 			<div id="qna_script">궁금한것은 질문해주세요.<span class="count">[전체글 개수 :<%=count%>]</span></div>
 		</div>
 		<div id="clear"></div>
