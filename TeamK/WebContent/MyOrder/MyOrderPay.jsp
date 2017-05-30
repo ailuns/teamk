@@ -56,6 +56,9 @@ function receive_setting(){
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
+	<div id="board_head">
+			<div id="rvw_title">결제 페이지</div>
+		</div>
 	<form action ="./MyOrderAddAction.mo" method ="post" name = "fr" onsubmit="return submit_check()">
 	<div id ="buyer_info">
 		<table>
@@ -86,7 +89,7 @@ function receive_setting(){
 	<div id = "packList">
 	<table border="1" id="packtable">
 	<caption>예약하신 패키지 상품 정보<br>
-		<span>예약하신 패키지 상품의 판플랫을 받아 보시겠습니까?
+		<span>예약하신 패키지 상품의 팜플랫을 받아 보시겠습니까?<br>
 			<input name = "po_receive_check" type ="radio" id ="po_receive_check" value="1" checked="checked">예
 			<input name = "po_receive_check" type ="radio" id ="po_receive_check" value="0">아니오
 		</span>
