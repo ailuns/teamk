@@ -238,12 +238,12 @@ if (id != null) {
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
-		<div id="member_head">
-			<div id="member_title">회원가입</div>
-			<div id="member_script"></div>
+		<div id="article_head">
+			<div id="article_title">회원가입</div>
+			<div id="article_script"></div>
 		</div>
 		<div id="clear"></div>
-		<div id="member">
+		<article>
 			<div id="insert_form">
 			<form action="./MemberJoinAction.me" method="post" name="fr" onsubmit="return winopen()">
 				<label for="id">아이디</label><input type="text" name="id" id="id" style="ime-mode:disabled"
@@ -283,7 +283,7 @@ if (id != null) {
 
   				
 			</div>
-		</div>
+		</article>
 	</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->

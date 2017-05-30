@@ -109,11 +109,12 @@
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
-<div id="board_head">
-<div id="rvw_title">
+<div id="article_head">
+<div id="article_title">
 	장바구니
 </div>
 </div>
+<article>
 	<form name="fr">
 	<div>
 		<h3>패키지</h3>
@@ -252,6 +253,7 @@
 	<input type="button" value="구입" onclick = "return basket_submit()">
 	<input type="button" value ="삭제" onclick = "return basket_delete()">
 	</form>
+	</article>
 		</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->

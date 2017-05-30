@@ -309,7 +309,7 @@ public class AdminDAO {
 		try{
 			conn= getconn();
 			sql = "select count(o_num) from thing_order "+
-					"where o_ti_num = ? and o_status < 3";
+					"where o_ti_num = ? and o_status < 9";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, ti_num);
 			rs = pstmt.executeQuery();
@@ -366,12 +366,13 @@ public class AdminDAO {
 		}
 		return ADThingList;
 	}
-	public void Ti_Status_Waiting_Update(int ti_num){
+	public void Ti_Status_Complet_Update(int ti_num){
 		int check = To_Trans_Search(ti_num);
+		System.out.println(check);
 		if(check ==0){
 			try{
 				conn =getconn();
-				sql = "update trade_info set ti_status = 9 where ti_num = ?";
+				sql = "update trade_info set ti_status = 10 where ti_num = ?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, ti_num);
 				pstmt.executeUpdate();

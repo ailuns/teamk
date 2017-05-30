@@ -111,7 +111,7 @@ img.ui-datepicker-trigger
 </div>
 <!--왼쪽 메뉴 -->
 	<div id="wrap">
-		<div id="package_head">
+		<div id="article_title">
 		패키지
 	</div>
 	<!--여행지 검색창 -->

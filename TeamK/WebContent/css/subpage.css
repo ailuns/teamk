@@ -1,11 +1,10 @@
 @CHARSET "UTF-8";
+/* Overall Components */
 div#clear {clear: both;}
 * {
 	box-sizing: border-box;
 	font-family: "나눔 고딕", "Noto Sans", sans-serif;
 }
-
-/* 페이징 */
 a#i{
 	margin: 0 6px;
 	color: #000;
@@ -27,8 +26,44 @@ input[type="button"]:HOVER, input[type="submit"]:HOVER {
 	font-weight: bold;
 	cursor: pointer;
 }
-table {
-	border-collapse: collapse;
+table {border-collapse: collapse;}
+article {
+	background-color: #fff;
+	padding: 30px 0;
+}
+div#article_head {
+	width: 1000px;
+	text-align: left;
+	background-color: white;
+}
+div#article_head span.count {
+	float: right;
+	font-size: 12px;
+	margin-right: 55px;
+}
+div#article_title, div#article_script{
+	height: 80px;
+	width: 1000px;
+	margin: 0 auto;
+	color: #fff;
+	padding-left: 100px;
+}
+div#article_title {
+	background-color: #fff;
+	padding: 30px 0 30px 0px;
+	border-bottom: 3px solid #06c;
+	font-size: 30px;
+	font-weight: bold;
+	color: #06c;
+	width: 900px;
+	float: right;
+}
+div#article_script {
+	background-color: #fff;
+	color: #333;
+	font-size: 15px;
+	padding-top: 5px;
+	height: 50px;
 }
 
 /* Main.jsp */
@@ -185,15 +220,7 @@ div#datepicker div table td#num, div#review_show div table td#num {width: 20px;}
 div#datepicker div table td#date, div#review_show div table td#date {width: 70px;}
 
 /* Package.jsp */
-div#package_head {
-	background-color: #fff;
-	padding-top: 5px;
-	font-size: 30px;
-	font-weight: lighter;
-	color: #06c;
-	text-align: left;
-	padding-left: 70px;
-}
+
 div#package_feat {
 	height: 300px;
 	width: 60%;
@@ -546,40 +573,23 @@ div#m_delete_form form input[type="text"],
 div#m_delete_form form input[type="password"] {width: 200px;}
 div#m_delete_form form input[type="button"] {}
 
-/* Board List.jsp */
-div#member_head, div#board_head {
+/* Member List.jsp */
+table#memberList {
 	width: 1000px;
 	text-align: left;
-	background-color: white;
-}
-div#board_head span.count {
-	float: right;
-	font-size: 12px;
-	margin-right: 55px;
-}
-div#member_title, div#member_script, div#qna_title, div#qna_script, div#rvw_title, div#rvw_script, div#package_head{
-	height: 80px;
-	width: 1000px;
-	margin: 0 auto;
-	color: #fff;
-	padding-left: 100px;
-}
-div#member_title, div#qna_title, div#rvw_title, div#package_head {
 	background-color: #fff;
-	padding: 30px 0 30px 0px;
-	border-bottom: 3px solid #06c;
-	font-size: 30px;
-	font-weight: bold;
-	color: #06c;
-	width:900px;
-	float: right;
 }
-div#member_script, div#qna_script, div#rvw_script {
-	background-color: #fff;
-	color: #333;
-	font-size: 15px;
-	padding-top: 5px;
+table#memberList th {border-bottom: 2px solid #06c;}
+table#memberList td {
+	border-bottom: 1px solid #06c;
+	padding: 5px 0;
 }
+table#memberList td#imsi {
+	border-bottom: 1px solid #ddd;
+}
+
+/* Board List.jsp */
+
 div#board {
 	width: 60%;
 	min-width: 1000px;
@@ -589,38 +599,38 @@ div#board {
 	border-bottom: 3px solid #06c;
 	min-height: 150px;
 }
-div#board div#board_list {
+div#board_list {
 	width: 90%;
-	margin: 10px auto;
+	margin: 0 auto;
 }
-div#board div#board_list table {
+div#board_list table {
 	border-collapse: collapse;
 	margin-bottom: 20px;
 	font-size: 15px;
 	width: 100%;
 }
-div#board div#board_list table tr {
+div#board_list table tr {
 	line-height: 1.75em;
 	border-bottom: 1px solid #ddd;
 }
-div#board div#board_list table span {
+div#board_list table span {
 	text-decoration: bold;
 }
-div#board div#board_list table tr:HOVER {background-color: #eee;}
-div#board div#board_list table th#num {width: 50px;}
-div#board div#board_list table th#cate {width: 100px;}
-div#board div#board_list table th#date {width: 100px;}
-div#board div#board_list table th#readcount {width: 50px;}
-div#board div#board_list table th#name {width: 100px;}
-div#board div#board_list table td#cate {font-weight: bold;}
-div#board div#board_list table td#title {
+div#board_list table tr:HOVER {background-color: #eee;}
+div#board_list table th#num {width: 50px;}
+div#board_list table th#cate {width: 100px;}
+div#board_list table th#date {width: 100px;}
+div#board_list table th#readcount {width: 50px;}
+div#board_list table th#name {width: 100px;}
+div#board_list table td#cate {font-weight: bold;}
+div#board_list table td#title {
 	text-align: left;
 	max-width: 200px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
-div#board div#board_list table a {
+div#board_list table a {
 	text-decoration: none;
 	color: #000;
 }
@@ -629,9 +639,7 @@ div#board_menu_bar input[type="button"] {
 	margin: 0 5px;
 }
 div#board_menu_bar form {float: right;}
-div#board_menu_bar form input[type="text"] {
-	width: 150px;
-}
+div#board_menu_bar form input[type="text"] {width: 150px;}
 div#board_menu_bar form input[type="text"], div#board_menu_bar form select {
 	border: 1px solid #06c;
 	background-color: #fff;
@@ -641,67 +649,67 @@ div#board_menu_bar form input[type="text"]:FOCUS, div#board_menu_bar form select
 	cursor: pointer;
 }
 /*Board Content.jsp*/
-div#board div#board_content {
+div#board_content {
 	width: 90%;
 	margin: 20px auto;
 }
-div#board div#board_content table {
+div#board_content table {
 	border-collapse: collapse;
 	width: 100%;
 }
-div#board div#board_content table tr {border-bottom: 1px solid #ccc;}
-div#board div#board_content table td#num {
+div#board_content table tr {border-bottom: 1px solid #ccc;}
+div#board_content table td#num {
 	width: 90px;
 	text-align: left;
 }
-div#board div#board_content table td#readcount {
+div#board_content table td#readcount {
 	width: 100px;
 	text-align: right;
 }
-div#board div#board_content table td#subject {
+div#board_content table td#subject {
 	text-align: left;
 	font-size: 20px;
 	font-weight: bold;
 	padding: 10px 0;
 	
 }
-div#board div#board_content table#content td#content {
+div#board_content table#content td#content {
 	max-width: 600px;
 	text-align: justify;
 	font-size: 15px;
 	font-weight: normal;
 	min-height: 300px;
 }
-div#board div#board_content table td#content img {max-width: 100%;}
-div#board div#board_content table#reply {text-align: justify;}
-div#board div#board_content table#reply td#name {
+div#board_content table td#content img {max-width: 100%;}
+div#board_content table#reply {text-align: justify;}
+div#board_content table#reply td#name {
 	width: 160px;
 	font-weight: bold;
 	border-right: 1px solid #ddd;
 }
-div#board div#board_content table#reply td#date {
+div#board_content table#reply td#date {
 	width: 70px;
 	font-size: 12px;
 }
-div#board div#board_content table#reply td#content {padding-left: 10px;}
-div#board div#board_content table#reply td#delete {
+div#board_content table#reply td#content {padding-left: 10px;}
+div#board_content table#reply td#delete {
 	width: 30px;
 }
-div#board div#board_content table#reply td#delete form input[type="button"] {
+div#board_content table#reply td#delete form input[type="button"] {
 	border: 1px solid #fff;
 	background-color: #fff;
 }
-div#board div#board_content table#reply td#delete form input[type="button"]:HOVER {
+div#board_content table#reply td#delete form input[type="button"]:HOVER {
 	color: #f00;
 	cursor: pointer;
 }
-div#board div#board_content form#reply {
+div#board_content form#reply {
 	width: 100%;
 	height: 60px;
 	position: relative;
 	margin: 10px 0;
 }
-div#board div#board_content form#reply span {
+div#board_content form#reply span {
 	position: absolute;
 	display: block;
 	height: 60px;
@@ -712,13 +720,13 @@ div#board div#board_content form#reply span {
 	padding-top: 20px;
 	text-align: left;
 }
-div#board div#board_content form#reply textarea {
+div#board_content form#reply textarea {
 	position: absolute;
 	left: 160px;
 	width: 625px;
 }
-div#board div#board_content form#reply input[type="submit"],
-div#board div#board_content form#reply input[type="button"] {
+div#board_content form#reply input[type="submit"],
+div#board_content form#reply input[type="button"] {
 	height: 60px;
 	width: 80px;
 	position: absolute;
@@ -727,32 +735,32 @@ div#board div#board_content form#reply input[type="button"] {
 }
 
 /*Board Write.jsp*/
-div#board div#board_write {
+div#board_write {
 	width: 800px;
 	margin: 20px auto;
 }
-div#board div#board_write form {width: 100%; text-align: left;}
-div#board div#board_write form label {
+div#board_write form {width: 100%; text-align: left;}
+div#board_write form label {
 	width: 100px;
 	float: left;
 	margin: 2px 20px 2px 0;
 	text-align: left;
 }
-div#board div#board_write form input {
+div#board_write form input {
 	margin: 2px 0;
 	width: 679px;
 }
-div#board div#board_write form textarea {width: 797px;}
-div#board div#board_write form input[type="submit"],
-div#board div#board_write form input[type="button"] {width: 150px;}
+div#board_write form textarea {width: 797px;}
+div#board_write form input[type="submit"],
+div#board_write form input[type="button"] {width: 150px;}
 
 
 /*Board Delete.jsp*/
-div#board div#board_delete {
+div#board_delete {
 	margin: 100px auto;
 	font-weight: bold;
 }
-div#board div#board_delete form input[type="submit"] {
+div#board_delete form input[type="submit"] {
 	width: 150px;
 	font-size: 15px;
 	font-weight: bold;
@@ -760,7 +768,7 @@ div#board div#board_delete form input[type="submit"] {
 	color: #fff;
 	border: 1px solid #000;
 }
-div#board div#board_delete form input[type="submit"]:HOVER {cursor: pointer;}
+div#board_delete form input[type="submit"]:HOVER {cursor: pointer;}
 
 /*QnA Board List.jsp*/
 
@@ -796,10 +804,8 @@ div#packList caption span input {
 	margin: 0 10px;
 }
 div#receive_info input[type="button"] {margin-left: 90px;}
-td.trade_type1 *, td.trade_type2 *, td.trade_type3 * {
-	border: 1px dotted #ddd;
-}
-td.trade_type1 div {
-	width: 100%;
-}
+td.trade_type1 div, td.trade_type2 div, td.trade_type3 div,
+div.trade_type1, div.trade_type2 {width: 100%;}
 td.trade_type1 div label {margin-right: 20px;}
+div.trade_type1, div.trade_type2 {border-top: none !important;}
+div.agree_li_view {border: 1px solid #ddd;}

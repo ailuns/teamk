@@ -30,16 +30,16 @@
 		String ty = (String) request.getAttribute("ty");
 		List<interestBEAN> MyInterest = (List<interestBEAN>) request.getAttribute("MyInterest");
 	%>
-
-	<h1>
-		<%=type%></h1>
-	<h4>
-		subject Count :
-		<%=count%></h4>
+	<div id="article_head">
+<div id="article_title"><%=type%></div>
+<div id="article_script">subject Count :<%=count%></div>
+</div>
+<article>
 	<table border="1">
 		<tr>
 			<th>Name</th>
 			<th>Cost</th>
+			<th></th>
 		</tr>
 		<%
 			for (int i = 0; i < MyInterest.size(); i++) {
@@ -76,6 +76,7 @@
 		}
 		} 
 	%><br>
+	</article>
 		</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->

@@ -91,12 +91,12 @@ function submit() {
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
-		<div id="member_head">
-			<div id="member_title">회원정보수정</div>
-			<div id="member_script">회원님의 정보를 수정합니다.</div>
+		<div id="article_head">
+			<div id="article_title">회원정보수정</div>
+			<div id="article_script">회원님의 정보를 수정합니다.</div>
 		</div>
 		<div id="clear"></div>
-		<div id="member">
+		<article>
 			<div id="m_update_form">
 				<form action="./MemberUpdateAction.me" method="post" name="fr" onsubmit="return submit()">
 					
@@ -128,7 +128,7 @@ function submit() {
 					
 				</form>
 			</div>
-		</div>
+		</article>
 	</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->

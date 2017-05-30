@@ -56,9 +56,10 @@ function receive_setting(){
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
-	<div id="board_head">
-			<div id="rvw_title">결제 페이지</div>
+	<div id="article_head">
+			<div id="article_title">결제 페이지</div>
 		</div>
+	<article>
 	<form action ="./MyOrderAddAction.mo" method ="post" name = "fr" onsubmit="return submit_check()" class="gyeolje">
 	<div id ="buyer_info">
 		<table>
@@ -513,7 +514,7 @@ function selectreset(){
 <div class="trade_type2">
 	<label><input type ="checkbox" name = "mobile_agree" checked="checked">
 		결제 대행 서비스 약관에 모두 동의 합니다.</label><br>
-		<span id="mobile_agree_ul_select" class = "agree_ul_select">내용보기▼</span>
+		<span id="mobile_agree_ul_select" class = "agree_ul_select">내용 보기▼</span>
 		<span id="mobile_agree_ul_selected" class="agree_ul_selected">내용보기▲</span>
 		<ul class="agree_ul" id="mobile_agree_ul">
 				<li>서비스 이용약관 동의<span id="mobile_agree_li_select1" class="agree_li_select"
@@ -544,6 +545,7 @@ function selectreset(){
 
 <input type = "submit" value="구매하기" id="fr_submit"><input type="button" value="취소" onclick="history.back();">
 </form>
+</article>
 	</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->

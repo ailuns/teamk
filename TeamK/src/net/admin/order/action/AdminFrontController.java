@@ -54,7 +54,6 @@ public class AdminFrontController extends HttpServlet{
 			}
 		}else if(command.equals("/Pack_res.ao")){
 			action = new Pack_Res();
-			System.out.println("call");
 			try {
 				afo = action.execute(request, response);
 			} catch (Exception e) {
