@@ -279,7 +279,16 @@ $(document).ready(function() {
 		$('#card_agree_ul').show();
 	});
 	$('#card_agree_ul_selected').on('click',function(){
-		selectreset();
+		$('.agree_li_view').hide();
+		$('#card_agree_ul').hide();
+		$('#mobile_agree_ul').hide();
+		$('.agree_ul_selected').hide();
+		$('.agree_li_selected').hide();
+		$('.agree_li_select').show();
+		$('.agree_ul_select').show();
+		$('#select_bank option:eq(0)').prop('selected',true);
+		$('#cash_receipt_check').prop('checked',false);
+		$('#cash_receipt').hide();
 	});
 	$('#mobile_agree_ul_select').on('click',function(){
 		$('#mobile_agree_ul_selected').show();

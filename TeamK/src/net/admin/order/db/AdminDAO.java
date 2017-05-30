@@ -286,7 +286,6 @@ public class AdminDAO {
 	}
 	
 	public void Trans_Num_Insert(String to_num, String Trans_Num){
-		System.out.println(to_num+" > "+Trans_Num);
 		try{
 			conn = getconn();
 			sql = "update thing_order set o_trans_num =?, o_status=3 where o_num = ?";
