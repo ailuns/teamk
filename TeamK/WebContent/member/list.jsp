@@ -38,25 +38,25 @@
 
 		List memberList = (List) request.getAttribute("memberList");
 	%>
-	<table border="1">
+	<table id="memberList">
 		<tr>
-			<td>아이디</td>
-			<td>이름</td>
-			<td>주소</td>
-			<td>상세주소</td>
-			<td>전화번호</td>
-			<td>이메일</td>
+			<th>아이디</th>
+			<th>이름</th>
+			<th>주소 / 상세 주소</th>
+			<th>전화번호 / 이메일</th>
 		</tr>
 		<%
 			for (int i = 0; i < memberList.size(); i++) {
 				MemberBean mb = (MemberBean) memberList.get(i);
 		%>
 		<tr>
-			<td><%=mb.getId()%></td>
-			<td><%=mb.getName()%></td>
-			<td><%=mb.getAddress1()%></td>
+			<td rowspan="2"><%=mb.getId()%></td>
+			<td rowspan="2"><%=mb.getName()%></td>
+			<td id="imsi"><%=mb.getAddress1()%></td>
+			<td id="imsi"><%=mb.getMobile()%></td>
+		</tr>
+		<tr>
 			<td><%=mb.getAddress2()%></td>
-			<td><%=mb.getMobile()%></td>
 			<td><%=mb.getEmail()%></td>
 		</tr>
 

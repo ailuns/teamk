@@ -27,8 +27,10 @@ input[type="button"]:HOVER, input[type="submit"]:HOVER {
 	font-weight: bold;
 	cursor: pointer;
 }
-table {
-	border-collapse: collapse;
+table {border-collapse: collapse;}
+article {
+	background-color: #fff;
+	padding: 30px 0;
 }
 
 /* Main.jsp */
@@ -545,6 +547,21 @@ div#m_delete_form form input[type="text"],
 div#m_delete_form form input[type="password"] {width: 200px;}
 div#m_delete_form form input[type="button"] {}
 
+/* Member List.jsp */
+table#memberList {
+	width: 1000px;
+	text-align: left;
+	background-color: #fff;
+}
+table#memberList th {border-bottom: 2px solid #06c;}
+table#memberList td {
+	border-bottom: 1px solid #06c;
+	padding: 5px 0;
+}
+table#memberList td#imsi {
+	border-bottom: 1px solid #ddd;
+}
+
 /* Board List.jsp */
 div#member_head, div#board_head {
 	width: 1000px;
@@ -795,5 +812,5 @@ div#receive_info input[type="button"] {margin-left: 90px;}
 td.trade_type1 div, td.trade_type2 div, td.trade_type3 div,
 div.trade_type1, div.trade_type2 {width: 100%;}
 td.trade_type1 div label {margin-right: 20px;}
-div.trade_type1, div.trade_type2,
-div.trade_type1 *, div.trade_type2 * {border-top: none !important;}
+div.trade_type1, div.trade_type2 {border-top: none !important;}
+div.agree_li_view {border: 1px solid #ddd;}
