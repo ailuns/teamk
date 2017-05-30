@@ -216,7 +216,8 @@ if(count!=0){
 		BoardBean bb=boardList.get(i);
 		%>
 <tr><td id="num"><%=bb.getRe_ref()%></td><td class="contxt">
-<a href="./BoardContent.bo?num=<%=bb.getNum()%>&pageNum=1"><%=bb.getSubject()%>[<%=bdao.getBoardReplyCount(bb.getNum())%>]</a></td>
+<a href="./BoardContent.bo?num=<%=bb.getNum()%>&pageNum=1"><%=bb.getSubject()%>
+<%if(bdao.getBoardReplyCount(bb.getNum())!=0){%>[<%=bdao.getBoardReplyCount(bb.getNum())%>]<%}%></a></td>
     <td id="date"><%=sdf.format(bb.getDate())%></td></tr>		
 		<%
 	}
@@ -234,7 +235,8 @@ if(count!=0){
 		BoardBean bb=boardList2.get(i);
 		%>
 <tr><td id="num"><%=bb.getRe_ref()%></td><td class="contxt">
-<a href="./BoardContent2.bo?num=<%=bb.getNum()%>&pageNum=1"><%=bb.getSubject()%>[<%=bdao.getBoardReplyCount(bb.getNum())%>]</a></td>
+<a href="./BoardContent2.bo?num=<%=bb.getNum()%>&pageNum=1"><%=bb.getSubject()%>
+<%if(bdao.getBoardReplyCount(bb.getNum())!=0){%>[<%=bdao.getBoardReplyCount(bb.getNum())%>]<%}%></a></td>
     <td id="date"><%=sdf.format(bb.getDate())%></td></tr>		
 		<%
 	}
