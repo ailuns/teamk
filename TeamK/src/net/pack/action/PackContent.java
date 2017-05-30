@@ -87,21 +87,15 @@ public class PackContent implements Action{
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("pagesize", pagesize);
 		
-		System.out.println("count >> " + count);
-		System.out.println("repageNum >> " + repageNum);
-		System.out.println("pageCount >> " + pageCount);
-		System.out.println("pageBlock >> " + pageBlock);
-		System.out.println("startPage >> " + startPage);
-		System.out.println("endPage >> " + endPage);
-		System.out.println("currentPage >> " + currentPage);
-		System.out.println("pagesize >> " + pagesize);
-				
-		
-		
-		
-		
-		
-		
+//		System.out.println("count >> " + count);
+//		System.out.println("repageNum >> " + repageNum);
+//		System.out.println("pageCount >> " + pageCount);
+//		System.out.println("pageBlock >> " + pageBlock);
+//		System.out.println("startPage >> " + startPage);
+//		System.out.println("endPage >> " + endPage);
+//		System.out.println("currentPage >> " + currentPage);
+//		System.out.println("pagesize >> " + pagesize);
+
 		//ActoinForward 이동정보 담아서 로그인 이동
 		ActionForward forward = new ActionForward();
 		forward.setPath("./pack/Package_content.jsp");
