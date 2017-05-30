@@ -118,7 +118,7 @@ if(rcount!=0){lrb=(List)request.getAttribute("lrb");}
 
 %>
 <div id="replyUpdate">
-<p>댓글(<%=rcount%>개)</p>
+<p>답변(<%=rcount%>개)</p>
 <table id="reply">
     <%if(rcount!=0){
     for(int i=0; i<lrb.size(); i++){
