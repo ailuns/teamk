@@ -25,9 +25,9 @@ public class Res_Cancel implements Action{
 		long mul_date = (startDate.getTime()-endDate.getTime())/(24 * 60 * 60 * 1000);
 		int cost = mtib.getCost();
 		String memo = "";
-		if(mul_date<0){
+		if(mul_date<=0){
 			cost = 0;
-			memo = "0%";
+			memo = "100%";
 		}
 		else if(mul_date<2){
 			cost *= 0.5;

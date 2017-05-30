@@ -37,7 +37,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
 				$('#bank_number').select();
 				return false;
 			}
-		}else return false;
+		}
 	}
 	
 </script>
@@ -46,7 +46,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
 <body>
 <div align="center">
 <h4>패키지 정보</h4>
-<form action = "./Pack_Res_Action.ao" method = "post" onsubmit="return bankcheck()">
+<form action = "./Res_Cancel_Action.mo" method = "post" onsubmit="return bankcheck()">
 <table>
 	<tr>
 		<td>예약번호 </td>
@@ -58,7 +58,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
 	</tr>
 	<tr>
 		<td>출발 날짜</td>
-		<td><%=sdf.format(mtib.getTrade_date()) %></td>
+		<td><%=sdf.format(mtib.getDate()) %></td>
 	</tr>
 	<tr>
 		<td>예약 인원</td>
