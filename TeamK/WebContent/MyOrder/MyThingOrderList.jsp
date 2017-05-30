@@ -96,7 +96,7 @@ function thing_exchange(num, ti_num){
 					<td>
 						<input type="button" value="구매 완료" 
 							onclick="complet(<%=mtb.getNum()%>,<%=mtib.getTi_num()%>)"><br>
-						<input type="button" value="교환 및 환불" onclick="thing_exchange()">
+						<input type="button" value="교환 및 환불" onclick="thing_exchange(<%=mtb.getNum()%>,<%=mtib.getTi_num()%>)">
 					</td>
 					<%} %>
 				</tr>

@@ -650,4 +650,36 @@ public class ModDAO {
 		}
 		
 	}
+	public ModTradeInfoBEAN TO_Cancel_or_Exchange(int o_num){
+		ModTradeInfoBEAN mtib = new ModTradeInfoBEAN();
+		try{
+			conn = getconn();
+			sql ="select A.*, B.subject, B.size, B.color,B.cost,C.ti_trade_type "
+					+"from thing_order A left outer join(thing B cross join trade_info C) "
+					+"on(A.ori_num =B.num and A.o_ti_num = C.ti_num) "
+					+"where A.o_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, o_num);
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				mtib.setSubject(rs.getString("subject"));
+				mtib.setSize(rs.getString("size"));
+				mtib.setColor(rs.getString("color"));
+				mtib.setThing_count(rs.getInt("o_count"));
+				mtib.setTotal_cost(rs.getInt("o_cost"));
+				mtib.setCost(rs.getInt("cost"));
+				mtib.setTrade_type(rs.getString("ti_trade_type"));
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}return mtib;
+	}
 }
