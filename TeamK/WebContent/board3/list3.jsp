@@ -45,19 +45,28 @@ BoardDAO bdao = new BoardDAO();
 		<div id="board_list">
 <table>
 <br>
-<tr><th id="num">번호</th><th id="title">제목</th><th id="name">작성자</th><th id="date">날짜</th><th id="readcount">조회수</th></tr>
+<tr>
+ <th id="num">번호</th>
+ <th></th>
+ <th id="title">제목</th>
+ <th id="name">작성자</th>
+ <th id="date">날짜</th>
+ <th id="readcount">조회수</th>
+</tr>
     <%
     for(int i=0; i<boardList3.size(); i++){
     	//자바빈(BoardBean) 변수 =배열한칸 접근  배열변수.get()
     	BoardBean bb = (BoardBean)boardList3.get(i);
     			%>
-<tr><td><%=bb.getRe_ref()%></td> <%--글 번호 --%>
-<td id="title"><a href="./BoardContent3.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>"><%=bb.getSubject()%></a><%--글 제목 --%>
-<%if(bdao.getFile(bb.getNum())!=null){%><img src="./img/disk.png" width="15" height="15>"><%}%></td>
-<td>관리자</td><%--작성자 Id --%>
-<td><%=bb.getDate()%></td><%--작성 날짜 --%>
-<td><%=bb.getReadcount() %></td><%--조회수 --%>
-    </tr>
+<tr>
+ <td><%=bb.getRe_ref()%></td> <%--글 번호 --%>
+ <td><strong>[<%=bb.getType_select()%>]</strong></td>
+ <td id="title"><a href="./BoardContent3.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>"><%=bb.getSubject()%></a><%--글 제목 --%>
+ <%if(bdao.getFile(bb.getNum())!=null){%><img src="./img/disk.png" width="15" height="15>"><%}%></td>
+ <td>관리자</td><%--작성자 Id --%>
+ <td><%=bb.getDate()%></td><%--작성 날짜 --%>
+ <td><%=bb.getReadcount() %></td><%--조회수 --%>
+</tr>
     			<%
     }
     %>

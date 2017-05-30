@@ -71,11 +71,22 @@ int num = Integer.parseInt(request.getParameter("num"));
 		<div id="board">
 		<div id="board_content">
 <table id="content">
-<tr><td id="num"><%=bb.getRe_ref()%></td><td id="date"><%=bb.getDate()%></td><td id="readcount">조회수: <%=bb.getReadcount()%></td></tr>
-<tr><td colspan="2" id="subject"> 
-<%=bb.getSubject()%></td><td id="id"><%=bb.getId()%></td></tr>
-<%if(id!=null){if(id.equals("admin")){%><tr><td id="num">메일주소 : <%=bb.getEmail()%></td></tr><%}}%>
-<tr><td colspan="3" id="content"><br><br><%=bb.getContent()%><br><br></td></tr>
+ <tr>
+  <td id="num"><%=bb.getRe_ref()%></td>
+  <td id="date"><%=bb.getDate()%></td>
+  <td id="readcount">조회수: <%=bb.getReadcount()%></td>
+ </tr>
+ <tr>
+  <td colspan="2" id="subject"><%=bb.getSubject()%></td>
+  <td id="id"><%=bb.getId()%></td>
+ </tr>
+ <%if(id!=null){if(id.equals("admin")){%>
+ <tr>
+  <td id="num">메일주소 : <%=bb.getEmail()%></td>
+ </tr><%}}%>
+ <tr>
+  <td colspan="3" id="content"><br><br><%=bb.getContent()%><br><br></td>
+ </tr>
 
 <%--첨부파일이 있을때만 첨부파일 표시--%>
 <%if(bb.getFile1()!=null){%>
@@ -118,16 +129,16 @@ if(rcount!=0){lrb=(List)request.getAttribute("lrb");}
 
 %>
 <div id="replyUpdate">
-<p>댓글(<%=rcount%>개)</p>
+<p>답변(<%=rcount%>개)</p>
 <table id="reply">
     <%if(rcount!=0){
     for(int i=0; i<lrb.size(); i++){
     	//자바빈(BoardBean) 변수 =배열한칸 접근  배열변수.get()
     	BoardReplyBean rb = (BoardReplyBean)lrb.get(i);%>
 <tr>
-<td id="name"><%=rb.getId()%></td>
-<td id="rContent"><%=rb.getContent()%></td>
-<td id="delete"><%
+ <td id="name"><%=rb.getId()%></td>
+ <td id="rContent"><%=rb.getContent()%></td>
+ <td id="delete"><%
 if(id!=null){
 	if(id.equals(rb.getId())||id.equals("admin")){ 
 %>
@@ -135,8 +146,9 @@ if(id!=null){
 <%--리플삭제버튼 replydelete로 AJAX 실행 --%>
 <input type="button" value="×" onclick="replydelete(<%=rb.getNum()%>)">
 </form>
-<%}}%></td>
-<td id="date"><%=rb.getDate()%></td>
+<%}}%>
+ </td>
+ <td id="date"><%=rb.getDate()%></td>
 </tr>
     <%
     }}

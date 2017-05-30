@@ -294,9 +294,6 @@ public class ModDAO {
 				case 2:
 					status_text = "결제 완료";
 					break;
-				case 3:
-					status_text = "환불 완료";
-					break;
 				case 9:
 					status_text = "대기중";
 					break;
@@ -448,15 +445,16 @@ public class ModDAO {
 				mtib.setSize(rs.getString("o_size"));
 				mtib.setTrade_date(rs.getTimestamp("o_date"));
 				mtib.setTrans_num(rs.getString("o_trans_num"));
+				mtib.setStatus(rs.getInt("o_status"));
 				String statustext = "";
 				switch(rs.getInt("o_status")){
-					case 0: statustext = "환불 완료";break;
 					case 1: statustext = "입금 확인중"; break;
 					case 2: statustext = "배송 준비중"; break;
 					case 3: statustext = "배송중";break;
 					case 4: statustext = "배송완료";break;
 					case 5: statustext = "구매완료";break;
 					case 6: statustext = "반송중";break;
+					case 9: statustext = "환불 완료";break;
 					case 10: statustext = "완료";break;
 				}
 				mtib.setStatus_text(statustext);

@@ -599,6 +599,9 @@ div#board div#board_list table tr {
 	line-height: 1.75em;
 	border-bottom: 1px solid #ddd;
 }
+div#board div#board_list table span {
+	text-decoration: bold;
+}
 div#board div#board_list table tr:HOVER {background-color: #eee;}
 div#board div#board_list table th#num {width: 50px;}
 div#board div#board_list table th#cate {width: 100px;}

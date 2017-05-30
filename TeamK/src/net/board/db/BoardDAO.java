@@ -141,12 +141,13 @@ public class BoardDAO {
 			sql="select max(re_ref) from board where type=3";
 			pstmt = con.prepareStatement(sql);
 			rs=pstmt.executeQuery();
+			String gong="공지사항";
 			if(rs.next()){
 				re_ref=rs.getInt(1)+1;
 			}
 			
 			//3 sql insert now()
-			sql="insert into board(num,id,subject,content,readcount,date,file1,file2,file3,file4,file5,type,re_ref,email) values(?,?,?,?,?,now(),?,?,?,?,?,?,?,?)";
+			sql="insert into board(num,id,subject,content,readcount,date,file1,file2,file3,file4,file5,type,re_ref,email,type_select) values(?,?,?,?,?,now(),?,?,?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1,num);
 			pstmt.setString(2,bb.getId());
@@ -161,6 +162,7 @@ public class BoardDAO {
 			pstmt.setInt(11,bb.getType());
 			pstmt.setInt(12,re_ref); //re_ref 답변글 들여쓰기 일반글 들여쓰기 없음
 			pstmt.setString(13,bb.getEmail());
+			pstmt.setString(14,gong);
 			//4  실행
 			pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -585,6 +587,7 @@ public List getBoardList3(int startRow,int pageSize){
 	    	bb.setFile5(rs.getString("file5"));
 	    	bb.setType(rs.getInt("type"));
 	    	bb.setRe_ref(rs.getInt("re_ref"));
+	    	bb.setType_select(rs.getString("type_select"));
 	    	
 	    	//boardList한칸저장
 	    	boardList3.add(bb);

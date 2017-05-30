@@ -63,56 +63,52 @@ function receive_change(i,ti_num){
 	%>
 	<div>
 		<form>
-			<h3>주문 번호 : <%=mtib.getTi_num() %></h3>
-			<h4> 상태 : <%=mtib.getStatus_text() %></h4>
-			<% 
-			if(mtbList.size()!=0){%>
-				<h5>주문한 상품 목록</h5>
+			<h4 align="left">주문 번호 : <%=mtib.getTi_num() %></h4>
 				<table border = "1">
 					<%for(int j =0; j< mtbList.size();j++){
 						ModTradeInfoBEAN mtb = mtbList.get(j);%>
-					<tr onclick="location.href='#'">
-						<td><%=mtb.getTrade_num() %></td>
+					<tr>
+						
 						<td><%=mtb.getImg() %></td>
-						<td><%=mtb.getSubject() %></td>
-						<td><%=mtb.getIntro() %></td>
-						<td><%=mtb.getColor() %></td>
-						<td><%=mtb.getSize() %></td>
+						<td><%=mtb.getSubject() %><br>
+						<%=mtb.getIntro() %></td>
+						<td><%=mtb.getColor() %>, <%=mtb.getSize() %></td>
 						<td><%=mtb.getThing_count()%>개</td>
 						<td><%=mtb.getCost() %>원</td>
+						<td><%=mtb.getStatus_text() %></td>
+						<%if(mtb.getStatus()==3){ %>
+						<td><%=mtb.getTrans_num() %></td>
+						<%}else if(mtb.getStatus()==4){ %>
+						<td>
+							<input type="button" value="구매 완료" onclick="complet()"><br>
+							<input type="button" value="교환 및 환불" onclick="thing_exchange()">
+						</td>
+						<%} %>
 					</tr>
 					<%} %>
-				</table>
+				<tr>
+					<td>주문 정보</td>
+					<td id="receive_name<%=i%>"><%=mtib.getName() %></td>
+					<td id="receive_mobile<%=i%>"><%=mtib.getMobile() %></td>
+					<td><%=mtib.getTotal_cost() %>원</td>
+					<td><%=sdf.format(mtib.getTrade_date()) %></td>
+				</tr>
+				<tr>
+					<td>배송지</td>
+					<td id="receive_addr<%=i%>" colspan="6">[<%=mtib.getPostcode() %>]
+						<%=mtib.getAddress1() %> <%=mtib.getAddress2() %></td>
+					<%if(mtib.getStatus()<3){ %>
+					<td id="receive_change<%=i %>">
+						<input type= "button" value="배송지 변경" onclick = "receive_change(<%=i%>,<%=mtib.getTi_num()%>)"></td>
+					<%} %>
+				</tr>
+				<%if(mtib.getMemo().length()!=0){ %>
+					<tr>
+						<td>배송 요청사항</td>
+						<td id="receive_memo<%=i%>" colspan="6"><%=mtib.getMemo().replace("\r\n", "<br>") %></td>
+					</tr>
 				<%} %>
-				<h5>결제 정보</h5>
-				<table border ="1">
-					<tr>
-						<td><%=mtib.getTrade_type() %></td>
-						<td><%=mtib.getPayer() %></td>
-						<td><%=mtib.getStatus_text()%></td>
-						<td><%=sdf.format(mtib.getTrade_date()) %></td>
-						<td><%=mtib.getTotal_cost() %>원</td>
-					</tr>
-				</table>
-				<h5><span class="receive_info_select" 
-						id="receive_info_select<%=i %>" onclick ="receive_info_select(<%=i%>)">배송지 정보▼</span>
-					<span class="receive_info_selected" 
-						id="receive_info_selected<%=i %>"onclick ="receive_info_hide()" >배송지 정보▲</span></h5>
-				<table class = "receive_info"
-					id = "receive_info<%=i%>" border ="1">
-					<tr>
-						<td id="receive_name<%=i%>"><%=mtib.getName() %></td>
-						<td id="receive_mobile<%=i%>"><%=mtib.getMobile() %></td>
-						<td id="receive_addr<%=i%>">[<%=mtib.getPostcode() %>]
-							<%=mtib.getAddress1() %> <%=mtib.getAddress2() %></td>
-						<td id="receive_status<%=i%>"><%=mtib.getStatus_text()%></td>
-						<%if(mtib.getStatus()<3){ %>
-						<td id="receive_change<%=i %>">
-							<input type= "button" value="배송지 변경" onclick = "receive_change(<%=i%>,<%=mtib.getTi_num()%>)"></td>
-						<%} %>
-						<%if(mtib.getMemo().length()!=0){ %><td id="receive_memo<%=i%>"><%=mtib.getMemo() %></td>
-						<%} %>
-					</tr>
+				
 				</table>
 			</form>
 		</div>
@@ -143,7 +139,7 @@ function receive_change(i,ti_num){
 	<%
 		}
 		}
-	%>
+	%><br>
 	<input type = "button" value = "내주문" onclick="location.href='./MyOrderList.mo'">
 		</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
