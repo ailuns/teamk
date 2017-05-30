@@ -24,8 +24,7 @@ public class PackSearchAction implements Action{
 		String endDate = request.getParameter("endDate");
 		
 		
-		
-		if (startDate == null)
+		if (startDate == null || startDate == "")
 		{
 			long time = System.currentTimeMillis(); 
 			SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-MM-dd");
@@ -100,6 +99,7 @@ public class PackSearchAction implements Action{
 		request.setAttribute("endDate", endDate);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("pagesize", pagesize);
+		request.setAttribute("startDate", startDate);
 		
 		//ActoinForward 이동정보 담아서 로그인 이동
 		ActionForward forward = new ActionForward();

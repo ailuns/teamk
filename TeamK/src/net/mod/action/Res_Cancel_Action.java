@@ -14,17 +14,13 @@ public class Res_Cancel_Action implements Action{
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		String [] memo = request.getParameterValues("Cancel_info");
-		System.out.println(memo.length);
 		String po_memo=memo[1]+","+memo[0];
 		if(memo.length>2){
 			po_memo +=","+memo[2]+","+memo[3]
 						+","+memo[4];
 		}
-		ModTradeInfoBEAN mtib = new ModTradeInfoBEAN();
-		mtib.setNum(Integer.parseInt(request.getParameter("pnum")));
-		mtib.setMemo(po_memo);
 		ModDAO moddao = new ModDAO();
-		int check =moddao.Res_Cancel(mtib);
+		int check =moddao.Res_Cancel(po_memo,Integer.parseInt(request.getParameter("pnum")));
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		if(check ==1){

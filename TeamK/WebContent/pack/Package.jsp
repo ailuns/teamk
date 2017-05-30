@@ -95,11 +95,13 @@
 	List CategoryList = (List)request.getAttribute("CategoryList");
 	
 	int count = ((Integer)request.getAttribute("count")).intValue();
-	String pageNum = (String)request.getAttribute("pageNum");
+	String repageNum = (String)request.getAttribute("repageNum");
 	int pageCount = ((Integer)request.getAttribute("pageCount")).intValue();
 	int pageBlock = ((Integer)request.getAttribute("pageBlock")).intValue();
 	int startPage = ((Integer)request.getAttribute("startPage")).intValue();
 	int endPage = ((Integer)request.getAttribute("endPage")).intValue();
+	int currentPage = ((Integer)request.getAttribute("currentPage")).intValue();
+	int pagesize = ((Integer)request.getAttribute("pagesize")).intValue();
 
 %>
 
@@ -113,7 +115,7 @@
 		<div id="package_search">
 			<p>내게 맞는 패키지 검색하기</p>
 			<form action="./PackSearchAction.po" name="fr" method="get" id="scheduler" onsubmit="return input_chk();">
-				<label for="date_from">출발</label><input type="text" id="date_from" class="input_style" name="startDate" required="yes"><br><br>
+				<label for="date_from">출발</label><input type="text" id="date_from" class="input_style" name="startDate"><br><br>
 				<label for="city_search">지역</label>
 				<select id="area" name="area">
 					<option value="">선택하세요</option>
@@ -222,10 +224,23 @@
 					</div>
 					<%
 				}
+				
+// 				<%
+// 				for (int j = 0; j < areaCount.length; i++)
+// 				{
+					if (areaCount[i] > 3)
+					{
+				%>
+						<p>More+</p>
+				<%
+					}
+// 				}
+				
 			}
-		%>
+			%>
 		</div>
 		<!-- 탭 내용 -->
+		
 	</div>
 	<%
 		if (user_id != null)

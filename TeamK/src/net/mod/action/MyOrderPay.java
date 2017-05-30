@@ -31,7 +31,6 @@ public class MyOrderPay implements Action{
 		TBasketBEAN tbb;
 		//memberdao mdao = new memberdao();
 		//MemberBEAN mb = mdao.getmember_info();
-		//request.setAttribute("mb", mb);
 		RIDAO ridao = new RIDAO();
 		HttpSession session = request.getSession();
 		String id = (String)session.getAttribute("id");

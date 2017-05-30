@@ -408,13 +408,15 @@ public class AdminDAO {
 			}
 		}
 	}
-	public int Pack_Res_Count(int status){
+	public int Pack_Res_Count(String status){
 		int count = 0;
 		try{
 			conn = getconn();
-			sql = "select count(po_num) from pack_order where po_res_status= ?";
+			sql = "select count(A.po_num) from pack_order A "
+					+"left outer join(pack B cross join trade_info C) "
+					+"on(A.ori_num = B.num and A.po_ti_num = C.ti_num)"
+					+" where A.po_res_status"+status;
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, status);
 			rs = pstmt.executeQuery();
 			if(rs.next())count = rs.getInt(1);
 		}catch (Exception e) {
@@ -428,22 +430,45 @@ public class AdminDAO {
 				e.printStackTrace();
 			}
 		}return count;
+	}public void PO_cancel_Memo_Isert(String memo, int pnum){
+		try{
+			conn = getconn();
+			sql = "update pack_order set po_memo = ? where po_num = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memo);
+			pstmt.setInt(2, pnum);
+			pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
-	public List<ModTradeInfoBEAN> Pack_Res(int status, int start, int end){
+	
+	public List<ModTradeInfoBEAN> Pack_Res(String status, int start, int end, String Orderby){
 		List<ModTradeInfoBEAN> Pack_Res_List = new ArrayList<ModTradeInfoBEAN>();
 		try{
 			conn = getconn();
-			sql = "select A.*, B.subject, B.intro, B.file1, B.date "
-					+"from pack_order A left outer join pack B "
-					+"on A.ori_num = B.num where A.po_res_status = ?"
-					+" order by A.po_res_date limit ?,?";
+			sql = "select A.*, B.subject, B.intro, B.file1, B.date,"
+					+"C.id,C.ti_trade_payer,C.ti_trade_type "
+					+"from pack_order A left outer join(pack B cross join trade_info C) "
+					+"on(A.ori_num = B.num and A.po_ti_num = C.ti_num)"
+					+" where A.po_res_status"+status
+					+" order by "+Orderby+" limit ?,?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, status);
-			pstmt.setInt(2, start-1);
-			pstmt.setInt(3, end);
+			pstmt.setInt(1, start-1);
+			pstmt.setInt(2, end);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				ModTradeInfoBEAN mtib = new ModTradeInfoBEAN();
+				mtib.setId(rs.getString("id"));
+				mtib.setPayer(rs.getString("ti_trade_payer"));
+				mtib.setTrade_type(rs.getString("ti_trade_type"));
 				mtib.setSubject(rs.getString("subject"));
 				mtib.setIntro(rs.getString("intro"));
 				mtib.setImg(rs.getString("file1"));
@@ -465,13 +490,14 @@ public class AdminDAO {
 					case 2: statustext="예약 대기중";break;
 					case 3: statustext="예약 완료";break;
 					case 4: statustext="환불대기";break;
-					case 5: statustext="환불 완료";break;
+					case 9: statustext="환불 완료";break;
 					case 10: statustext="완료";break;
 				}
 				mtib.setStatus(stat);
 				mtib.setStatus_text(statustext);
 				mtib.setMemo(rs.getString("po_memo"));
 				Pack_Res_List.add(mtib);
+				
 			}
 			
 		}catch (Exception e) {

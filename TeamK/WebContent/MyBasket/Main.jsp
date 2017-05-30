@@ -28,21 +28,16 @@ String id = (String)session.getAttribute("id");
 <h3>Client</h3>
 <input type = "button" value="My Basket" onclick ="location.href='./MyBasketList.bns'"><br>
 <input type = "button" value="My Interest" onclick ="location.href='./MyInterestList.ins'"><br>
-<input type ="button" value = "Basket" onclick = "location.href='./MyBasketAdd.bns'"><br>
 <input type="button" value="PackOrder" onclick = "location.href='./MyPackOrderList.mo'"><br>
 <input type="button" value="ThingOrder" onclick="location.href='./MyThingOrderList.mo'"><br>
-<input type = "button" value = "MyOrder" onclick = "location.href='./MyOrderList.mo'"><br>
-
-
 </div>
 <div>
 <h3>Admin</h3>
 <input type="button"value = "adminmenu" onclick="location.href='./BankPayCheck.ao'"><br>
-<input type="button"value = "adminControl" onclick="location.href='./TransNum_Insert.ao'"><br>
-<input type="button" value ="pack_res" onclick ="location.href = './Pack_res.ao'"><br>
-<input type="button" value="res_cancel" onclick="location.href='./Admin_Pack_Res_Cancel.ao'"><br>
-<input type="button" value="Thing_Exchange" onclick="location.href='./Thing_Exchange.ao'"><br>
-<input type="button" value="Thing_Cancel" onclick="location.href='./Thing_Cancel.ao'">
+<input type="button" value ="Admin_pack_Order" onclick ="location.href = './Pack_res.ao'"><br>
+<input type="button" value="Admin_thing_Order" onclick="location.href='./Trans_num_Insert.ao'"><br>
+<!-- <input type="button" value="thing_completed" onclick="location.href='./Thing_Exchange.ao'"><br> -->
+
 
 </div>
 	</div>

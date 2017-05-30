@@ -160,7 +160,7 @@
 				<p>내게 맞는 패키지 검색하기</p>
 				<form action="./PackSearchAction.po" method="post" name="fr" id="scheduler" onsubmit="return input_chk();">					
 					<label for="from">날짜</label>
-					<input type="text" id="from" name="startDate" required="yes"><br>
+					<input type="text" id="from" name="startDate"><br>
 <!-- 					<label for="to">~</label> -->
 <!-- 					<input type="text" id="to" name="endDate"><br> -->
 					<label for="area">지역</label>

@@ -27,7 +27,7 @@ String id = (String)session.getAttribute("id");
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
 		<div id="board_head">
-			<div id="rvw_title">리뷰 작성</div>
+			<div id="rvw_title">리뷰</div>
 			<div id="rvw_script">상품이나 패키지 후기를 쓰는 곳 입니다.</div>
 		</div>
 		<div id="clear"></div>
@@ -35,8 +35,8 @@ String id = (String)session.getAttribute("id");
 		<div id="board_write">
 <form action="./BoardUpdateAction.bo?pageNum=<%=pageNum%>" method="post" name="fr" enctype="multipart/form-data">
 <input type="hidden" name="num" value="<%=bb.getNum()%>">
-<input type="hidden" name="id" value="<%=id%>" readonly><br>
-<label for="subject">제목</label><input type="text" name="subject" id="subject" value="<%=bb.getSubject()%>"><br><br>
+<input type="hidden" name="id" value="<%=id%>">
+<label for="subject">제목</label><input type="text" name="subject" id="subject" value="<%=bb.getSubject()%>" maxlength="20"><br><br>
 <textarea id="ir1" rows="30" cols="80" name="content"><%=bb.getContent() %></textarea><br><br>
 <%if(bb.getFile1()!=null){%><label for="file11">기존파일1</label><input type="hidden" name="file11" id="file11" value="<%=bb.getFile1()%>"><img src="./upload/<%=bb.getFile1()%>" width="50" ><%=bb.getFile1()%><%}%><br>
 <%if(bb.getFile2()!=null){%><label for="file12">기존파일2</label><input type="hidden" name="file12" id="file12" value="<%=bb.getFile2()%>"><img src="./upload/<%=bb.getFile2()%>" width="50" ><%=bb.getFile2()%><%}%><br>
@@ -99,5 +99,30 @@ function submitContents(elClickedObj) {
 		elClickedObj.form.submit();
 	} catch(e) {}
 }
+
+$("#save").click(function(){
+
+    var content = oEditors.getById["ir1"].getIR(); // Edit에 쓴 내용을 content 변수에 저장    값 : <br>
+    
+    if (document.fr.subject.value == "") {
+		alert("제목을 입력하세요");
+		document.fr.subject.focus();
+		return false;
+	}
+    
+
+
+    if (content == "<br>")  // 빈공간 값 <br>
+    {
+       alert("글을 입력해주세요");  // 메시지 띄움
+       return false;
+    }
+    
+    else // 글내용 있을 시
+    {
+       oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []); // Edit에 쓴 내용을 textarea에 붙여넣어준다
+        $("#fr").submit();  // form을 submit 시킨다
+    }
+ });
 </script>
 </html>
