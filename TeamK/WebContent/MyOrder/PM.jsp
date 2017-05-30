@@ -132,7 +132,7 @@ if(PM_List.size()!=0){
 <%}
 } %>
 <input type="submit" value = "입력">
-<input type ="Button" value = "취소">
+<input type ="Button" value = "취소" onclick="window.close()">
 </form>
 </body>
 </html>
