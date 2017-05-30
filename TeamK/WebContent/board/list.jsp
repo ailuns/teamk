@@ -46,21 +46,28 @@ BoardDAO bdao = new BoardDAO();
 		<div id="board_list">
 <table>
 <br>
-<tr><th id="num">번호</th><th id="cate">분류</th><th id="title">제목</th><th id="name">작성자</th><th id="date">날짜</th><th id="readcount">조회수</th></tr>
+<tr>
+ <th id="num">번호</th>
+ <th id="cate">분류</th>
+ <th id="title">제목</th>
+ <th id="name">작성자</th>
+ <th id="date">날짜</th>
+ <th id="readcount">조회수</th>
+</tr>
     <%
     for(int i=0; i<boardList.size(); i++){
     	//자바빈(BoardBean) 변수 =배열한칸 접근  배열변수.get()
     	BoardBean bb = (BoardBean)boardList.get(i);
     			%>
 <tr>
-<td><%=bb.getRe_ref()%></td> <%--글 번호 --%>
-<td id="cate">[<%=bb.getType_select()%>]</td> <%--글 타입--%>
-<td id="title"><a href="./BoardContent.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>"><%=bb.getSubject()%> <%--글 제목--%>
-[<%=bdao.getBoardReplyCount(bb.getNum())%>]</a> <%--해당 글의 리플 갯수--%>
-<%if(bdao.getFile(bb.getNum())!=null){%><img src="./img/disk.png" width="15" height="15"><%}%></td> <%--첨부파일이 있으면 파일모양 아이콘 표시--%>
-<td><%=bb.getId()%></td> <%--작성자 ID--%>
-<td><%=bb.getDate()%></td> <%--작성 날짜--%>
-<td><%=bb.getReadcount() %></td> <%--조회수--%>
+ <td><%=bb.getRe_ref()%></td> <%--글 번호 --%>
+ <td id="cate">[<%=bb.getType_select()%>]</td> <%--글 타입--%>
+ <td id="title"><a href="./BoardContent.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>"><%=bb.getSubject()%> <%--글 제목--%>
+ [<%=bdao.getBoardReplyCount(bb.getNum())%>]</a> <%--해당 글의 리플 갯수--%>
+ <%if(bdao.getFile(bb.getNum())!=null){%><img src="./img/disk.png" width="15" height="15"><%}%></td> <%--첨부파일이 있으면 파일모양 아이콘 표시--%>
+ <td><%=bb.getId()%></td> <%--작성자 ID--%>
+ <td><%=bb.getDate()%></td> <%--작성 날짜--%>
+ <td><%=bb.getReadcount() %></td> <%--조회수--%>
 </tr>
     			<%
     }

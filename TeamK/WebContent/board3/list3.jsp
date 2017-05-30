@@ -46,7 +46,12 @@ BoardDAO bdao = new BoardDAO();
 <table>
 <br>
 <tr>
- <th id="num">번호</th><th></th><th id="title">제목</th><th id="name">작성자</th><th id="date">날짜</th><th id="readcount">조회수</th>
+ <th id="num">번호</th>
+ <th></th>
+ <th id="title">제목</th>
+ <th id="name">작성자</th>
+ <th id="date">날짜</th>
+ <th id="readcount">조회수</th>
 </tr>
     <%
     for(int i=0; i<boardList3.size(); i++){
