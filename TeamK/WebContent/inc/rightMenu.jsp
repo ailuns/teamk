@@ -14,6 +14,8 @@
 		<%}else if(id!=null || id!=""){%>
 		<li><a href="./MemberLogout.me">로그아웃</a></li>
 		<li><a href="./MemberInfo.me">내 정보</a></li>
+		<br>
+		<br>
 		<li><a href="./MyOrderList.mo">내 주문 현황</a></li>
 		<li><a href="./MyBasketList.bns">장바구니</a></li>
 		<li><a href="./MyInterestList.ins">찜 리스트</a></li>

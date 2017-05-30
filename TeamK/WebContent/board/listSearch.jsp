@@ -64,7 +64,8 @@ $(document).ready(function(){
 <tr>
  <td><%=bb.getRe_ref()%></td>
  <td id="cate">[<%=bb.getType_select()%>]</td>
- <td id="title"><a href="./BoardContent.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>"><%=bb.getSubject()%>[<%=bdao.getBoardReplyCount(bb.getNum())%>]</a><%if(bdao.getFile(bb.getNum())!=null){%><img src="./img/disk.png" width="15" height="15>"><%}%></td>
+ <td id="title"><a href="./BoardContent.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>"><%=bb.getSubject()%>
+ <%if(bdao.getBoardReplyCount(bb.getNum())!=0){%>[<%=bdao.getBoardReplyCount(bb.getNum())%>]<%}%></a><%if(bdao.getFile(bb.getNum())!=null){%><img src="./img/disk.png" width="15" height="15>"><%}%></td>
  <td><%=bb.getId()%></td>
  <td><%=bb.getDate()%></td>
  <td><%=bb.getReadcount() %></td>
