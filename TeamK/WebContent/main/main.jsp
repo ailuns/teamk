@@ -197,9 +197,7 @@
 				<script> bg(<%=j %>);</script>
 			<%
 				}
-			%>
-			
-<!-- 			<a href="#" id="pack1"><span id="pktt">제목이라네</span><br><span id="pksc">소제목이야</span><br><span id="pkpr">가격이지</span></a> -->
+			%>	
 		</div>
 		<div id="clear"></div>
 		<div id="goods_show">

@@ -54,28 +54,6 @@
 			var activeTab = $(this).attr("name");		// 클릭된 탭부분 name 속성값 가져와서 저장
 			$("#" + activeTab).fadeIn();		// 해당 탭내용 부분을 보여준다  흐릿 -> 또렷하게 애니메이션 효과			
 		});
-		
-		
-// 		$("#more_pack0").click(function(){
-			
-// // 	 		var str = $("ul li.tab_color").attr("name");
-// // 	 		alert(str);
-	 		
-// 			var ss = $('[name=tab1]').attr("value");
-	 		
-// 	 		alert(ss);
-// // 			alert("우와");
-// 		});
-// 		$("#more_pack1").click(function(){
-			
-// // 			var str = $("ul li.tab_color").attr("name");
-// // 	 		alert(str);
-	 		
-// 			var ss = $('[name=tab2]').attr("value");
-	 		
-// 	 		alert(ss);
-// // 			alert("우와");
-// 		});
 	});
 	
 	// 패키지 검색 시 지역 선택
@@ -192,7 +170,17 @@
 		<!-- 탭 부분 -->
 		</form>
 		<div class="clear"></div>
-
+		<%
+			if (user_id != null)
+			{
+				if (user_id.equals("admin"))
+				{
+		 	%> 
+				<input type="button" value="글쓰기" onclick="location.href='./PackWrite.po'">
+		 	<%
+				}
+			}
+		%>
 		<!-- 탭 내용 -->
 		<div class="tab_container"> 	
 		<%
@@ -280,24 +268,13 @@
 			}
 			%>
 		</div>
-		<!-- 탭 내용 -->
-		
 	</div>
-	<%
-		if (user_id != null)
-		{
-			if (user_id.equals("admin"))
-			{
-	 	%> 
-			<input type="button" value="글쓰기" onclick="location.href='./PackWrite.po'">
-	 	<%
-			}
-		}
-	%>
 </div>
 <!--오른쪽 메뉴 -->
 	<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
 <!--오른쪽 메뉴 -->
-<jsp:include page="../inc/footer.jsp"></jsp:include>
+<!-- 푸터 메뉴 -->
+	<jsp:include page="../inc/footer.jsp"></jsp:include>
+<!-- 푸터 메뉴 -->
 </body>
 </html>

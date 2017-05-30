@@ -111,6 +111,11 @@ img.ui-datepicker-trigger
 	padding-top : 50px;
 }
 
+#subject, #intro
+{
+	width : 500px;
+}
+
 
 
 </style>
@@ -132,10 +137,6 @@ img.ui-datepicker-trigger
 	<div>
 		<form action="./PackModifyAction.po?ori_subject=<%=pb.getSubject() %>" id="fr" method="post" enctype="multipart/form-data">
 			<table>
-				<tr>
-					<td>소제목</td>
-					<td><input type="text" name="intro" required="yes" value="<%=pb.getIntro() %>"></td>
-				</tr>
 				<tr>
 <!-- 					<td>출발일자</td> -->
 <%-- 					<td><input type="text" id="date_from" name="sdate" value="<%=pb.getDate() %>" class="input_style" name="startDate" required="yes"></td> --%>
@@ -186,7 +187,11 @@ img.ui-datepicker-trigger
 				</tr>
 				<tr>
 					<td>글제목</td>
-					<td><input type="text" name="subject" required="yes" value="<%=pb.getSubject() %>"></td>
+					<td><input type="text" id="subject" name="subject" required="yes" value="<%=pb.getSubject() %>"></td>
+				</tr>
+				<tr>
+					<td>소제목</td>
+					<td><input type="text" id="intro" name="intro" required="yes" value="<%=pb.getIntro() %>"></td>
 				</tr>
 				<tr>
 					<td>글내용</td>
@@ -352,5 +357,8 @@ img.ui-datepicker-trigger
 <!-- 오른쪽 메뉴 -->
 <jsp:include page="../inc/rightMenu.jsp"></jsp:include>
 <!-- 오른쪽 메뉴 -->
+<!-- 푸터 메뉴 -->
+	<jsp:include page="../inc/footer.jsp"></jsp:include>
+<!-- 푸터 메뉴 -->
 </body>
 </html>

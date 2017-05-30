@@ -46,25 +46,37 @@
 
 	jQuery(document).ready(function($){
 		
+		// 페이지 로딩 될 때 첫번쨰 선택된 날짜 값으로 초기값 설정 부분
 		var num = $("input:radio[name=chk]:checked").val();
-		
-//			alert(num);
-		
+
 		var cost = $("#aa" + num).html();
 		
 	    var str = String(cost);
-	    var uncomma_cost = str.replace(/[^\d]+/g, '');
-	    var uncomma_cost2 = uncomma_cost/2;
-		
+	    uncomma_cost = str.replace(/[^\d]+/g, ''); // 금액 자릿수 ,를 없앤다
+	    uncomma_cost2 = uncomma_cost / 2;  // cost2는 아이들 금액
 		
 		str = String(uncomma_cost);
-		var comma_cost =  str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
-		str1 = String(uncomma_cost);
-		var comma_cost2 =  str1.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+		var comma_cost =  str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');  // 금액 자릿수 ,를 붙인다
+		str1 = String(uncomma_cost2);
+		var comma_cost2 =  str1.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');  // 금액 자릿수 ,를 붙인다
 		
 		$("#cost_adult").html(comma_cost);
 		$("#cost_child").html(comma_cost2);
 		$("#p").html(comma_cost);
+		
+		$.ajax({
+			type:"post",
+			url:"./MyInterestAdd.ins",   // java로 보냄
+			data:{
+				type:"P",
+				num:$("input[type=radio][name=chk]:checked").val()					
+			},
+			success:function(){
+				$("#jjim_o").hide();
+				$("#jjim_x").show();
+			}
+		});
+		// 페이지 로딩 될 때 첫번쨰 선택된 날짜 값으로 초기값 설정 부분
 		
 		// 달력 관련 소스
 		$("#date_from").datepicker({
@@ -655,6 +667,16 @@
 /* 이미지 정보 부분 */
 #top {
 	width: 960px;
+	height: 450px;
+	padding-top : 20px;
+/*  	border: 2px solid red;  */
+}
+
+#top_content
+{
+	width: 928px;
+	height: 400px;
+/* 	border: 2px solid green; */
 }
 
 
@@ -666,7 +688,7 @@
 #imgdiv{
 	width: 470px;
 	height: 400px;
-	border: 3px solid orange;
+/* 	border: 3px solid orange; */
 	float: left;
 }
 
@@ -702,6 +724,45 @@
 	margin-left : 50px;
 }
 
+#content_notice
+{
+	font-size: 0.8em;
+	color: gray;
+}
+
+.contentdiv1_1, .contentdiv1_3
+{
+	width : 150px;
+	height : 50px; 
+	text-align: center;
+}
+
+.contentdiv1_2
+{
+	width : 150px;
+	height : 50px; 
+	text-align: center;
+}
+
+.contentdiv1_3
+{
+	width : 100px;
+	height : 50px; 
+	text-align: center;
+}
+
+.contentbtn
+{
+	width : 50px;
+	height : 50px;
+}
+
+.contentbtn2
+{
+	width : 100px;
+	height : 50px;	
+}
+
 /* 인원, 가격 정보 부분 */
 
 	
@@ -710,7 +771,7 @@
 #datecontent {
 	width: 960px;
 	height: 350px;
-	border: 3px solid gray;
+	border: 1px solid gray;
 	overflow: auto;
 }
 
@@ -758,6 +819,12 @@
 	width : 70px;
 }
 
+#datecontent, #contentdiv2, #QnA, #top, #top_content
+{
+	margin: 0 auto;
+}
+
+
 /* 날짜정보 내용 */
 	
 
@@ -766,7 +833,16 @@
 #contentdiv2 {
 	width: 960px;
 	min-height: 700px;
-	border: 3px solid gray;
+	border: 1px solid gray;
+}
+
+#contentdiv2_1
+{
+	width: 730px;
+	min-height: 700px;
+	margin : 0 auto;
+	padding-top : 30px;
+/* 	border: 3px solid red;	 */
 }
 
 /* 여행정보 내용 */
@@ -777,6 +853,7 @@
 #map_canvas {
 	width: 800px;
 	height: 500px;
+	margin: 0 auto;
 }
 
 .controls {
@@ -813,7 +890,7 @@
 #QnA {
 	width: 800px;
 	min-height: 300px;
-	border: 3px solid pink;
+	border: 1px solid pink;
 }
 
 #replyTable
@@ -1047,6 +1124,7 @@
 		<!--관리자만 보이게 -->
 		<hr>
 		<div id="top">
+		<div id="top_content">
 			<!--상품 이미지 -->
 			<div id="imgdiv">
 				<!--첫번째 이미지는 무조건 첨부하게 제어 -->
@@ -1077,14 +1155,9 @@
 				<form name="input_fr" method="post">
 					<table border="1">
 						<tr>
-						<%
-// 							DecimalFormat Commass = new DecimalFormat("#,###");
-// 							String cost_adult = (String)Commass.format(PB.getCost());
-// 							String cost_child = (String)Commass.format(PB.getCost() / 2);
-						%>
-							<td style="width:100px; text-align: center;">성인</td>
-							<td style="width:150px; text-align: center;" id="cost_adult"></td>
-							<td>
+							<td class="contentdiv1_1">성인(12세이상)</td>
+							<td class="contentdiv1_2" id="cost_adult"></td>
+							<td class="contentdiv1_3">
 								<!--최대 10명까지 선택가능하게 생성 -->
 								<select id="adult" name="adult" onchange="people_Calc(1)">
 										<%
@@ -1099,9 +1172,9 @@
 							</td>
 						</tr>
 						<tr>
-							<td>아동</td>
-							<td id="cost_child"></td>
-							<td>
+							<td class="contentdiv1_1">아동(12세미만)</td>
+							<td id="cost_child" class="contentdiv1_2"></td>
+							<td class="contentdiv1_3">
 							<!--초기값은 1명까지 선택되게 생성 -->
 							<select id="child" name="child" onchange="people_Calc()">
 									<option value="0">0</option>
@@ -1120,14 +1193,17 @@
 							</td>
 						</tr>
 						<tr>
-							<td>
-								<input type="button" id="jjim_o" value="찜하기" onclick="submit_fun(1, '<%=user_id %>')">
-								<input type="button" id="jjim_x" value="찜취소" style="display:none;" onclick="submit_fun(2, '<%=user_id %>')">
-							</td>
-							<td><input type="button" value="장바구니" onclick="submit_fun(3, '<%=user_id %>')"></td>
-							<td><input type="button" value="예약하기" onclick="submit_fun(4, '<%=user_id %>')"></td>
+							
 						</tr>
 					</table>
+					<br>
+					<input type="button" class="contentbtn" id="jjim_o" value="♡ 찜" onclick="submit_fun(1, '<%=user_id %>')">
+					<input type="button" class="contentbtn" id="jjim_x" value="♥ 찜" style="display:none;" onclick="submit_fun(2, '<%=user_id %>')">
+					<input type="button" class="contentbtn2" value="장바구니" onclick="submit_fun(3, '<%=user_id %>')">
+					<input type="button" class="contentbtn2" value="예약하기" onclick="submit_fun(4, '<%=user_id %>')">
+					
+					
+					<p id="content_notice">※성인 1명당 아이 1명으로 제한됩니다</p>
 					
 					<script type="text/javascript">
 							// 선택된 인원 수에 따라 가격 변경, 어른 인원에 따라 아이인원제한
@@ -1158,6 +1234,7 @@
 				</form>
 			</div>
 			<!--인원수, 가격 -->
+		</div>
 		</div>
 		<div class="clear"></div>
 		
@@ -1198,7 +1275,9 @@
 		<!--상품 정보, 내용이 들어가는 영역 -->
 		<div id="middle1">
 			<div id="contentdiv2">
+				<div id="contentdiv2_1">
 				<%=PB.getContent() %>
+				</div>
 			</div>
 		</div>
 		<!--상품 정보, 내용이 들어가는 영역 -->
@@ -1447,6 +1526,8 @@
 	<!-- 오른쪽 메뉴 -->
 	<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
 	<!-- 오른쪽 메뉴 -->
+	<!-- 푸터 메뉴 -->
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
+	<!-- 푸터 메뉴 -->
 </body>
 </html>
