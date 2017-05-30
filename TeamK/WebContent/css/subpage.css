@@ -581,6 +581,7 @@ div#board {
 	background-color: #fff;
 	padding: 5px;
 	border-bottom: 3px solid #06c;
+	min-height: 150px;
 }
 div#board div#board_list {
 	width: 90%;
@@ -639,7 +640,6 @@ div#board_menu_bar form input:FOCUS, div#board_menu_bar form select:HOVER, div#b
 	border: 1px solid #06c;
 	cursor: pointer;
 }
-
 /*Board Content.jsp*/
 div#board div#board_content {
 	width: 90%;
