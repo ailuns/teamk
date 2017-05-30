@@ -27,7 +27,9 @@ input[type="button"]:HOVER, input[type="submit"]:HOVER {
 	font-weight: bold;
 	cursor: pointer;
 }
-table {border-collapse: collapse;}
+table {
+	border-collapse: collapse;
+}
 
 /* Main.jsp */
 div#datepicker {
@@ -759,10 +761,41 @@ div#board div#board_delete form input[type="submit"]:HOVER {cursor: pointer;}
 /*QnA Board List.jsp*/
 
 
-/* my order 페이지*/
-div.trade_type1 ul.agree_ul{
-	margin-left: 95px;
+/* My Order.jsp*/
+form.gyeolje {background-color: #fff;}
+form.gyeolje div {
+	width: 80%;
+	margin: 0px auto;
+	padding: 10px 0;
+	border-top: 1px solid #ddd;
+	text-align: left;
 }
-div.trade_type1 ul.agree_ul li{
-	margin-right: 200px;	
+form.gyeolje table {width: 100%;}
+form.gyeolje caption {
+	text-align: left;
+	color: #06c;
+	font-size: 20px;
+	line-height: 2em;
 }
+form.gyeolje th {
+	width: 150px;
+	text-align: left;
+	text-decoration: none;
+	font-weight: normal;
+}
+form.gyeolje ul {list-style: none;}
+div#packList caption span {
+	color: #000;
+	font-size: 15px;
+}
+div#packList caption span input {
+	margin: 0 10px;
+}
+div#receive_info input[type="button"] {margin-left: 90px;}
+td.trade_type1 *, td.trade_type2 *, td.trade_type3 * {
+	border: 1px dotted #ddd;
+}
+td.trade_type1 div {
+	width: 100%;
+}
+td.trade_type1 div label {margin-right: 20px;}
