@@ -115,7 +115,9 @@ function pack_popup(select)
 <%-- 						<%} %> --%>
 					</tr>
 					<tr>
-						<td rowspan="2" id="tr2td1"  class="tr1td0_popup" onclick="pack_popup(<%=i %>);"><img src="./upload/<%=mtib.getImg()%>"></td>
+						<td rowspan="2" id="tr2td1"  class="tr1td0_popup" onclick="pack_popup(<%=i %>);">
+							<img src="./upload/<%=mtib.getImg()%>">
+						</td>
 						<td id="tr2td2"  class="tr1td0_popup" onclick="pack_popup(<%=i %>);"><%=mtib.getSubject()%></td>
 						<td id="tr2td3"><%=cost%>원</td>
 					</tr>
