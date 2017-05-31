@@ -1274,6 +1274,11 @@ div#list_view table {
 td#tr1td1, td#tr1td2, td#tr2td1,
 td#tr2td2, td#tr3td1 {text-align: left;}
 td#tr1td3, td#tr2td3, td#tr3td2 {text-align: right;}
+
+.tr1td0_popup:HOVER
+{
+	cursor: pointer;
+}
 td#tr1td1 {
 	width: 200px;
 	font-weight: bold;

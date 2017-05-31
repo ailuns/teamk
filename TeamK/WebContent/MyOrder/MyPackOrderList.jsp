@@ -105,7 +105,7 @@ function pack_popup(select)
 				%>
 <!-- 				<h5></h5> -->
 				<table> 
-					<tr onclick="pack_popup(<%=i %>);">
+					<tr>
 						<td id="subject<%=i %>" style="display:none;"><%=mtib.getSubject()%></td>
 						<td id="tr1td1"><%=sdf.format(mtib.getDate())%></td>
 						<td id="tr1td2"><%=mtib.getTrade_num()%></td>
@@ -115,8 +115,8 @@ function pack_popup(select)
 <%-- 						<%} %> --%>
 					</tr>
 					<tr>
-						<td rowspan="2" id="tr2td1"><img src="./upload/<%=mtib.getImg()%>"></td>
-						<td id="tr2td2"><%=mtib.getSubject()%></td>
+						<td rowspan="2" id="tr2td1"  class="tr1td0_popup" onclick="pack_popup(<%=i %>);"><img src="./upload/<%=mtib.getImg()%>"></td>
+						<td id="tr2td2"  class="tr1td0_popup" onclick="pack_popup(<%=i %>);"><%=mtib.getSubject()%></td>
 						<td id="tr2td3"><%=cost%>원</td>
 					</tr>
 					<%if(status.equals("ing")){
