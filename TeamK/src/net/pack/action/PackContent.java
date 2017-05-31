@@ -19,7 +19,9 @@ public class PackContent implements Action{
 		// TODO Auto-generated method stub
 		
 		HttpSession session = request.getSession();
-		
+		String user_id = (String) session.getAttribute("id");
+		if(user_id == null)
+			user_id = "";
 		int num = Integer.parseInt(request.getParameter("num"));
 		String repageNum = request.getParameter("repageNum");
 		PackDAO pdao = new PackDAO();
@@ -40,7 +42,7 @@ public class PackContent implements Action{
 		session.setAttribute("PackBean", pb);
 		
 		List date_list;
-		date_list = pdao.getPackList(pb.getSubject());
+		date_list = pdao.getPackList(pb.getSubject(), user_id);
 		
 		request.setAttribute("date_list", date_list);
 		

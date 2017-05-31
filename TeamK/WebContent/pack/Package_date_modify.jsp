@@ -79,22 +79,33 @@
 	// 날짜, 가격, 수량 수정
 	function dateUpdate()
 	{
-		$.ajax({
-			type:"post",
-			url:"./PackDateModifyAction.po",   // java로 보냄
-			data:{
-				num:$("#up_num").val(),
-				cost:$("#up_cost").val(),
-				stock:$("#up_stock").val(),
-				date:$("#up_date").val()
-				},
-			success:function()
-			{
-				alert('수정되었습니다');
-				opener.parent.location.reload();
-				window.close();
-			}
-		});
+		var up_cost = $("#up_cost").val();
+		var up_stock = $("#up_stock").val();
+		var up_date = $("#up_date").val();
+		
+		if (up_cost == "" || up_stock == "" || up_date == "")
+		{
+			alert("수정할 내용을 입력해주세요");
+		}
+		else
+		{
+			$.ajax({
+				type:"post",
+				url:"./PackDateModifyAction.po",   // java로 보냄
+				data:{
+					num:$("#up_num").val(),
+					cost:$("#up_cost").val(),
+					stock:$("#up_stock").val(),
+					date:$("#up_date").val()
+					},
+				success:function()
+				{
+					alert('수정되었습니다');
+					opener.parent.location.reload();
+					window.close();
+				}
+			});
+		}
 	}
 	
 	

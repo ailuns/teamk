@@ -215,7 +215,7 @@
 					for (int j = 0; j < ListArr[i].size(); j++)
 					{
 						pb =(PackBean)ListArr[i].get(j);
-						System.out.println(pb.getSubject());
+// 						System.out.println(pb.getSubject());
 						DecimalFormat Commas = new DecimalFormat("#,###");
 						String cost = (String)Commas.format(pb.getCost());
 				%>				

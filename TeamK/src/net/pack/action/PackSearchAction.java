@@ -18,7 +18,9 @@ public class PackSearchAction implements Action{
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
-		
+		String user_id = (String) session.getAttribute("id");
+		if(user_id == null)
+			user_id = "";
 		String search = request.getParameter("area");
 		String startDate = request.getParameter("startDate");
 		String endDate = request.getParameter("endDate");
@@ -45,7 +47,7 @@ public class PackSearchAction implements Action{
 		CategoryDAO cdao = new CategoryDAO();
 		
 		//전체글 횟수 구하기 int count = getBoardCount()
-		int count = pdao.getPackCount(search, startDate, endDate);
+		int count = pdao.getPackCount(search, startDate, user_id);
 		
 		System.out.println("count >> " + count);
 		//한페이지에 보여줄 글의 갯수
@@ -79,7 +81,7 @@ public class PackSearchAction implements Action{
 		
 
 		// area로 검색할때
-		List list = pdao.getPackList_search(search, startDate, endDate);
+		List list = pdao.getPackList_search(search, startDate, user_id);
 		request.setAttribute("list", list);
 
 		

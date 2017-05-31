@@ -20,7 +20,11 @@ public class PackList implements Action{
 		
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
+		String user_id = (String) session.getAttribute("id");
+		if(user_id == null)
+			user_id = "";
 		
+		System.out.println("PackList user_id >> " + user_id);
 		// 디비 객체 생성 BoardDAO
 		PackDAO pdao = new PackDAO();
 		CategoryDAO cdao = new CategoryDAO();
@@ -64,7 +68,7 @@ public class PackList implements Action{
 		// 지역별 패키지 갯수 구하기
 		for (int i = 0; i < area.length; i++)
 		{
-			areaCount[i] = pdao.getPackCount(area[i]);
+			areaCount[i] = pdao.getPackCount(area[i], user_id);
 		}
 		
 		// 지역별 패키지 갯수 넘기기
@@ -79,7 +83,7 @@ public class PackList implements Action{
 		// 지역별 패키지 리스트 구하기
 		for(int i = 0; i < area.length; i++)
 		{
-			list[i] = pdao.getBoardList(startRow, pagesize, area[i]);
+			list[i] = pdao.getBoardList(startRow, pagesize, area[i], user_id);
 		}
 
 		// 지역별 패키지 리스트 보내기
