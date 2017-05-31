@@ -1,6 +1,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="net.bns.db.PBasketBEAN"%>
 <%@page import="java.util.List"%>
+<%@ page import="java.text.DecimalFormat" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -15,8 +16,9 @@
 function people_Calc(cost,num){
 	var val1 = $("#adult"+num+" option:selected").val();
 		var val2 = $("#child"+num+" option:selected").val();
-		var val3 =(val1 * cost) + (val2 * (cost/2));
-	$('#pcost'+num).html(val3);
+   		var val3 =String((val1 * cost) + (val2 * (cost/2)));
+   		var val3a = val3.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');  // 금액 자릿수 ,를 붙인다
+	$('#pcost'+num).html(val3a);
 }
 function Basket_update(num){
 	$.ajax({
@@ -102,6 +104,8 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				for (int i = 0; i < MyPackBasket.size(); i++) {
 						PBasketBEAN pbb = MyPackBasket.get(i);
 						String [] countp = pbb.getCountp();
+						DecimalFormat Commas = new DecimalFormat("#,###");
+						String pbbcost = (String)Commas.format(pbb.getCost());
 			%>
 			<tr>
 				<td><input type ="checkbox" id="pch<%=i %>" name = "pch" value = "<%=pbb.getPb_num()%>">
@@ -121,7 +125,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				<%if(j==Integer.parseInt(countp[1])){%>selected <%} %>><%=j %></option>
 				<%} %>
 				</select></td>
-				<td id="pcost<%=i %>"><%=pbb.getCost()%></td>
+				<td id="pcost<%=i %>"><%=pbbcost%></td>
 				<td><%=sdf.format(pbb.getDate()) %>
 				<td>
 				<input type = "button" value="변경"  onclick="Basket_update(<%=i %>)" >
