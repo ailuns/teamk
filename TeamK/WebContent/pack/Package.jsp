@@ -176,7 +176,7 @@
 				if (user_id.equals("admin"))
 				{
 		 	%> 
-				<input type="button" value="글쓰기" onclick="location.href='./PackWrite.po'">
+				<input type="button" value="글쓰기" id="admin_write" onclick="location.href='./PackWrite.po'">
 		 	<%
 				}
 			}
@@ -200,16 +200,6 @@
 				%>
 					<div id="tab<%=i+1 %>" class="tab_content">
 					<table>
-					<%
-					if(areaCount[i] > 3)
-					{
-					%>
-					<tr>
-						<td colspan="3" style="text-align: right;"><span id="more_pack<%=i %>" onclick="more_packlist(<%=i+1 %>);">More</span></td>
-					</tr>
-					<%
-					}
-					%>
 				<%
 					PackBean pb;
 					for (int j = 0; j < ListArr[i].size(); j++)
@@ -252,11 +242,11 @@
 					}
 					%>
 					<%
-					if(areaCount[i] > 3)
+					if(areaCount[i] > 9)
 					{
 					%>
 					<tr>
-						<td colspan="3" style="text-align: right;"><span id="more_pack<%=i %>" onclick="more_packlist(<%=i+1 %>);">More</span></td>
+						<td colspan="3" style="text-align: right;"><span id="more_pack<%=i %>" class="more_pack" onclick="more_packlist(<%=i+1 %>);">More</span></td>
 					</tr>
 					<%
 					}

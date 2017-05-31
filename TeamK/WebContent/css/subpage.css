@@ -382,13 +382,39 @@ div#package_tab .tab_content a:VISITED {
 	text-decoration: none;
 }
 
+input#admin_write
+{
+	margin-top : 20px;
+}
+
+.more_pack
+{
+	font-weight: bold;
+}
+
+.more_pack:HOVER
+{
+	cursor: pointer;
+}
+
+
+/* Package_write & Package_modify.jsp */
+#wrap_pack table .td_size
+{
+	text-align: center;
+}
+
+/* Package_write & Package_modify.jsp */
+
+
 /* Package_content.jsp */
 #wrap_pack { 
-	width: 980px; 
-	min-height: 1000px;
-	border: 5px solid red;
+	width: 860px; 
+	min-height: 850px;
+/* 	border : 1px solid black; */
  	margin: 50px auto;
 	padding-top: 50px;
+	text-align: left;
 	background-color: #eee;
 } 
 

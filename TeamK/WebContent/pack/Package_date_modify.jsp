@@ -13,52 +13,12 @@
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 </head>
 <style>
-#datecontent 
+
+#Date_modify
 {
-	width: 390px;
-	height: 350px;
-	border: 3px solid gray;
-	overflow: auto;
-	text-align: center;
+	width : 300px;
 }
 
-#datecontent table
-{
-	border : 1px solid black;
-	border-collapse: collapse;
-}
-
-#datecontent tr:FIRST-CHILD
-{
-	background-color: gray;
-	height : 30px;
-}
-
-#datecontent tr:HOVER
-{
-	cursor: pointer;
-	background-color: #D5D5D5;
-}
-
-#datecontent .date_td_size
-{
-	height : 50px;
-	border : 1px solid black;
-}
-
-#datecontent #date_date
-{
-	width : 150px;
-}
-#datecontent #date_cost
-{
-	width : 150px;
-}
-
-#datecontent #date_stock
-{
-	width : 70px;
-}
 </style>
 <script type="text/javascript">
 
@@ -112,19 +72,28 @@
 	// 삭제
 	function dateDel()
 	{
-		$.ajax({
-			type:"post",
-			url:"./PackDateDeleteAction.po",   // java로 보냄
-			data:{
-				num:$("#up_num").val()
-				},
-			success:function()
-			{
-				alert('삭제되었습니다');
-				opener.parent.location.reload();
-				window.close();
-			}
-		});
+		if(confirm("삭제하시겠습니까?"))
+			
+		if (confirm("정말 삭제하시겠습니까??") == true)
+		{    //확인
+			$.ajax({
+				type:"post",
+				url:"./PackDateDeleteAction.po",   // java로 보냄
+				data:{
+					num:$("#up_num").val()
+					},
+				success:function()
+				{
+					alert('삭제되었습니다');
+					opener.parent.location.reload();
+					window.close();
+				}
+			});
+		}
+		else
+		{   //취소
+		    return;
+		}
 	}
 	
 	
@@ -137,8 +106,7 @@
 		$.ajax({   // 날짜를 클릭할때 마다 찜목록과 비교
 			type:"post",
 			url:"./PackDateAddChk.po",
-			data:{
-// 				제목, 날짜
+			data:{				//제목, 날짜
 				subject:$("#subject").val(),
 				date:$("#up_date").val()
 			},
@@ -153,7 +121,6 @@
 		});
 	}
 	
-
 	// 창닫기
 	function cls()
 	{
@@ -182,49 +149,44 @@
 
 
 <div id="Date_modify">
-<h4>수정 페이지</h4>
-<table>
-	<tr>
-		<td>
-			날짜
-		</td>
-		<td>
-			<input id="up_num" style="display: none;" value="<%=pb_up.getNum() %>"></input>
-			<input id="subject" style="display: none;" value="<%=pb_up.getSubject() %>"></input>
-			<input id="prev_date" style="display: none;" value="<%=pb_up.getDate() %>"></input>
-			<input type="text" id="up_date" value="<%=pb_up.getDate() %>" onchange="date_chk()">
-		</td>
-	</tr>
-	
-	<tr>
-		<td>
-			가격
-		</td>
-		<td>
-			<input type="text" id="up_cost" value="<%=pb_up.getCost() %>">
-		</td>
-	</tr>
-	
-	<tr>
-		<td>
-			수량
-		</td>
-		<td>
-			<input type="text" id="up_stock" value="<%=pb_up.getStock() %>">
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<input type="button" value="수정" onclick="dateUpdate()">
-		</td>
-		<td>
-			<input type="button" value="삭제" onclick="dateDel()">
-		</td>
-		<td>
-			<input type="button" value="닫기" onclick="cls()">
-		</td>
-	</tr>
-</table>
+	<fieldset>
+ 		<legend><h4>수정 페이지</h4></legend>
+ 		<table>
+			<tr>
+				<td>
+					날짜
+				</td>
+				<td>
+					<input id="up_num" style="display: none;" value="<%=pb_up.getNum() %>"></input>
+					<input id="subject" style="display: none;" value="<%=pb_up.getSubject() %>"></input>
+					<input id="prev_date" style="display: none;" value="<%=pb_up.getDate() %>"></input>
+					<input type="text" id="up_date" value="<%=pb_up.getDate() %>" onchange="date_chk()">
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+					가격
+				</td>
+				<td>
+					<input type="text" id="up_cost" value="<%=pb_up.getCost() %>">
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+					수량
+				</td>
+				<td>
+					<input type="text" id="up_stock" value="<%=pb_up.getStock() %>">
+				</td>
+			</tr>
+		</table>
+		<br>
+		<input type="button" value="수정" onclick="dateUpdate()">
+		<input type="button" value="삭제" onclick="dateDel()">
+		<input type="button" value="닫기" onclick="cls()">
+	</fieldset>
 </div>
 
 </form>

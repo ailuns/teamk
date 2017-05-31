@@ -115,9 +115,9 @@ img.ui-datepicker-trigger
 	<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
 </div>
 <!--왼쪽 메뉴 -->
-	<div id="wrap">
-		<div id="article_title">
-		패키지
+<div id="wrap">
+	<div id="article_head">
+		<div id="article_title"><img src="./img/travel2.png" width="30px" style="margin-right: 8px; vertical-align: bottom;">패키지</div>
 	</div>
 	<!--여행지 검색창 -->
 	<div id="package_feat">
@@ -260,6 +260,7 @@ img.ui-datepicker-trigger
 			}
 		%>
 	</div>
+
 <!--오른쪽 메뉴 -->
 	<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
 <!--오른쪽 메뉴 -->
