@@ -100,7 +100,6 @@ function search(){
 		<input type="text" id="search" name="search">
 		<input type="button" value="검색" onclick="return search()">
 		</div>
-	
 	<div>
 		<form method="post" action ="./Pack_Res_Action.ao?stat=<%=status2%>" name="fr" id="pack_res" onsubmit="return select_check()">
 			<%if(Pack_Res_List.size()!=0){
