@@ -143,7 +143,6 @@ function Trade_Update_Info(o_num) {
 					<td>주문 정보 </td>
 					<td id="receive_name<%=i%>"><%=mtib.getName() %></td>
 					<td id="receive_mobile<%=i%>"><%=mtib.getMobile() %></td>
-					<td><%=Total_cost%>원</td>
 					<td><%=sdf.format(mtib.getTrade_date()) %></td>
 				</tr>
 				<tr>

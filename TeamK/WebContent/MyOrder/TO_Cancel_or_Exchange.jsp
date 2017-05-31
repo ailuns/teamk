@@ -18,6 +18,7 @@ int ti_num = Integer.parseInt(request.getParameter("ti_num"));
 	$(document).ready(function(){
 		$('.payback').hide();
 		$('input[name=status]').change(function(){
+			tcount_reset();
 			payback_cost();
 			if($(this).val()=="Cancel"){
 				$('.payback').show();
@@ -32,9 +33,12 @@ int ti_num = Integer.parseInt(request.getParameter("ti_num"));
 			}
 		});
 	});
+	function tcount_reset(){
+		$('#tcount option:eq(0)').prop('selected','selected');
+	}
 	function payback_cost(){
 		var cost = <%=mtib.getCost()%>*$('select[name=tcount] option:selected').val();
-		$('#payback_co').val(cost);
+		$('input:hidden[name=payback_co]').val(cost);
 		$('#payback_cost').html(cost+"원");
 	}
 	function bankcheck(){
@@ -96,7 +100,7 @@ int ti_num = Integer.parseInt(request.getParameter("ti_num"));
 	<tr>
 		<td>수량</td>
 		<td>
-			<select name="tcount" onchange="payback_cost()">
+			<select id="tcount" name="tcount" onchange="payback_cost()">
 				<%for(int i =1; i<=mtib.getThing_count();i++){ %>
 				<option value="<%=i%>"><%=i %>개</option>
 				<%} %>
@@ -142,6 +146,7 @@ int ti_num = Integer.parseInt(request.getParameter("ti_num"));
 </table>
 <span style="color:red; font-size:14px;" class="Exchange">차액 발생시 추가 결제를 요하는 경우가 있습니다!</span><br>
 <input type="hidden" name="payback_co" value="">
+<input type="hidden" name="trade_type" value="<%=mtib.getTrade_type() %>">
 <input type="hidden" name="num" value="<%=o_num %>">
 <input type ="submit" id="submit" value = "교환 신청">
 <input type = "button" value ="닫기" onclick ="window.close()">
