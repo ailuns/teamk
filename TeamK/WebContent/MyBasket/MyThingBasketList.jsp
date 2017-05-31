@@ -93,12 +93,14 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 List<TBasketBEAN> ThingBasket=(List<TBasketBEAN>)request.getAttribute("MyThingBasket");
 
 %>
-
-<h1>
-패키지 리스트</h1>
-<h4>subject Count : <%=count %></h4>
-<form method ="post" name ="fr">
-	<table border="1">
+<div id="article_head">
+			<div id="article_title">상품 리스트</div>
+			<div id="article_script">subject Count : <%=count %></div>
+		</div>
+		<div id="clear"></div>
+		<article>
+<form method ="post" name ="fr" id="goods_basket_list">
+	<table>
 			<tr>
 			<th></th>
 				<th>이미지</th>
@@ -129,7 +131,7 @@ List<TBasketBEAN> ThingBasket=(List<TBasketBEAN>)request.getAttribute("MyThingBa
 				<option value="<%=j%>" 
 				<%if(j==tbb.getCount()){%>selected <%} %>><%=j %></option>
 				<%} %>
-				</select><br>
+				</select><br><br>
 				<input type = "button" value="수량 변경"  onclick="Basket_Update(<%=i %>)" >
 				</td>
 				

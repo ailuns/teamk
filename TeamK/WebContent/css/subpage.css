@@ -1170,8 +1170,33 @@ div#board_delete form input[type="submit"] {
 }
 div#board_delete form input[type="submit"]:HOVER {cursor: pointer;}
 
-/*QnA Board List.jsp*/
-
+/*My Pack Basket List.jsp*/
+form#pack_basket_list {
+	width: 900px;
+	margin: 0 auto;
+}
+form#pack_basket_list table {
+	width: 100%;
+}
+form#pack_basket_list table tr {
+	border-bottom: 1px solid #aaa;
+	padding-top: 10px;
+}
+/*My Thing Basket List.jsp*/
+form#goods_basket_list {
+	width: 900px;
+	margin: 0 auto;
+}
+form#goods_basket_list table {
+	width: 100%;
+}
+form#goods_basket_list table img {
+	width: 200px;
+}
+form#goods_basket_list table tr {
+	border-bottom: 1px solid #aaa;
+	padding-top: 10px;
+}
 
 /* My Order.jsp*/
 form.gyeolje {background-color: #fff;}

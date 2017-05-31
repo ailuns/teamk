@@ -95,9 +95,8 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		</div>
 		<div id="clear"></div>
 		<article>
-<form name ="fr" method ="post">
-<table border="1">
-
+<form name ="fr" method ="post" id="pack_basket_list">
+<table>
 <tr>
 <th></th><th>이미지</th><th>제목</th><th>성인</th><th>유아</th><th>가격</th><th>등록일</th><th>비고</th></tr>
 <%
