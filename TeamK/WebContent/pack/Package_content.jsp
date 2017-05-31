@@ -702,8 +702,8 @@
 	<!-- 왼쪽 메뉴 -->
 	<!--여행지 검색창 -->
 	<div id="wrap"> 
-	<div id="article_title">
-		패키지
+	<div id="article_head">
+		<div id="article_title"><img src="./img/travel2.png" width="30px" style="margin-right: 8px; vertical-align: bottom;">패키지</div>
 	</div>
 		<div id="package_feat">
 		<jsp:include page="../inc/packSlide.jsp"></jsp:include>
