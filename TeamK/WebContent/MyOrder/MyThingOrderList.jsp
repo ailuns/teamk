@@ -58,7 +58,17 @@ function thing_exchange(num, ti_num){
 	window.open("./TO_Cancel_or_Exchange.mo?num="+num+"&ti_num="+ti_num,''
 			,'left=200, top=100, width=600, height=640');
 }
+function Trade_Update_Info(o_num) {
+	window.open("./TO_Cancel_or_Exchange.mo?num="+o_num,''
+			,'left=200, top=100, width=600, height=640');
+}
 </script>
+<style type="text/css">
+.update_info:HOVER {
+ cursor: pointer;
+ color: red;
+}
+</style>
 </head>
 <body>
 	<!--왼쪽 메뉴 -->
@@ -93,10 +103,30 @@ function thing_exchange(num, ti_num){
 					<td><%=mtb.getColor() %>, <%=mtb.getSize() %></td>
 					<td><%=mtb.getThing_count()%>개</td>
 					<td><%=cost%>원</td>
-					<%if(mtb.getStatus()!=10){ %>
-					<td><%=mtb.getStatus_text() %>
-					<%if(mtb.getStatus()==3){ %></td>
-					<td>송장번호<br><%=mtb.getTrans_num() %><%}} %></td>
+					<td><%
+					//교환 상품 배송중일때 배송정보 조회 가능하게 링크
+						if(mtb.getStatus()==3){
+							if(mtb.getMemo().length()!=0){%>
+								<span class="update_info" onclick="Trade_Update_Info()" >교환 배송 중</span>
+						<%}else out.print(mtb.getStatus_text());
+						}else if(mtb.getStatus()==9){//환불 조건 찾기
+							String [] memoar = mtb.getMemo().split(":");
+							String[]paybackinfo = memoar[0].split(",");
+									//일부만 환불 되었을 경우
+							if((mtb.getThing_count()-Integer.parseInt(paybackinfo[2]))!=0){%>
+								구매 완료<br>
+								<span style="font-size:12px;" class="update_info" 
+									onclick="Trade_Update_Info(<%=mtb.getNum() %>)" >
+									일부 환불 처리</span>
+							<%}else out.print(mtb.getStatus_text());
+						}else if(mtb.getStatus()==5||mtb.getStatus()==6){
+							
+							%><span class="update_info" 
+									onclick="Trade_Update_Info(<%=mtb.getNum() %>)" >
+									<%=mtb.getStatus_text() %></span>
+					<%}else out.print(mtb.getStatus_text());
+					if(mtb.getStatus()==3){ %></td>
+					<td>송장번호<br><%=mtb.getTrans_num() %><%} %></td>
 					<%if(mtb.getStatus()==4){ %>
 					<td>
 						<input type="button" value="구매 완료" 

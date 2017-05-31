@@ -436,19 +436,22 @@ public class ModDAO {
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				ModTradeInfoBEAN mtib = new ModTradeInfoBEAN();
-				mtib.setNum(rs.getInt("o_num"));
+				int o_num=rs.getInt("o_num");
+				int o_count = rs.getInt("o_count");
+				mtib.setNum(o_num);
 				mtib.setOri_num(rs.getInt("ori_num"));
 				mtib.setIntro(rs.getString("intro"));
 				mtib.setSubject(rs.getString("subject"));
 				mtib.setImg(rs.getString("img"));
 				mtib.setTrade_num(rs.getString("o_trade_num"));
-				mtib.setThing_count(rs.getInt("o_count"));
+				mtib.setThing_count(o_count);
 				mtib.setCost(rs.getInt("o_cost"));
 				mtib.setColor(rs.getString("o_color"));
 				mtib.setSize(rs.getString("o_size"));
 				mtib.setTrade_date(rs.getTimestamp("o_date"));
 				mtib.setTrans_num(rs.getString("o_trans_num"));
 				mtib.setStatus(rs.getInt("o_status"));
+				mtib.setMemo(rs.getString("o_memo"));
 				String statustext = "";
 				switch(rs.getInt("o_status")){
 					case 1: statustext = "입금 확인중"; break;
@@ -460,6 +463,7 @@ public class ModDAO {
 					case 9: statustext = "환불 완료";break;
 					case 10: statustext = "구매 완료";break;
 				}
+				
 				mtib.setStatus_text(statustext);
 				mtib.setTrans_num(rs.getString("o_trans_num"));
 				ModThingList.add(mtib);

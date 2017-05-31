@@ -153,15 +153,15 @@ a#pack1 span, a#pack2 span, a#pack3 span {
 	display: block;
 }
 a#pack1 #pktt, a#pack2 #pktt, a#pack3 #pktt {
-	font-size: 30px;
+	font-size: 25px;
 	font-weight: bold;
-	margin-top: 20px;
+	margin-top: 10px;
 }
 a#pack1 #pksc, a#pack2 #pksc, a#pack3 #pksc {
-	height: 50px;
+	height: 30px;
 }
 a#pack1 #pkpr, a#pack2 #pkpr, a#pack3 #pkpr {
-	font-size: 30px;
+	font-size: 25px;
 	font-weight: bold;
 }
 div#goods_show {
@@ -844,7 +844,6 @@ div#login_form form input {
 }
 div#login_form form input[type="text"],
 div#login_form form input[type="password"] {width: 200px;}
-div#login_form form input[type="button"] {}
 div#login_form table {
 	width: 80%;
 	border-collapse: collapse;
@@ -907,7 +906,6 @@ div#findid_form form input {
 	border: 1px solid #999;
 }
 div#findid_form form input[type="text"] {width: 200px;}
-div#findid_form form input[type="button"] {}
 
 /*Find Pass.jsp*/
 div#findpass_form {
@@ -928,7 +926,6 @@ div#findpass_form form input {
 	border: 1px solid #999;
 }
 div#findpass_form form input[type="text"] {width: 200px;}
-div#findpass_form form input[type="button"] {}
 
 /*Member Info.jsp*/
 div#info_form {
@@ -1001,7 +998,6 @@ div#m_delete_form form input {
 }
 div#m_delete_form form input[type="text"],
 div#m_delete_form form input[type="password"] {width: 200px;}
-div#m_delete_form form input[type="button"] {}
 
 /* Member List.jsp */
 table#memberList {
@@ -1200,8 +1196,33 @@ div#board_delete form input[type="submit"] {
 }
 div#board_delete form input[type="submit"]:HOVER {cursor: pointer;}
 
-/*QnA Board List.jsp*/
-
+/*My Pack Basket List.jsp*/
+form#pack_basket_list {
+	width: 900px;
+	margin: 0 auto;
+}
+form#pack_basket_list table {
+	width: 100%;
+}
+form#pack_basket_list table tr {
+	border-bottom: 1px solid #aaa;
+	padding-top: 10px;
+}
+/*My Thing Basket List.jsp*/
+form#goods_basket_list {
+	width: 900px;
+	margin: 0 auto;
+}
+form#goods_basket_list table {
+	width: 100%;
+}
+form#goods_basket_list table img {
+	width: 200px;
+}
+form#goods_basket_list table tr {
+	border-bottom: 1px solid #aaa;
+	padding-top: 10px;
+}
 
 /* My Order.jsp*/
 form.gyeolje {background-color: #fff;}

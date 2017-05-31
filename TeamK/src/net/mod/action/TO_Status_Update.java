@@ -12,8 +12,15 @@ public class TO_Status_Update implements Action{
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		int num = Integer.parseInt(request.getParameter("num"));
-		int status = Integer.parseInt(request.getParameter("status"));
-		int ti_num = Integer.parseInt(request.getParameter("ti_num"));
+		String stat = request.getParameter("status");
+		int status =0;
+		switch(stat){
+			case "10": status=10;break;
+			case "Exchange":status=5;break;
+			case "Cancel":status=6;break;
+		}
+		System.out.println(status);
+		/*int ti_num = Integer.parseInt(request.getParameter("ti_num"));
 		String memo = request.getParameter("memo");
 		String type = request.getParameter("type");
 		if(memo==null)memo ="";
@@ -25,8 +32,8 @@ public class TO_Status_Update implements Action{
 		ModDAO moddao = new ModDAO();
 		moddao.To_Status_Update(status, num, memo);
 		AdminDAO admindao = new AdminDAO();
-		if(status>8)admindao.Ti_Status_Complet_Update(ti_num);
-		return null;
+		if(status>7)admindao.Ti_Status_Complet_Update(ti_num);
+	*/	return null;
 	}
 
 }

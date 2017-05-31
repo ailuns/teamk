@@ -16,7 +16,7 @@ public class TO_Cancel_or_Exchange implements Action{
 		ModDAO mdao = new ModDAO();
 		ModTradeInfoBEAN mtib = mdao.TO_Cancel_or_Exchange(o_num);
 		String [] t_type = mtib.getTrade_type().split(",");
-		mtib.setMemo(t_type[0]);
+		mtib.setTrade_type(t_type[0]);
 		afo.setPath("./MyOrder/TO_Cancel_or_Exchange.jsp");
 		request.setAttribute("mtib", mtib);
 		afo.setRedirect(false);
