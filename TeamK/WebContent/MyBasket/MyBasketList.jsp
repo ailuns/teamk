@@ -2,6 +2,7 @@
 <%@page import="net.bns.db.TBasketBEAN"%>
 <%@page import="net.bns.db.PBasketBEAN"%>
 <%@page import="java.util.List"%>
+<%@ page import="java.text.DecimalFormat" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -12,19 +13,24 @@
 <link href="./css/inc.css" rel="stylesheet" type="text/css">
 <link href="./css/subpage.css" rel="stylesheet" type="text/css">
 <script src = "./js/jquery-3.2.0.js"></script>
+
 <script type="text/javascript">
-	
+
 	function people_Calc(cost,num){
 		var val1 = $("#adult"+num+" option:selected").val();
    		var val2 = $("#child"+num+" option:selected").val();
-   		var val3 =(val1 * cost) + (val2 * (cost/2));
-    	$('#pcost'+num).html(val3);
+   		var val3 =String((val1 * cost) + (val2 * (cost/2)));
+   		var val3a = val3.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');  // 금액 자릿수 ,를 붙인다
+   		$('#pcost'+num).html(val3a);  
+   		
     	
-	}
+	} 
 	function thing_cal(cost, num) {
 		var val1 = $("#tcount"+num+" option:selected").val();
-		$('#ttcount'+num).val(val1)
-		$('#tcost'+num).html(cost*val1);
+		$('#ttcount'+num).val(val1);
+		var tval1 = String(cost*val1);
+		var tval2 = tval1.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');  // 금액 자릿수 ,를 붙인다
+		$('#tcost'+num).html(tval2);
 		$('#ttcost'+num).val(cost*val1);
 	}
 	function TBasket_Update(num){
@@ -109,11 +115,12 @@
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
-<div id="board_head">
-<div id="rvw_title">
+<div id="article_head">
+<div id="article_title">
 	장바구니
 </div>
 </div>
+<article>
 	<form name="fr">
 	<div>
 		<h3>패키지</h3>
@@ -145,6 +152,8 @@
 				for (int i = 0; i < PackBasket.size(); i++) {
 						PBasketBEAN pbb = PackBasket.get(i);
 						String [] countp = pbb.getCountp();
+						DecimalFormat Commas = new DecimalFormat("#,###");
+						String pbbcost = (String)Commas.format(pbb.getCost());
 			%>
 			<tr>
 				<td><input type="checkbox" id="pch<%=i %>" name="pch"value="<%=pbb.getPb_num()%>"></td>
@@ -165,7 +174,7 @@
 				<%if(j==Integer.parseInt(countp[1])){%>selected <%} %>><%=j %></option>
 				<%} %>
 				</select></td>
-				<td id="pcost<%=i %>"><%=pbb.getCost()%></td>
+				<td id="pcost<%=i %>"><%=pbbcost%></td>
 				<td><%=sdf.format(pbb.getDate()) %></td>
 				<td>
 				<input type = "button" value="변경"  onclick="PBasket_Update(<%=i %>)" >
@@ -211,6 +220,8 @@
 			<%
 				for (int i = 0; i <ThingBasket.size(); i++) {
 						TBasketBEAN tbb = ThingBasket.get(i);
+						DecimalFormat Commas = new DecimalFormat("#,###");
+						String tbbcost = (String)Commas.format(tbb.getCost());
 						
 			%>
 			<tr>
@@ -228,7 +239,7 @@
 				<%} %>
 				</select>
 				</td>
-				<td id="tcost<%=i%>"><%=tbb.getCost() %></td>
+				<td id="tcost<%=i%>"><%=tbbcost%></td>
 				<td><%=sdf.format(tbb.getDate()) %></td>
 				<td>
 				
@@ -252,6 +263,7 @@
 	<input type="button" value="구입" onclick = "return basket_submit()">
 	<input type="button" value ="삭제" onclick = "return basket_delete()">
 	</form>
+	</article>
 		</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->

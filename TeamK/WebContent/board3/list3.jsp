@@ -36,16 +36,16 @@ BoardDAO bdao = new BoardDAO();
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
-		<div id="board_head">
-			<div id="rvw_title"><img src="./img/notice2.png" width="30px" style="margin-right: 8px; vertical-align: bottom;">공지사항</div>
+		<div id="article_head">
+			<div id="article_title"><img src="./img/notice2.png" width="30px" style="margin-right: 8px; vertical-align: bottom;">공지사항</div>
 			<div id="clear"></div>
-			<div id="rvw_script">공지사항 게시판 입니다.<span class="count">[전체글 개수 :<%=count%>]</span></div>
+			<div id="article_script">공지사항 게시판 입니다.<span class="count">[전체글 개수 :<%=count%>]</span></div>
 		</div>
 		<div id="clear"></div>
-		<div id="board">
+		<article>
 		<div id="board_list">
-<table>
 <br>
+<table>
 <tr>
  <th id="num">번호</th>
  <th></th>
@@ -112,7 +112,7 @@ if(count!=0){
        </div>
 		<div class="clear"></div>
        </div>
-       </div>
+       </article>
 	</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->

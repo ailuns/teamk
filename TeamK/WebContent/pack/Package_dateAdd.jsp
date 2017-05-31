@@ -88,30 +88,42 @@
 	// 날짜 추가
 	function dateAdd()
 	{
-		$.ajax({
-			type:"post",
-			url:"./PackDateAddAction.po",   // java로 보냄
-			data:{
-				subject:$("#subject").val(),
-				intro:$("#intro").val(),
-				type:$("#type").val(),
-				area:$("#area").val(),
-				city:$("#city").val(),
-				sarea:$("#sarea").val(),
-				cost:$("#add_cost").val(),
-				stock:$("#add_stock").val(),
-				date:$("#add_date").val(),
-				file1:$("#file1").val(),
-				file2:$("#file2").val(),
-				file3:$("#file3").val(),
-				file4:$("#file4").val(),
-				file5:$("#file5").val()
-				},
-			success:function()
-			{
-				window.location.reload(true);  // 페이지 새로고침
-			}
-		});
+		date = $("#add_date").val();
+		cost = $("#add_cost").val();
+		stock = $("#add_stock").val();
+		
+		if (date == "" || cost == "" || stock == "")
+		{
+			alert("날짜, 가격, 수량 모두 입력해주세요");
+		}
+		else
+		{
+			$.ajax({
+				type:"post",
+				url:"./PackDateAddAction.po",   // java로 보냄
+				data:{
+					subject:$("#subject").val(),
+					intro:$("#intro").val(),
+					type:$("#type").val(),
+					area:$("#area").val(),
+					city:$("#city").val(),
+					sarea:$("#sarea").val(),
+					cost:$("#add_cost").val(),
+					stock:$("#add_stock").val(),
+					date:$("#add_date").val(),
+					file1:$("#file1").val(),
+					file2:$("#file2").val(),
+					file3:$("#file3").val(),
+					file4:$("#file4").val(),
+					file5:$("#file5").val()
+					},
+				success:function()
+				{
+					window.location.reload(true);  // 페이지 새로고침
+				}
+			});
+		}
+		
 	}
 	
 	
@@ -159,28 +171,6 @@
 		
 		var num = $("#num" + select_num).val();
 		winOpen(num);
-// 		var num = $("#num"+select_num).val();
-// 		var subject = $("#subject").val();
-// 		location.href="./PackDateAdd.po?num=" + num + "&subject=" + subject;
-		
-		
-// 		$("#Date_modify").show();
-// 		$("#Date_add").hide();
-		
-// 		$.ajax({   // 날짜를 클릭할때 마다 찜목록과 비교
-// 			type:"post",
-// 			url:"./PackDateAdd.po",
-// 			async: false,
-// 			data:{
-// 				num:$("#num"+select_num).val(),
-// 				subject:$("#subject").val()
-// 			},
-// 			success:function(data)
-// 			{
-// // 				alert(data);
-// 				window.location.reload(true); 
-// 			}
-// 		});
 	}
 
 	// 창닫기
@@ -241,9 +231,9 @@
 				<input id="file3" style="display:none;" value="<%=pb.getFile3() %>"></input>
 				<input id="file4" style="display:none;" value="<%=pb.getFile4() %>"></input>
 				<input id="file5" style="display:none;" value="<%=pb.getFile5() %>"></input>
-				<td class="date_td_size"><%=pb.getDate() %></td>
-				<td class="date_td_size"><%=cost %></td>
-				<td class="date_td_size"><%=pb.getStock() %></td>
+				<td class="date_td_size" id="add_date"><%=pb.getDate() %></td>
+				<td class="date_td_size" id="add_cost"><%=cost %></td>
+				<td class="date_td_size" id="add_stock"><%=pb.getStock() %></td>
 			</tr>
 		<%
 			}

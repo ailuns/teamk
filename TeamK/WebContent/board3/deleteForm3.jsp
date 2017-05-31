@@ -20,12 +20,12 @@ String id = (String)session.getAttribute("id");
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
-		<div id="board_head">
-			<div id="rvw_title">공지사항</div>
-			<div id="rvw_script">공지사항 게시판 입니다.</div>
+		<div id="article_head">
+			<div id="article_title">공지사항</div>
+			<div id="article_script">공지사항 게시판 입니다.</div>
 		</div>
 		<div id="clear"></div>
-		<div id="board">
+		<article>
 		<div id="board_delete">
 <form action="./BoardDeleteAction3.bo?pageNum=<%=pageNum%>" method="post" name="fr">
 <input type="hidden" name="id" value="<%=id%>">
@@ -34,7 +34,7 @@ String id = (String)session.getAttribute("id");
 <input type="submit" value="글삭제">
 </form>
 		</div>
-		</div>
+		</article>
 	</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->

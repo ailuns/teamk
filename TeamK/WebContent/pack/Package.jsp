@@ -67,6 +67,17 @@
 		}
 		return true;
     }
+	
+	
+	function more_packlist(num)
+	{
+		var area = $('[name=tab'+ num +']').attr("value");
+// 		alert(ss);
+		location.href="./PackSearchAction.po?area=" + area;
+	}
+	
+	
+	
 </script>
 </head>
 <body>
@@ -106,8 +117,8 @@
 %>
 
 <div id="wrap">
-	<div id="board_head">
-		<div id="rvw_title"><img src="./img/travel2.png" width="30px" style="margin-right: 8px; vertical-align: bottom;">패키지</div>
+	<div id="article_head">
+		<div id="article_title"><img src="./img/travel2.png" width="30px" style="margin-right: 8px; vertical-align: bottom;">패키지</div>
 	</div>
 	<!--여행지 검색창 -->
 	<div id="package_feat">
@@ -159,7 +170,17 @@
 		<!-- 탭 부분 -->
 		</form>
 		<div class="clear"></div>
-
+		<%
+			if (user_id != null)
+			{
+				if (user_id.equals("admin"))
+				{
+		 	%> 
+				<input type="button" value="글쓰기" onclick="location.href='./PackWrite.po'">
+		 	<%
+				}
+			}
+		%>
 		<!-- 탭 내용 -->
 		<div class="tab_container"> 	
 		<%
@@ -179,6 +200,16 @@
 				%>
 					<div id="tab<%=i+1 %>" class="tab_content">
 					<table>
+					<%
+					if(areaCount[i] > 3)
+					{
+					%>
+					<tr>
+						<td colspan="3" style="text-align: right;"><span id="more_pack<%=i %>" onclick="more_packlist(<%=i+1 %>);">More</span></td>
+					</tr>
+					<%
+					}
+					%>
 				<%
 					PackBean pb;
 					for (int j = 0; j < ListArr[i].size(); j++)
@@ -220,43 +251,30 @@
 						}
 					}
 					%>
+					<%
+					if(areaCount[i] > 3)
+					{
+					%>
+					<tr>
+						<td colspan="3" style="text-align: right;"><span id="more_pack<%=i %>" onclick="more_packlist(<%=i+1 %>);">More</span></td>
+					</tr>
+					<%
+					}
+					%>
 					</table>
 					</div>
 					<%
-				}
-				
-// 				<%
-// 				for (int j = 0; j < areaCount.length; i++)
-// 				{
-					if (areaCount[i] > 3)
-					{
-				%>
-						<p>More+</p>
-				<%
-					}
-// 				}
-				
+				}				
 			}
 			%>
 		</div>
-		<!-- 탭 내용 -->
-		
 	</div>
-	<%
-		if (user_id != null)
-		{
-			if (user_id.equals("admin"))
-			{
-	 	%> 
-			<input type="button" value="글쓰기" onclick="location.href='./PackWrite.po'">
-	 	<%
-			}
-		}
-	%>
 </div>
 <!--오른쪽 메뉴 -->
 	<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
 <!--오른쪽 메뉴 -->
-<jsp:include page="../inc/footer.jsp"></jsp:include>
+<!-- 푸터 메뉴 -->
+	<jsp:include page="../inc/footer.jsp"></jsp:include>
+<!-- 푸터 메뉴 -->
 </body>
 </html>

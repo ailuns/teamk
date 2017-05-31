@@ -41,7 +41,7 @@ public class ProductWriteAction  implements Action{
 	
 		//
 		//한글처리
-		
+
 		String name = multi.getParameter("name");
 		if(name.equals("select")){
 			name = multi.getParameter("name2");
@@ -70,14 +70,30 @@ public class ProductWriteAction  implements Action{
 		pb.setCountry(multi.getParameter("country"));
 		pb.setArea(multi.getParameter("area"));
 		pb.setStock(Integer.parseInt(multi.getParameter("stock")));
-		String img=multi.getFilesystemName("file1")+","+multi.getFilesystemName("file2")+","+multi.getFilesystemName("file3")+","+multi.getFilesystemName("file4")+","+multi.getFilesystemName("file5");
-		pb.setImg(img);
+		pb.setImg(multi.getFilesystemName("file1"));
+		pb.setImg2(multi.getFilesystemName("file2"));
+		String file3 = multi.getFilesystemName("file3");
+		if(file3 == null){
+			file3 = "";
+		}
+		pb.setImg3(file3);
+		String file4 = multi.getFilesystemName("file4");
+		if(file4 == null){
+			file4 = "";
+		}
+		pb.setImg4(file4);
+		String file5 = multi.getFilesystemName("file5");
+		if(file5 == null){
+			file5 = "";
+		}
+		pb.setImg5(file5);
 		//upload를 폴더에 올라가 파일이름
 		
 		//BoardDAO 객체생성 bdao
 		// 메서드 호출 insertBoard(bb)
 		pdao.insertProduct(pb);
 		//list.jsp 이동
+		
 		
 		
 		

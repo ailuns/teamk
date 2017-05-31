@@ -1,5 +1,6 @@
 <%@page import="net.ins.db.interestBEAN"%>
 <%@page import="java.util.List"%>
+<%@ page import="java.text.DecimalFormat" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -30,24 +31,26 @@
 		String ty = (String) request.getAttribute("ty");
 		List<interestBEAN> MyInterest = (List<interestBEAN>) request.getAttribute("MyInterest");
 	%>
-
-	<h1>
-		<%=type%></h1>
-	<h4>
-		subject Count :
-		<%=count%></h4>
+	<div id="article_head">
+<div id="article_title"><%=type%></div>
+<div id="article_script">subject Count :<%=count%></div>
+</div>
+<article>
 	<table border="1">
 		<tr>
 			<th>Name</th>
 			<th>Cost</th>
+			<th></th>
 		</tr>
 		<%
 			for (int i = 0; i < MyInterest.size(); i++) {
 				interestBEAN inb = MyInterest.get(i);
+				DecimalFormat Commas = new DecimalFormat("#,###");
+				String cost = (String)Commas.format(inb.getCost());
 		%>
 		<tr>
 			<td><%=inb.getSubject()%><br> <%=inb.getIntro()%></td>
-			<td><%=inb.getCost()%></td>
+			<td><%=cost%></td>
 			<td><input type="button" value="찜 취소"
 				onclick="location.href='./MyInterestDel.ins?n=<%=inb.getInter_num()%>'"></td>
 		</tr>
@@ -76,6 +79,7 @@
 		}
 		} 
 	%><br>
+	</article>
 		</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->

@@ -78,6 +78,11 @@ img.ui-datepicker-trigger
 	margin-left : 5px;
 }
 
+#package_list tr:HOVER
+{
+/* 	cursor: pointer; */
+}
+
 .clear 
 {
 	clear: both;
@@ -111,7 +116,7 @@ img.ui-datepicker-trigger
 </div>
 <!--왼쪽 메뉴 -->
 	<div id="wrap">
-		<div id="package_head">
+		<div id="article_title">
 		패키지
 	</div>
 	<!--여행지 검색창 -->
@@ -130,7 +135,7 @@ img.ui-datepicker-trigger
 						{
 							cb =(CategoryBean)CategoryList.get(i);
 					%>	
-						<option value="<%=cb.getCar_name() %>"><%=cb.getCar_name() %></option>
+						<option value="<%=cb.getCar_name() %>" <%if(search.equals(cb.getCar_name())){ %> selected <%} %>><%=cb.getCar_name() %></option>
 					<%
 						}
 					%>
@@ -166,7 +171,7 @@ img.ui-datepicker-trigger
 		%>
 		
 		
-<%-- 		<p>검색조건에 해당하는 상품이 총 <%=count %>개 있습니다</p> --%>
+		<p>검색조건에 해당하는 상품이 총 <%=count %>개 있습니다</p>
 		<hr>	
 
 		<div id="package_list">
@@ -196,17 +201,19 @@ img.ui-datepicker-trigger
 						<%=pb.getSubject() %>
 					</td>
 					<td rowspan="2"  id="price">
-						<span><%=cost %>원</span>
+						<span><%=cost %>원~</span>
 					</td>
 					<td rowspan="2"  id="date">
 						<span><%=pb.getDate() %>~</span>
 					</td>
+					
 				</tr>
 				<tr>
 					<td id="context">
 						<span><%=pb.getIntro() %></span>
 					</td>
 				</tr>
+				
 			<%
 					}
 				}
@@ -229,21 +236,21 @@ img.ui-datepicker-trigger
 						//이전
 						if (startPage > pageBlock) {
 				%>
-				<a href="./PackContent.po?pageNum=<%=startPage - pageBlock%>">[이전]</a>
+				<a href="./PackSearchAction.po?pageNum=<%=startPage - pageBlock%>">[이전]</a>
 				<%
 					}
 
 						//페이지
 						for (int i = startPage; i <= endPage; i++) {
 				%>
-				<a href="./PackContent.po?pageNum=<%=i %>">[<%=i%>]</a>
+				<a href="./PackSearchAction.po?pageNum=<%=i %>&area=<%=search %>">[<%=i%>]</a>
 				<%
 					}
 
 						//다음
 						if (endPage < pageCount) {
 				%>
-				<a href="./PackContent.po?pageNum=<%=startPage + pageBlock%>">[다음]</a>
+				<a href="./PackSearchAction.po?pageNum=<%=startPage + pageBlock%>">[다음]</a>
 				<%
 					}
 				}

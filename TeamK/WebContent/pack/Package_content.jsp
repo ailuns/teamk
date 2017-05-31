@@ -46,25 +46,37 @@
 
 	jQuery(document).ready(function($){
 		
+		// 페이지 로딩 될 때 첫번쨰 선택된 날짜 값으로 초기값 설정 부분
 		var num = $("input:radio[name=chk]:checked").val();
-		
-//			alert(num);
-		
+
 		var cost = $("#aa" + num).html();
 		
 	    var str = String(cost);
-	    var uncomma_cost = str.replace(/[^\d]+/g, '');
-	    var uncomma_cost2 = uncomma_cost/2;
-		
+	    uncomma_cost = str.replace(/[^\d]+/g, ''); // 금액 자릿수 ,를 없앤다
+	    uncomma_cost2 = uncomma_cost / 2;  // cost2는 아이들 금액
 		
 		str = String(uncomma_cost);
-		var comma_cost =  str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
-		str1 = String(uncomma_cost);
-		var comma_cost2 =  str1.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+		var comma_cost =  str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');  // 금액 자릿수 ,를 붙인다
+		str1 = String(uncomma_cost2);
+		var comma_cost2 =  str1.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');  // 금액 자릿수 ,를 붙인다
 		
 		$("#cost_adult").html(comma_cost);
 		$("#cost_child").html(comma_cost2);
 		$("#p").html(comma_cost);
+		
+		$.ajax({
+			type:"post",
+			url:"./MyInterestAdd.ins",   // java로 보냄
+			data:{
+				type:"P",
+				num:$("input[type=radio][name=chk]:checked").val()					
+			},
+			success:function(){
+				$("#jjim_o").hide();
+				$("#jjim_x").show();
+			}
+		});
+		// 페이지 로딩 될 때 첫번쨰 선택된 날짜 값으로 초기값 설정 부분
 		
 		// 달력 관련 소스
 		$("#date_from").datepicker({
@@ -642,318 +654,6 @@
 	clear: both;
 }
 
-#wrap_pack { 
-	width: 980px; 
-	min-height: 1000px;
-	border: 5px solid red;
- 	margin: 50px auto;
-	padding-top: 50px;
-	background-color: #eee;
-} 
-
-
-/* 이미지 정보 부분 */
-#top {
-	width: 960px;
-}
-
-
-#imgdiv ul
-{
-	list-style: none;
-}
-
-#imgdiv{
-	width: 470px;
-	height: 400px;
-	border: 3px solid orange;
-	float: left;
-}
-
-#imgdiv img {
-	width: 470px;
-	height: 300px;
-	float: left;
-}
-
-#imgdiv ul li img{
-	width: 80px;
-	height: 80px;
-	margin-top : 10px;
-	margin-left : 5px;
-}
-
-/* 이미지에 마우스를 올렸을 때 이벤트 */
-#imgdiv ul li img:HOVER{
-	box-sizing : border-box;
-	border : 5px solid #A6A6A6;
-}
-/* 이미지에 마우스를 올렸을 때 이벤트 */
-
-/* 이미지 정보 부분 */
-
-
-/* 인원, 가격 정보 부분 */
-#contentdiv1 {
-	width: 400px;
-	height: 400px;
-	border: 3px solid blue;
-	float: left;
-	margin-left : 50px;
-}
-
-/* 인원, 가격 정보 부분 */
-
-	
-/* 날짜정보 내용 */
-
-#datecontent {
-	width: 960px;
-	height: 350px;
-	border: 3px solid gray;
-	overflow: auto;
-}
-
-#datecontent table
-{
-	border-collapse: collapse;
-}	
-
-
-#datecontent tr:FIRST-CHILD
-{
-	background-color: gray;
-	height : 30px;
-}
-
-#datecontent tr.select_color:HOVER
-{
-	background-color: #D5D5D5;
-	cursor: pointer;
-}
-
-#datecontent .date_td_size
-{
-	height : 50px;
-	border-bottom : 1px solid black;
-}
-
-#datecontent #date_date
-{
-	width : 225px;
-}
-
-#datecontent #date_subject
-{
-	width : 525px;
-}
-
-#datecontent #date_cost
-{
-	width : 170px;
-}
-
-#datecontent #date_stock
-{
-	width : 70px;
-}
-
-/* 날짜정보 내용 */
-	
-
-/* 여행정보 내용 */
-
-#contentdiv2 {
-	width: 960px;
-	min-height: 700px;
-	border: 3px solid gray;
-}
-
-/* 여행정보 내용 */
-
-/* 구글맵 */
-
-
-#map_canvas {
-	width: 800px;
-	height: 500px;
-}
-
-.controls {
-	margin-top: 10px;
-	border: 1px solid transparent;
-	border-radius: 2px 0 0 2px;
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	height: 32px;
-	outline: none;
-	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-}
-
-#pac-input {
-	background-color: #fff;
-	font-family: Roboto;
-	font-size: 15px;
-	font-weight: 300;
-	margin-left: 12px;
-	padding: 0 11px 0 13px;
-	text-overflow: ellipsis;
-	width: 300px;
-}
-
-#pac-input:focus {
-	border-color: #4d90fe;
-}
-
-
-/* 구글맵 */
-
-
-/* 상품 문의 */
-#QnA {
-	width: 800px;
-	min-height: 300px;
-	border: 3px solid pink;
-}
-
-#replyTable
-{
-	background-color: white;
-	
-}
-
-/* tr:nth-child(odd)  */
-/* { */
-/* 	background-color: #BFBFBF; */
-/* } */
-
-#replyContent
-{	
-	width: 700px;
-	height : 50px;
-}
-
-#recontent, #contentup, #content
-{
-	width : 600px;
-	height : 70px;
-}
-
-#replyWrite
-{
-	background-color: white;
-}
-
-/* 상품 문의 */
-
-
-
-/* 추천상품 배너 */
-#banner_sub
-{
-	margin : 0px;
-	padding : 0px;
-	width : 100px;
-	height : 20px;
-	border-top : 2px solid black;
-	border-left : 2px solid black;
-	border-right : 2px solid black;
-	position : fixed;
-	right : 513px;
-	bottom : 185px;
-	background-color: white;
-	text-align: center;
-	font-size: 0.8em;
-	z-index : 1;
-}
-
-#banner
-{
-	margin : 0px;
-	padding : 0px;
-	width : 464px;
-	height : 180px;
-	border : 2px solid black;
-	position : fixed;
-	right : 150px;
-	bottom : 5px;
-	background-color: white;
-	z-index : 1;
-}
-
-#banner_content
-{
-	position : relative;
-	top : -20px;
-}
-
-#banner_content td
-{
-	text-align: center;
-}
-
-
-#banner img
-{
-	width : 150px;
-	height : 150px;
-}
-
-
-#close
-{
-	background-color: black;
-	color : white;
-	width : 50px;
-	height : 20px;
-	float: right;
-	position : relative;
-	z-index: 1;
-	text-align: center;
-}
-
-#close:HOVER
-{
-	cursor: pointer;
-}
-/* 추천상품 배너 */
-
-
-/* 화면이동 리모컨 */
-
-#remote_content
-{
-	width : 100px;
-	height : 170px;
-	position : fixed;
-	right : 250px;
-	bottom : 420px;
-	background-color: white;
-	text-align: center;
-	border : 1px solid #BDBDBD;
-	z-index : 1;
-}
-
-#remote_content:HOVER
-{
-	cursor: move;
-}
-
-#remote_control td
-{
-	border-bottom : 1px solid gray;
-	color : #BBBBBB;
-	text-decoration: none;
-	font-size: 0.8em;
-}
-
-#remote_control td span:HOVER, #remote_close
-{
-	cursor: pointer;
-}
-
-/* 화면이동 리모컨 */
-
 </style>
 	<div id="remote_control">
 		<table id="remote_content">
@@ -997,7 +697,7 @@
 	<!-- 왼쪽 메뉴 -->
 	<!--여행지 검색창 -->
 	<div id="wrap"> 
-	<div id="package_head">
+	<div id="article_title">
 		패키지
 	</div>
 		<div id="package_feat">
@@ -1005,7 +705,7 @@
 		<div id="package_search">
 			<p>내게 맞는 패키지 검색하기</p>
 			<form action="./PackSearchAction.po" name="fr" method="get" id="scheduler" onsubmit="return input_chk();">
-				<label for="date_from">출발</label><input type="text" id="date_from" class="input_style" name="startDate" required="yes"><br><br>
+				<label for="date_from">출발</label><input type="text" id="date_from" class="input_style" name="startDate"><br><br>
 				<label for="city_search">지역</label>
 				<select id="area" name="area">
 					<option value="">선택하세요</option>
@@ -1047,6 +747,7 @@
 		<!--관리자만 보이게 -->
 		<hr>
 		<div id="top">
+		<div id="top_content">
 			<!--상품 이미지 -->
 			<div id="imgdiv">
 				<!--첫번째 이미지는 무조건 첨부하게 제어 -->
@@ -1075,16 +776,11 @@
 			<!--인원수, 가격 -->
 			<div id="contentdiv1">
 				<form name="input_fr" method="post">
-					<table border="1">
+					<table>
 						<tr>
-						<%
-// 							DecimalFormat Commass = new DecimalFormat("#,###");
-// 							String cost_adult = (String)Commass.format(PB.getCost());
-// 							String cost_child = (String)Commass.format(PB.getCost() / 2);
-						%>
-							<td style="width:100px; text-align: center;">성인</td>
-							<td style="width:150px; text-align: center;" id="cost_adult"></td>
-							<td>
+							<td class="contentdiv1_1">성인(12세이상)</td>
+							<td class="contentdiv1_2" id="cost_adult"></td>
+							<td class="contentdiv1_3">
 								<!--최대 10명까지 선택가능하게 생성 -->
 								<select id="adult" name="adult" onchange="people_Calc(1)">
 										<%
@@ -1099,9 +795,9 @@
 							</td>
 						</tr>
 						<tr>
-							<td>아동</td>
-							<td id="cost_child"></td>
-							<td>
+							<td class="contentdiv1_1">아동(12세미만)</td>
+							<td id="cost_child" class="contentdiv1_2"></td>
+							<td class="contentdiv1_3">
 							<!--초기값은 1명까지 선택되게 생성 -->
 							<select id="child" name="child" onchange="people_Calc()">
 									<option value="0">0</option>
@@ -1111,7 +807,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td>합계</td>
+							<td class="contentdiv1_1">합계</td>
 							<td colspan="2">
 								<input type="hidden" id="cost" name="cost" value="">
 								<input type="hidden" id="ori_num" name="pnum" value="">
@@ -1119,15 +815,15 @@
 								<p id="p"></p>
 							</td>
 						</tr>
-						<tr>
-							<td>
-								<input type="button" id="jjim_o" value="찜하기" onclick="submit_fun(1, '<%=user_id %>')">
-								<input type="button" id="jjim_x" value="찜취소" style="display:none;" onclick="submit_fun(2, '<%=user_id %>')">
-							</td>
-							<td><input type="button" value="장바구니" onclick="submit_fun(3, '<%=user_id %>')"></td>
-							<td><input type="button" value="예약하기" onclick="submit_fun(4, '<%=user_id %>')"></td>
-						</tr>
 					</table>
+					<br>
+					<input type="button" class="contentbtn" id="jjim_o" value="♡ 찜" onclick="submit_fun(1, '<%=user_id %>')">
+					<input type="button" class="contentbtn" id="jjim_x" value="♥ 찜" style="display:none;" onclick="submit_fun(2, '<%=user_id %>')">
+					<input type="button" class="contentbtn2" value="장바구니" onclick="submit_fun(3, '<%=user_id %>')">
+					<input type="button" class="contentbtn2" value="예약하기" onclick="submit_fun(4, '<%=user_id %>')">
+					
+					
+					<p id="content_notice">※성인 1명당 아이 1명으로 제한됩니다</p>
 					
 					<script type="text/javascript">
 							// 선택된 인원 수에 따라 가격 변경, 어른 인원에 따라 아이인원제한
@@ -1159,6 +855,7 @@
 			</div>
 			<!--인원수, 가격 -->
 		</div>
+		</div>
 		<div class="clear"></div>
 		
 		<!--날짜정보 영역 -->
@@ -1184,7 +881,7 @@
 					<td class="date_td_size"><input type="radio" id="select_rbtn<%=i %>" name="chk" value="<%=pb.getNum() %>"
 						<%if(i == 0){ %> checked <%} %> ></td>
 					<td class="date_td_size"><%=pb.getDate() %></td>
-					<td class="date_td_size"><%=pb.getSarea() %></td>
+					<td class="date_td_size"><%=pb.getSubject() %></td>
 					<td class="date_td_size" id="aa<%=pb.getNum() %>"><%=cost %></td>
 					<td class="date_td_size"><%=pb.getStock() %></td>
 				</tr>
@@ -1198,7 +895,9 @@
 		<!--상품 정보, 내용이 들어가는 영역 -->
 		<div id="middle1">
 			<div id="contentdiv2">
+				<div id="contentdiv2_1">
 				<%=PB.getContent() %>
+				</div>
 			</div>
 		</div>
 		<!--상품 정보, 내용이 들어가는 영역 -->
@@ -1447,6 +1146,8 @@
 	<!-- 오른쪽 메뉴 -->
 	<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
 	<!-- 오른쪽 메뉴 -->
+	<!-- 푸터 메뉴 -->
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
+	<!-- 푸터 메뉴 -->
 </body>
 </html>

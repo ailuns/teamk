@@ -35,11 +35,7 @@ public class PackList implements Action{
 		//전체글 횟수 구하기 int count = getBoardCount()
 		// 지역별 패키지 갯수 구하기
 		int count = 8;
-//		for (int i = 0; i < area.length; i++)
-//		{
-//			count[i] = pdao.getPackCount(area[i]);
-//		}
-		
+
 		
 		//현재페이지가 몇페이지인지 가져오기
 		String pageNum = request.getParameter("pageNum");

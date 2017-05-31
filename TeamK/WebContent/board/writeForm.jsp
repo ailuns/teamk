@@ -20,12 +20,12 @@
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
-		<div id="board_head">
-			<div id="rvw_title">리뷰 작성</div>
-			<div id="rvw_script">상품이나 패키지 후기를 쓰는 곳 입니다.</div>
+		<div id="article_head">
+			<div id="article_title">리뷰 작성</div>
+			<div id="article_script">상품이나 패키지 후기를 쓰는 곳 입니다.</div>
 		</div>
 		<div id="clear"></div>
-		<div id="board">
+		<article>
 		<div id="board_write">
 <form action="./BoardWriteAction.bo" method="post" name="fr" enctype="multipart/form-data">
 <input type="hidden" value="1" name="type">
@@ -51,7 +51,7 @@
 <input type="button" value="글목록" onclick="location.href='./BoardList.bo?pageNum=1'">
 </form>
 </div>
-</div>
+</article>
 	</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->

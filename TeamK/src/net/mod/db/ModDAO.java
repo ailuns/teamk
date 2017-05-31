@@ -14,6 +14,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import net.admin.order.db.AdminDAO;
+
 public class ModDAO {
 	Connection conn = null;
 	PreparedStatement pstmt = null;
@@ -51,11 +53,12 @@ public class ModDAO {
 		}
 		return count;
 	}
-	public int TI_Count(String id){
+	public int TI_Count(String id, String status){
 		int count=0;
 		try{
 			conn = getconn();
-			sql = "select count(ti_num) from trade_info where id=? and to_null_check = 0";
+			sql = "select count(ti_num) from trade_info where id=? and ti_status"+status
+					+ " and to_null_check = 0";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -261,12 +264,12 @@ public class ModDAO {
 		}
 		return count;
 	}
-	public List<ModTradeInfoBEAN> TO_ReadModTI(String id,int start, int end){
+	public List<ModTradeInfoBEAN> TO_ReadModTI(String id,int start, int end,String status){
 		List<ModTradeInfoBEAN> ModList = new ArrayList<ModTradeInfoBEAN>();
 		try{
 			conn=getconn();
-			sql = "select * from trade_info where id = ? and "+
-					"to_null_check = 0 order by ti_num desc limit ?,?";
+			sql = "select * from trade_info where id = ? and ti_status"+status+
+					" and to_null_check = 0 order by ti_num desc limit ?,?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setInt(2, start-1);
@@ -433,19 +436,22 @@ public class ModDAO {
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				ModTradeInfoBEAN mtib = new ModTradeInfoBEAN();
-				mtib.setNum(rs.getInt("o_num"));
+				int o_num=rs.getInt("o_num");
+				int o_count = rs.getInt("o_count");
+				mtib.setNum(o_num);
 				mtib.setOri_num(rs.getInt("ori_num"));
 				mtib.setIntro(rs.getString("intro"));
 				mtib.setSubject(rs.getString("subject"));
 				mtib.setImg(rs.getString("img"));
 				mtib.setTrade_num(rs.getString("o_trade_num"));
-				mtib.setThing_count(rs.getInt("o_count"));
+				mtib.setThing_count(o_count);
 				mtib.setCost(rs.getInt("o_cost"));
 				mtib.setColor(rs.getString("o_color"));
 				mtib.setSize(rs.getString("o_size"));
 				mtib.setTrade_date(rs.getTimestamp("o_date"));
 				mtib.setTrans_num(rs.getString("o_trans_num"));
 				mtib.setStatus(rs.getInt("o_status"));
+				mtib.setMemo(rs.getString("o_memo"));
 				String statustext = "";
 				switch(rs.getInt("o_status")){
 					case 1: statustext = "입금 확인중"; break;
@@ -457,6 +463,7 @@ public class ModDAO {
 					case 9: statustext = "환불 완료";break;
 					case 10: statustext = "구매 완료";break;
 				}
+				
 				mtib.setStatus_text(statustext);
 				mtib.setTrans_num(rs.getString("o_trans_num"));
 				ModThingList.add(mtib);
@@ -646,5 +653,37 @@ public class ModDAO {
 			}
 		}
 		
+	}
+	public ModTradeInfoBEAN TO_Cancel_or_Exchange(int o_num){
+		ModTradeInfoBEAN mtib = new ModTradeInfoBEAN();
+		try{
+			conn = getconn();
+			sql ="select A.*, B.subject, B.size, B.color,B.cost,C.ti_trade_type "
+					+"from thing_order A left outer join(thing B cross join trade_info C) "
+					+"on(A.ori_num =B.num and A.o_ti_num = C.ti_num) "
+					+"where A.o_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, o_num);
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				mtib.setSubject(rs.getString("subject"));
+				mtib.setSize(rs.getString("size"));
+				mtib.setColor(rs.getString("color"));
+				mtib.setThing_count(rs.getInt("o_count"));
+				mtib.setTotal_cost(rs.getInt("o_cost"));
+				mtib.setCost(rs.getInt("cost"));
+				mtib.setTrade_type(rs.getString("ti_trade_type"));
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}return mtib;
 	}
 }

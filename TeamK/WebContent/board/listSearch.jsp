@@ -39,13 +39,13 @@ $(document).ready(function(){
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
-		<div id="board_head">
-			<div id="rvw_title">리뷰</div>
+		<div id="article_head">
+			<div id="article_title">리뷰</div>
 			<div id="clear"></div>
-			<div id="rvw_script">상품이나 패키지 후기를 쓰는 곳 입니다.<span class="count">[검색된 글의 개수 :<%=count%>]</span></div>
+			<div id="article_script">상품이나 패키지 후기를 쓰는 곳 입니다.<span class="count">[검색된 글의 개수 :<%=count%>]</span></div>
 		</div>
 		<div id="clear"></div>
-		<div id="board">
+		<article>
 		<div id="board_list">
 <table>
 <tr>
@@ -124,7 +124,7 @@ if(count!=0){
        </div>
 		<div class="clear"></div>
        </div>
-       </div>
+       </article>
 	</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->

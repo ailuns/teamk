@@ -1,27 +1,27 @@
 package net.member.db;
 
 public class CategoryBean {
-	private int canum;
-	private String caname;
-	private String catype;
-	public int getCanum() {
-		return canum;
-	}
-	public void setCanum(int canum) {
-		this.canum = canum;
-	}
-	public String getCaname() {
-		return caname;
-	}
-	public void setCaname(String caname) {
-		this.caname = caname;
-	}
-	public String getCatype() {
-		return catype;
-	}
-	public void setCatype(String catype) {
-		this.catype = catype;
-	}
+	private int car_num;
+	private String car_name;
+	private String car_pt;
 	
+	public int getCar_num() {
+		return car_num;
+	}
+	public void setCar_num(int car_num) {
+		this.car_num = car_num;
+	}
+	public String getCar_name() {
+		return car_name;
+	}
+	public void setCar_name(String car_name) {
+		this.car_name = car_name;
+	}
+	public String getCar_pt() {
+		return car_pt;
+	}
+	public void setCar_pt(String car_pt) {
+		this.car_pt = car_pt;
+	}
 	
 }

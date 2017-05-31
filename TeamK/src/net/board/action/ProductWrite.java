@@ -19,6 +19,7 @@ public class ProductWrite implements Action{
 		// TODO Auto-generated method stub
 		System.out.println("ProductWrite excute()");
 		
+		
 		request.setCharacterEncoding("UTF-8");
 		CategoryBean cb = new CategoryBean();
 		CategoryDAO cdao = new CategoryDAO();
@@ -36,13 +37,17 @@ public class ProductWrite implements Action{
 		List productList2 = null;
 		productList2 =cdao.getTypeList();
 		
+		List CategoryList = null;
+		CategoryList = cdao.getTypeList2();
+		
 		for (int i = 0; i < productList2.size(); i++) {
 
 			cb = (CategoryBean) productList2.get(i);
-			System.out.println(cb.getCanum());
+		
 		}
 		request.setAttribute("productList", productList);
 		request.setAttribute("productList2", productList2);
+		request.setAttribute("CategoryList", CategoryList);
 		request.setAttribute("id", id);
 				
 				//ActoinForward 이동정보 담아서 로그인 이동

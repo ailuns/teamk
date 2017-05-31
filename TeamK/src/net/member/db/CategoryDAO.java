@@ -77,8 +77,8 @@ public class CategoryDAO {
 			sql = "insert into category(car_num,car_name,car_pt) values(?,?,?) ";
 			pstmt =  con.prepareStatement(sql);
 			pstmt.setInt(1, car_num);
-			pstmt.setString(2, cb.getCaname());
-			pstmt.setString(3, cb.getCatype());
+			pstmt.setString(2, cb.getCar_name());
+			pstmt.setString(3, cb.getCar_pt());
 			pstmt.executeUpdate();
 			// 4단계 실행
 		} catch (Exception e) {
@@ -129,8 +129,8 @@ public class CategoryDAO {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				CategoryBean cb = new CategoryBean();
-				cb.setCanum(rs.getInt("car_num"));
-				cb.setCaname(rs.getString("car_name"));
+				cb.setCar_num(rs.getInt("car_num"));
+				cb.setCar_name(rs.getString("car_name"));
 				productList2.add(cb);
 		} }catch (Exception e) {
 			e.printStackTrace();
@@ -155,6 +155,55 @@ public class CategoryDAO {
 			}
 		}
 		return productList2;
+	}
+	
+	
+	public List getTypeList2() {
+		Connection con = null;
+		String sql = "";
+		ResultSet rs = null;
+		int count = 0;
+		List CategoryList = new ArrayList();
+		try {
+			//1,2 디비연결 메서드호출
+			// 3 sql 객체 생성
+			// 4 rs실행저장
+			// rs while 데이터 이씅면
+			// 자바빈 객체 생성 BoardBean bb
+			// bb 멤버변수 <= rs열데이터 가져와서 저장
+			// bb 게시판 글 하나 => 저장
+			con = getConnection();
+			sql = "select * from category where car_pt = 'P' ";
+			pstmt =con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				CategoryBean cb = new CategoryBean();
+				cb.setCar_num(rs.getInt("car_num"));
+				cb.setCar_name(rs.getString("car_name"));
+				CategoryList.add(cb);
+		} }catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ex) {
+				}
+			}
+		}
+		return CategoryList;
 	}
 	
 }

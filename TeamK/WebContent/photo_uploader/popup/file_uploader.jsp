@@ -70,8 +70,8 @@ if(request.getContentLength() > 10*1024*1024 ){
 	    
 	   
 	    try{
-             window.opener.pasteHTML(fname); 
-	    	
+             window.opener.parent.pasteHTML(fname); 
+
 	    	 window.close();
 	    }catch(e){ 
 //             alert(e); 
