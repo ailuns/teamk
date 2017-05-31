@@ -309,7 +309,7 @@ public class AdminDAO {
 		try{
 			conn= getconn();
 			sql = "select count(o_num) from thing_order "+
-					"where o_ti_num = ? and o_status < 9";
+					"where o_ti_num = ? and o_status <8";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, ti_num);
 			rs = pstmt.executeQuery();
