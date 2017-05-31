@@ -42,6 +42,7 @@ $(document).ready(function(){
 	<div id="wrap">
 		<div id="board_head">
 			<div id="qna_title">Q&A 게시판</div>
+			<div id="clear"></div>
 			<div id="qna_script">궁금한것은 질문해주세요.<span class="count">[검색된 글의 개수 :<%=count%>]</span></div>
 		</div>
 		<div id="clear"></div>

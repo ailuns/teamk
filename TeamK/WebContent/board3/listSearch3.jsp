@@ -42,6 +42,7 @@ $(document).ready(function(){
 	<div id="wrap">
 		<div id="board_head">
 			<div id="qna_title">공지사항</div>
+			<div id="clear"></div>
 			<div id="qna_script">공지사항 게시판 입니다.<span class="count">[검색된 글의 개수 :<%=count%>]</span></div>
 		</div>
 		<div id="clear"></div>
