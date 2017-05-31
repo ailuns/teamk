@@ -87,10 +87,12 @@ int pageNum = Integer.parseInt(pagenum);
 List<PBasketBEAN> MyPackBasket=(List<PBasketBEAN>)request.getAttribute("MyPackBasket");
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 %>
-
-<h1>
-패키지 리스트</h1>
-<h4>subject Count : <%=count %></h4>
+<div id="article_head">
+			<div id="article_title">패키지 리스트</div>
+			<div id="article_script">subject Count : <%=count %></div>
+		</div>
+		<div id="clear"></div>
+		<article>
 <form name ="fr" method ="post">
 <table border="1">
 
@@ -146,6 +148,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		}
 	}	//if(count%pagesize!=0)pcount+=1;
 	%>
+		</article>
 		</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->
