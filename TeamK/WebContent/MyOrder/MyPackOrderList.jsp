@@ -4,6 +4,7 @@
 <%@page import="java.util.Vector"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List"%>
+<%@ page import="java.text.DecimalFormat" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -89,9 +90,11 @@ function status_change2(){
 						for (int i = 0; i < ModPList.size(); i++) {
 							ModTradeInfoBEAN mtib = ModPList.get(i);
 							String[] pack_count = mtib.getPack_count().split(",");
+							DecimalFormat Commas = new DecimalFormat("#,###");
+							String cost = (String)Commas.format(mtib.getCost());
 				%>
 <!-- 				<h5></h5> -->
-				<table>
+				<table> 
 					<tr onclick="location.href='#'">
 						<td id="tr1td1"><%=sdf.format(mtib.getDate())%></td>
 						<td id="tr1td2"><%=mtib.getTrade_num()%></td>
@@ -103,7 +106,7 @@ function status_change2(){
 					<tr>
 						<td rowspan="2" id="tr2td1"><%=mtib.getImg()%></td>
 						<td id="tr2td2"><%=mtib.getSubject()%></td>
-						<td id="tr2td3"><%=mtib.getCost()%>원</td>
+						<td id="tr2td3"><%=cost%>원</td>
 					</tr>
 					<%if(status.equals("ing")){
 						if (mtib.getStatus() < 4) {

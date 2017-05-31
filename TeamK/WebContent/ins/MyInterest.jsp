@@ -1,5 +1,6 @@
 <%@page import="net.ins.db.interestBEAN"%>
 <%@page import="java.util.List"%>
+<%@ page import="java.text.DecimalFormat" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -44,10 +45,12 @@
 		<%
 			for (int i = 0; i < MyInterest.size(); i++) {
 				interestBEAN inb = MyInterest.get(i);
+				DecimalFormat Commas = new DecimalFormat("#,###");
+				String cost = (String)Commas.format(inb.getCost());
 		%>
 		<tr>
 			<td><%=inb.getSubject()%><br> <%=inb.getIntro()%></td>
-			<td><%=inb.getCost()%></td>
+			<td><%=cost%></td>
 			<td><input type="button" value="찜 취소"
 				onclick="location.href='./MyInterestDel.ins?n=<%=inb.getInter_num()%>'"></td>
 		</tr>
