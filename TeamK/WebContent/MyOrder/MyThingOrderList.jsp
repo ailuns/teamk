@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="net.mod.db.ModTradeInfoBEAN"%>
 <%@page import="com.sun.org.apache.xpath.internal.operations.Mod"%>
@@ -90,14 +91,18 @@ function Trade_Update_Info(o_num) {
 		<h4 align="left">주문 번호 : <%=mtib.getTi_num() %></h4>
 		<table border = "1">
 			<%for(int j =0; j< mtbList.size();j++){
-				ModTradeInfoBEAN mtb = mtbList.get(j);%>
+				ModTradeInfoBEAN mtb = mtbList.get(j);
+				DecimalFormat Commas = new DecimalFormat("#,###");
+				String cost = (String)Commas.format(mtb.getCost());
+				
+				%>
 				<tr>
 					<td><%=mtb.getImg() %></td>
 					<td><%=mtb.getSubject() %><br>
 						<%=mtb.getIntro() %></td>
 					<td><%=mtb.getColor() %>, <%=mtb.getSize() %></td>
 					<td><%=mtb.getThing_count()%>개</td>
-					<td><%=mtb.getCost() %>원</td>
+					<td><%=cost%>원</td>
 					<td><%
 					//교환 상품 배송중일때 배송정보 조회 가능하게 링크
 						if(mtb.getStatus()==3){
@@ -130,12 +135,15 @@ function Trade_Update_Info(o_num) {
 					</td>
 					<%} %>
 				</tr>
-				<%} %>
+				<%} 
+			DecimalFormat Commas = new DecimalFormat("#,###");
+			String Total_cost = (String)Commas.format(mtib.getTotal_cost());
+				%>
 				<tr>
 					<td>주문 정보 </td>
 					<td id="receive_name<%=i%>"><%=mtib.getName() %></td>
 					<td id="receive_mobile<%=i%>"><%=mtib.getMobile() %></td>
-					<td><%=mtib.getTotal_cost() %>원</td>
+					<td><%=Total_cost%>원</td>
 					<td><%=sdf.format(mtib.getTrade_date()) %></td>
 				</tr>
 				<tr>

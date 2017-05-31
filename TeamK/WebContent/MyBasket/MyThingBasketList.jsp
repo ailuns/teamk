@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="net.bns.db.TBasketBEAN"%>
 <%@page import="net.bns.db.PBasketBEAN"%>
@@ -14,9 +15,15 @@
 <script src = "./js/jquery-3.2.0.js"></script>
 <script type="text/javascript">
 function thing_cal(cost, num) {
-	var num = num;
+	//var num = num;
+	//var val1 = $("#tcount"+num+" option:selected").val();
+	//$('#tcost'+num).html(cost*val1);
+
 	var val1 = $("#tcount"+num+" option:selected").val();
-	$('#tcost'+num).html(cost*val1);
+	$('#ttcount'+num).val(val1);
+	var tval1 = String(cost*val1);
+	var tval2 = tval1.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');  // 금액 자릿수 ,를 붙인다
+	$('#tcost'+num).html(tval2);
 }
 function Basket_Update(num){
 	$.ajax({
@@ -105,6 +112,8 @@ List<TBasketBEAN> ThingBasket=(List<TBasketBEAN>)request.getAttribute("MyThingBa
 			<%
 				for (int i = 0; i <ThingBasket.size(); i++) {
 						TBasketBEAN tbb = ThingBasket.get(i);
+						DecimalFormat Commas = new DecimalFormat("#,###");
+						String tbbcost = (String)Commas.format(tbb.getCost());
 						
 			%>
 			<tr>
@@ -124,7 +133,7 @@ List<TBasketBEAN> ThingBasket=(List<TBasketBEAN>)request.getAttribute("MyThingBa
 				<input type = "button" value="수량 변경"  onclick="Basket_Update(<%=i %>)" >
 				</td>
 				
-				<td id="tcost<%=i%>"><%=tbb.getCost() %></td>
+				<td id="tcost<%=i%>"><%=tbbcost%></td>
 				<td><%=sdf.format(tbb.getDate()) %></td>
 				</tr>
 

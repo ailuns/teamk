@@ -1213,3 +1213,55 @@ div.trade_type1, div.trade_type2 {width: 100%;}
 td.trade_type1 div label {margin-right: 20px;}
 div.trade_type1, div.trade_type2 {border-top: none !important;}
 div.agree_li_view {border: 1px solid #ddd;}
+
+/* My Pack Order List.jsp*/
+div#list_view {
+	width: 900px;
+	margin: 0 auto;
+}
+div#list_view table {
+	width: 100%;
+	border-bottom: 2px solid #aaa;
+	margin-bottom: 10px;
+}
+td#tr1td1, td#tr1td2, td#tr2td1,
+td#tr2td2, td#tr3td1 {text-align: left;}
+td#tr1td3, td#tr2td3, td#tr3td2 {text-align: right;}
+td#tr1td1 {
+	width: 200px;
+	font-weight: bold;
+}
+td#tr1td3 {
+	width: 150px;
+}
+td#tr1td4 {
+	width: 100px;
+	font-weight: bold;
+}
+td#tr2td1 {
+	height: 120px;
+}
+td#tr2td2 {
+	font-weight: bold;
+	font-size: 20px;
+	color: #06c;
+}
+td#tr2td3 {
+	font-weight: bold;
+	font-size: 20px;
+	color: #f60;
+}
+
+/* Pack Res.jsp */
+form#pack_res {
+	width: 900px;
+	margin: 0 auto;
+}
+form#pack_res table {
+	width: 100%;
+	margin: 20px 0px;
+	text-align: left!important;
+	border-bottom: 2px solid #06c;
+}
+form#pack_res td#tr1td1 {width: 100px;}
+form#pack_res td#tr1td2 {width: 250px;}
