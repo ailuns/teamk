@@ -1282,10 +1282,16 @@ td#tr1td3 {
 	width: 150px;
 }
 td#tr1td4 {
-	width: 100px;
+	width: 120px;
+	padding-top : 20px;
 	font-weight: bold;
 }
 td#tr2td1 {
+	height: 120px;
+}
+td#tr2td1 img
+{
+	width : 190px;
 	height: 120px;
 }
 td#tr2td2 {

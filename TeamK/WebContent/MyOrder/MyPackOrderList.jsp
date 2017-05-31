@@ -59,6 +59,16 @@ function status_change2(){
 	location.href="./MyPackOrderList.mo?status="+$('#status').val()+
 			"&status2="+$('#status2').val();
 }
+
+function pack_popup(select)
+{
+	var select_sub = $("#subject" + select).html();
+// 	alert(select_num);
+	win = window.open("./MyPackPopup.mo?subejct=" + select_sub, "Package_dateAdd.jsp",
+	"width=850, height=900, left=500, top=50");	
+}
+
+
 </script>
 </head>
 <body>
@@ -95,7 +105,8 @@ function status_change2(){
 				%>
 <!-- 				<h5></h5> -->
 				<table> 
-					<tr onclick="location.href='#'">
+					<tr onclick="pack_popup(<%=i %>);">
+						<td id="subject<%=i %>" style="display:none;"><%=mtib.getSubject()%></td>
 						<td id="tr1td1"><%=sdf.format(mtib.getDate())%></td>
 						<td id="tr1td2"><%=mtib.getTrade_num()%></td>
 						<td id="tr1td3">성인 : <%=pack_count[0]%> / 아동 : <%=pack_count[1]%></td>
@@ -104,25 +115,41 @@ function status_change2(){
 <%-- 						<%} %> --%>
 					</tr>
 					<tr>
-						<td rowspan="2" id="tr2td1"><%=mtib.getImg()%></td>
+						<td rowspan="2" id="tr2td1"><img src="./upload/<%=mtib.getImg()%>"></td>
 						<td id="tr2td2"><%=mtib.getSubject()%></td>
 						<td id="tr2td3"><%=cost%>원</td>
 					</tr>
 					<%if(status.equals("ing")){
-						if (mtib.getStatus() < 4) {
+// 						if (mtib.getStatus() < 4) {
 					%>
 					<tr>
 						<td id="tr3td1"><%=mtib.getIntro()%></td>
-						<td id="tr3td2"><input type="button" value="여행자 정보 입력"
-							onclick="insertPM(<%=mtib.getNum()%>)"></td>
+						<td id="tr3td2">
+						<%
+						if (mtib.getStatus() < 4) {
+						%>
+						<input type="button" value="여행자 정보 입력"
+							onclick="insertPM(<%=mtib.getNum()%>)">
+						<%
+						}
+						%>
+						</td>
 						<%if(mtib.getStatus()>1){ %>
-						<td id="tr3td3"><input type="button" value="예약 취소"
-							onclick="Res_Cancel(<%=mtib.getNum()%>)"></td>
+						<td id="tr3td3">
+						<%
+						if (mtib.getStatus() < 4) {
+						%>
+						<input type="button" value="예약 취소"
+							onclick="Res_Cancel(<%=mtib.getNum()%>)">
+						<%
+						}
+						%>
+						</td>
 							<%} %>
-						</tr>
+					</tr>
 					<%
 						}
-					}
+// 					}
 					else if(mtib.getStatus()==9){
 						String [] memo = mtib.getMemo().split(",");
 					%>
