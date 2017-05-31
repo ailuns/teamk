@@ -40,6 +40,7 @@ $(document).ready(function(){
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
+
 		<div id="article_head">
 			<div id="article_title">공지사항</div>
 			<div id="clear"></div>

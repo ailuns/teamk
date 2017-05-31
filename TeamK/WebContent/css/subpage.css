@@ -207,7 +207,7 @@ div#datepicker div table, div#review_show div table {
 div#datepicker div table tr, div#review_show div table tr {
 	color: #565656;
 	text-align: left;
-	border-bottom: 1px dotted #999;
+	border-bottom: 1px dtted #999;
 	height: 25px;
 }
 div#datepicker div table tr:HOVER, #review_show div table tr:hover {background-color: #cef;}
