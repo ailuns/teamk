@@ -86,7 +86,7 @@ int num = Integer.parseInt(request.getParameter("num"));
   <td id="num">메일주소 : <%=bb.getEmail()%></td>
  </tr><%}}%>
  <tr>
-  <td colspan="3" id="content_td"><br><br><div id="min"><%=bb.getContent()%></div>><br></td>
+  <td colspan="3" id="content_td"><br><br><div id="min"><%=bb.getContent()%></div><br></td>
  </tr>
 
 <%--첨부파일이 있을때만 첨부파일 표시--%>
@@ -105,7 +105,7 @@ int num = Integer.parseInt(request.getParameter("num"));
 <%if(bb.getFile5()!=null){%>
 <tr><td>첨부파일5</td><td colspan="3"><%if(bb.getFile5()!=null){%><a href="./file_down.jsp?file_name=<%=bb.getFile5()%>"><%=bb.getFile5()%></a><%}%></td></tr>
 <%}%>
-</table>
+</table><br>
 <%
 if(id!=null){
 if(id.equals(bb.getId())){ %>

@@ -99,7 +99,7 @@ int num = Integer.parseInt(request.getParameter("num"));
 <%if(bb.getFile5()!=null){%>
 <tr><td>첨부파일5</td><td colspan="3"><%if(bb.getFile5()!=null){%><a href="./file_down.jsp?file_name=<%=bb.getFile5()%>"><%=bb.getFile5()%></a><%}%></td></tr>
 <%}%>
-</table>
+</table><br>
 <%
 if(id!=null){
 //자신의 Id일때만 글수정 가능
