@@ -1078,6 +1078,10 @@ div#board_list table th#date {width: 100px;}
 div#board_list table th#readcount {width: 50px;}
 div#board_list table th#name {width: 100px;}
 div#board_list table td#cate {font-weight: bold;}
+div#board_list table td#cate:HOVER, div#board_list table td#title:HOVER
+{
+	cursor: pointer;
+}
 div#board_list table td#title {
 	text-align: left;
 	max-width: 200px;

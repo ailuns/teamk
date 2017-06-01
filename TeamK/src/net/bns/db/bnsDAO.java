@@ -184,7 +184,7 @@ public class bnsDAO {
 		List<PBasketBEAN> PackBasket = new ArrayList<PBasketBEAN>();
 		try{
 			conn =getconn();
-			sql= "select A.subject,A.intro, A.cost,A.file1, B.pb_date,B.pb_num,B.pb_count "+
+			sql= "select A.subject,A.intro, A.cost,A.file1, B.pb_date,B.pb_num,B.pb_count, B.ori_num "+
 					"from pack A left outer join pack_basket B on A.num = B.ori_num "+
 					"where B.id = ? order by B.pb_num desc limit ?,?";
 			pstmt = conn.prepareStatement(sql);
@@ -195,6 +195,7 @@ public class bnsDAO {
 			while(rs.next()){
 				PBasketBEAN pbb = new PBasketBEAN();
 				pbb.setPb_num(rs.getInt("pb_num"));
+				pbb.setOri_num(rs.getInt("ori_num"));
 				pbb.setSubject(rs.getString("subject"));
 				pbb.setIntro(rs.getString("intro"));
 				pbb.setCountp(rs.getString("pb_count").split(","));
