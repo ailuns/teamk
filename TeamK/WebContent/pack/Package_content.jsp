@@ -127,15 +127,15 @@
 	
 	   		var btn = $(this).attr("value");   // 클릭된 버튼의 value 값을 가져온다
 			
-	   		if (btn == "주변 명소")
+	   		if (btn == "관광 명소")
 			{
 				value = "<%=PB.getCity()%> " + "<%=PB.getSarea()%> " + btn; 
 <%-- 				value = "<%=PB.getSarea()%> " + btn;  --%>
 				// ex) value = 부산 해운대 주변 명소
 			}
-			else if (btn == "주변 맛집")
+			else if (btn == "맛집")
 			{
-				value = "<%=PB.getCity()%> " + "<%=PB.getSarea()%> " + btn;
+				value = "<%=PB.getCity()%> " + "<%=PB.getSarea()%> 주변 " + btn;
 <%-- 				value = "<%=PB.getSarea()%> " + btn; --%>
 				// ex) value = 부산 해운대 주변 맛집
 			}
@@ -912,8 +912,8 @@
 			<hr>
 			<h3 id="sub"><%=PB.getCity()%> <%=PB.getSarea()%></h3>
 			<hr>
-			<input type="button" id="btn1" value="주변 명소"> 
-			<input type="button" id="btn2" value="주변 맛집">
+			<input type="button" id="btn1" value="관광 명소"> 
+			<input type="button" id="btn2" value="맛집">
 		</div>
 		<!--구글맵 제어할 버튼 부분 -->
 		

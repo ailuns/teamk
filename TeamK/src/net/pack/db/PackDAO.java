@@ -653,34 +653,44 @@ public class PackDAO {
 		try {
 			conn = getConnection();
 
-//			sql = "select pass from pack where num=?";
-//			pstm = conn.prepareStatement(sql);
-//			pstm.setInt(1, bb.getNum());
-//			rs = pstm.executeQuery();
-//
-//			if (rs.next()) {
-//				if (rs.getString(1).equals(bb.getPass())) {
-					sql = "update pack set subject=?, intro=?, content=?, type=?, area=?, city=?, sarea=?, file1=?, file2=?, file3=?, file4=?, file5=?  where subject=?";
-					pstm = conn.prepareStatement(sql);
-					pstm.setString(1, pb.getSubject());
-					pstm.setString(2, pb.getIntro());
-					pstm.setString(3, pb.getContent());
-					pstm.setString(4, pb.getType());
-					pstm.setString(5, pb.getArea());
-					pstm.setString(6, pb.getCity());
-					pstm.setString(7, pb.getSarea());
-					pstm.setString(8, pb.getFile1());
-					pstm.setString(9, pb.getFile2());
-					pstm.setString(10, pb.getFile3());
-					pstm.setString(11, pb.getFile4());
-					pstm.setString(12, pb.getFile5());
-					pstm.setString(13, ori_subject);
-					
-					pstm.executeUpdate();
-					return 1; // 수정 성공
-//				} else
-//					return -1; // 비번 틀림
-//			}
+			
+			sql = "update pack set subject=?, intro=?, content=?, type=?, area=?, city=?, sarea=?, file1=?, file2=?, file3=?, file4=?, file5=?  "
+					+ "where subject=? and num = "
+					+ "(select min(num) from pack where subject= ?)";
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, pb.getSubject());
+			pstm.setString(2, pb.getIntro());
+			pstm.setString(3, pb.getContent());
+			pstm.setString(4, pb.getType());
+			pstm.setString(5, pb.getArea());
+			pstm.setString(6, pb.getCity());
+			pstm.setString(7, pb.getSarea());
+			pstm.setString(8, pb.getFile1());
+			pstm.setString(9, pb.getFile2());
+			pstm.setString(10, pb.getFile3());
+			pstm.setString(11, pb.getFile4());
+			pstm.setString(12, pb.getFile5());
+			pstm.setString(13, ori_subject);
+			pstm.setString(14, ori_subject);
+			
+			
+			sql = "update pack set subject=?, intro=?, type=?, area=?, city=?, sarea=?, file1=?, file2=?, file3=?, file4=?, file5=?  where subject=?";
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, pb.getSubject());
+			pstm.setString(2, pb.getIntro());
+			pstm.setString(3, pb.getType());
+			pstm.setString(4, pb.getArea());
+			pstm.setString(5, pb.getCity());
+			pstm.setString(6, pb.getSarea());
+			pstm.setString(7, pb.getFile1());
+			pstm.setString(8, pb.getFile2());
+			pstm.setString(9, pb.getFile3());
+			pstm.setString(10, pb.getFile4());
+			pstm.setString(11, pb.getFile5());
+			pstm.setString(12, ori_subject);
+			
+			pstm.executeUpdate();
+			return 1; // 수정 성공
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

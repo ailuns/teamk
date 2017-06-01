@@ -331,7 +331,6 @@
 						}
 					});
 				</script>
-			
 			</div>
 		</div>
 		<input type="submit" id="save" value="글쓰기">
