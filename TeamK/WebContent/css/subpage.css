@@ -26,7 +26,9 @@ input[type="button"]:HOVER, input[type="submit"]:HOVER {
 	font-weight: bold;
 	cursor: pointer;
 }
-table {border-collapse: collapse;}
+table {
+	border-collapse: collapse;
+	}
 article {
 	background-color: #fff;
 	padding: 30px 0;
