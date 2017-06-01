@@ -113,14 +113,14 @@ div#scheduler form input[type=submit] {
 }
 div#scheduler form input[type=submit]:hover {background-color: #09f;}
 div#package_show {
-	height: 200px;
+	height: 250px;
 	width: 60%;
 	min-width: 1000px;
 	margin: 0 auto;
 	margin-top: 15px;
 }
 div#package_show a {
-	height: 200px;
+	height: 250px;
 	width: 33.3%;
 	display: block;
 	float: left;
@@ -167,7 +167,7 @@ a#pack1 #pkpr, a#pack2 #pkpr, a#pack3 #pkpr {
 	font-weight: bold;
 }
 div#goods_show {
-	height: 200px;
+	height: 250px;
 	width: 1000px;
 	margin: 0 auto;
 	margin-top: 15px;
@@ -1344,3 +1344,21 @@ form#pack_res table {
 }
 form#pack_res td#tr1td1 {width: 100px;}
 form#pack_res td#tr1td2 {width: 250px;}
+
+/*My Interest.jsp*/
+div#my_interest {
+	width: 900px;
+	margin: 50px auto;
+}
+div#my_interest table {
+	width: 100%;
+	margin-bottom: 20px;
+}
+div#my_interest table tr {
+	height: 50px;
+	border-bottom: 1px solid #ddd;
+}
+div#my_interest table th {
+	background-color: #eee;
+}
+
