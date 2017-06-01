@@ -56,11 +56,11 @@ function status_change(){
 }
 function thing_exchange(num, ti_num){
 	window.open("./TO_Cancel_or_Exchange.mo?num="+num+"&ti_num="+ti_num,''
-			,'left=200, top=100, width=600, height=640');
+			,'left=600, top=100, width=600, height=640');
 }
 function Trade_Update_Info(o_num) {
-	window.open("./TO_Cancel_or_Exchange.mo?num="+o_num,''
-			,'left=200, top=100, width=600, height=640');
+	window.open("./Trade_Update_Info.mo?num="+o_num,''
+			,'left=600, top=150, width=400, height=400');
 }
 </script>
 <style type="text/css">
@@ -107,7 +107,7 @@ function Trade_Update_Info(o_num) {
 					//교환 상품 배송중일때 배송정보 조회 가능하게 링크
 						if(mtb.getStatus()==3){
 							if(mtb.getMemo().length()!=0){%>
-								<span class="update_info" onclick="Trade_Update_Info()" >교환 배송 중</span>
+								<span class="update_info" onclick="Trade_Update_Info(<%=mtb.getNum() %>)" >교환 배송 중</span>
 						<%}else out.print(mtb.getStatus_text());
 						}else if(mtb.getStatus()==9){//환불 조건 찾기
 							String [] memoar = mtb.getMemo().split(":");
@@ -141,8 +141,11 @@ function Trade_Update_Info(o_num) {
 				%>
 				<tr>
 					<td>주문 정보 </td>
+					<td>받으시는 분</td>
 					<td id="receive_name<%=i%>"><%=mtib.getName() %></td>
+					<td>연락처</td>
 					<td id="receive_mobile<%=i%>"><%=mtib.getMobile() %></td>
+					<td>주문 날짜</td>
 					<td><%=sdf.format(mtib.getTrade_date()) %></td>
 				</tr>
 				<tr>
