@@ -11,6 +11,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import net.pack.db.PackBean;
+
 
 public class ProductDAO {
 
@@ -124,7 +126,6 @@ public class ProductDAO {
 		String sql = "";
 		ResultSet rs = null;
 		int num = 0;
-		String car_name ="";
 		try {
 			con = getConnection();
 			sql = "select max(num) from thing ";
@@ -134,14 +135,6 @@ public class ProductDAO {
 				num = rs.getInt(1) + 1;
 			}
 			
-			sql = "select car_name from category where car_num = ?";
-			pstmt =  con.prepareStatement(sql);
-			pstmt.setInt(1, pb.getCar_num());
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				car_name = rs.getString(1);
-			}
-				
 			sql = "insert into thing(num,name,subject,intro,content,color,size,car_num,type,cost,readcount,country,area,stock,img,img2,img3,img4,img5) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
 			pstmt =  con.prepareStatement(sql);
 			pstmt.setInt(1, num);
@@ -152,7 +145,7 @@ public class ProductDAO {
 			pstmt.setString(6, pb.getColor());
 			pstmt.setString(7, pb.getSize()); 
 			pstmt.setInt(8, pb.getCar_num());
-			pstmt.setString(9, car_name);
+			pstmt.setString(9, pb.getType());
 			pstmt.setInt(10, pb.getCost());
 			pstmt.setInt(11, 0);// readcount 조회수
 			pstmt.setString(12, pb.getCountry());
@@ -505,5 +498,125 @@ public class ProductDAO {
 
 		return count;
 	}
+	
+	public int ProductAddChk(String name, String color, String size) {
+		Connection con = null;
+		String sql = "";
+		ResultSet rs = null;
+		try {
+			con = getConnection();
+
+			sql = "select color, size from thing where name=? and color=? and size=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, name);
+			pstmt.setString(2, color);
+			pstmt.setString(3, size);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next())
+			{
+				return 1;
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return 0;
+	}
+	
+	
+	
+	public List getProductAddList(String name) {
+		Connection con = null;
+		String sql = "";
+		ResultSet rs = null;
+		int count = 0;
+		List productaddList = new ArrayList();
+		try {
+			con = getConnection();
+			sql = "select * from thing where name=? order by color";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, name);
+
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				ProductBean pb = new ProductBean();
+
+				pb.setNum(rs.getInt("num"));
+				pb.setName(rs.getString("name"));
+				pb.setSubject(rs.getString("subject"));
+				pb.setIntro(rs.getString("intro"));
+				pb.setContent(rs.getString("content"));
+				pb.setColor(rs.getString("color"));
+				pb.setSize(rs.getString("size"));
+				pb.setCar_num(rs.getInt("car_num"));
+				pb.setType(rs.getString("type"));
+				pb.setCost(rs.getInt("cost"));
+				pb.setArea(rs.getString("area"));
+				pb.setStock(rs.getInt("stock"));
+				pb.setReadcount(rs.getInt("readcount"));
+				pb.setImg(rs.getString("img"));
+				pb.setImg2(rs.getString("img2"));
+				pb.setImg3(rs.getString("img3"));
+				pb.setImg4(rs.getString("img4"));
+				pb.setImg5(rs.getString("img5"));
+				
+				productaddList.add(pb);
+			}
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return productaddList;
+	}
+	
 	
 }

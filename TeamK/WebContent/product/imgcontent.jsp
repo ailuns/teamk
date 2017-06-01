@@ -47,10 +47,11 @@
 	 	int pageBlock2 = (int) request.getAttribute("pageBlock2");
 	 	int startPage2 = (int) request.getAttribute("startPage2");
 	 	int endPage2 = (int) request.getAttribute("endPage2");
-String user_id = (String) session.getAttribute("id");
+		String user_id = (String) session.getAttribute("id");
 	
-	if (user_id == null)
-		user_id = "admin";
+
+if (user_id == null)
+	user_id = "";
 %>
 <body>
 <script>
@@ -522,9 +523,9 @@ String user_id = (String) session.getAttribute("id");
 	});
 	
 	// 날짜 추가 버튼 클릭 이벤트
-	function winOpen(subject) {
-		win = window.open("./PackDateAdd.po?subject=" + subject, "Package_dateAdd.jsp",
-				"width=800, height=700");
+	function winOpen(name,num) {
+		win = window.open("./ProductAdd.bo?num=" + num + "&name=" +name, "ProductAdd.jsp",
+				"width=800, height=700, left=100, top=100");
 	}
 	
 	
@@ -560,6 +561,7 @@ String user_id = (String) session.getAttribute("id");
 			}
 		});
 	}
+
 
 
 </script>
@@ -934,11 +936,11 @@ String user_id = (String) session.getAttribute("id");
 	<!--여행지 검색창 -->
 	<div id="wrap"> 
 		<div id="package_head">
-			<div id="package_title">패키지
+			<div id="package_title">상품
 			</div>
 			<div id="package_search">
 				<p>내게 맞는 패키지 검색하기</p>
-				<form action="./PackSearchAction.po" name="fr" method="get" id="scheduler" onsubmit="return input_chk()">
+				<form action="./PackSearchAction.po" name="fr1" method="get" id="scheduler" onsubmit="return input_chk()">
 					<label for="date_from">출발</label>
 					<input type="text" id="date_from" class="input_style" name="startDate" required="yes">
 					<label for="date_to">도착</label>
@@ -968,8 +970,8 @@ String user_id = (String) session.getAttribute("id");
 			if (user_id.equals("admin"))
 			{
 		%>
-			<input type="button" value="글수정" onclick="location.href='./ProductUpdate.bo?num=<%=num%>&pageNum=<%=pageNum%>'">
-			<input type="button" value="글삭제" onclick="location.href='./ProductDelete.bo?num=<%=num%>&pageNum=<%=pageNum%>'">
+			<input type="button" value="상품편집" onclick="winOpen('<%=pb.getName() %>',<%=num %>);">
+			<input type="button" value="상품글수정" onclick="location.href='./ProductUpdate.bo?num=<%=num%>&pageNum=<%=pageNum%>'">
 		<%
 			}
 		}
@@ -1068,8 +1070,29 @@ String user_id = (String) session.getAttribute("id");
 						</tr>
 						<tr>
 							<td>합계</td>
-							<td colspan="2"><p id="p">200000</p> <script
-									type="text/javascript">
+							<td colspan="2"><p id="p">200000</p> 
+							<script type="text/javascript">
+							function up(){
+								
+								var str = $("#stack").val();
+								if(str >= 999){
+									alert("더이상클릭할수업습니다.")
+								}else{
+								str++;
+								document.fr.stack.value = str;
+								}
+							}
+							function down(){
+								var str = $("#stack").val();
+								if(str <= 1){
+									alert("더이상클릭할수업습니다.")
+								}else{
+								str--;
+								document.fr.stack.value = str;
+								}
+							}
+							
+							
 							
 							function people_Calc2(str){			
 								$(document).ready(function(){

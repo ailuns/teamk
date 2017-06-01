@@ -43,10 +43,6 @@ public class ProductWriteAction  implements Action{
 		//한글처리
 
 		String name = multi.getParameter("name");
-		if(name.equals("select")){
-			name = multi.getParameter("name2");
-		}
-		
 		//자바빈 파일 만들기 패키지 board 파일이름 BoardBean
 		ProductBean pb = new ProductBean();
 		//액션태그 useBean BoardBean bb객체 생성
