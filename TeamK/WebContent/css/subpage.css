@@ -1093,6 +1093,12 @@ div#board_list table a {
 	text-decoration: none;
 	color: #000;
 }
+div#board_list table .inb_img
+{
+	width : 150px;
+	height : 100px;
+}
+
 div#board_menu_bar input[type="button"] {
 	float: left;
 	margin: 0 5px;

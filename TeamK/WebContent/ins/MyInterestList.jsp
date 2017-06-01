@@ -41,6 +41,7 @@ List<interestBEAN> InterestThing = (List<interestBEAN>) request.getAttribute("In
 		%>
 		<table>
 			<tr>
+				<th></th>
 				<th id="num">상품명</th>
 				<th id="num">가격</th>
 				<th id="num"></th>
@@ -54,6 +55,7 @@ List<interestBEAN> InterestThing = (List<interestBEAN>) request.getAttribute("In
 					String cost = (String)Commas.format(inb.getCost());
 			%>
 			<tr>
+				<td class="inb_img"><img class="inb_img" alt="" src="./upload/<%=inb.getImg() %>"></td>
 				<td><%=inb.getSubject()%><br>
 				<%=inb.getIntro() %></td>
 				<td><%=cost%></td>
