@@ -1342,6 +1342,22 @@ td#tr2td3 {
 	color: #f60;
 }
 
+/*My Thing Order List.jsp*/
+div#my_thing_order_list {
+	width: 900px;
+	margin: 20px auto;
+}
+div#my_thing_order_list table {
+	width: 900px;
+	text-align: left;
+}
+div#my_thing_order_list table span {
+	display: block;
+	border: 1px solid #06c;
+	text-align: center;
+	color: #06c;
+}
+
 /* Pack Res.jsp */
 form#pack_res {
 	width: 900px;

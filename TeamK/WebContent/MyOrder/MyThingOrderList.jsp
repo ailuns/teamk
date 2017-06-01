@@ -77,6 +77,11 @@ function Trade_Update_Info(o_num) {
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
+	<div id="article_head">
+<div id="article_title">My Goods Order List</div>
+<div id="article_script"></div>
+</div>
+<article>
 	<select id ="status" onchange="status_change()">
 		<option value="ing">구매 중인 상품</option>
 		<option value="completed">지난 주문 상품</option>
@@ -87,7 +92,7 @@ function Trade_Update_Info(o_num) {
 					Vector v = ModList.get(i);		
 					ModTradeInfoBEAN mtib = (ModTradeInfoBEAN)v.get(0);
 					List<ModTradeInfoBEAN> mtbList = (List<ModTradeInfoBEAN>)v.get(1); %>
-	<div>
+	<div id="my_thing_order_list">
 		<h4 align="left">주문 번호 : <%=mtib.getTi_num() %></h4>
 		<table border = "1">
 			<%for(int j =0; j< mtbList.size();j++){
@@ -150,7 +155,7 @@ function Trade_Update_Info(o_num) {
 				</tr>
 				<tr>
 					<td>배송지</td>
-					<td id="receive_addr<%=i%>" colspan="6">[<%=mtib.getPostcode() %>]
+					<td id="receive_addr<%=i%>" colspan="5">[<%=mtib.getPostcode() %>]
 						<%=mtib.getAddress1() %> <%=mtib.getAddress2() %></td>
 					<%if(mtib.getStatus()<3){ %>
 					<td id="receive_change<%=i %>">
@@ -193,6 +198,7 @@ function Trade_Update_Info(o_num) {
 		}
 		}
 	%> 
+		</article>
 		</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->
