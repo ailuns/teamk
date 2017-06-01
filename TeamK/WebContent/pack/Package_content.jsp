@@ -6,6 +6,7 @@
 <%@ page import="net.reply.db.ReplyDAO"%>
 <%@ page import="net.reply.db.ReplyBean"%>
 <%@ page import="net.pack.db.CategoryBean" %>
+<%@ page import="net.member.db.ProductBean" %>
 <%@ page import="java.text.DecimalFormat" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -31,6 +32,7 @@
 	List List = (List)request.getAttribute("replylist");
 	List CategoryList = (List)request.getAttribute("CategoryList");
 	List date_list = (List)request.getAttribute("date_list");
+	List RecommendProduct = (List)request.getAttribute("RecommendProduct");
 	
 	int count = ((Integer)request.getAttribute("count")).intValue();
 	String repageNum = (String)request.getAttribute("repageNum");
@@ -680,19 +682,60 @@
 		</table>
 	</div>
 	
-	<div id="banner_sub">추천상품</div>
+	
 	<div id="banner">
-		<div id="close">close</div>
 		<table id="banner_content">
 			<tr>
-				<td><a href="#"><img src="./upload/<%=PB.getFile1() %>"></a></td>
-				<td><a href="#"><img src="./upload/<%=PB.getFile1() %>"></a></td>
-				<td><a href="#"><img src="./upload/<%=PB.getFile1() %>"></a></td>
-			</tr>
-			<tr>
-				<td><div class="info">가격 50000</div></td>
-				<td><div class="info">가격 40000</div></td>
-				<td><div class="info">가격 30000</div></td>
+				<tr>
+				<%
+					if (RecommendProduct.size() == 1)
+					{
+				%>
+						<td><div id="banner_sub">추천상품</div></td>
+				<%
+					}
+					else if (RecommendProduct.size() == 2)
+					{
+				%>
+						<td><div id="banner_sub">추천상품</div></td>
+						<td><div id="close">close</div></td>
+				<%
+					}
+					else if (RecommendProduct.size() == 3)
+					{
+				%>
+						<td><div id="banner_sub">추천상품</div></td>
+						<td></td>
+						<td><div id="close">close</div></td>
+				<%
+					}
+				%>
+				</tr>
+				<%
+					ProductBean pdb;
+					for(int i = 0; i < RecommendProduct.size(); i++)
+					{
+						pdb =(ProductBean)RecommendProduct.get(i);
+				%>
+				
+				<td>
+					<table>
+						<tr>
+							<td><img src="./upload/<%=pdb.getImg() %>"></td>
+			<%-- 				<td><a href="#"><img src="./upload/<%=PB.getFile1() %>"></a></td> --%>
+			<%-- 				<td><a href="#"><img src="./upload/<%=PB.getFile1() %>"></a></td> --%>
+						</tr>
+						<tr>
+							<td><div class="info"><%=pdb.getCost() %></div></td>
+			<!-- 				<td><div class="info">가격 40000</div></td> -->
+			<!-- 				<td><div class="info">가격 30000</div></td> -->
+						</tr>
+					</table>
+				</td>
+				<%
+					}
+				%>
+				
 			</tr>
 		</table>
 	</div>

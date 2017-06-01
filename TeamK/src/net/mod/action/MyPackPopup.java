@@ -20,13 +20,13 @@ public class MyPackPopup implements Action{
 		
 		
 		
-		String subject = request.getParameter("subejct");
-		System.out.println("PackContent subject >> " + subject);
+		int num = Integer.parseInt(request.getParameter("num"));
+		System.out.println("PackContent num >> " + num);
 		
 		PackDAO pdao = new PackDAO();
 		PackBean pb = new PackBean();
 		
-		pb = pdao.getPack(subject);
+		pb = pdao.getPackPopup(num);
 		System.out.println("MyPackPopup num >> " + pb.getNum());
 		System.out.println("MyPackPopup num >> " + pb.getContent());
 		

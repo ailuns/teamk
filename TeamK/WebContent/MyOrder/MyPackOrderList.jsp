@@ -62,10 +62,10 @@ function status_change2(){
 
 function pack_popup(select)
 {
-	var select_sub = $("#subject" + select).html();
+	var select_num = $("#num" + select).html();
 // 	alert(select_num);
-	win = window.open("./MyPackPopup.mo?subejct=" + select_sub, "Package_dateAdd.jsp",
-	"width=850, height=900, left=500, top=50");	
+	win = window.open("./MyPackPopup.mo?num=" + select_num, "Package_dateAdd.jsp",
+	"width=850, height=900, left=500, top=50 scrollbars=yes");	
 }
 
 
@@ -106,7 +106,7 @@ function pack_popup(select)
 <!-- 				<h5></h5> -->
 				<table> 
 					<tr>
-						<td id="subject<%=i %>" style="display:none;"><%=mtib.getSubject()%></td>
+						<td id="num<%=i %>" style="display:none;"><%=mtib.getNum()%></td>
 						<td id="tr1td1"><%=sdf.format(mtib.getDate())%></td>
 						<td id="tr1td2"><%=mtib.getTrade_num()%></td>
 						<td id="tr1td3">성인 : <%=pack_count[0]%> / 아동 : <%=pack_count[1]%></td>
