@@ -11,11 +11,11 @@ ModTradeInfoBEAN mtib = (ModTradeInfoBEAN)request.getAttribute("mtib");
 String [] reason = mtib.getMemo().split("ㅨ");
 String []memo=reason[0].split(",");
 %>
-<title><%=memo[0] %> 요청 정보</title>
+<title><%=memo[0] %> 정보</title>
 </head>
 <body>
 <div>
-<h3 align="center"><%=memo[0] %> 요청 정보</h3>
+<h3 align="center"><%=memo[0] %> 정보</h3>
 	<table align="center">
 		<tr>
 			<td>상품명</td>
