@@ -409,14 +409,20 @@ input#admin_write
 
 /* Package_content.jsp */
 #wrap_pack { 
+	width: 1000px; 
+	min-height: 850px;
+	border : 1px solid #F6F6F6;
+	background-color: white;
+}
+
+#wrap_pack_detail
+{
 	width: 860px; 
 	min-height: 850px;
-/* 	border : 1px solid black; */
- 	margin: 50px auto;
+	margin: 50px auto;
 	padding-top: 50px;
 	text-align: left;
-	background-color: #eee;
-} 
+}
 
 
 /* 이미지 정보 부분 */

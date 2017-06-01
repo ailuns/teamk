@@ -125,6 +125,7 @@
 		<div id="article_title"><img src="./img/travel2.png" width="30px" style="margin-right: 8px; vertical-align: bottom;">패키지 상품등록</div>
 	</div>
 	<div id="wrap_pack">
+	<div id="wrap_pack_detail">
 		<div>
 			<form action="./PackWriteAction.po" id="fr" method="post" enctype="multipart/form-data">
 				<table border="1">
@@ -295,13 +296,14 @@
 						
 						var fileArr = [file1, file2, file3, file4, file5];
 						
+						//첫번쨰 이미지 필수 등록
 						if(file1 == "")
 						{
 							alert("첫번째 이미지는 필수로 넣어주세요");
 							return false;
 						}
 	
-						
+						// 파일 등록 확장자로 제한
 						for(var i = 0; i < fileArr.length; i++)
 						{
 							var file = fileArr[i].substring(fileArr[i].lastIndexOf(".") + 1)
@@ -329,11 +331,13 @@
 						}
 					});
 				</script>
-			</form>
+			
+			</div>
 		</div>
+		<input type="submit" id="save" value="글쓰기">
+		<input type="button" value="취소" onclick="history.back()">
+		</form>
 	</div>
-	<input type="submit" id="save" value="글쓰기">
-	<input type="button" value="취소" onclick="history.back()">
 </div>
 <!-- 오른쪽 메뉴 -->
 <jsp:include page="../inc/rightMenu.jsp"></jsp:include>

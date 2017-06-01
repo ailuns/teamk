@@ -10,8 +10,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<!-- <link href="./css/inc.css" rel="stylesheet" type="text/css"> -->
-<!-- <link href="./css/subpage.css" rel="stylesheet" type="text/css"> -->
+<link href="./css/inc.css" rel="stylesheet" type="text/css">
+<link href="./css/subpage.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="./js/HuskyEZCreator.js" charset="utf-8"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="./js/jquery-3.2.0.js"></script>
@@ -124,7 +124,6 @@ img.ui-datepicker-trigger
 	height:500px;
 }
 
-
 </style>
 
 <%
@@ -144,6 +143,7 @@ img.ui-datepicker-trigger
 		<div id="article_title"><img src="./img/travel2.png" width="30px" style="margin-right: 8px; vertical-align: bottom;">패키지 상품수정</div>
 	</div>
 	<div id="wrap_pack">
+	<div id="wrap_pack_detail">
 		<div>
 			<form action="./PackModifyAction.po?ori_subject=<%=pb.getSubject() %>" id="fr" method="post" enctype="multipart/form-data">
 				<table border="1">
@@ -205,7 +205,7 @@ img.ui-datepicker-trigger
 					</tr>
 					<tr>
 						<td class="td_size">글내용</td>
-						<td style="width:770px; height:412px;"><textarea name="content" id="ir1" rows="10" cols="100" style="width:770px; height:412px;"></textarea></td>
+						<td id="content_write"><textarea name="content" id="ir1" rows="10" cols="100"></textarea></td>
 					</tr>
 					<tr>
 						<td class="td_size">이미지첨부</td>
@@ -356,11 +356,12 @@ img.ui-datepicker-trigger
 					});
 					
 				</script>
-			</form>
+			</div>
 		</div>
+		<input type="submit" value="글수정" id="modify">
+		<input type="button" value="취소" onclick="history.go(-1)">
+		</form>
 	</div>
-	<input type="submit" value="글수정" id="modify">
-	<input type="button" value="취소" onclick="history.go(-1)">
 </div>
 <!-- 오른쪽 메뉴 -->
 <jsp:include page="../inc/rightMenu.jsp"></jsp:include>
