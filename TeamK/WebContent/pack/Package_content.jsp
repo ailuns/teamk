@@ -645,6 +645,15 @@
 		}
 	}
 
+	
+	function Rcom_move(select)
+	{
+		var select_num = $("#num" + select).html();
+		var car_num = $("#car_num" + select).html();
+// 		alert(select_num);
+// 		alert(car_num);
+		location.href="./ProductContent.bo?num=" + select_num + "&car_num=" + car_num;
+	}
 
 </script>
 
@@ -721,8 +730,10 @@
 				<td>
 					<table>
 						<tr>
-							<td><img src="./upload/<%=pdb.getImg() %>"></td>
-			<%-- 				<td><a href="#"><img src="./upload/<%=PB.getFile1() %>"></a></td> --%>
+							<td id="num<%=i %>" style="display: none;"><%=pdb.getNum() %></td>
+							<td id="car_num<%=i %>" style="display: none;"><%=pdb.getCar_num() %></td>
+							<td><img id="Rcom_pd" src="./upload/<%=pdb.getImg() %>" onclick="Rcom_move(<%=i %>)"></td>
+			<%-- 				<td><img src="./upload/<%=PB.getFile1() %>"></a></td> --%>
 			<%-- 				<td><a href="#"><img src="./upload/<%=PB.getFile1() %>"></a></td> --%>
 						</tr>
 						<tr>

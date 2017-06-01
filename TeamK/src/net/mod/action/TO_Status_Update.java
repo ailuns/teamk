@@ -24,7 +24,7 @@ public class TO_Status_Update implements Action{
 			case "Cancel":status=6;break;//환불
 		}
 		if(status==5){
-			memo = "교환,"+request.getParameter("tcount")+":"+
+			memo = "교환,"+request.getParameter("tcount")+"ㅨ"+
 					request.getParameter("memo");
 		}else if(status==6){
 			String type = request.getParameter("trade_type");
@@ -36,7 +36,7 @@ public class TO_Status_Update implements Action{
 					memo+=","+cancelinfo[i];
 				}
 			}
-			memo+=":"+request.getParameter("memo");
+			memo+="ㅨ"+request.getParameter("memo");
 		}else if(status ==10){
 			int ti_num = Integer.parseInt(request.getParameter("ti_num"));
 			AdminDAO admindao = new AdminDAO();
