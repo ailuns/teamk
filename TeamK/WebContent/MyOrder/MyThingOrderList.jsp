@@ -152,7 +152,7 @@ function Trade_Update_Info(o_num) {
 					<td>배송지</td>
 					<td id="receive_addr<%=i%>" colspan="6">[<%=mtib.getPostcode() %>]
 						<%=mtib.getAddress1() %> <%=mtib.getAddress2() %></td>
-					<%if(mtib.getStatus()<3){ %>
+					<%if(mtib.getStatus()==1||mtib.getStatus()==2){ %>
 					<td id="receive_change<%=i %>">
 						<input type= "button" value="배송지 변경" onclick = "receive_change(<%=i%>,<%=mtib.getTi_num()%>)"></td>
 					<%} %>
