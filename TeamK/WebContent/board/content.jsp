@@ -62,7 +62,8 @@ int num = Integer.parseInt(request.getParameter("num"));
 	<!--상단 메뉴 -->
 	<div id="wrap">
 		<div id="article_head">
-			<div id="article_title">리뷰</div>
+			<div id="article_title"><img src="./img/review2.png" width="23px" style="margin-right: 8px; vertical-align: bottom;">리뷰</div>
+			<div id="clear"></div>
 			<div id="article_script">상품이나 패키지 후기를 쓰는 곳 입니다.</div>
 		</div>
 		<div id="clear"></div>

@@ -23,8 +23,9 @@
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
 		<div id="article_head">
-		<div id="article_title">공지사항</div>
-			<div id="article_script">공지사항 게시판 입니다.</div>
+		<div id="article_title"><img src="./img/notice2.png" width="30px" style="margin-right: 8px; vertical-align: bottom;">공지사항</div>
+		<div id="clear"></div>
+		<div id="article_script">공지사항 게시판 입니다.</div>
 		</div>
 		<div id="clear"></div>
 		<article>
@@ -32,7 +33,7 @@
 <form action="./BoardWriteAction3.bo" method="post" name="fr" enctype="multipart/form-data">
 <input type="hidden" value="3" name="type">
 <input type="hidden" name="id" value="<%=id%>"><br>
-<label for="subject">제목</label><input type="text" name="subject" id="subject" maxlength="20"><br><br>
+<label for="subject">제목</label><input type="text" name="subject" id="subject" maxlength="40"><br><br>
 <textarea id="ir1" rows="30" cols="80" name="content" id="content"></textarea><br><br>
 <label for="file1">첨부파일1</label><input type="file" name="file1" id="file1"><br>
 <label for="file2">첨부파일2</label><input type="file" name="file2" id="file2"><br>
