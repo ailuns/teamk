@@ -127,15 +127,15 @@
 	
 	   		var btn = $(this).attr("value");   // 클릭된 버튼의 value 값을 가져온다
 			
-	   		if (btn == "주변 명소")
+	   		if (btn == "관광 명소")
 			{
 				value = "<%=PB.getCity()%> " + "<%=PB.getSarea()%> " + btn; 
 <%-- 				value = "<%=PB.getSarea()%> " + btn;  --%>
 				// ex) value = 부산 해운대 주변 명소
 			}
-			else if (btn == "주변 맛집")
+			else if (btn == "맛집")
 			{
-				value = "<%=PB.getCity()%> " + "<%=PB.getSarea()%> " + btn;
+				value = "<%=PB.getCity()%> " + "<%=PB.getSarea()%> 주변 " + btn;
 <%-- 				value = "<%=PB.getSarea()%> " + btn; --%>
 				// ex) value = 부산 해운대 주변 맛집
 			}
@@ -565,71 +565,76 @@
 	// 찜하기, 예약하기 버튼 클릭 시 각각 버튼 마다 이동할 페이지
 	function submit_fun(i, user_id)
 	{
-		// i = 1  찜추가   i = 2 찜취소    i = 3  예약하기
-		if (i == 1 && user_id != "") // 로그인 되어 있을 경우 찜추가
+		if(user_id != "")
 		{
-			$.ajax({
-				type:"post",
-				url:"./MyInterestAdd.ins",   // java로 보냄
-				data:{
-					type:"P",
-					num:$("input[type=radio][name=chk]:checked").val()					
-				},
-				success:function(){
-					alert("찜목록에 추가되었습니다");
-					$("#jjim_o").hide();
-					$("#jjim_x").show();
-//						window.location.reload(true);  // 페이지 새로고침
-				}
-			});
-		}
-		
-		else if(i == 2 && user_id != "")   // 로그인에 되어 있을 경우 찜취소
-		{
-			$.ajax({
-				type:"post",
-				url:"./MyInterestDel.ins",   // java로 보냄
-				data:{
-					type:"P",
-					num:$("input[type=radio][name=chk]:checked").val()					
-				},
-				success:function(){
-					$("#jjim_o").show();
-					$("#jjim_x").hide();
-					alert("찜목록에서 삭제되었습니다");
-//						window.location.reload(true);  // 페이지 새로고침
-				}
-			});
-		}
-		
-		else if (i == 3 && user_id != "")  // 로그인 되어 있을 경우  장바구니
-		{
-			var cost_temp = $("#p").html(); // 총금액 받아오기
-			str = String(cost_temp);		// 총금액 천원단위로 , 찍혀있는걸
-		    cost = str.replace(/[^\d]+/g, '');   // 풉니다
+			// i = 1  찜추가   i = 2 찜취소    i = 3  예약하기
+			if (i == 1) // 로그인 되어 있을 경우 찜추가
+			{
+				$.ajax({
+					type:"post",
+					url:"./MyInterestAdd.ins",   // java로 보냄
+					data:{
+						type:"P",
+						num:$("input[type=radio][name=chk]:checked").val()					
+					},
+					success:function(){
+						$("#jjim_o").hide();
+						$("#jjim_x").show();
+						alert("찜목록에 추가되었습니다");
+//							window.location.reload(true);  // 페이지 새로고침
+					}
+				});
+			}
 			
-		    $("#cost").val(cost);
-		    $("#ori_num").val($("input[type=radio][name=chk]:checked").val());
+			else if(i == 2)   // 로그인에 되어 있을 경우 찜취소
+			{
+				$.ajax({
+					type:"post",
+					url:"./MyInterestDel.ins",   // java로 보냄
+					data:{
+						type:"P",
+						num:$("input[type=radio][name=chk]:checked").val()					
+					},
+					success:function(){
+						$("#jjim_o").show();
+						$("#jjim_x").hide();
+						alert("찜목록에서 삭제되었습니다");
+//							window.location.reload(true);  // 페이지 새로고침
+					}
+				});
+			}
+			
+			else if (i == 3)  // 로그인 되어 있을 경우  장바구니
+			{
+				var cost_temp = $("#p").html(); // 총금액 받아오기
+				str = String(cost_temp);		// 총금액 천원단위로 , 찍혀있는걸
+			    cost = str.replace(/[^\d]+/g, '');   // 풉니다
+				
+			    $("#cost").val(cost);
+			    $("#ori_num").val($("input[type=radio][name=chk]:checked").val());
 
-		    document.input_fr.action = "./MyBasketAddAction.bns";	// 장바구니 페이지로 이동
-		    document.input_fr.method = "post";
-		    document.input_fr.submit();
+			    document.input_fr.action = "./MyBasketAddAction.bns";	// 장바구니 페이지로 이동
+			    document.input_fr.method = "post";
+			    document.input_fr.submit();
+			}
+			
+			else if (i == 4)  // 로그인 되어 있을 경우  예약하기
+			{
+				var cost_temp = $("#p").html(); // 총금액 받아오기
+				str = String(cost_temp);		// 총금액 천원단위로 , 찍혀있는걸
+			    cost = str.replace(/[^\d]+/g, '');  // 풉니다
+				
+			    // 폼태그로 보내기때문에 hidden 숨겨둔 곳에 각각 값을 넣는다
+			    $("#cost").val(cost);
+			    $("#ori_num").val($("input[type=radio][name=chk]:checked").val());
+
+			    document.input_fr.action = "./MyOrderPay.mo";  // 예약하기 페이지로 이동
+			    document.input_fr.method = "post";
+			    document.input_fr.submit();
+			}
 		}
 		
-		else if (i == 4 && user_id != "")  // 로그인 되어 있을 경우  예약하기
-		{
-			var cost_temp = $("#p").html(); // 총금액 받아오기
-			str = String(cost_temp);		// 총금액 천원단위로 , 찍혀있는걸
-		    cost = str.replace(/[^\d]+/g, '');  // 풉니다
-			
-		    // 폼태그로 보내기때문에 hidden 숨겨둔 곳에 각각 값을 넣는다
-		    $("#cost").val(cost);
-		    $("#ori_num").val($("input[type=radio][name=chk]:checked").val());
-
-		    document.input_fr.action = "./MyOrderPay.mo";  // 예약하기 페이지로 이동
-		    document.input_fr.method = "post";
-		    document.input_fr.submit();
-		}
+		
 		
 		
 		else if(user_id == "")	// 로그인 안되어 있을 경우
@@ -697,8 +702,8 @@
 	<!-- 왼쪽 메뉴 -->
 	<!--여행지 검색창 -->
 	<div id="wrap"> 
-	<div id="article_title">
-		패키지
+	<div id="article_head">
+		<div id="article_title"><img src="./img/travel2.png" width="30px" style="margin-right: 8px; vertical-align: bottom;">패키지</div>
 	</div>
 		<div id="package_feat">
 		<jsp:include page="../inc/packSlide.jsp"></jsp:include>
@@ -907,8 +912,8 @@
 			<hr>
 			<h3 id="sub"><%=PB.getCity()%> <%=PB.getSarea()%></h3>
 			<hr>
-			<input type="button" id="btn1" value="주변 명소"> 
-			<input type="button" id="btn2" value="주변 맛집">
+			<input type="button" id="btn1" value="관광 명소"> 
+			<input type="button" id="btn2" value="맛집">
 		</div>
 		<!--구글맵 제어할 버튼 부분 -->
 		

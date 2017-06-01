@@ -134,7 +134,15 @@ public class ModFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else if(command.equals("/MyPackPopup.mo")){
+			action = new MyPackPopup();
+			try {
+				afo = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+		
 		if (afo != null) {
 			if (afo.isRedirect()) {
 				response.sendRedirect(afo.getPath());

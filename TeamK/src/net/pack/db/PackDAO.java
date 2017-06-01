@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 public class PackDAO {
@@ -108,12 +109,21 @@ public class PackDAO {
 	
 	
 	// 지역별로 분류
-	public List getBoardList(int startRow, int pagesize, String area) {
+	public List getBoardList(int startRow, int pagesize, String area, String id) {
 		List list = new ArrayList();
 
 		try {
 			conn = getConnection();
-			sql = "select * from pack where area=? and date > now() group by subject order by date desc limit ?, ?";
+			
+			if (id.equals("admin"))
+			{
+				sql = "select * from pack where area=? group by subject order by date desc limit ?, ?";
+			}
+			else
+			{
+				sql = "select * from pack where area=? and date > now() group by subject order by date desc limit ?, ?";
+			}
+			
 			pstm = conn.prepareStatement(sql);
 			pstm.setString(1, area);
 			pstm.setInt(2, startRow - 1);
@@ -185,44 +195,39 @@ public class PackDAO {
 	
 	
 	// 검색어(도시, 날짜) 있는 게시판 글 가져오기
-	public List getPackList_search(String search, String startDate, String endDate) {
+	public List getPackList_search(String search, String startDate, String id) {
 		List list = new ArrayList();
 
 		try {
 			conn = getConnection();
 
-			sql = "select num, subject, intro, min(cost) as cost, min(date) as date, file1 from pack where area=? and date > ? group by subject order by date";
-			
-			pstm = conn.prepareStatement(sql);
-			pstm.setString(1, search);
-			pstm.setString(2, startDate);
-
+			if (id.equals("admin"))
+			{
+				sql = "select num, subject, intro, min(cost) as cost, min(date) as date, file1 from pack where area=? group by subject order by date";
+				pstm = conn.prepareStatement(sql);
+				pstm.setString(1, search);
+			}
+			else
+			{
+				sql = "select num, subject, intro, min(cost) as cost, min(date) as date, file1 from pack where area=? and date > ? group by subject order by date";
+				pstm = conn.prepareStatement(sql);
+				pstm.setString(1, search);
+				pstm.setString(2, startDate);
+			}
 			rs = pstm.executeQuery();
-//			if (rs.next())
-//			{
+
 			while (rs.next()) {
 				PackBean PB = new PackBean();
-//				PB.setDate(rs.getString("date"));
-//				
-//				sql = "select min(num) as num, subject, intro, cost, date, file1 from pack where subject=? group by subject";
-//				
-//				pstm = conn.prepareStatement(sql);
-//				pstm.setString(1, rs.getString("subject"));
-//				System.out.println(rs.getString("subject"));
-//				rs = pstm.executeQuery();
+
+				PB.setNum(rs.getInt("num"));
+				PB.setSubject(rs.getString("subject"));
+				PB.setIntro(rs.getString("intro"));
+				PB.setCost(rs.getInt("cost"));
+				PB.setDate(rs.getString("date"));
+				PB.setFile1(rs.getString("file1"));
 				
-					PB.setNum(rs.getInt("num"));
-					PB.setSubject(rs.getString("subject"));
-					PB.setIntro(rs.getString("intro"));
-					PB.setCost(rs.getInt("cost"));
-					PB.setDate(rs.getString("date"));
-					PB.setFile1(rs.getString("file1"));
-					
-					list.add(PB);
-				}
-//			}
-			
-			
+				list.add(PB);
+			}
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -261,17 +266,27 @@ public class PackDAO {
 	}
 	
 	
-	// 지역별로 분류
-	public List getPackList(String subject) {
+	// 해당 상품의 모든 날짜를 가져온다
+	public List getPackList(String subject, String id) {
 		List list = new ArrayList();
 
 		try {
 			conn = getConnection();
-			sql = "select * from pack where subject=? and date > now() order by date";
+			
+			if(id.equals("admin"))
+			{
+				sql = "select * from pack where subject=? order by date";
+			}
+			else
+			{
+				sql = "select * from pack where subject=? and date > now() order by date";
+			}
+			
 			pstm = conn.prepareStatement(sql);
 			pstm.setString(1, subject);
 
 			rs = pstm.executeQuery();
+			
 			while (rs.next()) {
 				PackBean PB = new PackBean();
 
@@ -337,15 +352,20 @@ public class PackDAO {
 	
 	
 	// 해당 지역의 패키지 갯수 카운터
-	public int getPackCount(String area) {
+	public int getPackCount(String area, String id) {
 		int count = 0;
 		try {
 			conn = getConnection();
-//				sql = "select count(*) from pack where city like ?";
+
+			if (id.equals("admin"))
+			{
+				sql = "select count(DISTINCT subject) from pack where area=?";
+			}
+			else
+			{
+				sql = "select count(DISTINCT subject) from pack where area=? and date > now()";
+			}
 			
-//			sql = "select count(*) from pack where area=?";
-			
-			sql = "select count(DISTINCT subject) from pack where area=? and date > now()";
 
 			pstm = conn.prepareStatement(sql);
 			pstm.setString(1, area);
@@ -394,32 +414,25 @@ public class PackDAO {
 	
 	
 	// 검색어(도시, 날짜) 있는 게시판 갯수 카운터
-	public int getPackCount(String search, String startDate, String endDate) {
+	public int getPackCount(String search, String startDate, String id) {
 		int count = 0;
 		try {
 			conn = getConnection();
 
-//			if (endDate == "")
-//			{
-//				sql = "select count(*) from pack where area = ? and date >= ?";
+			if (id.equals("admin"))
+			{
+				sql = "select count(DISTINCT subject) from pack where area = ?";
+				pstm = conn.prepareStatement(sql);
+				pstm.setString(1, search);
+			}
+			else
+			{
 				sql = "select count(DISTINCT subject) from pack where area = ? and date > ?";
-//				sql = "select count(*) from pack where area = ? and date >= ? group by subject";
-				
 				pstm = conn.prepareStatement(sql);
 				pstm.setString(1, search);
 				pstm.setString(2, startDate);
-//			}
-//			else
-//			{
-//				sql = "select count(*) from pack where area like ? and date >= ? and date <= ?";
-//
-//				pstm = conn.prepareStatement(sql);
-//				pstm.setString(1, "%" +  search + "%");
-//				pstm.setString(2, startDate);
-//				pstm.setString(3, endDate);
-//				
-//			}
-			
+			}
+
 			rs = pstm.executeQuery();
 			if (rs.next()) {
 				count = rs.getInt(1);
@@ -527,7 +540,6 @@ public class PackDAO {
 
 		return PB;
 	}
-	
 	
 	public void insertPack(PackBean pb) {
 		try {
@@ -641,34 +653,44 @@ public class PackDAO {
 		try {
 			conn = getConnection();
 
-//			sql = "select pass from pack where num=?";
-//			pstm = conn.prepareStatement(sql);
-//			pstm.setInt(1, bb.getNum());
-//			rs = pstm.executeQuery();
-//
-//			if (rs.next()) {
-//				if (rs.getString(1).equals(bb.getPass())) {
-					sql = "update pack set subject=?, intro=?, content=?, type=?, area=?, city=?, sarea=?, file1=?, file2=?, file3=?, file4=?, file5=?  where subject=?";
-					pstm = conn.prepareStatement(sql);
-					pstm.setString(1, pb.getSubject());
-					pstm.setString(2, pb.getIntro());
-					pstm.setString(3, pb.getContent());
-					pstm.setString(4, pb.getType());
-					pstm.setString(5, pb.getArea());
-					pstm.setString(6, pb.getCity());
-					pstm.setString(7, pb.getSarea());
-					pstm.setString(8, pb.getFile1());
-					pstm.setString(9, pb.getFile2());
-					pstm.setString(10, pb.getFile3());
-					pstm.setString(11, pb.getFile4());
-					pstm.setString(12, pb.getFile5());
-					pstm.setString(13, ori_subject);
-					
-					pstm.executeUpdate();
-					return 1; // 수정 성공
-//				} else
-//					return -1; // 비번 틀림
-//			}
+			
+			sql = "update pack set subject=?, intro=?, content=?, type=?, area=?, city=?, sarea=?, file1=?, file2=?, file3=?, file4=?, file5=?  "
+					+ "where subject=? and num = "
+					+ "(select min(num) from pack where subject= ?)";
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, pb.getSubject());
+			pstm.setString(2, pb.getIntro());
+			pstm.setString(3, pb.getContent());
+			pstm.setString(4, pb.getType());
+			pstm.setString(5, pb.getArea());
+			pstm.setString(6, pb.getCity());
+			pstm.setString(7, pb.getSarea());
+			pstm.setString(8, pb.getFile1());
+			pstm.setString(9, pb.getFile2());
+			pstm.setString(10, pb.getFile3());
+			pstm.setString(11, pb.getFile4());
+			pstm.setString(12, pb.getFile5());
+			pstm.setString(13, ori_subject);
+			pstm.setString(14, ori_subject);
+			
+			
+			sql = "update pack set subject=?, intro=?, type=?, area=?, city=?, sarea=?, file1=?, file2=?, file3=?, file4=?, file5=?  where subject=?";
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, pb.getSubject());
+			pstm.setString(2, pb.getIntro());
+			pstm.setString(3, pb.getType());
+			pstm.setString(4, pb.getArea());
+			pstm.setString(5, pb.getCity());
+			pstm.setString(6, pb.getSarea());
+			pstm.setString(7, pb.getFile1());
+			pstm.setString(8, pb.getFile2());
+			pstm.setString(9, pb.getFile3());
+			pstm.setString(10, pb.getFile4());
+			pstm.setString(11, pb.getFile5());
+			pstm.setString(12, ori_subject);
+			
+			pstm.executeUpdate();
+			return 1; // 수정 성공
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -702,21 +724,12 @@ public class PackDAO {
 		try {
 			conn = getConnection();
 
-//			sql = "select pass from pack where num=?";
-//			pstm = conn.prepareStatement(sql);
-//			pstm.setInt(1, num);
-//			rs = pstm.executeQuery();
-//
-//			if (rs.next()) {
-//				if (rs.getString(1).equals(pass)) {
-					sql = "delete from pack where num=?";
-					pstm = conn.prepareStatement(sql);
-					pstm.setInt(1, num);
-					pstm.executeUpdate();
-					return 1;
-//				} else
-//					return 0;
-//			}
+			sql = "delete from pack where num=?";
+			pstm = conn.prepareStatement(sql);
+			pstm.setInt(1, num);
+			pstm.executeUpdate();
+			return 1;
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -784,28 +797,18 @@ public class PackDAO {
 	
 	
 	public int updatePackDate(PackBean pb) {
-		try {
+		try 
+		{
 			conn = getConnection();
-
-//			sql = "select pass from pack where num=?";
-//			pstm = conn.prepareStatement(sql);
-//			pstm.setInt(1, bb.getNum());
-//			rs = pstm.executeQuery();
-//
-//			if (rs.next()) {
-//				if (rs.getString(1).equals(bb.getPass())) {
-					sql = "update pack set date=?, cost=?, stock=?  where num=?";
-					pstm = conn.prepareStatement(sql);
-					pstm.setString(1, pb.getDate());
-					pstm.setInt(2, pb.getCost());
-					pstm.setInt(3, pb.getStock());
-					pstm.setInt(4, pb.getNum());
+			
+			sql = "update pack set date=?, cost=?, stock=?  where num=?";
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, pb.getDate());
+			pstm.setInt(2, pb.getCost());
+			pstm.setInt(3, pb.getStock());
+			pstm.setInt(4, pb.getNum());
 					
-					pstm.executeUpdate();
-					return 1; // 수정 성공
-//				} else
-//					return -1; // 비번 틀림
-//			}
+			pstm.executeUpdate();
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -833,5 +836,72 @@ public class PackDAO {
 		return 0; // 글번호 없음
 	}
 	
+	// MyOrder에서 여행정보 팝업창 띄울 정보
+	public PackBean getPack(String subject) {
+		PackBean PB = new PackBean();
+		try {
+			conn = getConnection();
+			sql = "select * from pack where subject=? group by ?";
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, subject);
+			pstm.setString(2, subject);
+			rs = pstm.executeQuery();
+
+			if (rs.next()) {
+				PB.setNum(rs.getInt("num"));
+				PB.setSerial(rs.getInt("serial"));
+				PB.setSubject(rs.getString("subject"));
+				PB.setIntro(rs.getString("intro"));
+				PB.setContent(rs.getString("content"));
+				PB.setType(rs.getString("type"));
+				PB.setArea(rs.getString("area"));
+				PB.setCity(rs.getString("city"));
+				PB.setSarea(rs.getString("sarea"));
+				PB.setCost(rs.getInt("cost"));
+				PB.setReadcount(rs.getInt("readcount"));
+				PB.setStock(rs.getInt("stock"));
+				PB.setDate(rs.getString("date"));
+				PB.setFile1(rs.getString("file1"));
+				PB.setFile2(rs.getString("file2"));
+				PB.setFile3(rs.getString("file3"));
+				PB.setFile4(rs.getString("file4"));
+				PB.setFile5(rs.getString("file5"));
+			}
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		finally {
+			if (pstm != null) {
+				try {
+					pstm.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return PB;
+	}
 	
 }

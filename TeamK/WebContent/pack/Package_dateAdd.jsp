@@ -66,6 +66,13 @@
 	color : gray;
 }
 
+#Date_add
+{
+	width : 300px;
+	margin-top : 20px;
+}
+
+
 </style>
 <script type="text/javascript">
 
@@ -81,8 +88,6 @@
 	        //buttonImage: "./img/calendar.png",   // 버튼에 사용될 이미지
 	        //buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
 		});
-		
-		$("#Date_modify").hide();
 	});
 
 	// 날짜 추가
@@ -123,17 +128,16 @@
 				}
 			});
 		}
-		
 	}
 	
-	
+	// 날짜를 입력할 때 이미 등록된 날짜가 있는지 체크
 	function date_chk()
 	{
 		$("#subject").val();
 		$("#add_date").val();
 		
 		
-		$.ajax({   // 날짜를 클릭할때 마다 찜목록과 비교
+		$.ajax({   
 			type:"post",
 			url:"./PackDateAddChk.po",
 			data:{
@@ -156,7 +160,7 @@
 	// 날짜 수정 버튼 클릭 이벤트
 	function winOpen(num) {
 		win = window.open("./PackDateModify.po?num=" + num, "Package_date_modify.jsp",
-				"width=500, height=300, left=800, top=100");
+				"width=500, height=400, left=800, top=100");
 	}
 	
 	
@@ -231,9 +235,9 @@
 				<input id="file3" style="display:none;" value="<%=pb.getFile3() %>"></input>
 				<input id="file4" style="display:none;" value="<%=pb.getFile4() %>"></input>
 				<input id="file5" style="display:none;" value="<%=pb.getFile5() %>"></input>
-				<td class="date_td_size" id="add_date"><%=pb.getDate() %></td>
-				<td class="date_td_size" id="add_cost"><%=cost %></td>
-				<td class="date_td_size" id="add_stock"><%=pb.getStock() %></td>
+				<td class="date_td_size" ><%=pb.getDate() %></td>
+				<td class="date_td_size" ><%=cost %></td>
+				<td class="date_td_size" ><%=pb.getStock() %></td>
 			</tr>
 		<%
 			}
@@ -243,8 +247,9 @@
 
 </form>
  <div id="Date_add">
-		<h4>추가 페이지</h4>
-		<table>
+ 	<fieldset>
+ 		<legend><h4>추가 페이지</h4></legend>
+ 		<table>
 			<tr>
 				<td>
 					날짜
@@ -271,16 +276,12 @@
 					<input type="text" id="add_stock">
 				</td>
 			</tr>
-			<tr>
-				<td>
-					<input type="button" value="추가" onclick="dateAdd()">
-				</td>
-				<td>
-					<input type="button" value="닫기" onclick="cls()">
-				</td>
-			</tr>
 		</table>
-	</div>
+		<br>
+		<input type="button" value="추가" onclick="dateAdd()">
+		<input type="button" value="닫기" onclick="cls()">
+ 	</fieldset>
+</div>
 </center>
 </body>
 </html>

@@ -503,7 +503,7 @@ public class ModDAO {
 	public void To_Status_Update(int status, int o_num, String memo){
 		try{
 			conn = getconn();
-			sql = "update thing_order set o_status = ?, o_memo=? where o_num=?";
+			sql = "update thing_order set o_status = ?, o_memo=?,o_date=now() where o_num=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, status);
 			pstmt.setString(2, memo);
