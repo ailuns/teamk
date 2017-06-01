@@ -5,8 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link href="./css/inc.css" rel="stylesheet" type="text/css">
-<link href="./css/subpage.css" rel="stylesheet" type="text/css">
+<link href="./css/popup.css" rel="stylesheet" type="text/css">
 <%
 	request.setCharacterEncoding("utf-8");
 	String id = (String) session.getAttribute("id");
@@ -77,49 +76,38 @@ function check(){
 </script>
 </head>
 <body>
-	<!--왼쪽 메뉴 -->
-	<div>
-		<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
-	</div>
-	<!--왼쪽 메뉴 -->
-	<div id="wrap">
+	<div id="receive_add">
 	<form action ="./Add_AddressAction.mo" method="post" name="fr" onsubmit="return check()">
 		<table>
 			<tbody>
 			<tr>
-			<td>이름</td>
+			<th>이름</th>
 			<td><input id="name" type="text" name ="name"></td></tr>
 			<tr>
-			<td>연락처</td>
+			<th>연락처</th>
 			<td><input id="mobile" type="tel" name="mobile" placeholder="'-'를 제외하고 입력해 주세요" maxlength="11"
 					title="'-'를 제외한 10~11자리 숫자를 입력해 주세요" pattern="[0-9]{10}[0-9]?"></td></tr>
 			<tr>
-			<td>우편번호</td>
+			<th>우편번호</th>
 			<td><input type="text" id="postcode" name="postcode" placeholder="우편번호">
 				<input type="button" class="dup" onclick="code()" value="우편번호 찾기"></td>
 			</tr>
 			<tr>
-			<td>주소</td>
+			<th>주소</th>
 			<td><input type="text" name="address1" id="address1" placeholder="주소"></td></tr>
 			<tr>
-			<td>상세 주소</td>
+			<th>상세 주소</th>
 			<td>
 			<input type="text" id="address2" name="address2" placeholder="상세주소"></td>
 			</tr>
 			</tbody>
-		</table>
+		</table><br>
 		위 배송지를 기본 배송지로 설정 하시겠습니까?
 		<input type="radio" value="1" name="basic_setting" checked="checked">예
-		<input type="radio" value="0" name="basic_setting">아니오<br>
+		<input type="radio" value="0" name="basic_setting">아니오<br><br>
 		<input type = "submit" value="배송지 추가">
 		<input type = "button" value="배송지 목록" onclick="history.back()">
 	</form>
 		</div>
-	<jsp:include page="../inc/footer.jsp"></jsp:include>
-	<!--오른쪽 메뉴 -->
-	<div>
-		<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
-	</div>
-	<!--오른쪽 메뉴 -->
 </body>
 </html>

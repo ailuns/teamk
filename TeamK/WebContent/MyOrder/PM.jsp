@@ -6,8 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="./css/inc.css" rel="stylesheet" type="text/css">
-<link href="./css/subpage.css" rel="stylesheet" type="text/css">
+<link href="./css/popup.css" rel="stylesheet" type="text/css">
 <script src = "./js/jquery-3.2.0.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -34,14 +33,14 @@ List<PackMemberBEAN> PM_List = (List<PackMemberBEAN>)request.getAttribute("PM_Li
 <body>
 
 <form action="./PM_Info_Update.mo" method = "post"
-	name = "fr" onsubmit="return leader_check()">
+	name = "fr" onsubmit="return leader_check()" id="pm">
 <h3>여행자 정보 입력</h3>
 <%
 if(PM_List.size()!=0){
 	PackMemberBEAN pm = PM_List.get(0);
 %>
 	<h4>대표자</h4>
-	<h6 style="color:red">※ 대표자 정보는 반드시 입력 하셔야합니다!</h6>
+	<h5 style="color:red">※ 대표자 정보는 반드시 입력 하셔야합니다!</h5>
 	<input type="hidden" value = "<%=pm.getPm_num()%>" name = "pm_num">
 	<table>
 	<tr>
@@ -131,6 +130,7 @@ if(PM_List.size()!=0){
 
 <%}
 } %>
+<br>
 <input type="submit" value = "입력">
 <input type ="Button" value = "취소" onclick="window.close()">
 </form>
