@@ -66,18 +66,18 @@
 		$("#cost_child").html(comma_cost2);
 		$("#p").html(comma_cost);
 		
-		$.ajax({
-			type:"post",
-			url:"./MyInterestAdd.ins",   // java로 보냄
-			data:{
-				type:"P",
-				num:$("input[type=radio][name=chk]:checked").val()					
-			},
-			success:function(){
-				$("#jjim_o").hide();
-				$("#jjim_x").show();
-			}
-		});
+// 		$.ajax({
+// 			type:"post",
+// 			url:"./MyInterestAdd.ins",   // java로 보냄
+// 			data:{
+// 				type:"P",
+// 				num:$("input[type=radio][name=chk]:checked").val()					
+// 			},
+// 			success:function(){
+// 				$("#jjim_o").hide();
+// 				$("#jjim_x").show();
+// 			}
+// 		});
 		// 페이지 로딩 될 때 첫번쨰 선택된 날짜 값으로 초기값 설정 부분
 		
 		// 달력 관련 소스
@@ -519,6 +519,8 @@
 	function select_date(select_num)
 	{
 		var packnum = $("#select_rbtn" + select_num).val();  // 해당 라디오버튼의 글번호 값을 불러온다
+
+		
 		$(".select_color").css("background-color","");		// tr 부분 모든 배경색을 없앤다
 		$("#select_rbtn" + select_num).prop("checked", "true"); // 클릭된 라디오 버튼을 체크로 바꾼다
 		$("#select_date" + select_num).css("background-color", "#D5D5D5");  // 클릭된 tr 부분의 배경색을 #D5D5D5로 바꾼다
@@ -539,7 +541,12 @@
 		$("#cost_adult").html(comma_cost);
 		$("#cost_child").html(comma_cost2);
 		$("#p").html(comma_cost);
-		
+	}
+	
+	
+	jQuery(document).ready(function($){
+		var packnum = $("#ori_num_chk").val();
+// 		alert(packnum);
 		$.ajax({   // 날짜를 클릭할때 마다 찜목록과 비교
 			type:"post",
 			url:"./MyInterestCheck.ins",
@@ -561,8 +568,8 @@
 				}
 			}
 		});
-		
-	}
+	});
+	
 	
 	// 찜하기, 예약하기 버튼 클릭 시 각각 버튼 마다 이동할 페이지
 	function submit_fun(i, user_id)
@@ -577,7 +584,8 @@
 					url:"./MyInterestAdd.ins",   // java로 보냄
 					data:{
 						type:"P",
-						num:$("input[type=radio][name=chk]:checked").val()					
+// 						num:$("input[type=radio][name=chk]:checked").val()	
+						num:$("#ori_num_chk").val()
 					},
 					success:function(){
 						$("#jjim_o").hide();
@@ -595,7 +603,8 @@
 					url:"./MyInterestDel.ins",   // java로 보냄
 					data:{
 						type:"P",
-						num:$("input[type=radio][name=chk]:checked").val()					
+// 						num:$("input[type=radio][name=chk]:checked").val()	
+						num:$("#ori_num_chk").val()
 					},
 					success:function(){
 						$("#jjim_o").show();
@@ -650,8 +659,6 @@
 	{
 		var select_num = $("#num" + select).html();
 		var car_num = $("#car_num" + select).html();
-// 		alert(select_num);
-// 		alert(car_num);
 		location.href="./ProductContent.bo?num=" + select_num + "&car_num=" + car_num;
 	}
 
@@ -876,6 +883,7 @@
 						</tr>
 					</table>
 					<br>
+					<input type="hidden" id="ori_num_chk" value="<%=PB.getNum() %>">
 					<input type="button" class="contentbtn" id="jjim_o" value="♡ 찜" onclick="submit_fun(1, '<%=user_id %>')">
 					<input type="button" class="contentbtn" id="jjim_x" value="♥ 찜" style="display:none;" onclick="submit_fun(2, '<%=user_id %>')">
 					<input type="button" class="contentbtn2" value="장바구니" onclick="submit_fun(3, '<%=user_id %>')">
