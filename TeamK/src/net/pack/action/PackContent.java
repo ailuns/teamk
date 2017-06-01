@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.member.db.ProductBean;
+import net.member.db.ProductDAO;
 import net.pack.db.CategoryDAO;
 import net.pack.db.PackBean;
 import net.pack.db.PackDAO;
@@ -29,12 +31,19 @@ public class PackContent implements Action{
 		ReplyDAO rdao = new ReplyDAO();
 		ReplyBean rb = new ReplyBean();
 		CategoryDAO cdao = new CategoryDAO();
+		ProductDAO pddao = new ProductDAO();
+		ProductBean pdb = new ProductBean();
+		
+		
 		
 		System.out.println("PackContent num >> " + num);
 		System.out.println("PackContent pagenum >> " + repageNum);
 		
 		pb = pdao.getPack(num);
 		pdao.updateReadcount(num);
+		
+		List RecommendProduct;
+		RecommendProduct = pddao.getRecommendProduct(pb.getType());
 		
 		System.out.println("area >> " + pb.getArea());
 		System.out.println("Sarea >> " + pb.getSarea());
@@ -45,7 +54,7 @@ public class PackContent implements Action{
 		date_list = pdao.getPackList(pb.getSubject(), user_id);
 		
 		request.setAttribute("date_list", date_list);
-		
+		request.setAttribute("RecommendProduct", RecommendProduct);
 		
 		//전체글 횟수 구하기 int count = getBoardCount()
 		int count = rdao.getCommentCount(num);//pdao.getBoardCount();

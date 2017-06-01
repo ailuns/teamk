@@ -506,4 +506,58 @@ public class ProductDAO {
 		return count;
 	}
 	
+	
+	public List getRecommendProduct(String type) {
+		Connection con = null;
+		String sql = "";
+		ResultSet rs = null;
+		List productList = new ArrayList();
+		try {
+			con = getConnection();
+			sql = "select num, name, subject, cost, type, readcount, stock, img from thing where type=?";
+			
+			pstmt =con.prepareStatement(sql);
+			pstmt.setString(1, type);
+			
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				ProductBean pdb = new ProductBean();
+				pdb.setNum(rs.getInt("num"));
+				pdb.setName(rs.getString("name"));
+				pdb.setSubject(rs.getString("subject"));
+				pdb.setCost(rs.getInt("cost"));
+				pdb.setType(rs.getString("type"));
+				pdb.setReadcount(rs.getInt("readcount"));
+				pdb.setStock(rs.getInt("stock"));
+				pdb.setImg(rs.getString("img"));
+				
+				productList.add(pdb);
+			} 
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ex) {
+				}
+			}
+		}
+		return productList;
+	}
+	
 }
