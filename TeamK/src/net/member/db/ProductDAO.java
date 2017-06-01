@@ -514,7 +514,7 @@ public class ProductDAO {
 		List productList = new ArrayList();
 		try {
 			con = getConnection();
-			sql = "select num, name, subject, cost, type, readcount, stock, img from thing where type=?";
+			sql = "select num, car_num, name, subject, cost, type, readcount, stock, img from thing where type=?";
 			
 			pstmt =con.prepareStatement(sql);
 			pstmt.setString(1, type);
@@ -524,6 +524,7 @@ public class ProductDAO {
 				ProductBean pdb = new ProductBean();
 				pdb.setNum(rs.getInt("num"));
 				pdb.setName(rs.getString("name"));
+				pdb.setCar_num(rs.getInt("car_num"));
 				pdb.setSubject(rs.getString("subject"));
 				pdb.setCost(rs.getInt("cost"));
 				pdb.setType(rs.getString("type"));

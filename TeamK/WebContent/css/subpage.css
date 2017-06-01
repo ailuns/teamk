@@ -293,6 +293,12 @@ div#package_list table img
 	height: 150px;
 }
 
+div#package_list td a:LINK, div#package_list td a:VISITED
+{
+	color: black;
+	text-decoration: none;
+}
+
 div#package_list table #subject 
 {
 	font-size: 20px;
@@ -767,6 +773,11 @@ input#admin_write
 	width : 150px;
 	height : 150px;
 }
+#banner img#Rcom_pd:HOVER
+{
+	cursor: pointer;
+}
+
 
 
 #close
