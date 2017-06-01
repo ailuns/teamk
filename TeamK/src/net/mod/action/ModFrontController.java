@@ -141,6 +141,13 @@ public class ModFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else if(command.equals("/Trade_Update_Info.mo")){
+			action = new Trade_Update_Info();
+			try {
+				afo = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 		if (afo != null) {
