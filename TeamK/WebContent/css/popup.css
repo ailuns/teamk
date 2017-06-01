@@ -4,7 +4,23 @@
 	font-family: "나눔 고딕", "Noto Sans", sans-serif;
 	text-align: center;
 }
-
+input {
+	border: 1px solid #ddd;
+	background-color: #fff;
+}
+input:HOVER {border: 1px solid #000;}
+input:FOCUS {border: 1px solid #06c;}
+input[type="button"], input[type="submit"] {
+	background-color: #fff;
+	color: #06c;
+}
+input[type="button"]:HOVER, input[type="submit"]:HOVER {
+	border: 1px solid #06c;
+	background-color: #06c;
+	color: #fff;
+	font-weight: bold;
+	cursor: pointer;
+}
 /*Join Id Check.jsp*/
 div#idcheck {
 	width: 300px;
@@ -13,7 +29,6 @@ div#idcheck {
 }
 div#idcheck form input[type="text"] {width: 200px;}
 div#idcheck form input[type="submit"] {
-	border: 1px solid #000;
 	width: 90px;
 	height: 24px;
 }
@@ -25,18 +40,16 @@ div#idcheck form p {
 div#idcheck form input[type="button"] {
 	width: 150px;
 	height: 30px;
-	border: 1px solid #000;
 }
 
 /*Email Check.jsp*/
 div#emailchk {
 	width: 300px;
 	height: 25px;
-	margin: 88px auto;
+	margin: 84px auto;
 }
 div#emailchk form input[type="text"] {width: 200px;}
 div#emailchk form input[type="submit"] {
-	border: 1px solid #000;
 	width: 90px;
 	height: 24px;
 }
@@ -49,24 +62,26 @@ div#emailchkup {
 div#emailchkup form label {margin-right: 10px;}
 div#emailchkup form input[type="text"] {width: 240px;}
 div#emailchkup form input[type="submit"] {
-	border: 1px solid #000;
 	width: 100px;
 	height: 25px;
 	margin-top: 10px;
 }
 /*passchange.jsp*/
-div#passchange{
-	background-color: #dedede;
-}
+/* div#passchange{ */
+/* 	background-color: #dedede; */
+/* } */
 div#passchange form label {
-float: left;
-margin-left: 10px;
-font-weight: bold;
+	float: left;
+	margin-left: 10px;
+	text-align: right;
 }
-div#passchange form input[type="text"] {width: 150px; float: right; margin-right: 30px;}
-div#passchange form input[type="password"] {width: 150px; float: right; margin-right: 30px; }
+div#passchange form input[type="text"],
+div#passchange form input[type="password"] {
+	width: 150px;
+	float: right;
+	margin-right: 30px;
+}
 div#passchange form input[type="submit"],div#passchange form input[type="button"]  {
-	border: 1px solid #000;
 	width: 100px;
 	height: 25px;
 	margin-top: 10px; 
