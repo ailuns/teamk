@@ -96,6 +96,12 @@
 		return pchcount+tchcount;
 	
 	}
+	// 장바구니에서 패키지 상품 클릭 시 해당 패키지 정보로 이동
+	function pack_numchk(i)
+	{
+		var numchk = $("#pori_num" + i).val();
+		location.href="./PackContent.po?num=" + numchk;
+	}
 	
 </script>
 <%
@@ -156,9 +162,10 @@
 						String pbbcost = (String)Commas.format(pbb.getCost());
 			%>
 			<tr>
-				<td><input type="checkbox" id="pch<%=i %>" name="pch"value="<%=pbb.getPb_num()%>"></td>
-				<td id="cate"><img src ="./upload/<%=pbb.getImg()%>" height="70"></td>
-				<td id="title"><%=pbb.getSubject()%><br>
+				<input type="hidden" id="pori_num<%=i %>" value="<%=pbb.getOri_num() %>">
+				<td><input type="checkbox" id="pch<%=i %>" name="pch" value="<%=pbb.getPb_num()%>"></td>
+				<td id="cate" onclick="pack_numchk(<%=i %>)"><img src ="./upload/<%=pbb.getImg()%>" height="70"></td>
+				<td id="title" onclick="pack_numchk(<%=i %>)"><%=pbb.getSubject()%><br>
 				<%=pbb.getIntro() %></td>
 				
 				<td><select id = "adult<%=i%>" name="adult<%=i%>" onchange="people_Calc(<%=pbb.getOri_cost()%>,<%=i%>)">
