@@ -102,7 +102,7 @@ function check(){
 			</tr>
 			</tbody>
 		</table><br>
-		위 배송지를 기본 배송지로 설정 하시겠습니까?
+		위 배송지를 기본 배송지로 설정 하시겠습니까?<br>
 		<input type="radio" value="1" name="basic_setting" checked="checked">예
 		<input type="radio" value="0" name="basic_setting">아니오<br><br>
 		<input type = "submit" value="배송지 추가">
