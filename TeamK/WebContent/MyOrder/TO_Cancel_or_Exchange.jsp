@@ -58,11 +58,10 @@ int ti_num = Integer.parseInt(request.getParameter("ti_num"));
 					$('#bank_number').select();
 					return false;
 				}
-			}else return false;
+			}
 		}
 		
 		if($('textarea[name=memo]').val().length==0){
-			var radioval=$('input:radio[name=status]:checked').val();
 			if(radioval=="Exchange"){
 				alert("교환 요청사항을 입력해 주세요");
 				return false;
