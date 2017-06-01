@@ -4,6 +4,26 @@
 	font-family: "나눔 고딕", "Noto Sans", sans-serif;
 	text-align: center;
 }
+body {padding: 10px 0;}
+input {
+	border: 1px solid #ddd;
+	background-color: #fff;
+}
+input:HOVER {border: 1px solid #000;}
+input:FOCUS {border: 1px solid #06c;}
+input[type="type"], input[type="password"] {text-align: left;}
+input[type="button"], input[type="submit"] {
+	background-color: #fff;
+	color: #06c;
+}
+input[type="button"]:HOVER, input[type="submit"]:HOVER {
+	border: 1px solid #06c;
+	background-color: #06c;
+	color: #fff;
+	font-weight: bold;
+	cursor: pointer;
+}
+table {border-collapse: collapse;}
 
 /*Join Id Check.jsp*/
 div#idcheck {
@@ -13,7 +33,6 @@ div#idcheck {
 }
 div#idcheck form input[type="text"] {width: 200px;}
 div#idcheck form input[type="submit"] {
-	border: 1px solid #000;
 	width: 90px;
 	height: 24px;
 }
@@ -25,18 +44,16 @@ div#idcheck form p {
 div#idcheck form input[type="button"] {
 	width: 150px;
 	height: 30px;
-	border: 1px solid #000;
 }
 
 /*Email Check.jsp*/
 div#emailchk {
 	width: 300px;
 	height: 25px;
-	margin: 88px auto;
+	margin: 84px auto;
 }
 div#emailchk form input[type="text"] {width: 200px;}
 div#emailchk form input[type="submit"] {
-	border: 1px solid #000;
 	width: 90px;
 	height: 24px;
 }
@@ -49,30 +66,105 @@ div#emailchkup {
 div#emailchkup form label {margin-right: 10px;}
 div#emailchkup form input[type="text"] {width: 240px;}
 div#emailchkup form input[type="submit"] {
-	border: 1px solid #000;
 	width: 100px;
 	height: 25px;
 	margin-top: 10px;
 }
 /*passchange.jsp*/
-div#passchange{
-	background-color: #dedede;
+/* div#passchange{ */
+/* 	background-color: #dedede; */
+/* } */
+div#passchange form {
+	line-height: 2em;
+	margin-left: 10px;
 }
 div#passchange form label {
-float: left;
-margin-left: 10px;
-font-weight: bold;
+	float: left;
+	margin-left: 10px;
+	width: 180px;
+	text-align: left;
 }
-div#passchange form input[type="text"] {width: 150px; float: right; margin-right: 30px;}
-div#passchange form input[type="password"] {width: 150px; float: right; margin-right: 30px; }
+div#passchange form input[type="text"],
+div#passchange form input[type="password"] {
+	width: 150px;
+	float: right;
+	margin-right: 30px;
+}
 div#passchange form input[type="submit"],div#passchange form input[type="button"]  {
-	border: 1px solid #000;
 	width: 100px;
 	height: 25px;
 	margin-top: 10px; 
 }
 
+/*PM.jsp*/
+form#pm {
+	width: 550px;
+	padding: 10px;
+	margin: 0 auto;
+	border: 1px solid #06c;
+}
+form#pm h4, form#pm h5 {color: #06c;}
+form#pm table {width: 100%;}
+form#pm table * {text-align: left;}
+form#pm input[type="submit"],
+form#pm input[type="button"] {width: 100px;}
 
+/* Res Cancel.jsp*/
+div#res_cancel {
+	margin: 0 auto;
+	padding-bottom: 20px;
+	border: 1px solid #06c;
+}
+div#res_cancel table {
+	margin: 0 auto;
+	margin-bottom: 10px;
+	width: 80%;
+}
+div#res_cancel table * {
+	text-align: left;
+	padding: 10px;
+}
+div#res_cancel table th {
+	background-color: #eee;
+	border-bottom: 1px solid #fff;
+}
+div#res_cancel table td {border-bottom: 1px solid #eee;}
+span#cancel_rule_view {
+	display: block;
+	color: #f00;
+}
+div#res_cancel ul {list-style: none;}
+div#res_cancel ul li {margin-left: -30px;}
+div#res_cancel input[type="submit"],
+div#res_cancel input[type="button"] {width: 100px;}
 
+/*Receive Change.jsp*/
+div#receive_change {
+	margin: 0 auto;
+	padding-bottom: 10px;
+	border: 1px solid #06c;
+}
+div#receive_change table {
+	margin: 20px 5px 5px 5px;
+}
+div#receive_change table * {text-align: left;}
+div#receive_change table th {
+	width: 80px;
+	background-color: #eee;
+	border-bottom: 1px solid #fff;
+}
+div#receive_change table td {border-bottom: 1px solid #eee;}
 
+/*Receive Add.jsp*/
+div#receive_add {
+	margin: 0 auto;
+	padding: 10px;
+	padding-bottom: 20px;
+	border: 1px solid #06c;
+}
+div#receive_add table * {text-align: left;}
+div#receive_add table tr {height: 30px;}
+div#receive_add table th {width: 100px;}
+div#receive_add table input[type="text"],
+div#receive_add table input[type="tel"] {width: 230px;}
 

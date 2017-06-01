@@ -49,7 +49,7 @@ function complet(num, ti_num){
 	}
 }
 function receive_change(i,ti_num){
-	window.open('./Receive_Change.mo?num='+i+"&ti_num="+ti_num, '배송지 선택', 'left=200, top=100, width=480, height=640');
+	window.open('./Receive_Change.mo?num='+i+"&ti_num="+ti_num, '배송지 선택', 'left=200, top=100, width=480, height=640, scrollbars=yes');
 }
 function status_change(){
 	location.href="./MyThingOrderList.mo?status="+$('#status').val();

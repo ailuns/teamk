@@ -81,6 +81,16 @@
 	}
 
 	
+	// 날짜를 입력할 때 이미 등록된 날짜가 있는지 체크
+	function date_chk()
+	{
+		$("#subject").val();
+		$("#date_from").val();
+		
+		
+		
+	}
+	
 </script>
 
 <style type="text/css">
@@ -125,8 +135,9 @@
 		<div id="article_title"><img src="./img/travel2.png" width="30px" style="margin-right: 8px; vertical-align: bottom;">패키지 상품등록</div>
 	</div>
 	<div id="wrap_pack">
+	<div id="wrap_pack_detail">
 		<div>
-			<form action="./PackWriteAction.po" id="fr" method="post" enctype="multipart/form-data">
+			<form action="./PackWriteAction.po" id="fr" method="post" enctype="multipart/form-data" onsubmit="return frsubmit()">
 				<table border="1">
 					<tr>
 						<td class="td_size">출발일자</td>
@@ -286,7 +297,9 @@
 					}
 	
 					// 글쓰기 버튼 클릭 이벤트
-					$("#fr").submit(function(){
+// 					$("#fr").submit(function(){
+					function frsubmit()
+					{
 						var file1 = $("#file1").val();
 						var file2 = $("#file2").val();
 						var file3 = $("#file3").val();
@@ -295,13 +308,13 @@
 						
 						var fileArr = [file1, file2, file3, file4, file5];
 						
+						//첫번쨰 이미지 필수 등록
 						if(file1 == "")
 						{
 							alert("첫번째 이미지는 필수로 넣어주세요");
 							return false;
 						}
-	
-						
+						// 파일 등록 확장자로 제한
 						for(var i = 0; i < fileArr.length; i++)
 						{
 							var file = fileArr[i].substring(fileArr[i].lastIndexOf(".") + 1)
@@ -314,6 +327,31 @@
 					 		}
 						}
 				 		
+						var chk = 0;
+						$.ajax({   
+							type:"post",
+							url:"./PackDateAddChk.po",
+							async: false,
+							data:{
+//				 				제목, 날짜
+								subject:$("#subject").val(),
+								date:$("#date_from").val()								
+							},
+							success:function(data)
+							{
+								if (data == 1)
+								{
+									alert("이미 추가된 상품입니다\n날짜를 추가하려면 해당상품에서 [날짜편집]을 이용해주세요");
+									r = false;
+								}
+								else
+								{
+									r = true;
+								}
+							}
+						});
+							
+						return r;
 						
 						var content = oEditors.getById["ir1"].getIR(); // Edit에 쓴 내용을 content 변수에 저장    값 : <br>
 						
@@ -327,13 +365,15 @@
 							oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []); // Edit에 쓴 내용을 textarea에 붙여넣어준다
 	// 					    $("#fr").submit();  // form을 submit 시킨다
 						}
-					});
+// 					});
+					}
 				</script>
-			</form>
+			</div>
 		</div>
+		<input type="submit" id="save" value="글쓰기">
+		<input type="button" value="취소" onclick="history.back()">
+		</form>
 	</div>
-	<input type="submit" id="save" value="글쓰기">
-	<input type="button" value="취소" onclick="history.back()">
 </div>
 <!-- 오른쪽 메뉴 -->
 <jsp:include page="../inc/rightMenu.jsp"></jsp:include>

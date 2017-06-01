@@ -95,15 +95,27 @@ public class PackModifyAction implements Action{
 				
 //		pdao.updatePackcontent(pb, num);
 		
-		pdao.updatePackcontent(pb, ori_subject);
-			
-		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		out.println("<script>");
-		out.println("alert('글이 수정되었습니다');");
-		out.println("location.href='./PackList.po';");
-		out.println("</script>");
-		out.close();
-		return null;	
+		int chk = pdao.updatePackcontent(pb, ori_subject);
+		if (chk == 1)
+		{
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('글이 수정되었습니다');");
+			out.println("location.href='./PackList.po';");
+			out.println("</script>");
+			out.close();
+		}
+		else
+		{
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('글이 수정 실패하였습니다');");
+			out.println("history.go(-1)");
+			out.println("</script>");
+			out.close();
+		}
+		return null;
 	}
 }

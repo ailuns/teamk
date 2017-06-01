@@ -6,6 +6,7 @@
 <%@ page import="net.reply.db.ReplyDAO"%>
 <%@ page import="net.reply.db.ReplyBean"%>
 <%@ page import="net.pack.db.CategoryBean" %>
+<%@ page import="net.member.db.ProductBean" %>
 <%@ page import="java.text.DecimalFormat" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -31,6 +32,7 @@
 	List List = (List)request.getAttribute("replylist");
 	List CategoryList = (List)request.getAttribute("CategoryList");
 	List date_list = (List)request.getAttribute("date_list");
+	List RecommendProduct = (List)request.getAttribute("RecommendProduct");
 	
 	int count = ((Integer)request.getAttribute("count")).intValue();
 	String repageNum = (String)request.getAttribute("repageNum");
@@ -127,15 +129,15 @@
 	
 	   		var btn = $(this).attr("value");   // 클릭된 버튼의 value 값을 가져온다
 			
-	   		if (btn == "주변 명소")
+	   		if (btn == "관광 명소")
 			{
 				value = "<%=PB.getCity()%> " + "<%=PB.getSarea()%> " + btn; 
 <%-- 				value = "<%=PB.getSarea()%> " + btn;  --%>
 				// ex) value = 부산 해운대 주변 명소
 			}
-			else if (btn == "주변 맛집")
+			else if (btn == "맛집")
 			{
-				value = "<%=PB.getCity()%> " + "<%=PB.getSarea()%> " + btn;
+				value = "<%=PB.getCity()%> " + "<%=PB.getSarea()%> 주변 " + btn;
 <%-- 				value = "<%=PB.getSarea()%> " + btn; --%>
 				// ex) value = 부산 해운대 주변 맛집
 			}
@@ -643,6 +645,15 @@
 		}
 	}
 
+	
+	function Rcom_move(select)
+	{
+		var select_num = $("#num" + select).html();
+		var car_num = $("#car_num" + select).html();
+// 		alert(select_num);
+// 		alert(car_num);
+		location.href="./ProductContent.bo?num=" + select_num + "&car_num=" + car_num;
+	}
 
 </script>
 
@@ -680,19 +691,62 @@
 		</table>
 	</div>
 	
-	<div id="banner_sub">추천상품</div>
+	
 	<div id="banner">
-		<div id="close">close</div>
 		<table id="banner_content">
 			<tr>
-				<td><a href="#"><img src="./upload/<%=PB.getFile1() %>"></a></td>
-				<td><a href="#"><img src="./upload/<%=PB.getFile1() %>"></a></td>
-				<td><a href="#"><img src="./upload/<%=PB.getFile1() %>"></a></td>
-			</tr>
-			<tr>
-				<td><div class="info">가격 50000</div></td>
-				<td><div class="info">가격 40000</div></td>
-				<td><div class="info">가격 30000</div></td>
+				<tr>
+				<%
+					if (RecommendProduct.size() == 1)
+					{
+				%>
+						<td><div id="banner_sub">추천상품</div></td>
+				<%
+					}
+					else if (RecommendProduct.size() == 2)
+					{
+				%>
+						<td><div id="banner_sub">추천상품</div></td>
+						<td><div id="close">close</div></td>
+				<%
+					}
+					else if (RecommendProduct.size() == 3)
+					{
+				%>
+						<td><div id="banner_sub">추천상품</div></td>
+						<td></td>
+						<td><div id="close">close</div></td>
+				<%
+					}
+				%>
+				</tr>
+				<%
+					ProductBean pdb;
+					for(int i = 0; i < RecommendProduct.size(); i++)
+					{
+						pdb =(ProductBean)RecommendProduct.get(i);
+				%>
+				
+				<td>
+					<table>
+						<tr>
+							<td id="num<%=i %>" style="display: none;"><%=pdb.getNum() %></td>
+							<td id="car_num<%=i %>" style="display: none;"><%=pdb.getCar_num() %></td>
+							<td><img id="Rcom_pd" src="./upload/<%=pdb.getImg() %>" onclick="Rcom_move(<%=i %>)"></td>
+			<%-- 				<td><img src="./upload/<%=PB.getFile1() %>"></a></td> --%>
+			<%-- 				<td><a href="#"><img src="./upload/<%=PB.getFile1() %>"></a></td> --%>
+						</tr>
+						<tr>
+							<td><div class="info"><%=pdb.getCost() %></div></td>
+			<!-- 				<td><div class="info">가격 40000</div></td> -->
+			<!-- 				<td><div class="info">가격 30000</div></td> -->
+						</tr>
+					</table>
+				</td>
+				<%
+					}
+				%>
+				
 			</tr>
 		</table>
 	</div>
@@ -912,8 +966,8 @@
 			<hr>
 			<h3 id="sub"><%=PB.getCity()%> <%=PB.getSarea()%></h3>
 			<hr>
-			<input type="button" id="btn1" value="주변 명소"> 
-			<input type="button" id="btn2" value="주변 맛집">
+			<input type="button" id="btn1" value="관광 명소"> 
+			<input type="button" id="btn2" value="맛집">
 		</div>
 		<!--구글맵 제어할 버튼 부분 -->
 		

@@ -42,7 +42,7 @@ $(document).ready(function(){
 	<div id="wrap">
 
 		<div id="article_head">
-			<div id="article_title">공지사항</div>
+			<div id="article_title"><img src="./img/notice2.png" width="30px" style="margin-right: 8px; vertical-align: bottom;">공지사항</div>
 			<div id="clear"></div>
 			<div id="article_script">공지사항 게시판 입니다.<span class="count">[검색된 글의 개수 :<%=count%>]</span></div>
 		</div>
