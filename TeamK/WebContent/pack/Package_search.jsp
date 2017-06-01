@@ -198,8 +198,11 @@ img.ui-datepicker-trigger
 						</a>
 					</td>
 					<td id="subject">
+						<a href="./PackContent.po?num=<%=pb.getNum() %>">
 						<%=pb.getSubject() %>
+						</a>
 					</td>
+					
 					<td rowspan="2"  id="price">
 						<span><%=cost %>원~</span>
 					</td>
