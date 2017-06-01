@@ -1107,14 +1107,17 @@ div#board_content table td#subject {
 	padding: 10px 0;
 	
 }
-div#board_content table#content td#content {
+div#board_content table#content td#content_td {
 	max-width: 600px;
 	text-align: justify;
 	font-size: 15px;
 	font-weight: normal;
+}
+div#board_content table#content td#content_td div#min {
 	min-height: 300px;
 }
-div#board_content table td#content img {max-width: 100%;}
+
+div#board_content table td#content_td img {max-width: 100%;}
 div#board_content table#reply {text-align: justify;}
 div#board_content table#reply td#name {
 	width: 160px;

@@ -45,7 +45,7 @@ int num = Integer.parseInt(request.getParameter("num"));
  <td id="id"><%=bb.getId()%></td>
 </tr>
 <tr>
- <td colspan="3" id="content"><br><br><%=bb.getContent()%><br><br></td>
+ <td colspan="3" id="content_td"><br><br><div id="min"><%=bb.getContent()%></div>><br></td>
 </tr>
 
 <%--첨부파일이 있을때만 첨부파일 표시--%>
