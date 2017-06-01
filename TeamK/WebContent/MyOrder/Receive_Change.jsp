@@ -15,8 +15,7 @@ int  num =Integer.parseInt(request.getParameter("num"));
 
 %>
 <title>Insert title here</title>
-<link href="./css/inc.css" rel="stylesheet" type="text/css">
-<link href="./css/subpage.css" rel="stylesheet" type="text/css">
+<link href="./css/popup.css" rel="stylesheet" type="text/css">
 <script src = "./js/jquery-3.2.0.js"></script>
 <script type="text/javascript">
 $(function(){
@@ -60,25 +59,24 @@ function receive_change(num,ra_num){
 </script>
 </head>
 <body>
-
+<div id="receive_change">
 <%if(ribList.size() != 0){
 	for(int i=0; i<ribList.size(); i++){
 		ReceiveInfoBEAN rib = ribList.get(i);%>
-	<div>
 	<input type="hidden" value="<%=rib.getPostcode() %>" id = "postcode<%=rib.getRa_num() %>">
 	<input type="hidden" value="<%=rib.getAddress1() %>" id = "address1<%=rib.getRa_num() %>">
 	<input type="hidden" value="<%=rib.getAddress2() %>" id = "address2<%=rib.getRa_num() %>">
 	<table>
 		<tr>
-			<td>이름</td>
+			<th>이름</th>
 			<td id="name<%=rib.getRa_num()%>"><%=rib.getName() %></td>
 		</tr>
 		<tr>
-			<td>연락처</td>
+			<th>연락처</th>
 			<td id="mobile<%=rib.getRa_num()%>"><%=rib.getMobile() %></td>
 		</tr>
 		<tr>
-			<td>주소</td>
+			<th>주소</th>
 			<td id="address<%=rib.getRa_num()%>">
 			[<%=rib.getPostcode() %>] <%=rib.getAddress1() %> <%=rib.getAddress2() %></td>
 		</tr>
@@ -86,9 +84,9 @@ function receive_change(num,ra_num){
 	<input type = "button" value="선택" onclick ="receive_change(<%=rib.getRa_num() %>,<%=ti_num %>)">
 	<%if(rib.getBasic_setting()==0){ %><input type="button" value="기본 배송지로 설정" onclick="basic_change(<%=rib.getRa_num() %>)" >
 	<%} %>
-	</div>
 <%	}
-}else{ %>등록 된 정보가 없습니다<%} %>
+}else{ %>등록 된 정보가 없습니다<%} %><br><br>
 <input type = "button" id="Add_address" value = "배송지 추가">
+</div>
 </body>
 </html>

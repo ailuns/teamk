@@ -49,7 +49,7 @@ function insertPM(num){
 }
 function Res_Cancel(num){
 	window.open('./Res_Cancel.mo?num='+num, '패키치 취소', 
-			'left=200, top=100, width=600, height=400, scrollbars=yes, status=no,'+
+			'left=200, top=100, width=600, height=650, scrollbars=yes, status=no,'+
 			'resizable=no, fullscreen=no, channelmode=no,location=no');
 }
 function status_change(){
