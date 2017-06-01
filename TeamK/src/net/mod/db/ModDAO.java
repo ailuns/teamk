@@ -436,19 +436,22 @@ public class ModDAO {
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				ModTradeInfoBEAN mtib = new ModTradeInfoBEAN();
-				mtib.setNum(rs.getInt("o_num"));
+				int o_num=rs.getInt("o_num");
+				int o_count = rs.getInt("o_count");
+				mtib.setNum(o_num);
 				mtib.setOri_num(rs.getInt("ori_num"));
 				mtib.setIntro(rs.getString("intro"));
 				mtib.setSubject(rs.getString("subject"));
 				mtib.setImg(rs.getString("img"));
 				mtib.setTrade_num(rs.getString("o_trade_num"));
-				mtib.setThing_count(rs.getInt("o_count"));
+				mtib.setThing_count(o_count);
 				mtib.setCost(rs.getInt("o_cost"));
 				mtib.setColor(rs.getString("o_color"));
 				mtib.setSize(rs.getString("o_size"));
 				mtib.setTrade_date(rs.getTimestamp("o_date"));
 				mtib.setTrans_num(rs.getString("o_trans_num"));
 				mtib.setStatus(rs.getInt("o_status"));
+				mtib.setMemo(rs.getString("o_memo"));
 				String statustext = "";
 				switch(rs.getInt("o_status")){
 					case 1: statustext = "입금 확인중"; break;
@@ -460,6 +463,7 @@ public class ModDAO {
 					case 9: statustext = "환불 완료";break;
 					case 10: statustext = "구매 완료";break;
 				}
+				
 				mtib.setStatus_text(statustext);
 				mtib.setTrans_num(rs.getString("o_trans_num"));
 				ModThingList.add(mtib);
@@ -499,7 +503,7 @@ public class ModDAO {
 	public void To_Status_Update(int status, int o_num, String memo){
 		try{
 			conn = getconn();
-			sql = "update thing_order set o_status = ?, o_memo=? where o_num=?";
+			sql = "update thing_order set o_status = ?, o_memo=?,o_date=now() where o_num=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, status);
 			pstmt.setString(2, memo);
@@ -649,5 +653,37 @@ public class ModDAO {
 			}
 		}
 		
+	}
+	public ModTradeInfoBEAN TO_Cancel_or_Exchange(int o_num){
+		ModTradeInfoBEAN mtib = new ModTradeInfoBEAN();
+		try{
+			conn = getconn();
+			sql ="select A.*, B.subject, B.size, B.color,B.cost,C.ti_trade_type "
+					+"from thing_order A left outer join(thing B cross join trade_info C) "
+					+"on(A.ori_num =B.num and A.o_ti_num = C.ti_num) "
+					+"where A.o_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, o_num);
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				mtib.setSubject(rs.getString("subject"));
+				mtib.setSize(rs.getString("size"));
+				mtib.setColor(rs.getString("color"));
+				mtib.setThing_count(rs.getInt("o_count"));
+				mtib.setTotal_cost(rs.getInt("o_cost"));
+				mtib.setCost(rs.getInt("cost"));
+				mtib.setTrade_type(rs.getString("ti_trade_type"));
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}return mtib;
 	}
 }

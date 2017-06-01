@@ -4,6 +4,7 @@
 <%@page import="java.util.Vector"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List"%>
+<%@ page import="java.text.DecimalFormat" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -58,6 +59,16 @@ function status_change2(){
 	location.href="./MyPackOrderList.mo?status="+$('#status').val()+
 			"&status2="+$('#status2').val();
 }
+
+function pack_popup(select)
+{
+	var select_sub = $("#subject" + select).html();
+// 	alert(select_num);
+	win = window.open("./MyPackPopup.mo?subejct=" + select_sub, "Package_dateAdd.jsp",
+	"width=850, height=900, left=500, top=50");	
+}
+
+
 </script>
 </head>
 <body>
@@ -67,8 +78,12 @@ function status_change2(){
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
-
-		
+		<div id="article_head">
+			<div id="article_title"><span id = "title"></span></div>
+			<div id="article_script">상품이나 패키지 후기를 쓰는 곳 입니다.</div>
+		</div>
+		<div id="clear"></div>
+		<article>
 		<select id="status" onchange="status_change()">
 			<option value="ing">현재 주문</option>
 			<option value="completed">과거 주문</option>
@@ -79,48 +94,71 @@ function status_change2(){
 			<option value="confirm">예약 완료</option>
 			<option value="canceling">예약 취소중</option>
 		</select>
-		<h3 id = "title"></h3>
 		<div id = "list_view">
-			
 				<%
 					if (ModPList.size() != 0) {
 						for (int i = 0; i < ModPList.size(); i++) {
 							ModTradeInfoBEAN mtib = ModPList.get(i);
 							String[] pack_count = mtib.getPack_count().split(",");
+							DecimalFormat Commas = new DecimalFormat("#,###");
+							String cost = (String)Commas.format(mtib.getCost());
 				%>
-				<h5><%=mtib.getSubject()%></h5>
-				<table border="1">
-					<tr onclick="location.href='#'">
-						<td rowspan="2"><%=mtib.getImg()%></td>
-						<td><%=mtib.getTrade_num()%></td>
-						<td><%=sdf.format(mtib.getDate())%></td>
-						<td><%=mtib.getIntro()%></td>
-						<td>성인 : <%=pack_count[0]%>, 아동 : <%=pack_count[1]%></td>
-						<td><%=mtib.getCost()%>원</td>
-						<%if(status2.equals("none")){ %><td><%=mtib.getStatus_text()%></td><%} %>
+<!-- 				<h5></h5> -->
+				<table> 
+					<tr>
+						<td id="subject<%=i %>" style="display:none;"><%=mtib.getSubject()%></td>
+						<td id="tr1td1"><%=sdf.format(mtib.getDate())%></td>
+						<td id="tr1td2"><%=mtib.getTrade_num()%></td>
+						<td id="tr1td3">성인 : <%=pack_count[0]%> / 아동 : <%=pack_count[1]%></td>
+<%-- 						<%if(status2.equals("none")){ %> --%>
+						<td rowspan="2" id="tr1td4"><%=mtib.getStatus_text()%></td>
+<%-- 						<%} %> --%>
+					</tr>
+					<tr>
+						<td rowspan="2" id="tr2td1" class="tr1td0_popup" onclick="pack_popup(<%=i %>);">
+							<img src="./upload/<%=mtib.getImg()%>">
+						</td>
+						<td id="tr2td2" class="tr1td0_popup" onclick="pack_popup(<%=i %>);"><%=mtib.getSubject()%></td>
+						<td id="tr2td3"><%=cost%>원</td>
 					</tr>
 					<%if(status.equals("ing")){
-						if (mtib.getStatus() < 4) {
+// 						if (mtib.getStatus() < 4) {
 					%>
 					<tr>
-						<td><input type="button" value="여행자 정보 입력"
-							onclick="insertPM(<%=mtib.getNum()%>)"></td>
+						<td id="tr3td1"><%=mtib.getIntro()%></td>
+						<td id="tr3td2">
+						<%
+						if (mtib.getStatus() < 4) {
+						%>
+						<input type="button" value="여행자 정보 입력"
+							onclick="insertPM(<%=mtib.getNum()%>)">
+						<%
+						}
+						%>
+						</td>
 						<%if(mtib.getStatus()>1){ %>
-						<td><input type="button" value="예약 취소"
-							onclick="Res_Cancel(<%=mtib.getNum()%>)"></td>
+						<td id="tr3td3">
+						<%
+						if (mtib.getStatus() < 4) {
+						%>
+						<input type="button" value="예약 취소"
+							onclick="Res_Cancel(<%=mtib.getNum()%>)">
+						<%
+						}
+						%>
+						</td>
 							<%} %>
-						</tr>
+					</tr>
 					<%
 						}
-					}
+// 					}
 					else if(mtib.getStatus()==9){
 						String [] memo = mtib.getMemo().split(",");
 					%>
 					<tr>
-						<td>환불 방식</td>
-						<td><%=memo[0] %></td>
-						<td>환불 금액</td>
-						<td><%=memo[1] %>원</td>
+						<td id="tr3td1"><%=mtib.getIntro()%></td>
+						<td id="tr3td2">환불 방식: <%=memo[0] %></td>
+						<td id="tr3td3">환불 금액: <%=memo[1] %>원</td>
 					</tr>	
 				<%} %>
 				</table>
@@ -156,6 +194,7 @@ function status_change2(){
 		%>
  
 		</div>
+		</article>
 	</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->

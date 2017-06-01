@@ -19,7 +19,9 @@ public class PackContent implements Action{
 		// TODO Auto-generated method stub
 		
 		HttpSession session = request.getSession();
-		
+		String user_id = (String) session.getAttribute("id");
+		if(user_id == null)
+			user_id = "";
 		int num = Integer.parseInt(request.getParameter("num"));
 		String repageNum = request.getParameter("repageNum");
 		PackDAO pdao = new PackDAO();
@@ -40,7 +42,7 @@ public class PackContent implements Action{
 		session.setAttribute("PackBean", pb);
 		
 		List date_list;
-		date_list = pdao.getPackList(pb.getSubject());
+		date_list = pdao.getPackList(pb.getSubject(), user_id);
 		
 		request.setAttribute("date_list", date_list);
 		
@@ -87,21 +89,15 @@ public class PackContent implements Action{
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("pagesize", pagesize);
 		
-		System.out.println("count >> " + count);
-		System.out.println("repageNum >> " + repageNum);
-		System.out.println("pageCount >> " + pageCount);
-		System.out.println("pageBlock >> " + pageBlock);
-		System.out.println("startPage >> " + startPage);
-		System.out.println("endPage >> " + endPage);
-		System.out.println("currentPage >> " + currentPage);
-		System.out.println("pagesize >> " + pagesize);
-				
-		
-		
-		
-		
-		
-		
+//		System.out.println("count >> " + count);
+//		System.out.println("repageNum >> " + repageNum);
+//		System.out.println("pageCount >> " + pageCount);
+//		System.out.println("pageBlock >> " + pageBlock);
+//		System.out.println("startPage >> " + startPage);
+//		System.out.println("endPage >> " + endPage);
+//		System.out.println("currentPage >> " + currentPage);
+//		System.out.println("pagesize >> " + pagesize);
+
 		//ActoinForward 이동정보 담아서 로그인 이동
 		ActionForward forward = new ActionForward();
 		forward.setPath("./pack/Package_content.jsp");

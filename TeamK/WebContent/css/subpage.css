@@ -153,15 +153,15 @@ a#pack1 span, a#pack2 span, a#pack3 span {
 	display: block;
 }
 a#pack1 #pktt, a#pack2 #pktt, a#pack3 #pktt {
-	font-size: 30px;
+	font-size: 25px;
 	font-weight: bold;
-	margin-top: 20px;
+	margin-top: 10px;
 }
 a#pack1 #pksc, a#pack2 #pksc, a#pack3 #pksc {
-	height: 50px;
+	height: 30px;
 }
 a#pack1 #pkpr, a#pack2 #pkpr, a#pack3 #pkpr {
-	font-size: 30px;
+	font-size: 25px;
 	font-weight: bold;
 }
 div#goods_show {
@@ -207,7 +207,7 @@ div#datepicker div table, div#review_show div table {
 div#datepicker div table tr, div#review_show div table tr {
 	color: #565656;
 	text-align: left;
-	border-bottom: 1px dotted #999;
+	border-bottom: 1px dtted #999;
 	height: 25px;
 }
 div#datepicker div table tr:HOVER, #review_show div table tr:hover {background-color: #cef;}
@@ -382,6 +382,442 @@ div#package_tab .tab_content a:VISITED {
 	text-decoration: none;
 }
 
+input#admin_write
+{
+	margin-top : 20px;
+}
+
+.more_pack
+{
+	font-weight: bold;
+}
+
+.more_pack:HOVER
+{
+	cursor: pointer;
+}
+
+
+/* Package_write & Package_modify.jsp */
+#wrap_pack table .td_size
+{
+	text-align: center;
+}
+
+/* Package_write & Package_modify.jsp */
+
+
+/* Package_content.jsp */
+#wrap_pack { 
+	width: 1000px; 
+	min-height: 850px;
+	border : 1px solid #F6F6F6;
+	background-color: white;
+}
+
+#wrap_pack_detail
+{
+	width: 860px; 
+	min-height: 850px;
+	margin: 50px auto;
+	padding-top: 50px;
+	text-align: left;
+}
+
+
+/* 이미지 정보 부분 */
+#top {
+	width: 960px;
+	height: 450px;
+	padding-top : 20px;
+/*  	border: 2px solid red;  */
+}
+
+#top_content
+{
+	width: 928px;
+	height: 400px;
+/* 	border: 2px solid green; */
+}
+
+
+#imgdiv ul
+{
+	list-style: none;
+}
+
+#imgdiv{
+	width: 470px;
+	height: 400px;
+/* 	border: 3px solid orange; */
+	float: left;
+}
+
+#imgdiv img {
+	width: 470px;
+	height: 300px;
+	float: left;
+}
+
+#imgdiv ul li img{
+	width: 80px;
+	height: 80px;
+	margin-top : 10px;
+	margin-left : 5px;
+}
+
+
+#imgdiv ul li img:HOVER
+{/* 이미지에 마우스를 올렸을 때 이벤트 */
+	box-sizing : border-box;
+	border : 5px solid #A6A6A6;
+}
+
+/* 이미지 정보 부분 */
+
+
+/* 인원, 가격 정보 부분 */
+#contentdiv1 {
+	width: 400px;
+	height: 400px;
+ 	border: 1px solid #F6F6F6;
+	background-color : white;
+	float: left;
+	margin-left : 50px;
+}
+
+#content_notice
+{
+	font-size: 0.8em;
+	color: gray;
+}
+
+
+#contentdiv1 table
+{
+	margin : 0 auto;
+	margin-top : 30px;
+ 	border-collapse: collapse;
+}
+
+
+#contentdiv1 table tr
+{
+ 	border-bottom : 1px dashed #D5D5D5;
+}
+
+.contentdiv1_1
+{
+	background-color: #F6F6F6;
+}
+
+.contentdiv1_1, .contentdiv1_2
+{
+	width : 120px;
+	height : 50px; 
+	text-align: center;
+}
+
+.contentdiv1_3
+{
+	width : 80px;
+	height : 50px; 
+	text-align: center;
+}
+
+#contentdiv1 #adult, #contentdiv1 #child 
+{
+	width : 40px;
+}
+
+
+.contentbtn
+{
+	width : 50px;
+	height : 50px;
+}
+
+.contentbtn2
+{
+	width : 100px;
+	height : 50px;	
+}
+
+/* 인원, 가격 정보 부분 */
+
+	
+/* 날짜정보 내용 */
+
+#datecontent {
+	width: 960px;
+	height: 350px;
+	border: 1px solid gray;
+	overflow: auto;
+}
+
+#datecontent table
+{
+	border-collapse: collapse;
+}	
+
+
+#datecontent tr:FIRST-CHILD
+{
+	background-color: gray;
+	height : 30px;
+}
+
+#datecontent tr.select_color:HOVER
+{
+	background-color: #D5D5D5;
+	cursor: pointer;
+}
+
+#datecontent .date_td_size
+{
+	height : 50px;
+	border-bottom : 1px solid black;
+}
+
+#datecontent #date_date
+{
+	width : 225px;
+}
+
+#datecontent #date_subject
+{
+	width : 525px;
+}
+
+#datecontent #date_cost
+{
+	width : 170px;
+}
+
+#datecontent #date_stock
+{
+	width : 70px;
+}
+
+#datecontent, #contentdiv2, #QnA, #top, #top_content
+{
+	margin: 0 auto;
+}
+
+
+/* 날짜정보 내용 */
+	
+
+/* 여행정보 내용 */
+
+#contentdiv2 {
+	width: 960px;
+	min-height: 700px;
+	border: 1px solid gray;
+}
+
+#contentdiv2_1
+{
+	width: 730px;
+	min-height: 700px;
+	margin : 0 auto;
+	padding-top : 30px;
+/* 	border: 3px solid red;	 */
+}
+
+/* 여행정보 내용 */
+
+/* 구글맵 */
+
+
+#map_canvas {
+	width: 800px;
+	height: 500px;
+	margin: 0 auto;
+}
+
+.controls {
+	margin-top: 10px;
+	border: 1px solid transparent;
+	border-radius: 2px 0 0 2px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	height: 32px;
+	outline: none;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#pac-input {
+	background-color: #fff;
+	font-family: Roboto;
+	font-size: 15px;
+	font-weight: 300;
+	margin-left: 12px;
+	padding: 0 11px 0 13px;
+	text-overflow: ellipsis;
+	width: 300px;
+}
+
+#pac-input:focus {
+	border-color: #4d90fe;
+}
+
+
+/* 구글맵 */
+
+
+/* 상품 문의 */
+#QnA {
+	width: 800px;
+	min-height: 300px;
+	border: 1px solid pink;
+}
+
+#replyTable
+{
+	background-color: white;
+	
+}
+
+/* tr:nth-child(odd)  */
+/* { */
+/* 	background-color: #BFBFBF; */
+/* } */
+
+#replyContent
+{	
+	width: 700px;
+	height : 50px;
+}
+
+#recontent, #contentup, #content
+{
+	width : 600px;
+	height : 70px;
+}
+
+#replyWrite
+{
+	background-color: white;
+}
+
+/* 상품 문의 */
+
+
+
+/* 추천상품 배너 */
+#banner_sub
+{
+	margin : 0px;
+	padding : 0px;
+	width : 100px;
+	height : 20px;
+	border-top : 2px solid black;
+	border-left : 2px solid black;
+	border-right : 2px solid black;
+	position : fixed;
+	right : 513px;
+	bottom : 185px;
+	background-color: white;
+	text-align: center;
+	font-size: 0.8em;
+	z-index : 1;
+}
+
+#banner
+{
+	margin : 0px;
+	padding : 0px;
+	width : 464px;
+	height : 180px;
+	border : 2px solid black;
+	position : fixed;
+	right : 150px;
+	bottom : 5px;
+	background-color: white;
+	z-index : 1;
+}
+
+#banner_content
+{
+	position : relative;
+	top : -20px;
+}
+
+#banner_content td
+{
+	text-align: center;
+}
+
+
+#banner img
+{
+	width : 150px;
+	height : 150px;
+}
+
+
+#close
+{
+	background-color: black;
+	color : white;
+	width : 50px;
+	height : 20px;
+	float: right;
+	position : relative;
+	z-index: 1;
+	text-align: center;
+}
+
+#close:HOVER
+{
+	cursor: pointer;
+}
+/* 추천상품 배너 */
+
+
+/* 화면이동 리모컨 */
+
+#remote_content
+{
+	width : 100px;
+	height : 170px;
+	position : fixed;
+	right : 250px;
+	bottom : 420px;
+	background-color: white;
+	text-align: center;
+	border : 1px solid #BDBDBD;
+	z-index : 1;
+}
+
+#remote_content:HOVER
+{
+	cursor: move;
+}
+
+#remote_control td
+{
+	border-bottom : 1px solid gray;
+	color : #BBBBBB;
+	text-decoration: none;
+	font-size: 0.8em;
+}
+
+#remote_control td span:HOVER, #remote_close
+{
+	cursor: pointer;
+}
+
+/* 화면이동 리모컨 */
+
+/* Package_content.jsp */
+
+
+
+
+
+
 /* LoginForm.jsp */
 div#member {
 	width: 60%;
@@ -414,7 +850,6 @@ div#login_form form input {
 }
 div#login_form form input[type="text"],
 div#login_form form input[type="password"] {width: 200px;}
-div#login_form form input[type="button"] {}
 div#login_form table {
 	width: 80%;
 	border-collapse: collapse;
@@ -477,7 +912,6 @@ div#findid_form form input {
 	border: 1px solid #999;
 }
 div#findid_form form input[type="text"] {width: 200px;}
-div#findid_form form input[type="button"] {}
 
 /*Find Pass.jsp*/
 div#findpass_form {
@@ -498,7 +932,6 @@ div#findpass_form form input {
 	border: 1px solid #999;
 }
 div#findpass_form form input[type="text"] {width: 200px;}
-div#findpass_form form input[type="button"] {}
 
 /*Member Info.jsp*/
 div#info_form {
@@ -571,7 +1004,6 @@ div#m_delete_form form input {
 }
 div#m_delete_form form input[type="text"],
 div#m_delete_form form input[type="password"] {width: 200px;}
-div#m_delete_form form input[type="button"] {}
 
 /* Member List.jsp */
 table#memberList {
@@ -770,8 +1202,33 @@ div#board_delete form input[type="submit"] {
 }
 div#board_delete form input[type="submit"]:HOVER {cursor: pointer;}
 
-/*QnA Board List.jsp*/
-
+/*My Pack Basket List.jsp*/
+form#pack_basket_list {
+	width: 900px;
+	margin: 0 auto;
+}
+form#pack_basket_list table {
+	width: 100%;
+}
+form#pack_basket_list table tr {
+	border-bottom: 1px solid #aaa;
+	padding-top: 10px;
+}
+/*My Thing Basket List.jsp*/
+form#goods_basket_list {
+	width: 900px;
+	margin: 0 auto;
+}
+form#goods_basket_list table {
+	width: 100%;
+}
+form#goods_basket_list table img {
+	width: 200px;
+}
+form#goods_basket_list table tr {
+	border-bottom: 1px solid #aaa;
+	padding-top: 10px;
+}
 
 /* My Order.jsp*/
 form.gyeolje {background-color: #fff;}
@@ -809,3 +1266,66 @@ div.trade_type1, div.trade_type2 {width: 100%;}
 td.trade_type1 div label {margin-right: 20px;}
 div.trade_type1, div.trade_type2 {border-top: none !important;}
 div.agree_li_view {border: 1px solid #ddd;}
+
+/* My Pack Order List.jsp*/
+div#list_view {
+	width: 900px;
+	margin: 0 auto;
+}
+div#list_view table {
+	width: 100%;
+	border-bottom: 2px solid #aaa;
+	margin-bottom: 10px;
+}
+td#tr1td1, td#tr1td2, td#tr2td1,
+td#tr2td2, td#tr3td1 {text-align: left;}
+td#tr1td3, td#tr2td3, td#tr3td2 {text-align: right;}
+
+.tr1td0_popup:HOVER
+{
+	cursor: pointer;
+}
+td#tr1td1 {
+	width: 200px;
+	font-weight: bold;
+}
+td#tr1td3 {
+	width: 150px;
+}
+td#tr1td4 {
+	width: 120px;
+	padding-top : 20px;
+	font-weight: bold;
+}
+td#tr2td1 {
+	height: 120px;
+}
+td#tr2td1 img
+{
+	width : 190px;
+	height: 120px;
+}
+td#tr2td2 {
+	font-weight: bold;
+	font-size: 20px;
+	color: #06c;
+}
+td#tr2td3 {
+	font-weight: bold;
+	font-size: 20px;
+	color: #f60;
+}
+
+/* Pack Res.jsp */
+form#pack_res {
+	width: 900px;
+	margin: 0 auto;
+}
+form#pack_res table {
+	width: 100%;
+	margin: 20px 0px;
+	text-align: left!important;
+	border-bottom: 2px solid #06c;
+}
+form#pack_res td#tr1td1 {width: 100px;}
+form#pack_res td#tr1td2 {width: 250px;}

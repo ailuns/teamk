@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import net.pack.db.CategoryDAO;
 import net.pack.db.PackBean;
@@ -16,6 +17,10 @@ public class PackDateAdd implements Action{
 		// TODO Auto-generated method stub
 		System.out.println("PackDateAdd excute()");
 		
+		HttpSession session = request.getSession();
+		String user_id = (String) session.getAttribute("id");
+		if(user_id == null)
+			user_id = "";
 		String subject = request.getParameter("subject");
 		
 		int num = Integer.parseInt(request.getParameter("num"));
@@ -29,7 +34,7 @@ public class PackDateAdd implements Action{
 		request.setAttribute("pb_up", pb);
 		
 		List date_list;
-		date_list = pdao.getPackList(subject);
+		date_list = pdao.getPackList(subject, user_id);
 		
 		request.setAttribute("date_list", date_list);
 		

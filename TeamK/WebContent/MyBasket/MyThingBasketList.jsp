@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="net.bns.db.TBasketBEAN"%>
 <%@page import="net.bns.db.PBasketBEAN"%>
@@ -14,9 +15,15 @@
 <script src = "./js/jquery-3.2.0.js"></script>
 <script type="text/javascript">
 function thing_cal(cost, num) {
-	var num = num;
+	//var num = num;
+	//var val1 = $("#tcount"+num+" option:selected").val();
+	//$('#tcost'+num).html(cost*val1);
+
 	var val1 = $("#tcount"+num+" option:selected").val();
-	$('#tcost'+num).html(cost*val1);
+	$('#ttcount'+num).val(val1);
+	var tval1 = String(cost*val1);
+	var tval2 = tval1.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');  // 금액 자릿수 ,를 붙인다
+	$('#tcost'+num).html(tval2);
 }
 function Basket_Update(num){
 	$.ajax({
@@ -86,12 +93,14 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 List<TBasketBEAN> ThingBasket=(List<TBasketBEAN>)request.getAttribute("MyThingBasket");
 
 %>
-
-<h1>
-패키지 리스트</h1>
-<h4>subject Count : <%=count %></h4>
-<form method ="post" name ="fr">
-	<table border="1">
+<div id="article_head">
+			<div id="article_title">상품 리스트</div>
+			<div id="article_script">subject Count : <%=count %></div>
+		</div>
+		<div id="clear"></div>
+		<article>
+<form method ="post" name ="fr" id="goods_basket_list">
+	<table>
 			<tr>
 			<th></th>
 				<th>이미지</th>
@@ -105,6 +114,8 @@ List<TBasketBEAN> ThingBasket=(List<TBasketBEAN>)request.getAttribute("MyThingBa
 			<%
 				for (int i = 0; i <ThingBasket.size(); i++) {
 						TBasketBEAN tbb = ThingBasket.get(i);
+						DecimalFormat Commas = new DecimalFormat("#,###");
+						String tbbcost = (String)Commas.format(tbb.getCost());
 						
 			%>
 			<tr>
@@ -120,11 +131,11 @@ List<TBasketBEAN> ThingBasket=(List<TBasketBEAN>)request.getAttribute("MyThingBa
 				<option value="<%=j%>" 
 				<%if(j==tbb.getCount()){%>selected <%} %>><%=j %></option>
 				<%} %>
-				</select><br>
+				</select><br><br>
 				<input type = "button" value="수량 변경"  onclick="Basket_Update(<%=i %>)" >
 				</td>
 				
-				<td id="tcost<%=i%>"><%=tbb.getCost() %></td>
+				<td id="tcost<%=i%>"><%=tbbcost%></td>
 				<td><%=sdf.format(tbb.getDate()) %></td>
 				</tr>
 

@@ -565,71 +565,76 @@
 	// 찜하기, 예약하기 버튼 클릭 시 각각 버튼 마다 이동할 페이지
 	function submit_fun(i, user_id)
 	{
-		// i = 1  찜추가   i = 2 찜취소    i = 3  예약하기
-		if (i == 1 && user_id != "") // 로그인 되어 있을 경우 찜추가
+		if(user_id != "")
 		{
-			$.ajax({
-				type:"post",
-				url:"./MyInterestAdd.ins",   // java로 보냄
-				data:{
-					type:"P",
-					num:$("input[type=radio][name=chk]:checked").val()					
-				},
-				success:function(){
-					alert("찜목록에 추가되었습니다");
-					$("#jjim_o").hide();
-					$("#jjim_x").show();
-//						window.location.reload(true);  // 페이지 새로고침
-				}
-			});
-		}
-		
-		else if(i == 2 && user_id != "")   // 로그인에 되어 있을 경우 찜취소
-		{
-			$.ajax({
-				type:"post",
-				url:"./MyInterestDel.ins",   // java로 보냄
-				data:{
-					type:"P",
-					num:$("input[type=radio][name=chk]:checked").val()					
-				},
-				success:function(){
-					$("#jjim_o").show();
-					$("#jjim_x").hide();
-					alert("찜목록에서 삭제되었습니다");
-//						window.location.reload(true);  // 페이지 새로고침
-				}
-			});
-		}
-		
-		else if (i == 3 && user_id != "")  // 로그인 되어 있을 경우  장바구니
-		{
-			var cost_temp = $("#p").html(); // 총금액 받아오기
-			str = String(cost_temp);		// 총금액 천원단위로 , 찍혀있는걸
-		    cost = str.replace(/[^\d]+/g, '');   // 풉니다
+			// i = 1  찜추가   i = 2 찜취소    i = 3  예약하기
+			if (i == 1) // 로그인 되어 있을 경우 찜추가
+			{
+				$.ajax({
+					type:"post",
+					url:"./MyInterestAdd.ins",   // java로 보냄
+					data:{
+						type:"P",
+						num:$("input[type=radio][name=chk]:checked").val()					
+					},
+					success:function(){
+						$("#jjim_o").hide();
+						$("#jjim_x").show();
+						alert("찜목록에 추가되었습니다");
+//							window.location.reload(true);  // 페이지 새로고침
+					}
+				});
+			}
 			
-		    $("#cost").val(cost);
-		    $("#ori_num").val($("input[type=radio][name=chk]:checked").val());
+			else if(i == 2)   // 로그인에 되어 있을 경우 찜취소
+			{
+				$.ajax({
+					type:"post",
+					url:"./MyInterestDel.ins",   // java로 보냄
+					data:{
+						type:"P",
+						num:$("input[type=radio][name=chk]:checked").val()					
+					},
+					success:function(){
+						$("#jjim_o").show();
+						$("#jjim_x").hide();
+						alert("찜목록에서 삭제되었습니다");
+//							window.location.reload(true);  // 페이지 새로고침
+					}
+				});
+			}
+			
+			else if (i == 3)  // 로그인 되어 있을 경우  장바구니
+			{
+				var cost_temp = $("#p").html(); // 총금액 받아오기
+				str = String(cost_temp);		// 총금액 천원단위로 , 찍혀있는걸
+			    cost = str.replace(/[^\d]+/g, '');   // 풉니다
+				
+			    $("#cost").val(cost);
+			    $("#ori_num").val($("input[type=radio][name=chk]:checked").val());
 
-		    document.input_fr.action = "./MyBasketAddAction.bns";	// 장바구니 페이지로 이동
-		    document.input_fr.method = "post";
-		    document.input_fr.submit();
+			    document.input_fr.action = "./MyBasketAddAction.bns";	// 장바구니 페이지로 이동
+			    document.input_fr.method = "post";
+			    document.input_fr.submit();
+			}
+			
+			else if (i == 4)  // 로그인 되어 있을 경우  예약하기
+			{
+				var cost_temp = $("#p").html(); // 총금액 받아오기
+				str = String(cost_temp);		// 총금액 천원단위로 , 찍혀있는걸
+			    cost = str.replace(/[^\d]+/g, '');  // 풉니다
+				
+			    // 폼태그로 보내기때문에 hidden 숨겨둔 곳에 각각 값을 넣는다
+			    $("#cost").val(cost);
+			    $("#ori_num").val($("input[type=radio][name=chk]:checked").val());
+
+			    document.input_fr.action = "./MyOrderPay.mo";  // 예약하기 페이지로 이동
+			    document.input_fr.method = "post";
+			    document.input_fr.submit();
+			}
 		}
 		
-		else if (i == 4 && user_id != "")  // 로그인 되어 있을 경우  예약하기
-		{
-			var cost_temp = $("#p").html(); // 총금액 받아오기
-			str = String(cost_temp);		// 총금액 천원단위로 , 찍혀있는걸
-		    cost = str.replace(/[^\d]+/g, '');  // 풉니다
-			
-		    // 폼태그로 보내기때문에 hidden 숨겨둔 곳에 각각 값을 넣는다
-		    $("#cost").val(cost);
-		    $("#ori_num").val($("input[type=radio][name=chk]:checked").val());
-
-		    document.input_fr.action = "./MyOrderPay.mo";  // 예약하기 페이지로 이동
-		    document.input_fr.method = "post";
-		    document.input_fr.submit();
-		}
+		
 		
 		
 		else if(user_id == "")	// 로그인 안되어 있을 경우
@@ -653,402 +658,6 @@
 .clear {
 	clear: both;
 }
-
-#wrap_pack { 
-	width: 980px; 
-	min-height: 1000px;
-	border: 5px solid red;
- 	margin: 50px auto;
-	padding-top: 50px;
-	background-color: #eee;
-} 
-
-
-/* 이미지 정보 부분 */
-#top {
-	width: 960px;
-	height: 450px;
-	padding-top : 20px;
-/*  	border: 2px solid red;  */
-}
-
-#top_content
-{
-	width: 928px;
-	height: 400px;
-/* 	border: 2px solid green; */
-}
-
-
-#imgdiv ul
-{
-	list-style: none;
-}
-
-#imgdiv{
-	width: 470px;
-	height: 400px;
-/* 	border: 3px solid orange; */
-	float: left;
-}
-
-#imgdiv img {
-	width: 470px;
-	height: 300px;
-	float: left;
-}
-
-#imgdiv ul li img{
-	width: 80px;
-	height: 80px;
-	margin-top : 10px;
-	margin-left : 5px;
-}
-
-/* 이미지에 마우스를 올렸을 때 이벤트 */
-#imgdiv ul li img:HOVER{
-	box-sizing : border-box;
-	border : 5px solid #A6A6A6;
-}
-/* 이미지에 마우스를 올렸을 때 이벤트 */
-
-/* 이미지 정보 부분 */
-
-
-/* 인원, 가격 정보 부분 */
-#contentdiv1 {
-	width: 400px;
-	height: 400px;
- 	border: 1px solid #F6F6F6;
-	background-color : white;
-	float: left;
-	margin-left : 50px;
-}
-
-#content_notice
-{
-	font-size: 0.8em;
-	color: gray;
-}
-
-
-#contentdiv1 table
-{
-	margin : 0 auto;
-	margin-top : 30px;
- 	border-collapse: collapse;
-}
-
-
-#contentdiv1 table tr
-{
- 	border-bottom : 1px dashed #D5D5D5;
-}
-
-.contentdiv1_1
-{
-	background-color: #F6F6F6;
-}
-
-.contentdiv1_1, .contentdiv1_2
-{
-	width : 120px;
-	height : 50px; 
-	text-align: center;
-}
-
-.contentdiv1_3
-{
-	width : 80px;
-	height : 50px; 
-	text-align: center;
-}
-
-#contentdiv1 #adult, #contentdiv1 #child 
-{
-	width : 40px;
-}
-
-
-.contentbtn
-{
-	width : 50px;
-	height : 50px;
-}
-
-.contentbtn2
-{
-	width : 100px;
-	height : 50px;	
-}
-
-/* 인원, 가격 정보 부분 */
-
-	
-/* 날짜정보 내용 */
-
-#datecontent {
-	width: 960px;
-	height: 350px;
-	border: 1px solid gray;
-	overflow: auto;
-}
-
-#datecontent table
-{
-	border-collapse: collapse;
-}	
-
-
-#datecontent tr:FIRST-CHILD
-{
-	background-color: gray;
-	height : 30px;
-}
-
-#datecontent tr.select_color:HOVER
-{
-	background-color: #D5D5D5;
-	cursor: pointer;
-}
-
-#datecontent .date_td_size
-{
-	height : 50px;
-	border-bottom : 1px solid black;
-}
-
-#datecontent #date_date
-{
-	width : 225px;
-}
-
-#datecontent #date_subject
-{
-	width : 525px;
-}
-
-#datecontent #date_cost
-{
-	width : 170px;
-}
-
-#datecontent #date_stock
-{
-	width : 70px;
-}
-
-#datecontent, #contentdiv2, #QnA, #top, #top_content
-{
-	margin: 0 auto;
-}
-
-
-/* 날짜정보 내용 */
-	
-
-/* 여행정보 내용 */
-
-#contentdiv2 {
-	width: 960px;
-	min-height: 700px;
-	border: 1px solid gray;
-}
-
-#contentdiv2_1
-{
-	width: 730px;
-	min-height: 700px;
-	margin : 0 auto;
-	padding-top : 30px;
-/* 	border: 3px solid red;	 */
-}
-
-/* 여행정보 내용 */
-
-/* 구글맵 */
-
-
-#map_canvas {
-	width: 800px;
-	height: 500px;
-	margin: 0 auto;
-}
-
-.controls {
-	margin-top: 10px;
-	border: 1px solid transparent;
-	border-radius: 2px 0 0 2px;
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	height: 32px;
-	outline: none;
-	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-}
-
-#pac-input {
-	background-color: #fff;
-	font-family: Roboto;
-	font-size: 15px;
-	font-weight: 300;
-	margin-left: 12px;
-	padding: 0 11px 0 13px;
-	text-overflow: ellipsis;
-	width: 300px;
-}
-
-#pac-input:focus {
-	border-color: #4d90fe;
-}
-
-
-/* 구글맵 */
-
-
-/* 상품 문의 */
-#QnA {
-	width: 800px;
-	min-height: 300px;
-	border: 1px solid pink;
-}
-
-#replyTable
-{
-	background-color: white;
-	
-}
-
-/* tr:nth-child(odd)  */
-/* { */
-/* 	background-color: #BFBFBF; */
-/* } */
-
-#replyContent
-{	
-	width: 700px;
-	height : 50px;
-}
-
-#recontent, #contentup, #content
-{
-	width : 600px;
-	height : 70px;
-}
-
-#replyWrite
-{
-	background-color: white;
-}
-
-/* 상품 문의 */
-
-
-
-/* 추천상품 배너 */
-#banner_sub
-{
-	margin : 0px;
-	padding : 0px;
-	width : 100px;
-	height : 20px;
-	border-top : 2px solid black;
-	border-left : 2px solid black;
-	border-right : 2px solid black;
-	position : fixed;
-	right : 513px;
-	bottom : 185px;
-	background-color: white;
-	text-align: center;
-	font-size: 0.8em;
-	z-index : 1;
-}
-
-#banner
-{
-	margin : 0px;
-	padding : 0px;
-	width : 464px;
-	height : 180px;
-	border : 2px solid black;
-	position : fixed;
-	right : 150px;
-	bottom : 5px;
-	background-color: white;
-	z-index : 1;
-}
-
-#banner_content
-{
-	position : relative;
-	top : -20px;
-}
-
-#banner_content td
-{
-	text-align: center;
-}
-
-
-#banner img
-{
-	width : 150px;
-	height : 150px;
-}
-
-
-#close
-{
-	background-color: black;
-	color : white;
-	width : 50px;
-	height : 20px;
-	float: right;
-	position : relative;
-	z-index: 1;
-	text-align: center;
-}
-
-#close:HOVER
-{
-	cursor: pointer;
-}
-/* 추천상품 배너 */
-
-
-/* 화면이동 리모컨 */
-
-#remote_content
-{
-	width : 100px;
-	height : 170px;
-	position : fixed;
-	right : 250px;
-	bottom : 420px;
-	background-color: white;
-	text-align: center;
-	border : 1px solid #BDBDBD;
-	z-index : 1;
-}
-
-#remote_content:HOVER
-{
-	cursor: move;
-}
-
-#remote_control td
-{
-	border-bottom : 1px solid gray;
-	color : #BBBBBB;
-	text-decoration: none;
-	font-size: 0.8em;
-}
-
-#remote_control td span:HOVER, #remote_close
-{
-	cursor: pointer;
-}
-
-/* 화면이동 리모컨 */
 
 </style>
 	<div id="remote_control">
@@ -1093,8 +702,8 @@
 	<!-- 왼쪽 메뉴 -->
 	<!--여행지 검색창 -->
 	<div id="wrap"> 
-	<div id="article_title">
-		패키지
+	<div id="article_head">
+		<div id="article_title"><img src="./img/travel2.png" width="30px" style="margin-right: 8px; vertical-align: bottom;">패키지</div>
 	</div>
 		<div id="package_feat">
 		<jsp:include page="../inc/packSlide.jsp"></jsp:include>
@@ -1277,7 +886,7 @@
 					<td class="date_td_size"><input type="radio" id="select_rbtn<%=i %>" name="chk" value="<%=pb.getNum() %>"
 						<%if(i == 0){ %> checked <%} %> ></td>
 					<td class="date_td_size"><%=pb.getDate() %></td>
-					<td class="date_td_size"><%=pb.getSarea() %></td>
+					<td class="date_td_size"><%=pb.getSubject() %></td>
 					<td class="date_td_size" id="aa<%=pb.getNum() %>"><%=cost %></td>
 					<td class="date_td_size"><%=pb.getStock() %></td>
 				</tr>

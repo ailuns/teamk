@@ -74,6 +74,12 @@ function search(){
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
+		<div id="article_head">
+			<div id="article_title"><span id = "title"></span></div>
+			<div id="article_script"></div>
+		</div>
+		<div id="clear"></div>
+		<article>
 		<select id="status" onchange="status_change()">
 			<option value="ing">진행중인 주문</option>
 			<option value="completed">지난 주문 확인</option>
@@ -94,16 +100,15 @@ function search(){
 		<input type="text" id="search" name="search">
 		<input type="button" value="검색" onclick="return search()">
 		</div>
-	<h3 id = "title"></h3>
 	<div>
-		<form method="post" action ="./Pack_Res_Action.ao?stat=<%=status2%>"name="fr" onsubmit="return select_check()">
+		<form method="post" action ="./Pack_Res_Action.ao?stat=<%=status2%>" name="fr" id="pack_res" onsubmit="return select_check()">
 			<%if(Pack_Res_List.size()!=0){
 				for(int i =0; i< Pack_Res_List.size();i++){
 					ModTradeInfoBEAN mtib = Pack_Res_List.get(i);
 					String []pack_count = mtib.getPack_count().split(",");
 					String []trade_type = mtib.getTrade_type().split(",");
 					String []memo = mtib.getMemo().split(",");%>
-				<h5><%=mtib.getSubject() %></h5>
+<!-- 				<h5></h5> -->
 				<table border = "1">
 					<tr>
 						<%
@@ -114,14 +119,17 @@ function search(){
 						<td rowspan="4"><input type="checkbox" value="<%=mtib.getNum() %>" name="pnum"></td>
 						<%	}
 						}%>
+						<td id="tr1td1"><%=sdf.format(mtib.getDate()) %></td>
+						<td id="tr1td2"><%=mtib.getTrade_num() %></td>
+						<td id="tr1td3">성인 : <%=pack_count[0] %>, 아동 : <%=pack_count[1] %></td>
+<%-- 						<%if(status2.equals("none")){ %> --%>
+						<td rowspan="2"><%=mtib.getStatus_text() %></td>
+<%-- 						<%} %> --%>
+					</tr>
+					<tr>
 						<td><%=mtib.getImg() %></td>
-						<td><%=mtib.getTrade_num() %></td>
+						<td><%=mtib.getSubject() %></td>
 						<td><%=mtib.getIntro() %></td>
-						<td>성인 : <%=pack_count[0] %>, 아동 : <%=pack_count[1] %></td>
-						<td><%=sdf.format(mtib.getDate()) %></td>
-						<%if(status2.equals("none")){ %>
-						<td><%=mtib.getStatus_text() %></td>
-						<%} %>
 					</tr>
 					<%if(mtib.getPo_receive_check()==1&&status2.equals("waiting")) {%>
 					<tr>
@@ -136,8 +144,7 @@ function search(){
 						<td><%=mtib.getPayer() %></td>
 						<td><%=trade_type[0] %></td>
 						<% if(mtib.getStatus()==4||mtib.getStatus()==9){%>
-						<td>환불 금액</td>
-						<td><%=memo[1] %>원</td>
+						<td>환불 금액: <%=memo[1] %>원</td>
 						<%}else if(mtib.getStatus()<4){%>
 							<td><input type = "button" value="예약 취소" onclick ="res_cancel(<%=mtib.getNum()%>)"></td>
 						<%}%>
@@ -207,7 +214,8 @@ function search(){
 	%>
 		<br>
 		<input type = "button" value = "주문 관리" onclick="location.href='./AdminOrderList.ao'">
-			</div>
+		</article>
+		</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->
 	<div>
