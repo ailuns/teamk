@@ -39,7 +39,6 @@ List<interestBEAN> InterestThing = (List<interestBEAN>) request.getAttribute("In
 </div>
 <article>
 		<h3>패키지 찜 리스트</h3>
-		<div id="board">
 		<div id="packInterest_list">
 		<%
 			if (InterestPack.size() == 0) {
@@ -66,7 +65,7 @@ List<interestBEAN> InterestThing = (List<interestBEAN>) request.getAttribute("In
 				<td class="inb_img ev_hover" onclick="inter_pack_move(<%=i %>);"><img id="inb_img" alt="" src="./upload/<%=inb.getImg() %>"></td>
 				<td onclick="inter_pack_move(<%=i %>);" class="ev_hover"><%=inb.getSubject()%><br>
 				<%=inb.getIntro() %></td>
-				<td><%=cost%></td>
+				<td><%=cost%>원</td>
 				<td>
 				<input type="button" value="찜 취소" onclick = "location.href='./MyInterestDel.ins?n=<%=inb.getInter_num()%>'"></td>
 				</tr>
@@ -74,16 +73,13 @@ List<interestBEAN> InterestThing = (List<interestBEAN>) request.getAttribute("In
 				}
 			%>
 		</table>
-		<%if(count[0]>5); %><a href = "./MyInterest.ins?TY=P&pageNum=1">more+</a><%; %>
+		<%if(count[0]>5); %><a href = "./MyInterest.ins?TY=P&pageNum=1">더 보기 +</a><%; %>
 		<%
 			}
-		%>
-	</div>
-	</div>
-	<div>
+		%><br><br>
+		<hr><br>
 		<h3>상품 찜 리스트</h3>
-		<div id="board">
-		<div id="board_list">
+
 		<%
 			if (InterestThing.size() == 0) {
 		%>
@@ -113,15 +109,11 @@ List<interestBEAN> InterestThing = (List<interestBEAN>) request.getAttribute("In
 				}
 			%>
 		</table>
-		<%if(count[1]>5); %><a href = "./MyInterest.ins?TY=T&pageNum=1">more+</a><%; %>
+		<%if(count[1]>5); %><a href = "./MyInterest.ins?TY=T&pageNum=1">더 보기 +</a><%; %>
 		<%
 			}
 		%>
-		</div>
-		</div>
 		<br>
-	
-		
 		</div>
 		</article>
 		</div>

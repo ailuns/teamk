@@ -421,7 +421,7 @@ input#admin_write
 	width: 1000px; 
 	min-height: 850px;
 	border : 1px solid #F6F6F6;
-	background-color: white;
+	background-color: rgb(250,250,250);
 }
 
 #wrap_pack_detail
@@ -676,17 +676,34 @@ input#admin_write
 
 
 /* 상품 문의 */
-#QnA {
+
+#middle3
+{
 	width: 800px;
 	min-height: 300px;
-	border: 1px solid pink;
+	margin : 0 auto;
+}
+
+#QnA {
+	width: 1000px;
+	min-height: 300px;
+/* 	border: 1px solid pink; */
 }
 
 #replyTable
 {
 	background-color: white;
-	
+	width : 800px;
+	font-size: 0.9em;
 }
+
+#replyTable .reply_align
+{
+	float: left;
+	margin-left : 10px;
+}
+
+
 
 /* tr:nth-child(odd)  */
 /* { */
@@ -717,24 +734,9 @@ input#admin_write
 /* 추천상품 배너 */
 #banner_sub
 {
-/* 	margin : 0px; */
-/* 	padding : 0px; */
-/* 	width : 100px; */
-/* 	height : 20px; */
-/* 	border-top : 2px solid black; */
-/* 	border-left : 2px solid black; */
-/* 	border-right : 2px solid black; */
-/* 	position : fixed; */
-/* 	right : 513px; */
-/* 	bottom : 185px; */
-/* 	background-color: white; */
-/* 	text-align: center; */
-/* 	font-size: 0.8em; */
-/* 	z-index : 1; */
-	
 	background-color: black;
 	color : white;
-	width : 100px;
+	width : 80px;
 	height : 20px;
 	float: left;
 	position : relative;
@@ -1083,6 +1085,7 @@ div#board_list table th#date {width: 100px;}
 div#board_list table th#readcount {width: 50px;}
 div#board_list table th#name {width: 100px;}
 div#board_list table td#cate {font-weight: bold;}
+div#board_list table td#cate img{width:100px;}
 div#board_list table td#cate:HOVER, div#board_list table td#title:HOVER
 {
 	cursor: pointer;
@@ -1252,6 +1255,19 @@ form#pack_basket_list table tr {
 	border-bottom: 1px solid #aaa;
 	padding-top: 10px;
 }
+form#pack_basket_list table tr:HOVER {
+	background-color: #eee;
+}
+form#pack_basket_list table td img
+{
+	width : 100px;
+	height : 70px;
+}
+form#pack_basket_list table td.ev_hover:HOVER
+{
+	cursor: pointer;
+}
+
 /*My Thing Basket List.jsp*/
 form#goods_basket_list {
 	width: 900px;
@@ -1325,7 +1341,7 @@ td#tr1td1 {
 	font-weight: bold;
 }
 td#tr1td3 {
-	width: 150px;
+	width: 200px;
 }
 td#tr1td4 {
 	width: 120px;
@@ -1386,9 +1402,8 @@ div#my_thing_order_list table span {
 .tr2td6, .tr3td1, .tr4td1 {
 	font-weight: bold;
 	background-color: #f0f0f0;
-	border-right: 3px solid #aaa;
+	border-right: 1px solid #aaa;
 }
-
 
 /* Pack Res.jsp */
 form#pack_res {
@@ -1422,26 +1437,16 @@ div#my_interest table th {
 }
 
 
-/* MyInterestList.jsp */
-
-div#packInterest_list table .inb_img
-{
-	width : 80px;
-/* 	height : 130px; */
-}
-
-div#packInterest_list table #inb_img
-{
-	width : 150px;
-	height : 130px;
+/* My Interest List.jsp */
+div#packInterest_list table img#inb_img {
+	height: 120px;
 }
 
 div#packInterest_list {
-	width: 90%;
+	width: 900px;
 	margin: 0 auto;
 }
 div#packInterest_list table {
-	border-collapse: collapse;
 	margin-bottom: 20px;
 	font-size: 15px;
 	width: 100%;
@@ -1450,16 +1455,14 @@ div#packInterest_list table tr {
 	line-height: 1.75em;
 	border-bottom: 1px solid #ddd;
 }
-div#packInterest_list table span {
-	text-decoration: bold;
+div#packInterest_list table span {text-decoration: bold;}
+div#packInterest_list table tr:HOVER {background-color: #eee;}
+div#packInterest_list table .ev_hover:HOVER{cursor: pointer;}
+div#packInterest_list a {
+	text-decoration: none;
+	color: #000;
+	font-weight: bold;
 }
-div#packInterest_list table tr:HOVER 
-{
-	background-color: #eee;
+div#packInterest_list a:HOVER {
+	color: #f00;
 }
-
-div#packInterest_list table .ev_hover:HOVER
-{
-	cursor: pointer;
-}
-

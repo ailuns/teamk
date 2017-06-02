@@ -122,7 +122,7 @@ function Trade_Update_Info(o_num) {
 									//일부만 환불 되었을 경우
 							if((mtb.getThing_count()-Integer.parseInt(paybackinfo[2]))!=0){%>
 								구매 완료<br>
-								<span style="font-size:12px;" class="update_info" 
+								<span style="font-size:13px;" class="update_info" 
 									onclick="Trade_Update_Info(<%=mtb.getNum() %>)" >
 									일부 환불 처리</span>
 							<%}else out.print(mtb.getStatus_text());

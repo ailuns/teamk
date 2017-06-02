@@ -386,8 +386,77 @@ public class BoardFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		 
-	
+		else if(command.equals("/ProductAdd.bo"))
+		{
+			System.out.println("ProductAdd cald");
+			action = new ProductAdd();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/ProductAddChk.bo"))
+		{
+			System.out.println("ProductAddChk cald");
+			action = new ProductAddChk();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/ProductAddAction.bo"))
+		{
+			System.out.println("ProductAddAction cald");
+			action = new ProductAddAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		else if(command.equals("/ProductModify.bo"))
+		{
+			System.out.println("ProductModify cald");
+			action = new ProductModify();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/ProductModifyAction.bo"))
+		{
+			System.out.println("ProductModifyAction cald");
+			action = new ProductModifyAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		else if(command.equals("/ProductDeleteAction.bo"))
+		{
+			System.out.println("ProductDeleteAction cald");
+			action = new ProductDeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
+		
 		//이동하기
 		if(forward!=null){
 			if(forward.isRedirect()){
