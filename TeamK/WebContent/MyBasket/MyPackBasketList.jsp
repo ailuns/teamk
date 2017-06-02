@@ -67,6 +67,13 @@ function check(){
 
 }
 
+//장바구니에서 패키지 상품 클릭 시 해당 패키지 정보로 이동
+function pack_numchk(i)
+{
+	var numchk = $("#ori_num" + i).val();
+	location.href="./PackContent.po?num=" + numchk;
+}
+
 </script>
 </head>
 <body>
@@ -108,19 +115,20 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 						String pbbcost = (String)Commas.format(pbb.getCost());
 			%>
 			<tr>
+				<input type="hidden" id="ori_num<%=i %>" value="<%=pbb.getOri_num() %>">
 				<td><input type ="checkbox" id="pch<%=i %>" name = "pch" value = "<%=pbb.getPb_num()%>">
-				<td><img src ="./<%=pbb.getImg() %>"></td>
-				<td><%=pbb.getSubject()%><br>
+				<td class="ev_hover" onclick="pack_numchk(<%=i %>)"><img src ="./upload/<%=pbb.getImg() %>"></td>
+				<td class="ev_hover" onclick="pack_numchk(<%=i %>)"><%=pbb.getSubject()%><br>
 				<%=pbb.getIntro() %></td>
 				<td><select id = "adult<%=i%>" name="adult<%=i%>" onchange="people_Calc(<%=pbb.getOri_cost()%>,<%=i%>)">
-				<%for(int j =1 ; j<9; j++){ %>
+				<%for(int j =1 ; j<11; j++){ %>
 				<option value="<%=j%>" 
 				<%if(j==Integer.parseInt(countp[0])){%>selected <%} %>><%=j %></option>
 				<%} %>
 				</select>
 				</td>
 				<td><select id = "child<%=i%>" name="child<%=i%>" onchange="people_Calc(<%=pbb.getOri_cost()%>,<%=i%>)">
-				<%for(int j =0 ; j<9; j++){ %>
+				<%for(int j =0 ; j<11; j++){ %>
 				<option value="<%=j%>" 
 				<%if(j==Integer.parseInt(countp[1])){%>selected <%} %>><%=j %></option>
 				<%} %>

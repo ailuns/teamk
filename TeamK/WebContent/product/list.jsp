@@ -110,7 +110,7 @@
 	 	int pageBlock = (int) request.getAttribute("pageBlock");
 	 	int startPage = (int) request.getAttribute("startPage");
 	 	int endPage = (int) request.getAttribute("endPage");
-	 	String id = "admin";
+	 	String user_id = (String) session.getAttribute("id");
 	%>
 
 <div id="wrap">
@@ -119,17 +119,7 @@
 	</div>
 	<!--여행지 검색창 -->
 	<div id="package_feat">
-		<div id="package_slide">
-			<a href="#" class="slider"><img alt="" src="./img/i.jpg"></a>
-			<a href="#" class="slider"><img alt="" src="./img/20101021182610.jpg"></a>
-			<a href="#" class="slider"><img alt="" src="./img/491021_374477_1553.jpg"></a>
-			<a href="#" class="slider"><img alt="" src="./img/군항제3.jpg"></a>
-			<a href="#" class="slider"><img alt="" src="./img/Jeju-bg.jpg"></a>
-			<div class="controller" style="width:100%">
-				<div class="prev" onclick="plusDivs(-1)">&#10094;</div>
-				<div class="next" onclick="plusDivs(1)">&#10095;</div>
-			</div>
-		</div>
+		<jsp:include page ="../inc/packSlide.jsp"></jsp:include>
 			<div id="package_search">
 			<p>내게 맞는 패키지 검색하기</p>
 			<form action="./PackSearchAction.po" name="fr" method="get" id="scheduler" onsubmit="return input_chk();">
@@ -167,7 +157,17 @@
 		<!-- 탭 부분 -->
 		</form>
 		<div class="clear"></div>
-
+	<%
+		if (user_id != null)
+		{
+			if (user_id.equals("admin"))
+			{
+	 	%> 
+			<input type="button" value="글쓰기" onclick="location.href='./ProductWrite.bo'">
+	 	<%
+			}
+		}
+	%>
 		<!-- 탭 내용 -->
 		<div class="tab_container"> 	
 		<%
@@ -236,17 +236,7 @@
 		</div>
 		<!-- 탭 내용 -->
 	</div>
-	<%
-		if (id != null)
-		{
-			if (id.equals("admin"))
-			{
-	 	%> 
-			<input type="button" value="글쓰기" onclick="location.href='./ProductWrite.bo'">
-	 	<%
-			}
-		}
-	%>
+	
 </div>
 <!--오른쪽 메뉴 -->
  <jsp:include page="../inc/rightMenu.jsp"></jsp:include>
