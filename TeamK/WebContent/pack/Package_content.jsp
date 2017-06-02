@@ -971,6 +971,7 @@
 		<!--상품 문의 -->
 		
 		<div id="QnA">
+			<hr>
 			<h3>상품 문의</h3>
 			<hr>
 			<div id="middle3">

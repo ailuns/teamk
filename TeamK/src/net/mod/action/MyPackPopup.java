@@ -26,7 +26,7 @@ public class MyPackPopup implements Action{
 		PackDAO pdao = new PackDAO();
 		PackBean pb = new PackBean();
 		
-		pb = pdao.getPack(num);
+		pb = pdao.getPack_original(num);
 		System.out.println("MyPackPopup num >> " + pb.getNum());
 		System.out.println("MyPackPopup num >> " + pb.getContent());
 		

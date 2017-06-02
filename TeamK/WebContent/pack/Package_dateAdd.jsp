@@ -157,8 +157,9 @@
 	}
 	
 	
-	// 날짜 수정 버튼 클릭 이벤트
+	// 날짜 클릭 이벤트
 	function winOpen(num) {
+// 		var num = $("#num" + select).val();
 		win = window.open("./PackDateModify.po?num=" + num, "Package_date_modify.jsp",
 				"width=500, height=400, left=800, top=100");
 	}

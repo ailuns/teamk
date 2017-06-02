@@ -479,7 +479,7 @@ public class PackDAO {
 		PackBean PB = new PackBean();
 		try {
 			conn = getConnection();
-			sql = "select * from pack where subject=(select subject from pack where num=?) group by subject";
+			sql = "select * from pack where num=?";
 			pstm = conn.prepareStatement(sql);
 			pstm.setInt(1, num);
 			rs = pstm.executeQuery();
@@ -840,5 +840,73 @@ public class PackDAO {
 			}
 		}
 		return 0; // 글번호 없음
-	}	
+	}
+	
+	// MyOrder에서 여행정보 팝업창 띄울 정보
+	public PackBean getPack_original(int num) {
+		PackBean PB = new PackBean();
+		try {
+			conn = getConnection();
+			sql = "select * from pack where subject=(select subject from pack where num=?) group by subject";
+			pstm = conn.prepareStatement(sql);
+			pstm.setInt(1, num);
+			rs = pstm.executeQuery();
+
+			if (rs.next()) {
+				PB.setNum(rs.getInt("num"));
+				PB.setSerial(rs.getInt("serial"));
+				PB.setSubject(rs.getString("subject"));
+				PB.setIntro(rs.getString("intro"));
+				PB.setContent(rs.getString("content"));
+				PB.setType(rs.getString("type"));
+				PB.setArea(rs.getString("area"));
+				PB.setCity(rs.getString("city"));
+				PB.setSarea(rs.getString("sarea"));
+				PB.setCost(rs.getInt("cost"));
+				PB.setReadcount(rs.getInt("readcount"));
+				PB.setStock(rs.getInt("stock"));
+				PB.setDate(rs.getString("date"));
+				PB.setFile1(rs.getString("file1"));
+				PB.setFile2(rs.getString("file2"));
+				PB.setFile3(rs.getString("file3"));
+				PB.setFile4(rs.getString("file4"));
+				PB.setFile5(rs.getString("file5"));
+			}
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		finally {
+			if (pstm != null) {
+				try {
+					pstm.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return PB;
+	}
+	
 }
