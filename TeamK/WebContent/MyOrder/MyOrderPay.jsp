@@ -45,7 +45,7 @@ $(function(){
 	$('#receive_setting').on('click',receive_setting);
 });
 function receive_setting(){
-	window.open('./Receive_Setting.mo', '배송지 선택', 'left=200, top=100, width=480, height=640, scrollbars=no, status=no, resizable=no, fullscreen=no, channelmode=no');
+	window.open('./Receive_Setting.mo', '배송지 선택', 'left=200, top=100, width=480, height=640, scrollbars=yes, status=no, resizable=no, fullscreen=no, channelmode=no');
 }
 </script>
 </head>

@@ -13,8 +13,7 @@ String id = (String)session.getAttribute("id");
 
 %>
 <title>Insert title here</title>
-<link href="./css/inc.css" rel="stylesheet" type="text/css">
-<link href="./css/subpage.css" rel="stylesheet" type="text/css">
+<link href="./css/popup.css" rel="stylesheet" type="text/css">
 <script src = "./js/jquery-3.2.0.js"></script>
 <script type="text/javascript">
 $(function(){
@@ -53,7 +52,7 @@ function address_select(ra_num){
 </script>
 </head>
 <body>
-	<div id="wrap">
+	<div id="receive_setting">
 <%if(ribList.size() != 0){
 	for(int i=0; i<ribList.size(); i++){
 		ReceiveInfoBEAN rib = ribList.get(i);%>
@@ -63,15 +62,15 @@ function address_select(ra_num){
 	<input type="hidden" value="<%=rib.getAddress2() %>" id = "address2<%=rib.getRa_num() %>">
 	<table>
 		<tr>
-			<td>이름</td>
+			<th>이름</th>
 			<td id="name<%=rib.getRa_num()%>"><%=rib.getName() %></td>
 		</tr>
 		<tr>
-			<td>연락처</td>
+			<th>연락처</th>
 			<td id="mobile<%=rib.getRa_num()%>"><%=rib.getMobile() %></td>
 		</tr>
 		<tr>
-			<td>주소</td>
+			<th>주소</th>
 			<td id="address<%=rib.getRa_num()%>">
 			[<%=rib.getPostcode() %>] <%=rib.getAddress1() %> <%=rib.getAddress2() %></td>
 		</tr>
@@ -82,9 +81,8 @@ function address_select(ra_num){
 	</div>
 <%	}
 }else{ %>등록 된 정보가 없습니다<%} %>
+<br>
 <input type = "button" id="Add_address" value = "배송지 추가">
 	</div>
-	<jsp:include page="../inc/footer.jsp"></jsp:include>
-
 </body>
 </html>
