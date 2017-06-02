@@ -1030,11 +1030,15 @@ div#m_delete_form form input[type="password"] {width: 200px;}
 
 /* Member List.jsp */
 table#memberList {
-	width: 1000px;
+	width: 900px;
 	text-align: left;
 	background-color: #fff;
+	margin: 30px auto;
 }
-table#memberList th {border-bottom: 2px solid #06c;}
+table#memberList th {
+	border-bottom: 2px solid #06c;
+	padding: 10px;
+}
 table#memberList td {
 	border-bottom: 1px solid #06c;
 	padding: 5px 0;
@@ -1093,12 +1097,6 @@ div#board_list table a {
 	text-decoration: none;
 	color: #000;
 }
-div#board_list table .inb_img
-{
-	width : 150px;
-	height : 100px;
-}
-
 div#board_menu_bar input[type="button"] {
 	float: left;
 	margin: 0 5px;
@@ -1245,7 +1243,10 @@ form#pack_basket_list {
 }
 form#pack_basket_list table {
 	width: 100%;
+	margin: 30px 0;
 }
+form#pack_basket_list table th,
+form#pack_basket_list table td {padding: 10px;}
 form#pack_basket_list table tr {
 	border-bottom: 1px solid #aaa;
 	padding-top: 10px;
@@ -1257,10 +1258,10 @@ form#goods_basket_list {
 }
 form#goods_basket_list table {
 	width: 100%;
+	margin: 30px 0;
 }
-form#goods_basket_list table img {
-	width: 200px;
-}
+form#goods_basket_list table th {padding: 10px;}
+form#goods_basket_list table img {width: 200px;}
 form#goods_basket_list table tr {
 	border-bottom: 1px solid #aaa;
 	padding-top: 10px;
@@ -1317,10 +1318,7 @@ td#tr1td1, td#tr1td2, td#tr2td1,
 td#tr2td2, td#tr3td1 {text-align: left;}
 td#tr1td3, td#tr2td3, td#tr3td2 {text-align: right;}
 
-.tr1td0_popup:HOVER
-{
-	cursor: pointer;
-}
+.tr1td0_popup:HOVER{cursor: pointer;}
 td#tr1td1 {
 	width: 200px;
 	font-weight: bold;
@@ -1333,9 +1331,7 @@ td#tr1td4 {
 	padding-top : 20px;
 	font-weight: bold;
 }
-td#tr2td1 {
-	height: 120px;
-}
+td#tr2td1 {height: 120px;}
 td#tr2td1 img
 {
 	width : 190px;
@@ -1357,16 +1353,41 @@ div#my_thing_order_list {
 	width: 900px;
 	margin: 20px auto;
 }
+div#my_thing_order_list fieldset {
+	border: 1px solid #06c;
+}
+div#my_thing_order_list legend {
+	font-size: 20px;
+	font-weight: bold;
+	padding: 0 10px;
+}
 div#my_thing_order_list table {
-	width: 900px;
+	width: 100%;
 	text-align: left;
 }
+div#my_thing_order_list table td {padding: 5px;}
+div#my_thing_order_list table tr {border-bottom: 1px solid #ddd;}
 div#my_thing_order_list table span {
 	display: block;
 	border: 1px solid #06c;
 	text-align: center;
 	color: #06c;
 }
+.tr1td6 {font-weight: bold; text-align: center;}
+.tr2td1 {width: 150px;}
+.tr2td3 {width: 150px;}
+.tr2td4 {width: 70px;}
+.tr2td5 {width: 120px;}
+.tr2td6 {width: 100px;}
+.tr2td7 {width: 120px; text-align: right;}
+.tr3td3 {text-align: right;}
+.tr2td1, .tr2td2, .tr2td4,
+.tr2td6, .tr3td1, .tr4td1 {
+	font-weight: bold;
+	background-color: #f0f0f0;
+	border-right: 3px solid #aaa;
+}
+
 
 /* Pack Res.jsp */
 form#pack_res {
@@ -1397,5 +1418,47 @@ div#my_interest table tr {
 }
 div#my_interest table th {
 	background-color: #eee;
+}
+
+
+/* MyInterestList.jsp */
+
+div#packInterest_list table .inb_img
+{
+	width : 80px;
+/* 	height : 130px; */
+}
+
+div#packInterest_list table #inb_img
+{
+	width : 150px;
+	height : 130px;
+}
+
+div#packInterest_list {
+	width: 90%;
+	margin: 0 auto;
+}
+div#packInterest_list table {
+	border-collapse: collapse;
+	margin-bottom: 20px;
+	font-size: 15px;
+	width: 100%;
+}
+div#packInterest_list table tr {
+	line-height: 1.75em;
+	border-bottom: 1px solid #ddd;
+}
+div#packInterest_list table span {
+	text-decoration: bold;
+}
+div#packInterest_list table tr:HOVER 
+{
+	background-color: #eee;
+}
+
+div#packInterest_list table .ev_hover:HOVER
+{
+	cursor: pointer;
 }
 
