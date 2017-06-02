@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="./css/popup.css" rel="stylesheet" type="text/css">
 <%
 request.setCharacterEncoding("utf-8");
 ModTradeInfoBEAN mtib = (ModTradeInfoBEAN)request.getAttribute("mtib");
@@ -14,27 +15,26 @@ String []memo=reason[0].split(",");
 <title><%=memo[0] %> 정보</title>
 </head>
 <body>
-<div>
+<div id="trade_update_info">
 <h3 align="center"><%=memo[0] %> 정보</h3>
-	<table align="center">
+	<table>
 		<tr>
-			<td>상품명</td>
+			<th>상품명</th>
 			<td colspan ="3"><%=mtib.getSubject() %></td>
 		</tr>
 		<tr>
-			<td>색상</td>
+			<th>색상</th>
 			<td><%=mtib.getColor() %></td>
-			<td>사이즈</td>
+			<th>사이즈</th>
 			<td><%=mtib.getSize() %></td>
-			<td>
 		</tr>
 <%	if(memo[0].equals("교환")){%>
 		<tr>
-			<td>수량</td>
-			<td><%=memo[1] %>개</td>
+			<th>수량</th>
+			<td colspan ="3"><%=memo[1] %>개</td>
 		</tr>
 		<tr>
-			<td colspan="4">교환 요청 사항</td>
+			<th colspan="4">교환 요청 사항</th>
 		</tr>
 		<tr>
 			<td colspan="4"><%=reason[1].replace("\r\n", "<br>")%></td>
@@ -42,7 +42,7 @@ String []memo=reason[0].split(",");
 		
 <%		if(mtib.getStatus()==3){%>
 		<tr>
-			<td colspan="4">판매자 코멘트 </td>
+			<th colspan="4">판매자 코멘트</th>
 		</tr>
 		<tr>
 			<td colspan="4"><%=reason[2].replace("\r\n", "<br>")%></td>
@@ -50,34 +50,34 @@ String []memo=reason[0].split(",");
 	<%}
 	}else{%>
 		<tr>
-			<td>수량</td>
-			<td><%=memo[2] %></td>
+			<th>수량</th>
+			<td colspan ="3"><%=memo[2] %></td>
 		</tr>
 		<tr>
-			<td>환불 금액</td>
-			<td><%=memo[3] %></td>
+			<th>환불 금액</th>
+			<td colspan ="3"><%=memo[3] %></td>
 		</tr>
 		<tr>
-			<td>환불 방법</td>
+			<th>환불 방법</th>
 			<td colspan="3"><%=memo[1] %></td>
 		</tr>
 		<%if(memo[1].equals("무통장 입금")){ %>
 		<tr>
-			<td>은행명</td>
+			<th>은행명</th>
 			<td><%=memo[4] %></td>
-			<td>예금주</td>
+			<th>예금주</th>
 			<td><%=memo[5] %></td>
 		</tr>
 		<tr>
-			<td>계좌</td>
+			<th>계좌</th>
 			<td colspan="3"><%=memo[6] %></td>
 		</tr>
 		<%} %>
 		<tr>
-			<td>환불 사유</td>
+			<th colspan ="4">환불 사유</th>
 		</tr>
 		<tr>
-			<td colspan="3"><%=reason[1].replace("\r\n", "<br>") %></td>
+			<td colspan="4"><%=reason[1].replace("\r\n", "<br>") %></td>
 		</tr>
 	<%
 	}%>

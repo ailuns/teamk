@@ -137,6 +137,16 @@ function status_update(o_num,status){
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
+
+	<div id="article_head">
+			<div id="article_title">Administrator Goods Order List</div>
+			<div class="empty"></div>
+			<div id="article_script"></div>
+		</div>
+		<div id="empty"></div>
+		<article>
+	
+
 		<select name="status" id="status" onchange="status_change()">
 			<option value="ing">현재 주문 리스트</option>
 			<option value="completed">과거 주문 리스트</option>
@@ -329,6 +339,7 @@ function status_update(o_num,status){
 		%>
 	
 	<br><input type = "button" value = "주문 관리" onclick="location.href='./AdminOrderList.ao'">
+		</article>
 		</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->

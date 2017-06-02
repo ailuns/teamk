@@ -80,6 +80,7 @@ function pack_popup(select)
 	<div id="wrap">
 		<div id="article_head">
 			<div id="article_title"><span id = "title"></span></div>
+			<div class="empty"></div>
 			<div id="article_script">상품이나 패키지 후기를 쓰는 곳 입니다.</div>
 		</div>
 		<div id="clear"></div>
@@ -106,7 +107,7 @@ function pack_popup(select)
 <!-- 				<h5></h5> -->
 				<table> 
 					<tr>
-						<td id="num<%=i %>" style="display:none;"><%=mtib.getNum()%></td>
+						<td id="num<%=i %>" style="display:none;"><%=mtib.getOri_num()%></td>
 						<td id="tr1td1"><%=sdf.format(mtib.getDate())%></td>
 						<td id="tr1td2"><%=mtib.getTrade_num()%></td>
 						<td id="tr1td3">성인 : <%=pack_count[0]%> / 아동 : <%=pack_count[1]%></td>

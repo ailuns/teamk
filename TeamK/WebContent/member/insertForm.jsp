@@ -240,6 +240,7 @@ if (id != null) {
 	<div id="wrap">
 		<div id="article_head">
 			<div id="article_title">회원가입</div>
+			<div class="empty"></div>
 			<div id="article_script"></div>
 		</div>
 		<div id="clear"></div>

@@ -125,13 +125,12 @@
 <div id="article_title">
 	장바구니
 </div>
+<div class="empty"></div>
 </div>
 <article>
 	<form name="fr">
-	<div>
+	<div id="my_basket_list">
 		<h3>패키지</h3>
-		<div id="board">
-		<div id="board_list">
 		<%
 			if (packcount == 0) {
 		%>
@@ -164,19 +163,19 @@
 			<tr>
 				<input type="hidden" id="pori_num<%=i %>" value="<%=pbb.getOri_num() %>">
 				<td><input type="checkbox" id="pch<%=i %>" name="pch" value="<%=pbb.getPb_num()%>"></td>
-				<td id="cate" onclick="pack_numchk(<%=i %>)"><img src ="./upload/<%=pbb.getImg()%>" height="70"></td>
+				<td id="cate" onclick="pack_numchk(<%=i %>)"><img src ="./upload/<%=pbb.getImg()%>"></td>
 				<td id="title" onclick="pack_numchk(<%=i %>)"><%=pbb.getSubject()%><br>
 				<%=pbb.getIntro() %></td>
 				
 				<td><select id = "adult<%=i%>" name="adult<%=i%>" onchange="people_Calc(<%=pbb.getOri_cost()%>,<%=i%>)">
-				<%for(int j =1 ; j<9; j++){ %>
+				<%for(int j =1 ; j<11; j++){ %>
 				<option value="<%=j%>" 
 				<%if(j==Integer.parseInt(countp[0])){%>selected <%} %>><%=j %></option>
 				<%} %>
 				</select>
 				</td>
 				<td><select id = "child<%=i%>" name="child<%=i%>" onchange="people_Calc(<%=pbb.getOri_cost()%>,<%=i%>)">
-				<%for(int j =0 ; j<9; j++){ %>
+				<%for(int j =0 ; j<11; j++){ %>
 				<option value="<%=j%>" 
 				<%if(j==Integer.parseInt(countp[1])){%>selected <%} %>><%=j %></option>
 				<%} %>
@@ -191,18 +190,13 @@
 			<%
 				}
 			%>
-		</table>
-		<%if(packcount>5); %><a href = "./MyPackBasketList.bns?pageNum=1">more+</a><%; %>
+		</table><br>
+		<%if(packcount>5); %><a href = "./MyPackBasketList.bns?pageNum=1">더 보기 +</a><br><br><%; %>
 		<%
 			}
 		%>
-	</div>
-	</div>
-	</div>
-	<div>
+	<hr>
 	<h3>상품</h3>
-	<div id="board">
-	<div id="board_list">
 			<%
 			if (thingcount == 0) {
 		%>
@@ -257,15 +251,12 @@
 			<%
 				}
 			%>
-		</table>
-		
-		<%if(thingcount>5); %><a href = "./MyThingBasketList.bns?pageNum=1">more+</a><%; %>
+		</table><br>
+		<%if(thingcount>5); %><a href = "./MyThingBasketList.bns?pageNum=1">더 보기 +</a><br><br><%; %>
 		<%
 			}
 		%>
 		
-	</div>
-	</div>
 	</div>
 	<input type="button" value="구입" onclick = "return basket_submit()">
 	<input type="button" value ="삭제" onclick = "return basket_delete()">

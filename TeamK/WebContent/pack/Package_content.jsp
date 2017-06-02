@@ -1,3 +1,4 @@
+<%@page import="com.sun.xml.internal.ws.api.config.management.Reconfigurable"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="net.pack.db.PackDAO"%>
@@ -28,6 +29,8 @@
 	
 	if (user_id == null)
 		user_id = "";
+	if (PB.getSubject() == null)
+		response.sendRedirect("./PackList.po");
 	
 	List List = (List)request.getAttribute("replylist");
 	List CategoryList = (List)request.getAttribute("CategoryList");
@@ -54,8 +57,8 @@
 		var cost = $("#aa" + num).html();
 		
 	    var str = String(cost);
-	    uncomma_cost = str.replace(/[^\d]+/g, ''); // 금액 자릿수 ,를 없앤다
-	    uncomma_cost2 = uncomma_cost / 2;  // cost2는 아이들 금액
+	    uncomma_cost = str.replace(/[^\d]+/g, ''); // 금액 자릿수 ,를 없앤다  cost는 어른 금액
+	    uncomma_cost2 = uncomma_cost / 2;  // cost2는 아이 금액
 		
 		str = String(uncomma_cost);
 		var comma_cost =  str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');  // 금액 자릿수 ,를 붙인다
@@ -65,19 +68,7 @@
 		$("#cost_adult").html(comma_cost);
 		$("#cost_child").html(comma_cost2);
 		$("#p").html(comma_cost);
-		
-// 		$.ajax({
-// 			type:"post",
-// 			url:"./MyInterestAdd.ins",   // java로 보냄
-// 			data:{
-// 				type:"P",
-// 				num:$("input[type=radio][name=chk]:checked").val()					
-// 			},
-// 			success:function(){
-// 				$("#jjim_o").hide();
-// 				$("#jjim_x").show();
-// 			}
-// 		});
+
 		// 페이지 로딩 될 때 첫번쨰 선택된 날짜 값으로 초기값 설정 부분
 		
 		// 달력 관련 소스
@@ -101,23 +92,7 @@
 	        	}
 	        }
 		});
-	
-		$("#date_to").datepicker({
-			dateFormat: 'yy-mm-dd',    // 날짜 포맷 형식
-			minDate : 0,			   // 최소 날짜 설정      0이면 오늘부터 선택 가능
-			numberOfMonths: 2,		   // 보여줄 달의 갯수
-	        dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],  // 일(Day) 표기 형식
-	        monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],   // 월(Month) 표기 형식
-	        //showOn: "both",			// 버튼을 표시      both : input과 buttom 둘다 클릭 시 달력 표시           bottom  :  buttom 클릭 했을 때만 달력 표시
-	        //buttonImage: "./img/calendar.png",   // 버튼에 사용될 이미지
-	        //buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
-	        onClose: function(selectedDate){		// 닫힐 때 함수 호출
-	        	$("#from").datepicker("option", "maxDate", selectedDate);   // #date_from의 최대 날짜를 #date_to에서 선택된 날짜로 설정
-	       	}
-		});
 	});
-	
-	
 	
 	
 	
@@ -171,7 +146,7 @@
 			$('#main').attr("src", imgurl);
 		});
 		
-		
+		// 추천 상품 닫기
 		$('#close').click(function(){
 			$('#banner').hide();
 			$('#banner_sub').hide();
@@ -698,7 +673,10 @@
 		</table>
 	</div>
 	
-	
+	<%
+	if (RecommendProduct.size() > 0)
+	{
+	%>
 	<div id="banner">
 		<table id="banner_content">
 			<tr>
@@ -707,7 +685,11 @@
 					if (RecommendProduct.size() == 1)
 					{
 				%>
-						<td><div id="banner_sub">추천상품</div></td>
+						<td>
+							<div id="banner_sub">추천상품</div>
+							<div id="close">close</div>
+						</td>
+						
 				<%
 					}
 					else if (RecommendProduct.size() == 2)
@@ -740,13 +722,9 @@
 							<td id="num<%=i %>" style="display: none;"><%=pdb.getNum() %></td>
 							<td id="car_num<%=i %>" style="display: none;"><%=pdb.getCar_num() %></td>
 							<td><img id="Rcom_pd" src="./upload/<%=pdb.getImg() %>" onclick="Rcom_move(<%=i %>)"></td>
-			<%-- 				<td><img src="./upload/<%=PB.getFile1() %>"></a></td> --%>
-			<%-- 				<td><a href="#"><img src="./upload/<%=PB.getFile1() %>"></a></td> --%>
 						</tr>
 						<tr>
 							<td><div class="info"><%=pdb.getCost() %></div></td>
-			<!-- 				<td><div class="info">가격 40000</div></td> -->
-			<!-- 				<td><div class="info">가격 30000</div></td> -->
 						</tr>
 					</table>
 				</td>
@@ -757,16 +735,22 @@
 			</tr>
 		</table>
 	</div>
+	<%
+	}
+	%>
+	
 
 	<!-- 왼쪽 메뉴 -->
 	<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
 	<!-- 왼쪽 메뉴 -->
 	<!--여행지 검색창 -->
 	<div id="wrap"> 
+	<div id="wrap_pack">
 	<div id="article_head">
 		<div id="article_title"><img src="./img/travel2.png" width="30px" style="margin-right: 8px; vertical-align: bottom;">패키지</div>
+	<div class="empty"></div>
 	</div>
-		<div id="package_feat">
+	<div id="package_feat">
 		<jsp:include page="../inc/packSlide.jsp"></jsp:include>
 		<div id="package_search">
 			<p>내게 맞는 패키지 검색하기</p>
@@ -985,10 +969,12 @@
 		<!--구글맵 -->
 
 		<!--상품 문의 -->
-		<div id="middle3">
+		
 		<div id="QnA">
+			<hr>
 			<h3>상품 문의</h3>
 			<hr>
+			<div id="middle3">
 			<table border="1" id="replyTable">
 				<tr>
 <!-- 					<td>번호</td> -->
@@ -1020,60 +1006,102 @@
 					if ((rb.getId().equals(user_id) && rb.getH_or_s() == 1) || rb.getH_or_s() == 0){
 					%>
 					<td id="replyContent">
+						<span class="reply_align">
+						
 						<%
 							// 답글 들여쓰기 모양
 							int wid = 0;
 							if (rb.getRe_lev() > 0) {
 								wid = 10 * rb.getRe_lev();
 						%> 
-<%-- 						<img src="level.gif" id="reimg" width=<%=wid%>> <img src="re.gif"> --%>
+						<%--<img src="level.gif" id="reimg" width=<%=wid%>> <img src="re.gif"> --%>
+							<img src="./img/re.gif">
 							<span>[답변]</span>
 						<%
 							}
+							else
+							{
 						
+						%>
+						<span>[문의]</span>
+						<%
+						}
 						%> 
 						
-						<%=rb.getContent()%><span>(<%=rb.getDate() %>)</span>
+						<%=rb.getContent()%><span style="font-size: 0.8em; margin-left:5px;">(<%=rb.getDate() %>)</span>
+						
 						<%
 						if(rb.getH_or_s() == 1)
 						{
 						%>
 						<img src="./img/lock.png" width="10px" height="10px">
+						
 						<%
 						}
 						%>
+						</span>
+						<span style="float: right;">
+						<%
+						if(user_id.equals("admin"))
+						{
+						%>
+						
+						<input type="button" value="답글" id="rereply" onclick="rewrite(<%=rb.getNum()%>)">
+						<%
+						}
+						if(rb.getId().equals(user_id))
+						{
+						%>
+						<input type="button" value="수정" id="re_update" onclick="reupdate(<%=rb.getNum() %>)">
+						<%
+						}
+						if(rb.getId().equals(user_id) || user_id.equals("admin"))
+						{
+						%>
+						<input type="button" value="삭제" id="re_delete" onclick="ReplyDel(<%=rb.getNum() %>, '<%=user_id%>');">
+						<%
+						}
+						%>
+						</span>
 					</td>
 					<%
 					}
 					else if (rb.getH_or_s() == 1 && !rb.getId().equals(user_id)){
 					%>
 					<td style="height:50px;">
+						<span class="reply_align">
 						비밀글입니다<img src="./img/lock.png" width="10px" height="10px">
-						<span>(<%=rb.getDate() %>)</span>
+<%-- 						<span>(<%=rb.getDate() %>)</span> --%>
+						(<%=rb.getDate() %>)
+						</span>
+						<span style="float: right;">
+						<%
+						if(user_id.equals("admin"))
+						{
+						%>
+						<input type="button" value="답글" id="rereply" onclick="rewrite(<%=rb.getNum()%>)">
+						<%
+						}
+						if(rb.getId().equals(user_id))
+						{
+						%>
+						<input type="button" value="수정" id="re_update" onclick="reupdate(<%=rb.getNum() %>)">
+						<%
+						}
+						if(rb.getId().equals(user_id) || user_id.equals("admin"))
+						{
+						%>
+						<input type="button" value="삭제" id="re_delete" onclick="ReplyDel(<%=rb.getNum() %>, '<%=user_id%>');">
+						<%
+						}
+						%>
+						</span>
 					</td>
 					<%
 					}
+					%>
 					
 					
-					if(!user_id.equals(""))
-					{
-					%>
-					<td><input type="button" value="답글" id="rereply" onclick="rewrite(<%=rb.getNum()%>)"></td>
-					<%
-					}
-					if(rb.getId().equals(user_id))
-					{
-					%>
-					<td><input type="button" value="수정" id="re_update" onclick="reupdate(<%=rb.getNum() %>)"></td>
-					<%
-					}
-					if(rb.getId().equals(user_id) || user_id.equals("admin"))
-					{
-					%>
-					<td><input type="button" value="삭제" id="re_delete" onclick="ReplyDel(<%=rb.getNum() %>, '<%=user_id%>');"></td>
-					<%
-					}
-					%>
 				</tr>
 				
 				<tr id="conup<%=rb.getNum()%>" style="display: none;">
@@ -1081,15 +1109,16 @@
 						<%=user_id %>
 					</td>
 					
-					<td><textarea cols="60" rows="2" id="contentup<%=rb.getNum() %>" name="contentup"><%=rb.getContent() %></textarea></td>
 					<td>
+						<span class="reply_align">
+						<textarea style="width: 550px;" cols="60" rows="2" id="contentup<%=rb.getNum() %>" name="contentup"><%=rb.getContent() %></textarea>
+						</span>
+						<span style="float: right;">
 						<input type="button" value="수정" onclick="reUpdateAction(<%=rb.getNum() %>)">
-					</td>
-					<td>
-						<input type="button" value="취소" onclick="reupdate(<%=rb.getNum() %>)">
-					</td>
-					<td>
+						<input type="button" value="취소" onclick="reupdate(<%=rb.getNum() %>)"><br>
 						<input type="checkbox" class="up_secretChk<%=rb.getNum() %>" name="secretChk" value="1" <%if(rb.getH_or_s() == 1){%>checked<%} %>>비밀글
+						</span>
+					</td>
 					</td>
 				</tr>
 				<tr id="con<%=rb.getNum()%>" style="display: none;">
@@ -1103,15 +1132,15 @@
 						<p><%=user_id %></p>
 						<input type="hidden" id="reid" name="id" class="box" value="<%=user_id %>">
 					</td>
-					<td><textarea cols="60" rows="2" id="recontent<%=rb.getNum() %>" name="recontent"></textarea></td>
 					<td>
+						<span class="reply_align">
+						<textarea style="width: 550px;" cols="60" rows="2" id="recontent<%=rb.getNum() %>" name="recontent"></textarea>
+						</span>
+						<span style="float: right;">
 						<input type="button" value="답글등록" onclick="Re_Reply_Write(<%=rb.getNum() %>)">
-					</td>
-					<td>
-						<input type="button" value="취소" onclick="rewrite(<%=rb.getNum() %>)">
-					</td>
-					<td>
+						<input type="button" value="취소" onclick="rewrite(<%=rb.getNum() %>)"><br>
 						<input type="checkbox" class="re_secretChk" name="secretChk" value="1">비밀글
+						</span>
 					</td>
 				</tr>
 			
@@ -1209,6 +1238,7 @@
 		</div>
 	</div>
 	<!--상품 문의 -->
+	</div>
 	</div>
 	<!-- 오른쪽 메뉴 -->
 	<jsp:include page="../inc/rightMenu.jsp"></jsp:include>

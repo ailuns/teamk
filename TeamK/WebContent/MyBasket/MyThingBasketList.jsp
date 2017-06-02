@@ -95,6 +95,7 @@ List<TBasketBEAN> ThingBasket=(List<TBasketBEAN>)request.getAttribute("MyThingBa
 %>
 <div id="article_head">
 			<div id="article_title">상품 리스트</div>
+			<div class="empty"></div>
 			<div id="article_script">subject Count : <%=count %></div>
 		</div>
 		<div id="clear"></div>

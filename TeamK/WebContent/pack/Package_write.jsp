@@ -86,9 +86,6 @@
 	{
 		$("#subject").val();
 		$("#date_from").val();
-		
-		
-		
 	}
 	
 </script>
@@ -133,6 +130,7 @@
 <div id="wrap">
 	<div id="article_head">
 		<div id="article_title"><img src="./img/travel2.png" width="30px" style="margin-right: 8px; vertical-align: bottom;">패키지 상품등록</div>
+	<div class="empty"></div>
 	</div>
 	<div id="wrap_pack">
 	<div id="wrap_pack_detail">
@@ -297,9 +295,9 @@
 					}
 	
 					// 글쓰기 버튼 클릭 이벤트
-// 					$("#fr").submit(function(){
-					function frsubmit()
-					{
+					$("#fr").submit(function(){
+// 					function frsubmit()
+// 					{
 						var file1 = $("#file1").val();
 						var file2 = $("#file2").val();
 						var file3 = $("#file3").val();
@@ -326,6 +324,20 @@
 					 			return false;
 					 		}
 						}
+						
+						var content = oEditors.getById["ir1"].getIR(); // Edit에 쓴 내용을 content 변수에 저장    값 : <br>
+						
+						if (content == "<br>")  // 빈공간 값 <br>
+						{
+							alert("글을 입력해주세요");  // 메시지 띄움
+							return false;
+						}
+						else // 글내용 있을 시
+						{
+							oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []); // Edit에 쓴 내용을 textarea에 붙여넣어준다
+	// 					    $("#fr").submit();  // form을 submit 시킨다
+						}
+						
 				 		
 						var chk = 0;
 						$.ajax({   
@@ -353,20 +365,9 @@
 							
 						return r;
 						
-						var content = oEditors.getById["ir1"].getIR(); // Edit에 쓴 내용을 content 변수에 저장    값 : <br>
 						
-						if (content == "<br>")  // 빈공간 값 <br>
-						{
-							alert("글을 입력해주세요");  // 메시지 띄움
-							return false;
-						}
-						else // 글내용 있을 시
-						{
-							oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []); // Edit에 쓴 내용을 textarea에 붙여넣어준다
-	// 					    $("#fr").submit();  // form을 submit 시킨다
-						}
-// 					});
-					}
+					});
+// 					}
 				</script>
 			</div>
 		</div>

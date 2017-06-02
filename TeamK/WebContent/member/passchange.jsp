@@ -18,9 +18,9 @@
 		String pass = mb.getPass();		
 	%>
 	<div id="passchange">
-	<form action="../MemberPasschangeAction.me" method="post" name="fr"><br>
+	<form action="../MemberPasschangeAction.me" method="post" name="fr">
 			
-			<label>아이디</label>			<input type="text" value="<%=id%>" name="id"><br>
+			<label>아이디</label>			<input type="text" value="<%=id%>" name="id" readonly="readonly"><br>
 					
 			<!-- 기존의 비밀번호값 -->
 			<input type="hidden" name="pass" value="<%=pass%>"> 					

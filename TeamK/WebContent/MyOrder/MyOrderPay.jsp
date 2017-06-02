@@ -45,7 +45,7 @@ $(function(){
 	$('#receive_setting').on('click',receive_setting);
 });
 function receive_setting(){
-	window.open('./Receive_Setting.mo', '배송지 선택', 'left=200, top=100, width=480, height=640, scrollbars=no, status=no, resizable=no, fullscreen=no, channelmode=no');
+	window.open('./Receive_Setting.mo', '배송지 선택', 'left=200, top=100, width=480, height=640, scrollbars=yes, status=no, resizable=no, fullscreen=no, channelmode=no');
 }
 </script>
 </head>
@@ -58,6 +58,7 @@ function receive_setting(){
 	<div id="wrap">
 	<div id="article_head">
 			<div id="article_title">결제 페이지</div>
+			<div class="empty"></div>
 		</div>
 	<article>
 	<form action ="./MyOrderAddAction.mo" method ="post" name = "fr" onsubmit="return submit_check()" class="gyeolje">

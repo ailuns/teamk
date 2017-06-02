@@ -39,7 +39,8 @@ public class PackContent implements Action{
 		System.out.println("PackContent num >> " + num);
 		System.out.println("PackContent pagenum >> " + repageNum);
 		
-		pb = pdao.getPack(num);
+//		pb = pdao.getPack(num);
+		pb = pdao.getPack_original(num);
 		pdao.updateReadcount(num);
 		
 		List RecommendProduct;
