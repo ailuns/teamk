@@ -750,13 +750,9 @@
 							<td id="num<%=i %>" style="display: none;"><%=pdb.getNum() %></td>
 							<td id="car_num<%=i %>" style="display: none;"><%=pdb.getCar_num() %></td>
 							<td><img id="Rcom_pd" src="./upload/<%=pdb.getImg() %>" onclick="Rcom_move(<%=i %>)"></td>
-			<%-- 				<td><img src="./upload/<%=PB.getFile1() %>"></a></td> --%>
-			<%-- 				<td><a href="#"><img src="./upload/<%=PB.getFile1() %>"></a></td> --%>
 						</tr>
 						<tr>
 							<td><div class="info"><%=pdb.getCost() %></div></td>
-			<!-- 				<td><div class="info">가격 40000</div></td> -->
-			<!-- 				<td><div class="info">가격 30000</div></td> -->
 						</tr>
 					</table>
 				</td>
@@ -1038,20 +1034,28 @@
 					%>
 					<td id="replyContent">
 						<span class="reply_align">
+						
 						<%
 							// 답글 들여쓰기 모양
 							int wid = 0;
 							if (rb.getRe_lev() > 0) {
 								wid = 10 * rb.getRe_lev();
 						%> 
-<%-- 						<img src="level.gif" id="reimg" width=<%=wid%>> <img src="re.gif"> --%>
+						<%--<img src="level.gif" id="reimg" width=<%=wid%>> <img src="re.gif"> --%>
+							<img src="./img/re.gif">
 							<span>[답변]</span>
 						<%
 							}
+							else
+							{
 						
+						%>
+						<span>[문의]</span>
+						<%
+						}
 						%> 
 						
-						<%=rb.getContent()%><span>(<%=rb.getDate() %>)</span>
+						<%=rb.getContent()%><span style="font-size: 0.8em; margin-left:5px;">(<%=rb.getDate() %>)</span>
 						
 						<%
 						if(rb.getH_or_s() == 1)

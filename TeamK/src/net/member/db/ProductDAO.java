@@ -777,7 +777,7 @@ public class ProductDAO {
 		List productList = new ArrayList();
 		try {
 			con = getConnection();
-			sql = "select num, car_num, name, subject, cost, type, readcount, stock, img from thing where type=?";
+			sql = "select num, car_num, name, subject, cost, type, readcount, stock, img from thing where type=? limit 0, 3";
 			
 			pstmt =con.prepareStatement(sql);
 			pstmt.setString(1, type);
