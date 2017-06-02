@@ -86,9 +86,6 @@
 	{
 		$("#subject").val();
 		$("#date_from").val();
-		
-		
-		
 	}
 	
 </script>

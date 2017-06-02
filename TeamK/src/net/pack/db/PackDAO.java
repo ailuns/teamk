@@ -117,11 +117,11 @@ public class PackDAO {
 			
 			if (id.equals("admin"))
 			{
-				sql = "select * from pack where area=? group by subject order by date desc limit ?, ?";
+				sql = "select * from pack where area=? group by subject order by date asc limit ?, ?";
 			}
 			else
 			{
-				sql = "select * from pack where area=? and date > now() group by subject order by date desc limit ?, ?";
+				sql = "select * from pack where area=? and date > now() group by subject order by date asc limit ?, ?";
 			}
 			
 			pstm = conn.prepareStatement(sql);
@@ -842,8 +842,8 @@ public class PackDAO {
 		return 0; // 글번호 없음
 	}
 	
-	// MyOrder에서 여행정보 팝업창 띄울 정보
-	public PackBean getPackPopup(int num) {
+	// original Num 값으로 패키지 내용 가져올때 호출
+	public PackBean getPack_original(int num) {
 		PackBean PB = new PackBean();
 		try {
 			conn = getConnection();
@@ -905,7 +905,6 @@ public class PackDAO {
 				}
 			}
 		}
-
 		return PB;
 	}
 	

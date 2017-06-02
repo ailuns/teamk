@@ -43,7 +43,7 @@
 		var up_stock = $("#up_stock").val();
 		var up_date = $("#up_date").val();
 		
-		if (up_cost == "" || up_stock == "" || up_date == "")
+		if (up_cost == "" || up_stock == "" || up_date == "") // 내용이 모두 비었을 경우
 		{
 			alert("수정할 내용을 입력해주세요");
 		}
@@ -95,14 +95,14 @@
 		}
 	}
 	
-	
+	// 날짜 추가 시 동일 날짜 체크
 	function date_chk()
 	{
 // 		alert($("#subject").val());
 // 		alert($("#up_date").val());
 		var prev_date = $("#prev_date").val();
 		
-		$.ajax({   // 날짜를 클릭할때 마다 찜목록과 비교
+		$.ajax({   
 			type:"post",
 			url:"./PackDateAddChk.po",
 			data:{				//제목, 날짜
