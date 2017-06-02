@@ -35,7 +35,7 @@ String id = (String)session.getAttribute("id");
 <h3>Admin</h3>
 <input type="button"value = "adminmenu" onclick="location.href='./BankPayCheck.ao'"><br>
 <input type="button" value ="Admin_pack_Order" onclick ="location.href = './Pack_res.ao'"><br>
-<input type="button" value="Admin_thing_Order" onclick="location.href='./Trans_num_Insert.ao'"><br>
+<input type="button" value="Admin_thing_Order" onclick="location.href='./Admin_Thing_OrderList.ao'"><br>
 <!-- <input type="button" value="thing_completed" onclick="location.href='./Thing_Exchange.ao'"><br> -->
 
 
