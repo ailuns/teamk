@@ -57,8 +57,8 @@
 		var cost = $("#aa" + num).html();
 		
 	    var str = String(cost);
-	    uncomma_cost = str.replace(/[^\d]+/g, ''); // 금액 자릿수 ,를 없앤다
-	    uncomma_cost2 = uncomma_cost / 2;  // cost2는 아이들 금액
+	    uncomma_cost = str.replace(/[^\d]+/g, ''); // 금액 자릿수 ,를 없앤다  cost는 어른 금액
+	    uncomma_cost2 = uncomma_cost / 2;  // cost2는 아이 금액
 		
 		str = String(uncomma_cost);
 		var comma_cost =  str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');  // 금액 자릿수 ,를 붙인다
@@ -68,19 +68,7 @@
 		$("#cost_adult").html(comma_cost);
 		$("#cost_child").html(comma_cost2);
 		$("#p").html(comma_cost);
-		
-// 		$.ajax({
-// 			type:"post",
-// 			url:"./MyInterestAdd.ins",   // java로 보냄
-// 			data:{
-// 				type:"P",
-// 				num:$("input[type=radio][name=chk]:checked").val()					
-// 			},
-// 			success:function(){
-// 				$("#jjim_o").hide();
-// 				$("#jjim_x").show();
-// 			}
-// 		});
+
 		// 페이지 로딩 될 때 첫번쨰 선택된 날짜 값으로 초기값 설정 부분
 		
 		// 달력 관련 소스
@@ -104,23 +92,7 @@
 	        	}
 	        }
 		});
-	
-		$("#date_to").datepicker({
-			dateFormat: 'yy-mm-dd',    // 날짜 포맷 형식
-			minDate : 0,			   // 최소 날짜 설정      0이면 오늘부터 선택 가능
-			numberOfMonths: 2,		   // 보여줄 달의 갯수
-	        dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],  // 일(Day) 표기 형식
-	        monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],   // 월(Month) 표기 형식
-	        //showOn: "both",			// 버튼을 표시      both : input과 buttom 둘다 클릭 시 달력 표시           bottom  :  buttom 클릭 했을 때만 달력 표시
-	        //buttonImage: "./img/calendar.png",   // 버튼에 사용될 이미지
-	        //buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
-	        onClose: function(selectedDate){		// 닫힐 때 함수 호출
-	        	$("#from").datepicker("option", "maxDate", selectedDate);   // #date_from의 최대 날짜를 #date_to에서 선택된 날짜로 설정
-	       	}
-		});
 	});
-	
-	
 	
 	
 	
@@ -174,7 +146,7 @@
 			$('#main').attr("src", imgurl);
 		});
 		
-		
+		// 추천 상품 닫기
 		$('#close').click(function(){
 			$('#banner').hide();
 			$('#banner_sub').hide();
