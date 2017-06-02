@@ -99,6 +99,7 @@ function search_check(){
 	<div id="wrap">
 		<div id="article_head">
 			<div id="article_title"><span id = "title"></span></div>
+			<div class="empty"></div>
 			<div id="article_script"><span id ="result"></span></div>
 		</div>
 		<div id="clear"></div>

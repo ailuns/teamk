@@ -23,6 +23,7 @@ if (id != null) {
 	<div id="wrap"> 
 		<div id="article_head">
 			<div id="article_title">로그인</div>
+			<div class="empty"></div>
 			<div id="article_script">로그인이 필요합니다.</div>
 		</div>
 		<div id="clear"></div>

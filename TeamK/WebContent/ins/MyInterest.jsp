@@ -33,6 +33,7 @@
 	%>
 	<div id="article_head">
 <div id="article_title"><%=type%></div>
+<div class="empty"></div>
 <div id="article_script">subject Count :<%=count%></div>
 </div>
 <article>

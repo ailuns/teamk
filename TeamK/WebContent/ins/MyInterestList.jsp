@@ -35,6 +35,7 @@ List<interestBEAN> InterestThing = (List<interestBEAN>) request.getAttribute("In
 <div id="article_title">
 	찜 리스트
 </div>
+<div class="empty"></div>
 </div>
 <article>
 		<h3>패키지 찜 리스트</h3>

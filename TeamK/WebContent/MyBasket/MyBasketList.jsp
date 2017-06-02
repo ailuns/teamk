@@ -125,6 +125,7 @@
 <div id="article_title">
 	장바구니
 </div>
+<div class="empty"></div>
 </div>
 <article>
 	<form name="fr">

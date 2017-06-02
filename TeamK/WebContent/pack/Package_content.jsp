@@ -780,6 +780,7 @@
 	<div id="wrap_pack">
 	<div id="article_head">
 		<div id="article_title"><img src="./img/travel2.png" width="30px" style="margin-right: 8px; vertical-align: bottom;">패키지</div>
+	<div class="empty"></div>
 	</div>
 	<div id="package_feat">
 		<jsp:include page="../inc/packSlide.jsp"></jsp:include>

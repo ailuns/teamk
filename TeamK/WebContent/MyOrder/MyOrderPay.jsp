@@ -58,6 +58,7 @@ function receive_setting(){
 	<div id="wrap">
 	<div id="article_head">
 			<div id="article_title">결제 페이지</div>
+			<div class="empty"></div>
 		</div>
 	<article>
 	<form action ="./MyOrderAddAction.mo" method ="post" name = "fr" onsubmit="return submit_check()" class="gyeolje">
