@@ -986,9 +986,10 @@
 			<hr>
 			<h3 id="sub"><%=PB.getCity()%> <%=PB.getSarea()%></h3>
 			<hr>
+			<br><br>
 			<input type="button" id="btn1" value="관광 명소"> 
 			<input type="button" id="btn2" value="맛집">
-		</div>
+		</div><br><br>
 		<!--구글맵 제어할 버튼 부분 -->
 		
 		<!--구글맵 -->
