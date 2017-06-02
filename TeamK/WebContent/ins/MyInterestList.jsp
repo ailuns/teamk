@@ -65,7 +65,7 @@ List<interestBEAN> InterestThing = (List<interestBEAN>) request.getAttribute("In
 				<td class="inb_img ev_hover" onclick="inter_pack_move(<%=i %>);"><img id="inb_img" alt="" src="./upload/<%=inb.getImg() %>"></td>
 				<td onclick="inter_pack_move(<%=i %>);" class="ev_hover"><%=inb.getSubject()%><br>
 				<%=inb.getIntro() %></td>
-				<td><%=cost%></td>
+				<td><%=cost%>원</td>
 				<td>
 				<input type="button" value="찜 취소" onclick = "location.href='./MyInterestDel.ins?n=<%=inb.getInter_num()%>'"></td>
 				</tr>

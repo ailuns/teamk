@@ -169,14 +169,14 @@
 				<%=pbb.getIntro() %></td>
 				
 				<td><select id = "adult<%=i%>" name="adult<%=i%>" onchange="people_Calc(<%=pbb.getOri_cost()%>,<%=i%>)">
-				<%for(int j =1 ; j<9; j++){ %>
+				<%for(int j =1 ; j<11; j++){ %>
 				<option value="<%=j%>" 
 				<%if(j==Integer.parseInt(countp[0])){%>selected <%} %>><%=j %></option>
 				<%} %>
 				</select>
 				</td>
 				<td><select id = "child<%=i%>" name="child<%=i%>" onchange="people_Calc(<%=pbb.getOri_cost()%>,<%=i%>)">
-				<%for(int j =0 ; j<9; j++){ %>
+				<%for(int j =0 ; j<11; j++){ %>
 				<option value="<%=j%>" 
 				<%if(j==Integer.parseInt(countp[1])){%>selected <%} %>><%=j %></option>
 				<%} %>

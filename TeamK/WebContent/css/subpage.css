@@ -1078,6 +1078,7 @@ div#board_list table th#date {width: 100px;}
 div#board_list table th#readcount {width: 50px;}
 div#board_list table th#name {width: 100px;}
 div#board_list table td#cate {font-weight: bold;}
+div#board_list table td#cate img{width:100px;}
 div#board_list table td#cate:HOVER, div#board_list table td#title:HOVER
 {
 	cursor: pointer;
@@ -1244,6 +1245,19 @@ form#pack_basket_list table tr {
 	border-bottom: 1px solid #aaa;
 	padding-top: 10px;
 }
+form#pack_basket_list table tr:HOVER {
+	background-color: #eee;
+}
+form#pack_basket_list table td img
+{
+	width : 100px;
+	height : 70px;
+}
+form#pack_basket_list table td.ev_hover:HOVER
+{
+	cursor: pointer;
+}
+
 /*My Thing Basket List.jsp*/
 form#goods_basket_list {
 	width: 900px;
@@ -1320,7 +1334,7 @@ td#tr1td1 {
 	font-weight: bold;
 }
 td#tr1td3 {
-	width: 150px;
+	width: 200px;
 }
 td#tr1td4 {
 	width: 120px;

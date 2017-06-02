@@ -106,7 +106,7 @@ function pack_popup(select)
 <!-- 				<h5></h5> -->
 				<table> 
 					<tr>
-						<td id="num<%=i %>" style="display:none;"><%=mtib.getNum()%></td>
+						<td id="num<%=i %>" style="display:none;"><%=mtib.getOri_num()%></td>
 						<td id="tr1td1"><%=sdf.format(mtib.getDate())%></td>
 						<td id="tr1td2"><%=mtib.getTrade_num()%></td>
 						<td id="tr1td3">성인 : <%=pack_count[0]%> / 아동 : <%=pack_count[1]%></td>
