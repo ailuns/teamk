@@ -842,7 +842,7 @@ public class PackDAO {
 		return 0; // 글번호 없음
 	}
 	
-	// MyOrder에서 여행정보 팝업창 띄울 정보
+	// original Num 값으로 패키지 내용 가져올때 호출
 	public PackBean getPack_original(int num) {
 		PackBean PB = new PackBean();
 		try {
@@ -905,7 +905,6 @@ public class PackDAO {
 				}
 			}
 		}
-
 		return PB;
 	}
 	
