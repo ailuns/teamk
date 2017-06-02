@@ -168,6 +168,28 @@ div#receive_add table th {width: 100px;}
 div#receive_add table input[type="text"],
 div#receive_add table input[type="tel"] {width: 230px;}
 
+/*Receive Setting.jsp*/
+div#receive_setting {
+	margin: 0 auto;
+	padding: 10px;
+	padding-bottom: 20px;
+	border: 1px solid #06c;
+}
+div#receive_setting table {
+	margin: 20px auto;
+	width: 100%;
+}
+div#receive_setting th {
+	width: 70px;
+	background-color: #f0f0f0;
+}
+div#receive_setting td {
+	text-align: left;
+	padding: 5px;
+}
+
+
+
 /* Trade Update Info.jsp*/
 div#trade_update_info {
 	margin: 0 auto;

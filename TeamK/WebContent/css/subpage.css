@@ -1402,9 +1402,8 @@ div#my_thing_order_list table span {
 .tr2td6, .tr3td1, .tr4td1 {
 	font-weight: bold;
 	background-color: #f0f0f0;
-	border-right: 3px solid #aaa;
+	border-right: 1px solid #aaa;
 }
-
 
 /* Pack Res.jsp */
 form#pack_res {
@@ -1438,26 +1437,16 @@ div#my_interest table th {
 }
 
 
-/* MyInterestList.jsp */
-
-div#packInterest_list table .inb_img
-{
-	width : 80px;
-/* 	height : 130px; */
-}
-
-div#packInterest_list table #inb_img
-{
-	width : 150px;
-	height : 130px;
+/* My Interest List.jsp */
+div#packInterest_list table img#inb_img {
+	height: 120px;
 }
 
 div#packInterest_list {
-	width: 90%;
+	width: 900px;
 	margin: 0 auto;
 }
 div#packInterest_list table {
-	border-collapse: collapse;
 	margin-bottom: 20px;
 	font-size: 15px;
 	width: 100%;
@@ -1466,16 +1455,14 @@ div#packInterest_list table tr {
 	line-height: 1.75em;
 	border-bottom: 1px solid #ddd;
 }
-div#packInterest_list table span {
-	text-decoration: bold;
+div#packInterest_list table span {text-decoration: bold;}
+div#packInterest_list table tr:HOVER {background-color: #eee;}
+div#packInterest_list table .ev_hover:HOVER{cursor: pointer;}
+div#packInterest_list a {
+	text-decoration: none;
+	color: #000;
+	font-weight: bold;
 }
-div#packInterest_list table tr:HOVER 
-{
-	background-color: #eee;
+div#packInterest_list a:HOVER {
+	color: #f00;
 }
-
-div#packInterest_list table .ev_hover:HOVER
-{
-	cursor: pointer;
-}
-

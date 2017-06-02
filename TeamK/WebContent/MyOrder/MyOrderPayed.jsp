@@ -30,11 +30,18 @@ int check = Integer.parseInt(request.getParameter("check"));
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
-결제가 정상적으로 완료 되었습니다.<br>
-이용해주셔서 감사합니다<br>
-<input type = "button" value = "내주문" onclick="location.href='./MyOrderList.mo'">
+	<div id="article_head">
+<div id="article_title">결제 완료</div>
+<div class="empty"></div>
+</div>
+<article>
+<br><br>
+<h1>결제가 정상적으로 완료 되었습니다.</h1><br>
+<h3>이용해주셔서 감사합니다</h3><br><br><br>
+<input type = "button" value = "내 주문" onclick="location.href='./MyOrderList.mo'">
 <input type="button" value="Pack Order List" onclick="location.href='./MyPackOrderList.mo'">
-<input type="button" value="Thing Order List" onclick="location.href='./MyThingOrderList.mo'">
+<input type="button" value="Thing Order List" onclick="location.href='./MyThingOrderList.mo'"><br><br><br>
+	</article>
 	</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->
