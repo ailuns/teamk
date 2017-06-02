@@ -38,8 +38,8 @@ public class AdminFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/Trans_Num_Insert_Action.ao")){
-			action = new TransNum_Insert_Action();
+		}else if(command.equals("/TO_Status_Update.ao")){
+			action = new TO_Status_Update();
 			try {
 				afo = action.execute(request, response);
 			} catch (Exception e) {
@@ -84,6 +84,10 @@ public class AdminFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else if(command.equals("/trans_num_search.ao")){
+			afo = new ActionForward();
+			afo.setPath("Admin/trans_num_search.jsp");
+			afo.setRedirect(false);
 		}
 		if (afo != null) {
 			if (afo.isRedirect()) {

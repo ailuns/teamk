@@ -168,12 +168,10 @@ function search(){
 				
 				<%}
 				if(status.equals("ing")){
-					if(status2.equals("bank")||
-							status2.equals("waiting")||
-							status2.equals("cancel_call")){
+					if(status2.equals("waiting")||
+						status2.equals("cancel_call")){
 							String btn = "";
 							switch(status2){
-								case "bank":btn ="입금 확인";break;
 								case "waiting":btn ="예약 완료";break;
 								case "cancel_call":btn ="예약 취소";break;
 							}%>
@@ -181,11 +179,7 @@ function search(){
 				<%						
 					}
 				}
-				%>
-				
-				
-				<%
-				}else {%>
+			}else {%>
 					
 		주문 내역 없음
 		<%

@@ -19,7 +19,7 @@ public class Admin_Thing_OrderList implements Action{
 		ActionForward afo = new ActionForward();
 		String pageNum = request.getParameter("pageNum");
 		String stat = request.getParameter("status");
-		String stat2 = request.getParameter("to_status");
+		String stat2 = request.getParameter("status2");
 		String ti_status="";
 		String to_status="";
 		
@@ -39,6 +39,7 @@ public class Admin_Thing_OrderList implements Action{
 			case "completed":ti_status="=10";
 				to_status=">8";break;
 		}
+		System.out.println(to_status+">>>>>>"+ti_status);
 		AdminDAO adao = new AdminDAO();
 		ModDAO moddao = new ModDAO();
 		int count = adao.Thing_Order_Count(to_status, ti_status);
@@ -62,13 +63,15 @@ public class Admin_Thing_OrderList implements Action{
 				mtib = TradeInfoList.get(i);
 				String [] t_type = mtib.getTrade_type().split(",");
 				mtib.setTrade_type(t_type[0]);
-				List<ModTradeInfoBEAN> ModThingList = adao.ADThingOrder(mtib.getTi_num());
+				List<ModTradeInfoBEAN> ModThingList = adao.ADThingOrder(mtib.getTi_num(),to_status);
 				v.addElement(mtib);
 				v.addElement(ModThingList);
 				Thing_Order_List.add(v);
 			}
 		}
 		request.setAttribute("Thing_Order_List", Thing_Order_List);
+		request.setAttribute("status", stat);
+		request.setAttribute("status2", stat2);
 		request.setAttribute("pblock", pblock);
 		request.setAttribute("endpage", endpage);
 		request.setAttribute("startp", startp);

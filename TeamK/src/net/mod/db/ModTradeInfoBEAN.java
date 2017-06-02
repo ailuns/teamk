@@ -8,9 +8,15 @@ public class ModTradeInfoBEAN {
 	private String address1, address2, postcode, name, mobile;
 	private String trade_type, id, pack_count, memo, color, size,payer ;
 	private String img, subject, intro,trade_num, status_text, trans_num;
+	private String o_memo;
 	private int status, thing_count, ori_num,cost, po_receive_check,num, ti_num,total_cost,to_null_check;
-	
 	private Timestamp trade_date,date;
+	public String getO_memo() {
+		return o_memo;
+	}
+	public void setO_memo(String o_memo) {
+		this.o_memo = o_memo;
+	}
 	public int getTo_null_check() {
 		return to_null_check;
 	}
