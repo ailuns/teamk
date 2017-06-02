@@ -10,7 +10,15 @@
 <title>Insert title here</title>
 <link href="./css/inc.css" rel="stylesheet" type="text/css">
 <link href="./css/subpage.css" rel="stylesheet" type="text/css">
+<script src="./js/jquery-3.2.0.js"></script>
 </head>
+<script type="text/javascript">
+function inter_pack_move(select)
+{
+	var num = $("#num" + select).val();
+	location.href="./PackContent.po?num=" + num;
+}
+</script>
 <body>
 	<!--왼쪽 메뉴 -->
 	<div>
@@ -40,6 +48,7 @@
 	<div id="my_interest">
 	<table>
 		<tr>
+			<th></th>
 			<th>Name</th>
 			<th>Cost</th>
 			<th></th>
@@ -51,7 +60,9 @@
 				String cost = (String)Commas.format(inb.getCost());
 		%>
 		<tr>
-			<td><%=inb.getSubject()%><br> <%=inb.getIntro()%></td>
+			<input type="hidden" id="num<%=i %>" value="<%=inb.getOri_num() %>">
+			<td class="ev_hover" onclick="inter_pack_move(<%=i %>);"><img id="inb_img" alt="" src="./upload/<%=inb.getImg() %>"></td>
+			<td class="ev_hover" onclick="inter_pack_move(<%=i %>);"><%=inb.getSubject()%><br> <%=inb.getIntro()%></td>
 			<td><%=cost%></td>
 			<td><input type="button" value="찜 취소"
 				onclick="location.href='./MyInterestDel.ins?n=<%=inb.getInter_num()%>'"></td>

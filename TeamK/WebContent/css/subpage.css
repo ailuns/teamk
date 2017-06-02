@@ -1454,6 +1454,23 @@ div#my_interest table th {
 	background-color: #eee;
 }
 
+div#my_interest table #inb_img
+{
+	width : 200px;
+	height : 150px;
+}
+
+div#my_interest table .ev_hover:HOVER
+{
+	cursor: pointer;
+}
+
+div#my_interest table #inb_img
+{
+	width : 200px;
+	height : 150px;
+}
+
 
 /* My Interest List.jsp */
 div#packInterest_list table img#inb_img {

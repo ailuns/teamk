@@ -28,7 +28,7 @@ public class MyBasketDelete implements Action{
 		if(pch!=null){
 			for(int i = 0; i<pch.length;i++){
 				System.out.println(pch[i]);
-				//bnsdao.PackBasketDelete(Integer.parseInt(tch[i]));
+				bnsdao.PackBasketDelete(Integer.parseInt(pch[i]));
 			}
 		}
 		response.setContentType("text/html; charset=UTF-8");//JAVA���� JSPȣ���Ҷ� ���(response Ÿ�� ����)
