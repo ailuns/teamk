@@ -97,11 +97,11 @@
 		cost = $("#add_cost").val();
 		stock = $("#add_stock").val();
 		
-		if (date == "" || cost == "" || stock == "")
+		if (date == "" || cost == "" || stock == "")  // 값이 비었을 경우
 		{
 			alert("날짜, 가격, 수량 모두 입력해주세요");
 		}
-		else
+		else  // 모두 입력되었을 경우
 		{
 			$.ajax({
 				type:"post",
@@ -157,13 +157,12 @@
 	}
 	
 	
-	// 날짜 수정 버튼 클릭 이벤트
+	// 날짜 클릭 이벤트
 	function winOpen(num) {
+// 		var num = $("#num" + select).val();
 		win = window.open("./PackDateModify.po?num=" + num, "Package_date_modify.jsp",
 				"width=500, height=400, left=800, top=100");
 	}
-	
-	
 	
 	// 날짜 선택시 이벤트
 	function select_date(select_num)

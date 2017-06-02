@@ -59,8 +59,8 @@
 	// 패키지 검색 시 지역 선택
 	function input_chk()
     {
-    	var val = $("#area option:selected").val(); 
-    	if (val == "")
+    	var val = $("#area option:selected").val();  // 검색창의 값을 읽어온다
+    	if (val == "") // 값이 비었을 시
 		{
     		alert("지역을 선택해주세요");
 	    		return false;
@@ -68,7 +68,7 @@
 		return true;
     }
 	
-	
+	// packlist more 버튼 눌렀을때
 	function more_packlist(num)
 	{
 		var area = $('[name=tab'+ num +']').attr("value");
