@@ -168,3 +168,24 @@ div#receive_add table th {width: 100px;}
 div#receive_add table input[type="text"],
 div#receive_add table input[type="tel"] {width: 230px;}
 
+/* Trade Update Info.jsp*/
+div#trade_update_info {
+	margin: 0 auto;
+	padding: 10px;
+	padding-bottom: 20px;
+	border: 1px solid #06c;
+}
+div#trade_update_info table {
+	 width: 100%;
+	 margin-bottom: 30px;
+	 
+}
+div#trade_update_info table * {padding: 5px;}
+div#trade_update_info table tr {border-bottom: 1px solid #ddd;}
+div#trade_update_info table th {
+	width: 100px;
+	background-color: #f0f0f0;
+}
+
+
+
