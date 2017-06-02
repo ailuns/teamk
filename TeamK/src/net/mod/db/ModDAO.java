@@ -658,7 +658,7 @@ public class ModDAO {
 		ModTradeInfoBEAN mtib = new ModTradeInfoBEAN();
 		try{
 			conn = getconn();
-			sql ="select A.*, B.subject, B.size, B.color,B.cost,C.ti_trade_type "
+			sql ="select A.*, B.subject, B.size, B.color,B.cost,C.* "
 					+"from thing_order A left outer join(thing B cross join trade_info C) "
 					+"on(A.ori_num =B.num and A.o_ti_num = C.ti_num) "
 					+"where A.o_num=?";
@@ -673,6 +673,10 @@ public class ModDAO {
 				mtib.setTotal_cost(rs.getInt("o_cost"));
 				mtib.setCost(rs.getInt("cost"));
 				mtib.setTrade_type(rs.getString("ti_trade_type"));
+				mtib.setMemo(rs.getString("o_memo"));
+				mtib.setStatus(rs.getInt("o_status"));
+				mtib.setName(rs.getString("ti_receive_name"));
+				mtib.setMobile(rs.getString("ti_receive_mobile"));
 			}
 		}catch (Exception e) {
 			e.printStackTrace();

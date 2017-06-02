@@ -18,18 +18,18 @@
 		String pass = mb.getPass();		
 	%>
 	<div id="passchange">
-	<form action="../MemberPasschangeAction.me" method="post" name="fr"><br><br> 
+	<form action="../MemberPasschangeAction.me" method="post" name="fr">
 			
-			<label>아이디</label>			<input type="text" value="<%=id%>" name="id"><br><br>
+			<label>아이디</label>			<input type="text" value="<%=id%>" name="id" readonly="readonly"><br>
 					
 			<!-- 기존의 비밀번호값 -->
 			<input type="hidden" name="pass" value="<%=pass%>"> 					
 			 
-			<label>기존 비밀번호</label>		<input type="password" name="pass2"><br><br>
+			<label>기존 비밀번호</label>		<input type="password" name="pass2"><br>
 			
-			<label>변경할 비밀번호</label>	<input type="password" name="changepass"><br><br>
+			<label>변경할 비밀번호</label>	<input type="password" name="changepass"><br>
 			  
-			<label>변경할 비밀번호 확인</label>	<input type="password" name="changepass2"><br><br><br> 
+			<label>변경할 비밀번호 확인</label>	<input type="password" name="changepass2"><br>
 										<input type="submit" value="변경">
 										<input type="button" value="취소" onclick="window.close()">
 		</form>

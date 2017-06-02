@@ -45,8 +45,8 @@ public class AdminFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/TransNum_Insert.ao")){
-			action = new TransNum_Insert();
+		}else if(command.equals("/Admin_Thing_OrderList.ao")){
+			action = new Admin_Thing_OrderList();
 			try {
 				afo = action.execute(request, response);
 			} catch (Exception e) {

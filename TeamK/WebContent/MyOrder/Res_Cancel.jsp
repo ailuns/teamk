@@ -14,8 +14,7 @@ String[] countp = mtib.getPack_count().split(",");
 int po_num = Integer.parseInt(request.getParameter("num"));
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
 %>
-<link href="./css/inc.css" rel="stylesheet" type="text/css">
-<link href="./css/subpage.css" rel="stylesheet" type="text/css">
+<link href="./css/popup.css" rel="stylesheet" type="text/css">
 <script src = "./js/jquery-3.2.0.js"></script>
 	<script type="text/javascript">
 	var check = 0;
@@ -57,36 +56,36 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
 </head>
 
 <body>
-<div align="center">
+<div id="res_cancel">
 <h4>패키지 정보</h4>
 <form action = "./Res_Cancel_Action.mo" method = "post" onsubmit="return bankcheck()">
 <table>
 	<tr>
-		<td>예약번호 </td>
+		<th>예약번호 </th>
 		<td><%=mtib.getTrade_num() %></td>
 	</tr>
 	<tr>
-		<td>상품명</td>
+		<th>상품명</th>
 		<td><%=mtib.getSubject() %></td>
 	</tr>
 	<tr>
-		<td>출발 날짜</td>
+		<th>출발 날짜</th>
 		<td><%=sdf.format(mtib.getTrade_date()) %></td>
 	</tr>
 	<tr>
-		<td>예약 인원</td>
+		<th>예약 인원</th>
 		<td>성인 : <%=countp[0] %>, 아동 : <%=countp[1] %></td>
 	</tr>
 	<tr>
-		<td>결제 금액</td>
+		<th>결제 금액</th>
 		<td><%=mtib.getTotal_cost()%>원</td>
 	</tr>
 	<tr>
-		<td>공제율</td>
+		<th>공제율</th>
 		<td><%=mtib.getMemo()%></td>
 	</tr>
 	<tr>
-		<td>결제 환불 금액</td>
+		<th>결제 환불 금액</th>
 		<td><%=mtib.getCost() %>원<input type="hidden" name="Cancel_info" value="<%=mtib.getCost()%>">
 			<input type="hidden" name="Cancel_info" value="<%=mtib.getTrade_type()%>">
 			<input type="hidden"  name = "pnum" value ="<%=po_num %>"></td>
@@ -108,14 +107,13 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
 	</tr>
 	<%} %>
 </table>
-
-<span onclick = "cancel_rule_view()"
-	id = "cancel_rule_view">환불 규정▼</span>
- <div id="Cancel_Rule" style="display: none" align="center">
-	<ul style="text-align: left;"> 
+<!-- onclick = "cancel_rule_view()" -->
+<span id = "cancel_rule_view">※ 환불 규정</span>
+ <div id="Cancel_Rule">
+	<ul> 
   		<li>출발 7일전 취소시 총 여행경비 10%공제 후 환불</li>
  		<li>출발 5일전 취소시 총 여행경비 20%공제 후 환불</li>
-  		<li>출발 3일전 취소시 총 여행경비 30%공제후 환불</li>
+  		<li>출발 3일전 취소시 총 여행경비 30%공제 후 환불</li>
   		<li>출발 1일전 취소시 총 여행경비 50%공제 후 환불</li>
   		<li>당일 취소시 여행경비 환불 불가</li>
 	</ul>

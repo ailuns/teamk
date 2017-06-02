@@ -39,6 +39,7 @@ BoardDAO bdao = new BoardDAO();
 	<div id="wrap">
 		<div id="article_head">
 			<div id="article_title"><img src="./img/review2.png" width="23px" style="margin-right: 8px; vertical-align: bottom;">리뷰</div>
+			<div class="empty"></div>
 			<div id="clear"></div>
 			<div id="article_script">상품이나 패키지 후기를 쓰는 곳 입니다.<span class="count">[전체글 개수 :<%=count%>]</span></div>
 		</div>

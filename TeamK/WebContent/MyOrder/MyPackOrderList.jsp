@@ -49,7 +49,7 @@ function insertPM(num){
 }
 function Res_Cancel(num){
 	window.open('./Res_Cancel.mo?num='+num, '패키치 취소', 
-			'left=200, top=100, width=600, height=400, scrollbars=yes, status=no,'+
+			'left=200, top=100, width=600, height=650, scrollbars=yes, status=no,'+
 			'resizable=no, fullscreen=no, channelmode=no,location=no');
 }
 function status_change(){
@@ -62,10 +62,10 @@ function status_change2(){
 
 function pack_popup(select)
 {
-	var select_sub = $("#subject" + select).html();
+	var select_num = $("#num" + select).html();
 // 	alert(select_num);
-	win = window.open("./MyPackPopup.mo?subejct=" + select_sub, "Package_dateAdd.jsp",
-	"width=850, height=900, left=500, top=50");	
+	win = window.open("./MyPackPopup.mo?num=" + select_num, "Package_dateAdd.jsp",
+	"width=850, height=900, left=500, top=50 scrollbars=yes");	
 }
 
 
@@ -80,6 +80,7 @@ function pack_popup(select)
 	<div id="wrap">
 		<div id="article_head">
 			<div id="article_title"><span id = "title"></span></div>
+			<div class="empty"></div>
 			<div id="article_script">상품이나 패키지 후기를 쓰는 곳 입니다.</div>
 		</div>
 		<div id="clear"></div>
@@ -106,7 +107,7 @@ function pack_popup(select)
 <!-- 				<h5></h5> -->
 				<table> 
 					<tr>
-						<td id="subject<%=i %>" style="display:none;"><%=mtib.getSubject()%></td>
+						<td id="num<%=i %>" style="display:none;"><%=mtib.getOri_num()%></td>
 						<td id="tr1td1"><%=sdf.format(mtib.getDate())%></td>
 						<td id="tr1td2"><%=mtib.getTrade_num()%></td>
 						<td id="tr1td3">성인 : <%=pack_count[0]%> / 아동 : <%=pack_count[1]%></td>

@@ -54,12 +54,13 @@ public class AdminDAO {
 		}
 		return count;
 	}
-	public int TransNumInsert_Count(){
+	public int Thing_Order_Count(String to_status, String ti_status){
 		int count=0;
 		try{
 			conn = getconn();
-			sql = "select count(ti_num) from trade_info where to_null_check = 0"+
-					" and ti_status = 2";
+			sql = "select count(ti_num) from trade_info "+
+					"where ti_num in(select o_ti_num from thing_order where o_status"
+					+to_status+" order by o_ti_num) and ti_status"+ti_status;
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			if(rs.next())count = rs.getInt(1);
@@ -117,16 +118,16 @@ public class AdminDAO {
 		
 		return BankPayList;
 	}
-	public List<ModTradeInfoBEAN> StatusPayList(int TO_Null_Check, int ti_status, int start, int end){
+	public List<ModTradeInfoBEAN> Thing_Order_List(String to_status, String ti_status, int start, int end){
 		List<ModTradeInfoBEAN> BankPayList = new ArrayList<ModTradeInfoBEAN>();
 		try{
 			conn=getconn();
-			sql = "select * from trade_info where to_null_check = ? and ti_status = ? limit ?,?";
+			sql = "select * from trade_info where ti_num "
+					+"in(select o_ti_num from thing_order where o_status"+to_status
+					+" order by o_ti_num) and ti_status"+ti_status+" limit ?,?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, TO_Null_Check);
-			pstmt.setInt(2, ti_status);
-			pstmt.setInt(3, start-1);
-			pstmt.setInt(4, end);
+			pstmt.setInt(1, start-1);
+			pstmt.setInt(2, end);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				ModTradeInfoBEAN mtib = new ModTradeInfoBEAN();

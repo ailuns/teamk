@@ -41,8 +41,8 @@ $(document).ready(function(){
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
 		<div id="article_head">
-			<div id="article_title">Q&amp;A 게시판</div>
-			<div id="clear"></div>
+			<div id="article_title"><img src="./img/qna2.png" width="35px" style="margin-right: 8px; vertical-align: bottom;">Q&amp;A 게시판</div>
+			<div class="empty"></div>
 			<div id="article_script">궁금한것은 질문해주세요.<span class="count">[검색된 글의 개수 :<%=count%>]</span></div>
 		</div>
 		<div id="clear"></div>

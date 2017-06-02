@@ -21,7 +21,8 @@
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
 		<div id="article_head">
-			<div id="article_title">리뷰 작성</div>
+			<div id="article_title"><img src="./img/review2.png" width="23px" style="margin-right: 8px; vertical-align: bottom;">리뷰 작성</div>
+			<div class="empty"></div>
 			<div id="article_script">상품이나 패키지 후기를 쓰는 곳 입니다.</div>
 		</div>
 		<div id="clear"></div>
@@ -39,7 +40,7 @@
 </div>
 <div id="clear"></div>
 <br>
-<label for="subject">제목</label><input type="text" name="subject" id="subject" maxlength="20"><br><br>
+<label for="subject">제목</label><input type="text" name="subject" id="subject" maxlength="40"><br><br>
 <textarea id="ir1" rows="30" cols="80" name="content"></textarea><br><br>
 <label for="file1">첨부파일1</label><input type="file" name="file1" id="file1"><br>
 <label for="file2">첨부파일2</label><input type="file" name="file2" id="file2"><br>

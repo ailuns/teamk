@@ -49,18 +49,18 @@ function complet(num, ti_num){
 	}
 }
 function receive_change(i,ti_num){
-	window.open('./Receive_Change.mo?num='+i+"&ti_num="+ti_num, '배송지 선택', 'left=200, top=100, width=480, height=640');
+	window.open('./Receive_Change.mo?num='+i+"&ti_num="+ti_num, '배송지 선택', 'left=200, top=100, width=480, height=640, scrollbars=yes');
 }
 function status_change(){
 	location.href="./MyThingOrderList.mo?status="+$('#status').val();
 }
 function thing_exchange(num, ti_num){
 	window.open("./TO_Cancel_or_Exchange.mo?num="+num+"&ti_num="+ti_num,''
-			,'left=200, top=100, width=600, height=640');
+			,'left=600, top=100, width=600, height=640');
 }
 function Trade_Update_Info(o_num) {
-	window.open("./TO_Cancel_or_Exchange.mo?num="+o_num,''
-			,'left=200, top=100, width=600, height=640');
+	window.open("./Trade_Update_Info.mo?num="+o_num,''
+			,'left=600, top=150, width=400, height=400, scrollbars=yes');
 }
 </script>
 <style type="text/css">
@@ -77,6 +77,12 @@ function Trade_Update_Info(o_num) {
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
+	<div id="article_head">
+<div id="article_title">My Goods Order List</div>
+<div class="empty"></div>
+<div id="article_script"></div>
+</div>
+<article>
 	<select id ="status" onchange="status_change()">
 		<option value="ing">구매 중인 상품</option>
 		<option value="completed">지난 주문 상품</option>
@@ -87,9 +93,10 @@ function Trade_Update_Info(o_num) {
 					Vector v = ModList.get(i);		
 					ModTradeInfoBEAN mtib = (ModTradeInfoBEAN)v.get(0);
 					List<ModTradeInfoBEAN> mtbList = (List<ModTradeInfoBEAN>)v.get(1); %>
-	<div>
-		<h4 align="left">주문 번호 : <%=mtib.getTi_num() %></h4>
-		<table border = "1">
+	<div id="my_thing_order_list">
+	<fieldset>
+		<legend align="left">주문 번호 : <%=mtib.getTi_num() %></legend>
+		<table>
 			<%for(int j =0; j< mtbList.size();j++){
 				ModTradeInfoBEAN mtb = mtbList.get(j);
 				DecimalFormat Commas = new DecimalFormat("#,###");
@@ -97,17 +104,17 @@ function Trade_Update_Info(o_num) {
 				
 				%>
 				<tr>
-					<td><%=mtb.getImg() %></td>
-					<td><%=mtb.getSubject() %><br>
+					<td class="tr1td1"><%=mtb.getImg() %></td>
+					<td class="tr1td2"><b><%=mtb.getSubject() %></b><br>
 						<%=mtb.getIntro() %></td>
-					<td><%=mtb.getColor() %>, <%=mtb.getSize() %></td>
-					<td><%=mtb.getThing_count()%>개</td>
-					<td><%=cost%>원</td>
-					<td><%
+					<td class="tr1td3"><%=mtb.getColor() %> / <%=mtb.getSize() %></td>
+					<td class="tr1td4"><%=mtb.getThing_count()%>개</td>
+					<td class="tr1td5"><%=cost%>원</td>
+					<td class="tr1td6"><%
 					//교환 상품 배송중일때 배송정보 조회 가능하게 링크
 						if(mtb.getStatus()==3){
 							if(mtb.getMemo().length()!=0){%>
-								<span class="update_info" onclick="Trade_Update_Info()" >교환 배송 중</span>
+								<span class="update_info" onclick="Trade_Update_Info(<%=mtb.getNum() %>)" >교환 배송 중</span>
 						<%}else out.print(mtb.getStatus_text());
 						}else if(mtb.getStatus()==9){//환불 조건 찾기
 							String [] memoar = mtb.getMemo().split(":");
@@ -126,9 +133,9 @@ function Trade_Update_Info(o_num) {
 									<%=mtb.getStatus_text() %></span>
 					<%}else out.print(mtb.getStatus_text());
 					if(mtb.getStatus()==3){ %></td>
-					<td>송장번호<br><%=mtb.getTrans_num() %><%} %></td>
+					<td class="tr1td7">송장번호<br><%=mtb.getTrans_num() %><%} %></td>
 					<%if(mtb.getStatus()==4){ %>
-					<td>
+					<td class="tr1td7">
 						<input type="button" value="구매 완료" 
 							onclick="complet(<%=mtb.getNum()%>,<%=mtib.getTi_num()%>)"><br>
 						<input type="button" value="교환 및 환불" onclick="thing_exchange(<%=mtb.getNum()%>,<%=mtib.getTi_num()%>)">
@@ -140,27 +147,31 @@ function Trade_Update_Info(o_num) {
 			String Total_cost = (String)Commas.format(mtib.getTotal_cost());
 				%>
 				<tr>
-					<td>주문 정보 </td>
-					<td id="receive_name<%=i%>"><%=mtib.getName() %></td>
-					<td id="receive_mobile<%=i%>"><%=mtib.getMobile() %></td>
-					<td><%=sdf.format(mtib.getTrade_date()) %></td>
+					<td class="tr2td1">주문 정보 </td>
+					<td class="tr2td2">받으시는 분</td>
+					<td id="receive_name<%=i%>" class="tr2td3"><%=mtib.getName() %></td>
+					<td class="tr2td4">연락처</td>
+					<td id="receive_mobile<%=i%>" class="tr2td5"><%=mtib.getMobile() %></td>
+					<td class="tr2td6">주문 날짜</td>
+					<td class="tr2td7"><%=sdf.format(mtib.getTrade_date()) %></td>
 				</tr>
 				<tr>
-					<td>배송지</td>
-					<td id="receive_addr<%=i%>" colspan="6">[<%=mtib.getPostcode() %>]
+					<td class="tr3td1">배송지</td>
+					<td id="receive_addr<%=i%>" class="tr3td2" colspan="5">[<%=mtib.getPostcode() %>]
 						<%=mtib.getAddress1() %> <%=mtib.getAddress2() %></td>
-					<%if(mtib.getStatus()<3){ %>
-					<td id="receive_change<%=i %>">
+					<%if(mtib.getStatus()==1||mtib.getStatus()==2){ %>
+					<td id="receive_change<%=i %>" class="tr3td3">
 						<input type= "button" value="배송지 변경" onclick = "receive_change(<%=i%>,<%=mtib.getTi_num()%>)"></td>
 					<%} %>
 				</tr>
 				<%if(mtib.getMemo().length()!=0){ %>
 					<tr>
-						<td>배송 요청사항</td>
-						<td id="receive_memo<%=i%>" colspan="6"><%=mtib.getMemo().replace("\r\n", "<br>") %></td>
+						<td class="tr4td1">배송 요청사항</td>
+						<td id="receive_memo<%=i%>" colspan="6" class="tr4td2"><%=mtib.getMemo().replace("\r\n", "<br>") %></td>
 					</tr>
 				<%} %>
 			</table>
+		</fieldset>
 		</div>
 		
 	<%		}	
@@ -190,6 +201,7 @@ function Trade_Update_Info(o_num) {
 		}
 		}
 	%> 
+		</article>
 		</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->

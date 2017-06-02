@@ -1,3 +1,4 @@
+<%@page import="com.sun.xml.internal.ws.api.config.management.Reconfigurable"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="net.pack.db.PackDAO"%>
@@ -6,6 +7,7 @@
 <%@ page import="net.reply.db.ReplyDAO"%>
 <%@ page import="net.reply.db.ReplyBean"%>
 <%@ page import="net.pack.db.CategoryBean" %>
+<%@ page import="net.member.db.ProductBean" %>
 <%@ page import="java.text.DecimalFormat" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -27,10 +29,13 @@
 	
 	if (user_id == null)
 		user_id = "";
+	if (PB.getSubject() == null)
+		response.sendRedirect("./PackList.po");
 	
 	List List = (List)request.getAttribute("replylist");
 	List CategoryList = (List)request.getAttribute("CategoryList");
 	List date_list = (List)request.getAttribute("date_list");
+	List RecommendProduct = (List)request.getAttribute("RecommendProduct");
 	
 	int count = ((Integer)request.getAttribute("count")).intValue();
 	String repageNum = (String)request.getAttribute("repageNum");
@@ -64,18 +69,18 @@
 		$("#cost_child").html(comma_cost2);
 		$("#p").html(comma_cost);
 		
-		$.ajax({
-			type:"post",
-			url:"./MyInterestAdd.ins",   // java로 보냄
-			data:{
-				type:"P",
-				num:$("input[type=radio][name=chk]:checked").val()					
-			},
-			success:function(){
-				$("#jjim_o").hide();
-				$("#jjim_x").show();
-			}
-		});
+// 		$.ajax({
+// 			type:"post",
+// 			url:"./MyInterestAdd.ins",   // java로 보냄
+// 			data:{
+// 				type:"P",
+// 				num:$("input[type=radio][name=chk]:checked").val()					
+// 			},
+// 			success:function(){
+// 				$("#jjim_o").hide();
+// 				$("#jjim_x").show();
+// 			}
+// 		});
 		// 페이지 로딩 될 때 첫번쨰 선택된 날짜 값으로 초기값 설정 부분
 		
 		// 달력 관련 소스
@@ -127,15 +132,15 @@
 	
 	   		var btn = $(this).attr("value");   // 클릭된 버튼의 value 값을 가져온다
 			
-	   		if (btn == "주변 명소")
+	   		if (btn == "관광 명소")
 			{
 				value = "<%=PB.getCity()%> " + "<%=PB.getSarea()%> " + btn; 
 <%-- 				value = "<%=PB.getSarea()%> " + btn;  --%>
 				// ex) value = 부산 해운대 주변 명소
 			}
-			else if (btn == "주변 맛집")
+			else if (btn == "맛집")
 			{
-				value = "<%=PB.getCity()%> " + "<%=PB.getSarea()%> " + btn;
+				value = "<%=PB.getCity()%> " + "<%=PB.getSarea()%> 주변 " + btn;
 <%-- 				value = "<%=PB.getSarea()%> " + btn; --%>
 				// ex) value = 부산 해운대 주변 맛집
 			}
@@ -517,6 +522,8 @@
 	function select_date(select_num)
 	{
 		var packnum = $("#select_rbtn" + select_num).val();  // 해당 라디오버튼의 글번호 값을 불러온다
+
+		
 		$(".select_color").css("background-color","");		// tr 부분 모든 배경색을 없앤다
 		$("#select_rbtn" + select_num).prop("checked", "true"); // 클릭된 라디오 버튼을 체크로 바꾼다
 		$("#select_date" + select_num).css("background-color", "#D5D5D5");  // 클릭된 tr 부분의 배경색을 #D5D5D5로 바꾼다
@@ -537,7 +544,12 @@
 		$("#cost_adult").html(comma_cost);
 		$("#cost_child").html(comma_cost2);
 		$("#p").html(comma_cost);
-		
+	}
+	
+	
+	jQuery(document).ready(function($){
+		var packnum = $("#ori_num_chk").val();
+// 		alert(packnum);
 		$.ajax({   // 날짜를 클릭할때 마다 찜목록과 비교
 			type:"post",
 			url:"./MyInterestCheck.ins",
@@ -559,8 +571,8 @@
 				}
 			}
 		});
-		
-	}
+	});
+	
 	
 	// 찜하기, 예약하기 버튼 클릭 시 각각 버튼 마다 이동할 페이지
 	function submit_fun(i, user_id)
@@ -575,7 +587,8 @@
 					url:"./MyInterestAdd.ins",   // java로 보냄
 					data:{
 						type:"P",
-						num:$("input[type=radio][name=chk]:checked").val()					
+// 						num:$("input[type=radio][name=chk]:checked").val()	
+						num:$("#ori_num_chk").val()
 					},
 					success:function(){
 						$("#jjim_o").hide();
@@ -593,7 +606,8 @@
 					url:"./MyInterestDel.ins",   // java로 보냄
 					data:{
 						type:"P",
-						num:$("input[type=radio][name=chk]:checked").val()					
+// 						num:$("input[type=radio][name=chk]:checked").val()	
+						num:$("#ori_num_chk").val()
 					},
 					success:function(){
 						$("#jjim_o").show();
@@ -643,6 +657,13 @@
 		}
 	}
 
+	
+	function Rcom_move(select)
+	{
+		var select_num = $("#num" + select).html();
+		var car_num = $("#car_num" + select).html();
+		location.href="./ProductContent.bo?num=" + select_num + "&car_num=" + car_num;
+	}
 
 </script>
 
@@ -680,32 +701,88 @@
 		</table>
 	</div>
 	
-	<div id="banner_sub">추천상품</div>
+	<%
+	if (RecommendProduct.size() > 0)
+	{
+	%>
 	<div id="banner">
-		<div id="close">close</div>
 		<table id="banner_content">
 			<tr>
-				<td><a href="#"><img src="./upload/<%=PB.getFile1() %>"></a></td>
-				<td><a href="#"><img src="./upload/<%=PB.getFile1() %>"></a></td>
-				<td><a href="#"><img src="./upload/<%=PB.getFile1() %>"></a></td>
-			</tr>
-			<tr>
-				<td><div class="info">가격 50000</div></td>
-				<td><div class="info">가격 40000</div></td>
-				<td><div class="info">가격 30000</div></td>
+				<tr>
+				<%
+					if (RecommendProduct.size() == 1)
+					{
+				%>
+						<td>
+							<div id="banner_sub">추천상품</div>
+							<div id="close">close</div>
+						</td>
+						
+				<%
+					}
+					else if (RecommendProduct.size() == 2)
+					{
+				%>
+						<td><div id="banner_sub">추천상품</div></td>
+						<td><div id="close">close</div></td>
+				<%
+					}
+					else if (RecommendProduct.size() == 3)
+					{
+				%>
+						<td><div id="banner_sub">추천상품</div></td>
+						<td></td>
+						<td><div id="close">close</div></td>
+				<%
+					}
+				%>
+				</tr>
+				<%
+					ProductBean pdb;
+					for(int i = 0; i < RecommendProduct.size(); i++)
+					{
+						pdb =(ProductBean)RecommendProduct.get(i);
+				%>
+				
+				<td>
+					<table>
+						<tr>
+							<td id="num<%=i %>" style="display: none;"><%=pdb.getNum() %></td>
+							<td id="car_num<%=i %>" style="display: none;"><%=pdb.getCar_num() %></td>
+							<td><img id="Rcom_pd" src="./upload/<%=pdb.getImg() %>" onclick="Rcom_move(<%=i %>)"></td>
+			<%-- 				<td><img src="./upload/<%=PB.getFile1() %>"></a></td> --%>
+			<%-- 				<td><a href="#"><img src="./upload/<%=PB.getFile1() %>"></a></td> --%>
+						</tr>
+						<tr>
+							<td><div class="info"><%=pdb.getCost() %></div></td>
+			<!-- 				<td><div class="info">가격 40000</div></td> -->
+			<!-- 				<td><div class="info">가격 30000</div></td> -->
+						</tr>
+					</table>
+				</td>
+				<%
+					}
+				%>
+				
 			</tr>
 		</table>
 	</div>
+	<%
+	}
+	%>
+	
 
 	<!-- 왼쪽 메뉴 -->
 	<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
 	<!-- 왼쪽 메뉴 -->
 	<!--여행지 검색창 -->
 	<div id="wrap"> 
+	<div id="wrap_pack">
 	<div id="article_head">
 		<div id="article_title"><img src="./img/travel2.png" width="30px" style="margin-right: 8px; vertical-align: bottom;">패키지</div>
+	<div class="empty"></div>
 	</div>
-		<div id="package_feat">
+	<div id="package_feat">
 		<jsp:include page="../inc/packSlide.jsp"></jsp:include>
 		<div id="package_search">
 			<p>내게 맞는 패키지 검색하기</p>
@@ -822,6 +899,7 @@
 						</tr>
 					</table>
 					<br>
+					<input type="hidden" id="ori_num_chk" value="<%=PB.getNum() %>">
 					<input type="button" class="contentbtn" id="jjim_o" value="♡ 찜" onclick="submit_fun(1, '<%=user_id %>')">
 					<input type="button" class="contentbtn" id="jjim_x" value="♥ 찜" style="display:none;" onclick="submit_fun(2, '<%=user_id %>')">
 					<input type="button" class="contentbtn2" value="장바구니" onclick="submit_fun(3, '<%=user_id %>')">
@@ -912,8 +990,8 @@
 			<hr>
 			<h3 id="sub"><%=PB.getCity()%> <%=PB.getSarea()%></h3>
 			<hr>
-			<input type="button" id="btn1" value="주변 명소"> 
-			<input type="button" id="btn2" value="주변 맛집">
+			<input type="button" id="btn1" value="관광 명소"> 
+			<input type="button" id="btn2" value="맛집">
 		</div>
 		<!--구글맵 제어할 버튼 부분 -->
 		
@@ -923,10 +1001,11 @@
 		<!--구글맵 -->
 
 		<!--상품 문의 -->
-		<div id="middle3">
+		
 		<div id="QnA">
 			<h3>상품 문의</h3>
 			<hr>
+			<div id="middle3">
 			<table border="1" id="replyTable">
 				<tr>
 <!-- 					<td>번호</td> -->
@@ -958,6 +1037,7 @@
 					if ((rb.getId().equals(user_id) && rb.getH_or_s() == 1) || rb.getH_or_s() == 0){
 					%>
 					<td id="replyContent">
+						<span class="reply_align">
 						<%
 							// 답글 들여쓰기 모양
 							int wid = 0;
@@ -972,46 +1052,79 @@
 						%> 
 						
 						<%=rb.getContent()%><span>(<%=rb.getDate() %>)</span>
+						
 						<%
 						if(rb.getH_or_s() == 1)
 						{
 						%>
 						<img src="./img/lock.png" width="10px" height="10px">
+						
 						<%
 						}
 						%>
+						</span>
+						<span style="float: right;">
+						<%
+						if(user_id.equals("admin"))
+						{
+						%>
+						
+						<input type="button" value="답글" id="rereply" onclick="rewrite(<%=rb.getNum()%>)">
+						<%
+						}
+						if(rb.getId().equals(user_id))
+						{
+						%>
+						<input type="button" value="수정" id="re_update" onclick="reupdate(<%=rb.getNum() %>)">
+						<%
+						}
+						if(rb.getId().equals(user_id) || user_id.equals("admin"))
+						{
+						%>
+						<input type="button" value="삭제" id="re_delete" onclick="ReplyDel(<%=rb.getNum() %>, '<%=user_id%>');">
+						<%
+						}
+						%>
+						</span>
 					</td>
 					<%
 					}
 					else if (rb.getH_or_s() == 1 && !rb.getId().equals(user_id)){
 					%>
 					<td style="height:50px;">
+						<span class="reply_align">
 						비밀글입니다<img src="./img/lock.png" width="10px" height="10px">
-						<span>(<%=rb.getDate() %>)</span>
+<%-- 						<span>(<%=rb.getDate() %>)</span> --%>
+						(<%=rb.getDate() %>)
+						</span>
+						<span style="float: right;">
+						<%
+						if(user_id.equals("admin"))
+						{
+						%>
+						<input type="button" value="답글" id="rereply" onclick="rewrite(<%=rb.getNum()%>)">
+						<%
+						}
+						if(rb.getId().equals(user_id))
+						{
+						%>
+						<input type="button" value="수정" id="re_update" onclick="reupdate(<%=rb.getNum() %>)">
+						<%
+						}
+						if(rb.getId().equals(user_id) || user_id.equals("admin"))
+						{
+						%>
+						<input type="button" value="삭제" id="re_delete" onclick="ReplyDel(<%=rb.getNum() %>, '<%=user_id%>');">
+						<%
+						}
+						%>
+						</span>
 					</td>
 					<%
 					}
+					%>
 					
 					
-					if(!user_id.equals(""))
-					{
-					%>
-					<td><input type="button" value="답글" id="rereply" onclick="rewrite(<%=rb.getNum()%>)"></td>
-					<%
-					}
-					if(rb.getId().equals(user_id))
-					{
-					%>
-					<td><input type="button" value="수정" id="re_update" onclick="reupdate(<%=rb.getNum() %>)"></td>
-					<%
-					}
-					if(rb.getId().equals(user_id) || user_id.equals("admin"))
-					{
-					%>
-					<td><input type="button" value="삭제" id="re_delete" onclick="ReplyDel(<%=rb.getNum() %>, '<%=user_id%>');"></td>
-					<%
-					}
-					%>
 				</tr>
 				
 				<tr id="conup<%=rb.getNum()%>" style="display: none;">
@@ -1019,15 +1132,16 @@
 						<%=user_id %>
 					</td>
 					
-					<td><textarea cols="60" rows="2" id="contentup<%=rb.getNum() %>" name="contentup"><%=rb.getContent() %></textarea></td>
 					<td>
+						<span class="reply_align">
+						<textarea style="width: 550px;" cols="60" rows="2" id="contentup<%=rb.getNum() %>" name="contentup"><%=rb.getContent() %></textarea>
+						</span>
+						<span style="float: right;">
 						<input type="button" value="수정" onclick="reUpdateAction(<%=rb.getNum() %>)">
-					</td>
-					<td>
-						<input type="button" value="취소" onclick="reupdate(<%=rb.getNum() %>)">
-					</td>
-					<td>
+						<input type="button" value="취소" onclick="reupdate(<%=rb.getNum() %>)"><br>
 						<input type="checkbox" class="up_secretChk<%=rb.getNum() %>" name="secretChk" value="1" <%if(rb.getH_or_s() == 1){%>checked<%} %>>비밀글
+						</span>
+					</td>
 					</td>
 				</tr>
 				<tr id="con<%=rb.getNum()%>" style="display: none;">
@@ -1041,15 +1155,15 @@
 						<p><%=user_id %></p>
 						<input type="hidden" id="reid" name="id" class="box" value="<%=user_id %>">
 					</td>
-					<td><textarea cols="60" rows="2" id="recontent<%=rb.getNum() %>" name="recontent"></textarea></td>
 					<td>
+						<span class="reply_align">
+						<textarea style="width: 550px;" cols="60" rows="2" id="recontent<%=rb.getNum() %>" name="recontent"></textarea>
+						</span>
+						<span style="float: right;">
 						<input type="button" value="답글등록" onclick="Re_Reply_Write(<%=rb.getNum() %>)">
-					</td>
-					<td>
-						<input type="button" value="취소" onclick="rewrite(<%=rb.getNum() %>)">
-					</td>
-					<td>
+						<input type="button" value="취소" onclick="rewrite(<%=rb.getNum() %>)"><br>
 						<input type="checkbox" class="re_secretChk" name="secretChk" value="1">비밀글
+						</span>
 					</td>
 				</tr>
 			
@@ -1147,6 +1261,7 @@
 		</div>
 	</div>
 	<!--상품 문의 -->
+	</div>
 	</div>
 	<!-- 오른쪽 메뉴 -->
 	<jsp:include page="../inc/rightMenu.jsp"></jsp:include>

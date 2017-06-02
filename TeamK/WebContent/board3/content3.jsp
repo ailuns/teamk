@@ -27,7 +27,8 @@ int num = Integer.parseInt(request.getParameter("num"));
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
 		<div id="article_head">
-			<div id="article_title">공지사항</div>
+			<div id="article_title"><img src="./img/notice2.png" width="30px" style="margin-right: 8px; vertical-align: bottom;">공지사항</div>
+			<div class="empty"></div>
 			<div id="article_script">공지사항 게시판 입니다.</div>
 		</div>
 		<div id="clear"></div>
@@ -44,7 +45,7 @@ int num = Integer.parseInt(request.getParameter("num"));
  <td id="id"><%=bb.getId()%></td>
 </tr>
 <tr>
- <td colspan="3" id="content"><br><br><%=bb.getContent()%><br><br></td>
+ <td colspan="3" id="content_td"><br><br><div id="min"><%=bb.getContent()%></div>><br></td>
 </tr>
 
 <%--첨부파일이 있을때만 첨부파일 표시--%>

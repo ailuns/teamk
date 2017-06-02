@@ -33,10 +33,12 @@
 	%>
 	<div id="article_head">
 <div id="article_title"><%=type%></div>
+<div class="empty"></div>
 <div id="article_script">subject Count :<%=count%></div>
 </div>
 <article>
-	<table border="1">
+	<div id="my_interest">
+	<table>
 		<tr>
 			<th>Name</th>
 			<th>Cost</th>
@@ -79,6 +81,7 @@
 		}
 		} 
 	%><br>
+	</div>
 	</article>
 		</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>

@@ -72,9 +72,8 @@
 	// 삭제
 	function dateDel()
 	{
-		if(confirm("삭제하시겠습니까?"))
-			
-		if (confirm("정말 삭제하시겠습니까??") == true)
+		
+		if (confirm("삭제하시겠습니까??") == true)
 		{    //확인
 			$.ajax({
 				type:"post",

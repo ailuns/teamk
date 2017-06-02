@@ -119,6 +119,7 @@
 <div id="wrap">
 	<div id="article_head">
 		<div id="article_title"><img src="./img/travel2.png" width="30px" style="margin-right: 8px; vertical-align: bottom;">패키지</div>
+	<div class="empty"></div>
 	</div>
 	<!--여행지 검색창 -->
 	<div id="package_feat">

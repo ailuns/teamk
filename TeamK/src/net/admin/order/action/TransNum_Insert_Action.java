@@ -21,6 +21,8 @@ public class TransNum_Insert_Action implements Action{
 				aodao.Trans_Num_Insert(to_num[i], Trans_Num[i]);
 			}
 		}
+		
+		String sql ="select * from trade_info where ti_num in (select o_ti_num from thing_order where o_status<3 group by o_ti_num);";
 		for(int i = 0 ; i<ti_num.length; i++){
 			aodao.Ti_Status_Waiting_Update(Integer.parseInt(ti_num[i]));
 		}
