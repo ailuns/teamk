@@ -113,14 +113,14 @@ div#scheduler form input[type=submit] {
 }
 div#scheduler form input[type=submit]:hover {background-color: #09f;}
 div#package_show {
-	height: 200px;
+	height: 250px;
 	width: 60%;
 	min-width: 1000px;
 	margin: 0 auto;
 	margin-top: 15px;
 }
 div#package_show a {
-	height: 200px;
+	height: 250px;
 	width: 33.3%;
 	display: block;
 	float: left;
@@ -167,7 +167,7 @@ a#pack1 #pkpr, a#pack2 #pkpr, a#pack3 #pkpr {
 	font-weight: bold;
 }
 div#goods_show {
-	height: 200px;
+	height: 250px;
 	width: 1000px;
 	margin: 0 auto;
 	margin-top: 15px;
@@ -1078,6 +1078,10 @@ div#board_list table th#date {width: 100px;}
 div#board_list table th#readcount {width: 50px;}
 div#board_list table th#name {width: 100px;}
 div#board_list table td#cate {font-weight: bold;}
+div#board_list table td#cate:HOVER, div#board_list table td#title:HOVER
+{
+	cursor: pointer;
+}
 div#board_list table td#title {
 	text-align: left;
 	max-width: 200px;
@@ -1089,6 +1093,12 @@ div#board_list table a {
 	text-decoration: none;
 	color: #000;
 }
+div#board_list table .inb_img
+{
+	width : 150px;
+	height : 100px;
+}
+
 div#board_menu_bar input[type="button"] {
 	float: left;
 	margin: 0 5px;
@@ -1342,6 +1352,22 @@ td#tr2td3 {
 	color: #f60;
 }
 
+/*My Thing Order List.jsp*/
+div#my_thing_order_list {
+	width: 900px;
+	margin: 20px auto;
+}
+div#my_thing_order_list table {
+	width: 900px;
+	text-align: left;
+}
+div#my_thing_order_list table span {
+	display: block;
+	border: 1px solid #06c;
+	text-align: center;
+	color: #06c;
+}
+
 /* Pack Res.jsp */
 form#pack_res {
 	width: 900px;
@@ -1355,3 +1381,21 @@ form#pack_res table {
 }
 form#pack_res td#tr1td1 {width: 100px;}
 form#pack_res td#tr1td2 {width: 250px;}
+
+/*My Interest.jsp*/
+div#my_interest {
+	width: 900px;
+	margin: 50px auto;
+}
+div#my_interest table {
+	width: 100%;
+	margin-bottom: 20px;
+}
+div#my_interest table tr {
+	height: 50px;
+	border-bottom: 1px solid #ddd;
+}
+div#my_interest table th {
+	background-color: #eee;
+}
+

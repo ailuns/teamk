@@ -11,16 +11,37 @@ import net.admin.order.db.AdminDAO;
 import net.mod.db.ModDAO;
 import net.mod.db.ModTradeInfoBEAN;
 
-public class TransNum_Insert implements Action{
+public class Admin_Thing_OrderList implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		ActionForward afo = new ActionForward();
 		String pageNum = request.getParameter("pageNum");
+		String stat = request.getParameter("status");
+		String stat2 = request.getParameter("to_status");
+		String ti_status="";
+		String to_status="";
+		
+		if(stat ==null)stat = "ing";
+		if(stat2==null)stat2="none";
+		switch(stat2){
+			case "none": to_status="<8";break;
+			case "bank":to_status="=1";break;
+			case "ready":to_status="=2";break;
+			case "sending":to_status="=3";break;
+			case "arrived":to_status="=4";break;
+			case "exchange":to_status="=5";break;
+			case "cancel":to_status="=6";break;
+		}
+		switch(stat){
+			case "ing": ti_status="<8";break;
+			case "completed":ti_status="=10";
+				to_status=">8";break;
+		}
 		AdminDAO adao = new AdminDAO();
 		ModDAO moddao = new ModDAO();
-		int count = adao.TransNumInsert_Count();
+		int count = adao.Thing_Order_Count(to_status, ti_status);
 		if (pageNum == null)
 			pageNum = "1";
 		int curpage = Integer.parseInt(pageNum);
@@ -31,11 +52,11 @@ public class TransNum_Insert implements Action{
 		int startp=((curpage-1)/pblock)*pblock+1;
 		int endpage=startp+pblock-1;
 		if(endpage > pcount)endpage = pcount;
-		List<Vector> BankPayList = new ArrayList<Vector>();
+		List<Vector> Thing_Order_List = new ArrayList<Vector>();
 		ModTradeInfoBEAN mtib;
 		Vector v;
 		if (count != 0) {
-			List<ModTradeInfoBEAN> TradeInfoList = adao.StatusPayList(0,2,start, pagesize);
+			List<ModTradeInfoBEAN> TradeInfoList = adao.Thing_Order_List(to_status,ti_status,start, pagesize);
 			for (int i = 0; i < TradeInfoList.size(); i++) {
 				v = new Vector();
 				mtib = TradeInfoList.get(i);
@@ -44,17 +65,17 @@ public class TransNum_Insert implements Action{
 				List<ModTradeInfoBEAN> ModThingList = adao.ADThingOrder(mtib.getTi_num());
 				v.addElement(mtib);
 				v.addElement(ModThingList);
-				BankPayList.add(v);
+				Thing_Order_List.add(v);
 			}
 		}
-		request.setAttribute("ModList", BankPayList);
+		request.setAttribute("Thing_Order_List", Thing_Order_List);
 		request.setAttribute("pblock", pblock);
 		request.setAttribute("endpage", endpage);
 		request.setAttribute("startp", startp);
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("pcount", pcount);
 		request.setAttribute("count", count);
-		afo.setPath("./Admin/TransNum_Insert.jsp");
+		afo.setPath("./Admin/Admin_Thing_OrderList.jsp");
 		afo.setRedirect(false);
 		return afo;
 	}
