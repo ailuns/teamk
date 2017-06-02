@@ -1,3 +1,4 @@
+<%@page import="com.sun.xml.internal.ws.api.config.management.Reconfigurable"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="net.pack.db.PackDAO"%>
@@ -28,6 +29,8 @@
 	
 	if (user_id == null)
 		user_id = "";
+	if (PB.getSubject() == null)
+		response.sendRedirect("./PackList.po");
 	
 	List List = (List)request.getAttribute("replylist");
 	List CategoryList = (List)request.getAttribute("CategoryList");
@@ -698,7 +701,10 @@
 		</table>
 	</div>
 	
-	
+	<%
+	if (RecommendProduct.size() > 0)
+	{
+	%>
 	<div id="banner">
 		<table id="banner_content">
 			<tr>
@@ -707,7 +713,11 @@
 					if (RecommendProduct.size() == 1)
 					{
 				%>
-						<td><div id="banner_sub">추천상품</div></td>
+						<td>
+							<div id="banner_sub">추천상품</div>
+							<div id="close">close</div>
+						</td>
+						
 				<%
 					}
 					else if (RecommendProduct.size() == 2)
@@ -757,16 +767,21 @@
 			</tr>
 		</table>
 	</div>
+	<%
+	}
+	%>
+	
 
 	<!-- 왼쪽 메뉴 -->
 	<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
 	<!-- 왼쪽 메뉴 -->
 	<!--여행지 검색창 -->
 	<div id="wrap"> 
+	<div id="wrap_pack">
 	<div id="article_head">
 		<div id="article_title"><img src="./img/travel2.png" width="30px" style="margin-right: 8px; vertical-align: bottom;">패키지</div>
 	</div>
-		<div id="package_feat">
+	<div id="package_feat">
 		<jsp:include page="../inc/packSlide.jsp"></jsp:include>
 		<div id="package_search">
 			<p>내게 맞는 패키지 검색하기</p>
@@ -985,10 +1000,11 @@
 		<!--구글맵 -->
 
 		<!--상품 문의 -->
-		<div id="middle3">
+		
 		<div id="QnA">
 			<h3>상품 문의</h3>
 			<hr>
+			<div id="middle3">
 			<table border="1" id="replyTable">
 				<tr>
 <!-- 					<td>번호</td> -->
@@ -1020,6 +1036,7 @@
 					if ((rb.getId().equals(user_id) && rb.getH_or_s() == 1) || rb.getH_or_s() == 0){
 					%>
 					<td id="replyContent">
+						<span class="reply_align">
 						<%
 							// 답글 들여쓰기 모양
 							int wid = 0;
@@ -1034,46 +1051,79 @@
 						%> 
 						
 						<%=rb.getContent()%><span>(<%=rb.getDate() %>)</span>
+						
 						<%
 						if(rb.getH_or_s() == 1)
 						{
 						%>
 						<img src="./img/lock.png" width="10px" height="10px">
+						
 						<%
 						}
 						%>
+						</span>
+						<span style="float: right;">
+						<%
+						if(user_id.equals("admin"))
+						{
+						%>
+						
+						<input type="button" value="답글" id="rereply" onclick="rewrite(<%=rb.getNum()%>)">
+						<%
+						}
+						if(rb.getId().equals(user_id))
+						{
+						%>
+						<input type="button" value="수정" id="re_update" onclick="reupdate(<%=rb.getNum() %>)">
+						<%
+						}
+						if(rb.getId().equals(user_id) || user_id.equals("admin"))
+						{
+						%>
+						<input type="button" value="삭제" id="re_delete" onclick="ReplyDel(<%=rb.getNum() %>, '<%=user_id%>');">
+						<%
+						}
+						%>
+						</span>
 					</td>
 					<%
 					}
 					else if (rb.getH_or_s() == 1 && !rb.getId().equals(user_id)){
 					%>
 					<td style="height:50px;">
+						<span class="reply_align">
 						비밀글입니다<img src="./img/lock.png" width="10px" height="10px">
-						<span>(<%=rb.getDate() %>)</span>
+<%-- 						<span>(<%=rb.getDate() %>)</span> --%>
+						(<%=rb.getDate() %>)
+						</span>
+						<span style="float: right;">
+						<%
+						if(user_id.equals("admin"))
+						{
+						%>
+						<input type="button" value="답글" id="rereply" onclick="rewrite(<%=rb.getNum()%>)">
+						<%
+						}
+						if(rb.getId().equals(user_id))
+						{
+						%>
+						<input type="button" value="수정" id="re_update" onclick="reupdate(<%=rb.getNum() %>)">
+						<%
+						}
+						if(rb.getId().equals(user_id) || user_id.equals("admin"))
+						{
+						%>
+						<input type="button" value="삭제" id="re_delete" onclick="ReplyDel(<%=rb.getNum() %>, '<%=user_id%>');">
+						<%
+						}
+						%>
+						</span>
 					</td>
 					<%
 					}
+					%>
 					
 					
-					if(!user_id.equals(""))
-					{
-					%>
-					<td><input type="button" value="답글" id="rereply" onclick="rewrite(<%=rb.getNum()%>)"></td>
-					<%
-					}
-					if(rb.getId().equals(user_id))
-					{
-					%>
-					<td><input type="button" value="수정" id="re_update" onclick="reupdate(<%=rb.getNum() %>)"></td>
-					<%
-					}
-					if(rb.getId().equals(user_id) || user_id.equals("admin"))
-					{
-					%>
-					<td><input type="button" value="삭제" id="re_delete" onclick="ReplyDel(<%=rb.getNum() %>, '<%=user_id%>');"></td>
-					<%
-					}
-					%>
 				</tr>
 				
 				<tr id="conup<%=rb.getNum()%>" style="display: none;">
@@ -1081,15 +1131,16 @@
 						<%=user_id %>
 					</td>
 					
-					<td><textarea cols="60" rows="2" id="contentup<%=rb.getNum() %>" name="contentup"><%=rb.getContent() %></textarea></td>
 					<td>
+						<span class="reply_align">
+						<textarea style="width: 550px;" cols="60" rows="2" id="contentup<%=rb.getNum() %>" name="contentup"><%=rb.getContent() %></textarea>
+						</span>
+						<span style="float: right;">
 						<input type="button" value="수정" onclick="reUpdateAction(<%=rb.getNum() %>)">
-					</td>
-					<td>
-						<input type="button" value="취소" onclick="reupdate(<%=rb.getNum() %>)">
-					</td>
-					<td>
+						<input type="button" value="취소" onclick="reupdate(<%=rb.getNum() %>)"><br>
 						<input type="checkbox" class="up_secretChk<%=rb.getNum() %>" name="secretChk" value="1" <%if(rb.getH_or_s() == 1){%>checked<%} %>>비밀글
+						</span>
+					</td>
 					</td>
 				</tr>
 				<tr id="con<%=rb.getNum()%>" style="display: none;">
@@ -1103,15 +1154,15 @@
 						<p><%=user_id %></p>
 						<input type="hidden" id="reid" name="id" class="box" value="<%=user_id %>">
 					</td>
-					<td><textarea cols="60" rows="2" id="recontent<%=rb.getNum() %>" name="recontent"></textarea></td>
 					<td>
+						<span class="reply_align">
+						<textarea style="width: 550px;" cols="60" rows="2" id="recontent<%=rb.getNum() %>" name="recontent"></textarea>
+						</span>
+						<span style="float: right;">
 						<input type="button" value="답글등록" onclick="Re_Reply_Write(<%=rb.getNum() %>)">
-					</td>
-					<td>
-						<input type="button" value="취소" onclick="rewrite(<%=rb.getNum() %>)">
-					</td>
-					<td>
+						<input type="button" value="취소" onclick="rewrite(<%=rb.getNum() %>)"><br>
 						<input type="checkbox" class="re_secretChk" name="secretChk" value="1">비밀글
+						</span>
 					</td>
 				</tr>
 			
@@ -1209,6 +1260,7 @@
 		</div>
 	</div>
 	<!--상품 문의 -->
+	</div>
 	</div>
 	<!-- 오른쪽 메뉴 -->
 	<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
