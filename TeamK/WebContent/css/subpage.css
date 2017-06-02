@@ -1093,12 +1093,6 @@ div#board_list table a {
 	text-decoration: none;
 	color: #000;
 }
-div#board_list table .inb_img
-{
-	width : 150px;
-	height : 100px;
-}
-
 div#board_menu_bar input[type="button"] {
 	float: left;
 	margin: 0 5px;
@@ -1397,5 +1391,47 @@ div#my_interest table tr {
 }
 div#my_interest table th {
 	background-color: #eee;
+}
+
+
+/* MyInterestList.jsp */
+
+div#packInterest_list table .inb_img
+{
+	width : 80px;
+/* 	height : 130px; */
+}
+
+div#packInterest_list table #inb_img
+{
+	width : 150px;
+	height : 130px;
+}
+
+div#packInterest_list {
+	width: 90%;
+	margin: 0 auto;
+}
+div#packInterest_list table {
+	border-collapse: collapse;
+	margin-bottom: 20px;
+	font-size: 15px;
+	width: 100%;
+}
+div#packInterest_list table tr {
+	line-height: 1.75em;
+	border-bottom: 1px solid #ddd;
+}
+div#packInterest_list table span {
+	text-decoration: bold;
+}
+div#packInterest_list table tr:HOVER 
+{
+	background-color: #eee;
+}
+
+div#packInterest_list table .ev_hover:HOVER
+{
+	cursor: pointer;
 }
 

@@ -10,12 +10,20 @@
 <title>Insert title here</title>
 <link href="./css/inc.css" rel="stylesheet" type="text/css">
 <link href="./css/subpage.css" rel="stylesheet" type="text/css">
+<script src="./js/jquery-3.2.0.js"></script>
 <%
 request.setCharacterEncoding("utf-8");
 int []count = (int[])request.getAttribute("count");
 List<interestBEAN> InterestPack = (List<interestBEAN>) request.getAttribute("InterestPack");
 List<interestBEAN> InterestThing = (List<interestBEAN>) request.getAttribute("InterestThing"); %>
 </head>
+<script type="text/javascript">
+	function inter_pack_move(select)
+	{
+		var num = $("#num" + select).val();
+		location.href="./PackContent.po?num=" + num;
+	}
+</script>
 <body>
 	<!--왼쪽 메뉴 -->
 	<div>
@@ -31,7 +39,7 @@ List<interestBEAN> InterestThing = (List<interestBEAN>) request.getAttribute("In
 <article>
 		<h3>패키지 찜 리스트</h3>
 		<div id="board">
-		<div id="board_list">
+		<div id="packInterest_list">
 		<%
 			if (InterestPack.size() == 0) {
 		%>
@@ -41,12 +49,10 @@ List<interestBEAN> InterestThing = (List<interestBEAN>) request.getAttribute("In
 		%>
 		<table>
 			<tr>
-				<th></th>
+				<th class="inb_img"></th>
 				<th id="num">상품명</th>
 				<th id="num">가격</th>
 				<th id="num"></th>
-				
-				
 			</tr>
 			<%
 				for (int i = 0; i < InterestPack.size(); i++) {
@@ -55,15 +61,14 @@ List<interestBEAN> InterestThing = (List<interestBEAN>) request.getAttribute("In
 					String cost = (String)Commas.format(inb.getCost());
 			%>
 			<tr>
-				<td class="inb_img"><img class="inb_img" alt="" src="./upload/<%=inb.getImg() %>"></td>
-				<td><%=inb.getSubject()%><br>
+				<input type="hidden" id="num<%=i %>" value="<%=inb.getOri_num() %>">
+				<td class="inb_img ev_hover" onclick="inter_pack_move(<%=i %>);"><img id="inb_img" alt="" src="./upload/<%=inb.getImg() %>"></td>
+				<td onclick="inter_pack_move(<%=i %>);" class="ev_hover"><%=inb.getSubject()%><br>
 				<%=inb.getIntro() %></td>
 				<td><%=cost%></td>
 				<td>
 				<input type="button" value="찜 취소" onclick = "location.href='./MyInterestDel.ins?n=<%=inb.getInter_num()%>'"></td>
 				</tr>
-				
-
 			<%
 				}
 			%>
