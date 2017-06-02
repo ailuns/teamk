@@ -93,6 +93,7 @@ function submit() {
 	<div id="wrap">
 		<div id="article_head">
 			<div id="article_title">회원정보수정</div>
+			<div class="empty"></div>
 			<div id="article_script">회원님의 정보를 수정합니다.</div>
 		</div>
 		<div id="clear"></div>
