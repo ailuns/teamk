@@ -35,6 +35,7 @@ function passck() {
 	<div id="wrap">
 		<div id="article_head">
 			<div id="article_title">회원 탈퇴</div>
+			<div class="empty"></div>
 			<div id="article_script"></div>
 		</div>
 		<div id="clear"></div>

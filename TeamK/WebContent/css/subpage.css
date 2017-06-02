@@ -60,6 +60,7 @@ div#article_title {
 	width: 900px;
 	float: right;
 }
+div.empty {width: 100px; height: 80px;}
 div#article_script {
 	background-color: #fff;
 	color: #333;

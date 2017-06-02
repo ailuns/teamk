@@ -22,7 +22,7 @@ String id = (String)session.getAttribute("id");
 	<div id="wrap">
 		<div id="article_head">
 			<div id="article_title"><img src="./img/qna2.png" width="35px" style="margin-right: 8px; vertical-align: bottom;">Q&A 게시판</div>
-			<div id="clear"></div>
+			<div class="empty"></div>
 			<div id="article_script">궁금한것은 질문해주세요.</div>
 		</div>
 		<div id="clear"></div>

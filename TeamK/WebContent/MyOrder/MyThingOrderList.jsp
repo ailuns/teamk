@@ -79,6 +79,7 @@ function Trade_Update_Info(o_num) {
 	<div id="wrap">
 	<div id="article_head">
 <div id="article_title">My Goods Order List</div>
+<div class="empty"></div>
 <div id="article_script"></div>
 </div>
 <article>

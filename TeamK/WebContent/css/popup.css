@@ -36,16 +36,12 @@ div#idcheck {
 	padding: 10px;
 }
 div#idcheck form input[type="text"] {width: 200px;}
-div#idcheck form input[type="submit"] {
-	width: 90px;
-}
+div#idcheck form input[type="submit"] {width: 90px;}
 div#idcheck form p {
 	padding: 5px 10px;
 	background-color: #eee;
 }
-div#idcheck form input[type="button"] {
-	width: 150px;
-}
+div#idcheck form input[type="button"] {width: 150px;}
 
 /*Email Check.jsp*/
 div#emailchk {
@@ -54,9 +50,7 @@ div#emailchk {
 	border: 1px solid #06c;
 }
 div#emailchk form input[type="text"] {width: 200px;}
-div#emailchk form input[type="submit"] {
-	width: 90px;
-}
+div#emailchk form input[type="submit"] {width: 90px;}
 
 /*Email Check Update.jsp*/
 div#emailchkup {

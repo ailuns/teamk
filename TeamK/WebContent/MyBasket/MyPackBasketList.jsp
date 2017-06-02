@@ -91,6 +91,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 %>
 <div id="article_head">
 			<div id="article_title">패키지 리스트</div>
+			<div class="empty"></div>
 			<div id="article_script">subject Count : <%=count %></div>
 		</div>
 		<div id="clear"></div>
