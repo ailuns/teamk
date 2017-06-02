@@ -117,11 +117,11 @@ public class PackDAO {
 			
 			if (id.equals("admin"))
 			{
-				sql = "select * from pack where area=? group by subject order by date desc limit ?, ?";
+				sql = "select * from pack where area=? group by subject order by date asc limit ?, ?";
 			}
 			else
 			{
-				sql = "select * from pack where area=? and date > now() group by subject order by date desc limit ?, ?";
+				sql = "select * from pack where area=? and date > now() group by subject order by date asc limit ?, ?";
 			}
 			
 			pstm = conn.prepareStatement(sql);
