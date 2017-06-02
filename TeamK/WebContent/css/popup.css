@@ -4,10 +4,14 @@
 	font-family: "나눔 고딕", "Noto Sans", sans-serif;
 	text-align: center;
 }
-body {padding: 10px 0;}
+body {
+	padding: 10px 0;
+	background-color: #fff;
+}
 input {
 	border: 1px solid #ddd;
 	background-color: #fff;
+	padding: 5px;
 }
 input:HOVER {border: 1px solid #000;}
 input:FOCUS {border: 1px solid #06c;}
@@ -27,53 +31,52 @@ table {border-collapse: collapse;}
 
 /*Join Id Check.jsp*/
 div#idcheck {
-	width: 300px;
-	height: 150px;
-	margin: 25px auto;
+	margin: 0 auto;
+	border: 1px solid #06c;
+	padding: 10px;
 }
 div#idcheck form input[type="text"] {width: 200px;}
 div#idcheck form input[type="submit"] {
 	width: 90px;
-	height: 24px;
 }
 div#idcheck form p {
-	height: 60px;
 	padding: 5px 10px;
 	background-color: #eee;
 }
 div#idcheck form input[type="button"] {
 	width: 150px;
-	height: 30px;
 }
 
 /*Email Check.jsp*/
 div#emailchk {
-	width: 300px;
-	height: 25px;
-	margin: 84px auto;
+	padding: 70px 0;
+	margin: 0px auto;
+	border: 1px solid #06c;
 }
 div#emailchk form input[type="text"] {width: 200px;}
 div#emailchk form input[type="submit"] {
 	width: 90px;
-	height: 24px;
 }
 
 /*Email Check Update.jsp*/
 div#emailchkup {
-	width: 300px;
-	margin: 65px auto;
+	margin: 0px auto;
+	padding: 50px 0;
+	border: 1px solid #06c;
 }
 div#emailchkup form label {margin-right: 10px;}
 div#emailchkup form input[type="text"] {width: 240px;}
 div#emailchkup form input[type="submit"] {
 	width: 100px;
-	height: 25px;
 	margin-top: 10px;
 }
-/*passchange.jsp*/
-/* div#passchange{ */
-/* 	background-color: #dedede; */
-/* } */
+
+/* Pass Change.jsp*/
+div#passchange {
+	margin: 0px auto;
+	padding: 20px 0;
+	border: 1px solid #06c;
+}
 div#passchange form {
 	line-height: 2em;
 	margin-left: 10px;
@@ -92,8 +95,7 @@ div#passchange form input[type="password"] {
 }
 div#passchange form input[type="submit"],div#passchange form input[type="button"]  {
 	width: 100px;
-	height: 25px;
-	margin-top: 10px; 
+	margin-top: 20px; 
 }
 
 /*PM.jsp*/
@@ -152,8 +154,12 @@ div#receive_change table th {
 	width: 80px;
 	background-color: #eee;
 	border-bottom: 1px solid #fff;
+	padding: 5px;
 }
-div#receive_change table td {border-bottom: 1px solid #eee;}
+div#receive_change table td {
+	border-bottom: 1px solid #eee;
+	padding: 5px;
+}
 
 /*Receive Add.jsp*/
 div#receive_add {
@@ -183,7 +189,7 @@ div#trade_update_info table {
 div#trade_update_info table * {padding: 5px;}
 div#trade_update_info table tr {border-bottom: 1px solid #ddd;}
 div#trade_update_info table th {
-	width: 100px;
+	width: 80px;
 	background-color: #f0f0f0;
 }
 

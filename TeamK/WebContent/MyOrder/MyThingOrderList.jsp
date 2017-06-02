@@ -60,7 +60,7 @@ function thing_exchange(num, ti_num){
 }
 function Trade_Update_Info(o_num) {
 	window.open("./Trade_Update_Info.mo?num="+o_num,''
-			,'left=600, top=150, width=400, height=400');
+			,'left=600, top=150, width=400, height=400, scrollbars=yes');
 }
 </script>
 <style type="text/css">
