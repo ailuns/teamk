@@ -420,9 +420,43 @@ public class BoardFrontController extends HttpServlet {
 			}
 		}
 		
+		else if(command.equals("/ProductModify.bo"))
+		{
+			System.out.println("ProductModify cald");
+			action = new ProductModify();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/ProductModifyAction.bo"))
+		{
+			System.out.println("ProductModifyAction cald");
+			action = new ProductModifyAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		else if(command.equals("/ProductDeleteAction.bo"))
+		{
+			System.out.println("ProductDeleteAction cald");
+			action = new ProductDeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		
-	
+		
 		//이동하기
 		if(forward!=null){
 			if(forward.isRedirect()){

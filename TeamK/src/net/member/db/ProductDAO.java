@@ -60,7 +60,68 @@ public class ProductDAO {
 		
 	}
 	
-
+	public List getProdcutList3(int a) {
+		Connection con = null;
+		String sql = "";
+		ResultSet rs = null;
+		int count = 0;
+		String name = "";
+		List productList = new ArrayList();
+		try {
+			//1,2 디비연결 메서드호출
+			// 3 sql 객체 생성
+			// 4 rs실행저장
+			// rs while 데이터 이씅면
+			// 자바빈 객체 생성 BoardBean bb
+			// bb 멤버변수 <= rs열데이터 가져와서 저장
+			// bb 게시판 글 하나 => 저장
+			con = getConnection();
+			sql = "select name from thing where num=?";
+			pstmt =con.prepareStatement(sql);
+			pstmt.setInt(1, a);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				name = rs.getString(1);
+			}
+			sql = "select num, name,color,size,stock,car_num from thing where name=? order by num";
+			pstmt =con.prepareStatement(sql);
+			pstmt.setString(1, name);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				ProductBean pb = new ProductBean();
+				pb.setNum(rs.getInt("num"));
+				pb.setName(rs.getString("name"));
+				pb.setColor(rs.getString("color"));
+				pb.setSize(rs.getString("size"));
+				pb.setStock(rs.getInt("stock"));
+				pb.setCar_num(rs.getInt("car_num"));
+				productList.add(pb);
+		} }catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ex) {
+				}
+			}
+		}
+		return productList;
+	}
+	
+	
 	public ProductBean getProduct(int num){
 		ProductBean pb = null;
 		Connection con = null;
@@ -84,6 +145,8 @@ public class ProductDAO {
 			pb.setIntro(rs.getString("intro"));
 			pb.setContent(rs.getString("content"));
 			pb.setReadcount(rs.getInt("readcount"));
+			pb.setColor(rs.getString("color"));
+			pb.setSize(rs.getString("size"));
 			pb.setCar_num(rs.getInt("car_num"));
 			pb.setType(rs.getString("type"));
 			pb.setCost(rs.getInt("cost"));
@@ -91,6 +154,10 @@ public class ProductDAO {
 			pb.setArea(rs.getString("area"));
 			pb.setStock(rs.getInt("stock"));
 			pb.setImg(rs.getString("img"));
+			pb.setImg2(rs.getString("img2"));
+			pb.setImg3(rs.getString("img3"));
+			pb.setImg4(rs.getString("img4"));
+			pb.setImg5(rs.getString("img5"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -118,6 +185,46 @@ public class ProductDAO {
 	}
 	
 
+	public int deleteProduct(int num) {
+		Connection con = null;
+		String sql = "";
+		ResultSet rs = null;
+		try {
+			con = getConnection();
+
+			sql = "delete from thing where num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+			return 1;
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return -1;
+	}
+	
+	
+	
+	
 	public void insertProduct(ProductBean pb) {
 		// 1단계 드라이버로더
 		// 2단계 디비연결
@@ -542,6 +649,48 @@ public class ProductDAO {
 		return 0;
 	}
 	
+	public int updateProduct(ProductBean pb) {
+		Connection con = null;
+		String sql = "";
+		ResultSet rs = null;
+		try 
+		{
+			con = getConnection();
+			
+			sql = "update thing set color=?, size=?, stock=?  where num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, pb.getColor());
+			pstmt.setString(2, pb.getSize());
+			pstmt.setInt(3, pb.getStock());
+			pstmt.setInt(4, pb.getNum());
+					
+			pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return 0; // 글번호 없음
+	}
 	
 	
 	public List getProductAddList(String name) {
