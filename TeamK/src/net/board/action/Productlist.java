@@ -68,7 +68,7 @@ public class Productlist implements Action {
 		request.setAttribute("pageBlock", pageBlock);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
-		
+		request.setAttribute("car_num", Integer.parseInt(car_num));
 		
 		
 		

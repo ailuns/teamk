@@ -43,16 +43,28 @@
 		$(".tab_content").hide();  // 탭 내용 전체 숨김
 		$(".tab_content:first").show();  // 탭 첫번째 내용만 보이게
 		
-		$('ul li.tab_color').click(function() {
+// 		$('ul li.tab_color' ).click(function() {
+// 			$('.tab_color').css("color", "black");  //탭부분 글자색 검은색으로
+// 			$('.tab_color').css("border-bottom", "none");
+// 			$(".tab_content").hide();					// 탭 내용 전체 숨김
+// 			$(this).css("color", "#F29661");			// 클릭된 탭부분 글자색 #F29661으로
+// 			$(this).css("border-bottom", "4px solid #F29661");			
+// 			var activeTab = $(this).attr("name");		// 클릭된 탭부분 name 속성값 가져와서 저장
+// 			$("#" + activeTab).fadeIn();		// 해당 탭내용 부분을 보여준다  흐릿 -> 또렷하게 애니메이션 효과			
+// 		});
+	});
+	function btnclick(str){
+	
 			$('.tab_color').css("color", "black");  //탭부분 글자색 검은색으로
 			$('.tab_color').css("border-bottom", "none");
 			$(".tab_content").hide();					// 탭 내용 전체 숨김
-			$(this).css("color", "#F29661");			// 클릭된 탭부분 글자색 #F29661으로
-			$(this).css("border-bottom", "4px solid #F29661");			
+			$('.tab_color'+str).css("color", "#F29661");
+			$('.tab_color'+str).css("border-bottom", "4px solid #F29661");		
 			var activeTab = $(this).attr("name");		// 클릭된 탭부분 name 속성값 가져와서 저장
-			$("#" + activeTab).fadeIn();		// 해당 탭내용 부분을 보여준다  흐릿 -> 또렷하게 애니메이션 효과			
-		});
-	});
+			$("#" + activeTab).fadeIn();		// 해당 탭내용 부분을 보여준다  흐릿 -> 또렷하게 애니메이션
+		
+	}
+	
 	
 	// 패키지 검색 시 지역 선택
 	function input_chk()
@@ -100,6 +112,7 @@
 		List productList2 = (List) request.getAttribute("productList2");
 	 	//디비 객체 생성 BoardDAO bdao
 	 	// int count = getBoardCount() 메서드호출 count(*)
+	 	int car_num = (int) request.getAttribute("car_num");
 	 	int count = (int) request.getAttribute("count");
 	 	int pageSize = (int) request.getAttribute("pageSize");
 	 	String pageNum = (String) request.getAttribute("pageNum");
@@ -141,16 +154,24 @@
 		<ul class="tabs">
 		<%
 			cb =(CategoryBean)productList2.get(0);
+			if(car_num == 1){
 		%>
 			<a href="./Productlist.bo?car_num=<%=cb.getCar_num()%>"><li name="tab1" class="tab_color" style="color: #F29661; background-color: white; border-bottom:4px solid #F29661;" value="<%=cb.getCar_name()%>"><%=cb.getCar_name()%></li></a> 
-		<%
+	
+		<%}else{%>
+		<a href="./Productlist.bo?car_num=<%=cb.getCar_num()%>"><li name="tab1" class="tab_color" style="background-color: white;" value="<%=cb.getCar_name()%>"><%=cb.getCar_name()%></li></a> 
+		<%}
 			
 			for (int i = 1; i < productList2.size(); i++)
 			{
 				cb =(CategoryBean)productList2.get(i);
+			if(car_num == cb.getCar_num()){
 		%>	
-			<a href="./Productlist.bo?car_num=<%=cb.getCar_num()%>"><li name="tab<%=i+1 %>" class="tab_color" style="background-color: white;" value="<%=cb.getCar_name()%>"><%=cb.getCar_name()%></li></a> 
-		<%
+			<a href="./Productlist.bo?car_num=<%=cb.getCar_num()%>"><li name="tab<%=i+1 %>" class="tab_color<%=cb.getCar_num() %>" style="color: #F29661; background-color: white; border-bottom:4px solid #F29661;" value="<%=cb.getCar_name()%>" onclick="btnclick(<%=cb.getCar_num() %>)"><%=cb.getCar_name()%></li></a> 
+			
+		<%}else{%>
+			<a href="./Productlist.bo?car_num=<%=cb.getCar_num()%>"><li name="tab<%=i+1 %>" class="tab_color<%=cb.getCar_num() %>" style="background-color: white;" value="<%=cb.getCar_name()%>" onclick="btnclick(<%=cb.getCar_num() %>)"><%=cb.getCar_name()%></li></a> 
+		<%} 
 			}
 		%>
 		</ul>
