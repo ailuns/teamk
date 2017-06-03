@@ -52,7 +52,15 @@ public class AdminFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/Pack_res.ao")){
+		}else if(command.equals("/Admin_Thing_OrderList_Search.ao")){
+			action = new Admin_Thing_OrderList_Search();
+			try {
+				afo = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/Pack_res.ao")){
 			action = new Pack_Res();
 			try {
 				afo = action.execute(request, response);

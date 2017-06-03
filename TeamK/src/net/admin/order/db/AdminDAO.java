@@ -132,6 +132,7 @@ public class AdminDAO {
 			while(rs.next()){
 				ModTradeInfoBEAN mtib = new ModTradeInfoBEAN();
 				mtib.setTi_num(rs.getInt("ti_num"));
+				mtib.setId(rs.getString("id"));
 				mtib.setName(rs.getString("ti_receive_name"));
 				mtib.setMobile(rs.getString("ti_receive_mobile"));
 				mtib.setPostcode(rs.getString("ti_receive_postcode"));
