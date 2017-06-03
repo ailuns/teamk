@@ -52,8 +52,6 @@ public class ModDAO {
 		}
 	}
 	public void Mul_Pack_Stock(ModTradeInfoBEAN mtib){
-		System.out.println(mtib.getStock());
-		System.out.println(mtib.getOri_num());
 		try{
 			conn =getconn();
 			sql ="update pack set stock = ? where num = ?";

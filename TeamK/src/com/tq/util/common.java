@@ -17,7 +17,7 @@ public class common {
 	// Connection connect
 	public Connection connect() throws Exception{
 		
-		String dbUrl="jdbc:mysql://localhost:3306/jspteam";
+		String dbUrl="jdbc:mysql://192.168.2.15:3306/jspteam";
 		String dbId="teamkpro";
 		String dbPass="teamkpro2";
 		

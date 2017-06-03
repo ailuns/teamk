@@ -306,7 +306,12 @@ function submit_check(){
 		if($('#select_card option:eq(0)').prop('selected')){
 			alert("카드사를 선택해 주세요");
 			return false;
-		}else alert("카드 결제");
+		}
+		if(!($('input:checkbox[name=card_agree]').prop('checked'))){
+			alert("결제 대행 서비스 약관에 동의 하셔야 합니다!");			
+			return false;
+		}
+		else alert("카드 결제");
 	}else if($('#trade_type3').is(":checked")){
 		if($('#select_bank option:eq(0)').prop('selected')){
 			alert("은행을 선택해 주세요");
@@ -320,6 +325,10 @@ function submit_check(){
 			}else alert("successed");
 		}
 	}else{
+		if(!($('input:checkbox[name=mobile_agree]').prop('checked'))){
+			alert("결제 대행 서비스 약관에 동의 하셔야 합니다!");			
+			return false;
+		}
 		alert("모바일 결제");
 	}
 }

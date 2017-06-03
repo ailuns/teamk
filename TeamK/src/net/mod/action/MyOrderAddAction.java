@@ -83,9 +83,7 @@ public class MyOrderAddAction implements Action{
 		if(tch!=null){
 			for(int i = 0; i<tch.length;i++){
 				mtib=moddao.TBasketInfoToMTIB(Integer.parseInt(tch[i]),mtib);
-				System.out.println("orinum>>>"+mtib.getOri_num());
 				mtib=moddao.Thing_Stock_Check(mtib.getOri_num(), mtib);
-				System.out.println("stock_check==="+mtib.getStock_check());
 				if(mtib.getStock_check()==1){
 					out.println("<script>");
 					out.println("alert('죄송합니다.\\n"
@@ -122,8 +120,6 @@ public class MyOrderAddAction implements Action{
 					out.println("</script>");
 					out.close();
 				}else {
-					System.out.println(mtib.getStock());
-					System.out.println(mtib.getThing_count());
 					mtib.setStock(mtib.getStock()-mtib.getThing_count());
 					moddao.Mul_Pack_Stock(mtib);
 					int po_num = moddao.InsertPackOrder(mtib);
