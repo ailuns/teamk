@@ -109,10 +109,6 @@ function search_check(){
 		}
 	}return null;
 }
-function Client_Called_Info(o_num) {
-	window.open("./Client_Called_Info.ao?num="+o_num,''
-			,'left=600, top=150, width=400, height=400');
-}
 function trans_num_search(trans_num){
 	window.open("./trans_num_search.ao?num="+trans_num,''
 			,'left=600, top=150, width=400, height=400');
@@ -242,7 +238,7 @@ function status_update(o_num,status){
 					//교환 상품 배송중일때 배송정보 조회 가능하게 링크
 						if(mtb.getStatus()==3){
 							if(mtb.getO_memo()!=null&&mtb.getO_memo().length()!=0){%>
-								<span class="update_info" onclick="Client_Called_Info(<%=mtb.getNum() %>)" >교환 배송 중</span>
+								<span class="update_info" onclick="Trade_Update_Info(<%=mtb.getNum() %>)" >교환 배송 중</span>
 						<%}else out.print(mtb.getStatus_text());
 						}else if(mtb.getStatus()==9){//환불 조건 찾기
 							String[]paybackinfo = mtb.getO_memo().split(",");
