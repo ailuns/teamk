@@ -58,7 +58,6 @@ public class MyOrderAddAction implements Action{
 		if(Monthly_pay==null)Monthly_pay="1";
 		int status = 2;
 		String trade_type = request.getParameter("t_type");
-		if(!(trade_type.equals("무통장 입금"))&&tch==null)status=9;
 		switch(trade_type){
 			case "카드 결제":
 				trade_type+=", "+request.getParameter("select_card")+
@@ -146,10 +145,12 @@ public class MyOrderAddAction implements Action{
 		}
 
 		if(tnum!=null){
+			System.out.println(tnum);
 			mtib.setOri_num(Integer.parseInt(tnum));
 			mtib.setThing_count(Integer.parseInt(request.getParameter("count")));
 			mtib.setColor(request.getParameter("color"));
 			mtib.setSize(request.getParameter("size"));
+			mtib.setCost(Integer.parseInt(request.getParameter("cost")));
 			mtib=moddao.Thing_Stock_Check(mtib.getOri_num(), mtib);
 			if(mtib.getStock_check()==1){
 				out.println("<script>");
