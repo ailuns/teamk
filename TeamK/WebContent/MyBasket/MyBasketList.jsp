@@ -39,7 +39,7 @@
 			url:"./ThingBasketUpdate.bns",
 			data:{
 				tcount:$("#tcount"+num+" option:selected").val(),
-				tcost:$("#tcost"+num).html(),
+				tcost:$("#tcost"+num).html().replace(/[^\d]+/g, ''),
 				num:$("#tch"+num).val(),
 				success:function(){
 					alert("sucess");
@@ -54,7 +54,7 @@
 			data:{
 				adult_count:$("#adult"+num+" option:selected").val(),
 				child_count:$("#child"+num+" option:selected").val(),
-				pcost:$("#pcost"+num).html(),
+				pcost:$("#pcost"+num).html().replace(/[^\d]+/g, ''),
 				num:$("#pch"+num).val(),
 				success:function(){
 					alert("sucess");

@@ -145,6 +145,10 @@ function receive_setting(){
 				<%if(tbb.getNum()!=0){ %><input type="hidden" name="tch" value="<%=tbb.getNum() %>">
 				<%}else{ %><input type="hidden" name="tnum" value="<%=tbb.getOri_num()%>">
 							<input type="hidden" name="count" value="<%=tbb.getCount() %>">
+							<input type="hidden" name="color" value="<%=tbb.getColor() %>">
+							<input type="hidden" name="size" value="<%=tbb.getSize() %>">
+							<input type="hidden" name="cost" value="<%=tbb.getCost() %>">
+							
 				<%} %>
 				</td>
 			<td><%=tbb.getSubject()%></td>
