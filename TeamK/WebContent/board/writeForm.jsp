@@ -9,6 +9,7 @@
 <link href="./css/subpage.css" rel="stylesheet" type="text/css">
 <%String id = (String)session.getAttribute("id");%>
 <!-- Smart Editor -->
+<script src="./js/jquery-3.2.0.js" type="text/javascript"></script>
 <script type="text/javascript" src="./js/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>./photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js" charset="utf-8"></script>
 <!-- Smart Editor -->
@@ -89,35 +90,21 @@ function showHTML() {
 	alert(sHTML);
 }
 
-function submitContents(elClickedObj) {
-	oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
-	
-	// 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("ir1").value를 이용해서 처리하면 됩니다.
-	
-	try {
-		elClickedObj.form.submit();
-	} catch(e) {}
-}
-
 $("#save").click(function(){
 
     var content = oEditors.getById["ir1"].getIR(); // Edit에 쓴 내용을 content 변수에 저장    값 : <br>
     
-    if (document.fr.subject.value == "") {
+    if (document.fr.subject.value == ""){
 		alert("제목을 입력하세요");
 		document.fr.subject.focus();
 		return false;
-	}
+	} 
     
-
-
     if (content == "<br>")  // 빈공간 값 <br>
     {
        alert("글을 입력해주세요");  // 메시지 띄움
        return false;
-    }
-    
-    else // 글내용 있을 시
+    }else // 글내용 있을 시
     {
        oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []); // Edit에 쓴 내용을 textarea에 붙여넣어준다
         $("#fr").submit();  // form을 submit 시킨다
