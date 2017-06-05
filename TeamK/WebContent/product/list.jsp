@@ -69,10 +69,10 @@
 	// 패키지 검색 시 지역 선택
 	function input_chk()
     {
-    	var val = $("#area option:selected").val(); 
+    	var val = $("#serch_data").val(); 
     	if (val == "")
 		{
-    		alert("지역을 선택해주세요");
+    		alert("검색어를 넣어주세요");
 	    		return false;
 		}
 		return true;
@@ -134,12 +134,11 @@
 	<div id="package_feat">
 		<jsp:include page ="../inc/packSlide.jsp"></jsp:include>
 			<div id="package_search">
-			<p>내게 맞는 패키지 검색하기</p>
-			<form action="./PackSearchAction.po" name="fr" method="get" id="scheduler" onsubmit="return input_chk();">
-				<label for="date_from">출발</label><input type="text" id="date_from" class="input_style" name="startDate" required="yes"><br><br>
-				<label for="date_from">날짜</label><input type="text" id="date_from" class="input_style" name="startDate" required="yes">
+			<p>상품 검색하기</p>
+			<form action="./ProductSearchAction.bo" name="fr" method="get" id="scheduler" onsubmit="return input_chk();">
+				<label for="date_from">검색명</label><input type="text" id="serch_data" class="input_style" name="serch_data" required="yes"><br><br>
 <!-- 				<label for="date_to">~</label><input type="text" id="date_to" class="input_style" name="endDate"><br><br> -->
-				<label for="city_search">지역</label>
+			
 				
 				<input type="submit" value="검색" id="search_btn" class="input_style">
 			</form>
@@ -159,7 +158,7 @@
 			<a href="./Productlist.bo?car_num=<%=cb.getCar_num()%>"><li name="tab1" class="tab_color" style="color: #F29661; background-color: white; border-bottom:4px solid #F29661;" value="<%=cb.getCar_name()%>"><%=cb.getCar_name()%></li></a> 
 	
 		<%}else{%>
-		<a href="./Productlist.bo?car_num=<%=cb.getCar_num()%>"><li name="tab1" class="tab_color" style="background-color: white;" value="<%=cb.getCar_name()%>"><%=cb.getCar_name()%></li></a> 
+		<a href="./Productlist.bo?car_num=<%=cb.getCar_num()%>"><li name="tab1" class="tab_color" style="color: black; background-color: white;" value="<%=cb.getCar_name()%>"><%=cb.getCar_name()%></li></a> 
 		<%}
 			
 			for (int i = 1; i < productList2.size(); i++)
@@ -170,7 +169,7 @@
 			<a href="./Productlist.bo?car_num=<%=cb.getCar_num()%>"><li name="tab<%=i+1 %>" class="tab_color<%=cb.getCar_num() %>" style="color: #F29661; background-color: white; border-bottom:4px solid #F29661;" value="<%=cb.getCar_name()%>" onclick="btnclick(<%=cb.getCar_num() %>)"><%=cb.getCar_name()%></li></a> 
 			
 		<%}else{%>
-			<a href="./Productlist.bo?car_num=<%=cb.getCar_num()%>"><li name="tab<%=i+1 %>" class="tab_color<%=cb.getCar_num() %>" style="background-color: white;" value="<%=cb.getCar_name()%>" onclick="btnclick(<%=cb.getCar_num() %>)"><%=cb.getCar_name()%></li></a> 
+			<a href="./Productlist.bo?car_num=<%=cb.getCar_num()%>"><li name="tab<%=i+1 %>" class="tab_color<%=cb.getCar_num() %>" style="color: black; background-color: white;" value="<%=cb.getCar_name()%>" onclick="btnclick(<%=cb.getCar_num() %>)"><%=cb.getCar_name()%></li></a> 
 		<%} 
 			}
 		%>

@@ -454,6 +454,39 @@ public class BoardFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		else if(command.equals("/ContentUpdateAction.bo"))
+		{
+			System.out.println("ContentUpdateAction cald");
+			action = new ContentUpdateAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/ContentDeleteAction.bo"))
+		{
+			System.out.println("ContentDeleteAction cald");
+			action = new ContentDeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/ProductSearchAction.bo"))
+		{
+			System.out.println("ProductSearchAction cald");
+			action = new ProductSearchAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		
 		

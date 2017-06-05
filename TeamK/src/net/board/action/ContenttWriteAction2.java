@@ -17,28 +17,32 @@ public class ContenttWriteAction2 implements Action{
 		
 		request.setCharacterEncoding("UTF-8");
 		//request 파라미터 정보 가져오기
+		int num = Integer.parseInt(request.getParameter("num"));
+		int re_ref = Integer.parseInt(request.getParameter("re_ref"));
+		int re_lev = Integer.parseInt(request.getParameter("re_lev"));
+		int re_seq = Integer.parseInt(request.getParameter("re_seq"));		
 		String id = request.getParameter("id");
 		String content = request.getParameter("content");
-		int ref_fk = Integer.parseInt(request.getParameter("ref_fk"));
+		int h_or_s = Integer.parseInt(request.getParameter("secretChk"));
+		
 		//자바빈 패키지 net.member.db 파일 MemberBean
 				//MemberBean 객체 생성
 		CommentBean comb = new CommentBean();
 				//파라미터 정보 => 자바빈 저장
 		comb.setId(id);
 		comb.setContent(content);
-		comb.setRef_fk(ref_fk);
+		comb.setRe_ref(re_ref);
+		comb.setRe_lev(re_lev);
+		comb.setRe_seq(re_seq);
+		comb.setGroup_del(num);
+		comb.setH_or_s(h_or_s);
 		
-		int num = Integer.parseInt(request.getParameter("ref_fk"));
-		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
 		CommentDAO cmodao = new CommentDAO();
 		cmodao.reinsertComment(comb);
 		
 				
 				//ActoinForward 이동정보 담아서 로그인 이동
-				ActionForward forward = new ActionForward();
-				forward.setPath("./ProductContent.bo?num="+num+ "&pageNum="+pageNum);
-				forward.setRedirect(true);
-				return forward;
+		return null;
 	}
 
 }
