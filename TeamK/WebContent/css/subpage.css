@@ -1,4 +1,13 @@
 @CHARSET "UTF-8";
+* {
+	margin: 0;
+	padding: 0;	
+}
+body {
+	font-size: 13px;
+	
+}
+
 /* Overall Components */
 div#clear {clear: both;}
 * {
@@ -71,7 +80,7 @@ div#article_script {
 
 /* Main.jsp */
 div#datepicker {
-	height: 200px;
+	height: 250px;
 	width: 60%;
 	min-width: 1000px;
 	margin: 0 auto;
@@ -81,14 +90,24 @@ div#notice, div#scheduler {
 	float: left;
 	width: 500px;
 }
-div#notice {padding: 20px;}
+div#notice {
+	padding: 20px;
+	}
+div#notice td#num{
+/* 	padding-left: 8px; */
+text-align: left;
+}
 div#scheduler {
 	background-color: #06c;
-	height: 200px;
+	height: 250px;
 	color: #fff;
 	font-weight: bold;
 	font-size: 20px;
+	padding: 40px 0;
 }
+div#scheduler *{
+  margin: 10px 0;
+	}
 div#scheduler form {
 	text-align: left;
 	margin-left: 40px;
@@ -128,7 +147,10 @@ div#package_show a {
 	text-align: left;
 	text-decoration: none;
 	color: #fff;
-	text-shadow: 1px 1px 1px #000;
+	text-shadow: 2px 3px 4px #000, -2px -3px 4px #000;
+	/*  */
+    
+	/* background-color: rgba(255,255,255,0.7); */
 }
 #package_show #pack1 {
 	background-repeat : no-repeat;
@@ -136,6 +158,7 @@ div#package_show a {
 	background-position: center center;
  	transition: 0.4s;
  	background-position: left;
+ 	
 }
 div#package_show a#pack2 {
 	background-repeat : no-repeat;
@@ -151,26 +174,30 @@ div#package_show a#pack3 {
  	transition: 0.4s;
  	background-position: right;
 }
+
 a#pack1 span, a#pack2 span, a#pack3 span {
 	margin-left: 10px;
 	display: block;
 }
+
 a#pack1 #pktt, a#pack2 #pktt, a#pack3 #pktt {
 	font-size: 28px;
 	font-weight: bold;
 	margin-top: 10px;
 	padding-left: 10px;
-	padding-top: 10px;
-	
+	padding-top: 25px;
 }
 a#pack1 #pksc, a#pack2 #pksc, a#pack3 #pksc {
-	height: 30px;
+	font-size: 18px;
 	padding-left: 10px;
+	line-height: 0px;
+
 }
 a#pack1 #pkpr, a#pack2 #pkpr, a#pack3 #pkpr {
 	font-size: 25px;
 	font-weight: bold;
 	padding-left: 10px;
+	line-height: 16px;
 }
 div#goods_show {
 	height: 250px;
@@ -180,7 +207,7 @@ div#goods_show {
 	background-color: #ccc;
 }
 div#review_show {
-	height: 200px;
+	height: 250px;
 	width: 1000px;
 	margin: 0 auto;
 	margin-top: 15px;
@@ -189,9 +216,10 @@ div#review_show {
 }
 div#review_show div {
 	height: 200px;
-	width: 490px;
+	width: 440px;
 	float: left;
 	padding: 10px;
+	margin: 0 20px;
 }
 div#datepicker div h1, div#review_show div h1 {
 	text-align: left;
@@ -215,14 +243,16 @@ div#datepicker div table, div#review_show div table {
 div#datepicker div table tr, div#review_show div table tr {
 	color: #565656;
 	text-align: left;
-	border-bottom: 1px dtted #999;
-	height: 25px;
+	border-bottom: 1px dotted #999;
+	height: 35px;
+	/*  */
+	padding: 15px 0;
 }
 div#datepicker div table tr:HOVER, #review_show div table tr:hover {background-color: #cef;}
 div#datepicker div table a, div#review_show div table a {
 	text-decoration: none;
 	color: #565656;
-	padding-left: 10px;
+	
 }
 div#datepicker div table td#num, div#review_show div table td#num {width: 20px;}
 div#datepicker div table td#date, div#review_show div table td#date {width: 70px;}
