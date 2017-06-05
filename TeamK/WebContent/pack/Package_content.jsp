@@ -527,13 +527,13 @@
 		var cost = $("#aa" + packnum).html();
 		
 	    var str = String(cost);
-	    var uncomma_cost = str.replace(/[^\d]+/g, '');
+	    var uncomma_cost = str.replace(/[^\d]+/g, '');  // 콤마 삭제
 	    var uncomma_cost2 = uncomma_cost/2;
 		
 		
 		str = String(uncomma_cost);
 		var comma_cost =  str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
-		str1 = String(uncomma_cost);
+		str1 = String(uncomma_cost2);
 		var comma_cost2 =  str1.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
 		
 		$("#cost_adult").html(comma_cost);
