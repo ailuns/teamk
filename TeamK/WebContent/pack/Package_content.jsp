@@ -65,10 +65,11 @@
 		str1 = String(uncomma_cost2);
 		var comma_cost2 =  str1.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');  // 금액 자릿수 ,를 붙인다
 		
-		$("#cost_adult").html(comma_cost);
-		$("#cost_child").html(comma_cost2);
-		$("#p").html(comma_cost);
-
+		$("#cost_adult").html(comma_cost);  // 어른 값 설정
+		$("#cost_child").html(comma_cost2);  // 아이 값 설정
+		$("#p").html(comma_cost);			// 합계 = 어른 1명 선택값 
+		$("#stock").val($("#stock0").html());  // 선택된 stock 값 설정
+		
 		// 페이지 로딩 될 때 첫번쨰 선택된 날짜 값으로 초기값 설정 부분
 		
 		// 달력 관련 소스
@@ -494,7 +495,29 @@
 	function select_date(select_num)
 	{
 		var packnum = $("#select_rbtn" + select_num).val();  // 해당 라디오버튼의 글번호 값을 불러온다
-
+		var stock = $("#stock" + select_num).html(); // 선택된 날짜의 수량을 가져온다
+		
+		$("#stock").val(stock);  // 수량을 id="stock"인 곳에 값을 넣어준다 
+		
+		var stock_temp; 
+		
+		if (stock > 10)  // stock이 10보다 클 경우
+		{
+			stock_temp = 10;
+		}
+		else			// stock이 10보다 작을 경우
+		{
+			stock_temp = stock;
+		}
+		
+		$("#adult").find("option").remove();  // 어른에서 선택 값 전부 삭제
+		for (i = 1; i <= stock_temp; i++)  // stock_temp가 최대치인 어른 선택값 생성 
+		{
+			$('#adult').append("<option value=" + i + ">" + i + "</option");
+		}
+		people_Calc(1);  // 어른 값 변경에 따른 아이값 변경
+		
+		
 		
 		$(".select_color").css("background-color","");		// tr 부분 모든 배경색을 없앤다
 		$("#select_rbtn" + select_num).prop("checked", "true"); // 클릭된 라디오 버튼을 체크로 바꾼다
@@ -637,6 +660,11 @@
 		location.href="./ProductContent.bo?num=" + select_num + "&car_num=" + car_num;
 	}
 
+	function Select_stock(select)
+	{
+		var stock = $("#stock" + select).html();
+		
+	}
 </script>
 
 <!-- 구글맵에 필요한 스크립트 -->
@@ -859,6 +887,7 @@
 						<tr>
 							<td class="contentdiv1_1">합계</td>
 							<td colspan="2">
+								<input type="hidden" id="stock" value="">
 								<input type="hidden" id="cost" name="cost" value="">
 								<input type="hidden" id="ori_num" name="pnum" value="">
 								<input type="hidden" name="type" value="P">
@@ -881,11 +910,17 @@
 							function people_Calc(num){			
 								$(document).ready(function(){
 									var val1 = $("#adult option:selected").val();  // 어른 인원 선택된 값을 가져온다
-									var val2 = $("#child option:selected").val();  // 아이 인원 선택된 값을 가져온다
+									var val2 = $("#child option:selected").val();  // 아이 인원 선택된 값을 가져온다									
+									
+									var stock = $("#stock").val();
 									
 									// 어른 수에 따라 아이 수 제한
 									if (num == 1) // 어른 선택 시 호출
 									{
+										if (val1 > stock - val1) 
+										{
+											val1 = stock - val1;
+										}
 										$("#child").find("option").remove();  // 아이에서 선택 값 전부 삭제
 										for (i = 0; i <= val1; i++)  // 선택된 어른 수가 최대치인 아이 선택값 생성     ex) 어른 3명 선택 시 아이도 3명까지 선택 가능
 										{
@@ -934,7 +969,7 @@
 					<td class="date_td_size"><%=pb.getDate() %></td>
 					<td class="date_td_size"><%=pb.getSubject() %></td>
 					<td class="date_td_size" id="aa<%=pb.getNum() %>"><%=cost %></td>
-					<td class="date_td_size"><%=pb.getStock() %></td>
+					<td class="date_td_size" id="stock<%=i %>"><%=pb.getStock() %></td>
 				</tr>
 				<%
 					}
