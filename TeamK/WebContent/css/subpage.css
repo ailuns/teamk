@@ -156,16 +156,21 @@ a#pack1 span, a#pack2 span, a#pack3 span {
 	display: block;
 }
 a#pack1 #pktt, a#pack2 #pktt, a#pack3 #pktt {
-	font-size: 25px;
+	font-size: 28px;
 	font-weight: bold;
 	margin-top: 10px;
+	padding-left: 10px;
+	padding-top: 10px;
+	
 }
 a#pack1 #pksc, a#pack2 #pksc, a#pack3 #pksc {
 	height: 30px;
+	padding-left: 10px;
 }
 a#pack1 #pkpr, a#pack2 #pkpr, a#pack3 #pkpr {
 	font-size: 25px;
 	font-weight: bold;
+	padding-left: 10px;
 }
 div#goods_show {
 	height: 250px;
