@@ -1127,7 +1127,7 @@ if (user_id == null)
 							<td class="contentdiv1_1">합계</td>
 							<td colspan="2">
 								<input type="hidden" id="cost" name="cost" value="">
-								<input type="hidden" id="ori_num" name="pnum" value="">
+								<input type="hidden" id="ori_num" name="tnum" value="">
 								<input type="hidden" name="type" value="T">
 								<p id="p"></p>
 							</td>
@@ -1160,7 +1160,7 @@ if (user_id == null)
 									alert("더이상클릭할수업습니다.")
 								}else{
 								str++;
-								document.fr.stack.value = str;
+								document.input_fr.stack.value = str;
 								}
 								var sum = str * val;
 								
@@ -1175,7 +1175,7 @@ if (user_id == null)
 									alert("더이상클릭할수업습니다.")
 								}else{
 								str--;
-								document.fr.stack.value = str;
+								document.input_fr.stack.value = str;
 								}
 								var sum = str * val;
 							    str = String(sum);

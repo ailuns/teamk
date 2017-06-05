@@ -34,7 +34,7 @@ public class MyBasketAddAction implements Action{
 		if(type.equals("T")){
 			TBasketBEAN tbb = new TBasketBEAN();
 			tbb.setId(id);
-			tbb.setCount(Integer.parseInt("count"));
+			tbb.setCount(Integer.parseInt(request.getParameter("count")));
 			tbb.setCost(cost);
 			tbb.setOri_num(Integer.parseInt(request.getParameter("tnum")));
 			check = bnsdao.TBasketCheck(tbb);
