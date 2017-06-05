@@ -1,9 +1,12 @@
-<%@page import="javax.websocket.Session"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-	<%@ page import="net.member.db.*"%>
-<%@ page import="java.util.*"%>
+    <%@ page import="net.pack.db.PackDAO" %>
+    <%@ page import="net.pack.db.PackBean" %>
+    <%@ page import="java.util.List" %>
+    <%@ page import="net.pack.db.CategoryBean" %>
     <%@ page import="java.text.DecimalFormat" %>
+    	<%@ page import="net.member.db.*"%>
+<%@ page import="java.util.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -38,81 +41,48 @@
 	        	}
 	        }
 		});
-
-	    // 탭 관련 소스
-		$(".tab_content").hide();  // 탭 내용 전체 숨김
-		$(".tab_content:first").show();  // 탭 첫번째 내용만 보이게
-		
-// 		$('ul li.tab_color' ).click(function() {
-// 			$('.tab_color').css("color", "black");  //탭부분 글자색 검은색으로
-// 			$('.tab_color').css("border-bottom", "none");
-// 			$(".tab_content").hide();					// 탭 내용 전체 숨김
-// 			$(this).css("color", "#F29661");			// 클릭된 탭부분 글자색 #F29661으로
-// 			$(this).css("border-bottom", "4px solid #F29661");			
-// 			var activeTab = $(this).attr("name");		// 클릭된 탭부분 name 속성값 가져와서 저장
-// 			$("#" + activeTab).fadeIn();		// 해당 탭내용 부분을 보여준다  흐릿 -> 또렷하게 애니메이션 효과			
-// 		});
 	});
-	function btnclick(str){
-	
-			$('.tab_color').css("color", "black");  //탭부분 글자색 검은색으로
-			$('.tab_color').css("border-bottom", "none");
-			$(".tab_content").hide();					// 탭 내용 전체 숨김
-			$('.tab_color'+str).css("color", "#F29661");
-			$('.tab_color'+str).css("border-bottom", "4px solid #F29661");		
-			var activeTab = $(this).attr("name");		// 클릭된 탭부분 name 속성값 가져와서 저장
-			$("#" + activeTab).fadeIn();		// 해당 탭내용 부분을 보여준다  흐릿 -> 또렷하게 애니메이션
-		
-	}
-	
 	
 	// 패키지 검색 시 지역 선택
 	function input_chk()
     {
-    	var val = $("#serch_data").val(); 
+    	var val = $("#area option:selected").val(); 
     	if (val == "")
 		{
-    		alert("검색어를 넣어주세요");
+    		alert("지역을 선택해주세요");
 	    		return false;
 		}
 		return true;
     }
-	//슬라이드
-	var slideIndex = 1;
-	showDivs(slideIndex);
-	function plusDivs(n) {
-	  showDivs(slideIndex += n);
-	}
-	function currentDiv(n) {
-	  showDivs(slideIndex = n);
-	}
-	function showDivs(n) {
-	  var i;
-	  var x = document.getElementsByClassName("slider");
-	  if (n > x.length) {slideIndex = 1}    
-	  if (n < 1) {slideIndex = x.length}
-	  for (i = 0; i < x.length; i++) {
-	     x[i].style.display = "none";  
-	  }
-	  x[slideIndex-1].style.display = "block";  
-	}
-	
-	
+
 </script>
+
+<style type="text/css">
+
+img.ui-datepicker-trigger
+{
+	cursor : pointer;
+	margin-left : 5px;
+}
+
+#package_list tr:HOVER
+{
+/* 	cursor: pointer; */
+}
+
+.clear 
+{
+	clear: both;
+}
+</style>
 </head>
 <body>
-<!-- 왼쪽 메뉴 -->
-<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
-<!-- 왼쪽 메뉴 -->
 <%	request.setCharacterEncoding("utf-8");
 		ProductBean pb = new ProductBean();
 		ProductDAO pdao = new ProductDAO();
-		CategoryBean cb = new CategoryBean();
-		CategoryDAO cdao = new CategoryDAO();
-		List productList2 = (List) request.getAttribute("productList2");
+
 	 	//디비 객체 생성 BoardDAO bdao
 	 	// int count = getBoardCount() 메서드호출 count(*)
-	 	int car_num = (int) request.getAttribute("car_num");
 	 	int count = (int) request.getAttribute("count");
 	 	int pageSize = (int) request.getAttribute("pageSize");
 	 	String pageNum = (String) request.getAttribute("pageNum");
@@ -124,17 +94,24 @@
 	 	int startPage = (int) request.getAttribute("startPage");
 	 	int endPage = (int) request.getAttribute("endPage");
 	 	String user_id = (String) session.getAttribute("id");
+	 	String serch_data = (String) session.getAttribute("serch_data");
 	%>
 
+<!--왼쪽 메뉴 -->
+<div>
+	<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
+</div>
+<!--왼쪽 메뉴 -->
 <div id="wrap">
-	<div id="package_head">
-		패키지
+	<div id="article_head">
+		<div id="article_title"><img src="./img/travel2.png" width="30px" style="margin-right: 8px; vertical-align: bottom;">패키지</div>
+	<div class="empty"></div>
 	</div>
 	<!--여행지 검색창 -->
 	<div id="package_feat">
-		<jsp:include page ="../inc/packSlide.jsp"></jsp:include>
-			<div id="package_search">
-			<p>상품 검색하기</p>
+		<jsp:include page="../inc/packSlide.jsp"></jsp:include>
+		<div id="package_search">
+			<p>내게 맞는 패키지 검색하기</p>
 			<form action="./ProductSearchAction.bo" name="fr" method="get" id="scheduler" onsubmit="return input_chk();">
 				<label for="date_from">검색명</label><input type="text" id="serch_data" class="input_style" name="serch_data" required="yes"><br><br>
 <!-- 				<label for="date_to">~</label><input type="text" id="date_to" class="input_style" name="endDate"><br><br> -->
@@ -144,38 +121,38 @@
 			</form>
 		</div>
 	</div>
-	<div id="clear"></div>
-	<!--여행지 검색창 -->
-	<div id="clear"></div>
-	<div id="package_tab">
-		<form action="./Package.po" method="get" id="pf">
-		<!-- 탭 부분 -->
-		<ul class="tabs">
+		<div id="clear"></div>
+		
 		<%
-			cb =(CategoryBean)productList2.get(0);
-			if(car_num == 1){
-		%>
-			<a href="./Productlist.bo?car_num=<%=cb.getCar_num()%>"><li name="tab1" class="tab_color" style="color: #F29661; background-color: white; border-bottom:4px solid #F29661;" value="<%=cb.getCar_name()%>"><%=cb.getCar_name()%></li></a> 
-	
-		<%}else{%>
-		<a href="./Productlist.bo?car_num=<%=cb.getCar_num()%>"><li name="tab1" class="tab_color" style="color: black; background-color: white;" value="<%=cb.getCar_name()%>"><%=cb.getCar_name()%></li></a> 
-		<%}
-			
-			for (int i = 1; i < productList2.size(); i++)
+			if(count == 0)
 			{
-				cb =(CategoryBean)productList2.get(i);
-			if(car_num == cb.getCar_num()){
-		%>	
-			<a href="./Productlist.bo?car_num=<%=cb.getCar_num()%>"><li name="tab<%=i+1 %>" class="tab_color<%=cb.getCar_num() %>" style="color: #F29661; background-color: white; border-bottom:4px solid #F29661;" value="<%=cb.getCar_name()%>" onclick="btnclick(<%=cb.getCar_num() %>)"><%=cb.getCar_name()%></li></a> 
-			
-		<%}else{%>
-			<a href="./Productlist.bo?car_num=<%=cb.getCar_num()%>"><li name="tab<%=i+1 %>" class="tab_color<%=cb.getCar_num() %>" style="color: black; background-color: white;" value="<%=cb.getCar_name()%>" onclick="btnclick(<%=cb.getCar_num() %>)"><%=cb.getCar_name()%></li></a> 
-		<%} 
-			}
 		%>
-		</ul>
-		<!-- 탭 부분 -->
-		</form>
+				<p>검색조건에 해당하는 상품이 총 <%=count %>개 있습니다</p>
+				<hr>
+				<div id="package_list">
+					<table style="width:1000px;">
+						<tr>
+							<td colspan="2">상품</td>
+							<td>가격</td>
+							<td>출발일자</td>
+						</tr>
+						<tr>
+							<td colspan="5"><p style="text-align: center;">해당 검색 조건에 해당하는 상품이 없습니다</p></td>
+						</tr>
+					</table>
+				</div>
+		<%
+			}
+			if (count != 0)
+			{
+		%>
+		
+		
+		<p>검색조건에 해당하는 상품이 총 <%=count %>개 있습니다</p>
+		<hr>	
+
+		<div id="package_tab">
+	
 		<div class="clear"></div>
 	<%
 		if (user_id != null)
@@ -191,12 +168,10 @@
 		<!-- 탭 내용 -->
 		<div class="tab_container"> 	
 		<%
-		for(int i = 0; i < productList2.size(); i++)
-		{
+
 				if(count == 0)
 				{
 				%>
-					<div id="tab<%=i+1 %>" class="tab_content">
 						<img alt="" src="./img/nones.png" style="margin:0 auto; margin-top:220px;">
 					</div>
 				<%
@@ -205,7 +180,6 @@
 				else if(count != 0)
 				{
 				%>
-					<div id="tab<%=i+1 %>" class="tab_content">
 					<table>
 				<%
 				for(int j = 0; j < productList.size(); j++)
@@ -249,18 +223,20 @@
 					%>
 					</table>
 					</div>
-					<%
-				} 
-		}
-		%>
+					<%} 
+					}%>
+
 		</div>
 		<!-- 탭 내용 -->
 	</div>
-	
-</div>
+		
+	</div>
+
 <!--오른쪽 메뉴 -->
- <jsp:include page="../inc/rightMenu.jsp"></jsp:include>
+	<jsp:include page="../inc/rightMenu.jsp"></jsp:include>
 <!--오른쪽 메뉴 -->
-<jsp:include page="../inc/footer.jsp"></jsp:include>
+<!--아래 메뉴-->
+	<jsp:include page="../inc/footer.jsp"></jsp:include>
+<!--아래 메뉴-->
 </body>
 </html>

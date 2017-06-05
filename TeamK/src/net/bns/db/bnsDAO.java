@@ -107,7 +107,7 @@ public class bnsDAO {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			if(rs.next())i=rs.getInt(1)+1;
-			sql = "insert into pack_basket values(?,?,?,?,?,now())";
+			sql = "insert into thing_basket values(?,?,?,?,?,now())";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, i);
 			pstmt.setInt(2,tbb.getOri_num());

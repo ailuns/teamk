@@ -121,6 +121,70 @@ public class ProductDAO {
 		return productList;
 	}
 	
+	public List getProdcutSerchList(int startRow, int pageSize,String serch_data) {
+		Connection con = null;
+		String sql = "";
+		ResultSet rs = null;
+		int count = 0;
+		List productList = new ArrayList();
+		try {
+			//1,2 디비연결 메서드호출
+			// 3 sql 객체 생성
+			// 4 rs실행저장
+			// rs while 데이터 이씅면
+			// 자바빈 객체 생성 BoardBean bb
+			// bb 멤버변수 <= rs열데이터 가져와서 저장
+			// bb 게시판 글 하나 => 저장
+			con = getConnection();
+			sql = "select * from thing where subject = ? || name = ? group by name order by num desc,num limit ?,? ";
+			pstmt =con.prepareStatement(sql);
+			pstmt.setString(1, serch_data);
+			pstmt.setString(2, serch_data);
+			pstmt.setInt(3, startRow-1);//시작행-1
+			pstmt.setInt(4, pageSize);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				ProductBean pb = new ProductBean();
+				pb.setNum(rs.getInt("num"));
+				pb.setName(rs.getString("name"));
+				pb.setSubject(rs.getString("subject"));
+				pb.setType(rs.getString("type"));
+				pb.setCost(rs.getInt("cost"));
+				pb.setReadcount(rs.getInt("readcount"));
+				pb.setContent(rs.getString("content"));
+				pb.setCountry(rs.getString("country"));
+				pb.setArea(rs.getString("area"));
+				pb.setStock(rs.getInt("stock"));
+				pb.setImg(rs.getString("img"));
+				pb.setCar_num(rs.getInt("car_num"));
+				productList.add(pb);
+		} }catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ex) {
+				}
+			}
+		}
+		return productList;
+	}
+	
+	
+	
 	
 	public ProductBean getProduct(int num){
 		ProductBean pb = null;
@@ -604,6 +668,52 @@ public class ProductDAO {
 		}
 
 		return count;
+	}
+	
+
+	public int getProductSerchCount(String serch_data) {
+		Connection con = null;
+		String sql = "";
+		ResultSet rs = null;
+		int serch_count = 0;
+		try {
+			con = getConnection();
+			sql = "select count(distinct(name)) from thing where subject = ? || name = ? ";
+			pstmt =  con.prepareStatement(sql);
+			pstmt.setString(1, serch_data);
+			pstmt.setString(2, serch_data);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				serch_count = rs.getInt(1);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ex) {
+				}
+			}
+			// 예외상관없이 마무리작업
+			// 객체 생성 닫기
+
+		}
+
+		return serch_count;
 	}
 	
 
