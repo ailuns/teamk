@@ -17,8 +17,10 @@
 		int pcount = ((Integer) request.getAttribute("pcount")).intValue();
 		int count = ((Integer) request.getAttribute("count")).intValue();
 		String pagenum = (String) request.getAttribute("pageNum");
-		String status = (String)request.getAttribute("status");
-		String status2 = (String)request.getAttribute("status2");
+		String status = request.getParameter("status");
+		String status2 = request.getParameter("status2");
+		String search = request.getParameter("search");
+		String search_type=request.getParameter("search_type");		
 		int pageNum = Integer.parseInt(pagenum);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		List<Vector> Thing_Order_List = (List<Vector>) request.getAttribute("Thing_Order_List");
@@ -29,22 +31,34 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-	$('#status').val('<%=status%>').attr('selected','selected');
-	$('#status2').val('<%=status2%>').attr('selected','selected');
+	
+	select_reset();
+	$('#title').html($('#status2 option:selected').text()+" 주문");
 	if("<%=status%>"=="completed"){
 		$('select[name="status2"]').hide();
+		$('#title').html($('#status2 option:selected').text()+" 주문");
 	 }
 	if("<%=status2%>"!="ready"){
 		$('.readycheck').hide();
 	 }
-	$('.Trans_Num_Fix').hide();
+	
+	$('#result').html($('#search_type option:selected').text()
+			+': "<%=search %>" 검색 결과  <%=count %>건 ');
 	search_type_check();
+	//검색조건에 따라 숫자만 입력받게 함
 	$("#search").keyup(function(){
 		if($('#search_type').val()=="trade_num"){
 			$(this).val( $(this).val().replace(/[^0-9]/g,"") );
 		}
 	});
 });
+function select_reset(){
+	$('#status').val('<%=status%>').attr('selected','selected');
+	$('#status2').val('<%=status2%>').attr('selected','selected');
+	$('#search_type').val('<%=search_type%>').attr('selected','selected');
+	$('#search').val('<%=search%>');
+	$('.Trans_Num_Fix').hide();
+}
 function Trans_Num_Insert(num){
 	if($('#trans_num'+num).val().length==0){
 		alert("송장 번호를 입력해 주세요");
@@ -64,26 +78,47 @@ function Trans_Num_Fix(num){
 	$('#trans_num'+num).select();
 }
 function status_change(){
-	location.href="./Admin_Thing_OrderList.ao?status="+$('#status').val();
+	if(search_check()==null){
+		location.href="./Admin_Thing_OrderList_Search.ao?status="+$('#status').val()+"&status2=none"+
+		"&search_type="+$('#search_type').val()+"&search="+$('#search').val();
+		}
 }
 function status2_change(){
-	location.href="./Admin_Thing_OrderList.ao?status="+$('#status').val()+
-	"&status2="+$('#status2').val();
-}
-function search(){
-	if($('#search').val().length==0){
-		alert('검색어를 입력해 주세요');
-		return false;
-	}else{
+	if(search_check()==null){
 		location.href="./Admin_Thing_OrderList_Search.ao?status="+$('#status').val()+
 		"&status2="+$('#status2').val()+"&search_type="+$('#search_type').val()+
 		"&search="+$('#search').val();
 	}
-	
+}
+function search(){
+	if(search_check()==null){	
+		location.href="./Admin_Thing_OrderList_Search.ao?status="+$('#status').val()+
+		"&status2="+$('#status2').val()+"&search_type="+$('#search_type').val()+
+		"&search="+$('#search').val();
+	}
+}
+function search_check(){
+	if($('#search').val().length==0){
+		if(confirm('검색 조건을 없애겠습니까?')){
+			location.href = "./Admin_Thing_OrderList.ao?status="+$('#status').val()+
+			"&status2="+$('#status2').val();
+			return true;
+		}else{
+			select_reset();
+			return false;	
+		}
+	}return null;
 }
 function trans_num_search(trans_num){
 	window.open("./trans_num_search.ao?num="+trans_num,''
 			,'left=600, top=150, width=400, height=400');
+}
+function search_type_check(){
+	if($('#search_type').val()=="trade_num"){
+		$('#search').attr('placeholder','숫자로만 검색 가능 합니다');
+	}else{
+		$('#search').removeAttr('placeholder');
+	}
 }
 function status_update(o_num,status){
 	if(status==3){
@@ -129,17 +164,6 @@ function status_update(o_num,status){
 		}
 	}
 }
-function Trade_Update_Info(o_num) {
-	window.open("./Trade_Update_Info.mo?num="+o_num,''
-			,'left=600, top=150, width=400, height=400, scrollbars=yes');
-}
-function search_type_check(){
-	if($('#search_type').val()=="trade_num"){
-		$('#search').attr('placeholder','숫자로만 검색 가능 합니다');
-	}else{
-		$('#search').removeAttr('placeholder');
-	}
-}
 </script>
 </head>
 <body>
@@ -149,13 +173,12 @@ function search_type_check(){
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
-
-	<div id="article_head">
-			<div id="article_title">Administrator Goods Order List</div>
+		<div id="article_head">
+			<div id="article_title"><span id = "title"></span></div>
 			<div class="empty"></div>
-			<div id="article_script"></div>
+			<div id="article_script"><span id ="result"></span></div>
 		</div>
-		<div id="empty"></div>
+		<div id="clear"></div>
 		<article>
 	
 
@@ -173,8 +196,7 @@ function search_type_check(){
 			<option value="cancel">환불 요청</option>
 		</select>
 		<div align="right">	
-		<select id="search_type" name="search_type"
-			onchange="search_type_check()">
+		<select id="search_type" name="search_type">
 			<option value="trade_num">주문번호</option>
 			<option value="trans_num">송장 번호</option>
 			<option value="id">아이디</option>
@@ -185,6 +207,8 @@ function search_type_check(){
 		<input type="text" id="search" name="search">
 		<input type="button" value="검색" onclick="return search()">
 		</div>
+
+
 		<form action="./TO_Status_Update.ao?status=2" method="post" name="fr">
 		
 		<%
@@ -346,18 +370,22 @@ function search_type_check(){
 	 </form>
 	 <%
 		if (count != 0) {
+			String se = "&search_type="+search_type+"&search="+search;
 			if (endpage > pcount)endpage = pcount;
 			if (startp > pblock){
-	%><a href="./Admin_Thing_OrderList.ao?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=startp-1%>">[이전]</a>
+	%><a href="./Admin_Thing_OrderList_Search.ao?status=<%=status %>&status2=<%=status2 %>
+			&pageNum=<%=startp-1%><%=se%>">[이전]</a>
 	<%
 		}
 			for (int i = startp; i <= endpage; i++) {
-	%><a href="./Admin_Thing_OrderList.ao?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=i %>">[<%=i%>]
+	%><a href="./Admin_Thing_OrderList_Search.ao?status=<%=status %>&status2=<%=status2 %>
+			&pageNum=<%=i %><%=se%>">[<%=i%>]
 	</a>
 	<%
 		}
 			if (endpage < pcount) {
-	%><a href="./Admin_Thing_OrderList.ao?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=endpage+1%>">[다음]</a>
+	%><a href="./Admin_Thing_OrderList_Search.ao?status=<%=status %>&status2=<%=status2 %>
+			&pageNum=<%=endpage+1%><%=se%>">[다음]</a>
 	<%
 		}
 		}

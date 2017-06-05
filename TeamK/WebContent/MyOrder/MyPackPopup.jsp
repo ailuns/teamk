@@ -227,8 +227,10 @@ function initAutocomplete() {
 	<hr>
 	<center><h3 id="sub"><%=pb.getCity()%> <%=pb.getSarea()%></h3></center>
 	<hr>
+	<center>
 	<input type="button" id="btn1" value="주변 명소"> 
 	<input type="button" id="btn2" value="주변 맛집">
+	</center>
 </div>
 <!--구글맵 제어할 버튼 부분 -->
 

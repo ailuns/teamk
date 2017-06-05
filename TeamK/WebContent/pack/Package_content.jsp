@@ -1214,7 +1214,7 @@
 						//이전
 						if (startPage > pageBlock) {
 				%>
-				<a href="./PackContent.po?num=<%=PB.getNum() %>&pageNum=<%=startPage - pageBlock%>#QnA">[이전]</a>
+				<a href="./PackContent.po?num=<%=PB.getNum() %>&repageNum=<%=startPage - pageBlock%>#QnA">[이전]</a>
 				<%
 					}
 
@@ -1228,7 +1228,7 @@
 						//다음
 						if (endPage < pageCount) {
 				%>
-				<a href="./PackContent.po?num=<%=PB.getNum() %>&pageNum=<%=startPage + pageBlock%>#QnA">[다음]</a>
+				<a href="./PackContent.po?num=<%=PB.getNum() %>&repageNum=<%=startPage + pageBlock%>#QnA">[다음]</a>
 				<%
 					}
 				}

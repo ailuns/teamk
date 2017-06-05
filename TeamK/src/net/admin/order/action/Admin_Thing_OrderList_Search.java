@@ -11,7 +11,7 @@ import net.admin.order.db.AdminDAO;
 import net.mod.db.ModDAO;
 import net.mod.db.ModTradeInfoBEAN;
 
-public class Admin_Thing_OrderList implements Action{
+public class Admin_Thing_OrderList_Search implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -20,6 +20,8 @@ public class Admin_Thing_OrderList implements Action{
 		String pageNum = request.getParameter("pageNum");
 		String stat = request.getParameter("status");
 		String stat2 = request.getParameter("status2");
+		String search_type=request.getParameter("search_type");
+		String search=request.getParameter("search");
 		String ti_status="";
 		String to_status="";
 		
@@ -38,6 +40,20 @@ public class Admin_Thing_OrderList implements Action{
 			case "ing": ti_status="<8";break;
 			case "completed":ti_status="=10";
 				to_status=">8";break;
+		}
+		switch(search_type){
+			case "trade_num":
+				ti_status+=" and ti_num="+search; break;
+			case "id":
+				ti_status+=" and id like '%"+search+"%'"; break;
+			case "payer":
+				ti_status+=" and ti_trade_payer like '%"+search+"%'"; break;
+			case "moblie":
+				ti_status+=" and ti_receive_mobile like '%"+search+"%'"; break;
+			case "name":
+				ti_status+=" and ti_receive_name like '%"+search+"%'"; break;
+			case "trans_num":
+				to_status+=" and o_trans_num like '%"+search+"%'"; break;
 		}
 		System.out.println(to_status+">>>>>>"+ti_status);
 		AdminDAO adao = new AdminDAO();
@@ -78,7 +94,7 @@ public class Admin_Thing_OrderList implements Action{
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("pcount", pcount);
 		request.setAttribute("count", count);
-		afo.setPath("./Admin/Admin_Thing_OrderList.jsp");
+		afo.setPath("./Admin/Admin_Thing_OrderList_Search.jsp");
 		afo.setRedirect(false);
 		return afo;
 	}

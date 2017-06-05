@@ -132,6 +132,7 @@ public class AdminDAO {
 			while(rs.next()){
 				ModTradeInfoBEAN mtib = new ModTradeInfoBEAN();
 				mtib.setTi_num(rs.getInt("ti_num"));
+				mtib.setId(rs.getString("id"));
 				mtib.setName(rs.getString("ti_receive_name"));
 				mtib.setMobile(rs.getString("ti_receive_mobile"));
 				mtib.setPostcode(rs.getString("ti_receive_postcode"));
@@ -143,6 +144,7 @@ public class AdminDAO {
 				mtib.setTrade_date(rs.getTimestamp("ti_trade_date"));
 				mtib.setTotal_cost(rs.getInt("ti_total_cost"));
 				mtib.setStatus(rs.getInt("ti_status"));
+				mtib.setTrade_date(rs.getTimestamp("ti_trade_date"));
 				BankPayList.add(mtib);
 			}
 		}catch (Exception e) {
@@ -263,6 +265,74 @@ public class AdminDAO {
 			}
 		}
 	}
+	public void Thing_Stock_Plus(int ori_num, int t_count){
+		System.out.println(ori_num+">>>>>"+t_count);
+		try{
+			conn = getconn();
+			sql ="update thing set stock=? where num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, t_count);
+			pstmt.setInt(2, ori_num);
+			pstmt.executeUpdate();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	public ModTradeInfoBEAN TO_Info_Read(int o_num){
+		ModTradeInfoBEAN mtib = new ModTradeInfoBEAN();
+		try{
+			conn = getconn();
+			sql = "select A.*, B.stock from thing_order A "+
+				"left outer join thing B on A.ori_num = B.num where o_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, o_num);
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				mtib.setO_memo(rs.getString("o_memo"));;
+				mtib.setOri_num(rs.getInt("ori_num"));
+				mtib.setThing_count(rs.getInt("stock"));
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return mtib;
+	}
+	
+	public void TO_Str_Status_Update(String status, int o_num){
+		try{
+			conn = getconn();
+			sql ="update thing_order set "+status+
+					" where o_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, o_num);
+			pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	public void BankPayChecked(int status, int ti_num){
 		PO_Status_Update(status, ti_num);
 		TO_Status_Update(status, ti_num);
@@ -289,7 +359,7 @@ public class AdminDAO {
 	public void Trans_Num_Insert(String to_num, String Trans_Num){
 		try{
 			conn = getconn();
-			sql = "update thing_order set o_trans_num =?, o_status=3 where o_num = ?";
+			sql = "update thing_order set o_trans_num =?, o_status=3, o_date=now() where o_num = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, Trans_Num);
 			pstmt.setInt(2, Integer.parseInt(to_num));
@@ -328,13 +398,13 @@ public class AdminDAO {
 		}
 		return check;
 	}
-	public List<ModTradeInfoBEAN> ADThingOrder(int ti_num){
+	public List<ModTradeInfoBEAN> ADThingOrder(int ti_num, String to_status){
 		List<ModTradeInfoBEAN> ADThingList = new ArrayList<ModTradeInfoBEAN>();
 		try{
 			conn =getconn();
 			sql = "select A.*, B.subject, B.intro, B.img "
 					+"from thing_order A left outer join thing B "
-					+"on A.ori_num = B.num where A.o_ti_num=? and A.o_status = 2";
+					+"on A.ori_num = B.num where A.o_ti_num=? and A.o_status"+to_status;
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, ti_num);
 			rs = pstmt.executeQuery();
@@ -351,7 +421,22 @@ public class AdminDAO {
 				mtib.setColor(rs.getString("o_color"));
 				mtib.setSize(rs.getString("o_size"));
 				mtib.setTrade_date(rs.getTimestamp("o_date"));
+				mtib.setO_memo(rs.getString("o_memo"));
 				mtib.setTrans_num(rs.getString("o_trans_num"));
+				int status = rs.getInt("o_status");
+				String status_text = "";
+				mtib.setStatus(status);
+				switch(status){
+					case 1: status_text="입금 확인";break;
+					case 2: status_text="배송 준비";break;
+					case 3: status_text="배송 중";break;
+					case 4: status_text="배송 완료";break;
+					case 5: status_text="교환 요청";break;
+					case 6: status_text="환불 요청";break;
+					case 9: status_text="환불 완료";break;
+					case 10: status_text="구매 완료";break;
+				}
+				mtib.setStatus_text(status_text);
 				ADThingList.add(mtib);
 			}
 		}catch (Exception e) {

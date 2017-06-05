@@ -117,8 +117,7 @@ function Trade_Update_Info(o_num) {
 								<span class="update_info" onclick="Trade_Update_Info(<%=mtb.getNum() %>)" >교환 배송 중</span>
 						<%}else out.print(mtb.getStatus_text());
 						}else if(mtb.getStatus()==9){//환불 조건 찾기
-							String [] memoar = mtb.getMemo().split(":");
-							String[]paybackinfo = memoar[0].split(",");
+							String[]paybackinfo = mtb.getMemo().split(",");
 									//일부만 환불 되었을 경우
 							if((mtb.getThing_count()-Integer.parseInt(paybackinfo[2]))!=0){%>
 								구매 완료<br>

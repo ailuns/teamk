@@ -1225,7 +1225,6 @@ div#board_write form textarea {width: 797px;}
 div#board_write form input[type="submit"],
 div#board_write form input[type="button"] {width: 150px;}
 
-
 /*Board Delete.jsp*/
 div#board_delete {
 	margin: 100px auto;
@@ -1240,6 +1239,25 @@ div#board_delete form input[type="submit"] {
 	border: 1px solid #000;
 }
 div#board_delete form input[type="submit"]:HOVER {cursor: pointer;}
+
+/*My Basket List.jsp*/
+div#my_basket_list {
+	width: 900px;
+	margin: 0 auto;
+}
+div#my_basket_list table {width: 100%;}
+div#my_basket_list table tr {border-bottom: 1px solid #ddd;}
+div#my_basket_list table th {padding: 10px;}
+div#my_basket_list table img {
+	height: 70px;
+	width: 120px;
+}
+div#my_basket_list a {
+	text-decoration: none;
+	font-weight: bold;
+	color: #000;
+}
+div#my_basket_list a:HOVER {color: #f00;}
 
 /*My Pack Basket List.jsp*/
 form#pack_basket_list {
@@ -1435,6 +1453,23 @@ div#my_interest table tr {
 }
 div#my_interest table th {
 	background-color: #eee;
+}
+
+div#my_interest table #inb_img
+{
+	width : 200px;
+	height : 150px;
+}
+
+div#my_interest table .ev_hover:HOVER
+{
+	cursor: pointer;
+}
+
+div#my_interest table #inb_img
+{
+	width : 200px;
+	height : 150px;
 }
 
 

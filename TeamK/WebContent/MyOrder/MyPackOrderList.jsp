@@ -81,7 +81,7 @@ function pack_popup(select)
 		<div id="article_head">
 			<div id="article_title"><span id = "title"></span></div>
 			<div class="empty"></div>
-			<div id="article_script">상품이나 패키지 후기를 쓰는 곳 입니다.</div>
+			<div id="article_script"></div>
 		</div>
 		<div id="clear"></div>
 		<article>
