@@ -1256,10 +1256,10 @@ if (user_id == null)
 		
 
 		<!--상품 문의 -->
-			<div id="middle3">
 			<div id="QnA">
 			<h3>상품 문의</h3>
 			<hr>
+			<div id="middle3">
 			<table border="1" id="replyTable">
 				<tr>
 <!-- 					<td>번호</td> -->

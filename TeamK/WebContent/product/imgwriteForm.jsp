@@ -65,19 +65,6 @@ function winopen(num){
 	
 </script>
 
-<style type="text/css">
-
-
-#wrap_pack
-{
-	width : 1000px;
-	min-height : 1000px;
-	border : 1px solid black;
-	margin : 0 auto;
-	padding-top : 50px;
-}
-
-</style>
 
 </head>
 <%
@@ -97,7 +84,13 @@ function winopen(num){
 <jsp:include page="../inc/leftMenu.jsp"></jsp:include>
 <!-- 왼쪽 메뉴 -->
 
+<div id="wrap">
+	<div id="article_head">
+		<div id="article_title"><img src="./img/travel2.png" width="30px" style="margin-right: 8px; vertical-align: bottom;">패키지 상품등록</div>
+	<div class="empty"></div>
+</div>
 <div id="wrap_pack">
+<div id="wrap_pack_detail">
 	<div>
 		<form action="./ProductWriteAction.bo" id="fr" method="post" enctype="multipart/form-data">
 			<table border="1">
@@ -180,8 +173,8 @@ function winopen(num){
 				
 				<tr id = "select3">
 					<td>글내용</td>
-					<td style="width:770px; height:412px;">
-					<textarea name="content" id="ir1" rows="10" cols="100" style="width:770px; height:412px; display:none;"></textarea>
+					<td style="width:770px; height:500px;">
+					<textarea name="content" id="ir1" rows="10" cols="100" style="width:770px; height:500px; display:none;"></textarea>
 					</td>
 				</tr>
 				<script type="text/javascript">
@@ -268,54 +261,74 @@ function winopen(num){
 	
 </script>
 				
-				
-				<tr id="select2">
-					<td>이미지첨부</td>
-					<td>
-					<input type="file" name="file1" id="file1" accept=".gif, .jpg, .png"><input type="button" value="+" onclick="winopen(1)">
-					<input type="button" value="x" class="dup" id="button" onclick="document.getElementById('file1').value='';">
-					</td>
-				</tr>
-				<tr id="aa">
-					<td>이미지첨부</td>
-					<td>
-					<input type="file" name="file2" id="file2" accept=".gif, .jpg, .png"><input type="button" value="+" onclick="winopen(2)">
-					<input type="button" value="x" class="dup" id="button" onclick="document.getElementById('file2').value='';">
-					</td>
-				</tr>
-				<tr id="aa2">
-					<td>이미지첨부</td>
-					<td>
-					<input type="file" name="file3" id="file3" accept=".gif, .jpg, .png"><input type="button" value="+" onclick="winopen(3)">
-					<input type="button" value="x" class="dup" id="button" onclick="document.getElementById('file3').value='';">
-					</td>
-				</tr>	
-				<tr id="aa3">
-					<td>이미지첨부</td>
-					<td>
-					<input type="file" name="file4" id="file4" accept=".gif, .jpg, .png"><input type="button" value="+" onclick="winopen(4)">
-					<input type="button" value="x" class="dup" id="button" onclick="document.getElementById('file4').value='';">
-					</td>
-				</tr>
-				<tr id="aa4">
-					<td>이미지첨부</td>
-					<td>
-					<input type="file" name="file5" id="file5" accept=".gif, .jpg, .png">
-					<input type="button" value="x" class="dup" id="button" onclick="document.getElementById('file5').value='';">
-					</td>
-				</tr>
-				
-				<tr>
-					<td><input type="submit" id="save" value="글쓰기"></td>
-					<td><input type="button" value="취소" onclick="history.back()"></td>
-				</tr>
-			</table>
+			<tr id="select2">
+						<td class="td_size">이미지첨부</td>
+						<td>
+						<input type="text" name="file1" id="file1" readonly style="width: 300px; accept=".gif, .jpg, .png">
+						<input type="button" value="파일첨부" class="dup" id="button" onclick="document.getElementById('file11').click();">
+						<input type="button" value="파일삭제" class="dup" id="button" onclick="document.getElementById('file1').value='';">
+						<input type="button" value="+" onclick="winopen(1)">
+						<input type="file" size="30" name="file1" id="file11" style="display: none;"
+						onchange="document.getElementById('file1').value=this.value;" />		
+						</td>
+					</tr>
+					<tr id="aa">
+						<td class="td_size">이미지첨부</td>
+						<td>
+						<input type="text" name="file2" id="file2" readonly style="width: 300px; accept=".gif, .jpg, .png">
+						<input type="button" value="파일첨부" class="dup" id="button" onclick="document.getElementById('file22').click();">
+						<input type="button" value="파일삭제" class="dup" id="button" onclick="document.getElementById('file2').value='';">
+						<input type="button" value="+" onclick="winopen(2)">
+						<input type="file" size="30" name="file2" id="file22" style="display: none;"
+						onchange="document.getElementById('file2').value=this.value;" />
+						</td>
+					</tr>
+					<tr id="aa2">
+						<td class="td_size">이미지첨부</td>
+						<td>
+						<input type="text" name="file3" id="file3" readonly style="width: 300px; accept=".gif, .jpg, .png">
+						<input type="button" value="파일첨부" class="dup" id="button" onclick="document.getElementById('file33').click();">
+						<input type="button" value="파일삭제" class="dup" id="button" onclick="document.getElementById('file3').value='';">
+						<input type="button" value="+" onclick="winopen(3)">
+						<input type="file" size="30" name="file3" id="file33" style="display: none;"
+						onchange="document.getElementById('file3').value=this.value;" />
+						</td>
+					</tr>	
+					<tr id="aa3">
+						<td class="td_size">이미지첨부</td>
+						<td>
+						<input type="text" name="file4" id="file4" readonly style="width: 300px; accept=".gif, .jpg, .png">
+						<input type="button" value="파일첨부" class="dup" id="button" onclick="document.getElementById('file44').click();">
+						<input type="button" value="파일삭제" class="dup" id="button" onclick="document.getElementById('file4').value='';">
+						<input type="button" value="+" onclick="winopen(4)">
+						<input type="file" size="30" name="file4" id="file44" style="display: none;"
+						onchange="document.getElementById('file4').value=this.value;" />
+						</td>
+					</tr>
+					<tr id="aa4">
+						<td class="td_size">이미지첨부</td>
+						<td>
+						<input type="text" name="file5" id="file5" readonly style="width: 300px; accept=".gif, .jpg, .png">
+						<input type="button" value="파일첨부" class="dup" id="button" onclick="document.getElementById('file55').click();">
+						<input type="button" value="파일삭제" class="dup" id="button" onclick="document.getElementById('file5').value='';">
+						<input type="file" size="30" name="file5" id="file55" style="display: none;"
+						onchange="document.getElementById('file5').value=this.value;" />
+						</td>
+					</tr>
+				</table>
 			
+				</div>
+			</div>
+			<input type="submit" id="save" value="글쓰기">
+					<input type="button" value="취소" onclick="history.back()">
 		</form>
 	</div>
 </div>
 <!-- 오른쪽 메뉴 -->
 <jsp:include page="../inc/rightMenu.jsp"></jsp:include>
 <!-- 오른쪽 메뉴 -->
+<!-- 푸터 메뉴 -->
+	<jsp:include page="../inc/footer.jsp"></jsp:include>
+<!-- 푸터 메뉴 -->
 </body>
 </html>
