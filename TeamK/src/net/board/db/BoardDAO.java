@@ -750,7 +750,7 @@ try {
 			if(rs.next()){
 				if(bb.getId().equals(rs.getString("id"))){
 					check=1;
-					sql="update board set subject=?,content=?,file1=?,file2=?,file3=?,file4=?,file5=?,email=? where num=?";
+					sql="update board set subject=?,content=?,file1=?,file2=?,file3=?,file4=?,file5=?,email=?,type_select=? where num=?";
 					pstmt=con.prepareStatement(sql);
 					pstmt.setString(1,bb.getSubject());
 					pstmt.setString(2,bb.getContent());
@@ -760,7 +760,8 @@ try {
 					pstmt.setString(6,bb.getFile4());
 					pstmt.setString(7,bb.getFile5());
 					pstmt.setString(8,bb.getEmail());
-					pstmt.setInt(9,bb.getNum());
+					pstmt.setString(9,bb.getType_select());
+					pstmt.setInt(10,bb.getNum());
 				
 					pstmt.executeUpdate();
 				}

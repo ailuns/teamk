@@ -37,6 +37,15 @@ String id = (String)session.getAttribute("id");
 <form action="./BoardUpdateAction.bo?pageNum=<%=pageNum%>" method="post" name="fr" enctype="multipart/form-data">
 <input type="hidden" name="num" value="<%=bb.getNum()%>">
 <input type="hidden" name="id" value="<%=id%>">
+<div style="float: left;">글머리
+<select name="select" id="type_select" style="margin-left: 68px;">
+	<option value="기타">기타</option>
+    <option value="상품리뷰">상품리뷰</option>
+    <option value="패키지리뷰">패키지리뷰</option>
+</select>
+</div>
+<div id="clear"></div>
+<br>
 <label for="subject">제목</label><input type="text" name="subject" id="subject" value="<%=bb.getSubject()%>" maxlength="40"><br><br>
 <textarea id="ir1" rows="30" cols="80" name="content"><%=bb.getContent() %></textarea><br><br>
 <%if(bb.getFile1()!=null){%><label for="file11">기존파일1</label><input type="hidden" name="file11" id="file11" value="<%=bb.getFile1()%>"><img src="./upload/<%=bb.getFile1()%>" width="50" ><%=bb.getFile1()%><%}%><br>
@@ -50,7 +59,7 @@ String id = (String)session.getAttribute("id");
 <label for="file4">첨부파일4</label><input type="file" name="file4" id="file4">
 <label for="file5">첨부파일5</label><input type="file" name="file5" id="file5">
 <div class="clear"></div><br>
-<input type="submit" value="글수정" onclick="submitContents(this);">
+<input type="submit" id="save" value="글수정" onclick="submitContents(this);">
 <input type="button" value="취소" OnClick="javascript:history.back(-1)">
 </form>
 </div>
@@ -110,16 +119,12 @@ $("#save").click(function(){
 		document.fr.subject.focus();
 		return false;
 	}
-    
-
 
     if (content == "<br>")  // 빈공간 값 <br>
     {
        alert("글을 입력해주세요");  // 메시지 띄움
        return false;
-    }
-    
-    else // 글내용 있을 시
+    }else // 글내용 있을 시
     {
        oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []); // Edit에 쓴 내용을 textarea에 붙여넣어준다
         $("#fr").submit();  // form을 submit 시킨다
