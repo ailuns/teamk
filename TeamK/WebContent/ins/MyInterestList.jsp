@@ -89,6 +89,7 @@ List<interestBEAN> InterestThing = (List<interestBEAN>) request.getAttribute("In
 		%>
 		<table>
 			<tr>
+				<th class="inb_img"></th>
 				<th id="num">상품명</th>
 				<th id="num">가격</th>
 				
@@ -96,12 +97,15 @@ List<interestBEAN> InterestThing = (List<interestBEAN>) request.getAttribute("In
 			</tr>
 			<%
 				for (int i = 0; i < InterestThing.size(); i++) {
+						DecimalFormat Commas = new DecimalFormat("#,###");
 						interestBEAN inb = InterestThing.get(i);
+						String cost = (String)Commas.format(inb.getCost());
 			%>
 			<tr>
-				<td><%=inb.getSubject()%></td>
-				<td><%=inb.getCost()%><br>
+			<td class="inb_img ev_hover" onclick="inter_pack_move(<%=i %>);"><img id="inb_img" alt="" src="./upload/<%=inb.getImg() %>"></td>
+				<td><%=inb.getSubject()%><br>
 				<%=inb.getIntro() %></td>
+				<td><%=cost%>원</td>
 				<td>
 				<input type="button" value="찜 취소" onclick = "location.href='./MyInterestDel.ins?n=<%=inb.getInter_num()%>'"></td>
 			</tr>
