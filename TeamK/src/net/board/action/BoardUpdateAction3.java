@@ -35,6 +35,7 @@ public class BoardUpdateAction3 implements Action {
 		bb.setId(multi.getParameter("id"));
 		bb.setSubject(multi.getParameter("subject"));
 		bb.setContent(multi.getParameter("content"));
+		bb.setType_select("공지사항");
 		bb.setEmail(multi.getParameter("email"));
 		if(multi.getFilesystemName("file1")!=null){
 			bb.setFile1(multi.getFilesystemName("file1"));

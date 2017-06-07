@@ -65,7 +65,7 @@
 	function basket_delete(){
 		
 		if(confirm("정말 삭제하시겠습니까?")){
-			if(check()==0){
+			if(check==0){
 				alert("선택된 항목이 없습니다!");
 				return false;
 			}else{
@@ -86,15 +86,8 @@
 		}
 	}
 	function check(){
-		var pchcount = 0,tchcount = 0;
-		for(i = 0; i<document.fr.tch.length;i++){
-			if(document.fr.tch[i].checked==true)tchcount++;
-		}
-		for(i = 0; i<document.fr.pch.length;i++){
-			if(document.fr.pch[i].checked==true)pchcount++;
-		}
-		return pchcount+tchcount;
-	
+		return $('input:checkbox[name=tch]:checked').length+
+				 $('input:checkbox[name=tch]:checked').length;
 	}
 	// 장바구니에서 패키지 상품 클릭 시 해당 패키지 정보로 이동
 	function pack_numchk(i)
@@ -124,7 +117,7 @@
 <div id="article_head">
 <div id="article_title">
 	장바구니
-</div>
+</div>afasdfasdfa
 <div class="empty"></div>
 </div>
 <article>
@@ -142,7 +135,7 @@
 				
 				
 		%>
-		<table>
+		<table id ="ptable">
 			<tr>
 				<th id="num"></th>
 				<th id="num">이미지</th>
@@ -206,7 +199,7 @@
 				List<TBasketBEAN> ThingBasket = (List<TBasketBEAN>) request.getAttribute("ThingBasket");
 		%>
 		
-		<table>
+		<table id ="ttable">
 			<tr>
 				<th id="num"></th>
 				<th id="num">이미지</th>
