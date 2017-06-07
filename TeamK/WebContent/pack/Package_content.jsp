@@ -56,6 +56,8 @@
 		var stockArr = new Array();   // 각각 라디오 버튼 받을 배열
 		var stock_t = 0;
 		var radio_len = $('input:radio[name=chk]').length;  // 라디오 버튼 갯수 구하기
+		
+		// 각 날짜별 수량 가져오기
 		for (var i = 0; i < radio_len; i++)
 		{
 			stock_t = $("#stock" + i).html(); // 각 날짜 마다 수량 값을 가져온다
@@ -67,7 +69,7 @@
 		// 날짜별로 수량이 0인 품목은 비활성화 및 클릭 이벤트 해제
 		for (var i = 0; i < radio_len; i++)
 		{
-			if (stockArr[i] == 0)		
+			if (stockArr[i] == 0)	// 수량 0		
 			{
 				$("#select_rbtn" + i).attr("disabled", true);  // 라디오 버튼 비활성화
 				$("#select_date" + i).attr("onclick", "");  // 클릭 이벤트 없앰
@@ -97,10 +99,8 @@
 			$('#adult').append("<option value=" + i + ">" + i + "</option");
 		}
 		
-
-		var num = $("input:radio[name=chk]:checked").val();
-		var cost = $("#cost" + num).html();
-		
+		var num = $("input:radio[name=chk]:checked").val();  // 체크된 품목의 넘버값 가져온다
+		var cost = $("#cost" + num).html();  // 체크된 품목의 값 가져온다
 		
 	    var str = String(cost);
 	    uncomma_cost = str.replace(/[^\d]+/g, ''); // 금액 자릿수 ,를 없앤다  cost는 어른 금액
