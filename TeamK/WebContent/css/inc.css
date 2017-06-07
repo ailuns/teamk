@@ -154,6 +154,7 @@ body {
 	margin: 0;
 	padding: 0;
 	background: linear-gradient(to top, #d6a176, #f0e3d5);
+	font-size: 13px;
 }
 div#wrap {
  	width: 1000px;

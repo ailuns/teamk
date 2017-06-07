@@ -1,16 +1,10 @@
 @CHARSET "UTF-8";
-* {
-	margin: 0;
-	padding: 0;	
-}
-body {
-	font-size: 13px;
-	
-}
 
 /* Overall Components */
 div#clear {clear: both;}
 * {
+	margin: 0;
+	padding: 0;	
 	box-sizing: border-box;
 	font-family: "나눔 고딕", "Noto Sans", sans-serif;
 }
@@ -28,6 +22,7 @@ input[type="button"], input[type="submit"] {
 	border: 1px solid #06c;
 	background-color: #fff;
 	color: #06c;
+	padding: 1px 10px;
 }
 input[type="button"]:HOVER, input[type="submit"]:HOVER {
 	background-color: #06c;
@@ -1427,6 +1422,7 @@ div#my_thing_order_list {
 }
 div#my_thing_order_list fieldset {
 	border: 1px solid #06c;
+	padding: 10px;
 }
 div#my_thing_order_list legend {
 	font-size: 20px;
@@ -1535,6 +1531,61 @@ div#packInterest_list a {
 	color: #000;
 	font-weight: bold;
 }
-div#packInterest_list a:HOVER {
-	color: #f00;
+div#packInterest_list a:HOVER {color: #f00;}
+
+/*Admin Order List.jsp*/
+div#admin_order_list input[type="button"] {
+	width: 400px;
+	height: 50px;
+	text-transform: capitalize;
+	font-size: 25px;
+	font-weight: bolder;
+	margin: 5px auto;
 }
+
+/*Bank Pay Check.jsp*/
+div#bank_pay_check {
+	width: 900px;
+	margin: 0 auto;
+}
+div#bank_pay_check fieldset {
+	border: 1px solid #06c;
+	padding: 10px;
+	margin: 10px auto;
+	text-align: left;
+}
+div#bank_pay_check legend {
+	font-size: 20px;
+	font-weight: bold;
+	padding: 0 10px;
+}
+div#bank_pay_check table {width: 100%;}
+div#bank_pay_check td {padding: 5px;}
+
+/*Admin Thing Order.jsp*/
+div#admin_thing_order {
+	width: 900px;
+	margin: 0 auto;
+}
+div#admin_thing_order fieldset {
+	border: 1px solid #06c;
+	padding: 10px;
+	margin: 10px auto;
+	text-align: left;
+}
+div#admin_thing_order legend {
+	font-size: 20px;
+	font-weight: bold;
+	padding: 0 10px;
+}
+div#admin_thing_order table {
+	width: 100%;
+}
+div#admin_thing_order tr {border-bottom: 1px solid #ccc;}
+div#admin_thing_order td {padding: 5px;}
+div#admin_thing_order th {
+	width: 100px;
+	background-color: #f0f0f0;
+	border-right: 2px solid #aaa;
+}
+

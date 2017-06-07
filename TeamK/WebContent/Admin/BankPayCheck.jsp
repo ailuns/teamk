@@ -59,6 +59,12 @@ function Trade_Info_Delete(){
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
+		<div id="article_head">
+<div id="article_title">관리자 주문 관리 메뉴</div>
+<div class="empty"></div>
+</div>
+<article>
+<div id="bank_pay_check">
 <%	
 		request.setCharacterEncoding("utf-8");
 		int pblock = ((Integer) request.getAttribute("pblock")).intValue();
@@ -83,8 +89,9 @@ function Trade_Info_Delete(){
 				
 	%>
 	
-		<h3>주문 번호 : <%=mtib.getTi_num() %></h3>
-		<h4>결제일 : <%=sdf.format(mtib.getTrade_date())%></h4>
+		<fieldset>
+		<legend>주문 번호 : <%=mtib.getTi_num() %></legend>
+		<h4>결제일 : <%=sdf.format(mtib.getTrade_date())%></h4><br>
 		<table border="1">
 			<tr>
 				<td><input type = "checkbox" name ="tich" 
@@ -95,12 +102,12 @@ function Trade_Info_Delete(){
 				<td><%=sdf.format(mtib.getTrade_date()) %></td>
 			</tr>
 		</table>
-		<span id="order_select<%=i%>" class="order_select"
-			onclick = "order_view(<%=i%>)">주문 품목▼</span>
-		<span id="order_selected<%=i%>" class="order_selected" onclick="order_hide()">주문 품목▲</span>
+		<br><center id="order_select<%=i%>" class="order_select"
+			onclick = "order_view(<%=i%>)">주문 품목▼</center>
+		<center id="order_selected<%=i%>" class="order_selected" onclick="order_hide()">주문 품목▲</center>
 		<div id="order_view<%=i%>" class="order_view">
 		<%if(mpbList.size()!=0){ %>
-				<h5>주문한 여행 패키지 목록</h5>
+				<br><h5>주문한 여행 패키지 목록</h5><br>
 				<table border = "1">
 					<%for(int j =0; j< mpbList.size();j++){
 						ModTradeInfoBEAN mpb = mpbList.get(j);
@@ -119,7 +126,7 @@ function Trade_Info_Delete(){
 				</table>				
 			<%} 
 			if(mtbList.size()!=0){%>
-				<h5>주문한 상품 목록</h5>
+				<br><h5>주문한 상품 목록</h5><br>
 				<table border = "1">
 					<%for(int j =0; j< mtbList.size();j++){
 						ModTradeInfoBEAN mtb = mtbList.get(j);%>
@@ -138,10 +145,11 @@ function Trade_Info_Delete(){
 				<%} %>
 		</div>
 		
-		<br>
+		<br></fieldset>
 	<%	
 			}
 			%>
+		
 		<input type="submit" value="입금 확인  완료">
 		<input type="button" value="주문 삭제" onclick="Trade_Info_Delete()"> 
 	<%
@@ -171,7 +179,9 @@ function Trade_Info_Delete(){
 	}
 	%>
 	
-	<input type = "button" value = "주문 관리" onclick="location.href='./AdminOrderList.ao'">
+	<br><input type = "button" value = "주문 관리" onclick="location.href='./AdminOrderList.ao'">
+		</div>
+		</article>
 		</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->
