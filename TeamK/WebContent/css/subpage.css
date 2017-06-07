@@ -903,8 +903,10 @@ div#login_form form label {
 	text-align: right;
 }
 div#login_form form input {
-	margin: 5px 0;
+	margin: 5px 5px;
 	border: 1px solid #999;
+	width: 120px;
+	height: 20px;  
 }
 div#login_form form input[type="text"],
 div#login_form form input[type="password"] {width: 200px;}
@@ -915,8 +917,7 @@ div#login_form table {
 	text-align: left;
 }
 div#login_form table tr#hr {border-bottom: 1px solid #ccc;}
-div#login_form table input[type="button"] {width: 130px;}
-
+div#login_form table input[type="button"] {width: 130px; margin: 5px;}
 /*Insert Form.jsp*/
 div#insert_form {
 	margin: 30px auto;

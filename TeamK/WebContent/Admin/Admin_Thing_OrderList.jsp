@@ -17,8 +17,8 @@
 		int pcount = ((Integer) request.getAttribute("pcount")).intValue();
 		int count = ((Integer) request.getAttribute("count")).intValue();
 		String pagenum = (String) request.getAttribute("pageNum");
-		String status = (String)request.getAttribute("status");
-		String status2 = (String)request.getAttribute("status2");
+		//String status = (String)request.getAttribute("status");
+		//String status2 = (String)request.getAttribute("status2");
 		int pageNum = Integer.parseInt(pagenum);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		List<Vector> Thing_Order_List = (List<Vector>) request.getAttribute("Thing_Order_List");

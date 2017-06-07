@@ -32,7 +32,8 @@ if (id != null) {
 				<form action="./MemberLoginAction.me" method="post" name="fr">
 					<label for="id">아이디</label><input type="text" name="id" id="id" autofocus><br> 
 					<label for="pass">비밀번호</label><input type="password" name="pass" id="pass"><br> 
-					<input type="submit" value="로그인">
+					<input type="submit" value="로그인" id="login_submit">
+					<input type="button" value="돌아가기" onclick="location.href='./main.fo'">
 					<input type="hidden" value="<%=request.getHeader("referer")%>" name="exurl">
 				</form>
 				<table>
