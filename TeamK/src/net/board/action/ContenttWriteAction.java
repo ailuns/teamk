@@ -19,28 +19,30 @@ public class ContenttWriteAction implements Action{
 		
 		request.setCharacterEncoding("UTF-8");
 		//request 파라미터 정보 가져오기
+		String pageNum = request.getParameter("pageNum");
+		int num = Integer.parseInt(request.getParameter("num"));
 		String id = request.getParameter("id");
 		String content = request.getParameter("content");
-		int ref_fk = Integer.parseInt(request.getParameter("ref_fk"));
+		int h_or_s = Integer.parseInt(request.getParameter("secretChk"));
+		System.out.println(id);
+		System.out.println(content);
+		System.out.println(h_or_s);
+		
 		//자바빈 패키지 net.member.db 파일 MemberBean
 				//MemberBean 객체 생성
 		CommentBean comb = new CommentBean();
 				//파라미터 정보 => 자바빈 저장
 		comb.setId(id);
 		comb.setContent(content);
-		comb.setRef_fk(ref_fk);
+		comb.setH_or_s(h_or_s);
+		comb.setGroup_del(num);
 		
-		int num = Integer.parseInt(request.getParameter("ref_fk"));
-		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
 		CommentDAO cmodao = new CommentDAO();
 		cmodao.insertComment(comb);
 		
 				
 				//ActoinForward 이동정보 담아서 로그인 이동
-				ActionForward forward = new ActionForward();
-				forward.setPath("./ProductContent.bo?num="+num+ "&pageNum="+pageNum);
-				forward.setRedirect(true);
-				return forward;
+		return null;
 	}
 
 

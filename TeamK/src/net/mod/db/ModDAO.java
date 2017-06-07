@@ -31,6 +31,46 @@ public class ModDAO {
 		conn = ds.getConnection();
 		return conn;
 	}
+	public void Mul_Thing_Stock(ModTradeInfoBEAN mtib){
+		try{
+			conn =getconn();
+			sql ="update thing set stock = ? where num = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, mtib.getStock());
+			pstmt.setInt(2, mtib.getOri_num());
+			pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	public void Mul_Pack_Stock(ModTradeInfoBEAN mtib){
+		try{
+			conn =getconn();
+			sql ="update pack set stock = ? where num = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, mtib.getStock());
+			pstmt.setInt(2, mtib.getOri_num());
+			pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	public int PO_Count(String id, String status){
 		int count = 0;
 		try{
@@ -76,6 +116,67 @@ public class ModDAO {
 		}
 		return count;
 	}
+	public ModTradeInfoBEAN Thing_Stock_Check(int num,ModTradeInfoBEAN mtib){
+		try{
+			conn = getconn();
+			sql ="select subject, size, color, stock"+
+					" from thing where num = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				System.out.println(rs.getInt("stock")-mtib.getThing_count());
+				if((rs.getInt("stock")-mtib.getThing_count())<0){
+					mtib.setStock_check(1);
+					mtib.setSubject(rs.getString("subject"));
+					mtib.setSize(rs.getString("size"));
+					mtib.setColor(rs.getString("color"));
+				}
+				mtib.setStock(rs.getInt("stock"));			
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return mtib;
+	}
+	public ModTradeInfoBEAN Pack_Stock_Check(int num,ModTradeInfoBEAN mtib){
+		try{
+			conn = getconn();
+			sql ="select subject, stock"+
+					" from pack where num = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				if((rs.getInt("stock")-mtib.getThing_count())<0){
+					mtib.setStock_check(1);
+					mtib.setSubject(rs.getString("subject"));
+				}
+				
+				mtib.setStock(rs.getInt("stock"));
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return mtib;
+	}
+	
 	public ModTradeInfoBEAN TBasketInfoToMTIB(int tch_num,ModTradeInfoBEAN mtib){
 		try{
 			conn = getconn();

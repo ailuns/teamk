@@ -158,7 +158,7 @@
 			</table>
 			</div>
 			<div id="scheduler">
-				<p>내게 맞는 패키지 검색하기</p>
+				<p>[ 내게 맞는 패키지 검색하기 ]</p>
 				<form action="./PackSearchAction.po" method="post" name="fr" id="scheduler" onsubmit="return input_chk();">					
 					<label for="from">날짜</label>
 					<input type="text" id="from" name="startDate"><br>

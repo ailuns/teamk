@@ -2,6 +2,8 @@ package net.mod.action;
 
 
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -56,7 +58,6 @@ public class MyOrderAddAction implements Action{
 		if(Monthly_pay==null)Monthly_pay="1";
 		int status = 2;
 		String trade_type = request.getParameter("t_type");
-		if(!(trade_type.equals("무통장 입금"))&&tch==null)status=9;
 		switch(trade_type){
 			case "카드 결제":
 				trade_type+=", "+request.getParameter("select_card")+
@@ -72,6 +73,8 @@ public class MyOrderAddAction implements Action{
 					break;
 		}
 		int check = 0;
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
 		mtib.setStatus(status);
 		mtib.setTrade_type(trade_type);
 		mtib=moddao.CreateTradeInfo(mtib);
@@ -79,17 +82,116 @@ public class MyOrderAddAction implements Action{
 		if(tch!=null){
 			for(int i = 0; i<tch.length;i++){
 				mtib=moddao.TBasketInfoToMTIB(Integer.parseInt(tch[i]),mtib);
-				moddao.InsertThingOrder(mtib);
-				
-				//bnsdao.ThingBasketDelete(Integer.parseInt(tch[i]));
+				mtib=moddao.Thing_Stock_Check(mtib.getOri_num(), mtib);
+				if(mtib.getStock_check()==1){
+					out.println("<script>");
+					out.println("alert('죄송합니다.\\n"
+							+mtib.getSubject()+", 색상 : "+mtib.getColor()+
+							", 사이즈 : "+mtib.getSize()+"의 재고가 "+mtib.getStock()+
+							"개 밖에 남아 있지 않아 결제가 진행되지 않았습니다!\\n"+"');");
+							
+					out.println("history.back();");
+					out.println("</script>");
+					out.close();
+				}else {
+					mtib.setStock(mtib.getStock()-mtib.getThing_count());
+					moddao.Mul_Thing_Stock(mtib);
+					moddao.InsertThingOrder(mtib);
+					bnsdao.ThingBasketDelete(Integer.parseInt(tch[i]));
+				}
 			}
 		}
 		
 		if(pch!=null){
 			for(int i = 0; i<pch.length;i++){
 				mtib=moddao.PBasketInfoToMTIB(Integer.parseInt(pch[i]),mtib);
+				String [] count =mtib.getPack_count().split(",");
+				mtib.setThing_count(Integer.parseInt(count[0])+
+									Integer.parseInt(count[1]));	
+				mtib=moddao.Pack_Stock_Check(mtib.getOri_num(), mtib);
+				if(mtib.getStock_check()==1){
+					out.println("<script>");
+					out.println("alert('죄송합니다. \\n"
+							+mtib.getSubject()+"의 좌석이 "+mtib.getStock()+
+							"개 밖에 남아 있지 않아 결제가 진행되지 않았습니다!\\n"+
+							"주문 수량을 변경해 주시기 바랍니다.');");
+					out.println("history.back();");
+					out.println("</script>");
+					out.close();
+				}else {
+					mtib.setStock(mtib.getStock()-mtib.getThing_count());
+					moddao.Mul_Pack_Stock(mtib);
+					int po_num = moddao.InsertPackOrder(mtib);
+					String [] a_or_c = mtib.getPack_count().split(",");
+					pm = new PackMemberBEAN();
+					pm.setPo_num(po_num);
+					pm.setPm_id(id);
+					pm.setLeader_check(1);
+					pm.setAdult_or_child(1);
+					pmdao.PM_Create(pm);
+					pm.setLeader_check(0);
+					for(int j = 0; j < Integer.parseInt(a_or_c[0])-1; j++){
+						pmdao.PM_Create(pm);
+					}
+					pm.setAdult_or_child(2);
+					for(int j = 0; j<Integer.parseInt(a_or_c[1]);j++){
+						pmdao.PM_Create(pm);
+					}
+					
+					check = 1;
+					bnsdao.PackBasketDelete(Integer.parseInt(pch[i]));
+				}
+			}
+		}
+
+		if(tnum!=null){
+			System.out.println(tnum);
+			mtib.setOri_num(Integer.parseInt(tnum));
+			mtib.setThing_count(Integer.parseInt(request.getParameter("count")));
+			mtib.setColor(request.getParameter("color"));
+			mtib.setSize(request.getParameter("size"));
+			mtib.setCost(Integer.parseInt(request.getParameter("cost")));
+			mtib=moddao.Thing_Stock_Check(mtib.getOri_num(), mtib);
+			if(mtib.getStock_check()==1){
+				out.println("<script>");
+				out.println("alert('죄송합니다. \\n"
+						+mtib.getSubject()+", 색상 : "+mtib.getColor()+
+						", 사이즈 : "+mtib.getSize()+"의 재고가 "+mtib.getStock()+
+						"개 밖에 남아 있지 않아 결제가 진행되지 않았습니다!\\n"+
+						"주문 수량을 변경해 주시기 바랍니다.');");
+				out.println("history.back();");
+				out.println("</script>");
+				out.close();
+			}else {
+				mtib.setStock(mtib.getStock()-mtib.getThing_count());
+				moddao.Mul_Thing_Stock(mtib);
+				moddao.InsertThingOrder(mtib);
+			}
+		}
+		
+		if(pnum!=null){
+			mtib=moddao.CreateTradeInfo(mtib);
+			int num = Integer.parseInt(pnum);
+			mtib.setOri_num(num);
+			String adult = request.getParameter("adult");
+			String child= request.getParameter("child");
+			mtib.setThing_count(Integer.parseInt(adult)+Integer.parseInt(child));
+			mtib=moddao.Pack_Stock_Check(mtib.getOri_num(), mtib);
+			if(mtib.getStock_check()==1){
+				out.println("<script>");
+				out.println("alert('죄송합니다. \\n"
+						+mtib.getSubject()+"의 좌석이 "+mtib.getStock()+
+						"개 밖에 남아 있지 않아 결제가 진행되지 않았습니다!\\n"+
+						"주문 수량을 변경해 주시기 바랍니다.');");
+				out.println("history.back();");
+				out.println("</script>");
+				out.close();
+			}else {
+				mtib.setCost(mtib.getTotal_cost());
+				mtib.setPack_count(adult+","+child);
+				mtib.setStock(mtib.getStock()-mtib.getThing_count());
+				moddao.Mul_Pack_Stock(mtib);
 				int po_num = moddao.InsertPackOrder(mtib);
-				String [] a_or_c = mtib.getPack_count().split(",");
 				pm = new PackMemberBEAN();
 				pm.setPo_num(po_num);
 				pm.setPm_id(id);
@@ -97,59 +199,21 @@ public class MyOrderAddAction implements Action{
 				pm.setAdult_or_child(1);
 				pmdao.PM_Create(pm);
 				pm.setLeader_check(0);
-				for(int j = 0; j < Integer.parseInt(a_or_c[0])-1; j++){
+				for(int i = 0; i < Integer.parseInt(adult)-1; i++){
 					pmdao.PM_Create(pm);
 				}
 				pm.setAdult_or_child(2);
-				for(int j = 0; j<Integer.parseInt(a_or_c[1]);j++){
+				for(int i = 0; i<Integer.parseInt(child);i++){
 					pmdao.PM_Create(pm);
 				}
 				
 				check = 1;
-				//bnsdao.PackBasketDelete(Integer.parseInt(pch[i]));
 			}
 		}
-
-		if(tnum!=null){
-			mtib.setOri_num(Integer.parseInt(tnum));
-			mtib.setThing_count(Integer.parseInt(request.getParameter("count")));
-			mtib.setColor(request.getParameter("color"));
-			mtib.setSize(request.getParameter("size"));
-			moddao.InsertThingOrder(mtib);
-		}
-		
-		if(pnum!=null){
-			mtib=moddao.CreateTradeInfo(mtib);
-			int num = Integer.parseInt(pnum);
-			mtib.setOri_num(num);
-			mtib.setCost(mtib.getTotal_cost());
-			String adult = request.getParameter("adult");
-			String child= request.getParameter("child");
-			
-			mtib.setPack_count(adult+","+child);
-			int po_num = moddao.InsertPackOrder(mtib);
-			pm = new PackMemberBEAN();
-			pm.setPo_num(po_num);
-			pm.setPm_id(id);
-			pm.setLeader_check(1);
-			pm.setAdult_or_child(1);
-			pmdao.PM_Create(pm);
-			pm.setLeader_check(0);
-			for(int i = 0; i < Integer.parseInt(adult)-1; i++){
-				pmdao.PM_Create(pm);
-			}
-			pm.setAdult_or_child(2);
-			for(int i = 0; i<Integer.parseInt(child);i++){
-				pmdao.PM_Create(pm);
-			}
-			
-			check = 1;
-		}
-		afo.setPath("./MyOrderPayed.mo?check="+check);
-		afo.setRedirect(true);
-		return afo;
+		out.println("<script>");
+		out.println("location.href='./MyOrderPayed.mo?check="+check+"'");
+		out.println("</script>");
+		out.close();
+	return null;	
 	}
-	
-	
-
 }
