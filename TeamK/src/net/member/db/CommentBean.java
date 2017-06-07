@@ -4,14 +4,14 @@ import java.sql.Timestamp;
 
 public class CommentBean {
 	private int num;
-	private String id;;
+	private String id;
+	private String date;
 	private String content;
-	private int ref_fk;
 	private int re_ref;
 	private int re_lev;
 	private int re_seq;
-	private Timestamp date;
-	private int rock;
+	private int group_del;
+	private int h_or_s;
 	public int getNum() {
 		return num;
 	}
@@ -24,17 +24,17 @@ public class CommentBean {
 	public void setId(String id) {
 		this.id = id;
 	}
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
 	public String getContent() {
 		return content;
 	}
 	public void setContent(String content) {
 		this.content = content;
-	}
-	public int getRef_fk() {
-		return ref_fk;
-	}
-	public void setRef_fk(int ref_fk) {
-		this.ref_fk = ref_fk;
 	}
 	public int getRe_ref() {
 		return re_ref;
@@ -54,18 +54,19 @@ public class CommentBean {
 	public void setRe_seq(int re_seq) {
 		this.re_seq = re_seq;
 	}
-	public Timestamp getDate() {
-		return date;
+	public int getGroup_del() {
+		return group_del;
 	}
-	public void setDate(Timestamp date) {
-		this.date = date;
+	public void setGroup_del(int group_del) {
+		this.group_del = group_del;
 	}
-	public int getRock() {
-		return rock;
+	public int getH_or_s() {
+		return h_or_s;
 	}
-	public void setRock(int rock) {
-		this.rock = rock;
+	public void setH_or_s(int h_or_s) {
+		this.h_or_s = h_or_s;
 	}
+
 	
 	
 }

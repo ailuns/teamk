@@ -57,7 +57,9 @@ if (user_id == null)
 <script>
 
 	jQuery(document).ready(function($){
-		
+		var val = $("#avg_cost").html();
+		 var commasum = val.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+		$('#p').html(commasum);
 		// 작은 이미지 클릭 시 큰 이미지부분이 클릭한 이미지로 교체
 		$('.bxslider img').click(function(){
 			
@@ -119,75 +121,147 @@ if (user_id == null)
 	       	}
 		});
 	});
+	var slideIndex = 1;
+	showDivs(slideIndex);
+	function plusDivs(n) {
+	  showDivs(slideIndex += n);
+	}
+	function currentDiv(n) {
+	  showDivs(slideIndex = n);
+	}
+	function showDivs(n) {
+	  var i;
+	  var x = document.getElementsByClassName("slider");
+	  if (n > x.length) {slideIndex = 1}    
+	  if (n < 1) {slideIndex = x.length}
+	  for (i = 0; i < x.length; i++) {
+	     x[i].style.display = "none";  
+	  }
+	  x[slideIndex-1].style.display = "block";  
+	}
+	
+
+	jQuery(document).ready(function($){
+		var packnum = $("#ori_num_chk").val();
+// 		alert(packnum);
+		$.ajax({   // 날짜를 클릭할때 마다 찜목록과 비교
+			type:"post",
+			url:"./MyInterestCheck.ins",
+			data:{
+				num:packnum,
+				type:"T"
+			},
+			success:function(data)
+			{
+				if (data == 1)  // 찜목록에 해당 날짜 패키지가 있을 시
+				{
+					$("#jjim_o").hide();  // 찜추가   버튼  숨기기
+					$("#jjim_x").show();  // 찜삭제   버튼 보이기
+				}
+				else   // 찜목록에 해당 날짜 패키지가 없을 시
+				{
+					$("#jjim_o").show();  // 찜추가 버튼 보이기
+					$("#jjim_x").hide();  // 찜삭제 버튼 숨기기
+				}
+			}
+		});
+	});
+	
+	
 	
 	// 찜하기, 예약하기 버튼 클릭 시 각각 버튼 마다 이동할 페이지
 	function submit_fun(i, user_id)
 	{
-		// i = 1  찜추가   i = 2 찜취소    i = 3  예약하기
-		if (i == 1 && user_id != "") // 로그인 되어 있을 경우 찜추가
+		if(user_id != "")
 		{
-			$.ajax({
-				type:"post",
-				url:"./MyInterestAdd.ins",   // java로 보냄
-				data:{
-					type:"P",
-					num:$("input[type=radio][name=chk]:checked").val()					
-				},
-				success:function(){
-					alert("찜목록에 추가되었습니다");
-					$("#jjim_o").hide();
-					$("#jjim_x").show();
-//						window.location.reload(true);  // 페이지 새로고침
-				}
-			});
-		}
-		
-		else if(i == 2 && user_id != "")   // 로그인에 되어 있을 경우 찜취소
-		{
-			$.ajax({
-				type:"post",
-				url:"./MyInterestDel.ins",   // java로 보냄
-				data:{
-					type:"P",
-					num:$("input[type=radio][name=chk]:checked").val()					
-				},
-				success:function(){
-					$("#jjim_o").show();
-					$("#jjim_x").hide();
-					alert("찜목록에서 삭제되었습니다");
-//						window.location.reload(true);  // 페이지 새로고침
-				}
-			});
-		}
-		
-		else if (i == 3 && user_id != "")
-		{
-			var cost_temp = $("#p").html(); // 총금액 받아오기
-			str = String(cost_temp);		// 총금액 천원단위로 , 찍혀있는걸
-		    cost = str.replace(/[^\d]+/g, '');   // 풉니다
+			// i = 1  찜추가   i = 2 찜취소    i = 3  예약하기
+			if (i == 1) // 로그인 되어 있을 경우 찜추가
+			{
 			
-		    $("#cost").val(cost);
-		    $("#ori_num").val($("input[type=radio][name=chk]:checked").val());
+				$.ajax({
+					type:"post",
+					url:"./MyInterestAdd.ins",   // java로 보냄
+					data:{
+						type:"T",
+// 						num:$("input[type=radio][name=chk]:checked").val()	
+						num:$("#ori_num_chk").val()
+					},
+					success:function(){
+						$("#jjim_o").hide();
+						$("#jjim_x").show();
+						alert("찜목록에 추가되었습니다");
+//							window.location.reload(true);  // 페이지 새로고침
+					}
+				});
+			}
+			
+			else if(i == 2)   // 로그인에 되어 있을 경우 찜취소
+			{
+				$.ajax({
+					type:"post",
+					url:"./MyInterestDel.ins",   // java로 보냄
+					data:{
+						type:"T",
+// 						num:$("input[type=radio][name=chk]:checked").val()	
+						num:$("#ori_num_chk").val()
+					},
+					success:function(){
+						$("#jjim_o").show();
+						$("#jjim_x").hide();
+						alert("찜목록에서 삭제되었습니다");
+//							window.location.reload(true);  // 페이지 새로고침
+					}
+				});
+			}
+			
+			else if (i == 3)  // 로그인 되어 있을 경우  장바구니
+			{
+				
+				var val1 = $("#color option:selected").val(); 
+				var val2 = $("#size option:selected").val();
+				if(val1 == ""){
+					alert("color를 선택해주세요.")
+				}else if(val2 ==""){
+					alert("size를 선택해주세요.")
+				}else{
+				var cost_temp = $("#p").html(); // 총금액 받아오기
+				str = String(cost_temp);		// 총금액 천원단위로 , 찍혀있는걸
+			    cost = str.replace(/[^\d]+/g, '');   // 풉니다
+			    alert($("#size option:selected").val());				
+			    $("#cost").val(cost);
+			    $("#ori_num").val($("#size option:selected").val());
+			    alert($("#cost").val())
+			    document.input_fr.action = "./MyBasketAddAction.bns";	// 장바구니 페이지로 이동
+			    document.input_fr.method = "post";
+			    document.input_fr.submit();
+				}
+			}
+			
+			else if (i == 4)  // 로그인 되어 있을 경우  예약하기
+			{
+				var val1 = $("#color option:selected").val(); 
+				var val2 = $("#size option:selected").val();
+				if(val1 == ""){
+					alert("color를 선택해주세요.")
+				}else if(val2 ==""){
+					alert("size를 선택해주세요.")
+				}else{
+				var cost_temp = $("#p").html(); // 총금액 받아오기
+				str = String(cost_temp);		// 총금액 천원단위로 , 찍혀있는걸
+			    cost = str.replace(/[^\d]+/g, '');  // 풉니다
+				
+			    // 폼태그로 보내기때문에 hidden 숨겨둔 곳에 각각 값을 넣는다
+			    $("#cost").val(cost);
+			    $("#ori_num").val($("#size option:selected").val());
 
-		    document.input_fr.action = "./MyBasketAddAction.bns";	// 장바구니 페이지로 이동
-		    document.input_fr.method = "post";
-		    document.input_fr.submit();
+			    document.input_fr.action = "./MyOrderPay.mo";  // 예약하기 페이지로 이동
+			    document.input_fr.method = "post";
+			    document.input_fr.submit();
+				}
+			}
 		}
 		
-		else if (i == 4 && user_id != "")
-		{
-			var cost_temp = $("#p").html(); // 총금액 받아오기
-			str = String(cost_temp);		// 총금액 천원단위로 , 찍혀있는걸
-		    cost = str.replace(/[^\d]+/g, '');  // 풉니다
-			
-		    // 폼태그로 보내기때문에 hidden 숨겨둔 곳에 각각 값을 넣는다
-		    $("#cost").val(cost);
-		    $("#ori_num").val($("input[type=radio][name=chk]:checked").val());
-
-		    document.input_fr.action = "./MyOrderPay.mo";  // 예약하기 페이지로 이동
-		    document.input_fr.method = "post";
-		    document.input_fr.submit();
-		}
+		
 		
 		
 		else if(user_id == "")	// 로그인 안되어 있을 경우
@@ -208,7 +282,7 @@ if (user_id == null)
 		{
 			$.ajax({
 				type:"post",
-				url:"./ReplyWrite.ro",   // java로 보냄
+				url:"./ContenttWriteAction.bo",   // java로 보냄
 				data:{
 					id:$("#id").val(),
 					content:$("#content").val(),
@@ -225,7 +299,7 @@ if (user_id == null)
 		{
 			$.ajax({
 				type:"post",
-				url:"./ReplyWrite.ro",
+				url:"./ContenttWriteAction.bo",
 				data:{
 					id:$("#id").val(),
 					content:$("#content").val(),
@@ -246,7 +320,7 @@ if (user_id == null)
 		{
 			$.ajax({
 				type:"post",
-				url:"./Re_ReplyWriteAction.ro",
+				url:"./ContenttWriteAction2.bo",
 				data:{
 					id:$("#reid").val(),
 					content:$("#recontent"+num).val(),
@@ -267,7 +341,7 @@ if (user_id == null)
 		{
 			$.ajax({
 				type:"post",
-				url:"./Re_ReplyWriteAction.ro",
+				url:"./ContenttWriteAction2.bo",
 				data:{
 					num:$("#num").val(),
 					id:$("#reid").val(),
@@ -290,11 +364,12 @@ if (user_id == null)
 	// 댓글 삭제
 	function ReplyDel(renum, id)
 	{
+		
 		$.ajax({
 			type:"post",
-			url:"./ReplyDelAction.ro",
+			url:"./ContentDeleteAction.bo",
 			data:{
-				renum:renum,
+				num:renum,
 				id:id,				
 				success:function(){
 					window.location.reload(true);
@@ -310,7 +385,7 @@ if (user_id == null)
 		{
 			$.ajax({
 				type:"post",
-				url:"./ReplyUpdateActoin.ro",
+				url:"./ContentUpdateAction.bo",
 				data:{
 					content:$("#contentup"+num).val(),
 					num:num,
@@ -326,7 +401,7 @@ if (user_id == null)
 		{
 			$.ajax({
 				type:"post",
-				url:"./ReplyUpdateActoin.ro",
+				url:"./ContentUpdateAction.bo",
 				data:{
 					num:num,
 					content:$("#contentup"+num).val(),
@@ -543,7 +618,7 @@ if (user_id == null)
 			url:"./MyInterestCheck.ins",
 			data:{
 				num:packnum,
-				type:"P"
+				type:"T"
 			},
 			success:function(data)
 			{
@@ -938,6 +1013,8 @@ if (user_id == null)
 		<div id="package_head">
 			<div id="package_title">상품
 			</div>
+			<div id="package_feat">
+			<jsp:include page ="../inc/packSlide.jsp"></jsp:include>
 			<div id="package_search">
 				<p>내게 맞는 패키지 검색하기</p>
 				<form action="./PackSearchAction.po" name="fr1" method="get" id="scheduler" onsubmit="return input_chk()">
@@ -1006,21 +1083,19 @@ if (user_id == null)
 			
 			<!--인원수, 가격 -->
 				<div id="contentdiv1">
-				<form name="fr" method="post">
-					<table border="1">
+				<form name="input_fr" method="post">
+					<table>
 						<tr>
-							<td width="50px">판매가</td>
-							<td width="100px"><%=pb.getCost() %></td>
-						</tr>
-						<tr>
-							<td width="50px">카테고리</td>
-							<td width="100px"><%=pb.getType() %></td>
+							<td class="contentdiv1_1">판매가</td>
+							<td class="contentdiv1_2" id="avg_cost"><%=pb.getCost() %></td>
+							
+							<td class="contentdiv1_3"></td>
 						</tr>
 							<%} %>
 						<tr>
-							<td width="50px">color</td>
-								<td><select id="color" name="color" onchange="people_Calc2(<%=num%>)">
-								<option value = "">선택하세요</option>
+							<td class="contentdiv1_1">color</td>
+								<td class="contentdiv1_2"><select id="color" name="color" onchange="people_Calc2(<%=num%>)">
+								<option value ="">선택하세요</option>
 								<%
 				for (int i = 0; i < productList3.size(); i++) {
 
@@ -1030,66 +1105,82 @@ if (user_id == null)
 								<option value = "<%=pb.getColor()%>"><%=pb.getColor()%></option>
 								<%} %>
 							</select></td>
+							<td class="contentdiv1_3"></td>
 						</tr>
 						<tr>
-							<td width="50px">size</td>
-							<td width="100px">
+							<td class="contentdiv1_1">size</td>
+							<td class="contentdiv1_2">
 							<select  name="size"  id = "size"class="size" onchange="people_Calc3()">
 								<option  value = "" >선택하세요</option>
 								
 								</select></td>
+								<td class="contentdiv1_3"></td>
 						</tr>
 						<tr>
-							<td width="50px">수량</td>
-							<td width="100px">
-							<input type="button" value="▲" onclick="up()"><input type="text" id = "stack" name = "stack" value = "1" style="width:30px;"><input type="button"  value="▼" onclick="down()" >
+							<td class="contentdiv1_1">수량</td>
+							<td class="contentdiv1_2">
+							<input type="button" value="▲" onclick="up()"><input type="text" id = "stack" name = "count" value = "1" style="width:30px;" readonly><input type="button"  value="▼" onclick="down()" >
+							</td>
+							<td class="contentdiv1_3"></td>
+						</tr>
+						<tr>
+							<td class="contentdiv1_1">합계</td>
+							<td colspan="2">
+								<input type="hidden" id="cost" name="cost" value="">
+								<input type="hidden" id="ori_num" name="tnum" value="">
+								<input type="hidden" name="type" value="T">
+								<p id="p"></p>
 							</td>
 						</tr>
 						
-						
 					</table>
-					<table border="1">
-						<tr>
-							<td width="75px">성인</td>
-							<td width="75px">아동</td>
-						</tr>
-						<tr>
-							<td><select id="adult" name="adult" onchange="people_Calc(1)">
-									<%
-										for (int i = 1; i < 11; i++) {
-									%>
-									<option value="<%=i%>"><%=i%></option>
-									<%
-										}
-									%>
-							</select></td>
-							<td><select id="child" name="child" onchange="people_Calc()">
-									<option value="0">0</option>
-									<option value="1">1</option>
-							</select></td>
-						</tr>
-						<tr>
-							<td>합계</td>
-							<td colspan="2"><p id="p">200000</p> 
+					<br>
+										<%
+				for (int i = 0; i < productList.size(); i++) {
+
+						pb = (ProductBean) productList.get(i);
+			%>
+							<input type="hidden" id="ori_num_chk" value="<%=pb.getNum() %>">
+								<%} %>
+					
+				
+					<input type="button" class="contentbtn" id="jjim_o" value="♡ 찜" onclick="submit_fun(1, '<%=user_id %>')">
+					<input type="button" class="contentbtn" id="jjim_x" value="♥ 찜" style="display:none;" onclick="submit_fun(2, '<%=user_id %>')">
+					<input type="button" class="contentbtn2" value="장바구니" onclick="submit_fun(3, '<%=user_id %>')">
+					<input type="button" class="contentbtn2" value="예약하기" onclick="submit_fun(4, '<%=user_id %>')">
+					
+					
+					<p id="content_notice">※color를 선택해주셔야 size부분이 나옵니다!!!</p>
+					
 							<script type="text/javascript">
 							function up(){
-								
+								var val = $("#avg_cost").html();
 								var str = $("#stack").val();
 								if(str >= 999){
 									alert("더이상클릭할수업습니다.")
 								}else{
 								str++;
-								document.fr.stack.value = str;
+								document.input_fr.stack.value = str;
 								}
+								var sum = str * val;
+								
+							    str = String(sum);
+							    var commasum = str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+								$('#p').html(commasum);
 							}
 							function down(){
+								var val = $("#avg_cost").html();
 								var str = $("#stack").val();
 								if(str <= 1){
 									alert("더이상클릭할수업습니다.")
 								}else{
 								str--;
-								document.fr.stack.value = str;
+								document.input_fr.stack.value = str;
 								}
+								var sum = str * val;
+							    str = String(sum);
+							    var commasum = str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+								$('#p').html(commasum);
 							}
 							
 							
@@ -1099,13 +1190,13 @@ if (user_id == null)
 									var val1 = $("#color option:selected").val();
 									var val2 = str
 									
-
+									
 									$("#size").find("option").remove();
 									$('#size').append("<option  value = '' >선택하세요</option>");
 									$.getJSON('./product/json3.jsp?num='+val2+'&color='+val1,function(data){
 										$.each(data,function(index,qwer){
 										//body태그 추가 key:value	
-											$('#size').append("<option value=" + qwer.size + ">" + qwer.size + "</option>");
+											$('#size').append("<option value=" + qwer.num + ">" + qwer.size + "</option>");
 										});
 									});
 								});
@@ -1140,13 +1231,7 @@ if (user_id == null)
 								});
 							}
 							
-						</script></td>
-						</tr>
-						<tr>
-							<td><input type="submit" value="찜하기" onclick="submit_fun(1)"></td>
-							<td><input type="submit" value="예약하기" onclick="submit_fun(2)"></td>
-						</tr>
-					</table>
+						</script>
 				</form>
 			</div>
 			<!--인원수, 가격 -->
@@ -1202,108 +1287,146 @@ if (user_id == null)
 <%-- 					<td><%=rb.getNum()%></td> --%>
 					<td><%=comb.getId()%></td>
 					<%
-					if ((comb.getId().equals(user_id) && comb.getRock() == 1) || comb.getRock() == 0){
+					if ((comb.getId().equals(user_id) && comb.getH_or_s() == 1) || comb.getH_or_s() == 0){
 					%>
 					<td id="replyContent">
+						<span class="reply_align">
+						
 						<%
 							// 답글 들여쓰기 모양
 							int wid = 0;
 							if (comb.getRe_lev() > 0) {
 								wid = 10 * comb.getRe_lev();
 						%> 
-<%-- 						<img src="level.gif" id="reimg" width=<%=wid%>> <img src="re.gif"> --%>
+						<%--<img src="level.gif" id="reimg" width=<%=wid%>> <img src="re.gif"> --%>
+							<img src="./img/re.gif">
 							<span>[답변]</span>
 						<%
 							}
+							else
+							{
 						
+						%>
+						<span>[문의]</span>
+						<%
+						}
 						%> 
 						
-						<%=comb.getContent()%>
+						<%=comb.getContent()%><span style="font-size: 0.8em; margin-left:5px;">(<%=comb.getDate() %>)</span>
+						
 						<%
-						if(comb.getRock() == 1)
+						if(comb.getH_or_s() == 1)
 						{
 						%>
 						<img src="./img/lock.png" width="10px" height="10px">
+						
 						<%
 						}
 						%>
+						</span>
+						<span style="float: right;">
+						<%
+						if(user_id.equals("admin"))
+						{
+						%>
+						
+						<input type="button" value="답글" id="rereply" onclick="rewrite(<%=comb.getNum()%>)">
+						<%
+						}
+						if(comb.getId().equals(user_id))
+						{
+						%>
+						<input type="button" value="수정" id="re_update" onclick="reupdate(<%=comb.getNum() %>)">
+						<%
+						}
+						if(comb.getId().equals(user_id) || user_id.equals("admin"))
+						{
+						%>
+						<input type="button" value="삭제" id="re_delete" onclick="ReplyDel(<%=comb.getNum() %>, '<%=user_id%>');">
+						<%
+						}
+						%>
+						</span>
 					</td>
 					<%
 					}
-					else if (comb.getRock() == 1 && !comb.getId().equals(user_id)){
+					else if (comb.getH_or_s() == 1 && !comb.getId().equals(user_id)){
 					%>
 					<td style="height:50px;">
+						<span class="reply_align">
 						비밀글입니다<img src="./img/lock.png" width="10px" height="10px">
+<%-- 						<span>(<%=rb.getDate() %>)</span> --%>
+						(<%=comb.getDate() %>)
+						</span>
+						<span style="float: right;">
+						<%
+						if(user_id.equals("admin"))
+						{
+						%>
+						<input type="button" value="답글" id="rereply" onclick="rewrite(<%=comb.getNum()%>)">
+						<%
+						}
+						if(comb.getId().equals(user_id))
+						{
+						%>
+						<input type="button" value="수정" id="re_update" onclick="reupdate(<%=comb.getNum() %>)">
+						<%
+						}
+						if(comb.getId().equals(user_id) || user_id.equals("admin"))
+						{
+						%>
+						<input type="button" value="삭제" id="re_delete" onclick="ReplyDel(<%=comb.getNum() %>, '<%=user_id%>');">
+						<%
+						}
+						%>
+						</span>
 					</td>
 					<%
 					}
+					%>
 					
 					
-					if(user_id != null)
-					{
-					%>
-					<td><input type="button" value="답글" id="rereply" onclick="rewrite(<%=comb.getNum()%>)"></td>
-					<%
-					}
-					if(comb.getId().equals(user_id))
-					{
-					%>
-					<td><input type="button" value="수정" id="re_update" onclick="reupdate(<%=comb.getNum() %>)"></td>
-					<%
-					}
-					if(comb.getId().equals(user_id) || user_id.equals("admin"))
-					{
-					%>
-					<td><input type="button" value="삭제" id="re_delete" onclick="ReplyDel(<%=comb.getNum() %>, '<%=user_id%>');"></td>
-					<%
-					}
-					%>
 				</tr>
 				
 				<tr id="conup<%=comb.getNum()%>" style="display: none;">
 					<td>
-						<input type="hidden" name="num" value="<%=comb.getNum()%>">
-						<input type="hidden" name="pageNum" value="<%=pageNum%>">
-						<input type="hidden" name="ref_fk"  value="<%=num%>">
 						<%=user_id %>
 					</td>
 					
-					<td><textarea cols="60" rows="2" id="contentup<%=comb.getNum() %>" name="contentup"><%=comb.getContent() %></textarea></td>
 					<td>
-						<input type="button" id="re_reply_content" value="수정" onclick="reUpdateAction(<%=comb.getNum() %>)">
+						<span class="reply_align">
+						<textarea style="width: 550px;" cols="60" rows="2" id="contentup<%=comb.getNum() %>" name="contentup"><%=comb.getContent() %></textarea>
+						</span>
+						<span style="float: right;">
+						<input type="button" value="수정" onclick="reUpdateAction(<%=comb.getNum() %>)">
+						<input type="button" value="취소" onclick="reupdate(<%=comb.getNum() %>)"><br>
+						<input type="checkbox" class="up_secretChk<%=comb.getNum() %>" name="secretChk" value="1" <%if(comb.getH_or_s() == 1){%>checked<%} %>>비밀글
+						</span>
 					</td>
-					<td>
-						<input type="button" id="re_reply_content" value="취소" onclick="reupdate(<%=comb.getNum() %>)">
 					</td>
-					<td>
-						<input type="checkbox" class="up_secretChk<%=comb.getNum() %>" name="secretChk" value="1" <%if(comb.getRock() == 1){%>checked<%} %>>비밀글
-					</td>
-				<tr>
-				
-				
-				
+				</tr>
 				<tr id="con<%=comb.getNum()%>" style="display: none;">
 					<td>
-						<input type="hidden" id="wnum<%=comb.getNum()%>" name="num" value="<%=num%>">
-						<input type="hidden" id="repageNum<%=comb.getNum()%>" name="pageNum" value="<%=pageNum%>">
-						<input type="hidden" id="replynum<%=comb.getNum()%>" name="ref_fk" value="<%=num%>">
-						<input type="hidden" id="re_ref<%=comb.getNum()%>" name="re_ref" value="<%=comb.getRe_ref()%>">
-						<input type="hidden" id="re_lev<%=comb.getNum()%>" name="re_lev" value="<%=comb.getRe_lev()%>">
-						<input type="hidden" id="re_seq<%=comb.getNum()%>" name="re_seq" value="<%=comb.getRe_seq()%>">
+						<input type="hidden" id="num" name="num" value="<%=num%>">
+						<input type="hidden" id="repageNum" name="pageNum" value="<%=pageNum%>">
+						<input type="hidden" id="replynum" name="replynum" value="<%=comb.getNum()%>">
+						<input type="hidden" id="re_ref<%=comb.getNum() %>" name="re_ref" value="<%=comb.getRe_ref()%>">
+						<input type="hidden" id="re_lev" name="re_lev" value="<%=comb.getRe_lev()%>">
+						<input type="hidden" id="re_seq" name="re_seq" value="<%=comb.getRe_seq()%>">
 						<p><%=user_id %></p>
 						<input type="hidden" id="reid" name="id" class="box" value="<%=user_id %>">
 					</td>
-					<td><textarea type="text" cols="60" rows="2" id="recontent<%=comb.getNum()%>" name="content"></textarea></td>
 					<td>
-						<input type="button" id="re_reply_content" value="답글등록" onclick="Re_Reply_Write(<%=comb.getNum()%>)">
-					</td>
-					<td>
-						<input type="button" id="re_reply_content" value="취소" onclick="rewrite(<%=comb.getNum() %>)">
-					</td>
-					<td>
+						<span class="reply_align">
+						<textarea style="width: 550px;" cols="60" rows="2" id="recontent<%=comb.getNum() %>" name="recontent"></textarea>
+						</span>
+						<span style="float: right;">
+						<input type="button" value="답글등록" onclick="Re_Reply_Write(<%=comb.getNum() %>)">
+						<input type="button" value="취소" onclick="rewrite(<%=comb.getNum() %>)"><br>
 						<input type="checkbox" class="re_secretChk" name="secretChk" value="1">비밀글
+						</span>
 					</td>
-				<tr>
+				</tr>
 			
 				<%
 					}
@@ -1314,7 +1437,9 @@ if (user_id == null)
 				%>
 				
 			</table>
-
+			<br>
+			
+			
 			<center>
 			<%
 	if(commentcount!=0){

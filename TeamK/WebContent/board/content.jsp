@@ -30,6 +30,8 @@
 	         }
 	      });
 	}
+	
+	
 	function replydelete(rbNum) {
 		
 		$.ajax({

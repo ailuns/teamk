@@ -71,16 +71,18 @@ public class CommentDAO {
 			if (rs.next()) {
 				num = rs.getInt(1) + 1;
 			}
-			sql = "insert into comment(num,id,content,ref_fk,re_ref,re_lev,re_seq,rock,date) values(?,?,?,?,?,?,?,?,now()) ";
-			pstmt =  con.prepareStatement(sql);
+		
+			sql = "insert into comment values(?,?,now(),?,?,?,?,?,?)";
+			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.setString(2, comb.getId());
 			pstmt.setString(3, comb.getContent());
-			pstmt.setInt(4,comb.getRef_fk());// readcount 조회수
-			pstmt.setInt(5, num); // re_ref 답변글 그룹 == 일반글번호랑 같게
-			pstmt.setInt(6, 0);// re_lev 답변글 들여쓰기 일반글 들여쓰기 없음
-			pstmt.setInt(7, 0);// re_seq 답변글 순서 일반글 순서 맨위
-			pstmt.setInt(8, comb.getRock());
+			pstmt.setInt(4, num); // 답변글 그룹 == 일반글 번호
+			pstmt.setInt(5, 0); // 답변글 들여쓰기 - 일반글 들여쓰기없음
+			pstmt.setInt(6, 0); // 답변글 순서 - 일반글 순서 맨위
+			pstmt.setInt(7, comb.getGroup_del());
+			pstmt.setInt(8, comb.getH_or_s());
+			
 			pstmt.executeUpdate();
 			// 4단계 실행
 		
@@ -119,7 +121,7 @@ public class CommentDAO {
 		int count = 0;
 		try {
 			con = getConnection();
-			sql = "select count(*) from comment where ref_fk = ?  ";
+			sql = "select count(*) from comment where group_del=?  ";
 			pstmt =  con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
@@ -171,7 +173,7 @@ public class CommentDAO {
 			// bb 멤버변수 <= rs열데이터 가져와서 저장
 			// bb 게시판 글 하나 => 저장
 			con = getConnection();
-			sql = "select * from comment where ref_fk = ? order by re_ref desc,re_seq limit ?,? ";
+			sql = "select * from comment where group_del=? order by re_ref desc,re_seq limit ?,? ";
 			pstmt =con.prepareStatement(sql);
 			pstmt.setInt(1, num);//시작행-1
 			pstmt.setInt(2, startRow-1);//시작행-1
@@ -181,12 +183,13 @@ public class CommentDAO {
 				CommentBean cb = new CommentBean();
 				cb.setNum(rs.getInt("num"));
 				cb.setId(rs.getString("id"));
+				cb.setDate(rs.getString("date"));
 				cb.setContent(rs.getString("content"));
-				cb.setRef_fk(rs.getInt("ref_fk"));
 				cb.setRe_ref(rs.getInt("re_ref"));
 				cb.setRe_lev(rs.getInt("re_lev"));
 				cb.setRe_seq(rs.getInt("re_seq"));
-				cb.setDate(rs.getTimestamp("date"));
+				cb.setGroup_del(rs.getInt("group_del"));
+				cb.setH_or_s(rs.getInt("h_or_s"));
 				commentList.add(cb);
 		} }catch (Exception e) {
 			e.printStackTrace();
@@ -229,11 +232,11 @@ public class CommentDAO {
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) { // 디비중에서 하나라도 맞을경우에 쓰면 나온다.
 				if (rs.getInt("num")== comb.getNum()) {
-					String sql = "update comment set content =?, rock =? WHERE  num = ? ";
+					String sql = "update comment set content =?, h_or_s=? WHERE  num = ? ";
 					pstmt = (PreparedStatement) con.prepareStatement(sql);
 					// ? 값 저장 // 첫번째 물음표1, id에 입력될값
 					pstmt.setString(1, comb.getContent());// 두번째 물음표2, pass에 입력될값
-					pstmt.setInt(2, comb.getRock());
+					pstmt.setInt(2, comb.getH_or_s());
 					pstmt.setInt(3, comb.getNum());
 					pstmt.executeUpdate();
 					return 1;
@@ -345,16 +348,16 @@ public class CommentDAO {
 			pstmt.executeUpdate();
 			//3 sql insert num 구현값 re_ref 그대로 re_lev+1 re_sql+1
 			//4 실행
-			sql = "insert into comment(num,id,content,ref_fk,re_ref,re_lev,re_seq,rock,date) values(?,?,?,?,?,?,?,?,now()) ";
+			sql = "insert into comment values(?,?,now(),?,?,?,?,?,?) ";
 			pstmt =  con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.setString(2, comb.getId());
 			pstmt.setString(3, comb.getContent());
-			pstmt.setInt(4, comb.getRef_fk());
-			pstmt.setInt(5, comb.getRe_ref()); // re_ref 기존글 그룹번호 같게
-			pstmt.setInt(6, comb.getRe_lev()+1);// re_lev 답변글 들여쓰기 일반글 들여쓰기 없음
-			pstmt.setInt(7, comb.getRe_seq()+1);// re_seq 답변글 순서 일반글 순서 맨
-			pstmt.setInt(8, comb.getRock());
+			pstmt.setInt(4, comb.getRe_ref()); // 답변글 그룹 == 일반글 번호
+			pstmt.setInt(5, comb.getRe_lev() + 1); // 답변글 들여쓰기 - 일반글 들여쓰기없음
+			pstmt.setInt(6, comb.getRe_seq() + 1); // 답변글 순서 - 일반글 순서 맨위
+			pstmt.setInt(7, comb.getGroup_del());
+			pstmt.setInt(8, comb.getH_or_s());
 			pstmt.executeUpdate();
 			// 4단계 실행
 		} catch (Exception e) {

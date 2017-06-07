@@ -145,6 +145,10 @@ function receive_setting(){
 				<%if(tbb.getNum()!=0){ %><input type="hidden" name="tch" value="<%=tbb.getNum() %>">
 				<%}else{ %><input type="hidden" name="tnum" value="<%=tbb.getOri_num()%>">
 							<input type="hidden" name="count" value="<%=tbb.getCount() %>">
+							<input type="hidden" name="color" value="<%=tbb.getColor() %>">
+							<input type="hidden" name="size" value="<%=tbb.getSize() %>">
+							<input type="hidden" name="cost" value="<%=tbb.getCost() %>">
+							
 				<%} %>
 				</td>
 			<td><%=tbb.getSubject()%></td>
@@ -306,7 +310,12 @@ function submit_check(){
 		if($('#select_card option:eq(0)').prop('selected')){
 			alert("카드사를 선택해 주세요");
 			return false;
-		}else alert("카드 결제");
+		}
+		if(!($('input:checkbox[name=card_agree]').prop('checked'))){
+			alert("결제 대행 서비스 약관에 동의 하셔야 합니다!");			
+			return false;
+		}
+		else alert("카드 결제");
 	}else if($('#trade_type3').is(":checked")){
 		if($('#select_bank option:eq(0)').prop('selected')){
 			alert("은행을 선택해 주세요");
@@ -320,6 +329,10 @@ function submit_check(){
 			}else alert("successed");
 		}
 	}else{
+		if(!($('input:checkbox[name=mobile_agree]').prop('checked'))){
+			alert("결제 대행 서비스 약관에 동의 하셔야 합니다!");			
+			return false;
+		}
 		alert("모바일 결제");
 	}
 }

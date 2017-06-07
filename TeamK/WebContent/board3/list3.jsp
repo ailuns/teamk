@@ -10,7 +10,6 @@
 <title>Insert title here</title>
 <link href="../css/inc.css" rel="stylesheet" type="text/css">
 <link href="../css/subpage.css" rel="stylesheet" type="text/css">
-
 <%
 //세션 id값 불러오기
 String id = (String)session.getAttribute("id");
@@ -63,7 +62,7 @@ BoardDAO bdao = new BoardDAO();
  <td><%=bb.getRe_ref()%></td> <%--글 번호 --%>
  <td><strong>[<%=bb.getType_select()%>]</strong></td>
  <td id="title"><a href="./BoardContent3.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>"><%=bb.getSubject()%></a><%--글 제목 --%>
- <%if(bdao.getFile(bb.getNum())!=null){%><img src="./img/disk.png" width="15" height="15>"><%}%></td>
+ <%if(bdao.getFile(bb.getNum())!=null){%><img src="./img/disk.png" width="15" height="15>"><%}%></td><%--파일 첨부했으면 파일 이미지 나옴 --%>
  <td>관리자</td><%--작성자 Id --%>
  <td><%=bb.getDate()%></td><%--작성 날짜 --%>
  <td><%=bb.getReadcount() %></td><%--조회수 --%>
@@ -89,7 +88,7 @@ if(count!=0){
 	if(startPage>pageBlock){
 		%><a href="./BoardList3.bo?pageNum=<%=startPage-pageBlock%>">[이전]</a><%
 	}
-	// 1..10 11..20 21..30
+	// 현재페이지 빨간색, 클릭 안됨
 	for(int i=startPage; i<=endPage; i++){
 		if(i==pNum){%><span id="i"><%=i%></span><%}else{
 		%><a id="i" href="./BoardList3.bo?pageNum=<%=i%>"><%=i%></a><%
