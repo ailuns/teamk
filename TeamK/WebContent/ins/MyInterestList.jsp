@@ -38,7 +38,7 @@ List<interestBEAN> InterestThing = (List<interestBEAN>) request.getAttribute("In
 <div class="empty"></div>
 </div>
 <article>
-		<h3>패키지 찜 리스트</h3>
+		<h3>패키지 찜 리스트</h3><br>
 		<div id="packInterest_list">
 		<%
 			if (InterestPack.size() == 0) {
@@ -52,7 +52,7 @@ List<interestBEAN> InterestThing = (List<interestBEAN>) request.getAttribute("In
 				<th class="inb_img"></th>
 				<th id="num">상품명</th>
 				<th id="num">가격</th>
-				<th id="num"></th>
+				<th></th>
 			</tr>
 			<%
 				for (int i = 0; i < InterestPack.size(); i++) {
@@ -78,7 +78,7 @@ List<interestBEAN> InterestThing = (List<interestBEAN>) request.getAttribute("In
 			}
 		%><br><br>
 		<hr><br>
-		<h3>상품 찜 리스트</h3>
+		<h3>상품 찜 리스트</h3><br>
 
 		<%
 			if (InterestThing.size() == 0) {
@@ -92,8 +92,7 @@ List<interestBEAN> InterestThing = (List<interestBEAN>) request.getAttribute("In
 				<th class="inb_img"></th>
 				<th id="num">상품명</th>
 				<th id="num">가격</th>
-				
-				
+				<th></th>
 			</tr>
 			<%
 				for (int i = 0; i < InterestThing.size(); i++) {
