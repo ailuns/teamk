@@ -49,7 +49,7 @@ function basket_delete(){
 	}else return false;
 }
 function basket_submit(){
-	if(check()==0){
+	if($('input:checkbox[name=tch]:checked').length==0){
 		alert("선택된 항목이 없습니다!");
 		return false;
 	}else{
@@ -57,14 +57,6 @@ function basket_submit(){
 		document.fr.method="post";
 		document.fr.submit();
 	}
-}
-function check(){
-	var pchcount = 0;
-	for(i = 0; i<document.fr.pch.length;i++){
-		if(document.fr.pch[i].checked==true)pchcount++;
-	}
-	return pchcount;
-
 }
 
 //장바구니에서 패키지 상품 클릭 시 해당 패키지 정보로 이동

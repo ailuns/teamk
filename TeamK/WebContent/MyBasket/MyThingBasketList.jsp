@@ -53,7 +53,7 @@ function basket_delete(){
 	}else return false;
 }
 function basket_submit(){
-	if(check()==0){
+	if($('input:checkbox[name=pch]:checked').length==0){
 		alert("선택된 항목이 없습니다!");
 		return false;
 	}else{
@@ -62,14 +62,7 @@ function basket_submit(){
 		document.fr.submit();
 	}
 }
-function check(){
-	var tchcount = 0;
-	for(i = 0; i<document.fr.tch.length;i++){
-		if(document.fr.tch[i].checked==true)tchcount++;
-	}
-	return tchcount;
 
-}
 </script>
 </head>
 <body>
