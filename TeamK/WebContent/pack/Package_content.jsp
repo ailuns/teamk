@@ -51,10 +51,56 @@
 
 	jQuery(document).ready(function($){
 		
-		// 페이지 로딩 될 때 첫번쨰 선택된 날짜 값으로 초기값 설정 부분
-		var num = $("input:radio[name=chk]:checked").val();
+		// ▼ 페이지 로딩 될 때 첫번쨰 선택된 날짜 값으로 초기값 설정 부분
+		var adult_max;
+		var stockArr = new Array();   // 각각 라디오 버튼 받을 배열
+		var stock_t = 0;
+		var radio_len = $('input:radio[name=chk]').length;  // 라디오 버튼 갯수 구하기
+		for (var i = 0; i < radio_len; i++)
+		{
+			stock_t = $("#stock" + i).html(); // 각 날짜 마다 수량 값을 가져온다
+			if (stock_t == null) 			  // 0일 경우 null로 인식해서 0으로 변환
+				stock_t = 0;
+			stockArr[i] = stock_t;
+		}
+		
+		// 날짜별로 수량이 0인 품목은 비활성화 및 클릭 이벤트 해제
+		for (var i = 0; i < radio_len; i++)
+		{
+			if (stockArr[i] == 0)		
+			{
+				$("#select_rbtn" + i).attr("disabled", true);  // 라디오 버튼 비활성화
+				$("#select_date" + i).attr("onclick", "");  // 클릭 이벤트 없앰
+			}
+		}
+		
+		// 첫 로딩 시 재고가 품절이 아닌 품목이 선택되어 있게 
+		for (var i = 0; i < radio_len; i++)
+		{
+			if (stockArr[i] != 0)		
+			{
+				$("#select_rbtn" + i).attr("checked", true);  // 품절이 아닌 품목 라디오버튼 체크 되게
+				$("#select_date" + i).css("background-color", "#D5D5D5");  // 품절이 아닌 품목 배경색을 #D5D5D5
+				$("#stock").val($("#stock" + i).html());		// 품절 아닌 품목의 수량을 id="stock"에 값을 넣어준다
+				adult_max = $("#stock" + i).html()			// 품절이 아닌 품목의 수량을 어른 수 맥스 값으로 설정
+				break;
+			}
+		}
+		
+		// 최대 10명까지 선택 가능하게 제어
+		if (adult_max > 10)
+			adult_max = 10;
+		
+		// 남은 갯수에 따라 어른 최대값 설정 
+		for (var i = 1; i <= adult_max; i++)  
+		{
+			$('#adult').append("<option value=" + i + ">" + i + "</option");
+		}
+		
 
-		var cost = $("#aa" + num).html();
+		var num = $("input:radio[name=chk]:checked").val();
+		var cost = $("#cost" + num).html();
+		
 		
 	    var str = String(cost);
 	    uncomma_cost = str.replace(/[^\d]+/g, ''); // 금액 자릿수 ,를 없앤다  cost는 어른 금액
@@ -68,9 +114,9 @@
 		$("#cost_adult").html(comma_cost);  // 어른 값 설정
 		$("#cost_child").html(comma_cost2);  // 아이 값 설정
 		$("#p").html(comma_cost);			// 합계 = 어른 1명 선택값 
-		$("#stock").val($("#stock0").html());  // 선택된 stock 값 설정
+		// ▲ 페이지 로딩 될 때 첫번쨰 선택된 날짜 값으로 초기값 설정 부분
 		
-		// 페이지 로딩 될 때 첫번쨰 선택된 날짜 값으로 초기값 설정 부분
+		
 		
 		// 달력 관련 소스
 		$("#date_from").datepicker({
@@ -476,14 +522,6 @@
 		$("#remote_content").draggable();
 	});
 	
-	
-	// 패키지 내용 로딩 될 때 첫번째 날짜가 선택되어 있게 한다.
-	jQuery(document).ready(function($){
-		$("#select_rbtn0").prop("checked", "true");  // 첫번째 라디오 버튼 체크 되어 있게
-		$("#select_date0").css("background-color", "#D5D5D5");  // 첫번째 날짜 부분 배경색 #D5D5D5로 변경
-	});
-	
-	
 	// 날짜 추가 버튼 클릭 이벤트
 	function winOpen(subject, num) {
 		win = window.open("./PackDateAdd.po?subject=" + subject + "&num=" + num, "Package_dateAdd.jsp",
@@ -515,7 +553,7 @@
 		{
 			$('#adult').append("<option value=" + i + ">" + i + "</option");
 		}
-		people_Calc(1);  // 어른 값 변경에 따른 아이값 변경
+		
 		
 		
 		
@@ -524,7 +562,7 @@
 		$("#select_date" + select_num).css("background-color", "#D5D5D5");  // 클릭된 tr 부분의 배경색을 #D5D5D5로 바꾼다
 		
 		
-		var cost = $("#aa" + packnum).html();
+		var cost = $("#cost" + packnum).html();
 		
 	    var str = String(cost);
 	    var uncomma_cost = str.replace(/[^\d]+/g, '');  // 콤마 삭제
@@ -539,6 +577,8 @@
 		$("#cost_adult").html(comma_cost);
 		$("#cost_child").html(comma_cost2);
 		$("#p").html(comma_cost);
+		
+		people_Calc(1);  // 어른 값 변경에 따른 아이값 변경
 	}
 	
 	
@@ -861,13 +901,6 @@
 							<td class="contentdiv1_3">
 								<!--최대 10명까지 선택가능하게 생성 -->
 								<select id="adult" name="adult" onchange="people_Calc(1)">
-										<%
-											for (int i = 1; i < 11; i++) {
-										%>
-										<option value="<%=i%>"><%=i%></option>
-										<%
-											}
-										%>
 								</select>
 								<!--최대 10명까지 선택가능하게 생성 -->
 							</td>
@@ -879,7 +912,6 @@
 							<!--초기값은 1명까지 선택되게 생성 -->
 							<select id="child" name="child" onchange="people_Calc()">
 									<option value="0">0</option>
-									<option value="1">1</option>
 							</select>
 							<!--초기값은 1명까지 선택되게 생성 -->
 							</td>
@@ -915,20 +947,40 @@
 									var stock = $("#stock").val();
 									
 									// 어른 수에 따라 아이 수 제한
+									var maxval = 0;
 									if (num == 1) // 어른 선택 시 호출
 									{
 										if (val1 > stock - val1) 
 										{
-											val1 = stock - val1;
+											maxval = stock - val1;
+										}
+										else
+										{
+											maxval = val1;
 										}
 										$("#child").find("option").remove();  // 아이에서 선택 값 전부 삭제
-										for (i = 0; i <= val1; i++)  // 선택된 어른 수가 최대치인 아이 선택값 생성     ex) 어른 3명 선택 시 아이도 3명까지 선택 가능
+										
+										for (i = 0; i <= maxval; i++)  // 선택된 어른 수가 최대치인 아이 선택값 생성     ex) 어른 3명 선택 시 아이도 3명까지 선택 가능
 										{
 											$('#child').append("<option value=" + i + ">" + i + "</option");
 										}
+										val2 = $("#child option:selected").val();
 									}
+									
+// 									alert(val1);
+// 									alert(val2);
+									
+									var sum = 0;
 									// 선택된 어른 수, 아이 수에 따라 가격 계산 후 출력
-									var sum = val1 * <%=PB.getCost() %> + val2 * <%=PB.getCost()/2 %>
+									if (val1 < 1 && val2 < 1)
+									{
+										sum = 0;
+									}
+									else
+									{
+										sum = val1 * <%=PB.getCost() %> + val2 * <%=PB.getCost()/2 %>
+									}
+									
 									
 								    var str = String(sum);
 								    var commasum = str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
@@ -964,12 +1016,24 @@
 						String cost = (String)Commas.format(pb.getCost());
 				%>	
 				<tr id="select_date<%=i %>" class="select_color" onclick="select_date(<%=i %>)">
-					<td class="date_td_size"><input type="radio" id="select_rbtn<%=i %>" name="chk" value="<%=pb.getNum() %>"
-						<%if(i == 0){ %> checked <%} %> ></td>
+					<td class="date_td_size"><input type="radio" id="select_rbtn<%=i %>" name="chk" value="<%=pb.getNum() %>"></td>
 					<td class="date_td_size"><%=pb.getDate() %></td>
 					<td class="date_td_size"><%=pb.getSubject() %></td>
-					<td class="date_td_size" id="aa<%=pb.getNum() %>"><%=cost %></td>
+					<td class="date_td_size" id="cost<%=pb.getNum() %>"><%=cost %></td>
+					<%
+					if(pb.getStock() == 0)
+					{
+					%>
+					<td class="date_td_size">품절</td>
+					<%
+					}
+					else
+					{
+					%>
 					<td class="date_td_size" id="stock<%=i %>"><%=pb.getStock() %></td>
+					<%
+					}
+					%>
 				</tr>
 				<%
 					}
