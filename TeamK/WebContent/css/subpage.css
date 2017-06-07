@@ -1509,8 +1509,10 @@ div#my_interest table #inb_img
 /* My Interest List.jsp */
 div#packInterest_list table img#inb_img {
 	height: 120px;
+	width: 200px;
 }
-
+div#packInterest_list table td.inb_img {width: 200px;}
+div#packInterest_list table th#num {width: 300px;}
 div#packInterest_list {
 	width: 900px;
 	margin: 0 auto;
