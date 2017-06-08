@@ -19,7 +19,7 @@ public class Admin_Thing_OrderList implements Action{
 		ActionForward afo = new ActionForward();
 		String pageNum = request.getParameter("pageNum");
 		String stat = request.getParameter("status");
-		String stat2 = request.getParameter("to_status");
+		String stat2 = request.getParameter("status2");
 		String ti_status="";
 		String to_status="";
 		

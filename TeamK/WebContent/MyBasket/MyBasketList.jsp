@@ -117,7 +117,7 @@
 <div id="article_head">
 <div id="article_title">
 	장바구니
-</div>afasdfasdfa
+</div>
 <div class="empty"></div>
 </div>
 <article>
@@ -143,7 +143,7 @@
 				<th id="num">성인</th>
 				<th id="num">유아</th>
 				<th id="num">가격</th>
-				<th id="num">등록일</th>
+				<th id="num">출발일</th>
 				<th id="num">비고</th>
 			</tr>
 			<%
