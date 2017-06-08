@@ -33,7 +33,7 @@
 	if (PB.getSubject() == null)
 		response.sendRedirect("./PackList.po");
 	
-	List List = (List)request.getAttribute("replylist");
+	List replylist = (List)request.getAttribute("replylist");
 	List CategoryList = (List)request.getAttribute("CategoryList");
 	List date_list = (List)request.getAttribute("date_list");
 	List RecommendProduct = (List)request.getAttribute("RecommendProduct");
@@ -525,8 +525,8 @@
 	});
 	
 	// 날짜 추가 버튼 클릭 이벤트
-	function winOpen(subject, num) {
-		win = window.open("./PackDateAdd.po?subject=" + subject + "&num=" + num, "Package_dateAdd.jsp",
+	function winOpen(num) {
+		win = window.open("./PackDateAdd.po?num=" + num, "Package_dateAdd.jsp",
 				"width=800, height=700, left=100, top=100");
 	}
 	
@@ -926,7 +926,7 @@
 			if (user_id.equals("admin"))
 			{
 		%>
-			<input type="button" value="날짜편집" onclick="winOpen('<%=PB.getSubject() %>', <%=PB.getNum() %>);">
+			<input type="button" value="날짜편집" onclick="winOpen(<%=PB.getNum() %>);">
 			<input type="button" value="상품내용수정" onclick="location.href='PackModify.po?num=<%=PB.getNum() %>'">
 <%-- 			<input type="button" value="상품삭제" onclick="location.href='PackDeleteAction.po?num=<%=PB.getNum() %>'"> --%>
 		<%
@@ -1166,9 +1166,9 @@
 				
 					ReplyBean rb;
 					if (count != 0) {
-						for (int i = 0; i < List.size(); i++) 
+						for (int i = 0; i < replylist.size(); i++) 
 						{
-							rb = (ReplyBean)List.get(i);
+							rb = (ReplyBean)replylist.get(i);
 				%>
 
 				<tr id="relist<%=rb.getNum()%>">

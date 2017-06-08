@@ -54,7 +54,7 @@ public class PackContent implements Action{
 		request.setAttribute("date_list", date_list);
 		request.setAttribute("RecommendProduct", RecommendProduct);
 		
-		//전체글 횟수 구하기 int count = getBoardCount()
+		//전체상품문의 횟수 구하기 int count = getBoardCount()
 		int count = rdao.getCommentCount(num);//pdao.getBoardCount();
 		
 		//한페이지에 보여줄 글의 갯수
