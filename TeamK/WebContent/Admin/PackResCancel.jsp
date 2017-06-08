@@ -14,8 +14,7 @@ String[] countp = mtib.getPack_count().split(",");
 int po_num = Integer.parseInt(request.getParameter("num"));
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
 %>
-<link href="./css/inc.css" rel="stylesheet" type="text/css">
-<link href="./css/subpage.css" rel="stylesheet" type="text/css">
+<link href="./css/popup.css" rel="stylesheet" type="text/css">
 <script src = "./js/jquery-3.2.0.js"></script>
 	<script type="text/javascript">
 	var check = 0;
@@ -44,36 +43,36 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
 </head>
 
 <body>
-<div align="center">
+<div id="res_cancel">
 <h4>패키지 정보</h4>
 <form action = "./Res_Cancel_Action.mo" method = "post" onsubmit="return bankcheck()">
 <table>
 	<tr>
-		<td>예약번호 </td>
+		<th>예약번호 </th>
 		<td><%=mtib.getTrade_num() %></td>
 	</tr>
 	<tr>
-		<td>상품명</td>
+		<th>상품명</th>
 		<td><%=mtib.getSubject() %></td>
 	</tr>
 	<tr>
-		<td>출발 날짜</td>
+		<th>출발 날짜</th>
 		<td><%=sdf.format(mtib.getDate()) %></td>
 	</tr>
 	<tr>
-		<td>예약 인원</td>
+		<th>예약 인원</th>
 		<td>성인 : <%=countp[0] %>, 아동 : <%=countp[1] %></td>
 	</tr>
 	<tr>
-		<td>결제 금액</td>
+		<th>결제 금액</th>
 		<td><%=mtib.getTotal_cost() %>원</td>
 	</tr>
 	<tr>
-		<td>공제율</td>
+		<th>공제율</th>
 		<td><%=mtib.getMemo()%></td>
 	</tr>
 	<tr>
-		<td>결제 환불 금액</td>
+		<th>결제 환불 금액</th>
 		<td><%=mtib.getCost() %>원<input type="hidden" name="Cancel_info" value="<%=mtib.getCost()%>">
 			<input type="hidden" name="Cancel_info" value="<%=mtib.getTrade_type()%>">
 			<input type="hidden"  name = "pnum" value ="<%=po_num %>">
@@ -82,24 +81,24 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
 	</tr>
 	<%if(mtib.getTrade_type().equals("무통장 입금")&&mtib.getCost()!=0){ %>
 	<tr>
-		<td colspan="2">환불 받으실 계좌 정보 입력</td>
+		<th colspan="2">환불 받으실 계좌 정보 입력</th>
 	</tr>
 	<tr>
-		<td>은행명</td><td><input type="text" id="bank_name" name="Cancel_info"
+		<th>은행명</th><td><input type="text" id="bank_name" name="Cancel_info"
 							placeholder="EX)콩팥 머니 은행"></td>
-		<td>예금주</td><td><input type="text" id="name" name="Cancel_info"
+		<th>예금주</th><td><input type="text" id="name" name="Cancel_info"
 							placeholder="EX)홍길동"></td>
 	</tr>
 	<tr>
-		<td>계좌 번호</td><td><input type="text" id="bank_number" name="Cancel_info"
+		<th>계좌 번호</th><td><input type="text" id="bank_number" name="Cancel_info"
 							placeholder="EX)12-007-2245-777">
 			</td>
 	</tr>
 	<%} %>
 </table>
 
-	<h3>환불 규정</h3>
- 
+	<span id = "cancel_rule_view">※ 환불 규정</span>
+ 	<div id="Cancel_Rule">
 	<ul style="text-align: left;"> 
   		<li>출발 7일전 취소시 총 여행경비 10%공제 후 환불</li>
  		<li>출발 5일전 취소시 총 여행경비 20%공제 후 환불</li>
@@ -107,6 +106,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
   		<li>출발 1일전 취소시 총 여행경비 50%공제 후 환불</li>
   		<li>당일 취소시 여행경비 환불 불가</li>
 	</ul>
+	</div>
 <br>
  <input type ="submit" value = "예약 취소">
 <input type = "button" value ="닫기" onclick ="window.close()">

@@ -110,7 +110,9 @@ function search(){
 					String []trade_type = mtib.getTrade_type().split(",");
 					String []memo = mtib.getMemo().split(",");%>
 <!-- 				<h5></h5> -->
-				<table border = "1">
+				<fieldset>
+				<legend><%=mtib.getTrade_num() %></legend>
+				<table>
 					<tr>
 						<%
 						if(!(status2.equals("none"))){
@@ -166,7 +168,7 @@ function search(){
 					<%}
 					} %>
 				</table>
-				
+				</fieldset>
 				<%}
 				if(status.equals("ing")){
 					if(status2.equals("waiting")||

@@ -225,17 +225,17 @@ img.ui-datepicker-trigger
 			if(count == 0)
 			{
 		%>
-				<p>검색조건에 해당하는 상품이 총 <%=count %>개 있습니다</p>
+				<br><h2>검색조건에 해당하는 상품이 총 <%=count %>개 있습니다</h2><br>
 				<hr>
 				<div id="package_list">
 					<table style="width:1000px;">
 						<tr>
-							<td colspan="2">상품</td>
-							<td>가격</td>
-							<td>출발일자</td>
+							<th colspan="2">상품</th>
+							<th>가격</th>
+							<th>출발일자</th>
 						</tr>
 						<tr>
-							<td colspan="5"><p style="text-align: center;">해당 검색 조건에 해당하는 상품이 없습니다</p></td>
+							<td colspan="5"><br><p style="text-align: center;">해당 검색 조건에 해당하는 상품이 없습니다</p><br></td>
 						</tr>
 					</table>
 				</div>

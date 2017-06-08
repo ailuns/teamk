@@ -353,6 +353,10 @@ div#package_list {
 	background-color: #fff;
 	margin: 0 auto;
 }
+div#package_list th {
+	padding: 5px;
+	font-size: 15px;
+}
 div#package_list table {}
 div#package_list table tr {
 	padding-right: 10px;
@@ -1295,11 +1299,24 @@ form#pack_res {
 	width: 900px;
 	margin: 0 auto;
 }
+form#pack_res fieldset {
+	border: 1px solid #06c;
+	padding: 10px;
+	margin: 5px 0;
+}
+form#pack_res legend {
+	font-size: 20px;
+	font-weight: bold;
+	padding: 0 10px;
+}
 form#pack_res table {
 	width: 100%;
 	margin: 20px 0px;
 	text-align: left!important;
-	border-bottom: 2px solid #06c;
+}
+form#pack_res td, form#pack_res th {
+	padding: 5px;
+	border: 1px solid #ccc;
 }
 form#pack_res td#tr1td1 {width: 100px;}
 form#pack_res td#tr1td2 {width: 250px;}

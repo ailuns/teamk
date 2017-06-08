@@ -92,16 +92,16 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
 	</tr>
 	<%if(mtib.getTrade_type().equals("무통장 입금")&&mtib.getCost()!=0){ %>
 	<tr>
-		<td colspan="2">환불 받으실 계좌 정보 입력</td>
+		<th colspan="2">환불 받으실 계좌 정보 입력</th>
 	</tr>
 	<tr>
-		<td>은행명</td><td><input type="text" id="bank_name" name="Cancel_info"
+		<th>은행명</th><td><input type="text" id="bank_name" name="Cancel_info"
 							placeholder="EX)콩팥 머니 은행"></td>
-		<td>예금주</td><td><input type="text" id="name" name="Cancel_info"
+		<th>예금주</th><td><input type="text" id="name" name="Cancel_info"
 							placeholder="EX)홍길동"></td>
 	</tr>
 	<tr>
-		<td>계좌 번호</td><td><input type="text" id="bank_number" name="Cancel_info"
+		<th>계좌 번호</th><td><input type="text" id="bank_number" name="Cancel_info"
 							placeholder="EX)12-007-2245-777">
 			</td>
 	</tr>
