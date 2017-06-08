@@ -193,9 +193,10 @@ a#pack1 #pkpr, a#pack2 #pkpr, a#pack3 #pkpr, a#pack4 #pkpr  {
 	line-height: 16px;
 }
 a#pack1 #pkdt, a#pack2 #pkdt, a#pack3 #pkdt, a#pack4 #pkdt  {
-	font-size: 13px;
+	font-size: 15px;
 	padding-left: 10px;
 	line-height: 20px;
+	margin-top: 10px;
 }
 div#goods_show {
 	height: 250px;
@@ -205,10 +206,15 @@ div#goods_show {
 	background-color: #fff;
 }
 div#goods_show img {
-	width: 150px;
+	width: 200px;
 	height: 150px;
 	margin-top: 10px;
 }
+div#goods_show a {
+	text-decoration: none;
+	color: #000;
+}
+div#goods_show a:HOVER {color: #06c;}
 div#review_show {
 	height: 250px;
 	width: 1000px;
@@ -273,7 +279,6 @@ div#package_feat {
 	background-color: white;
 }
 div#package_slide, div#package_search {float: left;}
-
 div#package_slide a {
 	height: 100%;
 	width: 100%;
@@ -313,8 +318,6 @@ div#package_slide a#pack4 {
  	transition: 0.4s;
  	background-position: right;
 }
-
-
 div#package_search {
 	background-color: #f5b8d7;
 	width: 400px;
@@ -328,7 +331,10 @@ div#package_search p {
 	text-align: center;
 	font-size: 20px;
 }
-div#package_search form label {margin: 0 15px 0 25px;}
+div#package_search form label {
+	margin: 0 15px 0 25px;
+	font-size: 17px;
+}
 div#package_search form input[type=text] {
 	font-size: 15px;
 	width: 280px;

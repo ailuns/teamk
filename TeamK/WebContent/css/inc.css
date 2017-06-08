@@ -12,6 +12,7 @@ header img {
 	width: 140px;
 	height: 140px;
 	margin: 5px 0;
+	cursor: pointer;
 }
 nav {
 	position: absolute;
