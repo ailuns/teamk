@@ -142,13 +142,13 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				
 		if(endpage > pcount)endpage = pcount;
 		if(startp>pblock){
-			 %><a href = "./MyPackBasketList.bns?pageNum=<%=startp-1%>">[이전]</a><%
+			 %><a href = "./MyPackBasketList.bns?pageNum=<%=startp-1%>" id="i">이전</a><%
 		}
 		for(int i = startp;i<=endpage;i++){
-			%><a href="./MyPackBasketList.bns?pageNum=<%=i %>">[<%=i %>]</a><%
+			%><a href="./MyPackBasketList.bns?pageNum=<%=i %>" id="i"><%=i %></a><%
 		}
 		if(endpage<pcount){
-			%><a href = "./MyPackBasketList.bns?pageNum=<%=endpage+1%>">[다음]</a><%
+			%><a href = "./MyPackBasketList.bns?pageNum=<%=endpage+1%>" id="i">다음</a><%
 		}
 	}	//if(count%pagesize!=0)pcount+=1;
 	%>

@@ -146,13 +146,13 @@ List<TBasketBEAN> ThingBasket=(List<TBasketBEAN>)request.getAttribute("MyThingBa
 				
 		if(endpage > pcount)endpage = pcount;
 		if(startp>pblock){
-			 %><a href = "./MyThingBasketList.bns?pageNum=<%=startp-1%>">[이전]</a><%
+			 %><a href = "./MyThingBasketList.bns?pageNum=<%=startp-1%>" id="i">이전</a><%
 		}
 		for(int i = startp;i<=endpage;i++){
-			%><a href="./MyThingBasketList.bns?pageNum=<%=i %>">[<%=i %>]</a><%
+			%><a href="./MyThingBasketList.bns?pageNum=<%=i %>" id="i"><%=i %></a><%
 		}
 		if(endpage<pcount){
-			%><a href = "./MyThingBasketList.bns?pageNum=<%=endpage+1%>">[다음]</a><%
+			%><a href = "./MyThingBasketList.bns?pageNum=<%=endpage+1%>" id="i">다음</a><%
 		}
 	}	//if(count%pagesize!=0)pcount+=1;
 	%><br><input type = "button" value = "내주문" onclick="location.href='./MyOrderList.mo'">

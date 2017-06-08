@@ -373,18 +373,18 @@ function status_update(o_num,status){
 			if (endpage > pcount)endpage = pcount;
 			if (startp > pblock){
 	%><a href="./Admin_Thing_OrderList_Search.ao?status=<%=status %>&status2=<%=status2 %>
-			&pageNum=<%=startp-1%><%=se%>">[이전]</a>
+			&pageNum=<%=startp-1%><%=se%>" id="i">이전</a>
 	<%
 		}
 			for (int i = startp; i <= endpage; i++) {
 	%><a href="./Admin_Thing_OrderList_Search.ao?status=<%=status %>&status2=<%=status2 %>
-			&pageNum=<%=i %><%=se%>">[<%=i%>]
+			&pageNum=<%=i %><%=se%>" id="i"><%=i%>
 	</a>
 	<%
 		}
 			if (endpage < pcount) {
 	%><a href="./Admin_Thing_OrderList_Search.ao?status=<%=status %>&status2=<%=status2 %>
-			&pageNum=<%=endpage+1%><%=se%>">[다음]</a>
+			&pageNum=<%=endpage+1%><%=se%>" id="i">다음</a>
 	<%
 		}
 		}

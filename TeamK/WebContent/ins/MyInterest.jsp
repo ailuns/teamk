@@ -78,16 +78,16 @@ function inter_pack_move(select)
 			if (endpage > pcount)
 				endpage = pcount;
 			if (startp > pblock) {
-	%><a href="./MyInterest.ins?pageNum=<%=startp - 1%>&TY=<%=ty%>">[이전]</a>
+	%><a href="./MyInterest.ins?pageNum=<%=startp - 1%>&TY=<%=ty%>" id="i">이전</a>
 	<%
 		}
 			for (int i = startp; i <= endpage; i++) {
-	%><a href="./MyInterest.ins?pageNum=<%=i%>&TY=<%=ty%>">[<%=i%>]
+	%><a href="./MyInterest.ins?pageNum=<%=i%>&TY=<%=ty%>" id="i"><%=i%>
 	</a>
 	<%
 		}
 			if (endpage < pcount) {
-	%><a href="./MyInterest.ins?pageNum=<%=endpage + 1%>&TY=<%=ty%>">[다음]</a>
+	%><a href="./MyInterest.ins?pageNum=<%=endpage + 1%>&TY=<%=ty%>" id="i">다음</a>
 	<%
 		}
 		} 

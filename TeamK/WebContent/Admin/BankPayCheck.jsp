@@ -164,16 +164,16 @@ function Trade_Info_Delete(){
 	if (count != 0) {
 		if (endpage > pcount)endpage = pcount;
 		if (startp > pblock) {
-	%><a href="./BankPayCheck.ao?pageNum=<%=startp - 1%>">[이전]</a>
+	%><a href="./BankPayCheck.ao?pageNum=<%=startp - 1%>" id="i">이전</a>
 	<%
 		}
 			for (int i = startp; i <= endpage; i++) {
-	%><a href="./BankPayCheck.ao?pageNum=<%=i%>">[<%=i%>]
+	%><a href="./BankPayCheck.ao?pageNum=<%=i%>" id="i"><%=i%>
 	</a>
 	<%
 		}
 			if (endpage < pcount) {
-	%><a href="./BankPayCheck.ao?pageNum=<%=endpage + 1%>">[다음]</a>
+	%><a href="./BankPayCheck.ao?pageNum=<%=endpage + 1%>" id="i">다음</a>
 	<%
 		}
 	}
