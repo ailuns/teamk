@@ -487,7 +487,17 @@ public class BoardFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		
+		else if(command.equals("/ProductUpdateAction.bo"))
+		{
+			System.out.println("ProductUpdateAction cald");
+			action = new ProductUpdateAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		
 		//이동하기

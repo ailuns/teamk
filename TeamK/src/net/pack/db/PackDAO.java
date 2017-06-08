@@ -413,6 +413,82 @@ public class PackDAO {
 	
 	
 	
+	public List getRecommendProduct(String type) {
+		List list = new ArrayList();
+
+		try {
+			conn = getConnection();
+			
+				sql = "select * from pack where type=? and date > now() group by subject order by rand() limit 0, 3";
+			
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, type);
+
+			rs = pstm.executeQuery();
+			
+			while (rs.next()) {
+				PackBean PB = new PackBean();
+
+				PB.setNum(rs.getInt("num"));
+				PB.setSerial(rs.getInt("serial"));
+				PB.setSubject(rs.getString("subject"));
+				PB.setIntro(rs.getString("intro"));
+				PB.setContent(rs.getString("content"));
+				PB.setType(rs.getString("type"));
+				PB.setArea(rs.getString("area"));
+				PB.setCity(rs.getString("city"));
+				PB.setSarea(rs.getString("sarea"));
+				PB.setCost(rs.getInt("cost"));
+				PB.setReadcount(rs.getInt("readcount"));
+				PB.setStock(rs.getInt("stock"));
+				PB.setDate(rs.getString("date"));
+				PB.setFile1(rs.getString("file1"));
+				PB.setFile2(rs.getString("file2"));
+				PB.setFile3(rs.getString("file3"));
+				PB.setFile4(rs.getString("file4"));
+				PB.setFile5(rs.getString("file5"));
+				
+				list.add(PB);
+			}
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		finally {
+			if (pstm != null) {
+				try {
+					pstm.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return list;
+	}
+	
+	
+	
 	// 검색어(도시, 날짜) 있는 게시판 갯수 카운터
 	public int getPackCount(String search, String startDate, String id) {
 		int count = 0;

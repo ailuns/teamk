@@ -13,6 +13,7 @@ import net.member.db.ProductBean;
 import net.member.db.ProductDAO;
 import net.member.db.CommentBean;
 import net.member.db.CommentDAO;
+import net.pack.db.PackDAO;
 public class ProductContent implements Action {
 
 	@Override
@@ -22,6 +23,7 @@ public class ProductContent implements Action {
 		int num = Integer.parseInt(request.getParameter("num"));
 		ProductBean pb = new ProductBean();
 		ProductDAO pdao = new ProductDAO();
+		PackDAO pddao = new PackDAO();
 		CategoryBean cb = new CategoryBean();
 		CategoryDAO cdao = new CategoryDAO();
 		CommentBean comb = new CommentBean();
@@ -58,6 +60,13 @@ public class ProductContent implements Action {
 		
 		List productList3 = null;
 		productList3 = pdao.getProdcutList(num);
+		
+		pb= pdao.getProduct(num);
+		
+		
+		
+		List RecommendPack = null;
+		RecommendPack = pddao.getRecommendProduct(pb.getType());
 		
 		List productList = null;
 		if(count!=0){
@@ -111,6 +120,7 @@ public class ProductContent implements Action {
 		request.setAttribute("endPage2", endPage2);
 		request.setAttribute("pageCount2", pageCount2);
 		request.setAttribute("pageBlock2", pageBlock2);
+		request.setAttribute("RecommendPack", RecommendPack);
 		
 		
 		

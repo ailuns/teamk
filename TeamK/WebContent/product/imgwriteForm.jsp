@@ -86,7 +86,7 @@ function winopen(num){
 
 <div id="wrap">
 	<div id="article_head">
-		<div id="article_title"><img src="./img/travel2.png" width="30px" style="margin-right: 8px; vertical-align: bottom;">패키지 상품등록</div>
+		<div id="article_title"><img src="./img/travel2.png" width="30px" style="margin-right: 8px; vertical-align: bottom;"> 상품페이지 등록</div>
 	<div class="empty"></div>
 </div>
 <div id="wrap_pack">
