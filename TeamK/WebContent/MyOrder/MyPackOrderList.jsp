@@ -81,7 +81,8 @@ function pack_popup(select)
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
 		<div id="article_head">
-			<div id="article_title"><span id = "title"></span></div>
+			<div id="article_title">내 여행 예약 목록</div>
+<!-- 			<span id = "title"></span> -->
 			<div class="empty"></div>
 			<div id="article_script"></div>
 		</div>

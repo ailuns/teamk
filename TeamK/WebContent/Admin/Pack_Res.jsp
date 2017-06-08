@@ -75,7 +75,7 @@ function search(){
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
 		<div id="article_head">
-			<div id="article_title"><span id = "title"></span></div>
+			<div id="article_title">[관리자]고객 여행 주문 확인</div>
 			<div class="empty"></div>
 			<div id="article_script"></div>
 		</div>
@@ -110,7 +110,9 @@ function search(){
 					String []trade_type = mtib.getTrade_type().split(",");
 					String []memo = mtib.getMemo().split(",");%>
 <!-- 				<h5></h5> -->
-				<table border = "1">
+				<fieldset>
+				<legend><%=mtib.getTrade_num() %></legend>
+				<table>
 					<tr>
 						<%
 						if(!(status2.equals("none"))){
@@ -166,7 +168,7 @@ function search(){
 					<%}
 					} %>
 				</table>
-				
+				</fieldset>
 				<%}
 				if(status.equals("ing")){
 					if(status2.equals("waiting")||

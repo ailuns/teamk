@@ -990,7 +990,9 @@ if (user_id == null)
 
 						pb = (ProductBean) productList.get(i);
 			%>
+		<div id="pack_btn">
 		<!--글제목 -->
+		<br>
 		<h3><%=pb.getSubject()%></h3>
 		<!--글제목 -->
 		<!--관리자만 보이게 -->
@@ -1006,6 +1008,7 @@ if (user_id == null)
 			}
 		}
 		%>
+		</div>
 		<!--관리자만 보이게 -->
 		<hr>
 		<div id="top">
@@ -1197,7 +1200,7 @@ if (user_id == null)
 							var str2 = $("#size option:selected").val();
 							var str3 = $("#dstock"+str2).val();
 							
-							
+							alert(str2)
 //								var str2 = $("#hstock").val().split(",");
 //								var str3 = parseInt($("#size option").index($("#size option:selected")));
 							var max = 10;
@@ -1353,7 +1356,8 @@ if (user_id == null)
 										var stocktest = "";
 										$.each(data,function(index,qqqq){
 										//body태그 추가 key:value	
-											$('#stocktable').append("<tr id='stocktr"+qqqq.num+"'><td class='contentdiv1_2'>"+qqqq.size+"-"+qqqq.color+"</td><td><input type='button' value='▲' onclick='up("+qqqq.num+")'><input type='text' id = 'stack2"+qqqq.num+"' name = 'count' value='1' onkeydown='keyup("+qqqq.num+")'><input type='button' value='▼' onclick='down("+qqqq.num+")'></td><td><p id='p"+qqqq.num+"'></p></td></tr>");
+											$('#stocktable').append("<tr id='stocktr"+qqqq.num+"'><td class='contentdiv1_2'>"+qqqq.size+"-"+qqqq.color+"</td><td><input type='button' value='▲' onclick='up("+qqqq.num+")'><input type='text' id = 'stack2"+qqqq.num+"' name = 'count' value='1' onkeydown='keyup("+qqqq.num+")'><input type='button' value='▼' onclick='down("+qqqq.num+")'></td>"
+											+"<td><input type='hidden' value='' '><p id='p"+qqqq.num+"'></p></td></tr>");
 											
 										});
 									

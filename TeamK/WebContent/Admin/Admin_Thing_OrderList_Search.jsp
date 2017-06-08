@@ -174,7 +174,7 @@ function status_update(o_num,status){
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
 		<div id="article_head">
-			<div id="article_title"><span id = "title"></span></div>
+			<div id="article_title">[관리자]고객 상품 주문 확인</div>
 			<div class="empty"></div>
 			<div id="article_script"><span id ="result"></span></div>
 		</div>

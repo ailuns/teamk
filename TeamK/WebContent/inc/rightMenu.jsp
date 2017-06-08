@@ -24,6 +24,7 @@
 		<%if(id.equals("admin")){%>
 			<li><a href="./AdminOrderList.ao">고객 주문 관리</a></li> 
 			<li><a href="./MemberList.me">고객 정보 관리</a></li>
+			<li><a href="./Category.bo">카테고리추가</a></li>
 		<%}
 		}
 		 %>

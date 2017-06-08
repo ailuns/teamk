@@ -60,7 +60,7 @@ function Trade_Info_Delete(){
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
 		<div id="article_head">
-<div id="article_title">관리자 주문 관리 메뉴</div>
+<div id="article_title">[관리자]고객 무통장 입금확인</div>
 <div class="empty"></div>
 </div>
 <article>

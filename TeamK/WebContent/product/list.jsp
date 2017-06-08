@@ -230,7 +230,7 @@
 											<td><b><%=pb.getSubject() %></b></td>
 										</tr>
 										<tr>
-											<td><p><%=pb.getArea()%></p></td>
+											<td><p><%=pb.getIntro()%></p></td>
 										</tr>
 										<tr>
 											<td><b><%=cost %>원</b></td>
@@ -273,10 +273,11 @@
 				}
 					//1..10
 					for (int i = startPage; i <= endPage; i++) {
+						if(i==Integer.parseInt(pageNum)){%><span id="i"><%=i%></span><%}else{
 			%><a href="./Productlist.bo?pageNum=<%=i%>">[<%=i%>]
 			</a>
 			<%
-				}
+				}}
 					// 다음
 					if (endPage < pageCount) {
 			%><a href="./Productlist.bo?pageNum=<%=startPage + pageBlock%>">[다음]</a>

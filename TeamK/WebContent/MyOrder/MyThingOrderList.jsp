@@ -79,7 +79,7 @@ function Trade_Update_Info(o_num) {
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
 	<div id="article_head">
-<div id="article_title">My Goods Order List</div>
+<div id="article_title">내 상품 주문 목록</div>
 <div class="empty"></div>
 <div id="article_script"></div>
 </div>
