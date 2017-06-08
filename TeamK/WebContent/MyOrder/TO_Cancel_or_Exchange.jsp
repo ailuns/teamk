@@ -81,8 +81,8 @@ int ti_num = Integer.parseInt(request.getParameter("ti_num"));
 <div id="to_cancel_or_exchange">
 <h4>상품 정보</h4>
 <form action = "./TO_Status_Update.mo" method = "post" onsubmit="return bankcheck()">
-<input type="radio" checked="checked" value="Exchange" name="status">교환
-<input type="radio" value="Cancel" name="status">환불
+<input type="radio" checked="checked" value="Exchange" name="status" id="change"><label for="change">교환</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="radio" value="Cancel" name="status" id="refund"><label for="refund">환불</label>
 <br><br>
 <table>
 	<tr>
@@ -144,7 +144,7 @@ int ti_num = Integer.parseInt(request.getParameter("ti_num"));
 		</td>
 	</tr>
 </table>
-<br><span style="color:red; font-size:14px;" class="Exchange">차액 발생시 추가 결제를 요하는 경우가 있습니다!</span><br><br>
+<span style="color:red; font-size:14px;" class="Exchange">차액 발생시 추가 결제를 요하는 경우가 있습니다!</span><br><br>
 <input type="hidden" name="payback_co" value="">
 <input type="hidden" name="trade_type" value="<%=mtib.getTrade_type() %>">
 <input type="hidden" name="num" value="<%=o_num %>">

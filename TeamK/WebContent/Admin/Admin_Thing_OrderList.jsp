@@ -149,7 +149,6 @@ function search_type_check(){
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
-
 	<div id="article_head">
 			<div id="article_title">Administrator Goods Order List</div>
 			<div class="empty"></div>
