@@ -974,7 +974,7 @@ public class ProductDAO {
 		List productList = new ArrayList();
 		try {
 			con = getConnection();
-			sql = "select num, car_num, name, subject, cost, type, readcount, stock, img from thing where type=? limit 0, 3";
+			sql = "select num, car_num, name, subject, cost, type, stock, img from thing where type=? and stock > 0 group by subject order by rand() limit 0, 3";
 			
 			pstmt =con.prepareStatement(sql);
 			pstmt.setString(1, type);
@@ -988,7 +988,6 @@ public class ProductDAO {
 				pdb.setSubject(rs.getString("subject"));
 				pdb.setCost(rs.getInt("cost"));
 				pdb.setType(rs.getString("type"));
-				pdb.setReadcount(rs.getInt("readcount"));
 				pdb.setStock(rs.getInt("stock"));
 				pdb.setImg(rs.getString("img"));
 				

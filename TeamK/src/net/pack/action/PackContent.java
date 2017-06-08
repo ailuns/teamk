@@ -34,12 +34,9 @@ public class PackContent implements Action{
 		ProductDAO pddao = new ProductDAO();
 		ProductBean pdb = new ProductBean();
 		
-		
-		
 		System.out.println("PackContent num >> " + num);
 		System.out.println("PackContent pagenum >> " + repageNum);
 		
-//		pb = pdao.getPack(num);
 		pb = pdao.getPack_original(num);
 		pdao.updateReadcount(num);
 		
@@ -83,8 +80,13 @@ public class PackContent implements Action{
 		// 끝페이지 구하기
 		int endPage = startPage+pageBlock-1;
 
+		// 상품문의 리스트 불러오기&보내기
 		List replylist = rdao.getCommentList(startRow, pagesize, num);
 		request.setAttribute("replylist", replylist);
+		
+		// 패키지 페이지  패키지슬라이드에 추천 상품 4개 
+		List PackList = pdao.getPackList(0, 4);
+		request.setAttribute("PackReCommentList", PackList);
 		
 		// 지역 분류명 리스트 구하기&보내기
 		List CategoryList = cdao.getCategoryList();
@@ -98,15 +100,6 @@ public class PackContent implements Action{
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("pagesize", pagesize);
-		
-//		System.out.println("count >> " + count);
-//		System.out.println("repageNum >> " + repageNum);
-//		System.out.println("pageCount >> " + pageCount);
-//		System.out.println("pageBlock >> " + pageBlock);
-//		System.out.println("startPage >> " + startPage);
-//		System.out.println("endPage >> " + endPage);
-//		System.out.println("currentPage >> " + currentPage);
-//		System.out.println("pagesize >> " + pagesize);
 
 		//ActoinForward 이동정보 담아서 로그인 이동
 		ActionForward forward = new ActionForward();

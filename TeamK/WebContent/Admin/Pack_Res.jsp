@@ -18,7 +18,7 @@ int count = ((Integer)request.getAttribute("count")).intValue();
 String pagenum = (String)request.getAttribute("pageNum");
 String status = (String)request.getAttribute("status");
 String status2 = (String)request.getAttribute("status2");
-int pageNum = Integer.parseInt(pagenum);
+int pNum = Integer.parseInt(pagenum);
 List<ModTradeInfoBEAN> Pack_Res_List=(List<ModTradeInfoBEAN>)request.getAttribute("Pack_Res_List");
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 %>
@@ -200,8 +200,9 @@ function search(){
 			 %><a href = "./Pack_res.ao?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=startp-1%>" id="i">이전</a><%
 		}
 		for(int i = startp;i<=endpage;i++){
-			%><a href="./Pack_res.ao?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=i %>" id="i"><%=i %></a><%
-		}
+		if(i==pNum){%><span id="i"><%=i%></span><%}else{
+		%><a href="./Pack_res.ao?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=i %>" id="i"><%=i %></a><%
+		}}
 		if(endpage<pcount){
 			%><a href = "./Pack_res.ao?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=endpage+1%>" id="i">다음</a><%
 		}

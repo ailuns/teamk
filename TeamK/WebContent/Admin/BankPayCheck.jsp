@@ -73,7 +73,7 @@ function Trade_Info_Delete(){
 		int pcount = ((Integer) request.getAttribute("pcount")).intValue();
 		int count = ((Integer) request.getAttribute("count")).intValue();
 		String pagenum = (String) request.getAttribute("pageNum");
-		int pageNum = Integer.parseInt(pagenum);
+		int pNum = Integer.parseInt(pagenum);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		List<Vector> ModList = (List<Vector>) request.getAttribute("ModList");
 		%>
@@ -168,10 +168,9 @@ function Trade_Info_Delete(){
 	<%
 		}
 			for (int i = startp; i <= endpage; i++) {
-	%><a href="./BankPayCheck.ao?pageNum=<%=i%>" id="i"><%=i%>
-	</a>
-	<%
-		}
+	if(i==pNum){%><span id="i"><%=i%></span><%}else{			
+	%><a href="./BankPayCheck.ao?pageNum=<%=i%>" id="i"><%=i%></a><%
+		}}
 			if (endpage < pcount) {
 	%><a href="./BankPayCheck.ao?pageNum=<%=endpage + 1%>" id="i">다음</a>
 	<%

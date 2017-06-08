@@ -84,6 +84,10 @@ public class PackSearchAction implements Action{
 		List list = pdao.getPackList_search(search, startDate, user_id);
 		request.setAttribute("list", list);
 
+		// 패키지 페이지  패키지슬라이드에 추천 상품 4개 
+		List PackList = pdao.getPackList(0, 4);
+		request.setAttribute("PackReCommentList", PackList);
+		
 		
 		// 지역 분류명 리스트 구하기&보내기
 		List CategoryList = cdao.getCategoryList();

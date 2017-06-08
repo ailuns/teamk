@@ -135,7 +135,7 @@ div#package_show {
 	margin: 0 auto;
 	margin-top: 15px;
 }
-div#package_show a {
+div#package_show a, div#package_silde a {
 	height: 250px;
 	width: 33.3%;
 	display: block;
@@ -168,25 +168,25 @@ div#package_show a#pack3 {
  	background-position: right;
 }
 
-a#pack1 span, a#pack2 span, a#pack3 span {
+a#pack1 span, a#pack2 span, a#pack3 span, a#pack4 span {
 	margin-left: 10px;
 	display: block;
 }
 
-a#pack1 #pktt, a#pack2 #pktt, a#pack3 #pktt {
+a#pack1 #pktt, a#pack2 #pktt, a#pack3 #pktt, a#pack4 #pktt {
 	font-size: 28px;
 	font-weight: bold;
 	margin-top: 10px;
 	padding-left: 10px;
 	padding-top: 25px;
 }
-a#pack1 #pksc, a#pack2 #pksc, a#pack3 #pksc {
+a#pack1 #pksc, a#pack2 #pksc, a#pack3 #pksc,  a#pack4 #pksc {
 	font-size: 18px;
 	padding-left: 10px;
 	line-height: 0px;
 
 }
-a#pack1 #pkpr, a#pack2 #pkpr, a#pack3 #pkpr {
+a#pack1 #pkpr, a#pack2 #pkpr, a#pack3 #pkpr, a#pack4 #pkpr  {
 	font-size: 25px;
 	font-weight: bold;
 	padding-left: 10px;
@@ -268,6 +268,48 @@ div#package_feat {
 	background-color: white;
 }
 div#package_slide, div#package_search {float: left;}
+
+div#package_slide a {
+	height: 100%;
+	width: 100%;
+	display: block;
+	float: left;
+	text-align: left;
+	text-decoration: none;
+	color: #fff;
+	text-shadow: 2px 3px 4px #000, -2px -3px 4px #000;
+}
+div#package_slide #pack1 {
+	background-repeat : no-repeat;
+	background-size: cover;
+	background-position: center center;
+ 	transition: 0.4s;
+ 	background-position: left;
+ 	
+}
+div#package_slide a#pack2 {
+	background-repeat : no-repeat;
+	background-size: cover;
+	background-position: center center;
+ 	transition: 0.4s;
+ 	background-position: center;
+}
+div#package_slide a#pack3 {
+	background-repeat : no-repeat;
+	background-size: cover;
+	background-position: center center;
+ 	transition: 0.4s;
+ 	background-position: right;
+}
+div#package_slide a#pack4 {
+	background-repeat : no-repeat;
+	background-size: cover;
+	background-position: center center;
+ 	transition: 0.4s;
+ 	background-position: right;
+}
+
+
 div#package_search {
 	background-color: #f5b8d7;
 	width: 400px;

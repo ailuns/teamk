@@ -11,6 +11,8 @@ import javax.naming.InitialContext;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
+import net.member.db.ProductBean;
+
 public class PackDAO {
 
 	Connection conn = null;
@@ -50,13 +52,18 @@ public class PackDAO {
 
 	
 	// 메인 페이지 패키지 3개
-	public List getPackList() {
+	public List getPackList(int start, int end) {
 		List list = new ArrayList();
 
 		try {
 			conn = getConnection();
-			sql = "select num, subject, intro, cost, file1 from pack where date > now() group by subject order by cost desc limit 0, 3";
+			
+			
+			sql = "select num, subject, intro, cost, file1 from pack where date > now() group by subject order by readcount desc, cost desc limit ?, ?";
+			
 			pstm = conn.prepareStatement(sql);
+			pstm.setInt(1, start);
+			pstm.setInt(2, end);
 
 			rs = pstm.executeQuery();
 			while (rs.next()) {
@@ -983,5 +990,4 @@ public class PackDAO {
 		}
 		return PB;
 	}
-	
 }
