@@ -1356,7 +1356,14 @@ if (user_id == null)
 										var stocktest = "";
 										$.each(data,function(index,qqqq){
 										//body태그 추가 key:value	
-											$('#stocktable').append("<tr id='stocktr"+qqqq.num+"'><td class='contentdiv1_2'>"+qqqq.size+"-"+qqqq.color+"</td><td><input type='button' value='▲' onclick='up("+qqqq.num+")'><input type='text' id = 'stack2"+qqqq.num+"' name = 'count' value='1' onkeydown='keyup("+qqqq.num+")'><input type='button' value='▼' onclick='down("+qqqq.num+")'></td><td><p id='p"+qqqq.num+"'></p></td></tr>");
+											$('#stocktable').append(
+													"<tr id='stocktr"+qqqq.num+"'><td class='contentdiv1_2'>"
+													+qqqq.size+"-"+qqqq.color+"</td><td>"+
+													"<input type='button' value='▲' onclick='up("+qqqq.num+")'>"+
+													"<input type='text' id = 'stack2"+qqqq.num+
+													"' name = 'count' value='1' onkeydown='keyup("+qqqq.num+")'>"+
+													"<input type='button' value='▼' onclick='down("+qqqq.num+")'>"+
+													"</td><td><p id='p"+qqqq.num+"'></p></td></tr>");
 											
 										});
 									

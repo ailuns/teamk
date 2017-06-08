@@ -7,20 +7,44 @@
 <title>Insert title here</title>
 <script src="../js/jquery-3.2.0.js"></script>
 <script type="text/javascript">
-	$(document).ready(function(){
-		alert("jquery test");
-	});
-	
-	$(function(){
-		alert("테스트2");
-	});
-	
-	jQuery(document).ready(function(){
-		alert("테스트3");
-	});
+	function test(num){
+		var arr = $('#test').find('tr');
+		var check = 1;
+		for(var i = 0; i<arr.length;i++){
+			if($('#test tr').eq(i).attr('id')=="test"+num){
+				
+			}
+		}
+	}
+	function test2(){
+		alert($('table').find('.tstock').length);
+		var sum = 0;
+		for(var i = 0; i<$('table').find('.tstock').length; i++){
+			var ints = $('table .tstock').eq(i).text().replace(",","");
+			ints = ints.replace("원","");
+			sum += parseInt(ints);
+		}
+		$('#ss').html(sum+"원");
+	}
 </script>
 </head>
 <body>
 
+	<div id = "ss"></div>
+	<table>
+		<tr>
+			<td class ="tstock">1원</td>
+		</tr>
+		<tr>
+			<td class ="tstock">4원</td>
+		</tr>
+		<tr>
+			<td class ="tstock">1,0원</td>
+		</tr>
+		<tr>
+			<td class ="tstock">3,3원</td>
+		</tr>
+	</table>
+	<input type = "button" value = "test2" onclick = "test2()">
 </body>
 </html>
