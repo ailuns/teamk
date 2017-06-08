@@ -37,6 +37,7 @@ public class BoardUpdateAction implements Action {
 		bb.setId(multi.getParameter("id"));
 		bb.setSubject(multi.getParameter("subject"));
 		bb.setContent(multi.getParameter("content"));
+		bb.setType_select(multi.getParameter("select"));
 		
 		if(multi.getFilesystemName("file1")!=null){
 			bb.setFile1(multi.getFilesystemName("file1"));

@@ -55,17 +55,26 @@ div#submenu {
 }
 div#submenu ul {
 	list-style: none;
-	margin-left: -40px;
+	margin-left: 0px;
 	margin-top: 90px;
 }
-div#submenu ul li {padding: 5px 0 0 30px;}
+div#submenu ul li {padding: 5px 0 0 10px;}
 div#submenu ul a {
 	text-decoration: none;
 	font-size: 15px;
-	color: #000;
+	color: #fff;
+	display:inline-block;
+	background-color:#ace;
+	padding: 7px;
+	width: 130px;
+	border-radius:5px; 
+	text-align: center;
 }
+div#submenu ul li:nth-of-type(6) {letter-spacing:-0.1em;}
 div#submenu ul a:HOVER {
-	color: #06c;
+	background-color: #09f; /* #06c */
+	font-weight:bold;
+	text-shadow: 2px 2px 3px #000
 }
 /* div#submenu embed {position: fixed;right: 0;bottom: 20%;} */
 div#map {
@@ -140,6 +149,7 @@ body {
 	margin: 0;
 	padding: 0;
 	background: linear-gradient(to top, #d6a176, #f0e3d5);
+	font-size: 13px;
 }
 div#wrap {
  	width: 1000px;
@@ -250,8 +260,8 @@ footer a {
 footer div#footer_bar {
 	width: 1000px;
 	background-color: #ccc;
-	height: 25px;
-	padding-top: 5px;
+	height: 40px;
+	padding-top: 15px;
 }
 footer div#footer_bar div {
 	width: 1000px;
@@ -274,29 +284,27 @@ div#package_slide img {
 	width: 600px;
 	height: 300px;
 }
-.jssorb05 {
-position: absolute;
-}
+.jssorb05 {position: absolute;}
 .jssorb05 div, .jssorb05 div:hover, .jssorb05 .av {
-position: absolute;
-width: 16px;
-height: 16px;
-background: url('../img/b05.png') no-repeat;
-overflow: hidden;
-cursor: pointer;
+	position: absolute;
+	width: 16px;
+	height: 16px;
+	background: url('../img/b05.png') no-repeat;
+	overflow: hidden;
+	cursor: pointer;
 }
 .jssorb05 div { background-position: -7px -7px; }
 .jssorb05 div:hover, .jssorb05 .av:hover { background-position: -37px -7px; }
 .jssorb05 .av { background-position: -67px -7px; }
 .jssorb05 .dn, .jssorb05 .dn:hover { background-position: -97px -7px; }
 .jssora12l, .jssora12r {
-display: block;
-position: absolute;
-width: 30px;
-height: 46px;
-cursor: pointer;
-background: url('../img/a12.png') no-repeat;
-overflow: hidden;
+	display: block;
+	position: absolute;
+	width: 30px;
+	height: 46px;
+	cursor: pointer;
+	background: url('../img/a12.png') no-repeat;
+	overflow: hidden;
 }
 .jssora12l { background-position: -16px -37px; }
 .jssora12r { background-position: -75px -37px; }

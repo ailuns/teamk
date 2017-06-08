@@ -15,6 +15,11 @@
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
+	<div id="article_head">
+<div id="article_title">관리자 주문 관리 메뉴</div>
+<div class="empty"></div>
+</div>
+<article>
 <%request.setCharacterEncoding("utf-8");
 String id = (String)session.getAttribute("id");
 if(!(id.equals("admin"))){
@@ -24,13 +29,12 @@ alert("권한이 없습니다!");
 history.back();
 </script>
 <%} %>
-<div>
-<h3>Admin</h3>
-<input type="button"value = "adminmenu" onclick="location.href='./BankPayCheck.ao'"><br>
-<input type="button" value ="Admin_pack_Order" onclick ="location.href = './Pack_res.ao'"><br>
-<input type="button" value="Admin_thing_Order" onclick="location.href='./Admin_Thing_OrderList.ao'"><br>
-
+<div id="admin_order_list">
+<input type="button"value = "admin menu" onclick="location.href='./BankPayCheck.ao'"><br>
+<input type="button" value ="Admin pack Order" onclick ="location.href = './Pack_res.ao'"><br>
+<input type="button" value="Admin thing Order" onclick="location.href='./Admin_Thing_OrderList.ao'"><br>
 </div>
+</article>
 	</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 	<!--오른쪽 메뉴 -->

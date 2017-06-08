@@ -127,9 +127,11 @@
 	%>
 
 <div id="wrap">
-		<div id="article_head">
-		<div id="article_title"><img src="./img/shop.png" width="30px" style="margin-right: 8px; vertical-align: bottom;">상품</div>
-	<div class="empty"></div>
+
+	<div id="article_head">
+		<div id="article_title"><img src="./img/shop2.png" width="26px" style="margin:0 8px 3px 0;  vertical-align: bottom;">상품</div>
+			<div class="empty"></div>
+			<div id="clear"></div>
 	</div>
 	<!--여행지 검색창 -->
 	<div id="package_feat">
@@ -257,7 +259,32 @@
 		</div>
 		<!-- 탭 내용 -->
 	</div>
-	
+	<div id="page_control">
+			<%
+				if (count != 0) {
+					//전체 페이지수 구하기 게시판 글 50개 한화면에 보여줄 줄개수 10 = > 5전체페이지
+					if (endPage > pageCount) {
+						endPage = pageCount;
+					}
+					//이전
+					if (startPage > pageBlock) {
+			%><a href="./Productlist.bo?pageNum=<%=startPage - pageBlock%>">[이전]</a>
+			<%
+				}
+					//1..10
+					for (int i = startPage; i <= endPage; i++) {
+			%><a href="./Productlist.bo?pageNum=<%=i%>">[<%=i%>]
+			</a>
+			<%
+				}
+					// 다음
+					if (endPage < pageCount) {
+			%><a href="./Productlist.bo?pageNum=<%=startPage + pageBlock%>">[다음]</a>
+			<%
+				}
+				}
+			%>
+		</div>
 </div>
 <!--오른쪽 메뉴 -->
  <jsp:include page="../inc/rightMenu.jsp"></jsp:include>

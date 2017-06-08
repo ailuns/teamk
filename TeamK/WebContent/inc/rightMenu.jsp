@@ -18,8 +18,8 @@
 		<br>
 		<li><a href="./MyBasketList.bns">장바구니</a></li>
 		<li><a href="./MyInterestList.ins">찜 리스트</a></li>
-		<li><a href="./MyPackOrderList.mo">패키지 주문목록</a></li>
 		<li><a href="./MyThingOrderList.mo">상품 주문목록</a></li>
+		<li><a href="./MyPackOrderList.mo">패키지 주문목록</a></li>
 		<br><br>
 		<%if(id.equals("admin")){%>
 			<li><a href="./AdminOrderList.ao">고객 주문 관리</a></li> 

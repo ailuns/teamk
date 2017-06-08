@@ -803,7 +803,7 @@ public class ProductDAO {
 		return 0; // 글번호 없음
 	}
 	
-	public void UpdateProduct(ProductBean pb) {
+	public void UpdateProduct(ProductBean pb ,String backname) {
 		// 1단계 드라이버로더
 		// 2단계 디비연결
 		// 3단게 sql 객체 생성
@@ -847,6 +847,26 @@ public class ProductDAO {
 			pstmt.setString(14, pb.getImg5());
 			pstmt.setInt(15, pb.getNum());
 			pstmt.executeUpdate();
+			
+			sql = "update thing set name =? , subject = ? , intro = ? , car_num=?, type=? , cost = ? , country = ? , area = ? , img =? , img2 =? , img3 =? , img4=? , img5=?   WHERE  name = ? ";
+			pstmt = (PreparedStatement) con.prepareStatement(sql);
+			// ? 값 저장 // 첫번째 물음표1, id에 입력될값
+			pstmt.setString(1, pb.getName());// 두번째 물음표2, pass에 입력될값
+			pstmt.setString(2, pb.getSubject());// 세번째 물음표3, name에 입력될값
+			pstmt.setString(3, pb.getIntro());
+			pstmt.setInt(4, pb.getCar_num());
+			pstmt.setString(5, pb.getType());
+			pstmt.setInt(6, pb.getCost());
+			pstmt.setString(7, pb.getCountry());
+			pstmt.setString(8, pb.getArea());
+			pstmt.setString(9, pb.getImg());
+			pstmt.setString(10, pb.getImg2());
+			pstmt.setString(11, pb.getImg3());
+			pstmt.setString(12, pb.getImg4());
+			pstmt.setString(13, pb.getImg5());
+			pstmt.setString(14, backname);
+			pstmt.executeUpdate();
+			
 			// 4단계 실행
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -958,6 +978,59 @@ public class ProductDAO {
 			
 			pstmt =con.prepareStatement(sql);
 			pstmt.setString(1, type);
+			
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				ProductBean pdb = new ProductBean();
+				pdb.setNum(rs.getInt("num"));
+				pdb.setName(rs.getString("name"));
+				pdb.setCar_num(rs.getInt("car_num"));
+				pdb.setSubject(rs.getString("subject"));
+				pdb.setCost(rs.getInt("cost"));
+				pdb.setType(rs.getString("type"));
+				pdb.setReadcount(rs.getInt("readcount"));
+				pdb.setStock(rs.getInt("stock"));
+				pdb.setImg(rs.getString("img"));
+				
+				productList.add(pdb);
+			} 
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ex) {
+				}
+			}
+		}
+		return productList;
+	}
+
+	
+	public List getProductImgList() {
+		Connection con = null;
+		String sql = "";
+		ResultSet rs = null;
+		List productList = new ArrayList();
+		try {
+			con = getConnection();
+			sql = "select num, car_num, name, subject, cost, type, readcount, stock, img from thing group by name order by rand() limit 0, 6";
+			pstmt =con.prepareStatement(sql);
 			
 			rs = pstmt.executeQuery();
 			while (rs.next()) {

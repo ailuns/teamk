@@ -149,7 +149,6 @@ function search_type_check(){
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
-
 	<div id="article_head">
 			<div id="article_title">Administrator Goods Order List</div>
 			<div class="empty"></div>
@@ -157,8 +156,7 @@ function search_type_check(){
 		</div>
 		<div id="empty"></div>
 		<article>
-	
-
+		<div id="admin_thing_order">
 		<select name="status" id="status" onchange="status_change()">
 			<option value="ing">현재 주문 리스트</option>
 			<option value="completed">과거 주문 리스트</option>
@@ -195,15 +193,14 @@ function search_type_check(){
 				List<ModTradeInfoBEAN> mtbList = (List<ModTradeInfoBEAN>)v.get(1);
 				
 			if(mtbList.size()!=0){%>
-				<table border = "1">
-					<tr>
-						<td>주문 번호 : <%=mtib.getTi_num() %></td>
-					</tr>
+				<fieldset>
+				<legend>주문 번호 : <%=mtib.getTi_num() %></legend>
+				<table>
 					<%for(int j =0; j< mtbList.size();j++){
 						ModTradeInfoBEAN mtb = mtbList.get(j);%>
 					<tr>
-						<td>상품 번호
-							<input type = "hidden" name = "o_num" value="<%=mtb.getNum()%>"></td>
+						<th>상품 번호
+							<input type = "hidden" name = "o_num" value="<%=mtb.getNum()%>"></th>
 						<td><%=mtb.getOri_num() %></td>
 						<td><%=mtb.getSubject() %></td>
 						<td>색상 : <%=mtb.getColor() %></td>
@@ -249,18 +246,18 @@ function search_type_check(){
 						String []memo=reason[0].split(",");%>
 					
 					<tr>
-						<td>교환 요구 사항</td>
+						<th>교환 요구 사항</th>
 						<td colspan="6"><%=reason[1].replace("\r\n", "<br>") %></td>
 					</tr>
 					<tr>
-						<td>교환 요구 수량</td>
+						<th>교환 요구 수량</th>
 						<td><%=memo[1] %>개</td>
-						<td>재발송 송장 번호</td>
+						<th>재발송 송장 번호</th>
 						<td><input type="text" placeholder="송장 번호" 
 							id="Trans_num<%=mtb.getNum()%>"></td>
 					</tr>
 					<tr>
-						<td>교환 결과</td>
+						<th>교환 결과</th>
 						<td colspan ="6"><textarea rows="3" cols="60"
 							placeholder="고객에게의 메세지를 입력해 주세요"
 							id = "memo<%=mtb.getNum() %>" style="resize:none;"></textarea>
@@ -272,25 +269,25 @@ function search_type_check(){
 						String [] reason = mtb.getO_memo().split("ㅨ");
 						String []memo=reason[0].split(",");%>
 						<tr>
-						<td>환불 사유</td>
+						<th>환불 사유</th>
 						<td colspan="6"><%=reason[1].replace("\r\n", "<br>") %></td>
 					</tr>
 					<tr>
-						<td>환불 방식</td>
+						<th>환불 방식</th>
 						<td><%=memo[1] %></td>
-						<td>환불 수량</td>
+						<th>환불 수량</th>
 						<td><%=memo[2] %>개</td>
-						<td>환불 금액</td>
+						<th>환불 금액</th>
 						<td><%=memo[3] %>원</td>
 					
 						<%if(memo[1].equals("무통장 입금")){ %>
 						</tr>
 						<tr>
-							<td>은행명</td>
+							<th>은행명</th>
 							<td><%=memo[4] %></td>
-							<td>예금주</td>
+							<th>예금주</th>
 							<td><%=memo[5] %></td>
-							<td>계좌 번호</td>
+							<th>계좌 번호</th>
 							<td><%=memo[6] %></td>
 							
 						<%} %>
@@ -304,33 +301,34 @@ function search_type_check(){
 					<%}
 				}%>
 				<tr>
-					<td>거래 정보</td>
-					<td>주문자ID</td>
+					<th>거래 정보</th>
+					<th>주문자ID</th>
 					<td><%=mtib.getId() %></td>
-					<td>결제자</td>
+					<th>결제자</th>
 					<td><%=mtib.getPayer() %></td>
-					<td>결제 방법</td>
+					<th>결제 방법</th>
 					<td><%=mtib.getTrade_type() %></td>
 				</tr>
 				<tr>
-					<td>받으시는 분</td>
+					<th>받으시는 분</th>
 					<td><%=mtib.getName() %></td>
-					<td>연락처</td>
+					<th>연락처</th>
 					<td><%=mtib.getMobile() %></td>
-					<td>주문 날짜</td>
+					<th>주문 날짜</th>
 					<td colspan="3"><%=sdf.format(mtib.getTrade_date()) %></td>
 				</tr>
 				<tr>
-					<td>주소</td>
+					<th>주소</th>
 					<td colspan="7"><%="["+mtib.getPostcode()+"] "+mtib.getAddress1()+" "+mtib.getAddress2() %></td>
 				</tr>
 					<%if(mtib.getMemo().length()!=0){ %>
 						<tr>
-							<td>배송시 요청 사항</td>
+							<th>배송시 요청 사항</th>
 							<td colspan="8"><%=mtib.getMemo().replace("\r\n", "<br>") %></td>
 						</tr>
 					<%} %>
-				</table><br><br>
+				</table>
+				</fieldset>
 				<%} 
 			}
 			
@@ -348,22 +346,23 @@ function search_type_check(){
 		if (count != 0) {
 			if (endpage > pcount)endpage = pcount;
 			if (startp > pblock){
-	%><a href="./Admin_Thing_OrderList.ao?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=startp-1%>">[이전]</a>
+	%><a href="./Admin_Thing_OrderList.ao?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=startp-1%>" id="i">이전</a>
 	<%
 		}
 			for (int i = startp; i <= endpage; i++) {
-	%><a href="./Admin_Thing_OrderList.ao?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=i %>">[<%=i%>]
+	%><a href="./Admin_Thing_OrderList.ao?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=i %>" id="i"><%=i%>
 	</a>
 	<%
 		}
 			if (endpage < pcount) {
-	%><a href="./Admin_Thing_OrderList.ao?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=endpage+1%>">[다음]</a>
+	%><a href="./Admin_Thing_OrderList.ao?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=endpage+1%>" id="i">다음</a>
 	<%
 		}
 		}
 		%>
 	
 	<br><input type = "button" value = "주문 관리" onclick="location.href='./AdminOrderList.ao'">
+		</div>
 		</article>
 		</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>

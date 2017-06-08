@@ -584,6 +584,11 @@ if (user_id == null)
 		}
 		return true;
     }
+	function Rcom_move(select)
+	{
+		var select_num = $("#num" + select).html();
+		location.href="./PackContent.po?num=" + select_num;
+	}
 	
 	// 리모컨 닫기 이벤트
 	function remote_close()
@@ -901,7 +906,7 @@ if (user_id == null)
 					{
 				%>
 						<td>
-							<div id="banner_sub">추천상품</div>
+							<div id="banner_sub">추천패키지</div>
 							<div id="close">close</div>
 						</td>
 						
@@ -910,14 +915,14 @@ if (user_id == null)
 					else if (RecommendPack.size() == 2)
 					{
 				%>
-						<td><div id="banner_sub">추천상품</div></td>
+						<td><div id="banner_sub">추천패키지</div></td>
 						<td><div id="close">close</div></td>
 				<%
 					}
 					else if (RecommendPack.size() == 3)
 					{
 				%>
-						<td><div id="banner_sub">추천상품</div></td>
+						<td><div id="banner_sub">추천패키지</div></td>
 						<td></td>
 						<td><div id="close">close</div></td>
 				<%

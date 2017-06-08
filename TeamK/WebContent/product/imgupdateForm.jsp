@@ -213,7 +213,7 @@ CategoryDAO cdao = new CategoryDAO();
 <div id="wrap_pack">
 	<div id="wrap_pack_detail">
 	<div>
-		<form action="./ProductUpdateAction.bo?&pageNum=<%=pageNum%>&name=<%=pb.getName() %>" id="fr" method="post" enctype="multipart/form-data">
+		<form action="./ProductUpdateAction.bo?&pageNum=<%=pageNum%>&name=<%=pb2.getName() %>" id="fr" method="post" enctype="multipart/form-data">
 			<table>
 				<tr>
 					<td>상품명</td>
@@ -245,7 +245,18 @@ CategoryDAO cdao = new CategoryDAO();
 						</select>
 					</td>
 				</tr>
-	
+				
+				<tr>
+						<td class="td_size">타입</td>
+						<td>
+							<select id="type" name="type">
+								<option value="city" <%="city".equals(pb2.getType()) ? "selected" : ""%>>도시</option>
+								<option value="mount" <%="mount".equals(pb2.getType()) ? "selected" : ""%>>산</option>
+								<option value="sea" <%="sea".equals(pb2.getType()) ? "selected" : ""%>>바다</option>
+								<option value="country" <%="sea".equals(pb2.getType()) ? "selected" : ""%>>농촌</option>
+							</select>
+						</td>
+					</tr>
 				<tr>
 					<td>지역</td>
 					<td>
