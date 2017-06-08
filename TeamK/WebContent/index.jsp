@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%response.sendRedirect("./main.fo"); %>
+<%response.sendRedirect("./main.fo");%>
 </body>
 </html>
