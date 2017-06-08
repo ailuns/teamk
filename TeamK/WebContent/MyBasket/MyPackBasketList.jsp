@@ -38,7 +38,7 @@ function Basket_update(num){
 function basket_delete(){
 	
 	if(confirm("정말 삭제하시겠습니까?")){
-		if(check()==0){
+		if($('input:checkbox[name=pch]:checked').length==0){
 			alert("선택된 항목이 없습니다!");
 			return false;
 		}else{
@@ -49,7 +49,7 @@ function basket_delete(){
 	}else return false;
 }
 function basket_submit(){
-	if($('input:checkbox[name=tch]:checked').length==0){
+	if($('input:checkbox[name=pch]:checked').length==0){
 		alert("선택된 항목이 없습니다!");
 		return false;
 	}else{
@@ -98,7 +98,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 <form name ="fr" method ="post" id="pack_basket_list">
 <table>
 <tr>
-<th></th><th>이미지</th><th>제목</th><th>성인</th><th>유아</th><th>가격</th><th>등록일</th><th>비고</th></tr>
+<th></th><th>이미지</th><th>제목</th><th>성인</th><th>유아</th><th>가격</th><th>출발일</th><th>비고</th></tr>
 <%
 				for (int i = 0; i < MyPackBasket.size(); i++) {
 						PBasketBEAN pbb = MyPackBasket.get(i);
