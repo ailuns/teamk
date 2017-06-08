@@ -31,10 +31,10 @@ if (rs.next()) {
 
 
 
-sql = "select stock from thing where color = ? and size = ? and name = ?";
+sql = "select num,size,stock,color from thing where color = ? and num = ? and name = ?";
 pstmt = con.prepareStatement(sql);
 pstmt.setString(1, color);
-pstmt.setString(2, size);
+pstmt.setInt(2, num);
 pstmt.setString(3, name);
 //4단계 rs = 실행
 rs = pstmt.executeQuery();
@@ -48,7 +48,10 @@ rs = pstmt.executeQuery();
 JSONArray arr = new JSONArray();
 while(rs.next()){
 	JSONObject obj = new JSONObject();
-	obj.put("stock",rs.getInt(1));
+	obj.put("num",rs.getInt(1));
+	obj.put("size",rs.getString(2));
+	obj.put("stock",rs.getInt(3));
+	obj.put("color",rs.getString(4));;
 	arr.add(obj);
 }
 %>

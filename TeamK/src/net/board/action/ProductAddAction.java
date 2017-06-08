@@ -32,19 +32,19 @@ public class ProductAddAction implements Action {
 		pb.setCountry(request.getParameter("country"));
 		pb.setArea(request.getParameter("area"));
 		pb.setStock(Integer.parseInt(request.getParameter("stock")));
-		pb.setImg(request.getParameter("file1"));
-		pb.setImg2(request.getParameter("file2"));
-		String file3 = request.getParameter("file3");
+		pb.setImg(request.getParameter("img"));
+		pb.setImg2(request.getParameter("img2"));
+		String file3 = request.getParameter("img3");
 		if(file3 == null){
 			file3 = "";
 		}
 		pb.setImg3(file3);
-		String file4 = request.getParameter("file4");
+		String file4 = request.getParameter("img4");
 		if(file4 == null){
 			file4 = "";
 		}
 		pb.setImg4(file4);
-		String file5 = request.getParameter("file5");
+		String file5 = request.getParameter("img5");
 		if(file5 == null){
 			file5 = "";
 		}

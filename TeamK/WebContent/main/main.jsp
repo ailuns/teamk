@@ -4,6 +4,8 @@
 <%@page import="net.board.db.BoardDAO"%>
 <%@ page import="net.pack.db.CategoryBean" %>
 <%@ page import="net.pack.db.PackBean" %>
+<%@ page import="net.member.db.ProductDAO" %>
+<%@ page import="net.member.db.ProductBean" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.text.DecimalFormat" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -121,6 +123,7 @@
 <%
 	List CategoryList = (List)request.getAttribute("CategoryList");
 	List PackList = (List)request.getAttribute("PackList");
+	List ProductImgList = (List)request.getAttribute("ProductImgList");
 %>
 </head>
 <body>
@@ -194,7 +197,9 @@
 				<a href="./PackContent.po?num=<%=pb.getNum() %>" id="pack<%=j %>">
 				<span id="pktt"><%=pb.getSubject() %></span><br>
 				<span id="pksc"><%=pb.getIntro() %></span><br>
-				<span id="pkpr"><%=cost %>원~</span></a>
+				<span id="pkpr"><%=cost %>원</span>
+				<span id="pkdt"><%=pb.getDate() %></span>
+				</a>
 				<script> bg(<%=j %>);</script>
 			<%
 				}
@@ -206,36 +211,23 @@
         <!-- Loading Screen -->
         <div data-u="loading" style="position:absolute;top:0px;left:0px;background:url('./img/loading.gif') no-repeat 50% 50%;background-color:rgba(0, 0, 0, 0.7);"></div>
         <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:1000px;height:250px;overflow:hidden;">
+          <%
+				ProductBean prob;
+				for (int i = 0; i < ProductImgList.size(); i++)
+				{
+					int j = i + 1;
+					int z = ProductImgList.size();
+					prob =(ProductBean)ProductImgList.get(i);
+					DecimalFormat df = new DecimalFormat("#,###");
+				    String cost = df.format(prob.getCost());
+					
+			%>
             <div>
-                <a href="#"><img src="./img/home.png" /><br><br>
-                <h2>Goods Name</h2>
-                <h3>￦100,000~</h3></a>
+                <a href="./ProductContent.bo?num=<%=prob.getNum()%>&car_num=<%=prob.getCar_num()%>"><img src="./upload/<%=prob.getImg() %>" /><br><br>
+                <h2><%=prob.getName() %></h2>
+                <h3>￦<%= cost%></h3></a>
             </div>
-            <div>
-                <a href="#"><img src="./img/disk.png" /><br><br>
-                <h2>Goods Name</h2>
-                <h3>￦100,000~</h3></a>
-            </div>
-            <div>
-                <a href="#"><img src="./img/notice.png" /><br><br>
-                <h2>Goods Name</h2>
-                <h3>￦100,000~</h3></a>
-            </div>
-            <div>
-                <a href="#"><img src="./img/qna.png" /><br><br>
-                <h2>Goods Name</h2>
-                <h3>￦100,000~</h3></a>
-            </div>
-            <div>
-                <a href="#"><img src="./img/review.png" /><br><br>
-                <h2>Goods Name</h2>
-                <h3>￦100,000~</h3></a>
-            </div>
-            <div>
-                <a href="#"><img src="./img/shop.png" /><br><br>
-                <h2>Goods Name</h2>
-                <h3>￦100,000~</h3></a>
-            </div>
+           <%} %>
             <a data-u="any" href="https://wordpress.org/plugins/jssor-slider/" style="display:none">wordpress slider</a>
         </div>
     </div>

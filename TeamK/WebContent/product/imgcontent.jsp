@@ -1,6 +1,9 @@
+<%@page import="com.sun.xml.internal.ws.api.config.management.Reconfigurable"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%@ page import="net.member.db.*"%>
+	<%@ page import="net.pack.db.PackDAO"%>
+<%@ page import="net.pack.db.PackBean"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.text.DecimalFormat" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -23,6 +26,7 @@
 	CommentBean comb = new CommentBean();
 	CommentDAO comdao = new CommentDAO();
 	List productList2 = (List) request.getAttribute("productList2");
+	List RecommendPack = (List)request.getAttribute("RecommendPack");
 
 	 	int num = (int) request.getAttribute("num");
 	 	int count = (int) request.getAttribute("count");
@@ -57,6 +61,7 @@ if (user_id == null)
 <script>
 
 	jQuery(document).ready(function($){
+		$("#remote_content").draggable();
 		var val = $("#avg_cost").html();
 		 var commasum = val.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
 		$('#p').html(commasum);
@@ -579,6 +584,11 @@ if (user_id == null)
 		}
 		return true;
     }
+	function Rcom_move(select)
+	{
+		var select_num = $("#num" + select).html();
+		location.href="./PackContent.po?num=" + select_num;
+	}
 	
 	// 리모컨 닫기 이벤트
 	function remote_close()
@@ -594,7 +604,7 @@ if (user_id == null)
 	
 	// 리모컨 마우스 Drag&Drop 이벤트
 	jQuery(document).ready(function($){
-		$("#remote_content").draggable();
+	
 	});
 	
 	// 날짜 추가 버튼 클릭 이벤트
@@ -859,111 +869,10 @@ if (user_id == null)
 
 
 
-/* 추천상품 배너 */
-#banner_sub
-{
-	margin : 0px;
-	padding : 0px;
-	width : 100px;
-	height : 20px;
-	border-top : 2px solid black;
-	border-left : 2px solid black;
-	border-right : 2px solid black;
-	position : fixed;
-	right : 513px;
-	bottom : 185px;
-	background-color: white;
-	text-align: center;
-	font-size: 0.8em;
-	z-index : 1;
-}
-
-#banner
-{
-	margin : 0px;
-	padding : 0px;
-	width : 464px;
-	height : 180px;
-	border : 2px solid black;
-	position : fixed;
-	right : 150px;
-	bottom : 5px;
-	background-color: white;
-	z-index : 1;
-}
-
-#banner_content
-{
-	position : relative;
-	top : -20px;
-}
-
-#banner_content td
-{
-	text-align: center;
-}
 
 
-#banner img
-{
-	width : 150px;
-	height : 150px;
-}
 
 
-#close
-{
-	background-color: black;
-	color : white;
-	width : 50px;
-	height : 20px;
-	float: right;
-	position : relative;
-	z-index: 1;
-	text-align: center;
-}
-
-#close:HOVER
-{
-	cursor: pointer;
-}
-/* 추천상품 배너 */
-
-
-/* 화면이동 리모컨 */
-
-#remote_content
-{
-	width : 100px;
-	height : 170px;
-	position : fixed;
-	right : 310px;
-	bottom : 220px;
-	background-color: white;
-	text-align: center;
-	border : 1px solid #BDBDBD;
-	z-index : 1;
-}
-
-#remote_content:HOVER
-{
-	cursor: move;
-}
-
-#remote_control td
-{
-	border-bottom : 1px solid gray;
-	color : #BBBBBB;
-	text-decoration: none;
-	font-size: 0.8em;
-}
-
-#remote_control td span:HOVER, #remote_close
-{
-	cursor: pointer;
-}
-
-/* 화면이동 리모컨 */
 
 </style>
 
@@ -973,37 +882,82 @@ if (user_id == null)
 				<td><span onclick="remote_close()">close</span></td>
 			</tr>
 			<tr>
-				<td><span onclick="fnMove('#wrap')">Top</span></td>
+				<td><span onclick="fnMove('body')">Top</span></td>
 			</tr>
 			<tr>
-				<td><span onclick="fnMove('#contentdiv2')">여행정보</span></td>
+				<td><span onclick="fnMove('#contentdiv2')">상품정보</span></td>
 			</tr>
-			<tr>
-				<td><span onclick="fnMove('#middle2')">지도뷰</span></td>
-			</tr>
+		
 			<tr>
 				<td style="border-bottom: none;"><span onclick="fnMove('#QnA')">상품문의</span></td>
 			</tr>
 		</table>
 	</div>
-	
-	<div id="banner_sub">추천상품</div>
+	<%
+	if (RecommendPack.size() > 0)
+	{
+	%>
 	<div id="banner">
-		<div id="close">close</div>
 		<table id="banner_content">
-		
 			<tr>
-				<td><a href="#"><img src="./upload/<%=pb.getImg() %>"></a></td>
-				<td><a href="#"><img src="./upload/<%=pb.getImg() %>"></a></td>
-				<td><a href="#"><img src="./upload/<%=pb.getImg() %>"></a></td>
-			</tr>
-			<tr>
-				<td><div class="info">가격 50000</div></td>
-				<td><div class="info">가격 40000</div></td>
-				<td><div class="info">가격 30000</div></td>
+				<tr>
+				<%
+					if (RecommendPack.size() == 1)
+					{
+				%>
+						<td>
+							<div id="banner_sub">추천패키지</div>
+							<div id="close">close</div>
+						</td>
+						
+				<%
+					}
+					else if (RecommendPack.size() == 2)
+					{
+				%>
+						<td><div id="banner_sub">추천패키지</div></td>
+						<td><div id="close">close</div></td>
+				<%
+					}
+					else if (RecommendPack.size() == 3)
+					{
+				%>
+						<td><div id="banner_sub">추천패키지</div></td>
+						<td></td>
+						<td><div id="close">close</div></td>
+				<%
+					}
+				%>
+				</tr>
+				<%
+				PackBean pdb = new PackBean();
+					for(int i = 0; i < RecommendPack.size(); i++)
+					{
+						pdb =(PackBean)RecommendPack.get(i);
+				%>
+				
+				<td>
+					<table>
+						<tr>
+							<td id="num<%=i %>" style="display: none;"><%=pdb.getNum() %></td>
+			
+							<td><img id="Rcom_pd" src="./upload/<%=pdb.getFile1() %>" onclick="Rcom_move(<%=i %>)"></td>
+						</tr>
+						<tr>
+							<td><div class="info"><%=pdb.getCost() %></div></td>
+						</tr>
+					</table>
+				</td>
+				<%
+					}
+				%>
+				
 			</tr>
 		</table>
 	</div>
+	<%
+	}
+	%>
 
 	<!-- 왼쪽 메뉴 -->
 	<jsp:include page="../inc/leftMenu.jsp"></jsp:include>
@@ -1011,24 +965,23 @@ if (user_id == null)
 	<!--여행지 검색창 -->
 	<div id="wrap"> 
 		<div id="package_head">
-			<div id="package_title">상품
-			</div>
+			<div id="article_head">
+		<div id="article_title"><img src="./img/shop.png" width="30px" style="margin-right: 8px; vertical-align: bottom;">상품</div>
+	<div class="empty"></div>
+	</div>
 			<div id="package_feat">
-			<jsp:include page ="../inc/packSlide.jsp"></jsp:include>
+		<jsp:include page ="../inc/packSlide.jsp"></jsp:include>
 			<div id="package_search">
-				<p>내게 맞는 패키지 검색하기</p>
-				<form action="./PackSearchAction.po" name="fr1" method="get" id="scheduler" onsubmit="return input_chk()">
-					<label for="date_from">출발</label>
-					<input type="text" id="date_from" class="input_style" name="startDate" required="yes">
-					<label for="date_to">도착</label>
-					<input type="text" id="date_to" class="input_style" name="endDate">
-					<br><br>
-					<label for="city_search">지역</label>
-					
-					<input type="submit" value="검색" id="search_btn" class="input_style">
-				</form>
-			</div>
+			<p>상품 검색하기</p>
+			<form action="./ProductSearchAction.bo" name="fr" method="get" id="scheduler" onsubmit="return input_chk();">
+				<label for="date_from">검색명</label><input type="text" id="serch_data" class="input_style" name="serch_data" required="yes"><br><br>
+<!-- 				<label for="date_to">~</label><input type="text" id="date_to" class="input_style" name="endDate"><br><br> -->
+			
+				
+				<input type="submit" value="검색" id="search_btn" class="input_style">
+			</form>
 		</div>
+	</div>
 	
 	<div id="clear"></div>
 	<!--여행지 검색창 -->
@@ -1037,7 +990,9 @@ if (user_id == null)
 
 						pb = (ProductBean) productList.get(i);
 			%>
+		<div id="pack_btn">
 		<!--글제목 -->
+		<br>
 		<h3><%=pb.getSubject()%></h3>
 		<!--글제목 -->
 		<!--관리자만 보이게 -->
@@ -1053,6 +1008,7 @@ if (user_id == null)
 			}
 		}
 		%>
+		</div>
 		<!--관리자만 보이게 -->
 		<hr>
 		<div id="top">
@@ -1083,7 +1039,7 @@ if (user_id == null)
 			
 			<!--인원수, 가격 -->
 				<div id="contentdiv1">
-				<form name="input_fr" method="post">
+				<form name="input_fr" method="post" onsubmit="return false">
 					<table>
 						<tr>
 							<td class="contentdiv1_1">판매가</td>
@@ -1110,19 +1066,16 @@ if (user_id == null)
 						<tr>
 							<td class="contentdiv1_1">size</td>
 							<td class="contentdiv1_2">
-							<select  name="size"  id = "size"class="size" onchange="people_Calc3()">
-								<option  value = "" >선택하세요</option>
+							<select  name="size"  id ="size"class="size" onchange="people_Calc3(<%=num%>)">
+								<option  value = "5555" >선택하세요</option>
 								
 								</select></td>
-								<td class="contentdiv1_3"></td>
+				
+								<td class="contentdiv1_3"><input type="hidden" id="hstock" value=""></td>
+								<div id="dstock"></div>
 						</tr>
-						<tr>
-							<td class="contentdiv1_1">수량</td>
-							<td class="contentdiv1_2">
-							<input type="button" value="▲" onclick="up()"><input type="text" id = "stack" name = "count" value = "1" style="width:30px;" readonly><input type="button"  value="▼" onclick="down()" >
-							</td>
-							<td class="contentdiv1_3"></td>
-						</tr>
+						
+						
 						<tr>
 							<td class="contentdiv1_1">합계</td>
 							<td colspan="2">
@@ -1133,8 +1086,10 @@ if (user_id == null)
 							</td>
 						</tr>
 						
+						
 					</table>
 					<br>
+					<table id ="stocktable"></table>
 										<%
 				for (int i = 0; i < productList.size(); i++) {
 
@@ -1153,34 +1108,193 @@ if (user_id == null)
 					<p id="content_notice">※color를 선택해주셔야 size부분이 나옵니다!!!</p>
 					
 							<script type="text/javascript">
-							function up(){
+// 							function up(){
+								
+// 								var val = $("#avg_cost").html();
+// 								var str = $("#stack").val();
+								
+// 								var str2 = $("#size option:selected").val();
+// 								var str3 = parseInt($("#dstock"+str2).val());
+// 								alert(str3);
+								
+// // 								var str2 = $("#hstock").val().split(",");
+// // 								var str3 = parseInt($("#size option").index($("#size option:selected")));
+// 								var max = 10;
+// 								var alertmsg = "";
+// 								if(str3 != 0){
+// 									str++;
+// 									document.input_fr.stack.value = str;
+// 								if(str2[str3]<max){
+// 									max = str2[str3];
+// 									alertmsg = "재고가 부족합니다\n"+str2[str3]+"만큼 선택해주세요.";
+									
+// 								}else{
+// 									alertmsg = "10개 이하로 주문해주세요";
+								
+// 								}
+								
+// 								if(str > max){
+// 									alert(alertmsg);
+// 									$("#stack").val(parseInt($("#stack").val())-1);
+// 								}else{
+// 									var sum = str * val;
+									
+// 								    str = String(sum);
+// 								    var commasum = str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+// 									$('#p').html(commasum);
+								
+// 								}
+								
+								
+// 								}else{
+// 									alert("size를 선택하여주세요.");
+// 								}
+// 							}
+						function up(){
+								
 								var val = $("#avg_cost").html();
 								var str = $("#stack").val();
-								if(str >= 999){
-									alert("더이상클릭할수업습니다.")
+								
+								var str2 = $("#size option:selected").val();
+								var str3 = $("#dstock"+str2).val();
+								
+								
+// 								var str2 = $("#hstock").val().split(",");
+// 								var str3 = parseInt($("#size option").index($("#size option:selected")));
+								var max = 10;
+								var alertmsg = "";
+								if(str3 != 0){
+									str++;
+									document.input_fr.stack.value = str;
+								if(str3<max){
+									max = str3;
+									alertmsg = "재고가 부족합니다\n"+str3+"만큼 선택해주세요.";
+									
 								}else{
-								str++;
-								document.input_fr.stack.value = str;
+									alertmsg = "10개 이하로 주문해주세요";
+								
 								}
+								
+								if(str > max){
+									alert(alertmsg);
+									$("#stack").val(parseInt($("#stack").val())-1);
+								}else{
+									var sum = str * val;
+									
+								    str = String(sum);
+								    var commasum = str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+									$('#p').html(commasum);
+								
+								}
+								
+								
+								}else{
+									alert("size를 선택하여주세요.");
+								}
+							}
+						function up(num){
+							
+							var val = $("#avg_cost").html();
+							var str = parseInt($("#stack2"+num).val());
+							
+							var str2 = $("#size option:selected").val();
+							var str3 = $("#dstock"+str2).val();
+							
+							
+//								var str2 = $("#hstock").val().split(",");
+//								var str3 = parseInt($("#size option").index($("#size option:selected")));
+							var max = 10;
+							var alertmsg = "";
+							if(str3 != 0){
+								str++;
+								$("#stack2"+num).val(str);
+							if(str3<max){
+								max = str3;
+								alertmsg = "재고가 부족합니다\n"+str3+"만큼 선택해주세요.";
+								
+							}else{
+								alertmsg = "10개 이하로 주문해주세요";
+								
+							}
+							
+							if(str > max){
+								alert(alertmsg);
+								$("#stack2"+num).val(parseInt($("#stack2"+num).val())-1);
+							}else{
 								var sum = str * val;
 								
 							    str = String(sum);
 							    var commasum = str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
-								$('#p').html(commasum);
+								$('#p'+num).html(commasum);
+							
 							}
-							function down(){
+							
+							
+							}else{
+								alert("size를 선택하여주세요.");
+							}
+						}
+						
+						
+							function down(num){
+								
 								var val = $("#avg_cost").html();
-								var str = $("#stack").val();
+								var str = parseInt($("#stack2"+num).val());
 								if(str <= 1){
 									alert("더이상클릭할수업습니다.")
 								}else{
 								str--;
-								document.input_fr.stack.value = str;
+								$("#stack2"+num).val(str);
 								}
 								var sum = str * val;
 							    str = String(sum);
 							    var commasum = str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
-								$('#p').html(commasum);
+								$('#p'+num).html(commasum);
+							}
+							
+							function keyup(num){
+								 if (window.event.keyCode == 13) {
+								
+								var val = $("#avg_cost").html();
+								var str = parseInt($("#stack2"+num).val());
+								
+								var str2 = $("#size option:selected").val();
+								var str3 = $("#dstock"+str2).val();
+								
+								
+//									var str2 = $("#hstock").val().split(",");
+//									var str3 = parseInt($("#size option").index($("#size option:selected")));
+								var max = 10;
+								var alertmsg = "";
+								if(str3 != 0){
+									$("#stack2"+num).val(str);
+								if(str3<max){
+									max = str3;
+									alertmsg = "재고가 부족합니다\n"+str3+"만큼 선택해주세요.";
+									
+								}else{
+									alertmsg = "10개 이하로 주문해주세요";
+									
+								}
+								
+								if(str > max){
+									alert(alertmsg);
+									
+								
+								}else{
+									var sum = str * val;
+									
+								    str = String(sum);
+								    var commasum = str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+									$('#p'+num).html(commasum);
+								
+								}
+								
+								
+								}else{
+									alert("size를 선택하여주세요.");
+								}
+							}
 							}
 							
 							
@@ -1191,13 +1305,21 @@ if (user_id == null)
 									var val2 = str
 									
 									
+									
 									$("#size").find("option").remove();
-									$('#size').append("<option  value = '' >선택하세요</option>");
+									$("#dstock").find("input").remove();
+									$('#size').append("<option  value = '5555' >선택하세요</option>");
 									$.getJSON('./product/json3.jsp?num='+val2+'&color='+val1,function(data){
+										var stocktest = "";
 										$.each(data,function(index,qwer){
 										//body태그 추가 key:value	
-											$('#size').append("<option value=" + qwer.num + ">" + qwer.size + "</option>");
+											$('#size').append("<option value=" + qwer.num + ">" + qwer.size +"</option>");
+											$('#dstock').append("<input type = 'hidden' value ='"+qwer.stock+"'id='dstock"+qwer.num+"'>");
+											
+										stocktest+=","+ qwer.stock;
+									
 										});
+										$("#hstock").val(stocktest);
 									});
 								});
 							}
@@ -1220,15 +1342,31 @@ if (user_id == null)
 								});
 							}
 					
-							function people_Calc3(){			
+							function people_Calc3(str){
 								$(document).ready(function(){
-									var val1 = $(".size option:selected").val();
-							
-									
+									var val1 = $("#color option:selected").val();
+									var val2 = str
+									var val3 = $("#size option:selected").val();
 									
 
-								
+									if(val3 != 5555){
+									
+									
+									$.getJSON('./product/json4.jsp?num='+val3+'&color='+val1,function(data){
+										var stocktest = "";
+										$.each(data,function(index,qqqq){
+										//body태그 추가 key:value	
+											$('#stocktable').append("<tr id='stocktr"+qqqq.num+"'><td class='contentdiv1_2'>"+qqqq.size+"-"+qqqq.color+"</td><td><input type='button' value='▲' onclick='up("+qqqq.num+")'><input type='text' id = 'stack2"+qqqq.num+"' name = 'count' value='1' onkeydown='keyup("+qqqq.num+")'><input type='button' value='▼' onclick='down("+qqqq.num+")'></td><td><p id='p"+qqqq.num+"'></p></td></tr>");
+											
+										});
+									
+									});
+									}else{alert("닌멍청하다")
+									}
 								});
+							
+								
+								
 							}
 							
 						</script>
@@ -1248,7 +1386,10 @@ if (user_id == null)
 
 						pb = (ProductBean) productList.get(i);
 			%>
-			<div id="contentdiv2"><%=pb.getContent() %></div>
+			<div id="contentdiv2">
+				<div id="contentdiv2_1"><%=pb.getContent() %>
+				</div>
+				</div>
 			<%} %>
 		</div>
 		<!--상품 정보, 내용이 들어가는 영역 -->
@@ -1256,10 +1397,10 @@ if (user_id == null)
 		
 
 		<!--상품 문의 -->
-			<div id="middle3">
 			<div id="QnA">
 			<h3>상품 문의</h3>
 			<hr>
+			<div id="middle3">
 			<table border="1" id="replyTable">
 				<tr>
 <!-- 					<td>번호</td> -->

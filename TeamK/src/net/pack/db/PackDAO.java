@@ -59,7 +59,7 @@ public class PackDAO {
 			conn = getConnection();
 			
 			
-			sql = "select num, subject, intro, cost, file1 from pack where date > now() group by subject order by readcount desc, cost desc limit ?, ?";
+			sql = "select num, subject, intro, cost, date, file1 from pack where date > now() group by subject order by readcount desc, cost desc limit ?, ?";
 			
 			pstm = conn.prepareStatement(sql);
 			pstm.setInt(1, start);
@@ -73,6 +73,7 @@ public class PackDAO {
 				PB.setSubject(rs.getString("subject"));
 				PB.setIntro(rs.getString("intro"));
 				PB.setCost(rs.getInt("cost"));
+				PB.setDate(rs.getString("date"));
 				PB.setFile1(rs.getString("file1"));
 				
 				list.add(PB);
@@ -417,6 +418,82 @@ public class PackDAO {
 		return count;
 	}
 	
+	
+	
+	
+	public List getRecommendProduct(String type) {
+		List list = new ArrayList();
+
+		try {
+			conn = getConnection();
+			
+				sql = "select * from pack where type=? and date > now() group by subject order by rand() limit 0, 3";
+			
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, type);
+
+			rs = pstm.executeQuery();
+			
+			while (rs.next()) {
+				PackBean PB = new PackBean();
+
+				PB.setNum(rs.getInt("num"));
+				PB.setSerial(rs.getInt("serial"));
+				PB.setSubject(rs.getString("subject"));
+				PB.setIntro(rs.getString("intro"));
+				PB.setContent(rs.getString("content"));
+				PB.setType(rs.getString("type"));
+				PB.setArea(rs.getString("area"));
+				PB.setCity(rs.getString("city"));
+				PB.setSarea(rs.getString("sarea"));
+				PB.setCost(rs.getInt("cost"));
+				PB.setReadcount(rs.getInt("readcount"));
+				PB.setStock(rs.getInt("stock"));
+				PB.setDate(rs.getString("date"));
+				PB.setFile1(rs.getString("file1"));
+				PB.setFile2(rs.getString("file2"));
+				PB.setFile3(rs.getString("file3"));
+				PB.setFile4(rs.getString("file4"));
+				PB.setFile5(rs.getString("file5"));
+				
+				list.add(PB);
+			}
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		finally {
+			if (pstm != null) {
+				try {
+					pstm.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return list;
+	}
 	
 	
 	
