@@ -441,6 +441,13 @@ div#package_tab .tab_content a:VISITED {
 	text-decoration: none;
 }
 
+div#pack_btn{
+	height: 100px;
+	text-align: center;
+	font-size:20px;
+	font-weight: bold;
+}
+
 input#admin_write {margin-top : 20px;}
 .more_pack {font-weight: bold;}
 .more_pack:HOVER {cursor: pointer;}
