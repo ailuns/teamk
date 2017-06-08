@@ -108,7 +108,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			%>
 			<tr>
 				<input type="hidden" id="ori_num<%=i %>" value="<%=pbb.getOri_num() %>">
-				<td><input type ="checkbox" id="pch<%=i %>" name = "pch" value = "<%=pbb.getPb_num()%>">
+				<td class="chkbx"><input type ="checkbox" id="pch<%=i %>" name = "pch" value = "<%=pbb.getPb_num()%>">
 				<td class="ev_hover" onclick="pack_numchk(<%=i %>)"><img src ="./upload/<%=pbb.getImg() %>"></td>
 				<td class="ev_hover" onclick="pack_numchk(<%=i %>)"><%=pbb.getSubject()%><br>
 				<%=pbb.getIntro() %></td>

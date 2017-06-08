@@ -94,7 +94,7 @@ function Trade_Info_Delete(){
 		<h4>결제일 : <%=sdf.format(mtib.getTrade_date())%></h4><br>
 		<table border="1">
 			<tr>
-				<td><input type = "checkbox" name ="tich" 
+				<td class="chkbx"><input type = "checkbox" name ="tich" 
 							value = "<%=mtib.getTi_num() %>"></td>
 				<td><%=mtib.getPayer() %></td>
 				<td><%=mtib.getTrade_type() %></td>

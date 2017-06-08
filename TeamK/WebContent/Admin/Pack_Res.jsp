@@ -117,7 +117,7 @@ function search(){
 							if(mtib.getStatus()==1||
 								mtib.getStatus()==2||
 								mtib.getStatus()==4){ %>
-						<td rowspan="4"><input type="checkbox" value="<%=mtib.getNum() %>" name="pnum"></td>
+						<td rowspan="4" class="chkbx"><input type="checkbox" value="<%=mtib.getNum() %>" name="pnum"></td>
 						<%	}
 						}%>
 						<td id="tr1td1"><%=sdf.format(mtib.getDate()) %></td>

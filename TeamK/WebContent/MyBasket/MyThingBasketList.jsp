@@ -113,7 +113,7 @@ List<TBasketBEAN> ThingBasket=(List<TBasketBEAN>)request.getAttribute("MyThingBa
 						
 			%>
 			<tr>
-			<td><input type = "checkbox" name="tch" value="<%=tbb.getNum()%>" id = "tch<%=i%>"></td>
+			<td class="chkbx"><input type = "checkbox" name="tch" value="<%=tbb.getNum()%>" id = "tch<%=i%>"></td>
 				<td><img src ="./upload/<%=tbb.getImg() %>"></td>
 				<td><%=tbb.getSubject() %><br>
 				<%=tbb.getIntro() %></td>

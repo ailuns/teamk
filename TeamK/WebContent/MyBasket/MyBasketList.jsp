@@ -155,7 +155,7 @@
 			%>
 			<tr>
 				<input type="hidden" id="pori_num<%=i %>" value="<%=pbb.getOri_num() %>">
-				<td><input type="checkbox" id="pch<%=i %>" name="pch" value="<%=pbb.getPb_num()%>"></td>
+				<td class="chkbx"><input type="checkbox" id="pch<%=i %>" name="pch" value="<%=pbb.getPb_num()%>"></td>
 				<td id="cate" onclick="pack_numchk(<%=i %>)"><img src ="./upload/<%=pbb.getImg()%>"></td>
 				<td id="title" onclick="pack_numchk(<%=i %>)"><%=pbb.getSubject()%><br>
 				<%=pbb.getIntro() %></td>
@@ -219,7 +219,7 @@
 						
 			%>
 			<tr>
-				<td><input type="checkbox" id="tch<%=i %>"name="tch" value="<%=tbb.getNum()%>"></td>
+				<td class="chkbx"><input type="checkbox" id="tch<%=i %>"name="tch" value="<%=tbb.getNum()%>"></td>
 				<td><img src ="./upload/<%=tbb.getImg()%>"  height="70"></td>
 				<td><%=tbb.getSubject() %><br>
 				<%=tbb.getIntro() %></td>

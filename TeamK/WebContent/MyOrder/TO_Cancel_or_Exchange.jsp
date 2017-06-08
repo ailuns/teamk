@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="./css/popup.css" rel="stylesheet" type="text/css">
 <title>환불 및 취소 페이지</title>
 <%
 request.setCharacterEncoding("utf-8");
@@ -77,27 +78,27 @@ int ti_num = Integer.parseInt(request.getParameter("ti_num"));
 
 </head>
 <body>
-<div align="center">
+<div id="to_cancel_or_exchange">
 <h4>상품 정보</h4>
 <form action = "./TO_Status_Update.mo" method = "post" onsubmit="return bankcheck()">
 <input type="radio" checked="checked" value="Exchange" name="status">교환
 <input type="radio" value="Cancel" name="status">환불
-<br>
+<br><br>
 <table>
 	<tr>
-		<td>상품명</td>
+		<th>상품명</th>
 		<td><%=mtib.getSubject() %></td>
 	</tr>
 	<tr>
-		<td>사이즈</td>
+		<th>사이즈</th>
 		<td><%=mtib.getSize() %></td>
 	</tr>
 	<tr>
-		<td>색상</td>
+		<th>색상</th>
 		<td><%=mtib.getColor() %></td>
 	</tr>
 	<tr>
-		<td>수량</td>
+		<th>수량</th>
 		<td>
 			<select id="tcount" name="tcount" onchange="payback_cost()">
 				<%for(int i =1; i<=mtib.getThing_count();i++){ %>
@@ -107,31 +108,31 @@ int ti_num = Integer.parseInt(request.getParameter("ti_num"));
 		</td>
 	</tr>
 	<tr class="payback">
-		<td>총 상품 금액</td>
+		<th>총 상품 금액</th>
 		<td><%=mtib.getTotal_cost() %>원</td>
 	</tr>
 	<tr class="payback">
-		<td>환불 금액</td>
+		<th>환불 금액</th>
 		<td id="payback_cost"></td>
 	</tr>
 	<tr class="payback">
-		<td>환불 방식</td>
+		<th>환불 방식</th>
 		<td><%=mtib.getTrade_type() %></td>
 	</tr>
 	<%if(mtib.getTrade_type().equals("무통장 입금")){ %>
 	<tr class="payback">
-		<td colspan="2">환불 받으실 계좌 정보 입력</td>
+		<th colspan="2">환불 받으실 계좌 정보 입력</th>
 	</tr>
 	<tr class="payback">
-		<td>은행명</td><td><input type="text" id="bank_name" name="Cancel_info" 
+		<th>은행명</th><td><input type="text" id="bank_name" name="Cancel_info" 
 							placeholder="EX)콩팥 머니 은행"></td>
 	</tr>
 	<tr class="payback">
-		<td>예금주</td><td><input type="text" id="name" name="Cancel_info"
+		<th>예금주</th><td><input type="text" id="name" name="Cancel_info"
 							placeholder="EX)홍길동"></td>
 	</tr>
 	<tr class="payback">
-		<td>계좌 번호</td><td><input type="text" id="bank_number" name="Cancel_info"
+		<th>계좌 번호</th><td><input type="text" id="bank_number" name="Cancel_info"
 							placeholder="EX)12-007-2245-777">
 	</td>
 	</tr>
@@ -143,7 +144,7 @@ int ti_num = Integer.parseInt(request.getParameter("ti_num"));
 		</td>
 	</tr>
 </table>
-<span style="color:red; font-size:14px;" class="Exchange">차액 발생시 추가 결제를 요하는 경우가 있습니다!</span><br>
+<br><span style="color:red; font-size:14px;" class="Exchange">차액 발생시 추가 결제를 요하는 경우가 있습니다!</span><br><br>
 <input type="hidden" name="payback_co" value="">
 <input type="hidden" name="trade_type" value="<%=mtib.getTrade_type() %>">
 <input type="hidden" name="num" value="<%=o_num %>">
