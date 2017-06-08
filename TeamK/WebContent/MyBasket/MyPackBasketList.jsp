@@ -38,7 +38,7 @@ function Basket_update(num){
 function basket_delete(){
 	
 	if(confirm("정말 삭제하시겠습니까?")){
-		if(check()==0){
+		if($('input:checkbox[name=pch]:checked').length==0){
 			alert("선택된 항목이 없습니다!");
 			return false;
 		}else{
@@ -49,7 +49,7 @@ function basket_delete(){
 	}else return false;
 }
 function basket_submit(){
-	if(check()==0){
+	if($('input:checkbox[name=pch]:checked').length==0){
 		alert("선택된 항목이 없습니다!");
 		return false;
 	}else{
@@ -57,14 +57,6 @@ function basket_submit(){
 		document.fr.method="post";
 		document.fr.submit();
 	}
-}
-function check(){
-	var pchcount = 0;
-	for(i = 0; i<document.fr.pch.length;i++){
-		if(document.fr.pch[i].checked==true)pchcount++;
-	}
-	return pchcount;
-
 }
 
 //장바구니에서 패키지 상품 클릭 시 해당 패키지 정보로 이동
@@ -106,7 +98,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 <form name ="fr" method ="post" id="pack_basket_list">
 <table>
 <tr>
-<th></th><th>이미지</th><th>제목</th><th>성인</th><th>유아</th><th>가격</th><th>등록일</th><th>비고</th></tr>
+<th></th><th>이미지</th><th>제목</th><th>성인</th><th>유아</th><th>가격</th><th>출발일</th><th>비고</th></tr>
 <%
 				for (int i = 0; i < MyPackBasket.size(); i++) {
 						PBasketBEAN pbb = MyPackBasket.get(i);
@@ -116,7 +108,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			%>
 			<tr>
 				<input type="hidden" id="ori_num<%=i %>" value="<%=pbb.getOri_num() %>">
-				<td><input type ="checkbox" id="pch<%=i %>" name = "pch" value = "<%=pbb.getPb_num()%>">
+				<td class="chkbx"><input type ="checkbox" id="pch<%=i %>" name = "pch" value = "<%=pbb.getPb_num()%>">
 				<td class="ev_hover" onclick="pack_numchk(<%=i %>)"><img src ="./upload/<%=pbb.getImg() %>"></td>
 				<td class="ev_hover" onclick="pack_numchk(<%=i %>)"><%=pbb.getSubject()%><br>
 				<%=pbb.getIntro() %></td>
@@ -150,13 +142,13 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				
 		if(endpage > pcount)endpage = pcount;
 		if(startp>pblock){
-			 %><a href = "./MyPackBasketList.bns?pageNum=<%=startp-1%>">[이전]</a><%
+			 %><a href = "./MyPackBasketList.bns?pageNum=<%=startp-1%>" id="i">이전</a><%
 		}
 		for(int i = startp;i<=endpage;i++){
-			%><a href="./MyPackBasketList.bns?pageNum=<%=i %>">[<%=i %>]</a><%
+			%><a href="./MyPackBasketList.bns?pageNum=<%=i %>" id="i"><%=i %></a><%
 		}
 		if(endpage<pcount){
-			%><a href = "./MyPackBasketList.bns?pageNum=<%=endpage+1%>">[다음]</a><%
+			%><a href = "./MyPackBasketList.bns?pageNum=<%=endpage+1%>" id="i">다음</a><%
 		}
 	}	//if(count%pagesize!=0)pcount+=1;
 	%>

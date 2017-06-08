@@ -42,7 +42,7 @@ function Basket_Update(num){
 function basket_delete(){
 	
 	if(confirm("정말 삭제하시겠습니까?")){
-		if(check()==0){
+		if($('input:checkbox[name=tch]:checked').length==0){
 			alert("선택된 항목이 없습니다!");
 			return false;
 		}else{
@@ -53,7 +53,7 @@ function basket_delete(){
 	}else return false;
 }
 function basket_submit(){
-	if(check()==0){
+	if($('input:checkbox[name=tch]:checked').length==0){
 		alert("선택된 항목이 없습니다!");
 		return false;
 	}else{
@@ -62,14 +62,7 @@ function basket_submit(){
 		document.fr.submit();
 	}
 }
-function check(){
-	var tchcount = 0;
-	for(i = 0; i<document.fr.tch.length;i++){
-		if(document.fr.tch[i].checked==true)tchcount++;
-	}
-	return tchcount;
 
-}
 </script>
 </head>
 <body>
@@ -120,7 +113,7 @@ List<TBasketBEAN> ThingBasket=(List<TBasketBEAN>)request.getAttribute("MyThingBa
 						
 			%>
 			<tr>
-			<td><input type = "checkbox" name="tch" value="<%=tbb.getNum()%>" id = "tch<%=i%>"></td>
+			<td class="chkbx"><input type = "checkbox" name="tch" value="<%=tbb.getNum()%>" id = "tch<%=i%>"></td>
 				<td><img src ="./upload/<%=tbb.getImg() %>"></td>
 				<td><%=tbb.getSubject() %><br>
 				<%=tbb.getIntro() %></td>
@@ -153,13 +146,13 @@ List<TBasketBEAN> ThingBasket=(List<TBasketBEAN>)request.getAttribute("MyThingBa
 				
 		if(endpage > pcount)endpage = pcount;
 		if(startp>pblock){
-			 %><a href = "./MyThingBasketList.bns?pageNum=<%=startp-1%>">[이전]</a><%
+			 %><a href = "./MyThingBasketList.bns?pageNum=<%=startp-1%>" id="i">이전</a><%
 		}
 		for(int i = startp;i<=endpage;i++){
-			%><a href="./MyThingBasketList.bns?pageNum=<%=i %>">[<%=i %>]</a><%
+			%><a href="./MyThingBasketList.bns?pageNum=<%=i %>" id="i"><%=i %></a><%
 		}
 		if(endpage<pcount){
-			%><a href = "./MyThingBasketList.bns?pageNum=<%=endpage+1%>">[다음]</a><%
+			%><a href = "./MyThingBasketList.bns?pageNum=<%=endpage+1%>" id="i">다음</a><%
 		}
 	}	//if(count%pagesize!=0)pcount+=1;
 	%><br><input type = "button" value = "내주문" onclick="location.href='./MyOrderList.mo'">

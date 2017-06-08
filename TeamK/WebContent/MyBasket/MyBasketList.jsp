@@ -65,7 +65,7 @@
 	function basket_delete(){
 		
 		if(confirm("정말 삭제하시겠습니까?")){
-			if(check()==0){
+			if(check==0){
 				alert("선택된 항목이 없습니다!");
 				return false;
 			}else{
@@ -86,15 +86,8 @@
 		}
 	}
 	function check(){
-		var pchcount = 0,tchcount = 0;
-		for(i = 0; i<document.fr.tch.length;i++){
-			if(document.fr.tch[i].checked==true)tchcount++;
-		}
-		for(i = 0; i<document.fr.pch.length;i++){
-			if(document.fr.pch[i].checked==true)pchcount++;
-		}
-		return pchcount+tchcount;
-	
+		return $('input:checkbox[name=tch]:checked').length+
+				 $('input:checkbox[name=tch]:checked').length;
 	}
 	// 장바구니에서 패키지 상품 클릭 시 해당 패키지 정보로 이동
 	function pack_numchk(i)
@@ -142,7 +135,7 @@
 				
 				
 		%>
-		<table>
+		<table id ="ptable">
 			<tr>
 				<th id="num"></th>
 				<th id="num">이미지</th>
@@ -150,7 +143,7 @@
 				<th id="num">성인</th>
 				<th id="num">유아</th>
 				<th id="num">가격</th>
-				<th id="num">등록일</th>
+				<th id="num">출발일</th>
 				<th id="num">비고</th>
 			</tr>
 			<%
@@ -162,7 +155,7 @@
 			%>
 			<tr>
 				<input type="hidden" id="pori_num<%=i %>" value="<%=pbb.getOri_num() %>">
-				<td><input type="checkbox" id="pch<%=i %>" name="pch" value="<%=pbb.getPb_num()%>"></td>
+				<td class="chkbx"><input type="checkbox" id="pch<%=i %>" name="pch" value="<%=pbb.getPb_num()%>"></td>
 				<td id="cate" onclick="pack_numchk(<%=i %>)"><img src ="./upload/<%=pbb.getImg()%>"></td>
 				<td id="title" onclick="pack_numchk(<%=i %>)"><%=pbb.getSubject()%><br>
 				<%=pbb.getIntro() %></td>
@@ -206,7 +199,7 @@
 				List<TBasketBEAN> ThingBasket = (List<TBasketBEAN>) request.getAttribute("ThingBasket");
 		%>
 		
-		<table>
+		<table id ="ttable">
 			<tr>
 				<th id="num"></th>
 				<th id="num">이미지</th>
@@ -226,7 +219,7 @@
 						
 			%>
 			<tr>
-				<td><input type="checkbox" id="tch<%=i %>"name="tch" value="<%=tbb.getNum()%>"></td>
+				<td class="chkbx"><input type="checkbox" id="tch<%=i %>"name="tch" value="<%=tbb.getNum()%>"></td>
 				<td><img src ="./upload/<%=tbb.getImg()%>"  height="70"></td>
 				<td><%=tbb.getSubject() %><br>
 				<%=tbb.getIntro() %></td>

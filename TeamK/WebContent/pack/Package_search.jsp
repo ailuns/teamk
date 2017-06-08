@@ -225,21 +225,21 @@ img.ui-datepicker-trigger
 						//이전
 						if (startPage > pageBlock) {
 				%>
-				<a href="./PackSearchAction.po?pageNum=<%=startPage - pageBlock%>">[이전]</a>
+				<a href="./PackSearchAction.po?pageNum=<%=startPage - pageBlock%>" id="i">이전</a>
 				<%
 					}
 
 						//페이지
 						for (int i = startPage; i <= endPage; i++) {
 				%>
-				<a href="./PackSearchAction.po?pageNum=<%=i %>&area=<%=search %>">[<%=i%>]</a>
+				<a href="./PackSearchAction.po?pageNum=<%=i %>&area=<%=search %>" id="i"><%=i%></a>
 				<%
 					}
 
 						//다음
 						if (endPage < pageCount) {
 				%>
-				<a href="./PackSearchAction.po?pageNum=<%=startPage + pageBlock%>">[다음]</a>
+				<a href="./PackSearchAction.po?pageNum=<%=startPage + pageBlock%>" id="i">다음</a>
 				<%
 					}
 				}
