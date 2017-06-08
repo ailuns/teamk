@@ -703,15 +703,25 @@
 	// 이미지 슬라이드 소스
 	jssor_1_slider_init = function() {
 		var jssor_1_SlideshowTransitions = [
-			{$Duration:1200,$Opacity:2}
+// 			{$Duration:1200,$Opacity:2}
+			[{b:900,d:2000,x:-379,e:{x:7}}],
+			[{b:900,d:2000,x:-379,e:{x:7}}],
+			[{b:-1,d:1,o:-1,sX:2,sY:2},{b:0,d:900,x:-171,y:-341,o:1,sX:-2,sY:-2,e:{x:3,y:3,sX:3,sY:3}},{b:900,d:1600,x:-283,o:-1,e:{x:16}}]
+
 		];
 		var jssor_1_options = {
 			$AutoPlay: 1,
-			$SlideshowOptions: {
-				$Class: $JssorSlideshowRunner$,
-				$Transitions: jssor_1_SlideshowTransitions,
-				$TransitionsOrder: 1
-			},
+			$SlideDuration: 800,
+			$SlideEasing: $Jease$.$OutQuint,
+			$CaptionSliderOptions: {
+                $Class: $JssorCaptionSlideo$,
+                $Transitions: jssor_1_SlideoTransitions
+            },
+// 			$SlideshowOptions: {
+// 				$Class: $JssorSlideshowRunner$,
+// 				$Transitions: jssor_1_SlideshowTransitions,
+// 				$TransitionsOrder: 1
+// 			},
 			$ArrowNavigatorOptions: {
 				$Class: $JssorArrowNavigator$
 			},
@@ -720,23 +730,6 @@
 			}
 		};
 		var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
-		/*responsive code begin*/
-		/*remove responsive code if you don't want the slider scales while window resizing*/
-		function ScaleSlider() {
-			var refSize = jssor_1_slider.$Elmt.parentNode.clientWidth;
-			if (refSize) {
-				refSize = Math.min(refSize, 600);
-				jssor_1_slider.$ScaleWidth(refSize);
-			}
-			else {
-				window.setTimeout(ScaleSlider, 30);
-			}
-		}
-		ScaleSlider();
-		$Jssor$.$AddEvent(window, "load", ScaleSlider);
-		$Jssor$.$AddEvent(window, "resize", ScaleSlider);
-		$Jssor$.$AddEvent(window, "orientationchange", ScaleSlider);
-		/*responsive code end*/
 	};
 	
 	

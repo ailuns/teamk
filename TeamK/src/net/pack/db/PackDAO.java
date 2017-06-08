@@ -59,7 +59,7 @@ public class PackDAO {
 			conn = getConnection();
 			
 			
-			sql = "select num, subject, intro, cost, file1 from pack where date > now() group by subject order by readcount desc, cost desc limit ?, ?";
+			sql = "select num, subject, intro, cost, date, file1 from pack where date > now() group by subject order by readcount desc, cost desc limit ?, ?";
 			
 			pstm = conn.prepareStatement(sql);
 			pstm.setInt(1, start);
@@ -73,6 +73,7 @@ public class PackDAO {
 				PB.setSubject(rs.getString("subject"));
 				PB.setIntro(rs.getString("intro"));
 				PB.setCost(rs.getInt("cost"));
+				PB.setDate(rs.getString("date"));
 				PB.setFile1(rs.getString("file1"));
 				
 				list.add(PB);

@@ -213,7 +213,9 @@
 				<a href="./PackContent.po?num=<%=pb.getNum() %>" id="pack<%=j %>">
 				<span id="pktt"><%=pb.getSubject() %></span><br>
 				<span id="pksc"><%=pb.getIntro() %></span><br>
-				<span id="pkpr"><%=cost %>원~</span></a>
+				<span id="pkpr"><%=cost %>원</span>
+				<span id="pkdt"><%=pb.getDate() %></span>
+				</a>
 				<script> bg(<%=j %>);</script>
 			<%
 				}
