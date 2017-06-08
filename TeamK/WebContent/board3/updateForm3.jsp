@@ -100,5 +100,25 @@ function submitContents(elClickedObj) {
 		elClickedObj.form.submit();
 	} catch(e) {}
 }
+$("#save").click(function(){
+
+    var content = oEditors.getById["ir1"].getIR(); // Edit에 쓴 내용을 content 변수에 저장    값 : <br>
+    
+    if (document.fr.subject.value == "") {
+		alert("제목을 입력하세요");
+		document.fr.subject.focus();
+		return false;
+	}
+
+    if (content == "<br>")  // 빈공간 값 <br>
+    {
+       alert("글을 입력해주세요");  // 메시지 띄움
+       return false;
+    }else // 글내용 있을 시
+    {
+       oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []); // Edit에 쓴 내용을 textarea에 붙여넣어준다
+        $("#fr").submit();  // form을 submit 시킨다
+    }
+ });
 </script>
 </html>

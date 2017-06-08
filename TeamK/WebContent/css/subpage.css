@@ -197,7 +197,12 @@ div#goods_show {
 	width: 1000px;
 	margin: 0 auto;
 	margin-top: 15px;
-	background-color: #ccc;
+	background-color: #fff;
+}
+div#goods_show img {
+	width: 150px;
+	height: 150px;
+	margin-top: 10px;
 }
 div#review_show {
 	height: 250px;

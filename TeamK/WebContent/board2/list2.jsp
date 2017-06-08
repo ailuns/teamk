@@ -59,7 +59,7 @@ BoardDAO bdao = new BoardDAO();
     			%>
 <tr>
  <td><%=bb.getRe_ref()%></td> <%--글 번호 --%>
- <td id="cate">[<%=bb.getType_select()%>]</td> <%--글 타입 --%>
+ <td id="cate"><a href="./BoardContent2.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>">[<%=bb.getType_select()%>]</a></td> <%--글 타입 --%>
  <td id="title"><a href="./BoardContent2.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>">
  <%=bb.getSubject()%> <%--글 제목 --%>
  <%if(bdao.getBoardReplyCount(bb.getNum())!=0){%>[<%=bdao.getBoardReplyCount(bb.getNum())%>]<%}%></a> <%--해당 글의 리플 갯수 --%>
