@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="./js/jquery-3.2.0.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="./js/jssor.slider-24.1.5.min.js" type="text/javascript"></script>
 <script>
   jQuery(document).ready(function($){
 	//Scheduler
@@ -42,20 +43,6 @@
         	}
         }
 	});
-	
-// 	$("#to").datepicker({
-// 		dateFormat: 'yy-mm-dd',    // 날짜 포맷 형식
-// 		minDate : 0,			   // 최소 날짜 설정      0이면 오늘부터 선택 가능
-// 		numberOfMonths: 2,		   // 보여줄 달의 갯수
-//         dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],  // 일(Day) 표기 형식
-//         monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],   // 월(Month) 표기 형식
-//         //showOn: "both",			// 버튼을 표시      both : input과 buttom 둘다 클릭 시 달력 표시           bottom  :  buttom 클릭 했을 때만 달력 표시
-//         //buttonImage: "./img/calendar.png",   // 버튼에 사용될 이미지
-//         //buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
-//         onClose: function(selectedDate){		// 닫힐 때 함수 호출
-//         	$("#from").datepicker("option", "maxDate", selectedDate);   // #date_from의 최대 날짜를 #date_to에서 선택된 날짜로 설정
-//        	}
-// 	});
 
     //Package
     $("#pack1")
@@ -118,11 +105,38 @@
 		});
 	}
 
-	
-</script>
-<style type="text/css">
+	jssor_1_slider_init = function() {
+        var jssor_1_options = {
+          $AutoPlay: 1,
+          $Idle: 0,
+          $SlideDuration: 5000,
+          $SlideEasing: $Jease$.$Linear,
+          $PauseOnHover: 4,
+          $SlideWidth: 300,
+          $Cols: 5
+        };
 
-</style>
+        var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
+
+        /*responsive code begin*/
+        /*remove responsive code if you don't want the slider scales while window resizing*/
+        function ScaleSlider() {
+            var refSize = jssor_1_slider.$Elmt.parentNode.clientWidth;
+            if (refSize) {
+                refSize = Math.min(refSize, 1000);
+                jssor_1_slider.$ScaleWidth(refSize);
+            }
+            else {
+                window.setTimeout(ScaleSlider, 30);
+            }
+        }
+        ScaleSlider();
+        $Jssor$.$AddEvent(window, "load", ScaleSlider);
+        $Jssor$.$AddEvent(window, "resize", ScaleSlider);
+        $Jssor$.$AddEvent(window, "orientationchange", ScaleSlider);
+        /*responsive code end*/
+    };
+</script>
 <%
 	List CategoryList = (List)request.getAttribute("CategoryList");
 	List PackList = (List)request.getAttribute("PackList");
@@ -207,7 +221,44 @@
 		</div>
 		<div id="clear"></div>
 		<div id="goods_show">
-		상품 소개
+		<div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:1000px;height:250px;overflow:hidden;visibility:hidden;">
+        <!-- Loading Screen -->
+        <div data-u="loading" style="position:absolute;top:0px;left:0px;background:url('./img/loading.gif') no-repeat 50% 50%;background-color:rgba(0, 0, 0, 0.7);"></div>
+        <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:1000px;height:250px;overflow:hidden;">
+            <div>
+                <a href="#"><img src="./img/home.png" /><br><br>
+                <h2>Goods Name</h2>
+                <h3>￦100,000~</h3></a>
+            </div>
+            <div>
+                <a href="#"><img src="./img/disk.png" /><br><br>
+                <h2>Goods Name</h2>
+                <h3>￦100,000~</h3></a>
+            </div>
+            <div>
+                <a href="#"><img src="./img/notice.png" /><br><br>
+                <h2>Goods Name</h2>
+                <h3>￦100,000~</h3></a>
+            </div>
+            <div>
+                <a href="#"><img src="./img/qna.png" /><br><br>
+                <h2>Goods Name</h2>
+                <h3>￦100,000~</h3></a>
+            </div>
+            <div>
+                <a href="#"><img src="./img/review.png" /><br><br>
+                <h2>Goods Name</h2>
+                <h3>￦100,000~</h3></a>
+            </div>
+            <div>
+                <a href="#"><img src="./img/shop.png" /><br><br>
+                <h2>Goods Name</h2>
+                <h3>￦100,000~</h3></a>
+            </div>
+            <a data-u="any" href="https://wordpress.org/plugins/jssor-slider/" style="display:none">wordpress slider</a>
+        </div>
+    </div>
+    <script type="text/javascript">jssor_1_slider_init();</script>
 		</div>
 		<div id="review_show">
 		<div id="gds_rv">

@@ -60,7 +60,7 @@ MemberBean mb = mdao.getMember(id);
 		<div id="clear"></div>
 		<article>
 		<div id="board_write">
-<form action="./BoardUpdateAction2.bo?pageNum=<%=pageNum%>" method="post" name="fr" enctype="multipart/form-data">
+<form action="./BoardUpdateAction2.bo?pageNum=<%=pageNum%>" method="post" name="fr" enctype="multipart/form-data" onsubmit="return check()">
 <input type="hidden" name="num" value="<%=bb.getNum()%>">
 <input type="hidden" name="id" value="<%=id%>"><br>
 <label for="email">답변 받으실<br>이메일 주소</label><input type="text" name="email" id="email" value="<%=mb.getEmail()%>"><br><br>
@@ -77,7 +77,7 @@ MemberBean mb = mdao.getMember(id);
 <label for="file4">첨부파일4</label><input type="file" name="file4" id="file4">
 <label for="file5">첨부파일5</label><input type="file" name="file5" id="file5">
 <div class="clear"></div><br>
-<input type="submit" value="글수정">
+<input type="submit" id="save" value="글수정">
 <input type="button" value="취소" OnClick="javascript:history.back(-1)">
 </form>
 </div>

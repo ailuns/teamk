@@ -27,7 +27,7 @@ public class Main implements Action{
 		request.setAttribute("CategoryList", CategoryList);
 		
 		// 메인 페이지 패키지 추천 상품 3개 
-		List PackList = pdao.getPackList();
+		List PackList = pdao.getPackList(0, 3);
 		request.setAttribute("PackList", PackList);
 
 		//ActoinForward 이동정보 담아서 로그인 이동

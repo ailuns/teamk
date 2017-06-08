@@ -19,7 +19,7 @@
 		String pagenum = (String) request.getAttribute("pageNum");
 		String status = (String)request.getAttribute("status");
 		String status2 = (String)request.getAttribute("status2");
-		int pageNum = Integer.parseInt(pagenum);
+		int pNum = Integer.parseInt(pagenum);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		List<Vector> Thing_Order_List = (List<Vector>) request.getAttribute("Thing_Order_List");
 		%>
@@ -149,7 +149,6 @@ function search_type_check(){
 	</div>
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
-
 	<div id="article_head">
 			<div id="article_title">Administrator Goods Order List</div>
 			<div class="empty"></div>
@@ -347,16 +346,15 @@ function search_type_check(){
 		if (count != 0) {
 			if (endpage > pcount)endpage = pcount;
 			if (startp > pblock){
-	%><a href="./Admin_Thing_OrderList.ao?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=startp-1%>">[이전]</a>
+	%><a href="./Admin_Thing_OrderList.ao?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=startp-1%>" id="i">이전</a>
 	<%
 		}
 			for (int i = startp; i <= endpage; i++) {
-	%><a href="./Admin_Thing_OrderList.ao?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=i %>">[<%=i%>]
-	</a>
-	<%
-		}
+	if(i==pNum){%><span id="i"><%=i%></span><%}else{			
+	%><a href="./Admin_Thing_OrderList.ao?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=i%>" id="i"><%=i%></a><%
+		}}
 			if (endpage < pcount) {
-	%><a href="./Admin_Thing_OrderList.ao?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=endpage+1%>">[다음]</a>
+	%><a href="./Admin_Thing_OrderList.ao?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=endpage+1%>" id="i">다음</a>
 	<%
 		}
 		}

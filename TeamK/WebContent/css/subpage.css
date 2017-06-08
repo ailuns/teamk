@@ -12,11 +12,13 @@ a#i{
 	margin: 0 6px;
 	color: #000;
 	text-decoration:none;
+	font-size: 15px;
 }
 a#i:HOVER {color: #06c;}
 span#i{
 	color: red;
 	margin: 0 6px;
+	font-size: 15px;
 }
 input[type="button"], input[type="submit"] {
 	border: 1px solid #06c;
@@ -72,6 +74,10 @@ div#article_script {
 	font-size: 15px;
 	padding-top: 5px;
 	height: 50px;
+}
+td.chkbx {
+	width: 30px;
+	text-align: center;
 }
 
 /* Main.jsp */
@@ -129,7 +135,7 @@ div#package_show {
 	margin: 0 auto;
 	margin-top: 15px;
 }
-div#package_show a {
+div#package_show a, div#package_silde a {
 	height: 250px;
 	width: 33.3%;
 	display: block;
@@ -162,25 +168,25 @@ div#package_show a#pack3 {
  	background-position: right;
 }
 
-a#pack1 span, a#pack2 span, a#pack3 span {
+a#pack1 span, a#pack2 span, a#pack3 span, a#pack4 span {
 	margin-left: 10px;
 	display: block;
 }
 
-a#pack1 #pktt, a#pack2 #pktt, a#pack3 #pktt {
+a#pack1 #pktt, a#pack2 #pktt, a#pack3 #pktt, a#pack4 #pktt {
 	font-size: 28px;
 	font-weight: bold;
 	margin-top: 10px;
 	padding-left: 10px;
 	padding-top: 25px;
 }
-a#pack1 #pksc, a#pack2 #pksc, a#pack3 #pksc {
+a#pack1 #pksc, a#pack2 #pksc, a#pack3 #pksc,  a#pack4 #pksc {
 	font-size: 18px;
 	padding-left: 10px;
 	line-height: 0px;
 
 }
-a#pack1 #pkpr, a#pack2 #pkpr, a#pack3 #pkpr {
+a#pack1 #pkpr, a#pack2 #pkpr, a#pack3 #pkpr, a#pack4 #pkpr  {
 	font-size: 25px;
 	font-weight: bold;
 	padding-left: 10px;
@@ -191,7 +197,12 @@ div#goods_show {
 	width: 1000px;
 	margin: 0 auto;
 	margin-top: 15px;
-	background-color: #ccc;
+	background-color: #fff;
+}
+div#goods_show img {
+	width: 150px;
+	height: 150px;
+	margin-top: 10px;
 }
 div#review_show {
 	height: 250px;
@@ -257,6 +268,48 @@ div#package_feat {
 	background-color: white;
 }
 div#package_slide, div#package_search {float: left;}
+
+div#package_slide a {
+	height: 100%;
+	width: 100%;
+	display: block;
+	float: left;
+	text-align: left;
+	text-decoration: none;
+	color: #fff;
+	text-shadow: 2px 3px 4px #000, -2px -3px 4px #000;
+}
+div#package_slide #pack1 {
+	background-repeat : no-repeat;
+	background-size: cover;
+	background-position: center center;
+ 	transition: 0.4s;
+ 	background-position: left;
+ 	
+}
+div#package_slide a#pack2 {
+	background-repeat : no-repeat;
+	background-size: cover;
+	background-position: center center;
+ 	transition: 0.4s;
+ 	background-position: center;
+}
+div#package_slide a#pack3 {
+	background-repeat : no-repeat;
+	background-size: cover;
+	background-position: center center;
+ 	transition: 0.4s;
+ 	background-position: right;
+}
+div#package_slide a#pack4 {
+	background-repeat : no-repeat;
+	background-size: cover;
+	background-position: center center;
+ 	transition: 0.4s;
+ 	background-position: right;
+}
+
+
 div#package_search {
 	background-color: #f5b8d7;
 	width: 400px;
@@ -1084,16 +1137,14 @@ form#pack_basket_list table {
 	width: 100%;
 	margin: 30px 0;
 }
-form#pack_basket_list table th,
-form#pack_basket_list table td {padding: 10px;}
 form#pack_basket_list table tr {
 	border-bottom: 1px solid #aaa;
 	padding-top: 10px;
 }
 form#pack_basket_list table tr:HOVER {background-color: #eee;}
 form#pack_basket_list table td img {
-	width : 100px;
-	height : 70px;
+	height: 70px;
+	width: 120px;
 }
 form#pack_basket_list table td.ev_hover:HOVER {cursor: pointer;}
 
@@ -1107,7 +1158,10 @@ form#goods_basket_list table {
 	margin: 30px 0;
 }
 form#goods_basket_list table th {padding: 10px;}
-form#goods_basket_list table img {width: 200px;}
+form#goods_basket_list table img {
+	height: 70px;
+	width: 120px;
+}
 form#goods_basket_list table tr {
 	border-bottom: 1px solid #aaa;
 	padding-top: 10px;
@@ -1269,10 +1323,6 @@ div#my_interest table #inb_img {
 	height : 150px;
 }
 div#my_interest table .ev_hover:HOVER {cursor: pointer;}
-div#my_interest table #inb_img {
-	width : 200px;
-	height : 150px;
-}
 
 /* My Interest List.jsp */
 div#packInterest_list table img#inb_img {

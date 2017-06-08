@@ -17,6 +17,7 @@
 <link href="./css/inc.css" rel="stylesheet" type="text/css">
 <link href="./css/subpage.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="./js/jssor.slider-23.1.6.min.js" type="text/javascript"></script>
 <script src="./js/jquery-3.2.0.js"></script>
 <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -36,6 +37,7 @@
 	List CategoryList = (List)request.getAttribute("CategoryList");
 	List date_list = (List)request.getAttribute("date_list");
 	List RecommendProduct = (List)request.getAttribute("RecommendProduct");
+	List PackReCommentList = (List)request.getAttribute("PackReCommentList");
 	
 	int count = ((Integer)request.getAttribute("count")).intValue();
 	String repageNum = (String)request.getAttribute("repageNum");
@@ -683,16 +685,13 @@
 			}
 		}
 		
-		
-		
-		
 		else if(user_id == "")	// 로그인 안되어 있을 경우
 		{
 			loginChk();
 		}
 	}
 
-	
+	// 추천상품 클릭 시 이동
 	function Rcom_move(select)
 	{
 		var select_num = $("#num" + select).html();
@@ -700,10 +699,56 @@
 		location.href="./ProductContent.bo?num=" + select_num + "&car_num=" + car_num;
 	}
 
-	function Select_stock(select)
+	
+	// 이미지 슬라이드 소스
+	jssor_1_slider_init = function() {
+		var jssor_1_SlideshowTransitions = [
+			{$Duration:1200,$Opacity:2}
+		];
+		var jssor_1_options = {
+			$AutoPlay: 1,
+			$SlideshowOptions: {
+				$Class: $JssorSlideshowRunner$,
+				$Transitions: jssor_1_SlideshowTransitions,
+				$TransitionsOrder: 1
+			},
+			$ArrowNavigatorOptions: {
+				$Class: $JssorArrowNavigator$
+			},
+			$BulletNavigatorOptions: {
+				$Class: $JssorBulletNavigator$
+			}
+		};
+		var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
+		/*responsive code begin*/
+		/*remove responsive code if you don't want the slider scales while window resizing*/
+		function ScaleSlider() {
+			var refSize = jssor_1_slider.$Elmt.parentNode.clientWidth;
+			if (refSize) {
+				refSize = Math.min(refSize, 600);
+				jssor_1_slider.$ScaleWidth(refSize);
+			}
+			else {
+				window.setTimeout(ScaleSlider, 30);
+			}
+		}
+		ScaleSlider();
+		$Jssor$.$AddEvent(window, "load", ScaleSlider);
+		$Jssor$.$AddEvent(window, "resize", ScaleSlider);
+		$Jssor$.$AddEvent(window, "orientationchange", ScaleSlider);
+		/*responsive code end*/
+	};
+	
+	
+	
+	// 추천 패키지상품 배경이미지 지정
+	function bg(num)
 	{
-		var stock = $("#stock" + select).html();
-		
+		var imgname = $("#pack_img" + num).val();
+		$("#pack" + num).css({
+			"background-image" : "url(./upload/" + imgname + ")",
+			"overflow" : "hidden"
+		});
 	}
 </script>
 
@@ -819,7 +864,44 @@
 	<div class="empty"></div>
 	</div>
 	<div id="package_feat">
-		<jsp:include page="../inc/packSlide.jsp"></jsp:include>
+		<div id="package_slide">
+			<div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:600px;height:300px;overflow:hidden;visibility:hidden;">
+			<!-- Loading Screen -->
+				<div data-u="loading" style="position:absolute;top:0px;left:0px;background:url('./img/loading.gif') no-repeat 50% 50%;background-color:rgba(0, 0, 0, 0.7);"></div>
+				<div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:600px;height:300px;overflow:hidden;">
+				<%
+					PackBean pb_slide;
+					for (int i = 0; i < PackReCommentList.size(); i++)
+					{
+						int j = i + 1;
+						pb_slide =(PackBean)PackReCommentList.get(i);
+						DecimalFormat df = new DecimalFormat("#,###");
+					    String cost = df.format(pb_slide.getCost());
+				%>	
+					<div>
+						<input type="hidden" id="pack_img<%=j %>" value=<%=pb_slide.getFile1() %>>
+						<a href="./PackContent.po?num=<%=pb_slide.getNum() %>" id="pack<%=j %>">
+						<span id="pktt"><%=pb_slide.getSubject() %></span><br>
+						<span id="pksc"><%=pb_slide.getIntro() %></span><br>
+						<span id="pkpr"><%=cost %>원~</span></a>
+						<script> bg(<%=j %>);</script>
+					</div>
+				<%
+					}
+				%>
+				<a data-u="any" href="https://www.jssor.com" style="display:none">js slider</a>
+				</div>
+				<!-- Bullet Navigator -->
+				<div data-u="navigator" class="jssorb05" style="bottom:16px;right:16px;" data-autocenter="1">
+				<!-- bullet navigator item prototype -->
+				<div data-u="prototype" style="width:16px;height:16px;"></div>
+				</div>
+				<!-- Arrow Navigator -->
+				<span data-u="arrowleft" class="jssora12l" style="top:0px;left:0px;width:30px;height:46px;" data-autocenter="2"></span>
+				<span data-u="arrowright" class="jssora12r" style="top:0px;right:0px;width:30px;height:46px;" data-autocenter="2"></span>
+			</div>
+			<script type="text/javascript">jssor_1_slider_init();</script>
+		</div>
 		<div id="package_search">
 			<p>내게 맞는 패키지 검색하기</p>
 			<form action="./PackSearchAction.po" name="fr" method="get" id="scheduler" onsubmit="return input_chk();">

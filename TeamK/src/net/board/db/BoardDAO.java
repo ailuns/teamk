@@ -642,6 +642,7 @@ try {
     	bb.setFile5(rs.getString("file5"));
     	bb.setType(rs.getInt("type"));
     	bb.setRe_ref(rs.getInt("re_ref"));
+    	bb.setType_select(rs.getString("type_select"));
     	
     	//boardList한칸저장
     	boardList.add(bb);

@@ -20,11 +20,13 @@
 			int pcount = ((Integer) request.getAttribute("pcount")).intValue();
 			int count = ((Integer) request.getAttribute("count")).intValue();
 			String pagenum = (String) request.getAttribute("pageNum");
-			int pageNum = Integer.parseInt(pagenum);
 			List<ModTradeInfoBEAN> ModPList = (List<ModTradeInfoBEAN>) request.getAttribute("ModPList");
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
 			String status = (String)request.getAttribute("status");	
-			String status2 = (String)request.getAttribute("status2");%>
+			String status2 = (String)request.getAttribute("status2");
+			int pNum = Integer.parseInt(pagenum);
+			%>
+			
 <link href="./css/inc.css" rel="stylesheet" type="text/css">
 <link href="./css/subpage.css" rel="stylesheet" type="text/css">
 <script src="./js/jquery-3.2.0.js"></script>
@@ -179,16 +181,15 @@ function pack_popup(select)
 				if (endpage > pcount)
 					endpage = pcount;
 				if (startp > pblock) {
-		%><a href="./MyPackOrderList.mo?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=startp - 1%>">[이전]</a>
+		%><a href="./MyPackOrderList.mo?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=startp - 1%>" id="i">이전</a>
 		<%
 			}
 				for (int i = startp; i <= endpage; i++) {
-		%><a href="./MyPackOrderList.mo?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=i%>">[<%=i%>]
-		</a>
-		<%
-			}
+		if(i==pNum){%><span id="i"><%=i%></span><%}else{
+		%><a href="./MyPackOrderList.mo?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=i%>" id="i"><%=i%></a><%
+			}}
 				if (endpage < pcount) {
-		%><a href="./MyPackOrderList.mo?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=endpage + 1%>">[다음]</a>
+		%><a href="./MyPackOrderList.mo?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=endpage + 1%>" id="i">다음</a>
 		<%
 			}
 			}

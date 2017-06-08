@@ -206,5 +206,18 @@ div#trade_update_info table th {
 	background-color: #f0f0f0;
 }
 
-
+/*To Cancel or Exchange.jsp*/
+div#to_cancel_or_exchange {
+	margin: 0 auto;
+	padding: 10px;
+	padding-bottom: 20px;
+	border: 1px solid #06c;
+}
+div#to_cancel_or_exchange table {margin: 0 auto;}
+div#to_cancel_or_exchange td {border-bottom: 1px solid #ddd;}
+div#to_cancel_or_exchange th {
+	background: #eee;
+	border-bottom: 1px solid #fff;
+	padding: 5px;
+}
 

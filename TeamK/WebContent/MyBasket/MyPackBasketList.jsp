@@ -108,7 +108,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			%>
 			<tr>
 				<input type="hidden" id="ori_num<%=i %>" value="<%=pbb.getOri_num() %>">
-				<td><input type ="checkbox" id="pch<%=i %>" name = "pch" value = "<%=pbb.getPb_num()%>">
+				<td class="chkbx"><input type ="checkbox" id="pch<%=i %>" name = "pch" value = "<%=pbb.getPb_num()%>">
 				<td class="ev_hover" onclick="pack_numchk(<%=i %>)"><img src ="./upload/<%=pbb.getImg() %>"></td>
 				<td class="ev_hover" onclick="pack_numchk(<%=i %>)"><%=pbb.getSubject()%><br>
 				<%=pbb.getIntro() %></td>
@@ -142,13 +142,13 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				
 		if(endpage > pcount)endpage = pcount;
 		if(startp>pblock){
-			 %><a href = "./MyPackBasketList.bns?pageNum=<%=startp-1%>">[이전]</a><%
+			 %><a href = "./MyPackBasketList.bns?pageNum=<%=startp-1%>" id="i">이전</a><%
 		}
 		for(int i = startp;i<=endpage;i++){
-			%><a href="./MyPackBasketList.bns?pageNum=<%=i %>">[<%=i %>]</a><%
+			%><a href="./MyPackBasketList.bns?pageNum=<%=i %>" id="i"><%=i %></a><%
 		}
 		if(endpage<pcount){
-			%><a href = "./MyPackBasketList.bns?pageNum=<%=endpage+1%>">[다음]</a><%
+			%><a href = "./MyPackBasketList.bns?pageNum=<%=endpage+1%>" id="i">다음</a><%
 		}
 	}	//if(count%pagesize!=0)pcount+=1;
 	%>

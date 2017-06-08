@@ -52,7 +52,7 @@ $(document).ready(function(){
 <table>
 <tr>
  <th id="num">번호</th>
- <th></th>
+ <th id="cate"></th>
  <th id="title">제목</th>
  <th id="name">작성자</th>
  <th id="date">날짜</th>
@@ -66,8 +66,8 @@ $(document).ready(function(){
     			%>
 <tr>
  <td><%=bb.getRe_ref()%></td>
- <td><strong>[<%=bb.getType_select()%>]</strong></td>
- <td id="title"><a href="./BoardContent3.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>"><%=bb.getSubject()%>[<%=bdao.getBoardReplyCount(bb.getNum())%>]</a></td>
+ <td id="cate"><a href="./BoardContent3.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>">[<%=bb.getType_select()%>]</a></td><%--글 타입 --%>
+ <td id="title"><a href="./BoardContent3.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>"><%=bb.getSubject()%></a></td>
  <td>관리자</td><td><%=bb.getDate() %></td>
  <td><%=bb.getReadcount() %></td>
 </tr>

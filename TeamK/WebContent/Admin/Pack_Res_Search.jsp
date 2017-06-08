@@ -20,7 +20,7 @@ String status = request.getParameter("status");
 String status2 = request.getParameter("status2");
 String search = request.getParameter("search");
 String search_type=request.getParameter("search_type");
-int pageNum = Integer.parseInt(pagenum);
+int pNum = Integer.parseInt(pagenum);
 List<ModTradeInfoBEAN> Pack_Res_List=(List<ModTradeInfoBEAN>)request.getAttribute("Pack_Res_List");
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 %>
@@ -227,13 +227,14 @@ function search_check(){
 				
 		if(endpage > pcount)endpage = pcount;
 		if(startp>pblock){
-			 %><a href = "./Pack_Res_Search.ao?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=startp-1%><%=se%>">[이전]</a><%
+			 %><a href = "./Pack_Res_Search.ao?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=startp-1%><%=se%>" id="i">이전</a><%
 		}
 		for(int i = startp;i<=endpage;i++){
-			%><a href="./Pack_Res_Search.ao?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=i %><%=se%>">[<%=i %>]</a><%
-		}
+		if(i==pNum){%><span id="i"><%=i%></span><%}else{
+			%><a href="./Pack_Res_Search.ao?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=i %><%=se%>" id="i"><%=i %></a><%
+		}}
 		if(endpage<pcount){
-			%><a href = "./Pack_Res_Search.ao?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=endpage+1%><%=se%>">[다음]</a><%
+			%><a href = "./Pack_Res_Search.ao?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=endpage+1%><%=se%>" id="i">다음</a><%
 		}
 	}	
 	%>

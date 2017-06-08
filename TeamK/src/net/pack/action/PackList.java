@@ -60,7 +60,10 @@ public class PackList implements Action{
 		int startPage = ((currentPage-1)/pageBlock)*pageBlock+1;
 		// 끝페이지 구하기
 		int endPage = startPage+pageBlock-1;
-		
+
+		// 패키지 페이지  패키지슬라이드에 추천 상품 4개 
+		List PackList = pdao.getPackList(0, 4);
+		request.setAttribute("PackReCommentList", PackList);
 		
 		// 지역별 패키지 갯수 받을 저장 장소
 		int areaCount[] = new int[area.length];
