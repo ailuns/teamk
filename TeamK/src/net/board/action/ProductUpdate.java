@@ -63,7 +63,8 @@ public class ProductUpdate implements Action{
 				//글잘라오기 limit 시작행-1,개수
 						
 		}
-			
+			List CategoryList = null;
+			CategoryList = cdao.getTypeList2();
 			
 			
 			
@@ -90,6 +91,7 @@ public class ProductUpdate implements Action{
 			request.setAttribute("productList3", productList3);
 			request.setAttribute("commentcount", commentcount);
 			request.setAttribute("commentList", commentList);
+			request.setAttribute("CategoryList", CategoryList);
 			request.setAttribute("pb", pb);
 		 
 		 

@@ -4,8 +4,23 @@ import java.sql.Timestamp;
 
 public class PBasketBEAN {
 	private String [] countp;
-	private int cost,ori_cost,pb_num,ori_num;
 	private String id;
+	private int cost,ori_cost,pb_num,ori_num,ori_stock;
+	private String subject, intro, img;
+	private Timestamp date, ori_date;
+	
+	public Timestamp getOri_date() {
+		return ori_date;
+	}
+	public void setOri_date(Timestamp ori_date) {
+		this.ori_date = ori_date;
+	}
+	public int getOri_stock() {
+		return ori_stock;
+	}
+	public void setOri_stock(int ori_stock) {
+		this.ori_stock = ori_stock;
+	}
 	public String getId() {
 		return id;
 	}
@@ -24,8 +39,7 @@ public class PBasketBEAN {
 	public void setPb_num(int pb_num) {
 		this.pb_num = pb_num;
 	}
-	private String subject, intro, img;
-	private Timestamp date;
+	
 	public int getOri_cost() {
 		return ori_cost;
 	}
