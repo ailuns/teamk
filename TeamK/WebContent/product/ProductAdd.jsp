@@ -88,7 +88,7 @@
 	// 날짜 추가
 	function dateAdd()
 	{
-		
+	
 		$.ajax({   // 날짜를 클릭할때 마다 찜목록과 비교
 			type:"post",
 			url:"./ProductAddChk.bo",
@@ -255,7 +255,9 @@
 				pb =(ProductBean)productaddList.get(i);
 				DecimalFormat Commas = new DecimalFormat("#,###");
 				String cost = (String)Commas.format(pb.getCost());
+
 				%>	
+			
 			<tr id="select_date<%=i %>" class="select_color" onclick="select_date(<%=i %>)">
 				<input id="num<%=i %>" style="display:none;" value="<%=pb.getNum() %>"></input>
 				<input id="name" style="display:none;" value="<%=pb.getName() %>"></input>
