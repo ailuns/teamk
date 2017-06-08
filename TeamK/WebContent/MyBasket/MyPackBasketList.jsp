@@ -126,7 +126,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				<%} %>
 				</select></td>
 				<td id="pcost<%=i %>"><%=pbbcost%></td>
-				<td><%=sdf.format(pbb.getDate()) %>
+				<td><%=sdf.format(pbb.getOri_date()) %>
 				<td>
 				<input type = "button" value="변경"  onclick="Basket_update(<%=i %>)" >
 				</td>

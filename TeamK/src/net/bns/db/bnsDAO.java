@@ -184,7 +184,8 @@ public class bnsDAO {
 		List<PBasketBEAN> PackBasket = new ArrayList<PBasketBEAN>();
 		try{
 			conn =getconn();
-			sql= "select A.subject,A.intro, A.cost,A.file1, B.pb_date,B.pb_num,B.pb_count, B.ori_num "+
+			sql= "select A.subject,A.intro, A.cost,A.stock, A.file1, A.date, "+
+					"B.pb_date,B.pb_num,B.pb_count, B.ori_num "+
 					"from pack A left outer join pack_basket B on A.num = B.ori_num "+
 					"where B.id = ? order by B.pb_num desc limit ?,?";
 			pstmt = conn.prepareStatement(sql);
@@ -201,10 +202,10 @@ public class bnsDAO {
 				pbb.setCountp(rs.getString("pb_count").split(","));
 				String [] countp = rs.getString("pb_count").split(",");
 				int c = rs.getInt("cost");
-				pbb.setOri_cost(rs.getInt("cost"));
+				pbb.setOri_cost(c);
 				pbb.setCost((c*Integer.parseInt(countp[0]))+((c/2)*Integer.parseInt(countp[1])));
 				pbb.setImg(rs.getString("file1"));
-				pbb.setDate(rs.getTimestamp("pb_date"));
+				pbb.setOri_date(rs.getTimestamp("date"));
 				PackBasket.add(pbb);
 				
 			}
