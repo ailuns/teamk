@@ -196,6 +196,7 @@ a#pack1 #pkdt, a#pack2 #pkdt, a#pack3 #pkdt, a#pack4 #pkdt  {
 	font-size: 13px;
 	padding-left: 10px;
 	line-height: 20px;
+	margin-top: 5px;
 }
 div#goods_show {
 	height: 250px;
