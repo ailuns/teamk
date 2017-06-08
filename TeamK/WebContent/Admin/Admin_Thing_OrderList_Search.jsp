@@ -21,7 +21,7 @@
 		String status2 = request.getParameter("status2");
 		String search = request.getParameter("search");
 		String search_type=request.getParameter("search_type");		
-		int pageNum = Integer.parseInt(pagenum);
+		int pNum = Integer.parseInt(pagenum);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		List<Vector> Thing_Order_List = (List<Vector>) request.getAttribute("Thing_Order_List");
 		%>
@@ -377,11 +377,9 @@ function status_update(o_num,status){
 	<%
 		}
 			for (int i = startp; i <= endpage; i++) {
-	%><a href="./Admin_Thing_OrderList_Search.ao?status=<%=status %>&status2=<%=status2 %>
-			&pageNum=<%=i %><%=se%>" id="i"><%=i%>
-	</a>
-	<%
-		}
+	if(i==pNum){%><span id="i"><%=i%></span><%}else{
+	%><a href="./Admin_Thing_OrderList_Search.ao?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=i %><%=se%>" id="i"><%=i%></a><%
+		}}
 			if (endpage < pcount) {
 	%><a href="./Admin_Thing_OrderList_Search.ao?status=<%=status %>&status2=<%=status2 %>
 			&pageNum=<%=endpage+1%><%=se%>" id="i">다음</a>
