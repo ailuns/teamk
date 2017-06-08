@@ -990,7 +990,9 @@ if (user_id == null)
 
 						pb = (ProductBean) productList.get(i);
 			%>
+		<div id="pack_btn">
 		<!--글제목 -->
+		<br>
 		<h3><%=pb.getSubject()%></h3>
 		<!--글제목 -->
 		<!--관리자만 보이게 -->
@@ -1006,6 +1008,7 @@ if (user_id == null)
 			}
 		}
 		%>
+		</div>
 		<!--관리자만 보이게 -->
 		<hr>
 		<div id="top">
