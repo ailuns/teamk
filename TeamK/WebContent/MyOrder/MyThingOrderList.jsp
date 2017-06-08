@@ -186,16 +186,16 @@ function Trade_Update_Info(o_num) {
 			if (endpage > pcount)
 				endpage = pcount;
 			if (startp > pblock) {
-	%><a href="./MyThingOrderList.mo?pageNum=<%=startp - 1%>">[이전]</a>
+	%><a href="./MyThingOrderList.mo?pageNum=<%=startp - 1%>" id="i">이전</a>
 	<%
 		}
 			for (int i = startp; i <= endpage; i++) {
-	%><a href="./MyThingOrderList.mo?pageNum=<%=i%>">[<%=i%>]
+	%><a href="./MyThingOrderList.mo?pageNum=<%=i%>" id="i"><%=i%>
 	</a>
 	<%
 		}
 			if (endpage < pcount) {
-	%><a href="./MyThingOrderList.mo?pageNum=<%=endpage + 1%>">[다음]</a>
+	%><a href="./MyThingOrderList.mo?pageNum=<%=endpage + 1%>" id="i">다음</a>
 	<%
 		}
 		}

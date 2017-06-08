@@ -47,7 +47,7 @@
 				</table>
 				<input type="button" value="메인으로" onclick="location.href='./main.fo'">
 				<input type="button" value="회원정보수정" onclick="location.href='./MemberUpdate.me'">
-				<input type="button" value="회원정보삭제" onclick="location.href='./MemberDelete.me'">
+				<input type="button" value="회원탈퇴" onclick="location.href='./MemberDelete.me'">
 			</div>
 		</article>
 	</div>
