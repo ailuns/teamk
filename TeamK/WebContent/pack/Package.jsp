@@ -81,21 +81,26 @@
 	
 	// 이미지 슬라이드 소스
 	jssor_1_slider_init = function() {
-		var jssor_1_SlideshowTransitions = [
-			{$Duration:1200,$Opacity:2}
+
+		var jssor_1_SlideoTransitions = [
+			[{b:900,d:2000,x:-379,e:{x:7}}],
+			[{b:900,d:2000,x:-379,e:{x:7}}],
+			[{b:-1,d:1,o:-1,sX:2,sY:2},{b:0,d:900,x:-171,y:-341,o:1,sX:-2,sY:-2,e:{x:3,y:3,sX:3,sY:3}},{b:900,d:1600,x:-283,o:-1,e:{x:16}}]
 		];
+		
 		var jssor_1_options = {
 			$AutoPlay: 1,
-			$SlideshowOptions: {
-				$Class: $JssorSlideshowRunner$,
-				$Transitions: jssor_1_SlideshowTransitions,
-				$TransitionsOrder: 1
+			$SlideDuration: 800,
+			$SlideEasing: $Jease$.$OutQuint,
+			$CaptionSliderOptions: {
+			$Class: $JssorCaptionSlideo$,
+			$Transitions: jssor_1_SlideoTransitions
 			},
 			$ArrowNavigatorOptions: {
-				$Class: $JssorArrowNavigator$
+			$Class: $JssorArrowNavigator$
 			},
 			$BulletNavigatorOptions: {
-				$Class: $JssorBulletNavigator$
+			$Class: $JssorBulletNavigator$
 			}
 		};
 		var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
@@ -176,7 +181,8 @@
 						<a href="./PackContent.po?num=<%=pb_slide.getNum() %>" id="pack<%=j %>">
 						<span id="pktt"><%=pb_slide.getSubject() %></span><br>
 						<span id="pksc"><%=pb_slide.getIntro() %></span><br>
-						<span id="pkpr"><%=cost %>원~</span></a>
+						<span id="pkpr"><%=cost %>원</span>
+						<span id="pkdt"><%=pb_slide.getDate() %></span></a>
 						<script> bg(<%=j %>);</script>
 					</div>
 				<%
