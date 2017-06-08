@@ -132,8 +132,7 @@
 			} else {
 				
 				List<PBasketBEAN> PackBasket = (List<PBasketBEAN>) request.getAttribute("PackBasket");
-				
-				
+				 
 		%>
 		<table id ="ptable">
 			<tr>
@@ -174,7 +173,7 @@
 				<%} %>
 				</select></td>
 				<td id="pcost<%=i %>"><%=pbbcost%></td>
-				<td><%=sdf.format(pbb.getDate()) %></td>
+				<td><%=sdf.format(pbb.getOri_date()) %></td>
 				<td>
 				<input type = "button" value="변경"  onclick="PBasket_Update(<%=i %>)" >
 				</td>
@@ -184,7 +183,7 @@
 				}
 			%>
 		</table><br>
-		<%if(packcount>5); %><a href = "./MyPackBasketList.bns?pageNum=1">더 보기 +</a><br><br><%; %>
+		<%if(packcount>5) %><a href = "./MyPackBasketList.bns?pageNum=1">더 보기 +</a><br><br><%; %>
 		<%
 			}
 		%>
@@ -245,7 +244,7 @@
 				}
 			%>
 		</table><br>
-		<%if(thingcount>5); %><a href = "./MyThingBasketList.bns?pageNum=1">더 보기 +</a><br><br><%; %>
+		<%if(thingcount>5) %><a href = "./MyThingBasketList.bns?pageNum=1">더 보기 +</a><br><br><%; %>
 		<%
 			}
 		%>
