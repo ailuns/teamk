@@ -193,7 +193,7 @@ a#pack1 #pkpr, a#pack2 #pkpr, a#pack3 #pkpr, a#pack4 #pkpr  {
 	line-height: 16px;
 }
 a#pack1 #pkdt, a#pack2 #pkdt, a#pack3 #pkdt, a#pack4 #pkdt  {
-	font-size: 13px;
+	font-size: 15px;
 	padding-left: 10px;
 	line-height: 20px;
 	margin-top: 5px;
@@ -206,7 +206,7 @@ div#goods_show {
 	background-color: #fff;
 }
 div#goods_show img {
-	width: 150px;
+	width: 200px;
 	height: 150px;
 	margin-top: 10px;
 }
