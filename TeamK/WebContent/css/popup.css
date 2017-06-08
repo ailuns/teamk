@@ -12,7 +12,6 @@ body {
 input {
 	border: 1px solid #ddd;
 	background-color: #fff;
-	padding: 5px;
 }
 input:HOVER {border: 1px solid #000;}
 input:FOCUS {border: 1px solid #06c;}
@@ -189,8 +188,6 @@ div#receive_setting td {
 	padding: 5px;
 }
 
-
-
 /* Trade Update Info.jsp*/
 div#trade_update_info {
 	margin: 0 auto;
@@ -201,7 +198,6 @@ div#trade_update_info {
 div#trade_update_info table {
 	 width: 100%;
 	 margin-bottom: 30px;
-	 
 }
 div#trade_update_info table * {padding: 5px;}
 div#trade_update_info table tr {border-bottom: 1px solid #ddd;}
