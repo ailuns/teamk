@@ -30,9 +30,9 @@ history.back();
 </script>
 <%} %>
 <div id="admin_order_list">
-<input type="button"value = "admin menu" onclick="location.href='./BankPayCheck.ao'"><br>
-<input type="button" value ="Admin pack Order" onclick ="location.href = './Pack_res.ao'"><br>
-<input type="button" value="Admin thing Order" onclick="location.href='./Admin_Thing_OrderList.ao'"><br>
+<input type="button"value = "무통장 입금 확인" onclick="location.href='./BankPayCheck.ao'"><br>
+<input type="button" value ="여행 주문 확인" onclick ="location.href = './Pack_res.ao'"><br>
+<input type="button" value="상품 주문 확인" onclick="location.href='./Admin_Thing_OrderList.ao'"><br>
 </div>
 </article>
 	</div>

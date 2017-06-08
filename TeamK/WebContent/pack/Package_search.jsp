@@ -56,41 +56,29 @@
 
 	// 이미지 슬라이드 소스
 	jssor_1_slider_init = function() {
-		var jssor_1_SlideshowTransitions = [
-			{$Duration:1200,$Opacity:2}
+
+		var jssor_1_SlideoTransitions = [
+			[{b:900,d:2000,x:-379,e:{x:7}}],
+			[{b:900,d:2000,x:-379,e:{x:7}}],
+			[{b:-1,d:1,o:-1,sX:2,sY:2},{b:0,d:900,x:-171,y:-341,o:1,sX:-2,sY:-2,e:{x:3,y:3,sX:3,sY:3}},{b:900,d:1600,x:-283,o:-1,e:{x:16}}]
 		];
+		
 		var jssor_1_options = {
 			$AutoPlay: 1,
-			$SlideshowOptions: {
-				$Class: $JssorSlideshowRunner$,
-				$Transitions: jssor_1_SlideshowTransitions,
-				$TransitionsOrder: 1
+			$SlideDuration: 800,
+			$SlideEasing: $Jease$.$OutQuint,
+			$CaptionSliderOptions: {
+			$Class: $JssorCaptionSlideo$,
+			$Transitions: jssor_1_SlideoTransitions
 			},
 			$ArrowNavigatorOptions: {
-				$Class: $JssorArrowNavigator$
+			$Class: $JssorArrowNavigator$
 			},
 			$BulletNavigatorOptions: {
-				$Class: $JssorBulletNavigator$
+			$Class: $JssorBulletNavigator$
 			}
 		};
 		var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
-		/*responsive code begin*/
-		/*remove responsive code if you don't want the slider scales while window resizing*/
-		function ScaleSlider() {
-			var refSize = jssor_1_slider.$Elmt.parentNode.clientWidth;
-			if (refSize) {
-				refSize = Math.min(refSize, 600);
-				jssor_1_slider.$ScaleWidth(refSize);
-			}
-			else {
-				window.setTimeout(ScaleSlider, 30);
-			}
-		}
-		ScaleSlider();
-		$Jssor$.$AddEvent(window, "load", ScaleSlider);
-		$Jssor$.$AddEvent(window, "resize", ScaleSlider);
-		$Jssor$.$AddEvent(window, "orientationchange", ScaleSlider);
-		/*responsive code end*/
 	};
 	
 	// 추천 패키지상품 배경이미지 지정
@@ -178,7 +166,8 @@ img.ui-datepicker-trigger
 						<a href="./PackContent.po?num=<%=pb_slide.getNum() %>" id="pack<%=j %>">
 						<span id="pktt"><%=pb_slide.getSubject() %></span><br>
 						<span id="pksc"><%=pb_slide.getIntro() %></span><br>
-						<span id="pkpr"><%=cost %>원~</span></a>
+						<span id="pkpr"><%=cost %>원</span>
+						<span id="pkdt"><%=pb_slide.getDate() %></span></a>
 						<script> bg(<%=j %>);</script>
 					</div>
 				<%
@@ -198,7 +187,7 @@ img.ui-datepicker-trigger
 			<script type="text/javascript">jssor_1_slider_init();</script>
 		</div>
 		<div id="package_search">
-			<p>내게 맞는 패키지 검색하기</p>
+			<br><p>내게 맞는 패키지 검색하기</p><br>
 			<form action="./PackSearchAction.po" name="fr" method="get" id="scheduler" onsubmit="return input_chk();">
 				<label for="date_from">출발</label><input type="text" id="date_from" class="input_style" name="startDate" value="<%=startDate %>"><br><br>
 				<label for="city_search">지역</label>
@@ -225,17 +214,17 @@ img.ui-datepicker-trigger
 			if(count == 0)
 			{
 		%>
-				<p>검색조건에 해당하는 상품이 총 <%=count %>개 있습니다</p>
+				<br><h2>검색조건에 해당하는 상품이 총 <%=count %>개 있습니다</h2><br>
 				<hr>
 				<div id="package_list">
 					<table style="width:1000px;">
 						<tr>
-							<td colspan="2">상품</td>
-							<td>가격</td>
-							<td>출발일자</td>
+							<th colspan="2">상품</th>
+							<th>가격</th>
+							<th>출발일자</th>
 						</tr>
 						<tr>
-							<td colspan="5"><p style="text-align: center;">해당 검색 조건에 해당하는 상품이 없습니다</p></td>
+							<td colspan="5"><br><p style="text-align: center;">해당 검색 조건에 해당하는 상품이 없습니다</p><br></td>
 						</tr>
 					</table>
 				</div>

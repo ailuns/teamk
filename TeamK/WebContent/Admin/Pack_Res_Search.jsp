@@ -98,7 +98,7 @@ function search_check(){
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
 		<div id="article_head">
-			<div id="article_title"><span id = "title"></span></div>
+			<div id="article_title">[관리자]고객 여행 주문 확인</span></div>
 			<div class="empty"></div>
 			<div id="article_script"><span id ="result"></span></div>
 		</div>
@@ -231,7 +231,7 @@ function search_check(){
 		}
 		for(int i = startp;i<=endpage;i++){
 		if(i==pNum){%><span id="i"><%=i%></span><%}else{
-			%><a href="./Pack_Res_Search.ao?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=i %><%=se%>" id="i"><%=i %></a><%
+		%><a href="./Pack_Res_Search.ao?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=i %><%=se%>" id="i"><%=i %></a><%
 		}}
 		if(endpage<pcount){
 			%><a href = "./Pack_Res_Search.ao?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=endpage+1%><%=se%>" id="i">다음</a><%

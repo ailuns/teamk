@@ -80,9 +80,7 @@
       $("#pack1").css('width', '33.3%');
       $("#pack2").css('width', '33.3%');
     });
-    //
   });
-  
   
 	//패키지 검색 시 지역 선택
 	function input_chk()
@@ -107,6 +105,7 @@
 		});
 	}
 
+	//Goods Show의 슬라이더
 	jssor_1_slider_init = function() {
         var jssor_1_options = {
           $AutoPlay: 1,
@@ -114,29 +113,11 @@
           $SlideDuration: 5000,
           $SlideEasing: $Jease$.$Linear,
           $PauseOnHover: 4,
-          $SlideWidth: 300,
-          $Cols: 5
+          $SlideWidth: 300, //각 슬라이더의 가로 길이
+          $Cols: 5 //최소 슬라이더(div)의 개수. 이보다 div를 한 개 이상 더 넣어야 원활하게 작동 됨.
         };
 
         var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
-
-        /*responsive code begin*/
-        /*remove responsive code if you don't want the slider scales while window resizing*/
-        function ScaleSlider() {
-            var refSize = jssor_1_slider.$Elmt.parentNode.clientWidth;
-            if (refSize) {
-                refSize = Math.min(refSize, 1000);
-                jssor_1_slider.$ScaleWidth(refSize);
-            }
-            else {
-                window.setTimeout(ScaleSlider, 30);
-            }
-        }
-        ScaleSlider();
-        $Jssor$.$AddEvent(window, "load", ScaleSlider);
-        $Jssor$.$AddEvent(window, "resize", ScaleSlider);
-        $Jssor$.$AddEvent(window, "orientationchange", ScaleSlider);
-        /*responsive code end*/
     };
 </script>
 <%
@@ -216,7 +197,9 @@
 				<a href="./PackContent.po?num=<%=pb.getNum() %>" id="pack<%=j %>">
 				<span id="pktt"><%=pb.getSubject() %></span><br>
 				<span id="pksc"><%=pb.getIntro() %></span><br>
-				<span id="pkpr"><%=cost %>원~</span></a>
+				<span id="pkpr"><%=cost %>원</span>
+				<span id="pkdt"><%=pb.getDate() %></span>
+				</a>
 				<script> bg(<%=j %>);</script>
 			<%
 				}
