@@ -19,7 +19,7 @@
 		String pagenum = (String) request.getAttribute("pageNum");
 		String status = (String)request.getAttribute("status");
 		String status2 = (String)request.getAttribute("status2");
-		int pageNum = Integer.parseInt(pagenum);
+		int pNum = Integer.parseInt(pagenum);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		List<Vector> Thing_Order_List = (List<Vector>) request.getAttribute("Thing_Order_List");
 		%>
@@ -350,10 +350,9 @@ function search_type_check(){
 	<%
 		}
 			for (int i = startp; i <= endpage; i++) {
-	%><a href="./Admin_Thing_OrderList.ao?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=i %>" id="i"><%=i%>
-	</a>
-	<%
-		}
+	if(i==pNum){%><span id="i"><%=i%></span><%}else{			
+	%><a href="./Admin_Thing_OrderList.ao?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=i%>" id="i"><%=i%></a><%
+		}}
 			if (endpage < pcount) {
 	%><a href="./Admin_Thing_OrderList.ao?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=endpage+1%>" id="i">다음</a>
 	<%
