@@ -49,7 +49,14 @@ $(document).ready(function(){
 		<article>
 		<div id="board_list">
 <table>
-<tr><th id="num">번호</th><th id="cate">답변</th><th id="title">제목</th><th id="name">작성자</th><th id="date">날짜</th><th id="readcount">조회수</th></tr>
+<tr>
+ <th id="num">번호</th>
+ <th id="cate">답변</th>
+ <th id="title">제목</th>
+ <th id="name">작성자</th>
+ <th id="date">날짜</th>
+ <th id="readcount">조회수</th>
+</tr>
     <%
     if(count==0){%><tr> <td colspan="6">검색결과가 없습니다.</td></tr><%}else{
     for(int i=0; i<boardList2.size(); i++){
@@ -58,9 +65,8 @@ $(document).ready(function(){
     			%>
 <tr>
 <td><%=bb.getRe_ref()%></td>
-<td id="cate">[<%=bb.getType_select()%>]</td> <%--글 타입 --%>
-<td id="title">
-<a href="./BoardContent2.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>"><%=bb.getSubject()%>
+<td id="cate"><a href="./BoardContent2.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>">[<%=bb.getType_select()%>]</a></td><%--글 타입 --%>
+<td id="title"><a href="./BoardContent2.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>"><%=bb.getSubject()%>
 <%if(bdao.getBoardReplyCount(bb.getNum())!=0){%>[<%=bdao.getBoardReplyCount(bb.getNum())%>]<%}%></a><%if(bdao.getFile(bb.getNum())!=null){%><img src="./img/disk.png" width="15" height="15>"><%}%></td>
 <td><%=bb.getId()%></td><td><%=bb.getDate() %></td>
     <td><%=bb.getReadcount() %></td></tr>

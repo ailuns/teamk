@@ -24,6 +24,7 @@
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		List<Vector> ModList = (List<Vector>) request.getAttribute("ModList");
 		String status = (String)request.getAttribute("status");	
+		int pNum = Integer.parseInt(pagenum);
 %>
 <link href="./css/inc.css" rel="stylesheet" type="text/css">
 <link href="./css/subpage.css" rel="stylesheet" type="text/css">
@@ -183,17 +184,15 @@ function Trade_Update_Info(o_num) {
 	<%
 		if (count != 0) {
 
-			if (endpage > pcount)
-				endpage = pcount;
+			if (endpage > pcount)endpage = pcount;
 			if (startp > pblock) {
 	%><a href="./MyThingOrderList.mo?pageNum=<%=startp - 1%>" id="i">이전</a>
 	<%
 		}
 			for (int i = startp; i <= endpage; i++) {
-	%><a href="./MyThingOrderList.mo?pageNum=<%=i%>" id="i"><%=i%>
-	</a>
-	<%
-		}
+	if(i==pNum){%><span id="i"><%=i%></span><%}else{
+	%><a href="./MyThingOrderList.mo?pageNum=<%=i%>" id="i"><%=i%></a><%
+		}}
 			if (endpage < pcount) {
 	%><a href="./MyThingOrderList.mo?pageNum=<%=endpage + 1%>" id="i">다음</a>
 	<%

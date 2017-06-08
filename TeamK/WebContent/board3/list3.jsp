@@ -47,7 +47,7 @@ BoardDAO bdao = new BoardDAO();
 <table>
 <tr>
  <th id="num">번호</th>
- <th></th>
+ <th id="cate"></th>
  <th id="title">제목</th>
  <th id="name">작성자</th>
  <th id="date">날짜</th>
@@ -60,7 +60,7 @@ BoardDAO bdao = new BoardDAO();
     			%>
 <tr>
  <td><%=bb.getRe_ref()%></td> <%--글 번호 --%>
- <td><strong><a href="./BoardContent3.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>">[<%=bb.getType_select()%>]</a></strong></td>
+ <td id="cate"><a href="./BoardContent3.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>">[<%=bb.getType_select()%>]</a></td><%--글 타입 --%>
  <td id="title"><a href="./BoardContent3.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>"><%=bb.getSubject()%></a><%--글 제목 --%>
  <%if(bdao.getFile(bb.getNum())!=null){%><img src="./img/disk.png" width="15" height="15>"><%}%></td><%--파일 첨부했으면 파일 이미지 나옴 --%>
  <td>관리자</td><%--작성자 Id --%>
