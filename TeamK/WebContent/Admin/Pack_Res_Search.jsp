@@ -231,7 +231,7 @@ function search_check(){
 		}
 		for(int i = startp;i<=endpage;i++){
 		if(i==pNum){%><span id="i"><%=i%></span><%}else{
-			%><a href="./Pack_Res_Search.ao?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=i %><%=se%>" id="i"><%=i %></a><%
+		%><a href="./Pack_Res_Search.ao?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=i %><%=se%>" id="i"><%=i %></a><%
 		}}
 		if(endpage<pcount){
 			%><a href = "./Pack_Res_Search.ao?status=<%=status %>&status2=<%=status2 %>&pageNum=<%=endpage+1%><%=se%>" id="i">다음</a><%
