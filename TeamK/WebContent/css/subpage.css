@@ -18,7 +18,7 @@ a#i:HOVER {color: #06c;}
 span#i{
 	color: red;
 	margin: 0 6px;
-	font-size: 15px;
+	font-size: 20px;
 }
 input[type="button"], input[type="submit"] {
 	border: 1px solid #06c;
