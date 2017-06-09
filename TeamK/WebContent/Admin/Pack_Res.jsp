@@ -81,6 +81,7 @@ function search(){
 		</div>
 		<div id="clear"></div>
 		<article>
+		<div id="pack_res">
 		<select id="status" onchange="status_change()">
 			<option value="ing">진행중인 주문</option>
 			<option value="completed">지난 주문 확인</option>
@@ -101,8 +102,8 @@ function search(){
 		<input type="text" id="search" name="search">
 		<input type="button" value="검색" onclick="return search()">
 		</div>
-	<div>
-		<form method="post" action ="./Pack_Res_Action.ao?stat=<%=status2%>" name="fr" id="pack_res" onsubmit="return select_check()">
+	
+		<form method="post" action ="./Pack_Res_Action.ao?stat=<%=status2%>" name="fr" onsubmit="return select_check()">
 			<%if(Pack_Res_List.size()!=0){
 				for(int i =0; i< Pack_Res_List.size();i++){
 					ModTradeInfoBEAN mtib = Pack_Res_List.get(i);
