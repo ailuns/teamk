@@ -1127,7 +1127,7 @@
 		<!--구글맵 제어할 버튼 부분 -->
 		<div id="middle2">
 			<hr>
-			<h3 id="sub"><%=PB.getCity()%> <%=PB.getSarea()%></h3>
+			<div id="pack_btn"><h3 id="sub"><br><%=PB.getCity()%> <%=PB.getSarea()%></h3></div>
 			<hr>
 			<br><br>
 			<input type="button" id="btn1" value="관광 명소"> 
@@ -1144,7 +1144,10 @@
 		
 		<div id="QnA">
 			<hr>
+			<div id="pack_btn">
+			<br>
 			<h3>상품 문의</h3>
+			</div>
 			<hr>
 			<div id="middle3">
 			<table border="1" id="replyTable">

@@ -1424,7 +1424,10 @@ if (user_id == null)
 
 		<!--상품 문의 -->
 			<div id="QnA">
+			<div id="pack_btn">
+			<br>
 			<h3>상품 문의</h3>
+			</div>
 			<hr>
 			<div id="middle3">
 			<table border="1" id="replyTable">

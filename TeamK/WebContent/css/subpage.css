@@ -438,6 +438,7 @@ div#package_tab .tab_container {
 	min-height: 600px;
 	margin-top : 20px;
 	text-align: center;
+    padding: 26px;
 }
 div#package_tab {margin: 0 auto;}
 div#package_tab .img_size {
