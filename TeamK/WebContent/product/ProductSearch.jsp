@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="./js/jquery-3.2.0.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="./js/jssor.slider-24.1.5.min.js" type="text/javascript"></script>
 <script>
 	jQuery(document).ready(function($){
 		
@@ -55,6 +56,20 @@
 		return true;
     }
 
+	//슬라이더
+	jssor_1_slider_init = function() {
+        var jssor_1_options = {
+          $AutoPlay: 1,
+          $Idle: 0,
+          $SlideDuration: 5000,
+          $SlideEasing: $Jease$.$Linear,
+          $PauseOnHover: 4,
+          $SlideWidth: 300, //각 슬라이더의 가로 길이
+          $Cols: 5 //최소 슬라이더(div)의 개수. 이보다 div를 한 개 이상 더 넣어야 원활하게 작동 됨.
+        };
+
+        var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
+    };
 </script>
 
 <style type="text/css">
@@ -108,15 +123,62 @@ img.ui-datepicker-trigger
 	<div class="empty"></div>
 	</div>
 	<!--여행지 검색창 -->
-	<div id="package_feat">
-		<jsp:include page="../inc/packSlide.jsp"></jsp:include>
-		<div id="package_search">
-			<p>내게 맞는 패키지 검색하기</p>
+	<div id="goods_feat">
+		<div id="goods_show">
+			<div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:1000px;height:250px;overflow:hidden;visibility:hidden;">
+        <!-- Loading Screen -->
+        <div data-u="loading" style="position:absolute;top:0px;left:0px;background:url('./img/loading.gif') no-repeat 50% 50%;background-color:rgba(0, 0, 0, 0.7);"></div>
+        <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:1000px;height:250px;overflow:hidden;">
+            <div>
+            	<div id="gdsld">
+                <a href="#"><img src="./img/disk.png" /><br><br>
+                <h2>Name</h2>
+                <h3>￦</h3></a>
+                </div>
+            </div>
+            <div>
+            	<div id="gdsld">
+                <a href="#"><img src="./img/disk.png" /><br><br>
+                <h2>Name</h2>
+                <h3>￦</h3></a>
+                </div>
+            </div>
+            <div>
+            	<div id="gdsld">
+                <a href="#"><img src="./img/disk.png" /><br><br>
+                <h2>Name</h2>
+                <h3>￦</h3></a>
+                </div>
+            </div>
+            <div>
+            	<div id="gdsld">
+                <a href="#"><img src="./img/disk.png" /><br><br>
+                <h2>Name</h2>
+                <h3>￦</h3></a>
+                </div>
+            </div>
+            <div>
+            	<div id="gdsld">
+                <a href="#"><img src="./img/disk.png" /><br><br>
+                <h2>Name</h2>
+                <h3>￦</h3></a>
+                </div>
+            </div>
+            <div>
+            	<div id="gdsld">
+                <a href="#"><img src="./img/disk.png" /><br><br>
+                <h2>Name</h2>
+                <h3>￦</h3></a>
+                </div>
+            </div>
+            <a data-u="any" href="https://wordpress.org/plugins/jssor-slider/" style="display:none">wordpress slider</a>
+        </div>
+    </div>
+    <script type="text/javascript">jssor_1_slider_init();</script>
+		</div>
+		<div id="goods_search">
 			<form action="./ProductSearchAction.bo" name="fr" method="get" id="scheduler" onsubmit="return input_chk();">
-				<label for="date_from">검색명</label><input type="text" id="serch_data" class="input_style" name="serch_data" required="yes"><br><br>
-<!-- 				<label for="date_to">~</label><input type="text" id="date_to" class="input_style" name="endDate"><br><br> -->
-			
-				
+				<label for="date_from">검색명</label><input type="text" id="serch_data" class="input_style" name="serch_data" required="yes">
 				<input type="submit" value="검색" id="search_btn" class="input_style">
 			</form>
 		</div>
