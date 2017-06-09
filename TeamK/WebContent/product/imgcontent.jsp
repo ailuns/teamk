@@ -17,6 +17,7 @@
 <script src="./js/jquery-3.2.0.js"></script>
 <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="./js/jssor.slider-24.1.5.min.js" type="text/javascript"></script>
 </head>
 <%	request.setCharacterEncoding("utf-8");
 	ProductBean pb = new ProductBean();
@@ -126,26 +127,7 @@ if (user_id == null)
 	       	}
 		});
 	});
-	var slideIndex = 1;
-	showDivs(slideIndex);
-	function plusDivs(n) {
-	  showDivs(slideIndex += n);
-	}
-	function currentDiv(n) {
-	  showDivs(slideIndex = n);
-	}
-	function showDivs(n) {
-	  var i;
-	  var x = document.getElementsByClassName("slider");
-	  if (n > x.length) {slideIndex = 1}    
-	  if (n < 1) {slideIndex = x.length}
-	  for (i = 0; i < x.length; i++) {
-	     x[i].style.display = "none";  
-	  }
-	  x[slideIndex-1].style.display = "block";  
-	}
 	
-
 	jQuery(document).ready(function($){
 		var packnum = $("#ori_num_chk").val();
 // 		alert(packnum);
@@ -647,7 +629,20 @@ if (user_id == null)
 		});
 	}
 
+	//슬라이더
+	jssor_1_slider_init = function() {
+        var jssor_1_options = {
+          $AutoPlay: 1,
+          $Idle: 0,
+          $SlideDuration: 5000,
+          $SlideEasing: $Jease$.$Linear,
+          $PauseOnHover: 4,
+          $SlideWidth: 300, //각 슬라이더의 가로 길이
+          $Cols: 5 //최소 슬라이더(div)의 개수. 이보다 div를 한 개 이상 더 넣어야 원활하게 작동 됨.
+        };
 
+        var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
+    };
 
 </script>
 
@@ -660,212 +655,212 @@ if (user_id == null)
 
 <style type="text/css">
 
-.clear {
-	clear: both;
-}
-
-#wrap_pack { 
-	width: 980px; 
-	min-height: 1000px;
-	border: 5px solid red;
- 	margin: 50px auto;
-	padding-top: 50px;
-	background-color: #eee;
-} 
-
-
-/* 이미지 정보 부분 */
-#top {
-	width: 960px;
-}
-
-
-#imgdiv ul
-{
-	list-style: none;
-}
-
-#imgdiv{
-	width: 470px;
-	height: 400px;
-	border: 3px solid orange;
-	float: left;
-}
-
-#imgdiv img {
-	width: 470px;
-	height: 300px;
-	float: left;
-}
-
-#imgdiv ul li img{
-	width: 80px;
-	height: 80px;
-	margin-top : 10px;
-	margin-left : 5px;
-}
-
-/* 이미지에 마우스를 올렸을 때 이벤트 */
-#imgdiv ul li img:HOVER{
-	box-sizing : border-box;
-	border : 5px solid #A6A6A6;
-}
-/* 이미지에 마우스를 올렸을 때 이벤트 */
-
-/* 이미지 정보 부분 */
-
-
-/* 인원, 가격 정보 부분 */
-#contentdiv1 {
-	width: 400px;
-	height: 400px;
-	border: 3px solid blue;
-	float: left;
-	margin-left : 50px;
-}
-
-/* 인원, 가격 정보 부분 */
-
-	
-/* 날짜정보 내용 */
-
-#datecontent {
-	width: 960px;
-	height: 350px;
-	border: 3px solid gray;
-	overflow: auto;
-}
-
-#datecontent table
-{
-	border-collapse: collapse;
-}	
-
-
-#datecontent tr:FIRST-CHILD
-{
-	background-color: gray;
-	height : 30px;
-}
-
-#datecontent tr:HOVER
-{
-	background-color: #D5D5D5;
-}
-
-#datecontent .date_td_size
-{
-	height : 50px;
-	border-bottom : 1px solid black;
-}
-
-#datecontent #date_date
-{
-	width : 225px;
-}
-
-#datecontent #date_subject
-{
-	width : 525px;
-}
-
-#datecontent #date_cost
-{
-	width : 170px;
-}
-
-#datecontent #date_stock
-{
-	width : 70px;
-}
-
-/* 날짜정보 내용 */
-	
-
-/* 여행정보 내용 */
-
-#contentdiv2 {
-	width: 960px;
-	min-height: 700px;
-	border: 3px solid gray;
-}
-
-/* 여행정보 내용 */
-
-/* 구글맵 */
-
-
-#map_canvas {
-	width: 800px;
-	height: 500px;
-}
-
-.controls {
-	margin-top: 10px;
-	border: 1px solid transparent;
-	border-radius: 2px 0 0 2px;
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	height: 32px;
-	outline: none;
-	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-}
-
-#pac-input {
-	background-color: #fff;
-	font-family: Roboto;
-	font-size: 15px;
-	font-weight: 300;
-	margin-left: 12px;
-	padding: 0 11px 0 13px;
-	text-overflow: ellipsis;
-	width: 300px;
-}
-
-#pac-input:focus {
-	border-color: #4d90fe;
-}
-
-
-/* 구글맵 */
-
-
-/* 상품 문의 */
-#QnA {
-	width: 800px;
-	min-height: 300px;
-	border: 3px solid pink;
-}
-
-#replyTable
-{
-	background-color: white;
-	
-}
-
-/* tr:nth-child(odd)  */
-/* { */
-/* 	background-color: #BFBFBF; */
+/* .clear { */
+/* 	clear: both; */
 /* } */
 
-#replyContent
-{	
-	width: 700px;
-	height : 50px;
-}
+/* #wrap_pack {  */
+/* 	width: 980px;  */
+/* 	min-height: 1000px; */
+/* 	border: 5px solid red; */
+/*  	margin: 50px auto; */
+/* 	padding-top: 50px; */
+/* 	background-color: #eee; */
+/* }  */
 
-#recontent, #contentup, #content
-{
-	width : 600px;
-	height : 70px;
-}
 
-#replyWrite
-{
-	background-color: white;
-}
+/* /* 이미지 정보 부분 */ */
+/* #top { */
+/* 	width: 960px; */
+/* } */
 
-/* 상품 문의 */
+
+/* #imgdiv ul */
+/* { */
+/* 	list-style: none; */
+/* } */
+
+/* #imgdiv{ */
+/* 	width: 470px; */
+/* 	height: 400px; */
+/* 	border: 3px solid orange; */
+/* 	float: left; */
+/* } */
+
+/* #imgdiv img { */
+/* 	width: 470px; */
+/* 	height: 300px; */
+/* 	float: left; */
+/* } */
+
+/* #imgdiv ul li img{ */
+/* 	width: 80px; */
+/* 	height: 80px; */
+/* 	margin-top : 10px; */
+/* 	margin-left : 5px; */
+/* } */
+
+/* /* 이미지에 마우스를 올렸을 때 이벤트 */ */
+/* #imgdiv ul li img:HOVER{ */
+/* 	box-sizing : border-box; */
+/* 	border : 5px solid #A6A6A6; */
+/* } */
+/* /* 이미지에 마우스를 올렸을 때 이벤트 */ */
+
+/* /* 이미지 정보 부분 */ */
+
+
+/* /* 인원, 가격 정보 부분 */ */
+/* #contentdiv1 { */
+/* 	width: 400px; */
+/* 	min-height: 400px; */
+/* 	border: 3px solid blue; */
+/* 	float: left; */
+/* 	margin-left : 50px; */
+/* } */
+
+/* /* 인원, 가격 정보 부분 */ */
+
+	
+/* /* 날짜정보 내용 */ */
+
+/* #datecontent { */
+/* 	width: 960px; */
+/* 	height: 350px; */
+/* 	border: 3px solid gray; */
+/* 	overflow: auto; */
+/* } */
+
+/* #datecontent table */
+/* { */
+/* 	border-collapse: collapse; */
+/* }	 */
+
+
+/* #datecontent tr:FIRST-CHILD */
+/* { */
+/* 	background-color: gray; */
+/* 	height : 30px; */
+/* } */
+
+/* #datecontent tr:HOVER */
+/* { */
+/* 	background-color: #D5D5D5; */
+/* } */
+
+/* #datecontent .date_td_size */
+/* { */
+/* 	height : 50px; */
+/* 	border-bottom : 1px solid black; */
+/* } */
+
+/* #datecontent #date_date */
+/* { */
+/* 	width : 225px; */
+/* } */
+
+/* #datecontent #date_subject */
+/* { */
+/* 	width : 525px; */
+/* } */
+
+/* #datecontent #date_cost */
+/* { */
+/* 	width : 170px; */
+/* } */
+
+/* #datecontent #date_stock */
+/* { */
+/* 	width : 70px; */
+/* } */
+
+/* /* 날짜정보 내용 */ */
+	
+
+/* /* 여행정보 내용 */ */
+
+/* #contentdiv2 { */
+/* 	width: 960px; */
+/* 	min-height: 700px; */
+/* 	border: 3px solid gray; */
+/* } */
+
+/* /* 여행정보 내용 */ */
+
+/* /* 구글맵 */ */
+
+
+/* #map_canvas { */
+/* 	width: 800px; */
+/* 	height: 500px; */
+/* } */
+
+/* .controls { */
+/* 	margin-top: 10px; */
+/* 	border: 1px solid transparent; */
+/* 	border-radius: 2px 0 0 2px; */
+/* 	box-sizing: border-box; */
+/* 	-moz-box-sizing: border-box; */
+/* 	height: 32px; */
+/* 	outline: none; */
+/* 	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); */
+/* } */
+
+/* #pac-input { */
+/* 	background-color: #fff; */
+/* 	font-family: Roboto; */
+/* 	font-size: 15px; */
+/* 	font-weight: 300; */
+/* 	margin-left: 12px; */
+/* 	padding: 0 11px 0 13px; */
+/* 	text-overflow: ellipsis; */
+/* 	width: 300px; */
+/* } */
+
+/* #pac-input:focus { */
+/* 	border-color: #4d90fe; */
+/* } */
+
+
+/* /* 구글맵 */ */
+
+
+/* /* 상품 문의 */ */
+/* #QnA { */
+/* 	width: 800px; */
+/* 	min-height: 300px; */
+/* 	border: 3px solid pink; */
+/* } */
+
+/* #replyTable */
+/* { */
+/* 	background-color: white; */
+	
+/* } */
+
+/* /* tr:nth-child(odd)  */ */
+/* /* { */ */
+/* /* 	background-color: #BFBFBF; */ */
+/* /* } */ */
+
+/* #replyContent */
+/* {	 */
+/* 	width: 700px; */
+/* 	height : 50px; */
+/* } */
+
+/* #recontent, #contentup, #content */
+/* { */
+/* 	width : 600px; */
+/* 	height : 70px; */
+/* } */
+
+/* #replyWrite */
+/* { */
+/* 	background-color: white; */
+/* } */
+
+/* /* 상품 문의 */ */
 
 
 
@@ -964,25 +959,71 @@ if (user_id == null)
 	<!-- 왼쪽 메뉴 -->
 	<!--여행지 검색창 -->
 	<div id="wrap"> 
-		<div id="package_head">
-			<div id="article_head">
-		<div id="article_title"><img src="./img/shop2.png" width="26px" style="margin:0 8px 3px 0;  vertical-align: bottom;">상품</div>
+		<div id="article_head">
+		<div id="article_title"><img src="./img/travel2.png" width="30px" style="margin-right: 8px; vertical-align: bottom;">패키지</div>
 	<div class="empty"></div>
 	</div>
-			<div id="package_feat">
-		<jsp:include page ="../inc/packSlide.jsp"></jsp:include>
-			<div id="package_search">
-			<p>상품 검색하기</p>
+	<!--여행지 검색창 -->
+	<div id="goods_feat">
+		<div id="goods_show">
+			<div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:1000px;height:250px;overflow:hidden;visibility:hidden;">
+        <!-- Loading Screen -->
+        <div data-u="loading" style="position:absolute;top:0px;left:0px;background:url('./img/loading.gif') no-repeat 50% 50%;background-color:rgba(0, 0, 0, 0.7);"></div>
+        <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:1000px;height:250px;overflow:hidden;">
+            <div>
+            	<div id="gdsld">
+                <a href="#"><img src="./img/disk.png" /><br><br>
+                <h2>Name</h2>
+                <h3>￦</h3></a>
+                </div>
+            </div>
+            <div>
+            	<div id="gdsld">
+                <a href="#"><img src="./img/disk.png" /><br><br>
+                <h2>Name</h2>
+                <h3>￦</h3></a>
+                </div>
+            </div>
+            <div>
+            	<div id="gdsld">
+                <a href="#"><img src="./img/disk.png" /><br><br>
+                <h2>Name</h2>
+                <h3>￦</h3></a>
+                </div>
+            </div>
+            <div>
+            	<div id="gdsld">
+                <a href="#"><img src="./img/disk.png" /><br><br>
+                <h2>Name</h2>
+                <h3>￦</h3></a>
+                </div>
+            </div>
+            <div>
+            	<div id="gdsld">
+                <a href="#"><img src="./img/disk.png" /><br><br>
+                <h2>Name</h2>
+                <h3>￦</h3></a>
+                </div>
+            </div>
+            <div>
+            	<div id="gdsld">
+                <a href="#"><img src="./img/disk.png" /><br><br>
+                <h2>Name</h2>
+                <h3>￦</h3></a>
+                </div>
+            </div>
+            <a data-u="any" href="https://wordpress.org/plugins/jssor-slider/" style="display:none">wordpress slider</a>
+        </div>
+    </div>
+    <script type="text/javascript">jssor_1_slider_init();</script>
+		</div>
+		<div id="goods_search">
 			<form action="./ProductSearchAction.bo" name="fr" method="get" id="scheduler" onsubmit="return input_chk();">
-				<label for="date_from">검색명</label><input type="text" id="serch_data" class="input_style" name="serch_data" required="yes"><br><br>
-<!-- 				<label for="date_to">~</label><input type="text" id="date_to" class="input_style" name="endDate"><br><br> -->
-			
-				
+				<label for="date_from">검색명</label><input type="text" id="serch_data" class="input_style" name="serch_data" required="yes">
 				<input type="submit" value="검색" id="search_btn" class="input_style">
 			</form>
 		</div>
 	</div>
-	
 	<div id="clear"></div>
 	<!--여행지 검색창 -->
 	<%
@@ -1401,6 +1442,7 @@ if (user_id == null)
 				</form>
 			</div>
 			<!--인원수, 가격 -->
+			<div class="clear"></div>
 		</div>
 		<div class="clear"></div>
 		

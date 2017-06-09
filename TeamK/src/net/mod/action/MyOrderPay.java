@@ -23,7 +23,7 @@ public class MyOrderPay implements Action{
 		String []tch = request.getParameterValues("tch");
 		String []pch = request.getParameterValues("pch");
 		String pnum = request.getParameter("pnum");
-		String tnum = request.getParameter("tnum");
+		String [] tnum = request.getParameterValues("tnum");
 		ActionForward afo = new ActionForward();
 		List<TBasketBEAN>ModThingList = new ArrayList<TBasketBEAN>();
 		List<PBasketBEAN>ModPackList= new ArrayList<PBasketBEAN>();
@@ -51,13 +51,17 @@ public class MyOrderPay implements Action{
 			}
 		}
 		if(tnum!=null){
-			tbb = new TBasketBEAN();
-			tbb.setOri_num(Integer.parseInt(tnum));
-			tbb.setNum(0);
-			tbb.setCount(Integer.parseInt(request.getParameter("count")));
-			tbb.setCost(Integer.parseInt(request.getParameter("cost")));;
-			tbb=bndao.ThingBasketToPay(tbb);
-			ModThingList.add(tbb);
+			String [] count = request.getParameterValues("count");
+			String [] cost = request.getParameterValues("cost");
+			for(int i=0; i<tnum.length; i++){
+				tbb = new TBasketBEAN();
+				tbb.setOri_num(Integer.parseInt(tnum[i]));
+				tbb.setNum(0);
+				tbb.setCount(Integer.parseInt(count[i]));
+				tbb.setCost(Integer.parseInt(cost[i]));;
+				tbb=bndao.ThingBasketToPay(tbb);
+				ModThingList.add(tbb);
+			}
 		}
 		if(pnum!=null){
 			System.out.println(pnum);

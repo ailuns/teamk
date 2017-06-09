@@ -111,7 +111,7 @@ function search(){
 					String []pack_count = mtib.getPack_count().split(",");
 					String []trade_type = mtib.getTrade_type().split(",");
 					String []memo = mtib.getMemo().split(",");
-// 					DecimalFormat Commas = new DecimalFormat("#,###");
+					DecimalFormat Commas = new DecimalFormat("#,###");
 // 					String  = (String)Commas.format();	
 					%>
 <!-- 				<h5></h5> -->
@@ -135,7 +135,7 @@ function search(){
 <%-- 						<%} %> --%>
 					</tr>
 					<tr>
-						<td><%=mtib.getImg() %></td>
+						<td id="tr2td1"><img src='./upload/<%=mtib.getImg() %>'></td>
 						<td><%=mtib.getSubject() %></td>
 						<td><%=mtib.getIntro() %></td>
 					</tr>
@@ -152,7 +152,8 @@ function search(){
 						<td><%=mtib.getPayer() %></td>
 						<td><%=trade_type[0] %></td>
 						<% if(mtib.getStatus()==4||mtib.getStatus()==9){%>
-						<td>환불 금액: <%=memo[1] %>원</td>
+						<td>환불 금액: <%int cost = Integer.parseInt(memo[1]);
+										out.print(Commas.format(cost));%>원</td>
 						<%}else if(mtib.getStatus()<4){%>
 							<td><input type = "button" value="예약 취소" onclick ="res_cancel(<%=mtib.getNum()%>)"></td>
 						<%}%>

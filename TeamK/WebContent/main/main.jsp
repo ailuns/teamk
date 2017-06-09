@@ -223,9 +223,11 @@
 					
 			%>
             <div>
+            	<div id="gdsld">
                 <a href="./ProductContent.bo?num=<%=prob.getNum()%>&car_num=<%=prob.getCar_num()%>"><img src="./upload/<%=prob.getImg() %>" /><br><br>
                 <h2><%=prob.getName() %></h2>
                 <h3>￦<%= cost%></h3></a>
+                </div>
             </div>
            <%} %>
             <a data-u="any" href="https://wordpress.org/plugins/jssor-slider/" style="display:none">wordpress slider</a>
