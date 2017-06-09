@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="net.mod.db.ModTradeInfoBEAN"%>
 <%@page import="java.util.List"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -109,7 +110,10 @@ function search(){
 					ModTradeInfoBEAN mtib = Pack_Res_List.get(i);
 					String []pack_count = mtib.getPack_count().split(",");
 					String []trade_type = mtib.getTrade_type().split(",");
-					String []memo = mtib.getMemo().split(",");%>
+					String []memo = mtib.getMemo().split(",");
+// 					DecimalFormat Commas = new DecimalFormat("#,###");
+// 					String  = (String)Commas.format();	
+					%>
 <!-- 				<h5></h5> -->
 				<fieldset>
 				<legend><%=mtib.getTrade_num() %></legend>
