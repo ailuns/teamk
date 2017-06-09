@@ -1088,7 +1088,9 @@ if (user_id == null)
 						
 					</table>
 					<br>
+				<div style="overflow-x:auto; overflow-y:auto; height: 100px;">
 					<table id ="stocktable"></table>
+				</div>
 										<%
 				for (int i = 0; i < productList.size(); i++) {
 
