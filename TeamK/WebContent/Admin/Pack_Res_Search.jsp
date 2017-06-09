@@ -98,12 +98,13 @@ function search_check(){
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
 		<div id="article_head">
-			<div id="article_title"><span id = "title"></span></div>
+			<div id="article_title">[관리자]고객 여행 주문 확인</span></div>
 			<div class="empty"></div>
 			<div id="article_script"><span id ="result"></span></div>
 		</div>
 		<div id="clear"></div>
 		<article>
+		<div id="pack_res">
 		<select id="status" onchange="return status_change()">
 			<option value="ing">진행중인 주문</option>
 			<option value="completed">지난 주문 확인</option>
@@ -124,8 +125,8 @@ function search_check(){
 		<input type="text" id="search" name="search">
 		<input type="button" value="검색" onclick="return search()">
 		</div>
-	<div>
-		<form method="post" action ="./Pack_Res_Action.ao?stat=<%=status2%>"name="fr" id="pack_res" onsubmit="return select_check()">
+	
+		<form method="post" action ="./Pack_Res_Action.ao?stat=<%=status2%>"name="fr" onsubmit="return select_check()">
 			<%if(Pack_Res_List.size()!=0){
 				for(int i =0; i< Pack_Res_List.size();i++){
 					ModTradeInfoBEAN mtib = Pack_Res_List.get(i);

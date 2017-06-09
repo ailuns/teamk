@@ -187,7 +187,7 @@ img.ui-datepicker-trigger
 			<script type="text/javascript">jssor_1_slider_init();</script>
 		</div>
 		<div id="package_search">
-			<p>내게 맞는 패키지 검색하기</p>
+			<br><p>내게 맞는 패키지 검색하기</p><br>
 			<form action="./PackSearchAction.po" name="fr" method="get" id="scheduler" onsubmit="return input_chk();">
 				<label for="date_from">출발</label><input type="text" id="date_from" class="input_style" name="startDate" value="<%=startDate %>"><br><br>
 				<label for="city_search">지역</label>
@@ -214,17 +214,17 @@ img.ui-datepicker-trigger
 			if(count == 0)
 			{
 		%>
-				<p>검색조건에 해당하는 상품이 총 <%=count %>개 있습니다</p>
+				<br><h2>검색조건에 해당하는 상품이 총 <%=count %>개 있습니다</h2><br>
 				<hr>
 				<div id="package_list">
 					<table style="width:1000px;">
 						<tr>
-							<td colspan="2">상품</td>
-							<td>가격</td>
-							<td>출발일자</td>
+							<th colspan="2">상품</th>
+							<th>가격</th>
+							<th>출발일자</th>
 						</tr>
 						<tr>
-							<td colspan="5"><p style="text-align: center;">해당 검색 조건에 해당하는 상품이 없습니다</p></td>
+							<td colspan="5"><br><p style="text-align: center;">해당 검색 조건에 해당하는 상품이 없습니다</p><br></td>
 						</tr>
 					</table>
 				</div>

@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="net.mod.db.ModTradeInfoBEAN"%>
 <%@page import="java.util.Vector"%>
 <%@page import="java.util.List"%>
@@ -150,7 +151,7 @@ function search_type_check(){
 	<!--왼쪽 메뉴 -->
 	<div id="wrap">
 	<div id="article_head">
-			<div id="article_title">Administrator Goods Order List</div>
+			<div id="article_title">[관리자]고객 상품 주문 확인</div>
 			<div class="empty"></div>
 			<div id="article_script"></div>
 		</div>
@@ -191,13 +192,17 @@ function search_type_check(){
 				Vector v = Thing_Order_List.get(i);	
 				ModTradeInfoBEAN mtib = (ModTradeInfoBEAN)v.get(0);
 				List<ModTradeInfoBEAN> mtbList = (List<ModTradeInfoBEAN>)v.get(1);
+	
 				
 			if(mtbList.size()!=0){%>
 				<fieldset>
 				<legend>주문 번호 : <%=mtib.getTi_num() %></legend>
 				<table>
 					<%for(int j =0; j< mtbList.size();j++){
-						ModTradeInfoBEAN mtb = mtbList.get(j);%>
+						ModTradeInfoBEAN mtb = mtbList.get(j);
+						DecimalFormat Commas = new DecimalFormat("#,###");
+						String mtb_cost = (String)Commas.format(mtb.getCost() );
+						%>
 					<tr>
 						<th>상품 번호
 							<input type = "hidden" name = "o_num" value="<%=mtb.getNum()%>"></th>
@@ -206,7 +211,7 @@ function search_type_check(){
 						<td>색상 : <%=mtb.getColor() %></td>
 						<td>사이즈 : <%=mtb.getSize() %></td>
 						<td><%=mtb.getThing_count()%>개</td>
-						<td><%=mtb.getCost() %>원</td>
+						<td><%=mtb_cost%>원</td>
 						<td><%
 					//교환 상품 배송중일때 배송정보 조회 가능하게 링크
 						if(mtb.getStatus()==3){

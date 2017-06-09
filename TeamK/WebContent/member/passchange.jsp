@@ -29,7 +29,7 @@
 			
 			<label>변경할 비밀번호</label>	<input type="password" name="changepass"><br>
 			  
-			<label>변경할 비밀번호 확인</label>	<input type="password" name="changepass2"><br><br>
+			<label>변경할 비밀번호 확인</label>	<input type="password" name="changepass2"><br>
 										<input type="submit" value="변경">
 										<input type="button" value="취소" onclick="window.close()">
 		</form>

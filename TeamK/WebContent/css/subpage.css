@@ -193,9 +193,10 @@ a#pack1 #pkpr, a#pack2 #pkpr, a#pack3 #pkpr, a#pack4 #pkpr  {
 	line-height: 16px;
 }
 a#pack1 #pkdt, a#pack2 #pkdt, a#pack3 #pkdt, a#pack4 #pkdt  {
-	font-size: 13px;
+	font-size: 15px;
 	padding-left: 10px;
 	line-height: 20px;
+	margin-top: 5px;
 }
 div#goods_show {
 	height: 250px;
@@ -204,8 +205,12 @@ div#goods_show {
 	margin-top: 15px;
 	background-color: #fff;
 }
+div#goods_show a {
+	text-decoration: none;
+	color: #000;
+}
+div#goods_show a:HOVER {color: #06c;}
 div#goods_show img {
-	width: 150px;
 	height: 150px;
 	margin-top: 10px;
 }
@@ -357,6 +362,10 @@ div#package_list {
 	height: 100%;
 	background-color: #fff;
 	margin: 0 auto;
+}
+div#package_list th {
+	padding: 5px;
+	font-size: 15px;
 }
 div#package_list table {}
 div#package_list table tr {
@@ -1303,18 +1312,31 @@ div#my_thing_order_list table span {
 }
 
 /* Pack Res.jsp */
-form#pack_res {
+div#pack_res {
 	width: 900px;
 	margin: 0 auto;
 }
-form#pack_res table {
+div#pack_res fieldset {
+	border: 1px solid #06c;
+	padding: 10px;
+	margin: 5px 0;
+}
+div#pack_res legend {
+	font-size: 20px;
+	font-weight: bold;
+	padding: 0 10px;
+}
+div#pack_res table {
 	width: 100%;
 	margin: 20px 0px;
 	text-align: left!important;
-	border-bottom: 2px solid #06c;
 }
-form#pack_res td#tr1td1 {width: 100px;}
-form#pack_res td#tr1td2 {width: 250px;}
+div#pack_res td, form#pack_res th {
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+div#pack_res td#tr1td1 {width: 100px;}
+div#pack_res td#tr1td2 {width: 250px;}
 
 /*My Interest.jsp*/
 div#my_interest {
@@ -1420,3 +1442,18 @@ div#admin_thing_order th {
 	border-right: 2px solid #aaa;
 }
 
+/*Category Form.jsp*/
+div#category_form {
+	width: 500px;
+	margin: 100px auto;
+}
+div#category_form form table {margin: 10px auto;}
+div#category_form form th {
+	text-align: left;
+	width: 100px;
+	padding: 5px;
+}
+div#category_form form table input,
+div#category_form form table select {
+	width: 150px;
+}

@@ -1,7 +1,3 @@
-<%@page import="net.board.db.BoardBean"%>
-<%@page import="java.util.List"%>
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="net.board.db.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <link href="./css/inc.css" rel="stylesheet" type="text/css">

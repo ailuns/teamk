@@ -1050,7 +1050,7 @@ if (user_id == null)
 							<%} %>
 						<tr>
 							<td class="contentdiv1_1">color</td>
-								<td class="contentdiv1_2"><select id="color" name="color" onchange="people_Calc2(<%=num%>)">
+								<td class="contentdiv1_2"><select id="color" onchange="people_Calc2(<%=num%>)">
 								<option value ="">선택하세요</option>
 								<%
 				for (int i = 0; i < productList3.size(); i++) {
@@ -1066,7 +1066,7 @@ if (user_id == null)
 						<tr>
 							<td class="contentdiv1_1">size</td>
 							<td class="contentdiv1_2">
-							<select  name="size"  id ="size"class="size" onchange="people_Calc3(<%=num%>)">
+							<select  id ="size"class="size" onchange="people_Calc3(<%=num%>)">
 								<option  value = "5555" >선택하세요</option>
 								
 								</select></td>
@@ -1079,10 +1079,9 @@ if (user_id == null)
 						<tr>
 							<td class="contentdiv1_1">합계</td>
 							<td colspan="2">
-								<input type="hidden" id="cost" name="cost" value="">
-								<input type="hidden" id="ori_num" name="tnum" value="">
 								<input type="hidden" name="type" value="T">
-								<p id="p"></p>
+								<input type="hidden" name="totalcost">
+								<p id="p">0원</p>
 							</td>
 						</tr>
 						
@@ -1156,7 +1155,7 @@ if (user_id == null)
 								var str = $("#stack").val();
 								
 								var str2 = $("#size option:selected").val();
-								var str3 = $("#dstock"+str2).val();
+								var str3 = $("#stock"+num).val();
 								
 								
 // 								var str2 = $("#hstock").val().split(",");
@@ -1183,7 +1182,7 @@ if (user_id == null)
 									
 								    str = String(sum);
 								    var commasum = str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
-									$('#p').html(commasum);
+									$('#p').html(commasum+"원");
 								
 								}
 								
@@ -1191,6 +1190,7 @@ if (user_id == null)
 								}else{
 									alert("size를 선택하여주세요.");
 								}
+								totalP();
 							}
 						function up(num){
 							
@@ -1198,8 +1198,7 @@ if (user_id == null)
 							var str = parseInt($("#stack2"+num).val());
 							
 							var str2 = $("#size option:selected").val();
-							var str3 = $("#dstock"+str2).val();
-							
+							var str3 = $("#stock"+num).val();
 							
 //								var str2 = $("#hstock").val().split(",");
 //								var str3 = parseInt($("#size option").index($("#size option:selected")));
@@ -1222,10 +1221,10 @@ if (user_id == null)
 								$("#stack2"+num).val(parseInt($("#stack2"+num).val())-1);
 							}else{
 								var sum = str * val;
-								
+								$('#cost'+num).val(sum);
 							    str = String(sum);
 							    var commasum = str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
-								$('#p'+num).html(commasum);
+								$('#p'+num).html(commasum+"원");
 							
 							}
 							
@@ -1233,6 +1232,7 @@ if (user_id == null)
 							}else{
 								alert("size를 선택하여주세요.");
 							}
+							totalP();
 						}
 						
 						
@@ -1241,41 +1241,43 @@ if (user_id == null)
 								var val = $("#avg_cost").html();
 								var str = parseInt($("#stack2"+num).val());
 								if(str <= 1){
-									alert("더이상클릭할수업습니다.")
+									if(confirm('해당 상품을 리스트에서 삭제하시겠습니까?'))trdel(num);
 								}else{
 								str--;
 								$("#stack2"+num).val(str);
-								}
 								var sum = str * val;
+								$('#cost'+num).val(sum);
 							    str = String(sum);
 							    var commasum = str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
-								$('#p'+num).html(commasum);
+								$('#p'+num).html(commasum+"원");
+								totalP();
+								}
+								
 							}
 							
 							function keyup(num){
 								 if (window.event.keyCode == 13) {
-								
 								var val = $("#avg_cost").html();
 								var str = parseInt($("#stack2"+num).val());
 								
 								var str2 = $("#size option:selected").val();
-								var str3 = $("#dstock"+str2).val();
+								var str3 = $("#stock"+num).val();
 								
 								
 //									var str2 = $("#hstock").val().split(",");
 //									var str3 = parseInt($("#size option").index($("#size option:selected")));
 								var max = 10;
 								var alertmsg = "";
-								if(str3 != 0){
+								if(str3 > 0){
 									$("#stack2"+num).val(str);
-								if(str3<max){
-									max = str3;
-									alertmsg = "재고가 부족합니다\n"+str3+"만큼 선택해주세요.";
+									if(str3<max){
+										max = str3;
+										alertmsg = "재고가 부족합니다\n"+str3+"만큼 선택해주세요.";
 									
-								}else{
-									alertmsg = "10개 이하로 주문해주세요";
+									}else{
+										alertmsg = "10개 이하로 주문해주세요";
 									
-								}
+									}
 								
 								if(str > max){
 									alert(alertmsg);
@@ -1286,7 +1288,7 @@ if (user_id == null)
 									
 								    str = String(sum);
 								    var commasum = str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
-									$('#p'+num).html(commasum);
+									$('#p'+num).html(commasum+"원");
 								
 								}
 								
@@ -1295,6 +1297,7 @@ if (user_id == null)
 									alert("size를 선택하여주세요.");
 								}
 							}
+								 totalP();
 							}
 							
 							
@@ -1323,25 +1326,6 @@ if (user_id == null)
 									});
 								});
 							}
-							
-							function people_Calc(num){			
-								$(document).ready(function(){
-									var val1 = $("#adult option:selected").val();
-									var val2 = $("#child option:selected").val();
-									
-									if (num == 1)
-									{
-										$("#child").find("option").remove();
-										for (i = 0; i <= val1; i++)
-										{
-											$('#child').append("<option value=" + i + ">" + i + "</option");
-										}
-									}
-									
-									$('#p').html(val1 * 200000 + val2 * 100000);
-								});
-							}
-					
 							function people_Calc3(str){
 								$(document).ready(function(){
 									var val1 = $("#color option:selected").val();
@@ -1355,18 +1339,60 @@ if (user_id == null)
 									$.getJSON('./product/json4.jsp?num='+val3+'&color='+val1,function(data){
 										var stocktest = "";
 										$.each(data,function(index,qqqq){
-										//body태그 추가 key:value	
-											$('#stocktable').append("<tr id='stocktr"+qqqq.num+"'><td class='contentdiv1_2'>"+qqqq.size+"-"+qqqq.color+"</td><td><input type='button' value='▲' onclick='up("+qqqq.num+")'><input type='text' id = 'stack2"+qqqq.num+"' name = 'count' value='1' onkeydown='keyup("+qqqq.num+")'><input type='button' value='▼' onclick='down("+qqqq.num+")'></td><td><p id='p"+qqqq.num+"'></p></td></tr>");
+										//body태그 추가 key:value
+											var tnum = qqqq.num;
 											
+											var check = 1;
+											for(var i = 0; i<$('#stocktable').find('tr').length;i++){
+												if($('#stocktable tr').eq(i).attr('id')=="stocktr"+tnum)check=0;
+											}
+											if(check == 1){
+											$('#stocktable').append(
+													"<tr id='stocktr"+tnum+"'><td class='contentdiv1_2'>"
+													+qqqq.color+"-"+qqqq.size+"</td><td>"+
+													"<input type='button' value='▲' onclick='up("+tnum+")'>"+
+													"<input type='text' id = 'stack2"+tnum+"' size='1'"+
+													" name = 'count' value='1' onkeydown='keyup("+tnum+")'"+
+													"class='trcount' readonly>"+
+													"<input type='button' value='▼' onclick='down("+tnum+")'>"+
+													"</td><td><input type='hidden' id='stock"+tnum+"'"+
+																"name='stock' value='"+qqqq.stock+"'>"+
+																"<input type='hidden' id='cost"+tnum+"'"+
+																	"name='cost' value='"+qqqq.cost+"'>"+
+														  "<input type='hidden'"+"name='tnum' value='"+tnum+"'>"+
+														  "<input type='hidden'"+"name='color' value='"+qqqq.color+"'>"+
+														  "<input type='hidden'"+"name='size' value='"+qqqq.size+"'>"+
+													"<p class='tcost' id='p"+tnum+"'></p></td>"+
+													"<td><img src='./img/delete.png' onclick='trdel("+tnum+")'></td></tr>");
+												var cost = numberWithCommas(qqqq.cost);
+												$('#p'+tnum).html(cost+"원");
+												totalP();
+											}else{
+												alert('이미 구매리스트에 추가 되어 있는 상품 입니다');
+											}
 										});
 									
 									});
 									}else{alert("닌멍청하다")
 									}
 								});
-							
-								
-								
+							}
+							function trdel(tnum){
+								$('#stocktr'+tnum).remove();
+							}
+							function numberWithCommas(x) {
+							    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+							}
+							function totalP(){
+								var sum = 0;
+								for(var i = 0; i<$('#stocktable').find('.tcost').length; i++){
+									
+									var ints = $('#stocktable .tcost').eq(i).text().replace(",","");
+									ints = ints.replace("원","");
+									sum += parseInt(ints);
+								}
+								$('input:hidden[name=totalcost]').val(sum);
+								$('#p').html(numberWithCommas(sum)+"원");
 							}
 							
 						</script>

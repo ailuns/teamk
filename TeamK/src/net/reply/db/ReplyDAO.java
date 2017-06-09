@@ -54,7 +54,10 @@ public class ReplyDAO {
 		int count = 0;
 		try {
 			conn = getConnection();
-			sql = "select count(*) from reply where reply_type = 3 and group_del=?";
+			sql = "select count(*) from reply where reply_type = 3 and group_del=(select num from pack where subject=(select subject from pack where num=?) group by subject)";
+			
+//			sql = "select * from reply where reply_type = 3 and group_del=(select num from pack where subject=(select subject from pack where num=?) group by subject) order by re_ref desc, re_seq limit ?, ?";
+			
 			pstm = conn.prepareStatement(sql);
 			pstm.setInt(1, num);
 			rs = pstm.executeQuery();
@@ -104,7 +107,9 @@ public class ReplyDAO {
 
 		try {
 			conn = getConnection();
-			sql = "select * from reply where reply_type = 3 and group_del=? order by re_ref desc, re_seq limit ?, ?";
+//			sql = "select * from reply where reply_type = 3 and group_del=? order by re_ref desc, re_seq limit ?, ?";
+			sql = "select * from reply where reply_type = 3 and group_del=(select num from pack where subject=(select subject from pack where num=?) group by subject) order by re_ref desc, re_seq limit ?, ?";
+			
 			pstm = conn.prepareStatement(sql);
 			pstm.setInt(1, num);
 			pstm.setInt(2, start - 1);
