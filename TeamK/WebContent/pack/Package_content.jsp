@@ -893,7 +893,7 @@
 		<div id="package_search">
 			<br><p>내게 맞는 패키지 검색하기</p><br>
 			<form action="./PackSearchAction.po" name="fr" method="get" id="scheduler" onsubmit="return input_chk();">
-				<label for="date_from">출발</label><input type="text" id="date_from" class="input_style" name="startDate"><br><br>
+				<label for="date_from">출발</label><input type="text" id="date_from" class="input_style" name="startDate" readonly><br><br>
 				<label for="city_search">지역</label>
 				<select id="area" name="area">
 					<option value="">선택하세요</option>
