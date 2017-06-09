@@ -1140,11 +1140,10 @@
 		<div id="map_canvas"></div>
 		<!--구글맵 -->
 
-		<!--상품 문의 -->
-		
+		<!--패키지 문의 -->
 		<div id="QnA">
 			<hr>
-			<h3>상품 문의</h3>
+			<h3>패키지 문의</h3>
 			<hr>
 			<div id="middle3">
 			<table border="1" id="replyTable">
