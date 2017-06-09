@@ -60,14 +60,15 @@ function receive_change(num,ra_num){
 </head>
 <body>
 <div id="receive_change">
+<h3>배송지 변경</h3>
 <%if(ribList.size() != 0){
 	for(int i=0; i<ribList.size(); i++){
 		ReceiveInfoBEAN rib = ribList.get(i);%>
 	<input type="hidden" value="<%=rib.getPostcode() %>" id = "postcode<%=rib.getRa_num() %>">
 	<input type="hidden" value="<%=rib.getAddress1() %>" id = "address1<%=rib.getRa_num() %>">
 	<input type="hidden" value="<%=rib.getAddress2() %>" id = "address2<%=rib.getRa_num() %>">
+	<h5><%=i %>번째 배송지</h5>
 	<table>
-	<h3>배송지 변경</h3><br>
 		<tr>
 			<th>이름</th>
 			<td id="name<%=rib.getRa_num()%>"><%=rib.getName() %></td>
