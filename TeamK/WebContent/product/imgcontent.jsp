@@ -966,7 +966,7 @@ if (user_id == null)
 	<div id="wrap"> 
 		<div id="package_head">
 			<div id="article_head">
-		<div id="article_title"><img src="./img/shop.png" width="30px" style="margin-right: 8px; vertical-align: bottom;">상품</div>
+		<div id="article_title"><img src="./img/shop2.png" width="26px" style="margin:0 8px 3px 0;  vertical-align: bottom;">상품</div>
 	<div class="empty"></div>
 	</div>
 			<div id="package_feat">
