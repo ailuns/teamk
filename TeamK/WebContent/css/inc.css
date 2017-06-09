@@ -258,6 +258,7 @@ footer a {
 	color: #333;
 	margin: 0 10px;
 }
+footer a:HOVER {color: #06c;}
 footer div#footer_bar {
 	width: 1000px;
 	background-color: #ccc;
