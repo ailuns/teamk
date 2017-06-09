@@ -18,7 +18,8 @@ a#i:HOVER {color: #06c;}
 span#i{
 	color: red;
 	margin: 0 6px;
-	font-size: 15px;
+	font-size: 20px;
+	font-weight: bold;
 }
 input[type="button"], input[type="submit"] {
 	border: 1px solid #06c;
@@ -203,6 +204,12 @@ div#goods_show {
 	width: 1000px;
 	margin: 0 auto;
 	margin-top: 15px;
+	background-color: #eee;
+}
+div#gdsld {
+	width: 280px;
+	height: 250px;
+	border: 1px solid #fff;
 	background-color: #fff;
 }
 div#goods_show a {
@@ -211,8 +218,8 @@ div#goods_show a {
 }
 div#goods_show a:HOVER {color: #06c;}
 div#goods_show img {
-	height: 150px;
-	margin-top: 10px;
+	height: 170px;
+	max-width: 278px;
 }
 div#review_show {
 	height: 250px;
@@ -437,6 +444,7 @@ div#package_tab .tab_container {
 	min-height: 600px;
 	margin-top : 20px;
 	text-align: center;
+    padding: 26px;
 }
 div#package_tab {margin: 0 auto;}
 div#package_tab .img_size {
@@ -490,12 +498,12 @@ input#admin_write {margin-top : 20px;}
 /* 이미지 정보 부분 */
 #top {
 	width: 960px;
-	height: 450px;
+	min-height: 450px;
 	padding-top : 20px;
 }
 #top_content {
 	width: 928px;
-	height: 400px;
+	min-height: 400px;
 }
 #imgdiv ul {list-style: none;}
 #imgdiv {
@@ -525,7 +533,7 @@ input#admin_write {margin-top : 20px;}
 /* 인원, 가격 정보 부분 */
 #contentdiv1 {
 	width: 400px;
-	height: 400px;
+	min-height: 400px;
  	border: 1px solid #F6F6F6;
 	background-color : white;
 	float: left;
@@ -1457,3 +1465,22 @@ div#category_form form table input,
 div#category_form form table select {
 	width: 150px;
 }
+
+/*Goods Header*/
+div#goods_search form {
+	height: 50px;
+	margin: 10px auto;
+	font-weight: bold;
+	padding-top: 10px;
+}
+div#goods_search form * {font-size: 20px;}
+div#goods_search form input[type="text"] {
+	margin: 0 30px;
+	width: 650px;
+}
+div#goods_search form input[type="submit"] {
+	font-weight: bold;
+	width: 100px;
+}
+
+

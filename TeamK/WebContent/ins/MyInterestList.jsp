@@ -38,7 +38,7 @@ List<interestBEAN> InterestThing = (List<interestBEAN>) request.getAttribute("In
 <div class="empty"></div>
 </div>
 <article>
-		<h3>패키지 찜 리스트</h3><br>
+		<h1 style="color:#06c;">패키지 찜 리스트</h1><br>
 		<div id="packInterest_list">
 		<%
 			if (InterestPack.size() == 0) {
@@ -78,7 +78,7 @@ List<interestBEAN> InterestThing = (List<interestBEAN>) request.getAttribute("In
 			}
 		%><br><br>
 		<hr><br>
-		<h3>상품 찜 리스트</h3><br>
+		<h1 style="color:#06c;">상품 찜 리스트</h1><br>
 
 		<%
 			if (InterestThing.size() == 0) {

@@ -17,6 +17,7 @@
 <script src="./js/jquery-3.2.0.js"></script>
 <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="./js/jssor.slider-24.1.5.min.js" type="text/javascript"></script>
 </head>
 <%	request.setCharacterEncoding("utf-8");
 	ProductBean pb = new ProductBean();
@@ -52,7 +53,7 @@
 	 	int startPage2 = (int) request.getAttribute("startPage2");
 	 	int endPage2 = (int) request.getAttribute("endPage2");
 		String user_id = (String) session.getAttribute("id");
-	
+	 	List ProductImgList = (List)request.getAttribute("ProductImgList");
 
 if (user_id == null)
 	user_id = "";
@@ -335,11 +336,12 @@ if (user_id == null)
 					re_ref:$("#re_ref"+num).val(),
 					re_lev:$("#re_lev").val(),
 					re_seq:$("#re_seq").val(),
-					secretChk:$(".re_secretChk").val(),
-					success:function(){
-						window.location.reload(true);
-					}
-				}				
+					secretChk:$(".re_secretChk").val()
+				
+				},
+			success:function(){
+				window.location.reload(true);
+			}
 			});
 		}
 		else		  // 비밀글 체크 x
@@ -356,10 +358,10 @@ if (user_id == null)
 					re_ref:$("#re_ref"+num).val(),
 					re_lev:$("#re_lev").val(),
 					re_seq:$("#re_seq").val(),
-					secretChk:"0",
-					success:function(){
-						window.location.reload(true);
-					}
+					secretChk:"0"
+				},
+				success:function(){
+					window.location.reload(true);
 				}
 				
 			});
@@ -375,10 +377,10 @@ if (user_id == null)
 			url:"./ContentDeleteAction.bo",
 			data:{
 				num:renum,
-				id:id,				
-				success:function(){
-					window.location.reload(true);
-				}
+				id:id
+			},				
+			success:function(){
+				window.location.reload(true);
 			}
 		});
 	}
@@ -394,11 +396,11 @@ if (user_id == null)
 				data:{
 					content:$("#contentup"+num).val(),
 					num:num,
-					secretChk:$(".up_secretChk"+num).val(),
-					success:function(){
-						window.location.reload(true);
-					}
-				}				
+					secretChk:$(".up_secretChk"+num).val()
+				},
+				success:function(){
+					window.location.reload(true);
+				}			
 			});
 		}
 		
@@ -411,11 +413,11 @@ if (user_id == null)
 				data:{
 					num:num,
 					content:$("#contentup"+num).val(),
-					secretChk:"0",
-					success:function(){
-						window.location.reload(true);
-					}				
-				}
+					secretChk:"0"			
+				},
+				success:function(){
+					window.location.reload(true);
+				}	
 			});
 		}
 	}
@@ -965,25 +967,71 @@ if (user_id == null)
 	<!-- 왼쪽 메뉴 -->
 	<!--여행지 검색창 -->
 	<div id="wrap"> 
-		<div id="package_head">
+		<div id="wrap_pack">
 			<div id="article_head">
 		<div id="article_title"><img src="./img/shop.png" width="30px" style="margin-right: 8px; vertical-align: bottom;">상품</div>
 	<div class="empty"></div>
 	</div>
-			<div id="package_feat">
-		<jsp:include page ="../inc/packSlide.jsp"></jsp:include>
-			<div id="package_search">
-			<p>상품 검색하기</p>
+		<div id="goods_feat">
+		<div id="goods_show">
+			<div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:1000px;height:250px;overflow:hidden;visibility:hidden;">
+        <!-- Loading Screen -->
+        <div data-u="loading" style="position:absolute;top:0px;left:0px;background:url('./img/loading.gif') no-repeat 50% 50%;background-color:rgba(0, 0, 0, 0.7);"></div>
+        <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:1000px;height:250px;overflow:hidden;">
+            <div>
+            	<div id="gdsld">
+                <a href="#"><img src="./img/disk.png" /><br><br>
+                <h2>Name</h2>
+                <h3>￦</h3></a>
+                </div>
+            </div>
+            <div>
+            	<div id="gdsld">
+                <a href="#"><img src="./img/disk.png" /><br><br>
+                <h2>Name</h2>
+                <h3>￦</h3></a>
+                </div>
+            </div>
+            <div>
+            	<div id="gdsld">
+                <a href="#"><img src="./img/disk.png" /><br><br>
+                <h2>Name</h2>
+                <h3>￦</h3></a>
+                </div>
+            </div>
+            <div>
+            	<div id="gdsld">
+                <a href="#"><img src="./img/disk.png" /><br><br>
+                <h2>Name</h2>
+                <h3>￦</h3></a>
+                </div>
+            </div>
+            <div>
+            	<div id="gdsld">
+                <a href="#"><img src="./img/disk.png" /><br><br>
+                <h2>Name</h2>
+                <h3>￦</h3></a>
+                </div>
+            </div>
+            <div>
+            	<div id="gdsld">
+                <a href="#"><img src="./img/disk.png" /><br><br>
+                <h2>Name</h2>
+                <h3>￦</h3></a>
+                </div>
+            </div>
+            <a data-u="any" href="https://wordpress.org/plugins/jssor-slider/" style="display:none">wordpress slider</a>
+        </div>
+    </div>
+    <script type="text/javascript">jssor_1_slider_init();</script>
+		</div>
+		<div id="goods_search">
 			<form action="./ProductSearchAction.bo" name="fr" method="get" id="scheduler" onsubmit="return input_chk();">
-				<label for="date_from">검색명</label><input type="text" id="serch_data" class="input_style" name="serch_data" required="yes"><br><br>
-<!-- 				<label for="date_to">~</label><input type="text" id="date_to" class="input_style" name="endDate"><br><br> -->
-			
-				
+				<label for="date_from">검색명</label><input type="text" id="serch_data" class="input_style" name="serch_data" required="yes">
 				<input type="submit" value="검색" id="search_btn" class="input_style">
 			</form>
 		</div>
 	</div>
-	
 	<div id="clear"></div>
 	<!--여행지 검색창 -->
 	<%
