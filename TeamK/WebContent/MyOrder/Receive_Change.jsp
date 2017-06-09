@@ -67,6 +67,7 @@ function receive_change(num,ra_num){
 	<input type="hidden" value="<%=rib.getAddress1() %>" id = "address1<%=rib.getRa_num() %>">
 	<input type="hidden" value="<%=rib.getAddress2() %>" id = "address2<%=rib.getRa_num() %>">
 	<table>
+	<h3>배송지 변경</h3><br>
 		<tr>
 			<th>이름</th>
 			<td id="name<%=rib.getRa_num()%>"><%=rib.getName() %></td>

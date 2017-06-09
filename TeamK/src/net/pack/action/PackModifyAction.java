@@ -28,8 +28,9 @@ public class PackModifyAction implements Action{
 		MultipartRequest multi=new MultipartRequest(request, realPath,maxSize,"utf-8",new DefaultFileRenamePolicy());
 
 //		int num = Integer.parseInt(request.getParameter("num"));
-		String ori_subject = request.getParameter("ori_subject");
+//		String ori_subject = request.getParameter("ori_subject");
 //		System.out.println("Modify num >> " + num);
+		String ori_subject = multi.getParameter("ori_subject");
 		System.out.println("Modify ori_subject >> " + ori_subject);
 			
 		String subject = multi.getParameter("subject");

@@ -21,7 +21,7 @@ public class PackDateAdd implements Action{
 		String user_id = (String) session.getAttribute("id");
 		if(user_id == null)
 			user_id = "";
-		String subject = request.getParameter("subject");
+//		String subject = request.getParameter("subject");
 		
 		int num = Integer.parseInt(request.getParameter("num"));
 		System.out.println("PackDateAdd num >> " + num);
@@ -31,10 +31,10 @@ public class PackDateAdd implements Action{
 		
 		PackBean pb = pdao.getPack(num);
 		
-		request.setAttribute("pb_up", pb);
+//		request.setAttribute("pb_up", pb);
 		
 		List date_list;
-		date_list = pdao.getPackList(subject, user_id);
+		date_list = pdao.getPackList(pb.getSubject(), user_id);
 		
 		request.setAttribute("date_list", date_list);
 		
