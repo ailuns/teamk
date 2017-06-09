@@ -106,14 +106,11 @@ function receive_setting(){
 		%>
 		<tr>
 			
-			<td><%=pbb.getImg()%>
-				<%if(pbb.getPb_num()!=0){ %><input type="hidden" name="pch" value="<%=pbb.getPb_num() %>">
+			<td id="tr2td1"><img src='./upload/<%=pbb.getImg() %>'></td>
+			<td><%=pbb.getSubject()%><%if(pbb.getPb_num()!=0){ %><input type="hidden" name="pch" value="<%=pbb.getPb_num() %>">
 				<%}else{ %><input type="hidden" name="pnum" value="<%=pbb.getOri_num()%>">
 							<input type="hidden" name="adult" value="<%=countp[0] %>">
-							<input type="hidden" name="child" value="<%=countp[1] %>">
-				<%} %>
-				</td>
-			<td><%=pbb.getSubject()%></td>
+							<input type="hidden" name="child" value="<%=countp[1] %>"><%} %></td>
 			<td><%=pbb.getIntro()%></td>
 			<td><%=countp[0]%>,<%=countp[1]%></td>
 			<td><%=pbb.getCost()%></td>
@@ -141,17 +138,14 @@ function receive_setting(){
 					thing_cost_sum+=tbb.getCost();
 		%>
 		<tr>
-			<td><%=tbb.getImg()%>
+			<td id="tr2td1"><img src='./upload/<%=tbb.getImg() %>'></td>
+			<td><%=tbb.getSubject()%>
 				<%if(tbb.getNum()!=0){ %><input type="hidden" name="tch" value="<%=tbb.getNum() %>">
 				<%}else{ %><input type="hidden" name="tnum" value="<%=tbb.getOri_num()%>">
 							<input type="hidden" name="count" value="<%=tbb.getCount() %>">
 							<input type="hidden" name="color" value="<%=tbb.getColor() %>">
 							<input type="hidden" name="size" value="<%=tbb.getSize() %>">
-							<input type="hidden" name="cost" value="<%=tbb.getCost() %>">
-							
-				<%} %>
-				</td>
-			<td><%=tbb.getSubject()%></td>
+							<input type="hidden" name="cost" value="<%=tbb.getCost() %>"><%} %></td>
 			<td><%=tbb.getIntro()%></td>
 			<td><%=tbb.getColor()%></td>
 			<td><%=tbb.getSize()%></td>

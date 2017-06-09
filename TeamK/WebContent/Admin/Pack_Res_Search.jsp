@@ -152,7 +152,7 @@ function search_check(){
 <%-- 						<%} %> --%>
 					</tr>
 					<tr>
-						<td><%=mtib.getImg() %></td>
+						<td id="tr2td1"><img src='./upload/<%=mtib.getImg() %>'></td>
 						<td><%=mtib.getSubject() %></td>
 						<td><%=mtib.getIntro() %></td>
 					</tr>

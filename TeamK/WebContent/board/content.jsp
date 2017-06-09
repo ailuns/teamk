@@ -78,7 +78,7 @@ int num = Integer.parseInt(request.getParameter("num"));
  <td id="readcount">조회수:<%=bb.getReadcount()%></td>
 </tr>
 <tr>
- <td colspan="2" id="subject"><%=bb.getSubject()%></td>
+ <td colspan="2" id="subject">[<%=bb.getType_select()%>] <%=bb.getSubject()%></td>
  <td id="id"><%=bb.getId()%></td>
 </tr>
 <tr>

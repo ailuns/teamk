@@ -105,7 +105,7 @@ function Trade_Update_Info(o_num) {
 				
 				%>
 				<tr>
-					<td class="tr1td1"><%=mtb.getImg() %></td>
+					<td class="tr1td1" id="tr2td1"><img src='./upload/<%=mtb.getImg() %>'></td>
 					<td class="tr1td2"><b><%=mtb.getSubject() %></b><br>
 						<%=mtb.getIntro() %></td>
 					<td class="tr1td3"><%=mtb.getColor() %> / <%=mtb.getSize() %></td>

@@ -24,7 +24,7 @@ public class MyOrderAddAction implements Action{
 		String []tch = request.getParameterValues("tch");
 		String []pch=request.getParameterValues("pch");
 		String pnum = request.getParameter("pnum");
-		String tnum = request.getParameter("tnum");
+		String [] tnum = request.getParameterValues("tnum");
 		int to_null_check = 0;
 		if(tch==null&&tnum==null)to_null_check=1;
 		ModTradeInfoBEAN mtib = new ModTradeInfoBEAN();
@@ -80,7 +80,8 @@ public class MyOrderAddAction implements Action{
 		mtib=moddao.CreateTradeInfo(mtib);
 		if(status==9)mtib.setStatus(2);
 		if(tch!=null){
-			for(int i = 0; i<tch.length;i++){
+			int length = tch.length;
+			for(int i = 0; i<length;i++){
 				mtib=moddao.TBasketInfoToMTIB(Integer.parseInt(tch[i]),mtib);
 				mtib=moddao.Thing_Stock_Check(mtib.getOri_num(), mtib);
 				if(mtib.getStock_check()==1){
@@ -93,12 +94,15 @@ public class MyOrderAddAction implements Action{
 					out.println("history.back();");
 					out.println("</script>");
 					out.close();
-				}else {
-					mtib.setStock(mtib.getStock()-mtib.getThing_count());
-					moddao.Mul_Thing_Stock(mtib);
-					moddao.InsertThingOrder(mtib);
-					bnsdao.ThingBasketDelete(Integer.parseInt(tch[i]));
 				}
+			}
+			for(int i = 0; i<length;i++){
+				mtib=moddao.TBasketInfoToMTIB(Integer.parseInt(tch[i]),mtib);
+				mtib=moddao.Thing_Stock_Check(mtib.getOri_num(), mtib);
+				mtib.setStock(mtib.getStock()-mtib.getThing_count());
+				moddao.Mul_Thing_Stock(mtib);
+				moddao.InsertThingOrder(mtib);
+				bnsdao.ThingBasketDelete(Integer.parseInt(tch[i]));
 			}
 		}
 		
@@ -145,24 +149,35 @@ public class MyOrderAddAction implements Action{
 		}
 
 		if(tnum!=null){
-			System.out.println(tnum);
-			mtib.setOri_num(Integer.parseInt(tnum));
-			mtib.setThing_count(Integer.parseInt(request.getParameter("count")));
-			mtib.setColor(request.getParameter("color"));
-			mtib.setSize(request.getParameter("size"));
-			mtib.setCost(Integer.parseInt(request.getParameter("cost")));
-			mtib=moddao.Thing_Stock_Check(mtib.getOri_num(), mtib);
-			if(mtib.getStock_check()==1){
-				out.println("<script>");
-				out.println("alert('죄송합니다. \\n"
-						+mtib.getSubject()+", 색상 : "+mtib.getColor()+
-						", 사이즈 : "+mtib.getSize()+"의 재고가 "+mtib.getStock()+
-						"개 밖에 남아 있지 않아 결제가 진행되지 않았습니다!\\n"+
-						"주문 수량을 변경해 주시기 바랍니다.');");
-				out.println("history.back();");
-				out.println("</script>");
-				out.close();
-			}else {
+			String [] color = request.getParameterValues("color");
+			String [] cost = request.getParameterValues("cost");
+			String [] size = request.getParameterValues("size");
+			String [] count = request.getParameterValues("count");
+			int length = tnum.length;
+			for(int i=0; i<length; i++){
+				mtib.setOri_num(Integer.parseInt(tnum[i]));
+				mtib.setThing_count(Integer.parseInt(count[i]));
+				mtib=moddao.Thing_Stock_Check(mtib.getOri_num(), mtib);
+				if(mtib.getStock_check()==1){
+					out.println("<script>");
+					out.println("alert('죄송합니다. \\n"
+							+mtib.getSubject()+", 색상 : "+mtib.getColor()+
+							", 사이즈 : "+mtib.getSize()+"의 재고가 "+mtib.getStock()+
+							"개 밖에 남아 있지 않아 결제가 진행되지 않았습니다!\\n"+
+							"주문 수량을 변경해 주시기 바랍니다.');");
+					out.println("history.back();");
+					out.println("</script>");
+					out.close();
+				}
+			
+			}
+			for(int i=0;i<length;i++){
+				mtib.setOri_num(Integer.parseInt(tnum[i]));
+				mtib.setThing_count(Integer.parseInt(count[i]));
+				mtib=moddao.Thing_Stock_Check(mtib.getOri_num(), mtib);
+				mtib.setColor(color[i]);
+				mtib.setSize(size[i]);
+				mtib.setCost(Integer.parseInt(cost[i]));
 				mtib.setStock(mtib.getStock()-mtib.getThing_count());
 				moddao.Mul_Thing_Stock(mtib);
 				moddao.InsertThingOrder(mtib);
