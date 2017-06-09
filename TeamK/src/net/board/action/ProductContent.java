@@ -64,6 +64,8 @@ public class ProductContent implements Action {
 		pb= pdao.getProduct(num);
 		
 		
+		List ProductImgList = pdao.getProductImgList();
+		request.setAttribute("ProductImgList", ProductImgList);
 		
 		List RecommendPack = null;
 		RecommendPack = pddao.getRecommendProduct(pb.getType());

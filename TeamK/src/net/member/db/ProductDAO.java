@@ -1,4 +1,5 @@
 package net.member.db;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -13,53 +14,49 @@ import javax.sql.DataSource;
 
 import net.pack.db.PackBean;
 
-
 public class ProductDAO {
 
-	
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
-	
+
 	private Connection getConnection() throws Exception {
-		/*String url = "jdbc:mysql://localhost:3306/jspdb2";
-		String id2 = "jspid";
-		String pwd = "jsppass";
-		Class.forName("com.mysql.jdbc.Driver");
-		Connection con = null;
-		con = DriverManager.getConnection(url, id2, pwd);
-		return con;*/
-		
-		//케넥션 풀(connection Pool)
-		//데이터베이스와 연결된 Connection 객체를 미리 생성하여
-		//풀(pool)속에 저장해 두고 필요할때마다 이 풀을 접근하여 Connection 객체 사용
+		/*
+		 * String url = "jdbc:mysql://localhost:3306/jspdb2"; String id2 =
+		 * "jspid"; String pwd = "jsppass";
+		 * Class.forName("com.mysql.jdbc.Driver"); Connection con = null; con =
+		 * DriverManager.getConnection(url, id2, pwd); return con;
+		 */
+
+		// 케넥션 풀(connection Pool)
+		// 데이터베이스와 연결된 Connection 객체를 미리 생성하여
+		// 풀(pool)속에 저장해 두고 필요할때마다 이 풀을 접근하여 Connection 객체 사용
 		// 작업이 끝나면 다시 반환
-		
+
 		// 자카르타 DBCP API 이용한 커넥션 풀
 		// http://commons.apache.org/ 다운
 		// WebContent - WEB-INF - lib
-		//commons-collections-3.2.1.jar
-		//commons-dbcp-1.4.jar
-		//commons-pool-1.6.jar
+		// commons-collections-3.2.1.jar
+		// commons-dbcp-1.4.jar
+		// commons-pool-1.6.jar
 		// 아파치톰캣 7.0이상부턴 안넣어줘도 된다.
-		
-		//1. WebContent  - META-INF - context.xml 만들기
-		//  1단계 , 2단계 기술 -> 이름정의
-		//2. WebContent - WEB_INF - web.xml 수정
+
+		// 1. WebContent - META-INF - context.xml 만들기
+		// 1단계 , 2단계 기술 -> 이름정의
+		// 2. WebContent - WEB_INF - web.xml 수정
 		// context.xml 에 디비연동 해놓은 이름을 모든 페이지에 알려줌
 		// 3. DB작업(DAO) - 사용
-		
-		//Context 객체 생성
+
+		// Context 객체 생성
 		// DataSource = 디비연동 이름 불러오기
 		// con = DataSource
 		Connection con = null;
 		Context init = new InitialContext();
-		DataSource ds = (DataSource)init.lookup("java:comp/env/jdbc/mysqlDB");
-		con= ds.getConnection();
+		DataSource ds = (DataSource) init.lookup("java:comp/env/jdbc/mysqlDB");
+		con = ds.getConnection();
 		return con;
-		
-		
+
 	}
-	
+
 	public List getProdcutList3(int a) {
 		Connection con = null;
 		String sql = "";
@@ -68,7 +65,7 @@ public class ProductDAO {
 		String name = "";
 		List productList = new ArrayList();
 		try {
-			//1,2 디비연결 메서드호출
+			// 1,2 디비연결 메서드호출
 			// 3 sql 객체 생성
 			// 4 rs실행저장
 			// rs while 데이터 이씅면
@@ -77,14 +74,14 @@ public class ProductDAO {
 			// bb 게시판 글 하나 => 저장
 			con = getConnection();
 			sql = "select name from thing where num=?";
-			pstmt =con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, a);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				name = rs.getString(1);
 			}
 			sql = "select num, name,color,size,stock,car_num from thing where name=? order by num";
-			pstmt =con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, name);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -97,7 +94,8 @@ public class ProductDAO {
 				pb.setStock(rs.getInt("stock"));
 				pb.setCar_num(rs.getInt("car_num"));
 				productList.add(pb);
-		} }catch (Exception e) {
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			if (rs != null) {
@@ -121,15 +119,15 @@ public class ProductDAO {
 		}
 		return productList;
 	}
-	
-	public List getProdcutSerchList(int startRow, int pageSize,String serch_data) {
+
+	public List getProdcutSerchList(int startRow, int pageSize, String serch_data) {
 		Connection con = null;
 		String sql = "";
 		ResultSet rs = null;
 		int count = 0;
 		List productList = new ArrayList();
 		try {
-			//1,2 디비연결 메서드호출
+			// 1,2 디비연결 메서드호출
 			// 3 sql 객체 생성
 			// 4 rs실행저장
 			// rs while 데이터 이씅면
@@ -138,10 +136,10 @@ public class ProductDAO {
 			// bb 게시판 글 하나 => 저장
 			con = getConnection();
 			sql = "select * from thing where subject like ? || name like ? group by name order by num desc,num limit ?,? ";
-			pstmt =con.prepareStatement(sql);
-			pstmt.setString(1, "%"+serch_data+"%");
-			pstmt.setString(2, "%"+serch_data+"%");
-			pstmt.setInt(3, startRow-1);//시작행-1
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%" + serch_data + "%");
+			pstmt.setString(2, "%" + serch_data + "%");
+			pstmt.setInt(3, startRow - 1);// 시작행-1
 			pstmt.setInt(4, pageSize);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -159,7 +157,8 @@ public class ProductDAO {
 				pb.setImg(rs.getString("img"));
 				pb.setCar_num(rs.getInt("car_num"));
 				productList.add(pb);
-		} }catch (Exception e) {
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			if (rs != null) {
@@ -183,46 +182,43 @@ public class ProductDAO {
 		}
 		return productList;
 	}
-	
-	
-	
-	
-	public ProductBean getProduct(int num){
+
+	public ProductBean getProduct(int num) {
 		ProductBean pb = null;
 		Connection con = null;
 		String sql = "";
 		ResultSet rs = null;
 		try {
-			//1,2 디비연결 메서드 호출
+			// 1,2 디비연결 메서드 호출
 			// 3 sql객체 생성 조건num값에 해당하는 게시판글 전체 가져오기
 			// 4 rs = 실행저장
 			// 5 rs 데이터 있으면 자바빈 bb
 			con = getConnection();
 			sql = "select * from thing where num = ?  ";
-			pstmt =  con.prepareStatement(sql);
-			pstmt.setInt(1, num);//시작행-1
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);// 시작행-1
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-			pb = new ProductBean();
-			pb.setNum(rs.getInt("num"));
-			pb.setName(rs.getString("name"));
-			pb.setSubject(rs.getString("subject"));
-			pb.setIntro(rs.getString("intro"));
-			pb.setContent(rs.getString("content"));
-			pb.setReadcount(rs.getInt("readcount"));
-			pb.setColor(rs.getString("color"));
-			pb.setSize(rs.getString("size"));
-			pb.setCar_num(rs.getInt("car_num"));
-			pb.setType(rs.getString("type"));
-			pb.setCost(rs.getInt("cost"));
-			pb.setCountry(rs.getString("country"));
-			pb.setArea(rs.getString("area"));
-			pb.setStock(rs.getInt("stock"));
-			pb.setImg(rs.getString("img"));
-			pb.setImg2(rs.getString("img2"));
-			pb.setImg3(rs.getString("img3"));
-			pb.setImg4(rs.getString("img4"));
-			pb.setImg5(rs.getString("img5"));
+				pb = new ProductBean();
+				pb.setNum(rs.getInt("num"));
+				pb.setName(rs.getString("name"));
+				pb.setSubject(rs.getString("subject"));
+				pb.setIntro(rs.getString("intro"));
+				pb.setContent(rs.getString("content"));
+				pb.setReadcount(rs.getInt("readcount"));
+				pb.setColor(rs.getString("color"));
+				pb.setSize(rs.getString("size"));
+				pb.setCar_num(rs.getInt("car_num"));
+				pb.setType(rs.getString("type"));
+				pb.setCost(rs.getInt("cost"));
+				pb.setCountry(rs.getString("country"));
+				pb.setArea(rs.getString("area"));
+				pb.setStock(rs.getInt("stock"));
+				pb.setImg(rs.getString("img"));
+				pb.setImg2(rs.getString("img2"));
+				pb.setImg3(rs.getString("img3"));
+				pb.setImg4(rs.getString("img4"));
+				pb.setImg5(rs.getString("img5"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -248,7 +244,6 @@ public class ProductDAO {
 		}
 		return pb;
 	}
-	
 
 	public int deleteProduct(int num) {
 		Connection con = null;
@@ -286,10 +281,7 @@ public class ProductDAO {
 		}
 		return -1;
 	}
-	
-	
-	
-	
+
 	public void insertProduct(ProductBean pb) {
 		// 1단계 드라이버로더
 		// 2단계 디비연결
@@ -301,21 +293,21 @@ public class ProductDAO {
 		try {
 			con = getConnection();
 			sql = "select max(num) from thing ";
-			pstmt =  con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				num = rs.getInt(1) + 1;
 			}
-			
+
 			sql = "insert into thing(num,name,subject,intro,content,color,size,car_num,type,cost,readcount,country,area,stock,img,img2,img3,img4,img5) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
-			pstmt =  con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.setString(2, pb.getName());
 			pstmt.setString(3, pb.getSubject());
 			pstmt.setString(4, pb.getIntro());
 			pstmt.setString(5, pb.getContent());
 			pstmt.setString(6, pb.getColor());
-			pstmt.setString(7, pb.getSize()); 
+			pstmt.setString(7, pb.getSize());
 			pstmt.setInt(8, pb.getCar_num());
 			pstmt.setString(9, pb.getType());
 			pstmt.setInt(10, pb.getCost());
@@ -357,20 +349,21 @@ public class ProductDAO {
 		}
 
 	}
+
 	public void UpdateReadcount(int num) {
-		
+
 		Connection con = null;
 		String sql = "";
 		ResultSet rs = null;
 		try {
 			con = getConnection();
 			sql = "UPDATE thing SET readcount=readcount+1 where NUM=?";
-			pstmt =con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.executeUpdate();
-			
-		}catch(Exception e) {
-		}finally {
+
+		} catch (Exception e) {
+		} finally {
 			if (rs != null) {
 				try {
 					rs.close();
@@ -391,15 +384,15 @@ public class ProductDAO {
 			}
 		}
 	}
-	
-	public List getProdcutList(int startRow, int pageSize,int a) {
+
+	public List getProdcutList(int startRow, int pageSize, int a) {
 		Connection con = null;
 		String sql = "";
 		ResultSet rs = null;
 		int count = 0;
 		List productList = new ArrayList();
 		try {
-			//1,2 디비연결 메서드호출
+			// 1,2 디비연결 메서드호출
 			// 3 sql 객체 생성
 			// 4 rs실행저장
 			// rs while 데이터 이씅면
@@ -408,9 +401,9 @@ public class ProductDAO {
 			// bb 게시판 글 하나 => 저장
 			con = getConnection();
 			sql = "select * from thing where car_num = ? group by name order by num desc,num limit ?,? ";
-			pstmt =con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, a);
-			pstmt.setInt(2, startRow-1);//시작행-1
+			pstmt.setInt(2, startRow - 1);// 시작행-1
 			pstmt.setInt(3, pageSize);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -429,7 +422,8 @@ public class ProductDAO {
 				pb.setImg(rs.getString("img"));
 				pb.setCar_num(rs.getInt("car_num"));
 				productList.add(pb);
-		} }catch (Exception e) {
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			if (rs != null) {
@@ -453,7 +447,8 @@ public class ProductDAO {
 		}
 		return productList;
 	}
-	public List getProdcutList(int startRow, int pageSize,int a,int b) {
+
+	public List getProdcutList(int startRow, int pageSize, int a, int b) {
 		System.out.println(startRow);
 		Connection con = null;
 		String sql = "";
@@ -461,7 +456,7 @@ public class ProductDAO {
 		int count = 0;
 		List productList = new ArrayList();
 		try {
-			//1,2 디비연결 메서드호출
+			// 1,2 디비연결 메서드호출
 			// 3 sql 객체 생성
 			// 4 rs실행저장
 			// rs while 데이터 이씅면
@@ -470,10 +465,10 @@ public class ProductDAO {
 			// bb 게시판 글 하나 => 저장
 			con = getConnection();
 			sql = "select * from thing where car_num = ? && num = ? group by name order by num desc ,num limit ?,? ";
-			pstmt =con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, a);
 			pstmt.setInt(2, b);
-			pstmt.setInt(3, startRow-1);//시작행-1
+			pstmt.setInt(3, startRow - 1);// 시작행-1
 			pstmt.setInt(4, pageSize);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -496,7 +491,8 @@ public class ProductDAO {
 				pb.setImg5(rs.getString("img5"));
 				pb.setCar_num(rs.getInt("car_num"));
 				productList.add(pb);
-		} }catch (Exception e) {
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			if (rs != null) {
@@ -520,9 +516,7 @@ public class ProductDAO {
 		}
 		return productList;
 	}
-	
-	
-	
+
 	public List getProdcutList(int a) {
 		Connection con = null;
 		String sql = "";
@@ -531,7 +525,7 @@ public class ProductDAO {
 		String name = "";
 		List productList3 = new ArrayList();
 		try {
-			//1,2 디비연결 메서드호출
+			// 1,2 디비연결 메서드호출
 			// 3 sql 객체 생성
 			// 4 rs실행저장
 			// rs while 데이터 이씅면
@@ -540,21 +534,22 @@ public class ProductDAO {
 			// bb 게시판 글 하나 => 저장
 			con = getConnection();
 			sql = "select name from thing where num=?";
-			pstmt =con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, a);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				name = rs.getString(1);
 			}
 			sql = "select color from thing where name=? group by color";
-			pstmt =con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, name);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				ProductBean pb = new ProductBean();
 				pb.setColor(rs.getString("color"));
 				productList3.add(pb);
-		} }catch (Exception e) {
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			if (rs != null) {
@@ -578,7 +573,7 @@ public class ProductDAO {
 		}
 		return productList3;
 	}
-	
+
 	public List getProdcutList2() {
 		Connection con = null;
 		String sql = "";
@@ -586,7 +581,7 @@ public class ProductDAO {
 		int count = 0;
 		List productList = new ArrayList();
 		try {
-			//1,2 디비연결 메서드호출
+			// 1,2 디비연결 메서드호출
 			// 3 sql 객체 생성
 			// 4 rs실행저장
 			// rs while 데이터 이씅면
@@ -595,13 +590,14 @@ public class ProductDAO {
 			// bb 게시판 글 하나 => 저장
 			con = getConnection();
 			sql = "select distinct name from thing";
-			pstmt =con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				ProductBean pb = new ProductBean();
 				pb.setName(rs.getString("name"));
 				productList.add(pb);
-		} }catch (Exception e) {
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			if (rs != null) {
@@ -625,10 +621,7 @@ public class ProductDAO {
 		}
 		return productList;
 	}
-	
-	
-	
-	
+
 	public int getProductCount(int a) {
 		Connection con = null;
 		String sql = "";
@@ -637,7 +630,7 @@ public class ProductDAO {
 		try {
 			con = getConnection();
 			sql = "select count(*) from thing where car_num= ?  ";
-			pstmt =  con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, a);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
@@ -672,7 +665,6 @@ public class ProductDAO {
 
 		return count;
 	}
-	
 
 	public int getProductSerchCount(String serch_data) {
 		Connection con = null;
@@ -682,9 +674,9 @@ public class ProductDAO {
 		try {
 			con = getConnection();
 			sql = "select count(distinct(name)) from thing where subject like ? || name like ? ";
-			pstmt =  con.prepareStatement(sql);
-			pstmt.setString(1, "%"+serch_data+"%");
-			pstmt.setString(2, "%"+serch_data+"%");
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%" + serch_data + "%");
+			pstmt.setString(2, "%" + serch_data + "%");
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				serch_count = rs.getInt(1);
@@ -718,7 +710,6 @@ public class ProductDAO {
 
 		return serch_count;
 	}
-	
 
 	public int ProductAddChk(String name, String color, String size) {
 		Connection con = null;
@@ -733,12 +724,11 @@ public class ProductDAO {
 			pstmt.setString(2, color);
 			pstmt.setString(3, size);
 			rs = pstmt.executeQuery();
-			
-			if (rs.next())
-			{
+
+			if (rs.next()) {
 				return 1;
 			}
-			
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -762,22 +752,21 @@ public class ProductDAO {
 		}
 		return 0;
 	}
-	
+
 	public int updateProduct(ProductBean pb) {
 		Connection con = null;
 		String sql = "";
 		ResultSet rs = null;
-		try 
-		{
+		try {
 			con = getConnection();
-			
+
 			sql = "update thing set color=?, size=?, stock=?  where num=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, pb.getColor());
 			pstmt.setString(2, pb.getSize());
 			pstmt.setInt(3, pb.getStock());
 			pstmt.setInt(4, pb.getNum());
-					
+
 			pstmt.executeUpdate();
 
 		} catch (Exception e) {
@@ -805,32 +794,32 @@ public class ProductDAO {
 		}
 		return 0; // 글번호 없음
 	}
-	
-	public void UpdateProduct(ProductBean pb ,String backname) {
+
+	public void UpdateProduct(ProductBean pb, String backname) {
 		// 1단계 드라이버로더
 		// 2단계 디비연결
 		// 3단게 sql 객체 생성
 		Connection con = null;
 		String sql = "";
 		ResultSet rs = null;
-		String car_name="";
+		String car_name = "";
 		try {
 
 			con = getConnection();
 			sql = "select car_name from category where car_num = ?";
-			pstmt =  con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, pb.getCar_num());
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				car_name = rs.getString(1);
 			}
 			sql = "update thing set stock = ? where color = ?  and size = ?";
-			pstmt =  con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, pb.getStock());
 			pstmt.setString(2, pb.getColor());
 			pstmt.setString(3, pb.getSize());
 			pstmt.executeUpdate();
-			
+
 			sql = "update thing set name =? , subject = ? , intro = ? , content = ?, car_num=?, type=? , cost = ? , country = ? , area = ? , img =? , img2 =? , img3 =? , img4=? , img5=?   WHERE  num = ? ";
 			pstmt = (PreparedStatement) con.prepareStatement(sql);
 			// ? 값 저장 // 첫번째 물음표1, id에 입력될값
@@ -850,7 +839,7 @@ public class ProductDAO {
 			pstmt.setString(14, pb.getImg5());
 			pstmt.setInt(15, pb.getNum());
 			pstmt.executeUpdate();
-			
+
 			sql = "update thing set name =? , subject = ? , intro = ? , car_num=?, type=? , cost = ? , country = ? , area = ? , img =? , img2 =? , img3 =? , img4=? , img5=?   WHERE  name = ? ";
 			pstmt = (PreparedStatement) con.prepareStatement(sql);
 			// ? 값 저장 // 첫번째 물음표1, id에 입력될값
@@ -869,7 +858,7 @@ public class ProductDAO {
 			pstmt.setString(13, pb.getImg5());
 			pstmt.setString(14, backname);
 			pstmt.executeUpdate();
-			
+
 			// 4단계 실행
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -892,16 +881,25 @@ public class ProductDAO {
 		}
 
 	}
-	
-	
-	public List getProductAddList(String name) {
+
+	public List getProductAddList(int num) {
 		Connection con = null;
 		String sql = "";
 		ResultSet rs = null;
+		String name ="";
 		int count = 0;
 		List productaddList = new ArrayList();
 		try {
 			con = getConnection();
+			sql = "select name from thing where num = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				name = rs.getString(1);
+			}
+			
+			
 			sql = "select * from thing where name=? order by color";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, name);
@@ -928,7 +926,7 @@ public class ProductDAO {
 				pb.setImg3(rs.getString("img3"));
 				pb.setImg4(rs.getString("img4"));
 				pb.setImg5(rs.getString("img5"));
-				
+
 				productaddList.add(pb);
 			}
 
@@ -967,9 +965,7 @@ public class ProductDAO {
 
 		return productaddList;
 	}
-	
 
-	
 	public List getRecommendProduct(String type) {
 		Connection con = null;
 		String sql = "";
@@ -978,10 +974,10 @@ public class ProductDAO {
 		try {
 			con = getConnection();
 			sql = "select num, car_num, name, subject, cost, type, stock, img from thing where type=? and stock > 0 group by subject order by rand() limit 0, 3";
-			
-			pstmt =con.prepareStatement(sql);
+
+			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, type);
-			
+
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				ProductBean pdb = new ProductBean();
@@ -993,12 +989,10 @@ public class ProductDAO {
 				pdb.setType(rs.getString("type"));
 				pdb.setStock(rs.getInt("stock"));
 				pdb.setImg(rs.getString("img"));
-				
+
 				productList.add(pdb);
-			} 
-		}
-		catch (Exception e) 
-		{
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			if (rs != null) {
@@ -1023,7 +1017,6 @@ public class ProductDAO {
 		return productList;
 	}
 
-	
 	public List getProductImgList() {
 		Connection con = null;
 		String sql = "";
@@ -1032,8 +1025,8 @@ public class ProductDAO {
 		try {
 			con = getConnection();
 			sql = "select num, car_num, name, subject, cost, type, readcount, stock, img from thing group by name order by rand() limit 0, 6";
-			pstmt =con.prepareStatement(sql);
-			
+			pstmt = con.prepareStatement(sql);
+
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				ProductBean pdb = new ProductBean();
@@ -1046,12 +1039,10 @@ public class ProductDAO {
 				pdb.setReadcount(rs.getInt("readcount"));
 				pdb.setStock(rs.getInt("stock"));
 				pdb.setImg(rs.getString("img"));
-				
+
 				productList.add(pdb);
-			} 
-		}
-		catch (Exception e) 
-		{
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			if (rs != null) {
@@ -1076,5 +1067,4 @@ public class ProductDAO {
 		return productList;
 	}
 
-	
 }

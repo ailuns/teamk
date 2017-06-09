@@ -48,6 +48,9 @@ public class Productlist implements Action {
 			productList = pdao.getProdcutList(startRow, pageSize,Integer.parseInt(car_num));
 		}
 		
+		List ProductImgList = pdao.getProductImgList();
+		request.setAttribute("ProductImgList", ProductImgList);
+		
 		int pageCount = count/pageSize+(count%pageSize==0?0:1); // 삼항연산자를 써서 나머지 부분을 0과 1을 구한다
 		//한화면에 보여줄 페이지 번호 개수
 		int pageBlock=10;

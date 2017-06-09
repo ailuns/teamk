@@ -41,7 +41,8 @@ public class ProductSearchAction implements Action {
 		if(serch_count!=0){
 			productSerchList = pdao.getProdcutSerchList(startRow, pageSize,serch_data);
 		}
-		
+		List ProductImgList = pdao.getProductImgList();
+		request.setAttribute("ProductImgList", ProductImgList);
 		int pageCount = serch_count/pageSize+(serch_count%pageSize==0?0:1); // 삼항연산자를 써서 나머지 부분을 0과 1을 구한다
 		//한화면에 보여줄 페이지 번호 개수
 		int pageBlock=10;

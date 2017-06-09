@@ -39,13 +39,11 @@
 					<th>카테고리</th>
 					<td><select name="car_pt">
 							<option value="">선택하세요</option>
-							<option value="T">T</option>
-							<option value="P">P</option>
+							<option value="T">T (상품 페이지)</option>
+							<option value="P">P (패키지 페이지)</option>
 					</select></td>
 				</tr>
-				<tr>
-					<td colspan="2">T는 상품 페이지, P는 패키지 페이지입니다.</td>	
-				</tr>
+				
 			</table>
 			<input type="submit" id="save" value="등록">
 			<input type="button" value="취소" onclick="history.back()">

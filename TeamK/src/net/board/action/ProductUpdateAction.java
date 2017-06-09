@@ -48,7 +48,7 @@ System.out.println("ProductUpdateAction excute()");
 		//한글처리
 		String pageNum= request.getParameter("pageNum");
 		int num = Integer.parseInt(multi.getParameter("num"));
-		String backname= request.getParameter("name");
+		String backname= multi.getParameter("backname");
 
 		//자바빈 파일 만들기 패키지 board 파일이름 BoardBean
 		ProductBean pb = new ProductBean();
