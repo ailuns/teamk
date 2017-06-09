@@ -47,6 +47,7 @@
 	int endPage = ((Integer)request.getAttribute("endPage")).intValue();
 	int currentPage = ((Integer)request.getAttribute("currentPage")).intValue();
 	int pagesize = ((Integer)request.getAttribute("pagesize")).intValue();
+	int pNum = Integer.parseInt(repageNum);
 %>
 <body>
 <script>
@@ -258,11 +259,11 @@
 					re_ref:$("#re_ref"+num).val(),
 					re_lev:$("#re_lev").val(),
 					re_seq:$("#re_seq").val(),
-					secretChk:$(".re_secretChk").val(),
-					success:function(){
-						window.location.reload(true);
-					}
-				}				
+					secretChk:$(".re_secretChk").val()
+				},
+				success:function(){
+					window.location.reload(true);
+				}
 			});
 		}
 		else		  // 비밀글 체크 x
@@ -279,12 +280,11 @@
 					re_ref:$("#re_ref"+num).val(),
 					re_lev:$("#re_lev").val(),
 					re_seq:$("#re_seq").val(),
-					secretChk:"0",
-					success:function(){
-						window.location.reload(true);
-					}
+					secretChk:"0"
+				},
+				success:function(){
+					window.location.reload(true);
 				}
-				
 			});
 		}
 	}
@@ -297,10 +297,10 @@
 			url:"./ReplyDelAction.ro",
 			data:{
 				renum:renum,
-				id:id,				
-				success:function(){
-					window.location.reload(true);
-				}
+				id:id
+			},				
+			success:function(){
+				window.location.reload(true);
 			}
 		});
 	}
@@ -308,6 +308,7 @@
 	// 댓글 수정
 	function reUpdateAction(num)
 	{
+// 		alert(num);
 		if($(".up_secretChk"+num).is(":checked"))
 		{
 			$.ajax({
@@ -316,11 +317,11 @@
 				data:{
 					content:$("#contentup"+num).val(),
 					num:num,
-					secretChk:$(".up_secretChk"+num).val(),
-					success:function(){
-						window.location.reload(true);
-					}
-				}				
+					secretChk:$(".up_secretChk"+num).val()
+				},
+				success:function(){
+					window.location.reload(true);
+				}			
 			});
 		}
 		
@@ -332,10 +333,10 @@
 				data:{
 					num:num,
 					content:$("#contentup"+num).val(),
-					secretChk:"0",
-					success:function(){
-						window.location.reload(true);
-					}				
+					secretChk:"0"				
+				},
+				success:function(){
+					window.location.reload(true);
 				}
 			});
 		}
@@ -433,7 +434,7 @@
 		            	
 		            	// 말풍선에 넣을 이미지 및 문구 설정
 		            	var imgurl = photos[0].getUrl({'maxWidth': 150, 'maxHeight': 150});
-		            	var contentString = "<table border='1'><tr><td rowspan='2'><img style='width:100px; height:100px' src=" + imgurl + "></td><td><p style='text-align: center;'>" + place.name + "</p></td></tr>"
+		            	var contentString = "<table><tr><td rowspan='2'><img style='width:100px; height:100px' src=" + imgurl + "></td><td><p style='text-align: center;'>" + place.name + "</p></td></tr>"
 		            	 + "<tr><td><p style='text-align: center;'>" + place.formatted_address + "</p></td></tr></table>";
 						
 						var infowindow1 = new google.maps.InfoWindow({ content: contentString});
@@ -928,7 +929,6 @@
 		%>
 			<input type="button" value="날짜편집" onclick="winOpen(<%=PB.getNum() %>);">
 			<input type="button" value="상품내용수정" onclick="location.href='PackModify.po?num=<%=PB.getNum() %>'">
-<%-- 			<input type="button" value="상품삭제" onclick="location.href='PackDeleteAction.po?num=<%=PB.getNum() %>'"> --%>
 		<%
 			}
 		}
@@ -1127,7 +1127,7 @@
 		<!--구글맵 제어할 버튼 부분 -->
 		<div id="middle2">
 			<hr>
-			<h3 id="sub"><%=PB.getCity()%> <%=PB.getSarea()%></h3>
+			<div id="pack_btn"><h3 id="sub"><br><%=PB.getCity()%> <%=PB.getSarea()%></h3></div>
 			<hr>
 			<br><br>
 			<input type="button" id="btn1" value="관광 명소"> 
@@ -1140,11 +1140,13 @@
 		<div id="map_canvas"></div>
 		<!--구글맵 -->
 
-		<!--상품 문의 -->
-		
+		<!--패키지 문의 -->
 		<div id="QnA">
 			<hr>
-			<h3>상품 문의</h3>
+			<div id="pack_btn">
+			<br>
+			<h3>패키지 문의</h3>
+			</div>
 			<hr>
 			<div id="middle3">
 			<table border="1" id="replyTable">
@@ -1170,7 +1172,7 @@
 						{
 							rb = (ReplyBean)replylist.get(i);
 				%>
-
+			<!-- 상품문의 글보기 -->
 				<tr id="relist<%=rb.getNum()%>">
 <%-- 					<td><%=rb.getNum()%></td> --%>
 					<td><%=rb.getId()%></td>
@@ -1203,6 +1205,7 @@
 						<%=rb.getContent()%><span style="font-size: 0.8em; margin-left:5px;">(<%=rb.getDate() %>)</span>
 						
 						<%
+						// 비밀글일 경우 자물쇠 이미지 표시
 						if(rb.getH_or_s() == 1)
 						{
 						%>
@@ -1238,12 +1241,12 @@
 					</td>
 					<%
 					}
+					// 비밀글이며, 로그인했을 시
 					else if (rb.getH_or_s() == 1 && !rb.getId().equals(user_id)){
 					%>
 					<td style="height:50px;">
 						<span class="reply_align">
 						비밀글입니다<img src="./img/lock.png" width="10px" height="10px">
-<%-- 						<span>(<%=rb.getDate() %>)</span> --%>
 						(<%=rb.getDate() %>)
 						</span>
 						<span style="float: right;">
@@ -1272,10 +1275,10 @@
 					<%
 					}
 					%>
-					
-					
 				</tr>
+				<!-- 상품문의 글보기 -->
 				
+				<!-- 상품문의 수정 -->
 				<tr id="conup<%=rb.getNum()%>" style="display: none;">
 					<td>
 						<%=user_id %>
@@ -1293,6 +1296,9 @@
 					</td>
 					</td>
 				</tr>
+				<!-- 상품문의 수정 -->
+				
+				<!-- 답글 등록 -->
 				<tr id="con<%=rb.getNum()%>" style="display: none;">
 					<td>
 						<input type="hidden" id="num" name="num" value="<%=PB.getNum()%>">
@@ -1315,20 +1321,19 @@
 						</span>
 					</td>
 				</tr>
+				<!-- 답글 등록 -->
 			
 				<%
 					}
-						// 최근글위로 re_ref 그룹별 내림차순 re_se q 오름차순
-						// 			re_ref desc   re_seq asc
-						// 글잘라오기 limit 시작행-1, 개수
 					}
 				%>
 				
 			</table>
 			<br>
-			
+			<!-- 문의글 쓰기 -->
 			<table id="replyWrite">
 				<tr>
+				<!-- 비로그인 시 처리 -->
 					<%
 						if (user_id.equals(""))
 						{
@@ -1345,8 +1350,12 @@
 							</td>
 						</tr>
 					<td>
+				<!-- 문의글 쓰기 -->
+				
+				<!-- 로그인 시 문의글 쓰기 -->
 					<%
 						}
+					
 						else
 						{
 					%>
@@ -1367,46 +1376,53 @@
 					<%
 						}
 					%>
+				<!-- 로그인 시 문의글 쓰기 -->
 				</tr>
 			</table>
+			<!-- 문의글 쓰기 -->
 			
 			<center>
 				<%
-					if (count != 0) {
-						// 페이지 갯수 구하기
-						pageCount = count / pagesize + (count % pagesize == 0 ? 0 : 1);
-						pageBlock = 10;
-						// 시작 페이지 구하기
-						startPage = ((currentPage - 1) / pageBlock) * pageBlock + 1;
-						// 끝페이지 구하기
-						endPage = startPage + pageBlock - 1;
-						if (endPage > pageCount) {
-							endPage = pageCount;
+				//페이지 출력
+				if (count != 0) {
+					// 페이지 갯수 구하기
+					pageCount = count / pagesize + (count % pagesize == 0 ? 0 : 1);
+					pageBlock = 10;
+					// 시작 페이지 구하기
+					startPage = ((currentPage - 1) / pageBlock) * pageBlock + 1;
+					// 끝페이지 구하기
+					endPage = startPage + pageBlock - 1;
+					if (endPage > pageCount) {
+						endPage = pageCount;
+					}
+					
+					//이전
+					if(startPage>pageBlock){
+						%><a href="./PackContent.po?num=<%=PB.getNum() %>&repageNum=<%=startPage - pageBlock%>#QnA">[이전]</a><%
+					}
+
+					//해당 페이지 이동
+					for(int i=startPage; i<=endPage; i++)
+					{
+						if(i==pNum)
+							{%><span id="i"><%=i%></span><%}
+						else
+						{
+						%>
+						<a id="i" href="./PackContent.po?num=<%=PB.getNum() %>&repageNum=<%=i %>#QnA"><%=i%></a>
+						<%
 						}
-						//이전
-						if (startPage > pageBlock) {
-				%>
-				<a href="./PackContent.po?num=<%=PB.getNum() %>&repageNum=<%=startPage - pageBlock%>#QnA">[이전]</a>
-				<%
 					}
-
-						//페이지
-						for (int i = startPage; i <= endPage; i++) {
-				%>
-				<a href="./PackContent.po?num=<%=PB.getNum() %>&repageNum=<%=i %>#QnA">[<%=i%>]</a>
-				<%
-					}
-
-						//다음
-						if (endPage < pageCount) {
-				%>
-				<a href="./PackContent.po?num=<%=PB.getNum() %>&repageNum=<%=startPage + pageBlock%>#QnA">[다음]</a>
-				<%
+					//다음
+					if(endPage < pageCount)
+					{
+						%>
+						<a href="./PackContent.po?num=<%=PB.getNum() %>&repageNum=<%=startPage + pageBlock%>#QnA">[다음]</a>
+						<%
 					}
 				}
 				%>
 			</center>
-			
 		</div>
 	</div>
 	<!--상품 문의 -->

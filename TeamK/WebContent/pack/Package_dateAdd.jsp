@@ -158,9 +158,9 @@
 	
 	
 	// 날짜 클릭 이벤트
-	function winOpen(num) {
+	function winOpen(num, select_num) {
 // 		var num = $("#num" + select).val();
-		win = window.open("./PackDateModify.po?num=" + num, "Package_date_modify.jsp",
+		win = window.open("./PackDateModify.po?num=" + num + "&select_num=" + select_num, "Package_date_modify.jsp",
 				"width=500, height=400, left=800, top=100");
 	}
 	
@@ -173,7 +173,8 @@
 		$("#select_date" + select_num).css("background-color", "#D5D5D5");  // 클릭된 tr 부분의 배경색을 #D5D5D5로 바꾼다		
 		
 		var num = $("#num" + select_num).val();
-		winOpen(num);
+		winOpen(num, select_num);
+		
 	}
 
 	// 창닫기
@@ -254,7 +255,7 @@
 					날짜
 				</td>
 				<td>
-					<input type="text" id="add_date" onchange="date_chk()"><br>
+					<input type="text" id="add_date" readonly onchange="date_chk()"><br>
 				</td>
 			</tr>
 			

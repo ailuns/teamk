@@ -17,6 +17,7 @@ public class PackDateModify implements Action{
 		System.out.println("PackDateModify excute()");
 		//int num가져오기
 		int num = Integer.parseInt(request.getParameter("num"));
+		int select_num = Integer.parseInt(request.getParameter("select_num"));
 		System.out.println("PackDateModify num >> " + num);
 		//디비객체 생성
 		PackDAO pdao=new PackDAO();
@@ -24,6 +25,7 @@ public class PackDateModify implements Action{
 		PackBean pb = pdao.getPack(num);
 		
 		request.setAttribute("pb_up", pb);
+		request.setAttribute("select_num", select_num);
 		
 		ActionForward forward = new ActionForward();
 		forward.setPath("./pack/Package_date_modify.jsp");
