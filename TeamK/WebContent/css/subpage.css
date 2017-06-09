@@ -18,7 +18,8 @@ a#i:HOVER {color: #06c;}
 span#i{
 	color: red;
 	margin: 0 6px;
-	font-size: 15px;
+	font-size: 20px;
+	font-weight: bold;
 }
 input[type="button"], input[type="submit"] {
 	border: 1px solid #06c;
@@ -437,6 +438,7 @@ div#package_tab .tab_container {
 	min-height: 600px;
 	margin-top : 20px;
 	text-align: center;
+    padding: 26px;
 }
 div#package_tab {margin: 0 auto;}
 div#package_tab .img_size {

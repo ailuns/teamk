@@ -21,7 +21,7 @@ public class MyBasketDelete implements Action{
 		if(tch!=null){
 			for(int i = 0; i<tch.length;i++){
 				System.out.println(tch[i]);
-				//bnsdao.ThingBasketDelete(Integer.parseInt(tch[i]));
+				bnsdao.ThingBasketDelete(Integer.parseInt(tch[i]));
 			}
 		}
 		//패키지 장바구니 삭제

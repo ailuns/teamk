@@ -127,7 +127,7 @@
 		<%
 			if (packcount == 0) {
 		%>
-		<br><br>구매한 패키지가 없습니다!<br><br><br>
+		<br><br>장바구니에 담긴 패키지가 없습니다!<br><br><br>
 		<%
 			} else {
 				
@@ -192,7 +192,7 @@
 			<%
 			if (thingcount == 0) {
 		%>
-		<br><br>구매한 패키지가 없습니다!<br><br><br>
+		<br><br>장바구니에 담긴 상품이 없습니다!<br><br><br>
 		<%
 			} else {
 				List<TBasketBEAN> ThingBasket = (List<TBasketBEAN>) request.getAttribute("ThingBasket");
