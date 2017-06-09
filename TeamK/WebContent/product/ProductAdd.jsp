@@ -226,7 +226,6 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 
-	String name = (String)request.getAttribute("name");
 	List productaddList;
 	productaddList = (List)request.getAttribute("productaddList");
 	
@@ -238,7 +237,11 @@
 <form name="fr" method="POST">
 <%-- <input type="text" name="id" value="<%=id %>"> --%>
 <!-- <input type="button" value="중복확인" onclick="idchk(document.fr.id.value)"><br><br> -->
-<p><b>상품명 : <%=name %></b></p>
+<%
+			ProductBean pb;
+			pb =(ProductBean)productaddList.get(0);
+				%>	
+<p><b>상품명 : <%= pb.getName()%></b></p>
 <p id="sub_notice">※해당 상품정보 클릭 시 수정/삭제 페이지로 이동합니다</p>
 <div id="datecontent">
 	<table>
@@ -249,7 +252,7 @@
 		</tr>
 		
 		<%
-			ProductBean pb;
+			
 			for (int i = 0; i < productaddList.size(); i++)
 			{
 				pb =(ProductBean)productaddList.get(i);

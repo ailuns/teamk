@@ -28,7 +28,7 @@ System.out.println("ProductAdd excute()");
 
 		
 		List productaddList;
-		productaddList = pdao.getProductAddList(name);
+		productaddList = pdao.getProductAddList(num);
 		
 		request.setAttribute("productaddList", productaddList);
 		request.setAttribute("name", name);

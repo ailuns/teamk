@@ -608,8 +608,8 @@ if (user_id == null)
 	});
 	
 	// 날짜 추가 버튼 클릭 이벤트
-	function winOpen(name,num) {
-		win = window.open("./ProductAdd.bo?num=" + num + "&name=" +name, "ProductAdd.jsp",
+	function winOpen(num) {
+		win = window.open("./ProductAdd.bo?num=" + num, "ProductAdd.jsp",
 				"width=800, height=700, left=100, top=100");
 	}
 	
@@ -1002,7 +1002,7 @@ if (user_id == null)
 			if (user_id.equals("admin"))
 			{
 		%>
-			<input type="button" value="상품편집" onclick="winOpen('<%=pb.getName() %>',<%=num %>);">
+			<input type="button" value="상품편집" onclick="winOpen('<%=pb.getNum() %>',<%=num %>);">
 			<input type="button" value="상품글수정" onclick="location.href='./ProductUpdate.bo?num=<%=num%>&pageNum=<%=pageNum%>'">
 		<%
 			}
@@ -1357,7 +1357,7 @@ if (user_id == null)
 										$.each(data,function(index,qqqq){
 										//body태그 추가 key:value	
 											$('#stocktable').append("<tr id='stocktr"+qqqq.num+"'><td class='contentdiv1_2'>"+qqqq.size+"-"+qqqq.color+"</td><td><input type='button' value='▲' onclick='up("+qqqq.num+")'><input type='text' id = 'stack2"+qqqq.num+"' name = 'count' value='1' onkeydown='keyup("+qqqq.num+")'><input type='button' value='▼' onclick='down("+qqqq.num+")'></td>"
-											+"<td><input type='hidden' value='' '><p id='p"+qqqq.num+"'></p></td></tr>");
+											+"<td><p id='p"+qqqq.num+"'></p></td></tr>");
 											
 										});
 									
