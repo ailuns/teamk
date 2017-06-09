@@ -110,6 +110,7 @@ img.ui-datepicker-trigger
 	 	int endPage = (int) request.getAttribute("endPage");
 	 	String user_id = (String) session.getAttribute("id");
 	 	String serch_data = (String) session.getAttribute("serch_data");
+	 	List ProductImgList = (List)request.getAttribute("ProductImgList");
 	%>
 
 <!--왼쪽 메뉴 -->
@@ -119,8 +120,9 @@ img.ui-datepicker-trigger
 <!--왼쪽 메뉴 -->
 <div id="wrap">
 	<div id="article_head">
-		<div id="article_title"><img src="./img/travel2.png" width="30px" style="margin-right: 8px; vertical-align: bottom;">패키지</div>
-	<div class="empty"></div>
+		<div id="article_title"><img src="./img/shop2.png" width="26px" style="margin:0 8px 3px 0;  vertical-align: bottom;">상품</div>
+			<div class="empty"></div>
+			<div id="clear"></div>
 	</div>
 	<!--여행지 검색창 -->
 	<div id="goods_feat">
@@ -129,48 +131,25 @@ img.ui-datepicker-trigger
         <!-- Loading Screen -->
         <div data-u="loading" style="position:absolute;top:0px;left:0px;background:url('./img/loading.gif') no-repeat 50% 50%;background-color:rgba(0, 0, 0, 0.7);"></div>
         <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:1000px;height:250px;overflow:hidden;">
+          <%
+				ProductBean prob;
+				for (int i = 0; i < ProductImgList.size(); i++)
+				{
+					int j = i + 1;
+					int z = ProductImgList.size();
+					prob =(ProductBean)ProductImgList.get(i);
+					DecimalFormat df = new DecimalFormat("#,###");
+				    String cost = df.format(prob.getCost());
+					
+			%>
             <div>
             	<div id="gdsld">
-                <a href="#"><img src="./img/disk.png" /><br><br>
-                <h2>Name</h2>
-                <h3>￦</h3></a>
+                <a href="./ProductContent.bo?num=<%=prob.getNum()%>&car_num=<%=prob.getCar_num()%>"><img src="./upload/<%=prob.getImg() %>" /><br><br>
+                <h2><%=prob.getName() %></h2>
+                <h3>￦<%= cost%></h3></a>
                 </div>
             </div>
-            <div>
-            	<div id="gdsld">
-                <a href="#"><img src="./img/disk.png" /><br><br>
-                <h2>Name</h2>
-                <h3>￦</h3></a>
-                </div>
-            </div>
-            <div>
-            	<div id="gdsld">
-                <a href="#"><img src="./img/disk.png" /><br><br>
-                <h2>Name</h2>
-                <h3>￦</h3></a>
-                </div>
-            </div>
-            <div>
-            	<div id="gdsld">
-                <a href="#"><img src="./img/disk.png" /><br><br>
-                <h2>Name</h2>
-                <h3>￦</h3></a>
-                </div>
-            </div>
-            <div>
-            	<div id="gdsld">
-                <a href="#"><img src="./img/disk.png" /><br><br>
-                <h2>Name</h2>
-                <h3>￦</h3></a>
-                </div>
-            </div>
-            <div>
-            	<div id="gdsld">
-                <a href="#"><img src="./img/disk.png" /><br><br>
-                <h2>Name</h2>
-                <h3>￦</h3></a>
-                </div>
-            </div>
+           <%} %>
             <a data-u="any" href="https://wordpress.org/plugins/jssor-slider/" style="display:none">wordpress slider</a>
         </div>
     </div>

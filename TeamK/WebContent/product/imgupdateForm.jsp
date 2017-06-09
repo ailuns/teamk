@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="net.member.db.*"%>
 <%@ page import="java.util.*"%>
@@ -213,10 +213,11 @@ CategoryDAO cdao = new CategoryDAO();
 <div id="wrap_pack">
 	<div id="wrap_pack_detail">
 	<div>
-		<form action="./ProductUpdateAction.bo?&pageNum=<%=pageNum%>&name=<%=pb2.getName() %>" id="fr" method="post" enctype="multipart/form-data">
+		<form action="./ProductUpdateAction.bo?&pageNum=<%=pageNum%>" id="fr" method="post" enctype="multipart/form-data">
 			<table>
 				<tr>
 					<td>상품명</td>
+					<input type="hidden" name="backname" value="<%=pb2.getName()%>">
 					<input type="hidden" name="color" value="<%=pb2.getColor()%>">
 					<input type="hidden" name="size" value="<%=pb2.getSize()%>">
 					<input type="hidden" name="stock" value="<%=pb2.getStock()%>">

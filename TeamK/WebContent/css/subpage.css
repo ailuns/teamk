@@ -1201,7 +1201,7 @@ form#goods_basket_list table tr {
 	padding-top: 10px;
 }
 
-/* My Order.jsp*/
+/* My Order Pay.jsp*/
 form.gyeolje {background-color: #fff;}
 form.gyeolje div {
 	width: 80%;
@@ -1223,6 +1223,8 @@ form.gyeolje th {
 	text-decoration: none;
 	font-weight: normal;
 }
+form.gyeolje td#tr2td1 {width: 191px;}
+form.gyeolje td#tdtd {width: 100px;}
 form.gyeolje ul {list-style: none;}
 div#packList caption span {
 	color: #000;
@@ -1460,11 +1462,15 @@ div#category_form {
 	width: 500px;
 	margin: 100px auto;
 }
+div#category_form form {
+	border: 1px solid #06c;
+	padding: 50px 0;
+}
 div#category_form form table {margin: 10px auto;}
 div#category_form form th {
 	text-align: left;
 	width: 100px;
-	padding: 5px;
+	padding: 10px;
 }
 div#category_form form table input,
 div#category_form form table select {
