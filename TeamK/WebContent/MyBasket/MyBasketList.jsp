@@ -123,7 +123,7 @@
 <article>
 	<form name="fr">
 	<div id="my_basket_list">
-		<h3>패키지</h3>
+		<h1 style="color:#06c;">패키지</h1>
 		<%
 			if (packcount == 0) {
 		%>
@@ -188,7 +188,8 @@
 			}
 		%>
 	<hr>
-	<br><h3>상품</h3>
+	<br>
+	<h1 style="color:#06c;">상품</h1>
 			<%
 			if (thingcount == 0) {
 		%>
