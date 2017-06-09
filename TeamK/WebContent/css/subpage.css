@@ -205,6 +205,11 @@ div#goods_show {
 	margin-top: 15px;
 	background-color: #fff;
 }
+div#goods_show a {
+	text-decoration: none;
+	color: #000;
+}
+div#goods_show a:HOVER {color: #06c;}
 div#goods_show img {
 	width: 200px;
 	height: 150px;
@@ -1438,3 +1443,18 @@ div#admin_thing_order th {
 	border-right: 2px solid #aaa;
 }
 
+/*Category Form.jsp*/
+div#category_form {
+	width: 500px;
+	margin: 100px auto;
+}
+div#category_form form table {margin: 10px auto;}
+div#category_form form th {
+	text-align: left;
+	width: 100px;
+	padding: 5px;
+}
+div#category_form form table input,
+div#category_form form table select {
+	width: 150px;
+}
