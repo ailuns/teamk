@@ -191,19 +191,19 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 
-	String subject = request.getParameter("subject");
+// 	String subject = request.getParameter("subject");
 	List date_list;
 	date_list = (List)request.getAttribute("date_list");
 	
-	PackBean pb_up = (PackBean)request.getAttribute("pb_up");
-	
+// 	PackBean pb_up = (PackBean)request.getAttribute("pb_up");
+	PackBean subject = (PackBean)date_list.get(0);
 %>
  
 
 <form name="fr" method="POST">
 <%-- <input type="text" name="id" value="<%=id %>"> --%>
 <!-- <input type="button" value="중복확인" onclick="idchk(document.fr.id.value)"><br><br> -->
-<p><b>상품명 : <%=subject %></b></p>
+<p><b>상품명 : <%=subject.getSubject() %></b></p>
 <p id="sub_notice">※해당 날짜 클릭 시 수정/삭제 페이지로 이동합니다</p>
 <div id="datecontent">
 	<table>

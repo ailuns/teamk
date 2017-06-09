@@ -146,7 +146,7 @@ img.ui-datepicker-trigger
 	<div id="wrap_pack">
 	<div id="wrap_pack_detail">
 		<div>
-			<form action="./PackModifyAction.po?ori_subject=<%=pb.getSubject() %>" id="fr" method="post" enctype="multipart/form-data">
+			<form action="./PackModifyAction.po" id="fr" method="post" enctype="multipart/form-data">
 				<table border="1">
 					<tr>
 	<!-- 					<td>출발일자</td> -->
@@ -198,6 +198,7 @@ img.ui-datepicker-trigger
 					</tr>
 					<tr>
 						<td class="td_size">글제목</td>
+						<input type="hidden" id="ori_subject" name="ori_subject" value="<%=pb.getSubject() %>">
 						<td><input type="text" id="subject" name="subject" required="yes" value="<%=pb.getSubject() %>"></td>
 					</tr>
 					<tr>

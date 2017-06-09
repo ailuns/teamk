@@ -26,6 +26,44 @@ public class PackSearchAction implements Action{
 		String endDate = request.getParameter("endDate");
 		
 		
+		switch(search)
+		{
+			case "ccnd": 
+				search = "충청남도";
+				break;
+			case "jjd": 
+				search = "제주도";
+				break;
+			case "gsnd": 
+				search = "경상남도";
+				break;
+			case "gsbd": 
+				search = "경상북도";
+				break;
+			case "jrbd": 
+				search = "전라남도";
+				break;
+			case "ccbd": 
+				search = "충청북도";
+				break;
+			case "gwd": 
+				search = "강원도";
+				break;
+			case "ggd": 
+				search = "경기도";
+				break;
+			case "jrnd": 
+				search = "전라남도";
+				break;
+			case "bs": 
+				search = "부산";
+				break;
+			case "su": 
+				search = "서울";
+				break;
+		}
+		
+		
 		if (startDate == null || startDate == "")
 		{
 			long time = System.currentTimeMillis(); 

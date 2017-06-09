@@ -91,6 +91,7 @@ public class ProductDAO {
 				ProductBean pb = new ProductBean();
 				pb.setNum(rs.getInt("num"));
 				pb.setName(rs.getString("name"));
+				pb.setIntro(rs.getString("intro"));
 				pb.setColor(rs.getString("color"));
 				pb.setSize(rs.getString("size"));
 				pb.setStock(rs.getInt("stock"));
@@ -419,6 +420,7 @@ public class ProductDAO {
 				pb.setSubject(rs.getString("subject"));
 				pb.setType(rs.getString("type"));
 				pb.setCost(rs.getInt("cost"));
+				pb.setIntro(rs.getString("intro"));
 				pb.setReadcount(rs.getInt("readcount"));
 				pb.setContent(rs.getString("content"));
 				pb.setCountry(rs.getString("country"));
@@ -481,6 +483,7 @@ public class ProductDAO {
 				pb.setSubject(rs.getString("subject"));
 				pb.setType(rs.getString("type"));
 				pb.setCost(rs.getInt("cost"));
+				pb.setIntro(rs.getString("intro"));
 				pb.setReadcount(rs.getInt("readcount"));
 				pb.setContent(rs.getString("content"));
 				pb.setCountry(rs.getString("country"));
