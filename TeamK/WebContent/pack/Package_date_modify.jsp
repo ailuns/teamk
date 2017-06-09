@@ -70,29 +70,39 @@
 	
 	
 	// 삭제
-	function dateDel()
+	function dateDel(select_num)
 	{
 		
-		if (confirm("삭제하시겠습니까??") == true)
-		{    //확인
-			$.ajax({
-				type:"post",
-				url:"./PackDateDeleteAction.po",   // java로 보냄
-				data:{
-					num:$("#up_num").val()
-					},
-				success:function()
-				{
-					alert('삭제되었습니다');
-					opener.parent.location.reload();
-					window.close();
-				}
-			});
+		if(select_num != 0)
+		{
+			if (confirm("삭제하시겠습니까??") == true)
+			{    //확인
+				$.ajax({
+					type:"post",
+					url:"./PackDateDeleteAction.po",   // java로 보냄
+					data:{
+						num:$("#up_num").val()
+						},
+					success:function()
+					{
+						alert('삭제되었습니다');
+						opener.parent.location.reload();
+						window.close();
+					}
+				});
+			}
+			else
+			{   //취소
+			    return;
+			}
 		}
 		else
-		{   //취소
-		    return;
+		{
+			alert("처음 등록된 날짜는 삭제불가합니다");
 		}
+		
+			
+		
 	}
 	
 	// 날짜 추가 시 동일 날짜 체크
@@ -120,6 +130,12 @@
 		});
 	}
 	
+	function date_x()
+	{
+		alert("처음 등록된 날짜는 수정불가합니다");
+	}
+	
+	
 	// 창닫기
 	function cls()
 	{
@@ -136,17 +152,12 @@
 	request.setCharacterEncoding("UTF-8");
 
 	PackBean pb_up = (PackBean)request.getAttribute("pb_up");
-	
+	int select_num = ((Integer)request.getAttribute("select_num")).intValue();
 %>
  
 
 <form name="fr" method="POST">
-<%-- <input type="text" name="id" value="<%=id %>"> --%>
-<!-- <input type="button" value="중복확인" onclick="idchk(document.fr.id.value)"><br><br> -->
 <p><b>상품명 : <%=pb_up.getSubject() %></b></p>
-
-
-
 <div id="Date_modify">
 	<fieldset>
  		<legend><h4>수정 페이지</h4></legend>
@@ -159,7 +170,21 @@
 					<input id="up_num" style="display: none;" value="<%=pb_up.getNum() %>"></input>
 					<input id="subject" style="display: none;" value="<%=pb_up.getSubject() %>"></input>
 					<input id="prev_date" style="display: none;" value="<%=pb_up.getDate() %>"></input>
-					<input type="text" id="up_date" value="<%=pb_up.getDate() %>" onchange="date_chk()">
+					
+					<%
+					if(select_num == 0)
+					{
+					%>
+					<input type="text" id="up_date0" value="<%=pb_up.getDate() %>" readonly onclick="date_x()">
+					<%
+					}
+					else
+					{
+					%>
+					<input type="text" id="up_date" value="<%=pb_up.getDate() %>" readonly onchange="date_chk()">
+					<%
+					}
+					%>
 				</td>
 			</tr>
 			
@@ -183,7 +208,7 @@
 		</table>
 		<br>
 		<input type="button" value="수정" onclick="dateUpdate()">
-		<input type="button" value="삭제" onclick="dateDel()">
+		<input type="button" value="삭제" onclick="dateDel(<%=select_num %>)">
 		<input type="button" value="닫기" onclick="cls()">
 	</fieldset>
 </div>

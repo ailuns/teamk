@@ -16,10 +16,10 @@ public class ReplyUpdateActoin implements Action{
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		String pageNum = request.getParameter("pageNum");
-		int num = Integer.parseInt(request.getParameter("num"));
+//		String pageNum = request.getParameter("pageNum");
+		
 		int h_or_s = Integer.parseInt(request.getParameter("secretChk"));
-				
+		int num = Integer.parseInt(request.getParameter("num"));		
 		String id = request.getParameter("id");
 		String content = request.getParameter("content");
 		

@@ -959,8 +959,14 @@ if (user_id == null)
 	<!-- 왼쪽 메뉴 -->
 	<!--여행지 검색창 -->
 	<div id="wrap"> 
+<<<<<<< HEAD
 		<div id="article_head">
 		<div id="article_title"><img src="./img/travel2.png" width="30px" style="margin-right: 8px; vertical-align: bottom;">패키지</div>
+=======
+		<div id="package_head">
+			<div id="article_head">
+		<div id="article_title"><img src="./img/shop2.png" width="26px" style="margin:0 8px 3px 0;  vertical-align: bottom;">상품</div>
+>>>>>>> branch 'master' of https://github.com/ailuns/teamk.git
 	<div class="empty"></div>
 	</div>
 	<!--여행지 검색창 -->
@@ -1129,7 +1135,9 @@ if (user_id == null)
 						
 					</table>
 					<br>
+				<div style="overflow-x:auto; overflow-y:auto; height: 100px;">
 					<table id ="stocktable"></table>
+				</div>
 										<%
 				for (int i = 0; i < productList.size(); i++) {
 
@@ -1460,13 +1468,16 @@ if (user_id == null)
 				</div>
 			<%} %>
 		</div>
-		<!--상품 정보, 내용이 들어가는 영역 -->
+		<!--상품 정보,내용이 들어가는 영역 -->
 
 		
 
 		<!--상품 문의 -->
 			<div id="QnA">
+			<div id="pack_btn">
+			<br>
 			<h3>상품 문의</h3>
+			</div>
 			<hr>
 			<div id="middle3">
 			<table border="1" id="replyTable">
