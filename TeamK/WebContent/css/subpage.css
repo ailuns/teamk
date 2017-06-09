@@ -205,14 +205,20 @@ div#goods_show {
 	margin-top: 15px;
 	background-color: #eee;
 }
+div#gdsld {
+	width: 280px;
+	height: 250px;
+	border: 1px solid #fff;
+	background-color: #fff;
+}
 div#goods_show a {
 	text-decoration: none;
 	color: #000;
 }
 div#goods_show a:HOVER {color: #06c;}
 div#goods_show img {
-	height: 150px;
-	margin-top: 10px;
+	height: 170px;
+	max-width: 278px;
 }
 div#review_show {
 	height: 250px;
@@ -1457,3 +1463,22 @@ div#category_form form table input,
 div#category_form form table select {
 	width: 150px;
 }
+
+/*Goods Header*/
+div#goods_search form {
+	height: 50px;
+	margin: 10px auto;
+	font-weight: bold;
+	padding-top: 10px;
+}
+div#goods_search form * {font-size: 20px;}
+div#goods_search form input[type="text"] {
+	margin: 0 30px;
+	width: 650px;
+}
+div#goods_search form input[type="submit"] {
+	font-weight: bold;
+	width: 100px;
+}
+
+
