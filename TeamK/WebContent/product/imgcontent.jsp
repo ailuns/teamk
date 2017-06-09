@@ -660,212 +660,212 @@ if (user_id == null)
 
 <style type="text/css">
 
-.clear {
-	clear: both;
-}
-
-#wrap_pack { 
-	width: 980px; 
-	min-height: 1000px;
-	border: 5px solid red;
- 	margin: 50px auto;
-	padding-top: 50px;
-	background-color: #eee;
-} 
-
-
-/* 이미지 정보 부분 */
-#top {
-	width: 960px;
-}
-
-
-#imgdiv ul
-{
-	list-style: none;
-}
-
-#imgdiv{
-	width: 470px;
-	height: 400px;
-	border: 3px solid orange;
-	float: left;
-}
-
-#imgdiv img {
-	width: 470px;
-	height: 300px;
-	float: left;
-}
-
-#imgdiv ul li img{
-	width: 80px;
-	height: 80px;
-	margin-top : 10px;
-	margin-left : 5px;
-}
-
-/* 이미지에 마우스를 올렸을 때 이벤트 */
-#imgdiv ul li img:HOVER{
-	box-sizing : border-box;
-	border : 5px solid #A6A6A6;
-}
-/* 이미지에 마우스를 올렸을 때 이벤트 */
-
-/* 이미지 정보 부분 */
-
-
-/* 인원, 가격 정보 부분 */
-#contentdiv1 {
-	width: 400px;
-	height: 400px;
-	border: 3px solid blue;
-	float: left;
-	margin-left : 50px;
-}
-
-/* 인원, 가격 정보 부분 */
-
-	
-/* 날짜정보 내용 */
-
-#datecontent {
-	width: 960px;
-	height: 350px;
-	border: 3px solid gray;
-	overflow: auto;
-}
-
-#datecontent table
-{
-	border-collapse: collapse;
-}	
-
-
-#datecontent tr:FIRST-CHILD
-{
-	background-color: gray;
-	height : 30px;
-}
-
-#datecontent tr:HOVER
-{
-	background-color: #D5D5D5;
-}
-
-#datecontent .date_td_size
-{
-	height : 50px;
-	border-bottom : 1px solid black;
-}
-
-#datecontent #date_date
-{
-	width : 225px;
-}
-
-#datecontent #date_subject
-{
-	width : 525px;
-}
-
-#datecontent #date_cost
-{
-	width : 170px;
-}
-
-#datecontent #date_stock
-{
-	width : 70px;
-}
-
-/* 날짜정보 내용 */
-	
-
-/* 여행정보 내용 */
-
-#contentdiv2 {
-	width: 960px;
-	min-height: 700px;
-	border: 3px solid gray;
-}
-
-/* 여행정보 내용 */
-
-/* 구글맵 */
-
-
-#map_canvas {
-	width: 800px;
-	height: 500px;
-}
-
-.controls {
-	margin-top: 10px;
-	border: 1px solid transparent;
-	border-radius: 2px 0 0 2px;
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	height: 32px;
-	outline: none;
-	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-}
-
-#pac-input {
-	background-color: #fff;
-	font-family: Roboto;
-	font-size: 15px;
-	font-weight: 300;
-	margin-left: 12px;
-	padding: 0 11px 0 13px;
-	text-overflow: ellipsis;
-	width: 300px;
-}
-
-#pac-input:focus {
-	border-color: #4d90fe;
-}
-
-
-/* 구글맵 */
-
-
-/* 상품 문의 */
-#QnA {
-	width: 800px;
-	min-height: 300px;
-	border: 3px solid pink;
-}
-
-#replyTable
-{
-	background-color: white;
-	
-}
-
-/* tr:nth-child(odd)  */
-/* { */
-/* 	background-color: #BFBFBF; */
+/* .clear { */
+/* 	clear: both; */
 /* } */
 
-#replyContent
-{	
-	width: 700px;
-	height : 50px;
-}
+/* #wrap_pack {  */
+/* 	width: 980px;  */
+/* 	min-height: 1000px; */
+/* 	border: 5px solid red; */
+/*  	margin: 50px auto; */
+/* 	padding-top: 50px; */
+/* 	background-color: #eee; */
+/* }  */
 
-#recontent, #contentup, #content
-{
-	width : 600px;
-	height : 70px;
-}
 
-#replyWrite
-{
-	background-color: white;
-}
+/* /* 이미지 정보 부분 */ */
+/* #top { */
+/* 	width: 960px; */
+/* } */
 
-/* 상품 문의 */
+
+/* #imgdiv ul */
+/* { */
+/* 	list-style: none; */
+/* } */
+
+/* #imgdiv{ */
+/* 	width: 470px; */
+/* 	height: 400px; */
+/* 	border: 3px solid orange; */
+/* 	float: left; */
+/* } */
+
+/* #imgdiv img { */
+/* 	width: 470px; */
+/* 	height: 300px; */
+/* 	float: left; */
+/* } */
+
+/* #imgdiv ul li img{ */
+/* 	width: 80px; */
+/* 	height: 80px; */
+/* 	margin-top : 10px; */
+/* 	margin-left : 5px; */
+/* } */
+
+/* /* 이미지에 마우스를 올렸을 때 이벤트 */ */
+/* #imgdiv ul li img:HOVER{ */
+/* 	box-sizing : border-box; */
+/* 	border : 5px solid #A6A6A6; */
+/* } */
+/* /* 이미지에 마우스를 올렸을 때 이벤트 */ */
+
+/* /* 이미지 정보 부분 */ */
+
+
+/* /* 인원, 가격 정보 부분 */ */
+/* #contentdiv1 { */
+/* 	width: 400px; */
+/* 	min-height: 400px; */
+/* 	border: 3px solid blue; */
+/* 	float: left; */
+/* 	margin-left : 50px; */
+/* } */
+
+/* /* 인원, 가격 정보 부분 */ */
+
+	
+/* /* 날짜정보 내용 */ */
+
+/* #datecontent { */
+/* 	width: 960px; */
+/* 	height: 350px; */
+/* 	border: 3px solid gray; */
+/* 	overflow: auto; */
+/* } */
+
+/* #datecontent table */
+/* { */
+/* 	border-collapse: collapse; */
+/* }	 */
+
+
+/* #datecontent tr:FIRST-CHILD */
+/* { */
+/* 	background-color: gray; */
+/* 	height : 30px; */
+/* } */
+
+/* #datecontent tr:HOVER */
+/* { */
+/* 	background-color: #D5D5D5; */
+/* } */
+
+/* #datecontent .date_td_size */
+/* { */
+/* 	height : 50px; */
+/* 	border-bottom : 1px solid black; */
+/* } */
+
+/* #datecontent #date_date */
+/* { */
+/* 	width : 225px; */
+/* } */
+
+/* #datecontent #date_subject */
+/* { */
+/* 	width : 525px; */
+/* } */
+
+/* #datecontent #date_cost */
+/* { */
+/* 	width : 170px; */
+/* } */
+
+/* #datecontent #date_stock */
+/* { */
+/* 	width : 70px; */
+/* } */
+
+/* /* 날짜정보 내용 */ */
+	
+
+/* /* 여행정보 내용 */ */
+
+/* #contentdiv2 { */
+/* 	width: 960px; */
+/* 	min-height: 700px; */
+/* 	border: 3px solid gray; */
+/* } */
+
+/* /* 여행정보 내용 */ */
+
+/* /* 구글맵 */ */
+
+
+/* #map_canvas { */
+/* 	width: 800px; */
+/* 	height: 500px; */
+/* } */
+
+/* .controls { */
+/* 	margin-top: 10px; */
+/* 	border: 1px solid transparent; */
+/* 	border-radius: 2px 0 0 2px; */
+/* 	box-sizing: border-box; */
+/* 	-moz-box-sizing: border-box; */
+/* 	height: 32px; */
+/* 	outline: none; */
+/* 	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); */
+/* } */
+
+/* #pac-input { */
+/* 	background-color: #fff; */
+/* 	font-family: Roboto; */
+/* 	font-size: 15px; */
+/* 	font-weight: 300; */
+/* 	margin-left: 12px; */
+/* 	padding: 0 11px 0 13px; */
+/* 	text-overflow: ellipsis; */
+/* 	width: 300px; */
+/* } */
+
+/* #pac-input:focus { */
+/* 	border-color: #4d90fe; */
+/* } */
+
+
+/* /* 구글맵 */ */
+
+
+/* /* 상품 문의 */ */
+/* #QnA { */
+/* 	width: 800px; */
+/* 	min-height: 300px; */
+/* 	border: 3px solid pink; */
+/* } */
+
+/* #replyTable */
+/* { */
+/* 	background-color: white; */
+	
+/* } */
+
+/* /* tr:nth-child(odd)  */ */
+/* /* { */ */
+/* /* 	background-color: #BFBFBF; */ */
+/* /* } */ */
+
+/* #replyContent */
+/* {	 */
+/* 	width: 700px; */
+/* 	height : 50px; */
+/* } */
+
+/* #recontent, #contentup, #content */
+/* { */
+/* 	width : 600px; */
+/* 	height : 70px; */
+/* } */
+
+/* #replyWrite */
+/* { */
+/* 	background-color: white; */
+/* } */
+
+/* /* 상품 문의 */ */
 
 
 
@@ -1399,6 +1399,7 @@ if (user_id == null)
 				</form>
 			</div>
 			<!--인원수, 가격 -->
+			<div class="clear"></div>
 		</div>
 		<div class="clear"></div>
 		
