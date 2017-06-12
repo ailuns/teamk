@@ -739,6 +739,7 @@
 		});
 	}
 	
+	//패키지 상품 삭제
 	function PackDel(num)
 	{
 		if (confirm("※해당 패키지의 모든 날짜가 삭제됩니다") == true){    //확인

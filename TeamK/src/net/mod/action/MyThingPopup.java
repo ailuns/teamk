@@ -5,8 +5,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.member.db.ProductBean;
 import net.member.db.ProductDAO;
-import net.pack.db.PackBean;
-import net.pack.db.PackDAO;
 
 public class MyThingPopup implements Action{
 
@@ -16,9 +14,7 @@ public class MyThingPopup implements Action{
 		
 		System.out.println("MyThingPopUp");
 		request.setCharacterEncoding("utf-8");
-		
-		
-		
+
 		int num = Integer.parseInt(request.getParameter("num"));
 		System.out.println("ProductContent num >> " + num);
 		
@@ -26,11 +22,7 @@ public class MyThingPopup implements Action{
 		ProductBean pdb = new ProductBean();
 		
 		pdb = pddao.getProduct2(num);
-		
-//		pb = pdao.getPack_original(num);
-//		System.out.println("MyPackPopup num >> " + pb.getNum());
-//		System.out.println("MyPackPopup num >> " + pb.getContent());
-		
+
 		request.setAttribute("pdb", pdb);
 		
 		ActionForward forward = new ActionForward();
