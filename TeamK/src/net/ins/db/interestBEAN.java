@@ -3,7 +3,7 @@ package net.ins.db;
 import java.sql.Timestamp;
 
 public class interestBEAN {
-	private int inter_num,ori_num, cost;
+	private int inter_num,ori_num, cost, car_num;
 	private String id, type, subject, img, intro;
 	private Timestamp date;
 	public int getCost() {
@@ -60,4 +60,11 @@ public class interestBEAN {
 	public void setDate(Timestamp date) {
 		this.date = date;
 	}
+	public int getCar_num() {
+		return car_num;
+	}
+	public void setCar_num(int car_num) {
+		this.car_num = car_num;
+	}
+	
 }

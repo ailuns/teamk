@@ -115,8 +115,8 @@ function thing_popup(select)
 				%>
 				<tr>
 					<td id="num<%=i %>" style="display:none;"><%=mtb.getOri_num()%></td>
-					<td class="tr1td1" id="tr2td1" class="tr1td0_popup" onclick="thing_popup(<%=i %>);"><img src='./upload/<%=mtb.getImg() %>'></td>
-					<td class="tr1td2" class="tr1td0_popup" onclick="thing_popup(<%=i %>);"><b><%=mtb.getSubject() %></b><br>
+					<td class="tr1td1, tr1td0_popup" id="tr2td1" onclick="thing_popup(<%=i %>);"><img src='./upload/<%=mtb.getImg() %>'></td>
+					<td class="tr1td2, tr1td0_popup" onclick="thing_popup(<%=i %>);"><b><%=mtb.getSubject() %></b><br>
 						<%=mtb.getIntro() %></td>
 					<td class="tr1td3"><%=mtb.getColor() %> / <%=mtb.getSize() %></td>
 					<td class="tr1td4"><%=mtb.getThing_count()%>개</td>

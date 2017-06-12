@@ -353,7 +353,7 @@ public class bnsDAO {
 		List<TBasketBEAN> ThingBasket = new ArrayList<TBasketBEAN>();
 		try{
 			conn =getconn();
-			sql= "select A.subject,A.intro,A.stock, A.cost,A.color, A.size, A.img,B.tb_num, B.tb_date,B.tb_count "+
+			sql= "select A.car_num, A.subject,A.intro,A.stock, A.cost,A.color, A.size, A.img,B.tb_num, B.ori_num, B.tb_date,B.tb_count "+
 					"from thing A left outer join thing_basket B on A.num = B.ori_num "+
 					"where B.id = ? order by B.tb_num desc limit ?,?";
 			pstmt = conn.prepareStatement(sql);
@@ -368,7 +368,9 @@ public class bnsDAO {
 				if(rs.getInt("stock")<11)max=rs.getInt("stock");
 				tbb.setMaxcount(max);
 				tbb.setNum(rs.getInt("tb_num"));
+				tbb.setCar_num(rs.getInt("car_num"));
 				tbb.setIntro(rs.getString("intro"));
+				tbb.setOri_num(rs.getInt("ori_num"));
 				tbb.setCount(rs.getInt("tb_count"));
 				tbb.setSize(rs.getString("size"));
 				tbb.setColor(rs.getString("color"));
