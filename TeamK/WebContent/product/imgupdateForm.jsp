@@ -275,12 +275,7 @@ CategoryDAO cdao = new CategoryDAO();
 							%>
 						</select>
 					</td>
-			
-				<tr>
-					<td>가격</td>
-					<td><input type="type" name="cost" value="<%=pb2.getCost()%>"></td>
-				</tr>
-					
+	
 				<tr>
 					<td>인트로</td>
 					<td><input type="type" name="intro" value="<%=pb2.getIntro()%>"></td>

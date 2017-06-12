@@ -516,6 +516,68 @@ public class ProductDAO {
 		}
 		return productList;
 	}
+	
+	public ProductBean getProduct2(int num) {
+		ProductBean pb = null;
+		Connection con = null;
+		String sql = "";
+		ResultSet rs = null;
+		try {
+			// 1,2 디비연결 메서드 호출
+			// 3 sql객체 생성 조건num값에 해당하는 게시판글 전체 가져오기
+			// 4 rs = 실행저장
+			// 5 rs 데이터 있으면 자바빈 bb
+			con = getConnection();
+			sql = "select * from thing where subject = (select subject from thing where num = ?) group by subject  ";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);// 시작행-1
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				pb = new ProductBean();
+				pb.setNum(rs.getInt("num"));
+				pb.setName(rs.getString("name"));
+				pb.setSubject(rs.getString("subject"));
+				pb.setIntro(rs.getString("intro"));
+				pb.setContent(rs.getString("content"));
+				pb.setReadcount(rs.getInt("readcount"));
+				pb.setColor(rs.getString("color"));
+				pb.setSize(rs.getString("size"));
+				pb.setCar_num(rs.getInt("car_num"));
+				pb.setType(rs.getString("type"));
+				pb.setCost(rs.getInt("cost"));
+				pb.setCountry(rs.getString("country"));
+				pb.setArea(rs.getString("area"));
+				pb.setStock(rs.getInt("stock"));
+				pb.setImg(rs.getString("img"));
+				pb.setImg2(rs.getString("img2"));
+				pb.setImg3(rs.getString("img3"));
+				pb.setImg4(rs.getString("img4"));
+				pb.setImg5(rs.getString("img5"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ex) {
+				}
+			}
+		}
+		return pb;
+	}
 
 	public List getProdcutList(int a) {
 		Connection con = null;
@@ -760,12 +822,13 @@ public class ProductDAO {
 		try {
 			con = getConnection();
 
-			sql = "update thing set color=?, size=?, stock=?  where num=?";
+			sql = "update thing set color=?, size=?, stock=?,cost=?  where num=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, pb.getColor());
 			pstmt.setString(2, pb.getSize());
 			pstmt.setInt(3, pb.getStock());
-			pstmt.setInt(4, pb.getNum());
+			pstmt.setInt(4, pb.getCost());
+			pstmt.setInt(5, pb.getNum());
 
 			pstmt.executeUpdate();
 
@@ -820,7 +883,7 @@ public class ProductDAO {
 			pstmt.setString(3, pb.getSize());
 			pstmt.executeUpdate();
 
-			sql = "update thing set name =? , subject = ? , intro = ? , content = ?, car_num=?, type=? , cost = ? , country = ? , area = ? , img =? , img2 =? , img3 =? , img4=? , img5=?   WHERE  num = ? ";
+			sql = "update thing set name =? , subject = ? , intro = ? , content = ?, car_num=?, type=? ,country = ? , area = ? , img =? , img2 =? , img3 =? , img4=? , img5=?   WHERE  num = ? ";
 			pstmt = (PreparedStatement) con.prepareStatement(sql);
 			// ? 값 저장 // 첫번째 물음표1, id에 입력될값
 			pstmt.setString(1, pb.getName());// 두번째 물음표2, pass에 입력될값
@@ -829,26 +892,6 @@ public class ProductDAO {
 			pstmt.setString(4, pb.getContent());
 			pstmt.setInt(5, pb.getCar_num());
 			pstmt.setString(6, pb.getType());
-			pstmt.setInt(7, pb.getCost());
-			pstmt.setString(8, pb.getCountry());
-			pstmt.setString(9, pb.getArea());
-			pstmt.setString(10, pb.getImg());
-			pstmt.setString(11, pb.getImg2());
-			pstmt.setString(12, pb.getImg3());
-			pstmt.setString(13, pb.getImg4());
-			pstmt.setString(14, pb.getImg5());
-			pstmt.setInt(15, pb.getNum());
-			pstmt.executeUpdate();
-
-			sql = "update thing set name =? , subject = ? , intro = ? , car_num=?, type=? , cost = ? , country = ? , area = ? , img =? , img2 =? , img3 =? , img4=? , img5=?   WHERE  name = ? ";
-			pstmt = (PreparedStatement) con.prepareStatement(sql);
-			// ? 값 저장 // 첫번째 물음표1, id에 입력될값
-			pstmt.setString(1, pb.getName());// 두번째 물음표2, pass에 입력될값
-			pstmt.setString(2, pb.getSubject());// 세번째 물음표3, name에 입력될값
-			pstmt.setString(3, pb.getIntro());
-			pstmt.setInt(4, pb.getCar_num());
-			pstmt.setString(5, pb.getType());
-			pstmt.setInt(6, pb.getCost());
 			pstmt.setString(7, pb.getCountry());
 			pstmt.setString(8, pb.getArea());
 			pstmt.setString(9, pb.getImg());
@@ -856,7 +899,25 @@ public class ProductDAO {
 			pstmt.setString(11, pb.getImg3());
 			pstmt.setString(12, pb.getImg4());
 			pstmt.setString(13, pb.getImg5());
-			pstmt.setString(14, backname);
+			pstmt.setInt(14, pb.getNum());
+			pstmt.executeUpdate();
+
+			sql = "update thing set name =? , subject = ? , intro = ? , car_num=?, type=? , country = ? , area = ? , img =? , img2 =? , img3 =? , img4=? , img5=?   WHERE  name = ? ";
+			pstmt = (PreparedStatement) con.prepareStatement(sql);
+			// ? 값 저장 // 첫번째 물음표1, id에 입력될값
+			pstmt.setString(1, pb.getName());// 두번째 물음표2, pass에 입력될값
+			pstmt.setString(2, pb.getSubject());// 세번째 물음표3, name에 입력될값
+			pstmt.setString(3, pb.getIntro());
+			pstmt.setInt(4, pb.getCar_num());
+			pstmt.setString(5, pb.getType());
+			pstmt.setString(6, pb.getCountry());
+			pstmt.setString(7, pb.getArea());
+			pstmt.setString(8, pb.getImg());
+			pstmt.setString(9, pb.getImg2());
+			pstmt.setString(10, pb.getImg3());
+			pstmt.setString(11, pb.getImg4());
+			pstmt.setString(12, pb.getImg5());
+			pstmt.setString(13, backname);
 			pstmt.executeUpdate();
 
 			// 4단계 실행
@@ -900,7 +961,7 @@ public class ProductDAO {
 			}
 			
 			
-			sql = "select * from thing where name=? order by color";
+			sql = "select * from thing where name=? order by num";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, name);
 
