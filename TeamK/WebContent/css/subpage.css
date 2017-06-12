@@ -1157,6 +1157,11 @@ div#my_basket_list a {
 }
 div#my_basket_list a:HOVER {color: #f00;}
 
+div#my_basket_list #cate:HOVER, div#my_basket_list #title:HOVER  
+{
+	cursor: pointer;
+}
+
 /*My Pack Basket List.jsp*/
 form#pack_basket_list {
 	width: 900px;
