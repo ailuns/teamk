@@ -39,8 +39,8 @@ int check = Integer.parseInt(request.getParameter("check"));
 <h1>결제가 정상적으로 완료 되었습니다.</h1><br>
 <h3>이용해주셔서 감사합니다</h3><br><br><br>
 <input type = "button" value = "내 주문" onclick="location.href='./MyOrderList.mo'">
-<input type="button" value="Pack Order List" onclick="location.href='./MyPackOrderList.mo'">
-<input type="button" value="Thing Order List" onclick="location.href='./MyThingOrderList.mo'"><br><br><br>
+<input type="button" value="내 패키지 주문 목록" onclick="location.href='./MyPackOrderList.mo'">
+<input type="button" value="내 상품 주문 목록" onclick="location.href='./MyThingOrderList.mo'"><br><br><br>
 	</article>
 	</div>
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
