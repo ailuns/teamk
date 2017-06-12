@@ -187,7 +187,7 @@ function thing_popup(select)
 	<%		}	
 		} else {
 	%>
-	주문 내역 없음
+	<br><br>주문 내역 없음
 	<%
 		}
 	%>
