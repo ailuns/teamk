@@ -814,11 +814,21 @@ public class PackDAO {
 		try {
 			conn = getConnection();
 
-			sql = "delete from pack where num=?";
+			sql = "select subject from pack where num=?";
+			
 			pstm = conn.prepareStatement(sql);
 			pstm.setInt(1, num);
-			pstm.executeUpdate();
-			return 1;
+			rs = pstm.executeQuery();
+			
+			if (rs.next())
+			{
+				sql = "delete from pack where subject=?";
+				pstm = conn.prepareStatement(sql);
+				pstm.setString(1, rs.getString("subject"));
+				pstm.executeUpdate();
+				return 1;
+			}
+			
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

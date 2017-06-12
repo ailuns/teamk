@@ -18,6 +18,13 @@ function inter_pack_move(select)
 	var num = $("#num" + select).val();
 	location.href="./PackContent.po?num=" + num;
 }
+
+function inter_thing_move(select)
+{
+	var num = $("#num" + select).val();
+	var carnum = $("#carnum" + select).val();
+	location.href="./ProductContent.bo?num=" + num + "&car_num=" + carnum;
+}
 </script>
 <body>
 	<!--왼쪽 메뉴 -->
@@ -39,7 +46,7 @@ function inter_pack_move(select)
 		String ty = (String) request.getAttribute("ty");
 		List<interestBEAN> MyInterest = (List<interestBEAN>) request.getAttribute("MyInterest");
 	%>
-	<div id="article_head">
+<div id="article_head">
 <div id="article_title"><%=type%></div>
 <div class="empty"></div>
 <div id="article_script">subject Count :<%=count%></div>
@@ -58,6 +65,8 @@ function inter_pack_move(select)
 				interestBEAN inb = MyInterest.get(i);
 				DecimalFormat Commas = new DecimalFormat("#,###");
 				String cost = (String)Commas.format(inb.getCost());
+				if (ty.equals("P"))
+				{
 		%>
 		<tr>
 			<input type="hidden" id="num<%=i %>" value="<%=inb.getOri_num() %>">
@@ -68,6 +77,21 @@ function inter_pack_move(select)
 				onclick="location.href='./MyInterestDel.ins?n=<%=inb.getInter_num()%>'"></td>
 		</tr>
 		<%
+				}
+				else
+				{
+		%>
+		<tr>
+			<input type="hidden" id="num<%=i %>" value="<%=inb.getOri_num() %>">
+			<input type="hidden" id="carnum<%=i %>" value="<%=inb.getCar_num() %>">
+			<td class="ev_hover" onclick="inter_thing_move(<%=i %>);"><img id="inb_img" alt="" src="./upload/<%=inb.getImg() %>"></td>
+			<td class="ev_hover" onclick="inter_thing_move(<%=i %>);"><%=inb.getSubject()%><br> <%=inb.getIntro()%></td>
+			<td><%=cost%></td>
+			<td><input type="button" value="찜 취소"
+				onclick="location.href='./MyInterestDel.ins?n=<%=inb.getInter_num()%>'"></td>
+		</tr>
+		<%
+				}
 			}
 		%>
 	</table>

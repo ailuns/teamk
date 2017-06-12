@@ -77,7 +77,7 @@ public class interestDAO {
 	public List<interestBEAN> MyInterest(String id,String type,int start, int end){
 		List<interestBEAN> MyInterest = new ArrayList<interestBEAN>();
 		if(type.equals("P"))sql = "select B.inter_num, A.file1, A.subject, A.intro, A.cost, B.ori_num, B.date from pack A right outer join interest B on A.num = B.ori_num where B.id = ? and B.type =? order by B.inter_num desc limit ?,?";
-		else if(type.equals("T"))sql = "select B.inter_num, A.img, A.subject, A.intro, A.cost, B.ori_num, B.date from thing A right outer join interest B on A.num = B.ori_num where B.id = ? and B.type =? order by B.inter_num desc limit ?,?";
+		else if(type.equals("T"))sql = "select B.inter_num, A.car_num, A.img, A.subject, A.intro, A.cost, B.ori_num, B.date from thing A right outer join interest B on A.num = B.ori_num where B.id = ? and B.type =? order by B.inter_num desc limit ?,?";
 		
 		try{
 			conn = getconn();
@@ -90,7 +90,11 @@ public class interestDAO {
 			while(rs.next()){
 				interestBEAN inb = new interestBEAN();
 				if(type.equals("P"))inb.setImg(rs.getString("file1"));
-				if(type.equals("T"))inb.setImg(rs.getString("img"));
+				if(type.equals("T"))
+				{
+					inb.setImg(rs.getString("img"));
+					inb.setCar_num(rs.getInt("car_num"));
+				}
 				inb.setInter_num(rs.getInt("inter_num"));
 				inb.setDate(rs.getTimestamp("date"));
 				inb.setOri_num(rs.getInt("ori_num"));

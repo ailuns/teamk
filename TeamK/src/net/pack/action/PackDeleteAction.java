@@ -28,12 +28,12 @@ public class PackDeleteAction implements Action{
 		out.close();
 	
 		
-		return null;
+//		return null;
 		
-		//ActoinForward 이동정보 담아서 로그인 이동
-//		ActionForward forward = new ActionForward();
-//		forward.setPath("PackList.po");
-//		forward.setRedirect(true);
-//		return forward;
+//		ActoinForward 이동정보 담아서 로그인 이동
+		ActionForward forward = new ActionForward();
+		forward.setPath("PackList.po");
+		forward.setRedirect(false);
+		return forward;
 	}
 }

@@ -69,9 +69,11 @@
 				alert("선택된 항목이 없습니다!");
 				return false;
 			}else{
+				alert($('input:checkbox[name=tch]').length);
 				document.fr.action = "./MyBasketDelete.bns";
 				document.fr.method="post";
 				document.fr.submit();
+				return false;
 			}
 		}else return false;
 	}
@@ -86,7 +88,7 @@
 		}
 	}
 	function check(){
-		return $('input:checkbox[name=tch]:checked').length+
+		return $('input:checkbox[name=pch]:checked').length+
 				 $('input:checkbox[name=tch]:checked').length;
 	}
 	// 장바구니에서 패키지 상품 클릭 시 해당 패키지 정보로 이동
@@ -94,6 +96,13 @@
 	{
 		var numchk = $("#pori_num" + i).val();
 		location.href="./PackContent.po?num=" + numchk;
+	}
+	// 장바구니에서 상품 클릭 시 해당 상품 정보로 이동
+	function thing_numchk(i)
+	{
+		var numchk = $("#tch11" + i).val();
+		var carnumchk = $("#tch1" + i).val();
+		location.href="./ProductContent.bo?num=" + numchk + "&car_num=" + carnumchk;
 	}
 	
 </script>
@@ -219,9 +228,13 @@
 						
 			%>
 			<tr>
-				<td class="chkbx"><input type="checkbox" id="tch<%=i %>"name="tch" value="<%=tbb.getNum()%>"></td>
-				<td><img src ="./upload/<%=tbb.getImg()%>"  height="70"></td>
-				<td><%=tbb.getSubject() %><br>
+				<td class="chkbx">
+					<input type="checkbox" id="tch<%=i %>"name="tch" value="<%=tbb.getNum()%>">
+					<input type="hidden" id="tch11<%=i %>" value="<%=tbb.getOri_num()%>">
+					<input type="hidden" id="tch1<%=i %>" value="<%=tbb.getCar_num()%>">
+				</td>
+				<td onclick="thing_numchk(<%=i %>)" class="tr1td0_popup"><img src ="./upload/<%=tbb.getImg()%>"  height="70"></td>
+				<td onclick="thing_numchk(<%=i %>)" class="tr1td0_popup"><%=tbb.getSubject() %><br>
 				<%=tbb.getIntro() %></td>
 				
 				<td><%=tbb.getColor() %></td>

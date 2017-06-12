@@ -185,6 +185,7 @@ img.ui-datepicker-trigger
 								<option value="city" <%="city".equals(pb.getType()) ? "selected" : ""%>>도시</option>
 								<option value="mount" <%="mount".equals(pb.getType()) ? "selected" : ""%>>산</option>
 								<option value="sea" <%="sea".equals(pb.getType()) ? "selected" : ""%>>바다</option>
+								<option value="country" <%="country".equals(pb.getType()) ? "selected" : ""%>>농촌</option>
 							</select>
 						</td>
 					</tr>
