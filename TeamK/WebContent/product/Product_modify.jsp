@@ -72,8 +72,9 @@
 	
 	
 	// 삭제
-	function dateDel()
+	function dateDel(select_num)
 	{
+		
 		if(select_num != 0)
 		{
 		
