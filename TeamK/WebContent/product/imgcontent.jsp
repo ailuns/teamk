@@ -1491,7 +1491,7 @@ if (user_id == null)
 								wid = 10 * comb.getRe_lev();
 						%> 
 						<%--<img src="level.gif" id="reimg" width=<%=wid%>> <img src="re.gif"> --%>
-							<img src="./img/re.gif">
+							<img src="./img/reply.png" height="12px">
 							<span>[답변]</span>
 						<%
 							}
