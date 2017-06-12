@@ -132,10 +132,11 @@ function count_change(){
 		total_cost+=parseInt($('input:hidden[name=result]').eq(i).val());
 	}
 	$('#t_cost').val(total_cost);
-	$('#total_cost').html(str+numberWithCommas(total_cost)+"원");
+	$('#total_cost').html(numberWithCommas(total_cost)+"원");
 }
 function trdel(tnum){
 	$('#info'+tnum).remove();
+	count_change();
 }
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
