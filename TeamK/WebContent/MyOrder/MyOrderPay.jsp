@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="net.member.db.MemberBean"%>
 <%@page import="net.bns.db.PBasketBEAN"%>
 <%@page import="net.bns.db.TBasketBEAN"%>
@@ -103,6 +104,8 @@ function receive_setting(){
 					PBasketBEAN pbb = ModPackList.get(i);
 					String [] countp = pbb.getCountp();
 					cost_sum += pbb.getCost();
+					DecimalFormat Commas = new DecimalFormat("#,###");
+					String pbb_cost = (String)Commas.format(pbb.getCost());
 		%>
 		<tr>
 			
@@ -114,7 +117,7 @@ function receive_setting(){
 			<br><center><%=pbb.getIntro()%></center></td>
 			<td id="tdtd">성인: <%=countp[0]%>명
 			<br>유아: <%=countp[1]%>명</td>
-			<td id="tdtd"><%=pbb.getCost()%>원</td>
+			<td id="tdtd"><%=pbb_cost%>원</td>
 			
 			
 		</tr>
@@ -137,6 +140,8 @@ function receive_setting(){
 					TBasketBEAN tbb= ModThingList.get(i);
 					cost_sum += tbb.getCost();
 					thing_cost_sum+=tbb.getCost();
+					DecimalFormat Commas = new DecimalFormat("#,###");
+					String tbb_cost = (String)Commas.format(tbb.getCost());
 		%>
 		<tr>
 			<td id="tr2td1"><img src='./upload/<%=tbb.getImg() %>'></td>
@@ -151,7 +156,7 @@ function receive_setting(){
 			<td id="tdtd">색상: <%=tbb.getColor()%>
 			<br>크기: <%=tbb.getSize()%>
 			<br>수량: <%=tbb.getCount()%></td>
-			<td id="tdtd"><%=tbb.getCost()%>원</td>
+			<td id="tdtd"><%=tbb_cost%>원</td>
 			
 		</tr>
 		<%
