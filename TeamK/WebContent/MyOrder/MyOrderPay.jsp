@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="net.member.db.MemberBean"%>
 <%@page import="net.bns.db.PBasketBEAN"%>
 <%@page import="net.bns.db.TBasketBEAN"%>
@@ -89,7 +90,7 @@ function receive_setting(){
 		if (ModPackList.size() != 0) {
 	%>
 	<div id = "packList">
-	<table border="1" id="packtable">
+	<table id="packtable">
 	<caption>예약하신 패키지 상품 정보<br>
 		<span>예약하신 패키지 상품의 팜플랫을 받아 보시겠습니까?
 			<input name = "po_receive_check" type ="radio" id ="po_receive_check" value="1" checked="checked">예
@@ -103,17 +104,20 @@ function receive_setting(){
 					PBasketBEAN pbb = ModPackList.get(i);
 					String [] countp = pbb.getCountp();
 					cost_sum += pbb.getCost();
+					DecimalFormat Commas = new DecimalFormat("#,###");
+					String pbb_cost = (String)Commas.format(pbb.getCost());
 		%>
 		<tr>
 			
 			<td id="tr2td1"><img src='./upload/<%=pbb.getImg() %>'></td>
-			<td><%=pbb.getSubject()%><%if(pbb.getPb_num()!=0){ %><input type="hidden" name="pch" value="<%=pbb.getPb_num() %>">
+			<td><b><center><%=pbb.getSubject()%></center></b><%if(pbb.getPb_num()!=0){ %><input type="hidden" name="pch" value="<%=pbb.getPb_num() %>">
 				<%}else{ %><input type="hidden" name="pnum" value="<%=pbb.getOri_num()%>">
 							<input type="hidden" name="adult" value="<%=countp[0] %>">
-							<input type="hidden" name="child" value="<%=countp[1] %>"><%} %></td>
-			<td><%=pbb.getIntro()%></td>
-			<td><%=countp[0]%>,<%=countp[1]%></td>
-			<td><%=pbb.getCost()%></td>
+							<input type="hidden" name="child" value="<%=countp[1] %>"><%} %>
+			<br><center><%=pbb.getIntro()%></center></td>
+			<td id="tdtd">성인: <%=countp[0]%>명
+			<br>유아: <%=countp[1]%>명</td>
+			<td id="tdtd"><%=pbb_cost%>원</td>
 			
 			
 		</tr>
@@ -128,7 +132,7 @@ function receive_setting(){
 		if (ModThingList.size() != 0) {
 	%>
 	<div id ="thingList">
-	<table border="1" id="Thingtable">
+	<table id="Thingtable">
 	<caption>주문하신 상품 정보</caption>
 	<tbody>
 		<%
@@ -136,21 +140,23 @@ function receive_setting(){
 					TBasketBEAN tbb= ModThingList.get(i);
 					cost_sum += tbb.getCost();
 					thing_cost_sum+=tbb.getCost();
+					DecimalFormat Commas = new DecimalFormat("#,###");
+					String tbb_cost = (String)Commas.format(tbb.getCost());
 		%>
 		<tr>
 			<td id="tr2td1"><img src='./upload/<%=tbb.getImg() %>'></td>
-			<td><%=tbb.getSubject()%>
+			<td><b><center><%=tbb.getSubject()%></center></b>
 				<%if(tbb.getNum()!=0){ %><input type="hidden" name="tch" value="<%=tbb.getNum() %>">
 				<%}else{ %><input type="hidden" name="tnum" value="<%=tbb.getOri_num()%>">
 							<input type="hidden" name="count" value="<%=tbb.getCount() %>">
 							<input type="hidden" name="color" value="<%=tbb.getColor() %>">
 							<input type="hidden" name="size" value="<%=tbb.getSize() %>">
-							<input type="hidden" name="cost" value="<%=tbb.getCost() %>"><%} %></td>
-			<td><%=tbb.getIntro()%></td>
-			<td><%=tbb.getColor()%></td>
-			<td><%=tbb.getSize()%></td>
-			<td><%=tbb.getCount()%></td>
-			<td><%=tbb.getCost()%></td>
+							<input type="hidden" name="cost" value="<%=tbb.getCost() %>"><%} %>
+			<br><center><%=tbb.getIntro()%></center></td>
+			<td id="tdtd">색상: <%=tbb.getColor()%>
+			<br>크기: <%=tbb.getSize()%>
+			<br>수량: <%=tbb.getCount()%></td>
+			<td id="tdtd"><%=tbb_cost%>원</td>
 			
 		</tr>
 		<%

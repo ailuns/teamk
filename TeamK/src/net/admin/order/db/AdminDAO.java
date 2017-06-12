@@ -6,12 +6,16 @@ import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import com.sun.org.apache.xalan.internal.xsltc.cmdline.getopt.GetOpt;
 
@@ -624,6 +628,138 @@ public class AdminDAO {
 			e.printStackTrace();
 		} 
 		return mtib;
+	}
+	public ModTradeInfoBEAN Exchange_info(int o_num){
+		ModTradeInfoBEAN mtib = new ModTradeInfoBEAN();
+		try{
+			conn = getconn();
+			sql ="select A.o_count, A.o_cost, A.o_size, A.o_color, A.o_memo,A.o_date, "+
+					"A.ori_num, A.o_num,B.*,C.subject, C.cost from thing_order A "+
+					"left outer join(trade_info B cross join thing C) "+
+					"on (A.o_ti_num = B.ti_num and A.ori_num = C.num) where A.o_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, o_num);
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				mtib.setThing_count(rs.getInt("o_count"));
+				mtib.setCost(rs.getInt("o_cost"));
+				mtib.setSize(rs.getString("o_size"));
+				mtib.setColor(rs.getString("o_color"));
+				mtib.setO_memo(rs.getString("o_memo"));
+				mtib.setOri_num(rs.getInt("ori_num"));
+				mtib.setTotal_cost(rs.getInt("cost"));
+				mtib.setSubject(rs.getString("subject"));
+				mtib.setTrade_date(rs.getTimestamp("o_date"));
+				mtib.setName(rs.getString("ti_receive_name"));
+				mtib.setMobile(rs.getString("ti_receive_mobile"));
+				mtib.setPostcode(rs.getString("ti_receive_postcode"));
+				mtib.setAddress1(rs.getString("ti_receive_address1"));
+				mtib.setAddress2(rs.getString("ti_receive_address2"));
+				mtib.setMemo(rs.getString("ti_receive_memo"));	
+				mtib.setTrade_type(rs.getString("ti_trade_type"));
+				mtib.setPayer(rs.getString("ti_trade_payer"));
+				mtib.setId(rs.getString("id"));
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return mtib;
+	}
+	
+	public List<String> Color_List(int ori_num){
+		
+		List<String> Color_List= new ArrayList<String>();
+		try{
+			conn = getconn();
+			sql = "select color from thing "
+					+"where subject = (select subject from thing where num=?) and num!=? "+
+					"group by color order by num";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, ori_num);
+			pstmt.setInt(2, ori_num);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				Color_List.add(rs.getString("color"));
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return Color_List;
+	}
+	public JSONArray Size_Info_Read(int ori_num, String color){
+		JSONArray Color_List= new JSONArray();
+		try{
+			conn = getconn();
+			sql = "select size,num,stock from thing "+
+					"where subject = (select subject from thing where num=?)"+
+					"and num!=? and color =? order by size";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, ori_num);
+			pstmt.setInt(2, ori_num);
+			pstmt.setString(3, color);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				JSONObject obj = new JSONObject();
+				obj.put("size", rs.getString(1));
+				obj.put("num", rs.getInt(2));
+				obj.put("stock", rs.getInt(3));
+				Color_List.add(obj);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return Color_List;
+	}
+	public JSONObject Thing_Exchange_Add(int num){
+		JSONObject obj = new JSONObject();
+		try{
+			conn = getconn();
+			sql = "select size,stock,cost,color from thing where num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				obj.put("size", rs.getString(1));
+				obj.put("stock", rs.getInt(2));
+				obj.put("cost", rs.getInt(3));
+				obj.put("color", rs.getString(4));
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return obj;
 	}
 	
 }

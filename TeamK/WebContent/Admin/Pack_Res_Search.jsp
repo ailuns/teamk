@@ -88,6 +88,15 @@ function search_check(){
 		}
 	}return null;
 }
+
+//패키지 내용 팝업창
+function pack_popup(select)
+{
+	var select_num = $("#num" + select).html();
+// 	alert(select_num);
+	win = window.open("./MyPackPopup.mo?num=" + select_num, "MyPackPopup.jsp",
+	"width=850, height=900, left=500, top=50 scrollbars=yes");	
+}
 </script>
 </head>
 <body>
@@ -144,6 +153,7 @@ function search_check(){
 						<td rowspan="4"><input type="checkbox" value="<%=mtib.getNum() %>" name="pnum"></td>
 						<%	}
 						}%>
+						<td id="num<%=i %>" style="display:none;"><%=mtib.getOri_num()%></td>
 						<td id="tr1td1"><%=sdf.format(mtib.getDate()) %></td>
 						<td id="tr1td2"><%=mtib.getTrade_num() %></td>
 						<td id="tr1td3">성인 : <%=pack_count[0] %>, 아동 : <%=pack_count[1] %></td>
@@ -152,8 +162,8 @@ function search_check(){
 <%-- 						<%} %> --%>
 					</tr>
 					<tr>
-						<td id="tr2td1"><img src='./upload/<%=mtib.getImg() %>'></td>
-						<td><%=mtib.getSubject() %></td>
+						<td id="tr2td1" class="tr1td0_popup" onclick="pack_popup(<%=i %>);"><img src='./upload/<%=mtib.getImg() %>'></td>
+						<td class="tr1td0_popup" onclick="pack_popup(<%=i %>);"><%=mtib.getSubject() %></td>
 						<td><%=mtib.getIntro() %></td>
 					</tr>
 					<%if(mtib.getPo_receive_check()==1&&status2.equals("waiting")) {%>
