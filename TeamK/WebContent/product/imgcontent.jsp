@@ -1337,9 +1337,13 @@ if (user_id == null)
 										var stocktest = "";
 										$.each(data,function(index,qwer){
 										//body태그 추가 key:value	
-											$('#size').append("<option value=" + qwer.num + ">" + qwer.size +"</option>");
-											$('#dstock').append("<input type = 'hidden' value ='"+qwer.stock+"'id='dstock"+qwer.num+"'>");
-											
+										
+										if(qwer.stock <= 0){
+										$('#size').append("<option value=" + qwer.num + " disabled>" + qwer.size + "품절</option>");
+										}else{
+										$('#size').append("<option value=" + qwer.num + ">" + qwer.size +"</option>");
+										$('#dstock').append("<input type = 'hidden' value ='"+qwer.stock+"'id='dstock"+qwer.num+"'>");
+										}	
 										stocktest+=","+ qwer.stock;
 									
 										});
@@ -1394,7 +1398,6 @@ if (user_id == null)
 										});
 									
 									});
-									}else{alert("닌멍청하다")
 									}
 								});
 							}

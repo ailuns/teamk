@@ -71,24 +71,31 @@
 
 	jQuery(document).ready(function($){
 		// 달력 관련 소스
-		$("#add_date").datepicker({
-			dateFormat: 'yy-mm-dd',    // 날짜 포맷 형식
-			minDate : 0,			   // 최소 날짜 설정      0이면 오늘부터 선택 가능
-			numberOfMonths: 1,		   // 보여줄 달의 갯수
-	        dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],  // 일(Day) 표기 형식
-	        monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],   // 월(Month) 표기 형식
-	        //showOn: "both",		// 버튼을 표시      both : input과 buttom 둘다 클릭 시 달력 표시           bottom  :  buttom 클릭 했을 때만 달력 표시
-	        //buttonImage: "./img/calendar.png",   // 버튼에 사용될 이미지
-	        //buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
+		$(".number").keyup(function(){
+			$(this).val( $(this).val().replace(/[^0-9]/g,"") );
 		});
 		
-		$("#Date_modify").hide();
+		$(".str").keyup(function() {
+			$(this).val( $(this).val().replace(/[0-9]|[^\!-z]/gi,"") );
+		});
+		
+		
+	
+		
+	
 	});
 
-	// 날짜 추가
+
 	function dateAdd()
 	{
+		
 	
+		if($("#add_size").val() == "" || $("#add_color").val() == "" || $("#add_size").val() == "" || $("#add_stock").val()== "" ){
+			alert("빈공간이 없게 입력해주세요.")
+		}else if($("#add_stock").val() == 0){
+			alert("수량을 1부터 입력해주세요.")
+		}
+		else{
 		$.ajax({   // 날짜를 클릭할때 마다 찜목록과 비교
 			type:"post",
 			url:"./ProductAddChk.bo",
@@ -138,7 +145,7 @@
 		});
 		
 		
-		
+		}
 		
 	}
 	
@@ -295,7 +302,7 @@
 					Color
 				</td>
 				<td>
-					<input type="text" id="add_color" ><br>
+					<input type="text" id="add_color" class="str"><br>
 				</td>
 			</tr>
 			
@@ -304,7 +311,7 @@
 					Size
 				</td>
 				<td>
-					<input type="text" id="add_size" >
+					<input type="text" id="add_size" class="str">
 				</td>
 			</tr>
 			
@@ -313,7 +320,7 @@
 					수량
 				</td>
 				<td>
-					<input type="text" id="add_stock">
+					<input type="text" id="add_stock" class="number">
 				</td>
 			</tr>
 			<tr>
@@ -321,7 +328,7 @@
 					가격
 				</td>
 				<td>
-					<input type="text" id="add_cost">
+					<input type="text" id="add_cost" class="number">
 				</td>
 			</tr>
 			<tr>
