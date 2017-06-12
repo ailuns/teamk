@@ -1130,7 +1130,8 @@
 		<div id="middle1">
 			<div id="contentdiv2">
 				<div id="contentdiv2_1">
-				<%=PB.getContent() %>
+				<center><%=PB.getContent() %></center>
+				
 				</div>
 			</div>
 		</div>
