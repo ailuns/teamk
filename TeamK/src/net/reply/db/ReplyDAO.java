@@ -306,10 +306,20 @@ public class ReplyDAO {
 		 // 1 성공 -1 실패 0 아이디없음
 		try {
 			conn = getConnection();
-			sql = "select id from reply where num=?";
-			pstm = conn.prepareStatement(sql);
-			pstm.setInt(1, num);
-			rs = pstm.executeQuery();
+			if (id.equals("admin"))
+			{
+				sql = "delete from reply where num=?";
+				pstm = conn.prepareStatement(sql);
+				pstm.setInt(1, num);
+				pstm.executeUpdate();
+			}
+			else
+			{
+				sql = "select id from reply where num=?";
+				pstm = conn.prepareStatement(sql);
+				pstm.setInt(1, num);
+				rs = pstm.executeQuery();
+			}
 			
 			if (rs.next())
 			{

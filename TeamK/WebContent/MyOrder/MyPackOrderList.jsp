@@ -62,11 +62,12 @@ function status_change2(){
 			"&status2="+$('#status2').val();
 }
 
+//패키지 내용 팝업창
 function pack_popup(select)
 {
 	var select_num = $("#num" + select).html();
 // 	alert(select_num);
-	win = window.open("./MyPackPopup.mo?num=" + select_num, "Package_dateAdd.jsp",
+	win = window.open("./MyPackPopup.mo?num=" + select_num, "MyPackPopup.jsp",
 	"width=850, height=900, left=500, top=50 scrollbars=yes");	
 }
 
