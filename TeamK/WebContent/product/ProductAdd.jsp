@@ -114,7 +114,7 @@
 							intro:$("#intro").val(),
 							car_num:$("#car_num").val(),
 							type:$("#type").val(),
-							cost:$("#cost").val(),
+							cost:$("#add_cost").val(),
 							area:$("#area").val(),
 							color:$("#add_color").val(),
 							size:$("#add_size").val(),
@@ -170,8 +170,8 @@
 	
 	
 	// 날짜 수정 버튼 클릭 이벤트
-	function winOpen(num) {
-		win = window.open("./ProductModify.bo?num=" + num, "Product_modify.jsp",
+	function winOpen(num, select_num) {
+		win = window.open("./ProductModify.bo?num=" + num + "&select_num=" + select_num, "Product_modify.jsp",
 				"width=500, height=300, left=800, top=100");
 	}
 	
@@ -186,7 +186,7 @@
 		$("#select_date" + select_num).css("background-color", "#D5D5D5");  // 클릭된 tr 부분의 배경색을 #D5D5D5로 바꾼다		
 		
 		var num = $("#num" + select_num).val();
-		winOpen(num);
+		winOpen(num, select_num);
 // 		var num = $("#num"+select_num).val();
 // 		var subject = $("#subject").val();
 // 		location.href="./PackDateAdd.po?num=" + num + "&subject=" + subject;
@@ -249,6 +249,7 @@
 			<td id="date_date">Color</td>
 			<td id="date_cost">Size</td>
 			<td id="date_stock">갯수</td>
+			<td id="date_stock">가격</td>
 		</tr>
 		
 		<%
@@ -268,7 +269,6 @@
 				<input id="intro" style="display:none;" value="<%=pb.getIntro() %>"></input>
 				<input id="car_num" style="display:none;" value="<%=pb.getCar_num()%>"></input>
 				<input id="type" style="display:none;" value="<%=pb.getType() %>"></input>
-				<input id="cost" style="display:none;" value="<%=pb.getCost() %>"></input>
 				<input id="area" style="display:none;" value="<%=pb.getArea() %>"></input>
 				<input id="file1" style="display:none;" value="<%=pb.getImg() %>"></input>
 				<input id="file2" style="display:none;" value="<%=pb.getImg2() %>"></input>
@@ -278,6 +278,7 @@
 				<td class="date_td_size"><%=pb.getColor() %></td>
 				<td class="date_td_size"><%=pb.getSize() %></td>
 				<td class="date_td_size"><%=pb.getStock() %></td>
+				<td class="date_td_size"><%=pb.getCost() %></td>
 			</tr>
 		<%
 			}
@@ -313,6 +314,14 @@
 				</td>
 				<td>
 					<input type="text" id="add_stock">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					가격
+				</td>
+				<td>
+					<input type="text" id="add_cost">
 				</td>
 			</tr>
 			<tr>
