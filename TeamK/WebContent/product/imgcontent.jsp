@@ -1062,7 +1062,9 @@ if (user_id == null)
 					<table>
 						<tr>
 							<td class="contentdiv1_1">판매가</td>
-							<td class="contentdiv1_2" id="avg_cost"><%=pb.getCost() %></td>
+							<td class="contentdiv1_2" id="avg_cost">
+							<input type ="hidden" id ="ori_cost" value="<%=pb.getCost() %>">
+							<%=pb.getCost() %></td>
 							
 							<td class="contentdiv1_3"></td>
 						</tr>
@@ -1337,11 +1339,16 @@ if (user_id == null)
 										var stocktest = "";
 										$.each(data,function(index,qwer){
 										//body태그 추가 key:value	
-										
+											var cost_cal = qwer.cost - parseInt($("#ori_cost").val());
+											var sss = "";
+											if(cost_cal > 0){
+												sss = "+";
+											}
+											
 										if(qwer.stock <= 0){
-										$('#size').append("<option value=" + qwer.num + " disabled>" + qwer.size + "품절</option>");
+										$('#size').append("<option value=" + qwer.num + " disabled>" + qwer.size+ ":"+ sss+cost_cal +  "품절</option>");
 										}else{
-										$('#size').append("<option value=" + qwer.num + ">" + qwer.size +"</option>");
+										$('#size').append("<option value=" + qwer.num + ">" + qwer.size + ":&nbsp&nbsp&nbsp["+ sss+cost_cal +"원] </option>");
 										$('#dstock').append("<input type = 'hidden' value ='"+qwer.stock+"'id='dstock"+qwer.num+"'>");
 										}	
 										stocktest+=","+ qwer.stock;
@@ -1366,6 +1373,12 @@ if (user_id == null)
 										$.each(data,function(index,qqqq){
 										//body태그 추가 key:value
 											var tnum = qqqq.num;
+											var cost_cal = qqqq.cost - parseInt($("#ori_cost").val());
+											alert(cost_cal)
+											var sss = "";
+											if(cost_cal > 0){
+												sss = "+";
+											}
 											
 											var check = 1;
 											for(var i = 0; i<$('#stocktable').find('tr').length;i++){
@@ -1374,9 +1387,9 @@ if (user_id == null)
 											if(check == 1){
 											$('#stocktable').append(
 													"<tr id='stocktr"+tnum+"'><td class='contentdiv1_2'>"
-													+qqqq.color+"-"+qqqq.size+"</td><td>"+
+													+qqqq.color+"-"+qqqq.size+"&nbsp&nbsp&nbsp"+sss+cost_cal+"원</td><td>"+
 													"<input type='button' value='▲' onclick='up("+tnum+")'>"+
-													"<input type='text' id = 'stack2"+tnum+"' size='1'"+
+													"<input type='text' id = 'stack2"+tnum+"' size='1'"+ 
 													" name = 'count' value='1' onkeydown='keyup("+tnum+")'"+
 													"class='trcount' readonly>"+
 													"<input type='button' value='▼' onclick='down("+tnum+")'>"+

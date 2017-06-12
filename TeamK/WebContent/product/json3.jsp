@@ -28,7 +28,7 @@ if (rs.next()) {
 }
 
 
-sql = "select num,size,stock,color from thing where name = ? && color = ?";
+sql = "select num,size,stock,color,cost from thing where name = ? && color = ?";
  pstmt = con.prepareStatement(sql);
 pstmt.setString(1, name);
 pstmt.setString(2, color);
@@ -48,6 +48,7 @@ while(rs.next()){
 	obj.put("size",rs.getString(2));
 	obj.put("stock",rs.getInt(3));
 	obj.put("color",rs.getString(4));
+	obj.put("cost",rs.getInt(5));
 	arr.add(obj);
 }
 %>
