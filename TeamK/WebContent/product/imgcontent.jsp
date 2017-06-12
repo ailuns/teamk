@@ -590,8 +590,8 @@ if (user_id == null)
 	});
 	
 	// 날짜 추가 버튼 클릭 이벤트
-	function winOpen(name,num) {
-		win = window.open("./ProductAdd.bo?num=" + num + "&name=" +name, "ProductAdd.jsp",
+	function winOpen(num) {
+		win = window.open("./ProductAdd.bo?num=" + num , "ProductAdd.jsp",
 				"width=800, height=700, left=100, top=100");
 	}
 	
@@ -1021,7 +1021,7 @@ if (user_id == null)
 			if (user_id.equals("admin"))
 			{
 		%>
-			<input type="button" value="상품편집" onclick="winOpen('<%=pb.getName() %>',<%=num %>);">
+			<input type="button" value="상품편집" onclick="winOpen(<%=num %>);">
 			<input type="button" value="상품글수정" onclick="location.href='./ProductUpdate.bo?num=<%=num%>&pageNum=<%=pageNum%>'">
 		<%
 			}
@@ -1122,7 +1122,7 @@ if (user_id == null)
 					<input type="button" class="contentbtn" id="jjim_o" value="♡ 찜" onclick="submit_fun(1, '<%=user_id %>')">
 					<input type="button" class="contentbtn" id="jjim_x" value="♥ 찜" style="display:none;" onclick="submit_fun(2, '<%=user_id %>')">
 					<input type="button" class="contentbtn2" value="장바구니" onclick="submit_fun(3, '<%=user_id %>')">
-					<input type="button" class="contentbtn2" value="예약하기" onclick="submit_fun(4, '<%=user_id %>')">
+					<input type="button" class="contentbtn2" value="구매하기" onclick="submit_fun(4, '<%=user_id %>')">
 					
 					
 					<p id="content_notice">※color를 선택해주셔야 size부분이 나옵니다!!!</p>

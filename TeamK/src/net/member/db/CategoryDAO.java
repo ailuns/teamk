@@ -67,7 +67,7 @@ public class CategoryDAO {
 		int car_num = 0;
 		try {
 			con = getConnection();
-			sql = "select max(canum) from category ";
+			sql = "select max(car_num) from category ";
 			pstmt =  con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
