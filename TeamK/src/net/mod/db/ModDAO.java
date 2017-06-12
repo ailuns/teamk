@@ -150,7 +150,7 @@ public class ModDAO {
 	public ModTradeInfoBEAN Pack_Stock_Check(int num,ModTradeInfoBEAN mtib){
 		try{
 			conn = getconn();
-			sql ="select subject, stock"+
+			sql ="select subject, stock, date"+
 					" from pack where num = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
@@ -159,6 +159,7 @@ public class ModDAO {
 				if((rs.getInt("stock")-mtib.getThing_count())<0){
 					mtib.setStock_check(1);
 					mtib.setSubject(rs.getString("subject"));
+					mtib.setDate(rs.getTimestamp("date"));
 				}
 				
 				mtib.setStock(rs.getInt("stock"));
@@ -210,7 +211,9 @@ public class ModDAO {
 	public ModTradeInfoBEAN PBasketInfoToMTIB(int pch_num, ModTradeInfoBEAN mtib){
 		try{
 			conn = getconn();
-			sql = "select ori_num, pb_count, pb_cost from pack_basket where pb_num = ?"; 
+			sql = "select A.ori_num, A.pb_count, A.pb_cost, B.date "+
+			"from pack_basket A left outer join pack B "+
+			"on A.ori_num = B.num where pb_num = ?"; 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, pch_num);
 			rs = pstmt.executeQuery();
@@ -218,6 +221,7 @@ public class ModDAO {
 				mtib.setOri_num(rs.getInt("ori_num"));
 				mtib.setCost(rs.getInt("pb_cost"));
 				mtib.setPack_count(rs.getString("pb_count"));
+				mtib.setDate(rs.getTimestamp("date"));
 				mtib.setNum(pch_num);
 			}
 		}catch (Exception e) {
@@ -283,7 +287,7 @@ public class ModDAO {
 			if(rs.next())i = rs.getInt(1)+1;
 			strtoday = sdf.format(c1);
 			sql = "insert into pack_order "+
-				"values(?,?,?,?,?,?,?,?,?,?,?)";
+				"values(?,?,?,?,?,?,?,?,?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, i);
 			pstmt.setString(2, mtib.getId());
@@ -296,6 +300,7 @@ public class ModDAO {
 			pstmt.setTimestamp(9, c1);
 			pstmt.setInt(10, mtib.getStatus());
 			pstmt.setString(11, "");
+			pstmt.setTimestamp(12,mtib.getDate());
 			pstmt.executeUpdate();
 		}catch (Exception e) {
 			e.printStackTrace();
