@@ -30,7 +30,7 @@ function color_check(){
 			return false;
 		}
 	}else{
-		alert("교환 요구 수량을 초과하였습니다 \n 교환 요구 수량을 확인하세요");
+		alert("이미 교환 요구 수량을 만족하였습니다 \n교환 요구 수량을 확인하세요");
 		return false;
 	}
 }
@@ -41,7 +41,8 @@ function count_check(){
 	}
 	return max_count;
 }
-function size_call(ori_num){			
+function size_call(ori_num){
+	if(count_check()==0)alert("이미 교환 요구 수량을 만족하였습니다 \n교환 요구 수량을 확인하세요");
 	$("#size").find("option").remove();
 	$('#size').append("<option  value = 'none' >사이즈-재고</option>");
 	$.ajax({
@@ -84,8 +85,9 @@ function info_call(){
 					}
 					//사이즈 선택시 새로운 tr 추가
 					$('#select').append("<tr id='info"+num+"'><td>물품 번호 : "+num+
-						"</td><td>색상 : "+data.color+"</td><td>사이즈 : "+data.size+"</td><td>"+
-						"<select id ='count"+num+"'name='count' class='count'"+
+						"</td><td>색상 : "+data.color+"</td><td>사이즈 : "+data.size+"</td>"+
+						"<td>재고 : "+data.stock+"</td>"+
+						"<td><select id ='count"+num+"'name='count' class='count'"+
 						"onchange='count_change("+num+")'></select>"+
 						"<input type='hidden' id='stock"+num+"'"+
 							"name='stock' value='"+data.stock+"'>"+
@@ -97,35 +99,40 @@ function info_call(){
 							  "<input type='hidden' id='result"+num+"' name='result' value=''></td>"+
 						"<td class='tcost' id='tcost"+num+"'></td>"+
 						"<td><img src='./img/delete.png' onclick='trdel("+num+")'></td></tr>");
-					var j = count_check();
-					for(var i =1; i<=j;i++){
-						$('#count'+num).append("<option value = '"+i+"'>"+i+"</option>");
-					}
-					var str = "차액 ";
-					var cost_cal = $('#ori_cost').val()-$('#cost'+num).val();
-					if(cost_cal>0)str+="+";
-					var result = cost_cal*$("#count"+num+" option:selected").val();
-					$('#result'+num).val(result);
-					$('#tcost'+num).html(str+numberWithCommas(result)+"원");
+					$('#count'+num).append("<option value = '1'>1</option>");
+					count_change();
 				}else{
 				alert("이미 리스트에 있는 상품 입니다");
 			}
 		}		
 	});
 }
-function count_change(num){
-	
+function count_change(){
 	var ch = count_check();
-	if(ch==0){
-		for(var i = 0; i<$('.count').length;i++){
-			var j = $(".count").eq(i).find('option:last').val();
-			for(j;j>$(".count").eq(i).find('option:selected').val();j--){
-				alert(j);
-				alert($(".count").eq(i).find('option:selected').val());
-				$(".count").eq(i).find('option:last').remove();
-			}
+	for(var i = 0; i<$('.count').length;i++){
+		var selected = $(".count").eq(i).find('option:selected').val();
+		var str ="차액 : ";
+		var cost_cal = $('#ori_cost').val()-$('input:hidden[name=cost]').eq(i).val();
+		if(cost_cal>0)str+="+";
+		var result = cost_cal*selected;
+		$('input:hidden[name=result]').eq(i).val(result);
+		$('.tcost').eq(i).html(str+numberWithCommas(result)+"원");
+		var do_count = $(".count").eq(i).find('option:last').val()-selected;
+		for(var x =0; x<do_count; x++)$(".count").eq(i).find('option:last').remove();
+		var stock=$('input:hidden[name=stock]').eq(i).val();
+		var j = parseInt(selected)+parseInt(ch);
+		if(stock<j)j=stock;
+		for(selected;selected<j;selected++){
+			var y = parseInt(selected)+1;
+			$(".count").eq(i).append("<option value = '"+y+"'>"+y+"</option>");
 		}
 	}
+	var total_cost =0;
+	for(var i = 0; i<$('input:hidden[name=result]').length;i++){
+		total_cost+=parseInt($('input:hidden[name=result]').eq(i).val());
+	}
+	$('#t_cost').val(total_cost);
+	$('#total_cost').html(str+numberWithCommas(total_cost)+"원");
 }
 function trdel(tnum){
 	$('#info'+tnum).remove();
@@ -133,16 +140,12 @@ function trdel(tnum){
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
-function totalP(){
-	var sum = 0;
-	for(var i = 0; i<$('#stocktable').find('.tcost').length; i++){
-		
-		var ints = $('#stocktable .tcost').eq(i).text().replace(",","");
-		ints = ints.replace("원","");
-		sum += parseInt(ints);
+function check(){
+	if(count_check!=0){
+		if(!(confirm('교환 요구 수량과 교환 수량이 일치 하지 않습니다\n계속 진행하시겠습니까?'))){
+			return false;
+		}
 	}
-	$('input:hidden[name=totalcost]').val(sum);
-	$('#p').html(numberWithCommas(sum)+"원");
 }
 </script>
 <link href="./css/inc.css" rel="stylesheet" type="text/css">
@@ -150,7 +153,7 @@ function totalP(){
 </head>
 <body>
 <div id = "wrap">
-<form>
+<form action="./Thing_Exchange_Action.ao" method = "post" onsubmit="return check()">
 <table border = "1">
 	<tr>
 		<th>상품 번호
@@ -209,6 +212,8 @@ function totalP(){
 		<td><select id="size" onclick="return color_check()" onchange="info_call()">
 		<option value = "none">사이즈-재고</option>
 		</select></td>
+		<td>총 차액 : <span id="total_cost"></span>
+			<input type="hidden"id="t_cost" name="t_cost"></td>
 	</tr>
 </table>
 <table>
@@ -220,6 +225,7 @@ function totalP(){
 		</td>
 	</tr>
 </table>
+	<input type="submit" value="교환 완료">
 </form>
 </div>
 </body>
