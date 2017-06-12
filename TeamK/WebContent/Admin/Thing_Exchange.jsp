@@ -63,49 +63,51 @@ function size_call(ori_num){
 }
 function info_call(){
 	var num = $('#size option:selected').val();
-	$.ajax({
-		type:"POST",
-		url:"./thing_info.jc",
-		data:{
-			num:num
-		},
-		datatype:"JSON",
-		success:function(data){
-			var check = 1;
-			for(var i = 0; i<$('#select').find('tr').length;i++){
-				if($('#select tr').eq(i).attr('id')=="info"+num)check=0;
-			}
-				if(check == 1){
-					//기존에 있던 count의 옵션 값들 중에 마지막 옵션 삭제
-					for(var i = 0; i<$('.count').length;i++){
-						if($(".count").eq(i).find('option').length>1&&
-								$(".count").eq(i).find('option:selected').val()<
-								$(".count").eq(i).find('option:last').val())
-							$(".count").eq(i).find('option:last').remove();
-					}
-					//사이즈 선택시 새로운 tr 추가
-					$('#select').append("<tr id='info"+num+"'><td>품번: "+num+
-						"</td><td>색상: "+data.color+"</td><td>사이즈: "+data.size+"</td>"+
-						"<td>재고: "+data.stock+"</td>"+
-						"<td><select id ='count"+num+"'name='count' class='count'"+
-						"onchange='count_change("+num+")'></select>"+
-						"<input type='hidden' id='stock"+num+"'"+
-							"name='stock' value='"+data.stock+"'>"+
-						 "<input type='hidden' id='cost"+num+"'"+
-							"name='cost' value='"+data.cost+"'>"+
-							  "<input type='hidden' name='tnum' value='"+num+"'>"+
-							  "<input type='hidden' name='color' value='"+data.color+"'>"+
-							  "<input type='hidden' name='size' value='"+data.size+"'>"+
-							  "<input type='hidden' id='result"+num+"' name='result' value=''></td>"+
-						"<td class='tcost' id='tcost"+num+"'></td>"+
-						"<td><img src='./img/delete.png' onclick='trdel("+num+")'></td></tr>");
-					$('#count'+num).append("<option value = '1'>1</option>");
-					count_change();
-				}else{
-				alert("이미 리스트에 있는 상품 입니다");
-			}
-		}		
-	});
+	if($('#size option:selected').val()!="none"){
+		$.ajax({
+			type:"POST",
+			url:"./thing_info.jc",
+			data:{
+				num:num
+			},
+			datatype:"JSON",
+			success:function(data){
+				var check = 1;
+				for(var i = 0; i<$('#select').find('tr').length;i++){
+					if($('#select tr').eq(i).attr('id')=="info"+num)check=0;
+				}
+					if(check == 1){
+						//기존에 있던 count의 옵션 값들 중에 마지막 옵션 삭제
+						for(var i = 0; i<$('.count').length;i++){
+							if($(".count").eq(i).find('option').length>1&&
+									$(".count").eq(i).find('option:selected').val()<
+									$(".count").eq(i).find('option:last').val())
+								$(".count").eq(i).find('option:last').remove();
+						}
+						//사이즈 선택시 새로운 tr 추가
+						$('#select').append("<tr id='info"+num+"'><td>품번: "+num+
+							"</td><td>색상: "+data.color+"</td><td>사이즈: "+data.size+"</td>"+
+							"<td>재고: "+data.stock+"</td>"+
+							"<td><select id ='count"+num+"'name='count' class='count'"+
+							"onchange='count_change("+num+")'></select>"+
+							"<input type='hidden' id='stock"+num+"'"+
+								"name='stock' value='"+data.stock+"'>"+
+							 "<input type='hidden' id='cost"+num+"'"+
+								"name='cost' value='"+data.cost+"'>"+
+								  "<input type='hidden' name='tnum' value='"+num+"'>"+
+								  "<input type='hidden' name='color' value='"+data.color+"'>"+
+								  "<input type='hidden' name='size' value='"+data.size+"'>"+
+								  "<input type='hidden' id='result"+num+"' name='result' value=''></td>"+
+							"<td class='tcost' id='tcost"+num+"'></td>"+
+							"<td><img src='./img/delete.png' onclick='trdel("+num+")'></td></tr>");
+						$('#count'+num).append("<option value = '1'>1</option>");
+						count_change();
+					}else{
+					alert("이미 리스트에 있는 상품 입니다");
+				}
+			}		
+		});
+	}
 }
 function count_change(){
 	var ch = count_check();

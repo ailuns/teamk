@@ -16,7 +16,7 @@ public class MemberLoginAction implements Action {
 		request.setCharacterEncoding("utf-8");
 		String id = request.getParameter("id");
 		String pass = request.getParameter("pass");
-		String exurl=request.getParameter("exurl");
+		String exurl = request.getParameter("exurl");
 
 		MemberBean mb = new MemberBean();
 
@@ -50,12 +50,19 @@ public class MemberLoginAction implements Action {
 			HttpSession session = request.getSession();
 			session.setAttribute("id", id);
 			ActionForward forward = new ActionForward();
-			forward.setPath(exurl);
-			forward.setRedirect(true);
+			
+			//아이디랑 패스워드 찾은후 로그인시에 로그인으로 액션 제어
+			if (exurl.equals("http://localhost:8080/TeamK/MemberFindIdAction.me")
+					|| exurl.equals("http://localhost:8080/TeamK/MemberFindPassAction.me")) {
+				forward.setPath("./main.fo");
+				forward.setRedirect(true);
+				return forward;
+			} else {
+				forward.setPath(exurl);
+				forward.setRedirect(true);
+			}
 			return forward;
 		}
-		
 
 	}
 }
-
