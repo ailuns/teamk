@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script src="../js/jquery-3.2.0.js"></script>
+<script src="./js/jquery-3.2.0.js"></script>
 <script type="text/javascript">
 	function test(num){
 		var arr = $('#test').find('tr');
@@ -26,6 +26,15 @@
 		}
 		$('#ss').html(sum+"원");
 	}
+	function test3(){
+		alert('1');
+		$.getJSON('./product/json4.jsp?num=1&color=red',function(data){
+			alert('2');
+			$.each(data,function(index,test){
+				alert('3');
+			});
+		});
+	}
 </script>
 </head>
 <body>
@@ -45,6 +54,6 @@
 			<td class ="tstock">3,3원</td>
 		</tr>
 	</table>
-	<input type = "button" value = "test2" onclick = "test2()">
+	<input type = "button" value = "test2" onclick = "test3()">
 </body>
 </html>

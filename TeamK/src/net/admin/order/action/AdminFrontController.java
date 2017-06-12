@@ -96,6 +96,13 @@ public class AdminFrontController extends HttpServlet{
 			afo = new ActionForward();
 			afo.setPath("Admin/trans_num_search.jsp");
 			afo.setRedirect(false);
+		}else if(command.equals("/Thing_Exchange.ao")){
+			action = new Thing_Exchange();
+			try {
+				afo = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		if (afo != null) {
 			if (afo.isRedirect()) {

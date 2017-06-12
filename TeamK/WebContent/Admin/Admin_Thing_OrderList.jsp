@@ -128,6 +128,9 @@ function status_update(o_num,status){
 		}else{
 			return false;
 		}
+	}else if(status==5){
+		window.open("./Thing_Exchange.ao?num="+o_num,''
+				,'left=600, top=150, width=600, height=600');
 	}
 }
 function Trade_Update_Info(o_num) {
@@ -252,23 +255,11 @@ function search_type_check(){
 					
 					<tr>
 						<th>교환 요구 사항</th>
-						<td colspan="6"><%=reason[1].replace("\r\n", "<br>") %></td>
-					</tr>
-					<tr>
+						<td colspan="4"><%=reason[1].replace("\r\n", "<br>") %></td>
 						<th>교환 요구 수량</th>
 						<td><%=memo[1] %>개</td>
-						<th>재발송 송장 번호</th>
-						<td><input type="text" placeholder="송장 번호" 
-							id="Trans_num<%=mtb.getNum()%>"></td>
-					</tr>
-					<tr>
-						<th>교환 결과</th>
-						<td colspan ="6"><textarea rows="3" cols="60"
-							placeholder="고객에게의 메세지를 입력해 주세요"
-							id = "memo<%=mtb.getNum() %>" style="resize:none;"></textarea>
-							<input type="button" value="교환 완료" align="bottom"
-								onclick="return status_update(<%=mtb.getNum()%>,3)">
-							</td>
+						<td><input type="button" value="교환 정보 입력"
+								onclick="status_update(<%=mtb.getNum()%>,5)"></td>
 					</tr>
 					<%}else if(status2.equals("cancel")){
 						String [] reason = mtb.getO_memo().split("ㅨ");
@@ -312,7 +303,7 @@ function search_type_check(){
 					<th>결제자</th>
 					<td><%=mtib.getPayer() %></td>
 					<th>결제 방법</th>
-					<td><%=mtib.getTrade_type() %></td>
+					<td colspan="3"><%=mtib.getTrade_type() %></td>
 				</tr>
 				<tr>
 					<th>받으시는 분</th>
@@ -320,11 +311,11 @@ function search_type_check(){
 					<th>연락처</th>
 					<td><%=mtib.getMobile() %></td>
 					<th>주문 날짜</th>
-					<td colspan="3"><%=sdf.format(mtib.getTrade_date()) %></td>
+					<td colspan="6"><%=sdf.format(mtib.getTrade_date()) %></td>
 				</tr>
 				<tr>
 					<th>주소</th>
-					<td colspan="7"><%="["+mtib.getPostcode()+"] "+mtib.getAddress1()+" "+mtib.getAddress2() %></td>
+					<td colspan="9	"><%="["+mtib.getPostcode()+"] "+mtib.getAddress1()+" "+mtib.getAddress2() %></td>
 				</tr>
 					<%if(mtib.getMemo().length()!=0){ %>
 						<tr>
