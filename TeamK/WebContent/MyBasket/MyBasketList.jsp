@@ -42,7 +42,7 @@
 				tcost:$("#tcost"+num).html().replace(/[^\d]+/g, ''),
 				num:$("#tch"+num).val(),
 				success:function(){
-					alert("sucess");
+					alert("변경되었습니다.");
 				}
 			}
 		});
@@ -57,7 +57,7 @@
 				pcost:$("#pcost"+num).html().replace(/[^\d]+/g, ''),
 				num:$("#pch"+num).val(),
 				success:function(){
-					alert("sucess");
+					alert("변경되었습니다.");
 				}
 			}
 		});
