@@ -86,7 +86,7 @@
 		}
 	}
 	function check(){
-		return $('input:checkbox[name=tch]:checked').length+
+		return $('input:checkbox[name=pch]:checked').length+
 				 $('input:checkbox[name=tch]:checked').length;
 	}
 	// 장바구니에서 패키지 상품 클릭 시 해당 패키지 정보로 이동
