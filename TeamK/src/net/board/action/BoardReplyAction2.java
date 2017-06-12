@@ -31,6 +31,8 @@ public class BoardReplyAction2 implements Action {
 		
 		String rid = request.getParameter("rId"); //rid에 리플 작성자 아이디 저장
 		String rcontent = request.getParameter("rContent"); //rcontent에 리플내용 저장
+		System.out.println("아작스 리플내용="+rcontent);
+		System.out.println("아작스 작성자="+rid);
 		int rNum = Integer.parseInt(request.getParameter("rNum")); //rNum에 글번호 저장
 		String pageNum = request.getParameter("pageNum");
 		String wEmail = request.getParameter("wEmail"); //wEmail에 글작성자 email주소 저장
@@ -59,7 +61,7 @@ String email = wEmail;//받는사람의 이메일 주소에 글작성자의 이�
 			
 		String sender="insup0117@naver.com"; // 이메일 발신자
 		String receiver= email; //받는사람
-		String subject = "답변이 왔습니다."; //메일 제목
+		String subject = "11답변이 왔습니다.11"; //메일 제목
 	
 		String content1=  "문의내용 : ["+wContent+"] <br> 답변내용 : ["+rcontent+"]";
 		//메일 내용 content1에  wContent 글작성자의 글내용, rcontent 리플 작성자의 리플내용 넣음.

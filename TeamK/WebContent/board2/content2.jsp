@@ -17,6 +17,7 @@
 
 /////////////////////AJAX 리플 달기, 삭제/////////////////////////
 	function replyupdate(){
+	if(document.fr1.content.value!=""){
 		 $.ajax({
 	         url:'./BoardReplyAction2.bo',
 	         type:'post',
@@ -31,6 +32,9 @@
 	        	 $('#replyUpdate').html(data);
 	         }
 	      });
+	}else if(document.fr1.content.value==""){
+		alert("댓글을 입력해주세요");
+	}
 	}
 	function replydelete(rbNum) {
 		
@@ -138,7 +142,7 @@ if(rcount!=0){lrb=(List)request.getAttribute("lrb");}
     	BoardReplyBean rb = (BoardReplyBean)lrb.get(i);%>
 <tr>
  <td id="name"><%=rb.getId()%></td>
- <td id="rContent"><%=rb.getContent()%></td>
+ <td id="content"><%=rb.getContent()%></td>
  <td id="delete"><%
 if(id!=null){
 	if(id.equals(rb.getId())||id.equals("admin")){ 
