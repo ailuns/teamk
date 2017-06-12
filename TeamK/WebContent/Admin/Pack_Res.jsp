@@ -148,7 +148,7 @@ function pack_popup(select)
 					</tr>
 					<tr>
 						<td id="tr2td1" class="tr1td0_popup" onclick="pack_popup(<%=i %>);"><img src='./upload/<%=mtib.getImg() %>'></td>
-						<td class="tr1td0_popup"><%=mtib.getSubject() %></td>
+						<td class="tr1td0_popup" onclick="pack_popup(<%=i %>);"><%=mtib.getSubject() %></td>
 						<td><%=mtib.getIntro() %></td>
 					</tr>
 					<%if(mtib.getPo_receive_check()==1&&status2.equals("waiting")) {%>
