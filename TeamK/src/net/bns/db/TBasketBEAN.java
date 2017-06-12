@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class TBasketBEAN {
 	private String img, subject, intro, color, size, id;
-	private int cost, count,num, maxcount,ori_cost,ori_num;
+	private int cost, count,num, maxcount,ori_cost,ori_num, car_num;
 	public String getId() {
 		return id;
 	}
@@ -83,5 +83,13 @@ public class TBasketBEAN {
 	public void setNum(int num) {
 		this.num = num;
 	}
+	public int getCar_num() {
+		return car_num;
+	}
+	public void setCar_num(int car_num) {
+		this.car_num = car_num;
+	}
+
+
 	private Timestamp date;
 }

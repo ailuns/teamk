@@ -63,6 +63,15 @@ function Trade_Update_Info(o_num) {
 	window.open("./Trade_Update_Info.mo?num="+o_num,''
 			,'left=600, top=150, width=400, height=400, scrollbars=yes');
 }
+
+//상품 내용 팝업창
+function thing_popup(select)
+{
+	var select_num = $("#num" + select).html();
+// 	alert(select_num);
+	win = window.open("./MyThingPopup.mo?num=" + select_num, "MyThingPopup.jsp",
+	"width=850, height=900, left=500, top=50 scrollbars=yes");	
+}
 </script>
 <style type="text/css">
 .update_info:HOVER {
@@ -105,8 +114,9 @@ function Trade_Update_Info(o_num) {
 				
 				%>
 				<tr>
-					<td class="tr1td1" id="tr2td1"><img src='./upload/<%=mtb.getImg() %>'></td>
-					<td class="tr1td2"><b><%=mtb.getSubject() %></b><br>
+					<td id="num<%=i %>" style="display:none;"><%=mtb.getOri_num()%></td>
+					<td class="tr1td1, tr1td0_popup" id="tr2td1" onclick="thing_popup(<%=i %>);"><img src='./upload/<%=mtb.getImg() %>'></td>
+					<td class="tr1td2, tr1td0_popup" onclick="thing_popup(<%=i %>);"><b><%=mtb.getSubject() %></b><br>
 						<%=mtb.getIntro() %></td>
 					<td class="tr1td3"><%=mtb.getColor() %> / <%=mtb.getSize() %></td>
 					<td class="tr1td4"><%=mtb.getThing_count()%>개</td>

@@ -1369,7 +1369,7 @@ div#my_interest table tr {
 div#my_interest table th {background-color: #eee;}
 div#my_interest table #inb_img {
 	width : 200px;
-	height : 150px;
+	height : 120px;
 }
 div#my_interest table .ev_hover:HOVER {cursor: pointer;}
 

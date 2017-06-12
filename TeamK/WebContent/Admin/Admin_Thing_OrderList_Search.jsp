@@ -165,7 +165,7 @@ function status_update(o_num,status){
 		}
 	}else if(status==5){
 		window.open("./Thing_Exchange.ao?num="+o_num,''
-				,'left=600, top=150, width=600, height=600');
+				,'left=600, top=150, width=600, height=600, scrollbars=yes');
 	}
 }
 </script>

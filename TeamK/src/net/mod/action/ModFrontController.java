@@ -148,6 +148,13 @@ public class ModFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else if(command.equals("/MyThingPopup.mo")){
+			action = new MyThingPopup();
+			try {
+				afo = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 		if (afo != null) {

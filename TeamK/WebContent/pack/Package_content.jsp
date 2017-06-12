@@ -738,6 +738,16 @@
 			"overflow" : "hidden"
 		});
 	}
+	
+	function PackDel(num)
+	{
+		if (confirm("※해당 패키지의 모든 날짜가 삭제됩니다") == true){    //확인
+			location.href='PackDeleteAction.po?num='+num;
+		}
+		else //취소
+		    return;
+	}
+	
 </script>
 
 <!-- 구글맵에 필요한 스크립트 -->
@@ -929,6 +939,7 @@
 		%>
 			<input type="button" value="날짜편집" onclick="winOpen(<%=PB.getNum() %>);">
 			<input type="button" value="상품내용수정" onclick="location.href='PackModify.po?num=<%=PB.getNum() %>'">
+			<input type="button" value="상품삭제" onclick="PackDel(<%=PB.getNum() %>);">
 		<%
 			}
 		}
