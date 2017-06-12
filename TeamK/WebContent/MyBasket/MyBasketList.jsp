@@ -230,8 +230,8 @@
 			<tr>
 				<td class="chkbx">
 					<input type="checkbox" id="tch<%=i %>"name="tch" value="<%=tbb.getNum()%>">
-					<input type="hidden" id="tch11<%=i %>"name="tch" value="<%=tbb.getOri_num()%>">
-					<input type="hidden" id="tch1<%=i %>"name="tch" value="<%=tbb.getCar_num()%>">
+					<input type="hidden" id="tch11<%=i %>" value="<%=tbb.getOri_num()%>">
+					<input type="hidden" id="tch1<%=i %>" value="<%=tbb.getCar_num()%>">
 				</td>
 				<td onclick="thing_numchk(<%=i %>)" class="tr1td0_popup"><img src ="./upload/<%=tbb.getImg()%>"  height="70"></td>
 				<td onclick="thing_numchk(<%=i %>)" class="tr1td0_popup"><%=tbb.getSubject() %><br>
