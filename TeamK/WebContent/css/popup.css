@@ -221,3 +221,23 @@ div#to_cancel_or_exchange th {
 	padding: 5px;
 }
 
+/*Thing Exchange.jsp*/
+div#thing_exchange {
+	margin: 0 auto;
+	padding: 10px;
+	border: 1px solid #06c;
+}
+div#thing_exchange table {
+	width: 100%;
+	margin: 10px auto;
+}
+div#thing_exchange th {
+	width: 80px;
+	background: #eee;
+	border-bottom: 1px solid #fff;
+	padding: 5px;
+}
+div#thing_exchange td {
+	text-align: left;
+	border-bottom: 1px solid #ddd;
+}
