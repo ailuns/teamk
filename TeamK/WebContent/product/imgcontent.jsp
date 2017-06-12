@@ -1435,7 +1435,7 @@ if (user_id == null)
 						pb = (ProductBean) productList.get(i);
 			%>
 			<div id="contentdiv2">
-				<div id="contentdiv2_1"><%=pb.getContent() %>
+				<div id="contentdiv2_1"><center><%=pb.getContent() %></center>
 				</div>
 				</div>
 			<%} %>
