@@ -79,7 +79,7 @@ public class MemberFindPassAction implements Action {
 				PrintWriter out = response.getWriter();
 				out.println("<script>");
 				out.println("alert('이메일로 비밀번호가 발송되었습니다.');");
-				out.println("location.href='./MemberLogin.me'");
+				out.println("location.href='./main.fo'");
 				out.println("</script>");
 				out.close();
 
