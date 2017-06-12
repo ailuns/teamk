@@ -57,7 +57,7 @@
 				pcost:$("#pcost"+num).html().replace(/[^\d]+/g, ''),
 				num:$("#pch"+num).val(),
 				success:function(){
-					alert("변경되었습니다.");
+					alert("변경되었습니다");
 				}
 			}
 		});
