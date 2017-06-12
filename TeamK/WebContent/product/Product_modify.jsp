@@ -74,8 +74,9 @@
 	// 삭제
 	function dateDel()
 	{
-		if(confirm("삭제하시겠습니까?"))
-			
+		if(select_num != 0)
+		{
+		
 		if (confirm("정말 삭제하시겠습니까??") == true)
 		{    //확인
 			$.ajax({
@@ -95,6 +96,10 @@
 		else
 		{   //취소
 		    return;
+		}
+		}else
+		{
+			alert("처음 등록된 날짜는 삭제불가합니다");
 		}
 	}
 	
@@ -136,6 +141,7 @@
 			request.setCharacterEncoding("UTF-8");
 
 			ProductBean pb_up = (ProductBean) request.getAttribute("pb_up");
+			int select_num = ((Integer)request.getAttribute("select_num")).intValue();
 		%>
 
 
@@ -182,8 +188,8 @@
 						</tr>
 					</table>
 					<br> <input type="button" value="수정"
-						onclick="dateUpdate(<%=pb_up.getNum()%>)"> <input
-						type="button" value="삭제" onclick="dateDel()"> <input
+						onclick="dateUpdate()"> <input
+						type="button" value="삭제" onclick="dateDel(<%=select_num %>)"> <input
 						type="button" value="닫기" onclick="cls()">
 				</fieldset>
 			</div>
