@@ -241,3 +241,7 @@ div#thing_exchange td {
 	text-align: left;
 	border-bottom: 1px solid #ddd;
 }
+div#thing_exchange textarea {
+	width: 100%;
+	text-align: left;
+}

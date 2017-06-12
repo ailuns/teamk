@@ -84,9 +84,9 @@ function info_call(){
 							$(".count").eq(i).find('option:last').remove();
 					}
 					//사이즈 선택시 새로운 tr 추가
-					$('#select').append("<tr id='info"+num+"'><td>물품 번호 : "+num+
-						"</td><td>색상 : "+data.color+"</td><td>사이즈 : "+data.size+"</td>"+
-						"<td>재고 : "+data.stock+"</td>"+
+					$('#select').append("<tr id='info"+num+"'><td>품번: "+num+
+						"</td><td>색상: "+data.color+"</td><td>사이즈: "+data.size+"</td>"+
+						"<td>재고: "+data.stock+"</td>"+
 						"<td><select id ='count"+num+"'name='count' class='count'"+
 						"onchange='count_change("+num+")'></select>"+
 						"<input type='hidden' id='stock"+num+"'"+
@@ -149,21 +149,20 @@ function check(){
 	}
 }
 </script>
-<link href="./css/inc.css" rel="stylesheet" type="text/css">
-<link href="./css/subpage.css" rel="stylesheet" type="text/css">
+<link href="./css/popup.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<div id = "wrap">
+<div id = "thing_exchange">
 <form action="./Thing_Exchange_Action.ao" method = "post" onsubmit="return check()">
-<table border = "1">
+<table>
 	<tr>
 		<th>상품 번호
 			<input type = "hidden" name = "o_num" value="<%=tnum%>"></th>
 		<td><%=mtib.getOri_num() %></td>
 		<td><%=mtib.getSubject() %></td>
-		<td>색상 : <%=mtib.getColor() %></td>
-		<td>사이즈 : <%=mtib.getSize() %></td>
-		<td><%=mtib.getThing_count()%>개</td>
+		<td>색상: <%=mtib.getColor() %></td>
+		<td>사이즈: <%=mtib.getSize() %></td>
+		<td>수량: <%=mtib.getThing_count()%>개</td>
 		<td><%=mtib_cost%>원<input type="hidden" id = "ori_cost" value="<%=mtib.getTotal_cost()%>"></td>
 	</tr>
 	<tr>
@@ -213,15 +212,15 @@ function check(){
 		<td><select id="size" onclick="return color_check()" onchange="info_call()">
 		<option value = "none">사이즈-재고</option>
 		</select></td>
-		<td>총 차액 : <span id="total_cost"></span>
+		<td colspan="3">총 차액 : <span id="total_cost"></span>
 			<input type="hidden"id="t_cost" name="t_cost"></td>
 	</tr>
 </table>
 <table>
 	<tr>
 		<th>코멘트 입력</th>
-		<td colspan ="6"><textarea rows="3" cols="60"
-			placeholder="고객에게의 메세지를 입력해 주세요"
+		<td colspan ="6"><textarea rows="3"
+			placeholder="고객에 보낼 메시지를 입력해 주세요"
 			id = "memo<%=mtib.getNum() %>" style="resize:none;"></textarea>
 		</td>
 	</tr>
