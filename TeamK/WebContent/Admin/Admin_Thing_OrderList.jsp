@@ -135,7 +135,7 @@ function status_update(o_num,status){
 }
 function Trade_Update_Info(o_num) {
 	window.open("./Trade_Update_Info.mo?num="+o_num,''
-			,'left=600, top=150, width=400, height=400, scrollbars=yes');
+			,'left=600, top=150, width=600, height=600, scrollbars=yes');
 }
 function search_type_check(){
 	if($('#search_type').val()=="trade_num"){

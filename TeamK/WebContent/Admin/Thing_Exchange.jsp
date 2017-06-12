@@ -55,8 +55,13 @@ function size_call(ori_num){
 		datatype:"JSON",
 		success:function(data){
 			$.each(data,function(i,size){
-				$('#size').append("<option  value = '"+size.num+
-						"' >"+size.size+"-"+size.stock+"개</option>");			
+				if(size.stock >0){
+					$('#size').append("<option  value = '"+size.num+
+							"' >"+size.size+"-"+size.stock+"개</option>");
+				}else{
+					$('#size').append("<option  value = '"+size.num+
+							"' disabled='disabled' >"+size.size+"-"+size.stock+"개 품절</option>");
+				}
 			});
 		}
 	});
@@ -144,11 +149,24 @@ function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 function check(){
-	if(count_check!=0){
+	
+	if(count_check()==$('#max_count').val()){
+		alert('교환 물품을 하나 이상은 선택 하셔야 합니다');
+		return false;
+	}
+	if(count_check()!=0){
 		if(!(confirm('교환 요구 수량과 교환 수량이 일치 하지 않습니다\n계속 진행하시겠습니까?'))){
 			return false;
 		}
 	}
+	if($('input:text[name=trans_num]').val().length==0){
+		alert('송장 번호를 입력해 주세요');
+		return false;
+	}
+	if($('#memo').val().length==0){
+		alert('교환 코맨트를 입력해 주세요');
+		return false;
+	}	
 }
 </script>
 <link href="./css/popup.css" rel="stylesheet" type="text/css">
@@ -159,7 +177,8 @@ function check(){
 <table>
 	<tr>
 		<th>상품 번호
-			<input type = "hidden" name = "o_num" value="<%=tnum%>"></th>
+			<input type = "hidden" name = "o_num" value="<%=tnum%>">
+			<input type = "hidden" name = "ori_num" value="<%=mtib.getOri_num()%>"></th>
 		<td><%=mtib.getOri_num() %></td>
 		<td><%=mtib.getSubject() %></td>
 		<td>색상: <%=mtib.getColor() %></td>
@@ -220,10 +239,14 @@ function check(){
 </table>
 <table>
 	<tr>
+		<th>송장 번호</th>
+		<td><input type="text" name="trans_num" size="30" placeholder="송장 번호를 입력해 주세요"></td>
+	</tr>
+	<tr>
 		<th>코멘트 입력</th>
-		<td colspan ="6"><textarea rows="3"
+		<td colspan ="6"><textarea rows="3" name="comment"
 			placeholder="고객에 보낼 메시지를 입력해 주세요"
-			id = "memo<%=mtib.getNum() %>" style="resize:none;"></textarea>
+			id = "memo" style="resize:none;"></textarea>
 		</td>
 	</tr>
 </table>

@@ -270,7 +270,6 @@ public class AdminDAO {
 		}
 	}
 	public void Thing_Stock_Plus(int ori_num, int t_count){
-		System.out.println(ori_num+">>>>>"+t_count);
 		try{
 			conn = getconn();
 			sql ="update thing set stock=? where num=?";
@@ -458,7 +457,6 @@ public class AdminDAO {
 	}
 	public void Ti_Status_Complet_Update(int ti_num){
 		int check = To_Trans_Search(ti_num);
-		System.out.println(check);
 		if(check ==0){
 			try{
 				conn =getconn();
@@ -760,6 +758,111 @@ public class AdminDAO {
 			}
 		}
 		return obj;
+	}
+	public int Thing_Stock_Check(int tnum){
+		int stock=0;
+		try{
+			conn = getconn();
+			sql = "select stock from thing where num = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, tnum);
+			rs = pstmt.executeQuery();
+			if(rs.next())stock=rs.getInt(1);
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return stock;
+	}
+	public void Stock_Mul(int num, int count){
+		try{
+			conn = getconn();
+			sql = "update thing set stock=stock-? where num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, count);
+			pstmt.setInt(2, num);
+			pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	public void Stock_Add(int num, int count){
+		System.out.println(num+">>>>>>>>"+count);
+		try{
+			conn = getconn();
+			sql = "update thing set stock=stock+? where num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, count);
+			pstmt.setInt(2, num);
+			pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	public void Thing_Exchange_Action(int o_num,String transnum, String memo){
+		try{
+			conn = getconn();
+			sql = "update thing_order set o_memo=?, o_trans_num=?,o_status=3 "+
+					"where o_num = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memo);
+			pstmt.setString(2, transnum);
+			pstmt.setInt(3, o_num);
+			pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	public String O_Memo_Read(int o_num){
+		String memo="";
+		try{
+			conn = getconn();
+			sql = "select o_memo from thing_order where o_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, o_num);
+			rs = pstmt.executeQuery();
+			if(rs.next())memo = rs.getString(1);
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return memo;
 	}
 	
 }
