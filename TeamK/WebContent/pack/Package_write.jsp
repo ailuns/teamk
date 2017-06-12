@@ -174,6 +174,7 @@
 								<option value="city">도시</option>
 								<option value="mount">산</option>
 								<option value="sea">바다</option>
+								<option value="country">농촌</option>
 							</select>
 						</td>
 					</tr>
