@@ -71,11 +71,7 @@ System.out.println("ProductUpdateAction excute()");
 		String car_num =multi.getParameter("car_num");
 		pb.setCar_num(Integer.parseInt(car_num));
 		pb.setType(multi.getParameter("type"));
-		String cost = multi.getParameter("cost");
-		if(cost.equals("")){
-			cost = "0";
-		}
-		pb.setCost(Integer.parseInt(cost));
+
 		pb.setCountry(multi.getParameter("country"));
 		pb.setArea(multi.getParameter("area"));
 

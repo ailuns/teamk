@@ -15,9 +15,9 @@ public class ProductModify implements Action{
 		// TODO Auto-generated method stub
 		System.out.println("ProductModify excute()");
 		
-		
+		int select_num = Integer.parseInt(request.getParameter("select_num"));
 		int num = Integer.parseInt(request.getParameter("num"));
-
+		
 		//디비객체 생성
 
 		//디비객체 생성
@@ -26,6 +26,7 @@ public class ProductModify implements Action{
 		ProductBean pb = pdao.getProduct(num);
 
 		request.setAttribute("pb_up", pb);
+		request.setAttribute("select_num", select_num);
 		
 		ActionForward forward=new ActionForward();
 		forward.setPath("./product/Product_modify.jsp");

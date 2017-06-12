@@ -20,6 +20,7 @@ public class ProductModifyAction implements Action{
 		String color = request.getParameter("color");
 		String size = request.getParameter("size");
 		int stock = Integer.parseInt(request.getParameter("stock"));
+		int cost = Integer.parseInt(request.getParameter("cost"));
 		//디비객체 생성
 
 		//디비객체 생성
@@ -33,6 +34,7 @@ public class ProductModifyAction implements Action{
 		pb.setColor(color);
 		pb.setSize(size);
 		pb.setStock(stock);
+		pb.setCost(cost);
 		
 		pdao.updateProduct(pb);
 			

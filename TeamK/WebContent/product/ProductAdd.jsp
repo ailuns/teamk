@@ -71,24 +71,31 @@
 
 	jQuery(document).ready(function($){
 		// 달력 관련 소스
-		$("#add_date").datepicker({
-			dateFormat: 'yy-mm-dd',    // 날짜 포맷 형식
-			minDate : 0,			   // 최소 날짜 설정      0이면 오늘부터 선택 가능
-			numberOfMonths: 1,		   // 보여줄 달의 갯수
-	        dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],  // 일(Day) 표기 형식
-	        monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],   // 월(Month) 표기 형식
-	        //showOn: "both",		// 버튼을 표시      both : input과 buttom 둘다 클릭 시 달력 표시           bottom  :  buttom 클릭 했을 때만 달력 표시
-	        //buttonImage: "./img/calendar.png",   // 버튼에 사용될 이미지
-	        //buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
+		$(".number").keyup(function(){
+			$(this).val( $(this).val().replace(/[^0-9]/g,"") );
 		});
 		
-		$("#Date_modify").hide();
+		$(".str").keyup(function() {
+			$(this).val( $(this).val().replace(/[0-9]|[^\!-z]/gi,"") );
+		});
+		
+		
+	
+		
+	
 	});
 
-	// 날짜 추가
+
 	function dateAdd()
 	{
+		
 	
+		if($("#add_size").val() == "" || $("#add_color").val() == "" || $("#add_size").val() == "" || $("#add_stock").val()== "" ){
+			alert("빈공간이 없게 입력해주세요.")
+		}else if($("#add_stock").val() == 0){
+			alert("수량을 1부터 입력해주세요.")
+		}
+		else{
 		$.ajax({   // 날짜를 클릭할때 마다 찜목록과 비교
 			type:"post",
 			url:"./ProductAddChk.bo",
@@ -114,7 +121,7 @@
 							intro:$("#intro").val(),
 							car_num:$("#car_num").val(),
 							type:$("#type").val(),
-							cost:$("#cost").val(),
+							cost:$("#add_cost").val(),
 							area:$("#area").val(),
 							color:$("#add_color").val(),
 							size:$("#add_size").val(),
@@ -138,7 +145,7 @@
 		});
 		
 		
-		
+		}
 		
 	}
 	
@@ -170,8 +177,8 @@
 	
 	
 	// 날짜 수정 버튼 클릭 이벤트
-	function winOpen(num) {
-		win = window.open("./ProductModify.bo?num=" + num, "Product_modify.jsp",
+	function winOpen(num, select_num) {
+		win = window.open("./ProductModify.bo?num=" + num + "&select_num=" + select_num, "Product_modify.jsp",
 				"width=500, height=300, left=800, top=100");
 	}
 	
@@ -186,7 +193,7 @@
 		$("#select_date" + select_num).css("background-color", "#D5D5D5");  // 클릭된 tr 부분의 배경색을 #D5D5D5로 바꾼다		
 		
 		var num = $("#num" + select_num).val();
-		winOpen(num);
+		winOpen(num, select_num);
 // 		var num = $("#num"+select_num).val();
 // 		var subject = $("#subject").val();
 // 		location.href="./PackDateAdd.po?num=" + num + "&subject=" + subject;
@@ -249,6 +256,7 @@
 			<td id="date_date">Color</td>
 			<td id="date_cost">Size</td>
 			<td id="date_stock">갯수</td>
+			<td id="date_stock">가격</td>
 		</tr>
 		
 		<%
@@ -268,7 +276,6 @@
 				<input id="intro" style="display:none;" value="<%=pb.getIntro() %>"></input>
 				<input id="car_num" style="display:none;" value="<%=pb.getCar_num()%>"></input>
 				<input id="type" style="display:none;" value="<%=pb.getType() %>"></input>
-				<input id="cost" style="display:none;" value="<%=pb.getCost() %>"></input>
 				<input id="area" style="display:none;" value="<%=pb.getArea() %>"></input>
 				<input id="file1" style="display:none;" value="<%=pb.getImg() %>"></input>
 				<input id="file2" style="display:none;" value="<%=pb.getImg2() %>"></input>
@@ -278,6 +285,7 @@
 				<td class="date_td_size"><%=pb.getColor() %></td>
 				<td class="date_td_size"><%=pb.getSize() %></td>
 				<td class="date_td_size"><%=pb.getStock() %></td>
+				<td class="date_td_size"><%=pb.getCost() %></td>
 			</tr>
 		<%
 			}
@@ -294,7 +302,7 @@
 					Color
 				</td>
 				<td>
-					<input type="text" id="add_color" ><br>
+					<input type="text" id="add_color" class="str"><br>
 				</td>
 			</tr>
 			
@@ -303,7 +311,7 @@
 					Size
 				</td>
 				<td>
-					<input type="text" id="add_size" >
+					<input type="text" id="add_size" class="str">
 				</td>
 			</tr>
 			
@@ -312,7 +320,15 @@
 					수량
 				</td>
 				<td>
-					<input type="text" id="add_stock">
+					<input type="text" id="add_stock" class="number">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					가격
+				</td>
+				<td>
+					<input type="text" id="add_cost" class="number">
 				</td>
 			</tr>
 			<tr>

@@ -1337,9 +1337,13 @@ if (user_id == null)
 										var stocktest = "";
 										$.each(data,function(index,qwer){
 										//body태그 추가 key:value	
-											$('#size').append("<option value=" + qwer.num + ">" + qwer.size +"</option>");
-											$('#dstock').append("<input type = 'hidden' value ='"+qwer.stock+"'id='dstock"+qwer.num+"'>");
-											
+										
+										if(qwer.stock <= 0){
+										$('#size').append("<option value=" + qwer.num + " disabled>" + qwer.size + "품절</option>");
+										}else{
+										$('#size').append("<option value=" + qwer.num + ">" + qwer.size +"</option>");
+										$('#dstock').append("<input type = 'hidden' value ='"+qwer.stock+"'id='dstock"+qwer.num+"'>");
+										}	
 										stocktest+=","+ qwer.stock;
 									
 										});
@@ -1394,7 +1398,6 @@ if (user_id == null)
 										});
 									
 									});
-									}else{alert("닌멍청하다")
 									}
 								});
 							}
@@ -1435,7 +1438,7 @@ if (user_id == null)
 						pb = (ProductBean) productList.get(i);
 			%>
 			<div id="contentdiv2">
-				<div id="contentdiv2_1"><%=pb.getContent() %>
+				<div id="contentdiv2_1"><center><%=pb.getContent() %></center>
 				</div>
 				</div>
 			<%} %>
@@ -1491,7 +1494,7 @@ if (user_id == null)
 								wid = 10 * comb.getRe_lev();
 						%> 
 						<%--<img src="level.gif" id="reimg" width=<%=wid%>> <img src="re.gif"> --%>
-							<img src="./img/re.gif">
+							<img src="./img/reply.png" height="12px">
 							<span>[답변]</span>
 						<%
 							}

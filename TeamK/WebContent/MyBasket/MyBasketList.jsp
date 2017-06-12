@@ -65,7 +65,7 @@
 	function basket_delete(){
 		
 		if(confirm("정말 삭제하시겠습니까?")){
-			if(check==0){
+			if(check()==0){
 				alert("선택된 항목이 없습니다!");
 				return false;
 			}else{
