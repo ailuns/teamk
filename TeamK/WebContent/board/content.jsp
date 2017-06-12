@@ -16,6 +16,7 @@
 
 /////////////////////AJAX 리플 달기, 삭제/////////////////////////
 	function replyupdate(){
+	if(document.fr1.content.value!=""){
 		 $.ajax({
 	         url:'./BoardReplyAction.bo',
 	         type:'post',
@@ -29,6 +30,9 @@
 	        	$('#replyUpdate').html(data);
 	         }
 	      });
+	}else if(document.fr1.content.value==""){
+		alert("댓글을 입력해주세요");
+	}
 	}
 	
 	

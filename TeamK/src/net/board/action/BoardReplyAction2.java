@@ -31,6 +31,8 @@ public class BoardReplyAction2 implements Action {
 		
 		String rid = request.getParameter("rId"); //rid에 리플 작성자 아이디 저장
 		String rcontent = request.getParameter("rContent"); //rcontent에 리플내용 저장
+		System.out.println("아작스 리플내용="+rcontent);
+		System.out.println("아작스 작성자="+rid);
 		int rNum = Integer.parseInt(request.getParameter("rNum")); //rNum에 글번호 저장
 		String pageNum = request.getParameter("pageNum");
 		String wEmail = request.getParameter("wEmail"); //wEmail에 글작성자 email주소 저장

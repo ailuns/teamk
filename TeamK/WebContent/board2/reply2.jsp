@@ -25,7 +25,7 @@ String rNum = (String)request.getAttribute("rNum"); // rNum에 글 번호 불러
 String wEmail = (String)request.getAttribute("wEmail"); //wEmail에 작성자의 메일주소 불러오기
 String wContent = (String)request.getAttribute("wContent"); //wContent에 작성한 댓글 내용 불러오기
 %>
-<p>댓글(<%=rcount%>개)</p>
+<p>답변(<%=rcount%>개)</p>
 <table id="reply">
     <%if(rcount!=0){
     for(int i=0; i<lrb.size(); i++){
@@ -33,7 +33,7 @@ String wContent = (String)request.getAttribute("wContent"); //wContent에 작성
     	BoardReplyBean rb = (BoardReplyBean)lrb.get(i);%>
 <tr>
 <td id="name"><%=rb.getId()%></td>
-<td id="rContent"><%=rb.getContent()%></td>
+<td id="content"><%=rb.getContent()%></td>
 <td id="delete"><%
 if(id!=null){
 	if(id.equals(rb.getId())||id.equals("admin")){ 
@@ -57,7 +57,7 @@ if(id!=null){
 	<input type="hidden" id="wContent" value="<%=wContent%>"><%--글작성자 글내용 넘기기  --%>
 	<input type="hidden" id="wEmail" value="<%=wEmail%>"><%--글작성자 메일주소 넘기기 --%>
 	<div id="textarea">
-		<textarea rows="3" cols="59" id="rContent" name="content"></textarea><%--리플내용 넘기기 --%>
+	<textarea rows="3" cols="59" id="rContent" name="content"></textarea><%--리플내용 넘기기 --%>
 	</div>
 	<input type="button" value="댓글달기" onclick="replyupdate()">
 </form>
