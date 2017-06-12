@@ -739,6 +739,7 @@
 		});
 	}
 	
+	//패키지 상품 삭제
 	function PackDel(num)
 	{
 		if (confirm("※해당 패키지의 모든 날짜가 삭제됩니다") == true){    //확인
@@ -1129,7 +1130,8 @@
 		<div id="middle1">
 			<div id="contentdiv2">
 				<div id="contentdiv2_1">
-				<%=PB.getContent() %>
+				<center><%=PB.getContent() %></center>
+				
 				</div>
 			</div>
 		</div>
@@ -1200,7 +1202,7 @@
 								wid = 10 * rb.getRe_lev();
 						%> 
 						<%--<img src="level.gif" id="reimg" width=<%=wid%>> <img src="re.gif"> --%>
-							<img src="./img/re.gif">
+							<img src="./img/reply.png" height="12px">
 							<span>[답변]</span>
 						<%
 							}

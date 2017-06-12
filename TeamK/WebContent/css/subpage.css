@@ -610,7 +610,8 @@ input#admin_write {margin-top : 20px;}
 }
 
 #contentdiv2_1 {
-	width: 730px;
+	min-width: 730px;
+	overflow : hidden;
 	min-height: 700px;
 	margin : 0 auto;
 	padding-top : 30px;
