@@ -45,33 +45,6 @@ jQuery(document).ready(function($){
     	google.maps.event.trigger(input, 'focus');
 	    google.maps.event.trigger(input, 'keydown', { keyCode: 13 });
 	});
-	
-	
-	// 작은 이미지 클릭 시 큰 이미지부분이 클릭한 이미지로 교체
-	$('.bxslider img').click(function(){
-		
-		// 모든 이미지의 테두리값을 없앤다
-		$('.bxslider img').css("border", "");  
-		
-		// 클릭된 이미지에 회색 테두리를 만든다
-		// 선택된 효과
-		$(this).css({
-			"border" : "5px solid #A6A6A6",
-			"box-sizing" : "border-box"
-		});
-		
-		// 클릭된 이미지의 src 주소값을 가져온다
-		var imgurl = $(this).attr("src");
-		// 큰 이미지 부분에 클릭된 작은이미지 src 적용
-		$('#main').attr("src", imgurl);
-	});
-	
-	
-	$('#close').click(function(){
-		$('#banner').hide();
-		$('#banner_sub').hide();
-	});
-
 });
 
 

@@ -20,12 +20,12 @@ public class MyThingPopup implements Action{
 		
 		
 		int num = Integer.parseInt(request.getParameter("num"));
-		System.out.println("PackContent num >> " + num);
+		System.out.println("ProductContent num >> " + num);
 		
 		ProductDAO pddao = new ProductDAO();
 		ProductBean pdb = new ProductBean();
 		
-		pdb = pddao.getProduct(num);
+		pdb = pddao.getProduct2(num);
 		
 //		pb = pdao.getPack_original(num);
 //		System.out.println("MyPackPopup num >> " + pb.getNum());
@@ -34,8 +34,8 @@ public class MyThingPopup implements Action{
 		request.setAttribute("pdb", pdb);
 		
 		ActionForward forward = new ActionForward();
-		forward.setRedirect(false);
 		forward.setPath("./MyOrder/MyThingPopup.jsp");
+		forward.setRedirect(false);
 		return forward;
 	}
 
