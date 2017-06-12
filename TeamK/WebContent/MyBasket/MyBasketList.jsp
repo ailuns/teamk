@@ -69,9 +69,11 @@
 				alert("선택된 항목이 없습니다!");
 				return false;
 			}else{
+				alert($('input:checkbox[name=tch]').length);
 				document.fr.action = "./MyBasketDelete.bns";
 				document.fr.method="post";
 				document.fr.submit();
+				return false;
 			}
 		}else return false;
 	}

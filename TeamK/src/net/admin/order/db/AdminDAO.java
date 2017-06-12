@@ -253,7 +253,7 @@ public class AdminDAO {
 	public void TO_Status_Update(int status, int ti_num){
 		try{
 			conn = getconn();
-			sql ="update thing_order set o_status = ? where o_ti_num=?";
+			sql ="update thing_order set o_status = ?,o_date=now() where o_ti_num=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, status);
 			pstmt.setInt(2, ti_num);
@@ -322,7 +322,7 @@ public class AdminDAO {
 		try{
 			conn = getconn();
 			sql ="update thing_order set "+status+
-					" where o_num=?";
+					", o_date=now() where o_num=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, o_num);
 			pstmt.executeUpdate();
