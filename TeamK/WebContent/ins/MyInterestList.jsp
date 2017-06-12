@@ -26,7 +26,7 @@ List<interestBEAN> InterestThing = (List<interestBEAN>) request.getAttribute("In
 	
 	function inter_thing_move(select)
 	{
-		var num = $("#num" + select).val();
+		var num = $("#thingnum" + select).val();
 		var carnum = $("#carnum" + select).val();
 		location.href="./ProductContent.bo?num=" + num + "&car_num=" + carnum;
 	}
@@ -108,7 +108,8 @@ List<interestBEAN> InterestThing = (List<interestBEAN>) request.getAttribute("In
 						String cost = (String)Commas.format(inb.getCost());
 			%>
 			<tr>
-			<input type="hidden" id="carnum<%=i %>" value="<%=inb.getOri_num() %>">
+			<input type="hidden" id="thingnum<%=i %>" value="<%=inb.getOri_num() %>">
+			<input type="hidden" id="carnum<%=i %>" value="<%=inb.getCar_num() %>">
 			<td class="inb_img ev_hover" onclick="inter_thing_move(<%=i %>);"><img id="inb_img" alt="" src="./upload/<%=inb.getImg() %>"></td>
 				<td><%=inb.getSubject()%><br>
 				<%=inb.getIntro() %></td>
