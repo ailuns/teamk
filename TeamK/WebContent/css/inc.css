@@ -162,11 +162,11 @@ body {
 	padding: 0;
 	background-image:url("../img/travel_logo7.jpg"); 
 	/* background-size: 290px; */
-		background-size: 440px 660px;
-		background-repeat:no-repeat;
-		background-position:left 150px;	
-		background-color:rgb(249,136,32);
-		background-attachment:fixed;
+	background-size: 440px 660px;
+	background-repeat:no-repeat;
+	background-position:left 150px;	
+	background-color:rgb(249,136,32);
+	background-attachment:fixed;
 	font-size: 13px;
 }
 div#wrap {
