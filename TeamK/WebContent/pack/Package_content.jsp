@@ -826,6 +826,8 @@
 					for(int i = 0; i < RecommendProduct.size(); i++)
 					{
 						pdb =(ProductBean)RecommendProduct.get(i);
+						DecimalFormat df = new DecimalFormat("#,###");
+					    String Recommedcost = df.format(pdb.getCost());
 				%>
 				
 				<td>
@@ -836,7 +838,7 @@
 							<td><img id="Rcom_pd" src="./upload/<%=pdb.getImg() %>" onclick="Rcom_move(<%=i %>)"></td>
 						</tr>
 						<tr>
-							<td><div class="info"><%=pdb.getCost() %></div></td>
+							<td><div class="info"><%=Recommedcost %>원</div></td>
 						</tr>
 					</table>
 				</td>
