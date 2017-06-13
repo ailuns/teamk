@@ -589,7 +589,7 @@ input#admin_write {margin-top : 20px;}
 	height : 30px;
 }
 #datecontent tr.select_color:HOVER {
-	background-color: #D5D5D5;
+/* 	background-color: #D5D5D5; */
 	cursor: pointer;
 }
 #datecontent .date_td_size {
