@@ -1216,8 +1216,7 @@ if (user_id == null)
 								totalP();
 							}
 						function up(num){
-							var t=$("#avg_cost").html().replace(",","");
-							var val =t.replace("원","");
+							var val = $('#o_cost'+num).val();
 							var str = parseInt($("#stack2"+num).val());
 							
 							var str2 = $("#size option:selected").val();
@@ -1260,8 +1259,8 @@ if (user_id == null)
 						
 						
 							function down(num){
-								var t=$("#avg_cost").html().replace(",","");
-								var val =t.replace("원","");
+								
+								var val = $('#o_cost'+num).val();
 								var str = parseInt($("#stack2"+num).val());
 								if(str <= 1){
 									if(confirm('해당 상품을 리스트에서 삭제하시겠습니까?'))trdel(num);
@@ -1397,6 +1396,8 @@ if (user_id == null)
 																"name='stock' value='"+qqqq.stock+"'>"+
 																"<input type='hidden' id='cost"+tnum+"'"+
 																	"name='cost' value='"+qqqq.cost+"'>"+
+																"<input type='hidden' id='o_cost"+tnum+"'"+
+																	"name='o_cost' value='"+qqqq.cost+"'>"+
 														  "<input type='hidden'"+"name='tnum' value='"+tnum+"'>"+
 														  "<input type='hidden'"+"name='color' value='"+qqqq.color+"'>"+
 														  "<input type='hidden'"+"name='size' value='"+qqqq.size+"'>"+
@@ -1416,19 +1417,20 @@ if (user_id == null)
 							}
 							function trdel(tnum){
 								$('#stocktr'+tnum).remove();
+								totalP();
 							}
 							function numberWithCommas(x) {
 							    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 							}
 							function totalP(){
 								var sum = 0;
-								for(var i = 0; i<$('#stocktable').find('.tcost').length; i++){
+								for(var i = 0; i<$('#stocktable').find('[name=cost]').length; i++){
 									
-									var ints = $('#stocktable .tcost').eq(i).text().replace(",","");
-									ints = ints.replace("원","");
+									var ints = $('#stocktable [name=cost]').eq(i).val();
 									sum += parseInt(ints);
 								}
 								$('input:hidden[name=totalcost]').val(sum);
+								alert(sum);
 								$('#p').html(numberWithCommas(sum)+"원");
 							}
 							
