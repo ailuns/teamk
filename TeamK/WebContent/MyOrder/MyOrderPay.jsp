@@ -94,7 +94,7 @@ function receive_setting(){
 	<caption>예약하신 패키지 상품 정보<br>
 		<span>예약하신 패키지 상품의 팜플랫을 받아 보시겠습니까?
 			<input name = "po_receive_check" type ="radio" id ="po_receive_check" value="1" checked="checked">예
-			<input name = "po_receive_check" type ="radio" id ="po_receive_check" value="0">아니오
+			<input name = "po_receive_check" type ="radio" value="0">아니오
 		</span>
 	</caption>
 	
@@ -199,21 +199,21 @@ function receive_setting(){
 <script type="text/javascript">
 
 $(document).ready(function() {
-	$('#cost_sum').html(<%=cost_sum%>+"원");
+	$('#cost_sum').html(numberWithCommas(<%=cost_sum%>)+"원");
 	if(<%=ModThingList.size()%>!=0){
 		if(<%=thing_cost_sum%>>=20000){
 			$('#trans_cost').prepend("0원");	
 			$('#total_cost').val(<%=cost_sum%>);
-			$('#t_cost').html(<%=cost_sum%>+"원");
+			$('#t_cost').html(numberWithCommas(<%=cost_sum%>)+"원");
 		}
 		else {
-			$('#trans_cost').prepend("3000원");
+			$('#trans_cost').prepend("3,000원");
 			$('#total_cost').val(<%=cost_sum%>+3000);
-			$('#t_cost').html(<%=cost_sum%>+3000+"원");
+			$('#t_cost').html(numberWithCommas(<%=cost_sum%>)+"원");
 		}
 	}else{
 		$('#total_cost').val(<%=cost_sum%>);
-		$('#t_cost').html(<%=cost_sum%>+"원");
+		$('#t_cost').html(numberWithCommas(<%=cost_sum%>)+"원");
 	}
 	for(var i = 1; i<5;i++){
 		$('.trade_type'+i).hide();	
@@ -305,7 +305,18 @@ $(document).ready(function() {
 		selectreset();
 	});
 });
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 function submit_check(){
+	if($("#po_receive_check").is(':checked')&&
+			<%=ModThingList.size()%>==0){
+		if($('#o_receive_name').val()=="null"){
+			alert('배송지 정보를 입력해 주세요');
+			return false;
+		}
+	}
+	
 	if($('#trade_type1').is(":checked")){
 		if($('#select_card option:eq(0)').prop('selected')){
 			alert("카드사를 선택해 주세요");
