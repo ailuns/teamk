@@ -123,7 +123,7 @@
 	 	List ProductImgList = (List)request.getAttribute("ProductImgList");
 	%>
 
-<div id="wrap">
+<div id="wrap" style="background-color: white;">
 
 	<div id="article_head">
 		<div id="article_title"><img src="./img/shop2.png" width="26px" style="margin:0 8px 3px 0;  vertical-align: bottom;">상품</div>
