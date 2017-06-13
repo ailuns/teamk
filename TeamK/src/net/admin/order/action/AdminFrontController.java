@@ -104,7 +104,7 @@ public class AdminFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 		}else if(command.equals("/Thing_Exchange_Action.ao")){
-			action = new Thing_Exchange();
+			action = new Thing_Exchange_Action();
 			try {
 				afo = action.execute(request, response);
 			} catch (Exception e) {

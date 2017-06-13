@@ -11,7 +11,6 @@ public class thing_info implements Action{
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		ActionForward afo = new ActionForward();
-		System.out.println("work");
 		int num = Integer.parseInt(request.getParameter("num"));
 		AdminDAO admindao = new AdminDAO();
 		request.setAttribute("obj", admindao.Thing_Exchange_Add(num));
