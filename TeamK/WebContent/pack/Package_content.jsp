@@ -74,6 +74,7 @@
 		{
 			if (stockArr[i] == 0)	// 수량 0		
 			{
+				$("#select_date" + i).css("color", "#BDBDBD");
 				$("#select_rbtn" + i).attr("disabled", true);  // 라디오 버튼 비활성화
 				$("#select_date" + i).attr("onclick", "");  // 클릭 이벤트 없앰
 			}
@@ -1102,7 +1103,7 @@
 						String cost = (String)Commas.format(pb.getCost());
 				%>	
 				<tr id="select_date<%=i %>" class="select_color" onclick="select_date(<%=i %>)">
-					<td class="date_td_size"><input type="radio" id="select_rbtn<%=i %>" name="chk" value="<%=pb.getNum() %>"></td>
+					<td class="date_td_size"><input type="radio" class="select_rbtn" id="select_rbtn<%=i %>" name="chk" value="<%=pb.getNum() %>"></td>
 					<td class="date_td_size"><%=pb.getDate() %></td>
 					<td class="date_td_size"><%=pb.getSubject() %></td>
 					<td class="date_td_size" id="cost<%=pb.getNum() %>"><%=cost %></td>
