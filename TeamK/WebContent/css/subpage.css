@@ -328,7 +328,8 @@ div#package_slide a#pack4 {
 
 
 div#package_search {
-	background-color: #f5b8d7;
+/* 	background-color: #f5b8d7; */
+	background-color: #06c;
 	width: 400px;
 	height: 300px;
 	color: #fff;
@@ -355,7 +356,8 @@ div#package_search form input[type=submit] {
 	font-size: 15px;
 	width: 70px;
 	border: 1px solid #fff;
-	background-color: #f5b8d7;
+/* 	background-color: #f5b8d7; */
+	background-color: #06c;
 	color: #fff;
 	font-weight: bold;
 }
