@@ -248,7 +248,7 @@ CategoryDAO cdao = new CategoryDAO();
 				</tr>
 				
 				<tr>
-						<td class="td_size">타입</td>
+						<td>타입</td>
 						<td>
 							<select id="type" name="type">
 								<option value="city" <%="city".equals(pb2.getType()) ? "selected" : ""%>>도시</option>

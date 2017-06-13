@@ -21,22 +21,28 @@
 <script type="text/javascript">
 
 	jQuery(document).ready(function($){
-		// 달력 관련 소스
-		$("#up_date").datepicker({
-			dateFormat: 'yy-mm-dd',    // 날짜 포맷 형식
-			minDate : 0,			   // 최소 날짜 설정      0이면 오늘부터 선택 가능
-			numberOfMonths: 1,		   // 보여줄 달의 갯수
-	        dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],  // 일(Day) 표기 형식
-	        monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],   // 월(Month) 표기 형식
-	        //showOn: "both",		// 버튼을 표시      both : input과 buttom 둘다 클릭 시 달력 표시           bottom  :  buttom 클릭 했을 때만 달력 표시
-	        //buttonImage: "./img/calendar.png",   // 버튼에 사용될 이미지
-	        //buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
+		// 숫자
+		$(".number").keyup(function(){
+			$(this).val( $(this).val().replace(/[^0-9]/g,"") );
 		});
+		// 영문자
+		$(".str").keyup(function() {
+			$(this).val( $(this).val().replace(/[0-9]|[^\!-z]/gi,"") ); 
+		});
+		
+		
 	});
 
 	// 날짜, 가격, 수량 수정
-	function dateUpdate(num)
+	function dateUpdate()
 	{
+
+		if($("#add_size").val() == "" || $("#add_color").val() == "" || $("#add_size").val() == "" || $("#add_stock").val()== "" ){
+			alert("빈공간이 없게 입력해주세요.")
+		}else if($("#add_stock").val() == 0){
+			alert("수량을 1부터 입력해주세요.")
+		}
+		else{
 		var up_cost = $("#up_cost").val();
 		var up_stock = $("#up_stock").val();
 		var up_date = $("#up_date").val();
@@ -65,6 +71,7 @@
 		}
 		});
 	}
+		}
 	}			
 	
 	
@@ -163,7 +170,7 @@
 					<table>
 						<tr>
 							<td>color</td>
-							<td><input id="up_num" style="display: none;"
+							<td><input id="up_num" style="display: none;" class="str"
 								value="<%=pb_up.getNum()%>"></input> <input id="name"
 								style="display: none;" value="<%=pb_up.getName()%>"></input> <input
 								type="text" id="up_color" value="<%=pb_up.getColor()%>" readonly>
@@ -172,19 +179,19 @@
 
 						<tr>
 							<td>Size</td>
-							<td><input type="text" id="up_size"
+							<td><input type="text" id="up_size" class="str"
 								value="<%=pb_up.getSize()%>" readonly>
 							</td>
 						</tr>
 
 						<tr>
 							<td>수량</td>
-							<td><input type="text" id="up_stock"
+							<td><input type="text" id="up_stock" class="number"
 								value="<%=pb_up.getStock()%>"></td>
 						</tr>
 						<tr>
 							<td>가격</td>
-							<td><input type="text" id="up_cost"
+							<td><input type="text" id="up_cost" class="number"
 								value="<%=pb_up.getCost()%>"></td>
 						</tr>
 					</table>
