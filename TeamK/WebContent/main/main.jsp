@@ -140,8 +140,10 @@
 				<%
 				BoardDAO bdao=new BoardDAO();
 				int count=bdao.getBoardCount();
+				int count2=bdao.getBoardCount2();
+				int count3=bdao.getBoardCount3();
 				SimpleDateFormat sdf=new SimpleDateFormat("yyyy.MM.dd");
-				if(count!=0){
+				if(count3==0){%><tr><td colspan="3">글이 없습니다.</td></tr><%}else{
 					List<BoardBean> boardList3=bdao.getBoardList3(1, 5);
 					for(int i=0;i<boardList3.size();i++){
 						BoardBean bb=boardList3.get(i);
@@ -240,7 +242,7 @@
 		<h1><a href="./BoardList.bo">리뷰<span>＋</span></a></h1>
 			<table>
 				<%
-				if(count!=0){
+				if(count==0){%><tr><td colspan="3">글이 없습니다.</td></tr><%}else{
 					List<BoardBean> boardList=bdao.getBoardList(1, 5);
 					for(int i=0;i<boardList.size();i++){
 						BoardBean bb=boardList.get(i);
@@ -259,7 +261,7 @@
 			<h1><a href="./BoardList2.bo">Q&amp;A<span>＋</span></a></h1>
 			<table>
 				<%
-				if(count!=0){
+				if(count2==0){%><tr><td colspan="3">글이 없습니다.</td></tr><%}else{
 					List<BoardBean> boardList2=bdao.getBoardList2(1, 5);
 					for(int i=0;i<boardList2.size();i++){
 						BoardBean bb=boardList2.get(i);
