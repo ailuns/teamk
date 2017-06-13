@@ -181,10 +181,10 @@ if (user_id == null)
 				var cost_temp = $("#p").html(); // 총금액 받아오기
 				str = String(cost_temp);		// 총금액 천원단위로 , 찍혀있는걸
 			    cost = str.replace(/[^\d]+/g, '');   // 풉니다
-			    alert($("#size option:selected").val());				
+			  			
 			    $("#cost").val(cost);
 			    $("#ori_num").val($("#size option:selected").val());
-			    alert($("#cost").val())
+		
 			    document.input_fr.action = "./MyBasketAddAction.bns";	// 장바구니 페이지로 이동
 			    document.input_fr.method = "post";
 			    document.input_fr.submit();
