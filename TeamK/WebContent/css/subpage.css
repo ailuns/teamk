@@ -457,7 +457,7 @@ div#package_tab .img_size {
 div#package_tab #img_content {
 	padding : 0px;
 	margin : 15px;
-	border: 1px solid pink;
+	border: 1px solid #ddd;
 	background-color: white;
 }
 div#package_tab .tab_content a:LINK,
