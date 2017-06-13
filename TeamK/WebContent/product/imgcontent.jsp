@@ -1064,14 +1064,14 @@ if (user_id == null)
 						<tr>
 							<td class="contentdiv1_1">판매가<input type ="hidden" id ="ori_cost" value="<%=pb.getCost() %>"></td>
 							<td class="contentdiv1_2" id="avg_cost">
-							<%=pb.getCost() %></td>
+							<%=pb.getCost() %></td><td></td>
 							
 							<td class="contentdiv1_3"></td>
 						</tr>
 							<%} %>
 						<tr>
 							<td class="contentdiv1_1">color</td>
-								<td class="contentdiv1_2"><select id="color" onchange="people_Calc2(<%=num%>)">
+								<td class="contentdiv1_2"><select id="color" onchange="people_Calc2(<%=num%>)" style="width:150px;">
 								<option value ="">선택하세요</option>
 								<%
 				for (int i = 0; i < productList3.size(); i++) {
@@ -1087,7 +1087,7 @@ if (user_id == null)
 						<tr>
 							<td class="contentdiv1_1">size</td>
 							<td class="contentdiv1_2">
-							<select  id ="size"class="size" onchange="people_Calc3(<%=num%>)">
+							<select  id ="size"class="size" onchange="people_Calc3(<%=num%>)" style ="width : 150px;">
 								<option  value = "5555" >선택하세요</option>
 								
 								</select></td>
@@ -1346,9 +1346,9 @@ if (user_id == null)
 											}
 											
 										if(qwer.stock <= 0){
-										$('#size').append("<option value=" + qwer.num + " disabled>" + qwer.size+ ":"+ sss+cost_cal +  "품절</option>");
+										$('#size').append("<option value=" + qwer.num + " disabled>" + qwer.size+ "------재고수량:▶[품절]</option>");
 										}else{
-										$('#size').append("<option value=" + qwer.num + ">" + qwer.size + ":&nbsp&nbsp&nbsp["+ sss+cost_cal +"원] </option>");
+										$('#size').append("<option value=" + qwer.num + ">" + qwer.size + "------재고수량:▶"+qwer.stock+"개&nbsp;["+ sss+cost_cal +"원] </option>");
 										$('#dstock').append("<input type = 'hidden' value ='"+qwer.stock+"'id='dstock"+qwer.num+"'>");
 										}	
 										stocktest+=","+ qwer.stock;
