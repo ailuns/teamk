@@ -6,7 +6,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>TeamK 여행사</title>
 <link href="../css/popup.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 <%request.setCharacterEncoding("UTF-8"); %>
+
+
 <script type="text/javascript">
 	function result() {
 		if(document.wfr.userid.value<4){
@@ -19,6 +22,17 @@
 			window.close(); 
 		}
 	}
+	
+	
+	$(function(){ 
+		  //크롬등에서 ime-mode:disabled 정상작동 되지않으므로 정규식으로 처리
+		   $('#id').keyup(function(){
+		   $(this).val($(this).val().replace(/[^a-zA-Z0-9]/g,''));
+		   });
+
+		});
+	
+	
 	function check_key() {
 		var char_ASCII = event.keyCode;
 
@@ -53,8 +67,9 @@
 			return false;
 		}
 		//한글입력 불가
-		document.wfr.userid.style.imeMode = "disabled"
+		//document.wfr.userid.style.imeMode = "disabled"
 	}
+
 </script>
 </head>
 <body>
@@ -65,8 +80,9 @@
 	%>
 	<div id="idcheck">
 	<form action="joinIdCheck.jsp" method="post" name="wfr">
-		<input type="text" name="userid" value="<%=id%>" onkeypress="nonHangulSpecialKey()" 
+		<input type="text" name="userid" value="<%=id%>" id="id" onkeypress="nonHangulSpecialKey()" 
 		style="ime-mode:disabled" maxlength="10">
+
 		<input type="submit" value="중복확인">
 		<p>
 		<%if(id.length()>=4 && id.length()<=10){
