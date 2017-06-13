@@ -1001,7 +1001,7 @@ if (user_id == null)
 											if(check == 1){
 											$('#stocktable').prepend(
 													"<tr id='stocktr"+tnum+"'><td class='contentdiv1_2'>"
-													+qqqq.color+"-"+qqqq.size+"&nbsp&nbsp&nbsp"+sss+cost_cal+"원</td><td>"+
+													+qqqq.color+"-"+qqqq.size+"&nbsp&nbsp&nbsp<br>"+sss+cost_cal+"원</td><td>"+
 													"<input type='button' value='▲' onclick='up("+tnum+")'>"+
 													"<input type='text' id = 'stack2"+tnum+"' size='1'"+ 
 													" name = 'count' value='1' onkeydown='keyup("+tnum+")'"+
