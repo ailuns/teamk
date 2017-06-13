@@ -80,8 +80,6 @@ if(id.equals(bb.getId())||id.equals("admin")){ %>
 <%}}%>
 <input type="button" value="글목록" 
        onclick="location.href='./BoardList3.bo?pageNum=<%=pageNum%>'">
-
-
 </div>
 </article>
 	</div>
