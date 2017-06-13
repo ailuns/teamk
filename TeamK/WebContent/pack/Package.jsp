@@ -247,8 +247,11 @@
 		</ul>
 		<!-- 탭 부분 -->
 		</form>
-		<div class="clear"></div>
+		<div class="clear"></div>	
+		<!-- 탭 내용 -->
+		<div class="tab_container"> 	
 		<%
+		
 			if (user_id != null)
 			{
 				if (user_id.equals("admin"))
@@ -258,10 +261,6 @@
 		 	<%
 				}
 			}
-		%>
-		<!-- 탭 내용 -->
-		<div class="tab_container"> 	
-		<%
 			for(int i = 0; i < ListArr.length; i++)
 			{
 				if(areaCount[i] == 0)
