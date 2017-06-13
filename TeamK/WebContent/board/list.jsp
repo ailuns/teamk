@@ -55,7 +55,9 @@ BoardDAO bdao = new BoardDAO();
  <th id="date">날짜</th>
  <th id="readcount">조회수</th>
 </tr>
+
     <%
+    if(count==0){%><tr><td colspan="6">글이 없습니다.</td></tr><%}else{
     for(int i=0; i<boardList.size(); i++){
     	//자바빈(BoardBean) 변수 =배열한칸 접근  배열변수.get()
     	BoardBean bb = (BoardBean)boardList.get(i);
@@ -71,7 +73,7 @@ BoardDAO bdao = new BoardDAO();
  <td><%=bb.getReadcount() %></td> <%--조회수--%>
 </tr>
     			<%
-    }
+    }}
     %>
 </table>
 <div id="board_menu_bar">
