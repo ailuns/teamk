@@ -1373,7 +1373,6 @@ if (user_id == null)
 										//body태그 추가 key:value
 											var tnum = qqqq.num;
 											var cost_cal = qqqq.cost - parseInt($("#ori_cost").val());
-											alert(cost_cal)
 											var sss = "";
 											if(cost_cal > 0){
 												sss = "+";
@@ -1430,7 +1429,6 @@ if (user_id == null)
 									sum += parseInt(ints);
 								}
 								$('input:hidden[name=totalcost]').val(sum);
-								alert(sum);
 								$('#p').html(numberWithCommas(sum)+"원");
 							}
 							
