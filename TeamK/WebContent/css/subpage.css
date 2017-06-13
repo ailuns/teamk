@@ -328,7 +328,8 @@ div#package_slide a#pack4 {
 
 
 div#package_search {
-	background-color: #f5b8d7;
+/* 	background-color: #f5b8d7; */
+	background-color: #06c;
 	width: 400px;
 	height: 300px;
 	color: #fff;
@@ -355,7 +356,8 @@ div#package_search form input[type=submit] {
 	font-size: 15px;
 	width: 70px;
 	border: 1px solid #fff;
-	background-color: #f5b8d7;
+/* 	background-color: #f5b8d7; */
+	background-color: #06c;
 	color: #fff;
 	font-weight: bold;
 }
@@ -447,8 +449,9 @@ div#package_tab .tab_container {
     padding: 26px;
 }
 div#package_tab {margin: 0 auto;}
-div#package_tab .img_size {
+div#package_tab .img_size { 
 	width : 280px;
+	
 	height : 200px;
 }
 div#package_tab #img_content {
