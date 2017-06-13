@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="net.mod.db.ModTradeInfoBEAN"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -10,9 +11,19 @@
 request.setCharacterEncoding("utf-8");
 ModTradeInfoBEAN mtib = (ModTradeInfoBEAN)request.getAttribute("mtib");
 String [] reason = mtib.getMemo().split("ㅨ");
+int length = reason.length;
 String []memo=reason[0].split(",");
+DecimalFormat Commas = new DecimalFormat("#,###");
+
 %>
 <title><%=memo[0] %> 정보</title>
+<script src = "./js/jquery-3.2.0.js"></script>
+<script type="text/javascript">
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+</script>
+
 </head>
 <body>
 <div id="trade_update_info">
@@ -31,7 +42,9 @@ String []memo=reason[0].split(",");
 <%	if(memo[0].equals("교환")){%>
 		<tr>
 			<th>수량</th>
-			<td colspan ="3"><%=memo[1] %>개</td>
+			<td><%=memo[1] %>개</td>
+			<th>가격</th>
+			<td><%=Commas.format(mtib.getCost()) %>원</td>
 		</tr>
 		<tr>
 			<th colspan="4">교환 요청 사항</th>
@@ -39,13 +52,40 @@ String []memo=reason[0].split(",");
 		<tr>
 			<td colspan="4"><%=reason[1].replace("\r\n", "<br>")%></td>
 		</tr>
+		<tr>
+		</tr>
 		
-<%		if(mtib.getStatus()==3){%>
+<%		if(mtib.getStatus()==3){
+		%>
+		<tr>
+			<th colspan="4">교환 처리 결과</th>
+		</tr>
+		<%
+		for(int i = 2; i<length-2;i++){
+			String[] info=reason[i].split(",");%>
+		<tr>
+			<td>색상 : <%=info[0] %></td>
+			<td>사이즈 : <%=info[1] %></td>
+			<td>수량 : <%=info[2] %>개</td>
+			<td>차액 : <%=Commas.format(Integer.parseInt(info[3])) %>원</td>
+		</tr>
+		<%} %>
+		<tr>
+			<th colspan="2">
+			<%if(Integer.parseInt(reason[length-2])<0){ %>
+			환불 금액
+			<%}else{ %>
+			추가 결제 금액
+			<%} %>
+			</th>
+			<td colspan = "2"><%=Commas.format(Math.abs(Integer.parseInt(reason[length-2]))) %>원</td>
+		</tr>
+		
 		<tr>
 			<th colspan="4">판매자 코멘트</th>
 		</tr>
 		<tr>
-			<td colspan="4"><%=reason[2].replace("\r\n", "<br>")%></td>
+			<td colspan="4"><%=reason[length-1].replace("\r\n", "<br>")%></td>
 		</tr>
 	<%}
 	}else{%>

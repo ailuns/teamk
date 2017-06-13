@@ -152,7 +152,7 @@
             	<div id="gdsld">
                 <a href="./ProductContent.bo?num=<%=prob.getNum()%>&car_num=<%=prob.getCar_num()%>"><img src="./upload/<%=prob.getImg() %>" /><br><br>
                 <h2><%=prob.getName() %></h2>
-                <h3>￦<%= cost%></h3></a>
+                <h3><%= cost%></h3></a>
                 </div>
             </div>
            <%} %>

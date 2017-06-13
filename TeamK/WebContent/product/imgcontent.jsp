@@ -63,9 +63,8 @@ if (user_id == null)
 
 	jQuery(document).ready(function($){
 		$("#remote_content").draggable();
-		var val = $("#avg_cost").html();
-		 var commasum = val.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
-		$('#p').html(commasum);
+		$("#avg_cost").html($('#avg_cost').html().replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+		 
 		// 작은 이미지 클릭 시 큰 이미지부분이 클릭한 이미지로 교체
 		$('.bxslider img').click(function(){
 			
@@ -929,6 +928,8 @@ if (user_id == null)
 					for(int i = 0; i < RecommendPack.size(); i++)
 					{
 						pdb =(PackBean)RecommendPack.get(i);
+						DecimalFormat df = new DecimalFormat("#,###");
+						
 				%>
 				
 				<td>
@@ -939,7 +940,7 @@ if (user_id == null)
 							<td><img id="Rcom_pd" src="./upload/<%=pdb.getFile1() %>" onclick="Rcom_move(<%=i %>)"></td>
 						</tr>
 						<tr>
-							<td><div class="info"><%=pdb.getCost() %></div></td>
+							<td><div class="info"><%=df.format(pdb.getCost()) %>원</div></td>
 						</tr>
 					</table>
 				</td>
@@ -1061,9 +1062,8 @@ if (user_id == null)
 				<form name="input_fr" method="post" onsubmit="return false">
 					<table>
 						<tr>
-							<td class="contentdiv1_1">판매가</td>
+							<td class="contentdiv1_1">판매가<input type ="hidden" id ="ori_cost" value="<%=pb.getCost() %>"></td>
 							<td class="contentdiv1_2" id="avg_cost">
-							<input type ="hidden" id ="ori_cost" value="<%=pb.getCost() %>">
 							<%=pb.getCost() %></td>
 							
 							<td class="contentdiv1_3"></td>
@@ -1216,8 +1216,8 @@ if (user_id == null)
 								totalP();
 							}
 						function up(num){
-							
-							var val = $("#avg_cost").html();
+							var t=$("#avg_cost").html().replace(",","");
+							var val =t.replace("원","");
 							var str = parseInt($("#stack2"+num).val());
 							
 							var str2 = $("#size option:selected").val();
@@ -1260,8 +1260,8 @@ if (user_id == null)
 						
 						
 							function down(num){
-								
-								var val = $("#avg_cost").html();
+								var t=$("#avg_cost").html().replace(",","");
+								var val =t.replace("원","");
 								var str = parseInt($("#stack2"+num).val());
 								if(str <= 1){
 									if(confirm('해당 상품을 리스트에서 삭제하시겠습니까?'))trdel(num);
@@ -1385,7 +1385,7 @@ if (user_id == null)
 												if($('#stocktable tr').eq(i).attr('id')=="stocktr"+tnum)check=0;
 											}
 											if(check == 1){
-											$('#stocktable').append(
+											$('#stocktable').prepend(
 													"<tr id='stocktr"+tnum+"'><td class='contentdiv1_2'>"
 													+qqqq.color+"-"+qqqq.size+"&nbsp&nbsp&nbsp"+sss+cost_cal+"원</td><td>"+
 													"<input type='button' value='▲' onclick='up("+tnum+")'>"+
