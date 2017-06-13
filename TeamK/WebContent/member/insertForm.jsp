@@ -31,6 +31,14 @@ String id = (String) session.getAttribute("id");
 
 <script type="text/javascript">
 
+$(function(){ 
+	  //크롬등에서 ime-mode:disabled 정상작동 되지않으므로 정규식으로 처리
+	   $('#id').keyup(function(event){
+	   $(this).val($(this).val().replace(/[^a-zA-Z0-9]/g,''));
+	   });
+
+	});
+
 //구글 리캡차 시작--자동가입방지
 
       var verifyCallback = function(response) {
@@ -103,7 +111,7 @@ function sample6_execDaumPostcode() {
 		}
 		
 		//한글입력 불가
-		document.fr.id.style.imeMode = "disabled"
+		//document.fr.id.style.imeMode = "disabled"
 	}
 	function check_key() {
 		var char_ASCII = event.keyCode;
@@ -133,6 +141,7 @@ function sample6_execDaumPostcode() {
 			location.reload();
 			return false;
 		}
+		
 	}
 	
 	function sendmail() {			
@@ -245,9 +254,10 @@ if (id != null) {
 		</div>
 		<div id="clear"></div>
 		<article>
-			<div id="insert_form">
+			<div id="insert_form"> 
 			<form action="./MemberJoinAction.me" method="post" name="fr" onsubmit="return winopen()">
-				<label for="id">아이디</label><input type="text" name="id" id="id" style="ime-mode:disabled"
+				<label for="id">아이디</label>
+				<input type="text" name="id" id="id"
 				onkeypress="nonHangulSpecialKey()" placeholder="ID는 영문, 숫자만 가능"  maxlength="10">
 				<input type="hidden" name="idchecknum"> 
 				<input type="hidden" name="name2" value="0"> 

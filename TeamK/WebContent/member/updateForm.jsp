@@ -17,7 +17,17 @@
 <link href="./css/inc.css" rel="stylesheet" type="text/css">
 <link href="./css/subpage.css" rel="stylesheet" type="text/css">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 <script type="text/javascript">
+
+$(function(){ 
+	  //크롬등에서 ime-mode:disabled 정상작동 되지않으므로 정규식으로 처리
+	   $('#id').keyup(function(event){
+	   $(this).val($(this).val().replace(/[^a-zA-Z0-9]/g,''));
+	   });
+
+	});
+
 function passchange() {
 	fid=document.fr.id.value;
 	window.open("./member/passchange.jsp?userid="+fid, "", "width=400,height=250");
