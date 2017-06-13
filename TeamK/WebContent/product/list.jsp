@@ -123,7 +123,7 @@
 	 	List ProductImgList = (List)request.getAttribute("ProductImgList");
 	%>
 
-<div id="wrap" style="background-color: white;">
+<div id="wrap">
 
 	<div id="article_head">
 		<div id="article_title"><img src="./img/shop2.png" width="26px" style="margin:0 8px 3px 0;  vertical-align: bottom;">상품</div>
@@ -152,7 +152,7 @@
             	<div id="gdsld">
                 <a href="./ProductContent.bo?num=<%=prob.getNum()%>&car_num=<%=prob.getCar_num()%>"><img src="./upload/<%=prob.getImg() %>" /><br><br>
                 <h2><%=prob.getName() %></h2>
-                <h3>￦<%= cost%></h3></a>
+                <h3><%= cost%></h3></a>
                 </div>
             </div>
            <%} %>
