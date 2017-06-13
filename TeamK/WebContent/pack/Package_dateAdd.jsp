@@ -88,6 +88,17 @@
 	        //buttonImage: "./img/calendar.png",   // 버튼에 사용될 이미지
 	        //buttonImageOnly: true,					// 이미지만 표시한다    버튼모양 x
 		});
+		
+		// 수량에 숫자만 들어가게 제어
+		$("#add_stock").keyup(function(){
+			$(this).val( $(this).val().replace(/[^0-9]/g,"") );
+		});
+		
+		// 가격에 숫자만 들어가게 제어
+		$("#add_cost").keyup(function(){
+			$(this).val( $(this).val().replace(/[^0-9]/g,"") );
+		});
+		
 	});
 
 	// 날짜 추가

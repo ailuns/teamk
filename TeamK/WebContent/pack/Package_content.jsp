@@ -102,6 +102,7 @@
 		{
 			$('#adult').append("<option value=" + i + ">" + i + "</option");
 		}
+		people_Calc(1);  // 어른 값 변경에 따른 아이값 변경
 		
 		var num = $("input:radio[name=chk]:checked").val();  // 체크된 품목의 넘버값 가져온다
 		var cost = $("#cost" + num).html();  // 체크된 품목의 값 가져온다

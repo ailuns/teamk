@@ -181,10 +181,10 @@ if (user_id == null)
 				var cost_temp = $("#p").html(); // 총금액 받아오기
 				str = String(cost_temp);		// 총금액 천원단위로 , 찍혀있는걸
 			    cost = str.replace(/[^\d]+/g, '');   // 풉니다
-			    alert($("#size option:selected").val());				
+			  			
 			    $("#cost").val(cost);
 			    $("#ori_num").val($("#size option:selected").val());
-			    alert($("#cost").val())
+		
 			    document.input_fr.action = "./MyBasketAddAction.bns";	// 장바구니 페이지로 이동
 			    document.input_fr.method = "post";
 			    document.input_fr.submit();
@@ -1001,7 +1001,7 @@ if (user_id == null)
 											if(check == 1){
 											$('#stocktable').prepend(
 													"<tr id='stocktr"+tnum+"'><td class='contentdiv1_2'>"
-													+qqqq.color+"-"+qqqq.size+"&nbsp&nbsp&nbsp"+sss+cost_cal+"원</td><td>"+
+													+qqqq.color+"-"+qqqq.size+"&nbsp&nbsp&nbsp<br>"+sss+cost_cal+"원</td><td>"+
 													"<input type='button' value='▲' onclick='up("+tnum+")'>"+
 													"<input type='text' id = 'stack2"+tnum+"' size='1'"+ 
 													" name = 'count' value='1' onkeydown='keyup("+tnum+")'"+
