@@ -204,7 +204,7 @@ div#goods_show {
 	width: 1000px;
 	margin: 0 auto;
 	margin-top: 15px;
-	background-color: #eee;
+	background-color: white;
 }
 div#gdsld {
 	width: 280px;
@@ -437,7 +437,7 @@ div#package_tab ul.tabs li {
 	line-height: 31px;
 }
 div#package_tab .tab_container {
-	background-color : #F6F6F6;
+	background-color : white;
 	float: left;
 	width: 100%;
 	min-width: 1000px;
@@ -447,8 +447,9 @@ div#package_tab .tab_container {
     padding: 26px;
 }
 div#package_tab {margin: 0 auto;}
-div#package_tab .img_size {
+div#package_tab .img_size { 
 	width : 280px;
+	
 	height : 200px;
 }
 div#package_tab #img_content {
