@@ -123,7 +123,7 @@ if(id.equals(bb.getId())){ %>
        onclick="location.href='./BoardList2.bo?pageNum=<%=pageNum%>'">
 
 
-
+<br><br>
 <!-- ///////////////////댓글///////////////// -->
 <!-- 댓글부분 댓글 하나 달면 그때부터 board2/reply2.jsp 페이지로 대체됨, 새로고침시 초기화-->
 <%

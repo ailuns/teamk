@@ -120,8 +120,7 @@ if(id.equals(bb.getId())||id.equals("admin")){ %>
 <%}}%>
 <input type="button" value="글목록" 
        onclick="location.href='./BoardList.bo?pageNum=<%=pageNum%>'">
-
-
+<br><br>
 <!-- ///////////////////댓글///////////////// -->
 <!-- 댓글부분 댓글 하나 달면 그때부터 board/reply.jsp 페이지로 대체됨, 새로고침시 초기화-->
 <%
