@@ -34,5 +34,5 @@
 	<object type="image/svg+xml" data="./img/Map_of_South_Korea-blank.svg">Your browser does not support SVGs</object>
 	</div>
 <!-- 	<embed height="250px" width="150px" src="http://www.gagalive.kr/livechat1.swf?chatroom=~~~new_TeamK"></embed> -->
-	<a href='#' id = "banner1"><img src='./img/tomcat_banner.gif' style="width: 150px; height:70px;"></a>
+	<a href='http://192.168.2.28:8080/TomCat/Main.me' id = "banner1"><img src='./img/tomcat_banner.gif' style="width: 150px; height:70px;"></a>
 </div>
