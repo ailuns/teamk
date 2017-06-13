@@ -70,13 +70,13 @@
 <script type="text/javascript">
 
 	jQuery(document).ready(function($){
-		// 달력 관련 소스
+		// 숫자
 		$(".number").keyup(function(){
 			$(this).val( $(this).val().replace(/[^0-9]/g,"") );
 		});
-		
+		// 영문자
 		$(".str").keyup(function() {
-			$(this).val( $(this).val().replace(/[0-9]|[^\!-z]/gi,"") );
+			$(this).val( $(this).val().replace(/[0-9]|[^\!-z]/gi,"") ); 
 		});
 		
 		
@@ -88,8 +88,6 @@
 
 	function dateAdd()
 	{
-		
-	
 		if($("#add_size").val() == "" || $("#add_color").val() == "" || $("#add_size").val() == "" || $("#add_stock").val()== "" ){
 			alert("빈공간이 없게 입력해주세요.")
 		}else if($("#add_stock").val() == 0){
