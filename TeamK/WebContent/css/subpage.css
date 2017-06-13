@@ -209,7 +209,7 @@ div#goods_show {
 div#gdsld {
 	width: 280px;
 	height: 250px;
-	border: 1px solid #fff;
+	border: 1px solid #ddd;
 	background-color: #fff;
 }
 div#goods_show a {
@@ -328,7 +328,8 @@ div#package_slide a#pack4 {
 
 
 div#package_search {
-	background-color: #f5b8d7;
+/* 	background-color: #f5b8d7; */
+	background-color: #06c;
 	width: 400px;
 	height: 300px;
 	color: #fff;
@@ -355,7 +356,8 @@ div#package_search form input[type=submit] {
 	font-size: 15px;
 	width: 70px;
 	border: 1px solid #fff;
-	background-color: #f5b8d7;
+/* 	background-color: #f5b8d7; */
+	background-color: #06c;
 	color: #fff;
 	font-weight: bold;
 }
@@ -455,7 +457,7 @@ div#package_tab .img_size {
 div#package_tab #img_content {
 	padding : 0px;
 	margin : 15px;
-	border: 1px solid pink;
+	border: 1px solid #ddd;
 	background-color: white;
 }
 div#package_tab .tab_content a:LINK,

@@ -1064,14 +1064,14 @@ if (user_id == null)
 						<tr>
 							<td class="contentdiv1_1">판매가<input type ="hidden" id ="ori_cost" value="<%=pb.getCost() %>"></td>
 							<td class="contentdiv1_2" id="avg_cost">
-							<%=pb.getCost() %></td>
+							<%=pb.getCost() %></td><td></td>
 							
 							<td class="contentdiv1_3"></td>
 						</tr>
 							<%} %>
 						<tr>
 							<td class="contentdiv1_1">color</td>
-								<td class="contentdiv1_2"><select id="color" onchange="people_Calc2(<%=num%>)">
+								<td class="contentdiv1_2"><select id="color" onchange="people_Calc2(<%=num%>)" style="width:150px;">
 								<option value ="">선택하세요</option>
 								<%
 				for (int i = 0; i < productList3.size(); i++) {
@@ -1087,7 +1087,7 @@ if (user_id == null)
 						<tr>
 							<td class="contentdiv1_1">size</td>
 							<td class="contentdiv1_2">
-							<select  id ="size"class="size" onchange="people_Calc3(<%=num%>)">
+							<select  id ="size"class="size" onchange="people_Calc3(<%=num%>)" style ="width : 150px;">
 								<option  value = "5555" >선택하세요</option>
 								
 								</select></td>
@@ -1216,8 +1216,7 @@ if (user_id == null)
 								totalP();
 							}
 						function up(num){
-							var t=$("#avg_cost").html().replace(",","");
-							var val =t.replace("원","");
+							var val = $('#o_cost'+num).val();
 							var str = parseInt($("#stack2"+num).val());
 							
 							var str2 = $("#size option:selected").val();
@@ -1260,8 +1259,8 @@ if (user_id == null)
 						
 						
 							function down(num){
-								var t=$("#avg_cost").html().replace(",","");
-								var val =t.replace("원","");
+								
+								var val = $('#o_cost'+num).val();
 								var str = parseInt($("#stack2"+num).val());
 								if(str <= 1){
 									if(confirm('해당 상품을 리스트에서 삭제하시겠습니까?'))trdel(num);
@@ -1346,9 +1345,9 @@ if (user_id == null)
 											}
 											
 										if(qwer.stock <= 0){
-										$('#size').append("<option value=" + qwer.num + " disabled>" + qwer.size+ ":"+ sss+cost_cal +  "품절</option>");
+										$('#size').append("<option value=" + qwer.num + " disabled>" + qwer.size+ "------재고수량:▶[품절]</option>");
 										}else{
-										$('#size').append("<option value=" + qwer.num + ">" + qwer.size + ":&nbsp&nbsp&nbsp["+ sss+cost_cal +"원] </option>");
+										$('#size').append("<option value=" + qwer.num + ">" + qwer.size + "------재고수량:▶"+qwer.stock+"개&nbsp;["+ sss+cost_cal +"원] </option>");
 										$('#dstock').append("<input type = 'hidden' value ='"+qwer.stock+"'id='dstock"+qwer.num+"'>");
 										}	
 										stocktest+=","+ qwer.stock;
@@ -1374,7 +1373,6 @@ if (user_id == null)
 										//body태그 추가 key:value
 											var tnum = qqqq.num;
 											var cost_cal = qqqq.cost - parseInt($("#ori_cost").val());
-											alert(cost_cal)
 											var sss = "";
 											if(cost_cal > 0){
 												sss = "+";
@@ -1397,6 +1395,8 @@ if (user_id == null)
 																"name='stock' value='"+qqqq.stock+"'>"+
 																"<input type='hidden' id='cost"+tnum+"'"+
 																	"name='cost' value='"+qqqq.cost+"'>"+
+																"<input type='hidden' id='o_cost"+tnum+"'"+
+																	"name='o_cost' value='"+qqqq.cost+"'>"+
 														  "<input type='hidden'"+"name='tnum' value='"+tnum+"'>"+
 														  "<input type='hidden'"+"name='color' value='"+qqqq.color+"'>"+
 														  "<input type='hidden'"+"name='size' value='"+qqqq.size+"'>"+
@@ -1416,16 +1416,16 @@ if (user_id == null)
 							}
 							function trdel(tnum){
 								$('#stocktr'+tnum).remove();
+								totalP();
 							}
 							function numberWithCommas(x) {
 							    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 							}
 							function totalP(){
 								var sum = 0;
-								for(var i = 0; i<$('#stocktable').find('.tcost').length; i++){
+								for(var i = 0; i<$('#stocktable').find('[name=cost]').length; i++){
 									
-									var ints = $('#stocktable .tcost').eq(i).text().replace(",","");
-									ints = ints.replace("원","");
+									var ints = $('#stocktable [name=cost]').eq(i).val();
 									sum += parseInt(ints);
 								}
 								$('input:hidden[name=totalcost]').val(sum);

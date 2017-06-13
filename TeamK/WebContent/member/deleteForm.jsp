@@ -10,7 +10,18 @@
 <title>TeamK 여행사</title>
 <link href="./css/inc.css" rel="stylesheet" type="text/css">
 <link href="./css/subpage.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 <script type="text/javascript">
+
+
+$(function(){ 
+	  //크롬등에서 ime-mode:disabled 정상작동 되지않으므로 정규식으로 처리
+	   $('#id').keyup(function(event){
+	   $(this).val($(this).val().replace(/[^a-zA-Z0-9]/g,''));
+	   });
+
+	});
+
 function passck() {
 	if(document.fr.pass.value==null || document.fr.pass.value==""){
 	alert("비밀번호를 입력해주세요.");
