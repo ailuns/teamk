@@ -59,6 +59,18 @@
 				}
 			});
 		}
+		
+		// 수량에 숫자만 들어가게 제어
+		$("#stock").keyup(function(){
+			$(this).val( $(this).val().replace(/[^0-9]/g,"") );
+		});
+		
+		// 가격에 숫자만 들어가게 제어
+		$("#cost").keyup(function(){
+			$(this).val( $(this).val().replace(/[^0-9]/g,"") );
+		});
+		
+		
 	});
 	
 	// 이미지추가 버튼 (+) 클릭 시 보여준다
