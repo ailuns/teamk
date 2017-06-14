@@ -6,6 +6,7 @@ import java.util.Random;
 
 import javax.mail.Address;
 import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
@@ -48,15 +49,44 @@ public class MemberFindPassAction implements Action {
 			checknum = buf.toString();
 			String newpass=BCrypt.hashpw(checknum, BCrypt.gensalt(12));
 			mdao.passchange(id, newpass);
-			String sender = "itwillbs8@itwillbs8.cafe24.com";
-			String receiver = email;
-			String subject = "[Team K 여행사]비밀번호 조회";
+			//String sender = "itwillbs8@itwillbs8.cafe24.com";
+			//String receiver = email;
+			final String subject = "[Team K 여행사]비밀번호 조회";
 
-			String content = name+"고객님의  임시 비밀번호는 :  "+ checknum + " 입니다.";
+			final String content = name+"고객님의  임시 비밀번호는 :  "+ checknum + " 입니다.";
 
-			String server = "smtp.cafe24.com";
-
+			//String server = "smtp.cafe24.com";
+			final String e_id = "itwillbs8@itwillbs8.cafe24.com";
+			final String e_pass = "itwillbs8030909";
+			int port = 587;
+			String host = "smtp.cafe24.com";
+			String from = "admin@itwillbs6.cafe24.com";
 			try {
+				Properties props = new Properties();
+				props.put("mail.stmp.starttls.enable", "true");
+				props.put("mail.smtp.auth", "true");
+				props.put("mail.smtp.host", host);
+		  		props.put("mail.smtp.port", port);
+
+				Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+					protected PasswordAuthentication getPasswordAuthentication() {
+						return new PasswordAuthentication(e_id, e_pass);
+					}
+				});
+				
+				session.setDebug(true);
+				Message message = new MimeMessage(session);
+				message.setFrom(new InternetAddress(from));
+				message.setRecipient(Message.RecipientType.TO, new InternetAddress(email));
+				
+				message.setSubject(subject);
+				message.setContent(content, "text/html; charset=EUC-KR");
+				message.setText(content);
+
+				Transport.send(message);
+					
+			} catch (Exception e) {e.printStackTrace();}
+/*			try {
 				Properties properties = new Properties();
 				properties.put("mail.smtp.host", server);
 				Session s = Session.getDefaultInstance(properties, null);
@@ -85,7 +115,7 @@ public class MemberFindPassAction implements Action {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-			}
+			}*/
 		}else if(pass==""){
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
