@@ -73,7 +73,7 @@ function receive_change(num,ra_num){
 			<th>이름</th>
 			<td id="name<%=rib.getRa_num()%>"><%=rib.getName() %></td>
 		</tr>
-		<tr>
+		<tr> 
 			<th>연락처</th>
 			<td id="mobile<%=rib.getRa_num()%>"><%=rib.getMobile() %></td>
 		</tr>
