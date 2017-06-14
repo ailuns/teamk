@@ -16,10 +16,12 @@ public class common {
 	
 	// Connection connect
 	public Connection connect() throws Exception{
-		
-		String dbUrl="jdbc:mysql://localhost/itwillbs8";
+		String dbUrl="jdbc:mysql://192.168.2.15:3306/jspteam";
+		String dbId="teamkpro";
+		String dbPass="teamkpro2";
+		/*String dbUrl="jdbc:mysql://localhost/itwillbs8";
 		String dbId="itwillbs8";
-		String dbPass="itwillbs8030909";
+		String dbPass="itwillbs8030909";*/
 		
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con = DriverManager.getConnection(dbUrl, dbId, dbPass);
