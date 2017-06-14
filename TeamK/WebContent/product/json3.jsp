@@ -13,9 +13,9 @@ String name= "";
 String color= request.getParameter("color");
 Class.forName("com.mysql.jdbc.Driver");
 //2단계 디비 연결
-String dbUrl = "jdbc:mysql://192.168.2.15:3306/jspteam";
-String dbId = "teamkpro";
-String dbPass = "teamkpro2";
+String dbUrl = "jdbc:mysql://localhost/itwillbs8";
+String dbId = "itwillbs8";
+String dbPass = "itwillbs8030909";
 Connection con = DriverManager.getConnection(dbUrl, dbId, dbPass);
 //3단계 sql
 	String sql = "select name from thing where num = ?";
