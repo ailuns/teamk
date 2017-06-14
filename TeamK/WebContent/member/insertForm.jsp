@@ -16,7 +16,6 @@ maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium
 <link href="./css/subpage.css" rel="stylesheet" type="text/css">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
 
 <%
 request.setCharacterEncoding("UTF-8"); 
@@ -39,20 +38,6 @@ $(function(){
 
 	});
 
-//구글 리캡차 시작--자동가입방지
-
-      var verifyCallback = function(response) {
-        document.fr.catpchavalue.value="1";
-      };
-      
-      var onloadCallback = function() {
-          grecaptcha.render('html_element', {
-              'sitekey' : '6Ld-QiMUAAAAAF0iwNhurnWiHaHYRhKhnjZxicIQ',
-              callback : verifyCallback
-            });
-          };
-          
-//구글 리캡차 끝
 
 	
 	
@@ -224,10 +209,6 @@ function sample6_execDaumPostcode() {
 			document.fr.email.focus();
 			return false;
 		}
-		if (document.fr.catpchavalue.value == "") {
-			alert("자동가입 인증 체크를 완료해주세요");
-			return false;
-		}
 		
 	}
 	document.fr.submit();
@@ -284,12 +265,9 @@ if (id != null) {
 				<input type="button" value="이메일 인증" onclick="sendmail()">
 				<input type="hidden" name="eckecknum"> <br>
 				
-				<!-- 자동가입방지 구글 recaptcha-->
 				<br>
-				<input type="hidden" name="catpchavalue">
-				<div id="html_element" style="margin-left: 150px;"></div>
 				
-				<input type="submit" name="submit" value="가입">
+				<input type="submit" name="submit" value="가입"> 
 			</form>
 
   				
