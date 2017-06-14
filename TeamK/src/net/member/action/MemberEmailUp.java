@@ -38,13 +38,13 @@ public class MemberEmailUp implements Action {
 			}
 			checknum = buf.toString();
 
-			String sender = "insup0117@naver.com";
+			String sender = "itwillbs8@itwillbs8.cafe24.com";
 			String receiver = email;
 			String subject = "[Team K 여행사]인증 번호";
 
 			String content = "인증번호 : " + checknum ;
 
-			String server = "smtp.naver.com";
+			String server = "smtp.cafe24.com";
 
 			try {
 				Properties properties = new Properties();
@@ -63,7 +63,7 @@ public class MemberEmailUp implements Action {
 				message.setSentDate(new java.util.Date());
 
 				Transport transport = s.getTransport("smtp");
-				transport.connect(server, "insup0117", "dlstjq2@@");
+				transport.connect(server, "itwillbs8", "itwillbs8030909");
 				transport.sendMessage(message, message.getAllRecipients());
 				transport.close();
 

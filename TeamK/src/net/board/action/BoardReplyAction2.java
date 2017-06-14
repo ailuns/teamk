@@ -59,14 +59,14 @@ public class BoardReplyAction2 implements Action {
 		
 String email = wEmail;//받는사람의 이메일 주소에 글작성자의 이메일주소 wEmail 넣기
 			
-		String sender="insup0117@naver.com"; // 이메일 발신자
+		String sender="itwillbs8@itwillbs8.cafe24.com"; // 이메일 발신자
 		String receiver= email; //받는사람
 		String subject = "답변이 왔습니다."; //메일 제목
 	
 		String content1=  "문의내용 : ["+wContent+"] <br> 답변내용 : ["+rcontent+"]";
 		//메일 내용 content1에  wContent 글작성자의 글내용, rcontent 리플 작성자의 리플내용 넣음.
 		
-		String server = "smtp.naver.com";
+		String server = "smtp.cafe24.com";
 		
 		try{
 			Properties properties = new Properties();
@@ -85,7 +85,7 @@ String email = wEmail;//받는사람의 이메일 주소에 글작성자의 이�
 			message.setSentDate(new java.util.Date());
 			
 			Transport transport= s.getTransport("smtp") ;
-			transport.connect(server,"insup0117","dlstjq2@@");
+			transport.connect(server,"itwillbs8","itwillbs8030909");
 			transport.sendMessage(message,message.getAllRecipients());
 			transport.close();
 			

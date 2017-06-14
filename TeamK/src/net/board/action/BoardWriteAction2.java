@@ -54,15 +54,15 @@ public class BoardWriteAction2 implements Action {
 		String sub = multi.getParameter("subject");
 		String con = multi.getParameter("content");
 			
-		String email = "insup0117@naver.com";//질문 등록시 메일받는사람(관리자)의 이메일 주소
+		String email = "itwillbs8@itwillbs8.cafe24.com";//질문 등록시 메일받는사람(관리자)의 이메일 주소
 	
-		String sender="insup0117@naver.com"; //보내는사람 메일 주소(수정X)
+		String sender="itwillbs8@itwillbs8.cafe24.com"; //보내는사람 메일 주소(수정X)
 		String receiver= email;
 		String subject = "새로운 문의가 왔습니다.["+sub+"]";
 		
 		String content=  "제목 : ["+sub+"] <br> 내용 : ["+con+"]";
 		
-		String server = "smtp.naver.com";
+		String server = "smtp.cafe24.com";
 		
 		try{
 			Properties properties = new Properties();
@@ -81,7 +81,7 @@ public class BoardWriteAction2 implements Action {
 			message.setSentDate(new java.util.Date());
 			
 			Transport transport= s.getTransport("smtp") ;
-			transport.connect(server,"insup0117","dlstjq2@@");
+			transport.connect(server,"itwillbs8","itwillbs8030909");
 			transport.sendMessage(message,message.getAllRecipients());
 			transport.close();
 			

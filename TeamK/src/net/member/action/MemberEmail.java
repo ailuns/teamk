@@ -5,12 +5,14 @@ import java.util.Random;
 
 import javax.mail.Address;
 import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 public class MemberEmail implements Action {
 
@@ -40,15 +42,44 @@ public class MemberEmail implements Action {
 			}
 			checknum = buf.toString();
 
-			String sender = "insup0117@naver.com";
-			String receiver = email;
-			String subject = "[Team K 여행사]인증 번호";
+			
+			//String receiver = email;
+			final String subject = "[Team K 여행사]인증 번호";
 
-			String content = "인증번호 : " + checknum ;
+			final String content = "인증번호 : " + checknum ;
 
-			String server = "smtp.naver.com";
-
+			final String id = "itwillbs8@itwillbs8.cafe24.com";
+			final String pass = "itwillbs8030909";
+			int port = 587;
+			String host = "smtp.cafe24.com";
+			String from = "admin@itwillbs6.cafe24.com";
 			try {
+				Properties props = new Properties();
+				props.put("mail.stmp.starttls.enable", "true");
+				props.put("mail.smtp.auth", "true");
+				props.put("mail.smtp.host", host);
+		  		props.put("mail.smtp.port", port);
+
+				Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+					protected PasswordAuthentication getPasswordAuthentication() {
+						return new PasswordAuthentication(id, pass);
+					}
+				});
+				
+				session.setDebug(true);
+				Message message = new MimeMessage(session);
+				message.setFrom(new InternetAddress(from));
+				message.setRecipient(Message.RecipientType.TO, new InternetAddress(email));
+				
+				message.setSubject(subject);
+				message.setContent(content, "text/html; charset=EUC-KR");
+				message.setText(content);
+
+				Transport.send(message);
+					
+			} catch (Exception e) {e.printStackTrace();}
+
+			/*try {
 				Properties properties = new Properties();
 				properties.put("mail.smtp.host", server);
 				Session s = Session.getDefaultInstance(properties, null);
@@ -65,13 +96,13 @@ public class MemberEmail implements Action {
 				message.setSentDate(new java.util.Date());
 
 				Transport transport = s.getTransport("smtp");
-				transport.connect(server, "insup0117", "dlstjq2@@");
+				transport.connect(server, "itwillbs8", "itwillbs8030909");
 				transport.sendMessage(message, message.getAllRecipients());
 				transport.close();
 
 			} catch (Exception e) {
 				e.printStackTrace();
-			}
+			}*/
 		}
 		
 		request.setAttribute("checknum", checknum);

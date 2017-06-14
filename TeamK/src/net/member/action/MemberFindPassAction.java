@@ -48,13 +48,13 @@ public class MemberFindPassAction implements Action {
 			checknum = buf.toString();
 			String newpass=BCrypt.hashpw(checknum, BCrypt.gensalt(12));
 			mdao.passchange(id, newpass);
-			String sender = "insup0117@naver.com";
+			String sender = "itwillbs8@itwillbs8.cafe24.com";
 			String receiver = email;
 			String subject = "[Team K 여행사]비밀번호 조회";
 
 			String content = name+"고객님의  임시 비밀번호는 :  "+ checknum + " 입니다.";
 
-			String server = "smtp.naver.com";
+			String server = "smtp.cafe24.com";
 
 			try {
 				Properties properties = new Properties();
@@ -73,7 +73,7 @@ public class MemberFindPassAction implements Action {
 				message.setSentDate(new java.util.Date());
 
 				Transport transport = s.getTransport("smtp");
-				transport.connect(server, "insup0117", "dlstjq2@@");
+				transport.connect(server, "itwillbs8", "itwillbs8030909");
 				transport.sendMessage(message, message.getAllRecipients());
 				
 				PrintWriter out = response.getWriter();
